@@ -1,0 +1,107 @@
+/* Fastfood v0.15 - Admin stylesheet */
+
+/* Common Admin elements
+----------------------------------------------*/
+body {
+	background: url('images/main.png') repeat-x scroll left 57px #f9f9f9;
+}
+#wpcontent #wphead {
+	border-bottom: 10px solid #404040;
+}
+
+/* Theme options elements
+----------------------------------------------*/
+#fastfood-infos ul {
+	list-style: disc inside;
+	margin-left: 30px;
+}
+#fastfood-infos-li div.wp-menu-image {
+	background: url('../../../wp-admin/images/menu.png') no-repeat scroll -38px -39px transparent;
+}
+#fastfood-infos-li:hover div.wp-menu-image,
+#fastfood-infos-li.tab-selected div.wp-menu-image {
+	background: url('../../../wp-admin/images/menu.png') no-repeat scroll -38px -7px transparent;
+}
+#fastfood-options div,
+#fastfood-infos div {
+	margin: 0 0 20px;
+}
+#fastfood-options p,
+#fastfood-infos p {
+	background-color: #ccc;
+	display: block;
+	font-weight: bold;
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	margin: 15px 0 3px;
+	padding: 3px;
+}
+#fastfood-options,
+#fastfood-infos {
+	background: url('images/mainmenu.png') repeat-x scroll left -5px #f9f9f9;
+	border: 1px solid #fff;
+	border-top: none;
+	-moz-box-shadow: 0px 2px 8px #404040;
+	-webkit-box-shadow: 0px 2px 8px #404040;
+	box-shadow: 0px 2px 8px #404040;
+	margin: 0 0 20px;
+	padding: 0 10px;
+}
+#fastfood-options-li div.wp-menu-image {
+	background: url('../../../wp-admin/images/menu.png') no-repeat scroll -247px -39px transparent;
+}
+#fastfood-options-li:hover div.wp-menu-image,
+#fastfood-options-li.tab-selected div.wp-menu-image {
+	background: url('../../../wp-admin/images/menu.png') no-repeat scroll -247px -7px transparent;
+}
+#selector {
+	list-style: none;
+	margin-left: 30px;
+}
+#selector a {
+	display: block;
+	font-weight: bold;
+	text-decoration: none;
+}
+#selector li {
+	border-left: 2px groove #fff;
+	border-right: 2px groove #fff;
+	border-top: 2px groove #fff;
+	float: left;
+	width: 150px;
+	margin: 0;
+	padding: 5px;
+}
+#selector li div.wp-menu-image {
+	float: left;
+	height: 16px;
+	width: 22px;
+}
+#selector li.tab-selected {
+	background-color: #404040;
+	border-left: 2px solid #404040;
+	border-right: 2px solid #404040;
+	border-top: 2px solid #404040;
+	-moz-box-shadow: 0px 2px 8px #404040;
+	-webkit-box-shadow: 0px 2px 8px #404040;
+	box-shadow: 0px 2px 8px #404040;
+}
+#tabs-container {
+	width: 700px;
+	margin: 20px auto;
+}
+.ff_opt_input {
+	text-align: center;
+	padding: 3px;
+}
+.tab-hidden {
+	display: none;
+}
+.tab-selected a,
+.tab-selected a:hover,
+.tab-selected a:focus {
+	color: #fff;
+	text-shadow: 1px 1px 2px #000;
+}

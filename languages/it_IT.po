@@ -1,0 +1,254 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: Fastfood Theme v0.15\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: TwoBeers Crew <light@twobeers.net>\n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: utf-8\n"
+
+#. Text in function
+#: attachment.php:103
+msgid "&laquo; Previous Image"
+msgstr "&laquo; Immagine Precedente"
+
+#. Text in echo
+#: footer.php:15
+msgid "All rights reserved"
+msgstr "Tutti i diritti riservati"
+
+#. Text in echo
+#: footer.php:229
+#: footer.php:231
+msgid "Bottom of page"
+msgstr "Fondo pagina"
+
+#. Text in function
+#: functions.php:225
+msgid "Child pages: "
+msgstr "Pagine discendenti: "
+
+#. Text in function
+#: functions.php:355
+msgid "First Footer Widget Area"
+msgstr "Fondo pagina: prima area widget"
+
+#. Text in echo
+#: functions.php:328
+msgid "Hide/Show sliding menu"
+msgstr "Nascondi/Visualizza il menu a scoparsa"
+
+#. Text in echo
+#: functions.php:338
+msgid "Javascript Animations"
+msgstr "Animazioni Javascript"
+
+#. Text in function
+#: footer.php:81
+msgid "Logged in as %s"
+msgstr "Collegato come %s"
+
+#. Text in function
+#: functions.php:355
+msgid "Main Navigation Menu"
+msgstr "Menu di navigazione principale"
+
+#. Text in function
+#: footer.php:215
+msgid "Newer Posts"
+msgstr "Articoli pi&ugrave; recenti"
+
+#. Text in function
+#: attachment.php:104
+msgid "Next Image &raquo;"
+msgstr "Immagine Successiva &raquo;"
+
+#. Text in function
+#: functions.php:355
+msgid "No preview: this is a comment of a protected post"
+msgstr "Nessuna anteprima: questo &egrave; un commento ad un articolo protetto"
+
+#. Text in function
+#: functions.php:355
+msgid "No preview: this is a protected post"
+msgstr "Nessuna anteprima: questo articolo &egrave; protetto"
+
+#. Text in function
+#: footer.php:81
+msgid "Not logged in"
+msgstr "Non sei collegato"
+
+#. Text in function
+#: footer.php:212
+msgid "Older Posts"
+msgstr "Articoli pi&ugrave; vecchi"
+
+#. Text in function
+#: functions.php:225
+msgid "Parent page: "
+msgstr "Pagina genitore: "
+
+#. Text in function
+#: footer.php:191
+#: footer.php:192
+#: footer.php:193
+msgid "Return to %s"
+msgstr "Ritorna a %s"
+
+#. Text in function
+#: functions.php:355
+msgid "Second Footer Widget Area"
+msgstr "Fondo pagina: seconda area widget"
+
+#. Text in function
+#: functions.php:355
+msgid "Sidebar Widget Area"
+msgstr "Barra laterale: area widget"
+
+#. Text in echo
+#: functions.php:327
+msgid "Sliding Menu"
+msgstr "Menu a scorrimento"
+
+#. Text in echo
+#: 404.php:13
+msgid "Sorry, you're looking for something that isn't here"
+msgstr "Spiacente, stai cercando qualcosa che non esiste"
+
+#. Text in function
+#: functions.php:355
+msgid "The first footer widget area"
+msgstr "La prima area widget nel fondo pagina"
+
+#. Text in function
+#: functions.php:355
+msgid "The second footer widget area"
+msgstr "La seconda area widget nel fondo pagina"
+
+#. Text in function
+#: functions.php:355
+msgid "The sidebar widget area"
+msgstr "L&apos;area widget nella barra laterale"
+
+#. Text in function
+#: functions.php:355
+msgid "The third footer widget area"
+msgstr "La terza area widget nel fondo pagina"
+
+#. Text in function
+#: functions.php:355
+msgid "Third Footer Widget Area"
+msgstr "Fondo pagina: terza area widget"
+
+#. Text in echo
+#: footer.php:222
+#: footer.php:224
+msgid "Top of page"
+msgstr "Inizio pagina"
+
+#. Text in echo
+#: functions.php:339
+msgid "Try disable animations if you encountered problems with javascript"
+msgstr "Prova a disabilitare le animazioni nel caso di problemi con javascript"
+
+#. Text in echo
+#: functions.php:350
+msgid "Undo Changes"
+msgstr "Annulla Modifiche"
+
+#. Text in echo
+#: functions.php:349
+msgid "Update Options"
+msgstr "Aggiorna Opzioni"
+
+#. Text in echo
+#: footer.php:78
+msgid "User"
+msgstr "Utente"
+
+#. Text in echo
+#: attachment.php:105
+msgid "View full size"
+msgstr "Dimensione originale"
+
+#. Text in echo
+#: 404.php:14
+msgid "You can try the following:"
+msgstr "Vuoi un consiglio? Prova a..."
+
+#. Text in function
+#: functions.php:355
+msgid "about"
+msgstr "in"
+
+#. Text in function
+#: functions.php:340
+msgid "active"
+msgstr "attivate"
+
+#. Text in echo
+#: 404.php:19
+msgid "browse the site throught the popup menu on bottom left"
+msgstr "navigare nel sito tramite il menu a scomparsa in basso a sinitra"
+
+#. Text in echo
+#: search.php:57
+#: attachment.php:32
+#: functions.php:355
+#: index.php:37
+#: single.php:31
+msgid "by"
+msgstr "di"
+
+#. Text in echo
+#: footer.php:153
+#: footer.php:155
+msgid "feed for comments on this post"
+msgstr "feed dei commenti per questo post"
+
+#. Text in function
+#: functions.php:340
+msgid "hide"
+msgstr "nascondi"
+
+#. Text in function
+#: functions.php:340
+msgid "inactive"
+msgstr "disattivate"
+
+#. Text in function
+#: search.php:71
+#: index.php:93
+msgid "page %1$s of %2$s"
+msgstr "pagina %1$s di %2$s"
+
+#. Text in echo
+#: 404.php:17
+msgid "search the site using the searchbox in the upper-right"
+msgstr "usare lo strumento di ricerca in alto a destra"
+
+#. Text in echo
+#: 404.php:18
+msgid "see the suggested pages in the above menu"
+msgstr "vedere le pagine proposte nel menu qui sopra"
+
+#. Text in function
+#: functions.php:340
+msgid "show"
+msgstr "visualizza"
+
+#. Text in function
+#: functions.php:478
+msgid "Fastfood Default Gravatar"
+msgstr "Gravatar predefinito di Fastfood"
+
+#. Text in echo
+#: functions.php:226
+msgid "This page has relationships"
+msgstr "Questa pagina ha una parentela"
+

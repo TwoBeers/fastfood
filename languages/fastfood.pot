@@ -1,0 +1,255 @@
+msgid ""
+msgstr ""
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Project-Id-Version: Fastfood Theme v0.15\n"
+
+#. Text in function
+#: attachment.php:103
+msgid "&laquo; Previous Image"
+msgstr ""
+
+#. Text in echo
+#: footer.php:15
+msgid "All rights reserved"
+msgstr ""
+
+#. Text in echo
+#: footer.php:229
+#: footer.php:231
+msgid "Bottom of page"
+msgstr ""
+
+#. Text in function
+#: functions.php:225
+msgid "Child pages: "
+msgstr ""
+
+#. Text in echo
+#: functions.php:322
+msgid "Fastfood - Theme options"
+msgstr ""
+
+#. Text in function
+#: functions.php:355
+msgid "First Footer Widget Area"
+msgstr ""
+
+#. Text in echo
+#: functions.php:328
+msgid "Hide/Show sliding menu"
+msgstr ""
+
+#. Text in echo
+#: functions.php:338
+msgid "Javascript Animations"
+msgstr ""
+
+#. Text in function
+#: footer.php:81
+msgid "Logged in as %s"
+msgstr ""
+
+#. Text in function
+#: functions.php:355
+msgid "Main Navigation Menu"
+msgstr ""
+
+#. Text in function
+#: footer.php:215
+msgid "Newer Posts"
+msgstr ""
+
+#. Text in function
+#: attachment.php:104
+msgid "Next Image &raquo;"
+msgstr ""
+
+#. Text in function
+#: functions.php:355
+msgid "No preview: this is a comment of a protected post"
+msgstr ""
+
+#. Text in function
+#: functions.php:355
+msgid "No preview: this is a protected post"
+msgstr ""
+
+#. Text in function
+#: footer.php:81
+msgid "Not logged in"
+msgstr ""
+
+#. Text in function
+#: footer.php:212
+msgid "Older Posts"
+msgstr ""
+
+#. Text in function
+#: functions.php:225
+msgid "Parent page: "
+msgstr ""
+
+#. Text in function
+#: footer.php:191
+#: footer.php:192
+#: footer.php:193
+msgid "Return to %s"
+msgstr ""
+
+#. Text in function
+#: functions.php:355
+msgid "Second Footer Widget Area"
+msgstr ""
+
+#. Text in function
+#: functions.php:355
+msgid "Sidebar Widget Area"
+msgstr ""
+
+#. Text in echo
+#: functions.php:327
+msgid "Sliding Menu"
+msgstr ""
+
+#. Text in echo
+#: 404.php:13
+msgid "Sorry, you're looking for something that isn't here"
+msgstr ""
+
+#. Text in function
+#: functions.php:355
+msgid "The first footer widget area"
+msgstr ""
+
+#. Text in function
+#: functions.php:355
+msgid "The second footer widget area"
+msgstr ""
+
+#. Text in function
+#: functions.php:355
+msgid "The sidebar widget area"
+msgstr ""
+
+#. Text in function
+#: functions.php:355
+msgid "The third footer widget area"
+msgstr ""
+
+#. Text in function
+#: functions.php:242
+msgid "Theme Options"
+msgstr ""
+
+#. Text in function
+#: functions.php:355
+msgid "Third Footer Widget Area"
+msgstr ""
+
+#. Text in echo
+#: footer.php:222
+#: footer.php:224
+msgid "Top of page"
+msgstr ""
+
+#. Text in echo
+#: functions.php:339
+msgid "Try disable animations if you encountered problems with javascript"
+msgstr ""
+
+#. Text in echo
+#: functions.php:350
+msgid "Undo Changes"
+msgstr ""
+
+#. Text in echo
+#: functions.php:349
+msgid "Update Options"
+msgstr ""
+
+#. Text in echo
+#: footer.php:78
+msgid "User"
+msgstr ""
+
+#. Text in echo
+#: attachment.php:105
+msgid "View full size"
+msgstr ""
+
+#. Text in echo
+#: 404.php:14
+msgid "You can try the following:"
+msgstr ""
+
+#. Text in function
+#: functions.php:355
+msgid "about"
+msgstr ""
+
+#. Text in function
+#: functions.php:340
+msgid "active"
+msgstr ""
+
+#. Text in echo
+#: 404.php:19
+msgid "browse the site throught the popup menu on bottom left"
+msgstr ""
+
+#. Text in echo
+#: search.php:57
+#: attachment.php:32
+#: functions.php:355
+#: index.php:37
+#: single.php:31
+msgid "by"
+msgstr ""
+
+#. Text in echo
+#: footer.php:153
+#: footer.php:155
+msgid "feed for comments on this post"
+msgstr ""
+
+#. Text in function
+#: functions.php:340
+msgid "hide"
+msgstr ""
+
+#. Text in function
+#: functions.php:340
+msgid "inactive"
+msgstr ""
+
+#. Text in function
+#: search.php:71
+#: index.php:93
+msgid "page %1$s of %2$s"
+msgstr ""
+
+#. Text in echo
+#: 404.php:17
+msgid "search the site using the searchbox in the upper-right"
+msgstr ""
+
+#. Text in echo
+#: 404.php:18
+msgid "see the suggested pages in the above menu"
+msgstr ""
+
+#. Text in function
+#: functions.php:340
+msgid "show"
+msgstr ""
+
+#. Text in echo
+#: functions.php:226
+msgid "This page has relationships"
+msgstr ""
+
+#. Text in function
+#: functions.php:478
+msgid "Fastfood Default Gravatar"
+msgstr ""
