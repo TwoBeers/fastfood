@@ -40,7 +40,7 @@ window.addEvent("domready",function(){
 				mouseenter:function(){
 					a.cancel();
 					e.setStyle("display","block");
-					a.start({height:[0,220],opacity:1});
+					a.start({height:[0,250],opacity:1});
 					b.cancel();
 					b.start({width:65})
 				},
@@ -97,7 +97,6 @@ window.addEvent("domready",function(){
 					list.setStyle('opacity', '0');
 				}
 			});	
-			list.setStyle('display', 'block');
 		};
 	});
 

@@ -32,7 +32,7 @@
 				<div class="meta top_meta">
 
 					<div class="metafield">
-						<div class="metafield_trigger" style="background-image: url('<?php echo get_bloginfo( 'stylesheet_directory' ) . '/images/' ?>/mini_comm.png'); right: 10px; width:16px"> </div>
+						<div class="metafield_trigger mft_comm" style="right: 10px; width:16px"> </div>
 						<div class="metafield_content">
 							<?php _e( 'Comments' ); ?>:
 							<?php comments_popup_link( __( 'No Comments' ), __( '1 Comment' ), __( '% Comments' ) ); // number of comments?>

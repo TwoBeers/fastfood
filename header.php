@@ -16,51 +16,21 @@
 		</title>
 
 		<?php
-		global $fastfood_opt;
-
-		//load style
-		fastfood_stylesheet();
+			global $fastfood_opt;
 		?>
-		
-		<?php // custom header style and conditional comment for IE ?>
-		<style type="text/css">
-			#head {
-				background: transparent url( '<?php esc_url ( header_image() ); ?>' ) right bottom no-repeat;
-			}
-			#head h1 a, #head .description, #head {
-				color: #<?php echo get_theme_mod( 'header_textcolor', '404040' ); ?>;
-			}
-		</style>
-		<!--[if lte IE 8]>
-		<style type="text/css">
-			.js-res {
-				border:1px solid #333333 !important;
-			}
-			.menuitem_1ul > ul > li {
-				margin-right:-2px;
-			}
-		</style>
-		<![endif]-->
-
 
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 		<?php wp_get_archives( 'type=monthly&format=link' ); ?>
-		<?php
-			if ( $fastfood_opt['fastfood_jsani'] == 'active' ) { //load scripts if enabled
-				wp_enqueue_script( 'mootools_core', get_bloginfo( 'stylesheet_directory' ) . '/js/mootools.js' ); //mootools core
-				if ( !isset( $_GET['style'] ) ) { //script not to be loaded in print preview
-					wp_enqueue_script( 'fastfoodscript', get_bloginfo( 'stylesheet_directory' ) . '/js/fastfoodscript.js' ); //fastfood js
-				}
-			}
-			if ( is_singular() ) {
-				wp_enqueue_script( 'comm-rep', get_bloginfo( 'stylesheet_directory' ) . '/js/comment-reply.min.js' ); //custom comment-reply pop-up box
-			}
-		?>
 		<?php wp_head(); ?>
 
 	</head>
 
 	<body <?php body_class(); ?>>
+		<div id="ff_background">
+			<div id="ff_body" class="pad_bg">
+				<div id="ff_body_overlay"></div>
+			</div>
+		</div>
 		<div id="main">
 
 		<div id="content">
@@ -75,5 +45,7 @@
 				<?php wp_nav_menu( array( 'menu_id' => 'mainmenu', 'fallback_cb' => 'fastfood_pages_menu', 'theme_location' => 'primary' ) ); ?>
 				<div class="fixfloat"></div>
 			</div>
+			
+			<?php get_sidebar( 'header' ); // show header widgets area ?>
 
 			<div id="posts_content" <?php if ( is_singular() ) { echo 'class="posts_wide"'; } else { echo 'class="posts_narrow"'; } ?>>

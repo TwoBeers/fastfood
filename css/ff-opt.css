@@ -3,7 +3,7 @@
 /* Common Admin elements
 ----------------------------------------------*/
 body {
-	background: url('images/main.png') repeat-x scroll left 57px #f9f9f9;
+	background: url('../images/main.png') repeat-x scroll left 57px #f9f9f9;
 }
 #wpcontent #wphead {
 	border-bottom: 10px solid #404040;
@@ -16,11 +16,11 @@ body {
 	margin-left: 30px;
 }
 #fastfood-infos-li div.wp-menu-image {
-	background: url('../../../wp-admin/images/menu.png') no-repeat scroll -38px -39px transparent;
+	background: url('../../../../wp-admin/images/menu.png') no-repeat scroll -38px -39px transparent;
 }
 #fastfood-infos-li:hover div.wp-menu-image,
 #fastfood-infos-li.tab-selected div.wp-menu-image {
-	background: url('../../../wp-admin/images/menu.png') no-repeat scroll -38px -7px transparent;
+	background: url('../../../../wp-admin/images/menu.png') no-repeat scroll -38px -7px transparent;
 }
 #fastfood-options div,
 #fastfood-infos div {
@@ -40,7 +40,7 @@ body {
 }
 #fastfood-options,
 #fastfood-infos {
-	background: url('images/mainmenu.png') repeat-x scroll left -5px #f9f9f9;
+	background: url('../images/mainmenu.png') repeat-x scroll left -5px #f9f9f9;
 	border: 1px solid #fff;
 	border-top: none;
 	-moz-box-shadow: 0px 2px 8px #404040;
@@ -50,11 +50,11 @@ body {
 	padding: 0 10px;
 }
 #fastfood-options-li div.wp-menu-image {
-	background: url('../../../wp-admin/images/menu.png') no-repeat scroll -247px -39px transparent;
+	background: url('../../../../wp-admin/images/menu.png') no-repeat scroll -247px -39px transparent;
 }
 #fastfood-options-li:hover div.wp-menu-image,
 #fastfood-options-li.tab-selected div.wp-menu-image {
-	background: url('../../../wp-admin/images/menu.png') no-repeat scroll -247px -7px transparent;
+	background: url('../../../../wp-admin/images/menu.png') no-repeat scroll -247px -7px transparent;
 }
 #selector {
 	list-style: none;
@@ -89,7 +89,7 @@ body {
 	box-shadow: 0px 2px 8px #404040;
 }
 #tabs-container {
-	width: 700px;
+	width: 800px;
 	margin: 20px auto;
 }
 .ff_opt_input {
@@ -104,4 +104,8 @@ body {
 .tab-selected a:focus {
 	color: #fff;
 	text-shadow: 1px 1px 2px #000;
+}
+#fastfood-options th,
+#fastfood-options td {
+	padding: 5px;
 }

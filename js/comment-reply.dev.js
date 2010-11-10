@@ -49,12 +49,12 @@ addComment = {
 	},
 	
 	resetForm : function() {
-		var t = addComment, temp = t.I('wp-temp-form-div'), respond = t.I('respond'), cancel = t.I('cancel-comment-reply-link');
+		var t = addComment, temp = t.I('wp-temp-form-div'), respond = t.I('respond'), cancel = t.I('cancel-comment-reply-link'), parent = t.I('comment_parent');
 
 		if ( ! cancel || ! respond )
 			return;
 
-		t.I('comment_parent').value = '0';
+		if ( parent ) parent.value = '0';
 		if ( temp ) {
 			temp.parentNode.insertBefore(respond, temp);
 			temp.parentNode.removeChild(temp);
@@ -68,11 +68,11 @@ addComment = {
 	viewForm : function() {
 		var t = addComment, respond = t.I('respond'), cancel = t.I('cancel-comment-reply-link'), replytitle = t.I('reply-title'), replytopost = t.I('replytopost');
 		
-		if ( ! respond || ! cancel || ! replytopost || ! replytitle)
+		if ( ! respond || ! cancel || ! replytitle)
 			return false;
 		addComment.resetForm();
 		respond.className = 'fixed-respond js-res';
-		replytitle.innerHTML = replytopost.value;
+		if ( replytopost ) replytitle.innerHTML = replytopost.value;
 		replytitle.appendChild(cancel);
 		respond.style.display = "block";
 		
@@ -80,6 +80,19 @@ addComment = {
 		catch(e) {}
 
 		return false;
+	},
+	
+	addCloseButton : function() {
+		var t = addComment, respond = t.I('respond'), replytitle = t.I('reply-title');
+
+		if ( ! respond || ! replytitle )
+			return;
+		if ( ! t.I('ff_reply_close') ) {
+			div = document.createElement('div');
+			div.id = 'ff_reply_close';
+			div.innerHTML = '<input type="button" title="Close" value="x" style="padding: 0 0 3px; position: absolute; top: 10px; right: 10px; width:19px;" onclick="return addComment.resetForm()" />';
+			respond.insertBefore(div, replytitle);
+		}
 	},
 	
 	I : function(e) {

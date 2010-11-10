@@ -1,14 +1,14 @@
 /*
 Theme Name: Fastfood
-Theme URI: http://www.twobeers.net/annunci/tema-per-wordpress-fastfood
+Theme URI: http: //www.twobeers.net/annunci/tema-per-wordpress-fastfood
 Description: Simple and clear theme with lots of features, like a "quick links" menu, widgetized footer or print preview. Full supports WP 3.0 new custom menu tool and posts thumbnails
-Version: 0.15
+Version: 0.16
 Tags: translation-ready, threaded-comments, custom-menu, custom-header, theme-options, fixed-width, two-columns, white, silver, orange, light, sticky-post
 Author: TwoBeers Crew
-Author URI: http://www.twobeers.net/
+Author URI: http: //www.twobeers.net/
 
 License: GNU General Public License, version 2
-License URI: http://www.gnu.org/licenses/gpl-2.0.html
+License URI: http: //www.gnu.org/licenses/gpl-2.0.html
 */
 
 
@@ -79,7 +79,7 @@ fieldset {
 	padding: 8px;
 }
 legend {
-	color: #999999;
+	color: #999;
 }
 blockquote {
 	border-left: 5px solid #ccc;
@@ -179,7 +179,6 @@ input[type=reset]:hover {
 	clear: both;
 }
 #main {
-	background: transparent url('images/body2.png') center top repeat-y;
 	width: 848px;
 	min-height: 500px;
 	margin: 0 auto;
@@ -195,25 +194,45 @@ input[type=reset]:hover {
 	margin: 10px 0;
 	padding: 10px 9px;
 }
-#quickbar {
+#fixedfoot {
 	position: fixed;
 	bottom: 0;
 	width: 848px;
-	border-top: 2px groove #fff;
-	background: #f9f9f9 url('images/mainmenu.png') left -24px repeat-x;
-	z-index: 1000;
 	padding: 0;
 }
 #statusbar {
-	text-align: right;
 	font-size: 9px;
+	height: 12px;
 	padding: 10px;
+	text-align: right;
+	border-top: 2px groove #fff;
+	background: #f9f9f9;
+	z-index: 10;
 }
 #footer {
 	clear: both;
 	text-align: center;
 	padding-bottom: 45px;
 }
+#ff_background {
+	top: 0;
+	height: 4000px;
+	left: 0;
+	position: fixed;
+	width: 100%;
+	z-index: -10;
+}
+#ff_body {
+	height: 4000px;
+	margin: 0 auto;
+	width: 972px;
+}
+#ff_body_overlay {
+	background: url('images/body.png') repeat-y center top transparent;
+	height: 4000px;
+	width: 972px;
+}
+
 
 
 /* =Header
@@ -239,86 +258,101 @@ input[type=reset]:hover {
 
 /* =menu items (quickbar)
 ----------------------------------------------------------*/
-.itemimg {
-	position: absolute;
+#quickbar {
+	bottom: 34px;
 	left: -65px;
-	width: 50px;
-	height: 50px;
-	background-position: right top;
-	background-repeat: no-repeat;
+	position: absolute;
 }
+.itemimg,
 .itemimg_js {
-	position: absolute;
-	left: -65px;
 	width: 50px;
 	height: 50px;
-	background-position: right top;
 	background-repeat: no-repeat;
+	background-image: url('images/qbarv.png');
+	background-color: transparent;
 }
-.menuback {
-	height: 0;
-	display: none;
-	background: url('images/mainmenu.png') repeat-x scroll left -1px #F9F9F9;
-	padding: 0;
+#mii_rpost {
+	background-position: right 0;
 }
+#mii_pcats {
+	background-position: right -300px;
+}
+#mii_rcomm {
+	background-position: right -100px;
+}
+#mii_cuser {
+	background-position: right -200px;
+}
+.menuitem:hover #mii_rpost {
+	background-position: right -50px;
+}
+.menuitem:hover #mii_pcats {
+	background-position: right -350px;
+}
+.menuitem:hover #mii_rcomm {
+	background-position: right -150px;
+}
+.menuitem:hover #mii_cuser {
+	background-position: right -250px;
+}
+
+.menuback,
 .menuback_js {
-	height: 0;
+	background: url("images/mainmenu.png") repeat-x scroll left -1px #F9F9F9;
+	border-top: 2px groove #FFFFFF;
+	bottom: 0;
 	display: none;
-	background: url('images/mainmenu.png') repeat-x scroll left -1px #F9F9F9;
+	height: 0;
+	left: 65px;
+	overflow: hidden;
 	padding: 0;
+	position: absolute;
+	width: 848px;
 }
 .menuitem:hover .menuback {
 	display: block;
-	height: 220px;
+	height: 250px;
 }
 .menuitem:hover .itemimg {
-	background-position: right bottom;
 	width: 65px;
 }
-.menuitem:hover .itemimg_js {
-	background-position: right bottom;
-}
-.menulcont {
-	height: 195px;
-}
 .solid_ul {
-	height: 195px;
+	height: 210px;
 	margin: 0;
 	padding: 5px 0;
 	background: transparent url('images/operafix.png') left top repeat;
+	width: 424px;
 }
-.menuitem_1ul {
-	width: 423px;
-	height: 200px;
+.menulcont {
 	position: absolute;
 	top: 0;
 	left: 0;
 	padding: 0;
 }
-.menuitem_1ul > ul {
+.menulcont > ul {
 	border-right: 2px groove #fff;
 }
-.menuitem_1ul li {
+.menulcont li {
 	color: #404040;
 	display: block;
 	background: transparent url('images/operafix.png') left top repeat;
 	padding: 1px 5px;
 }
-.menuitem_1ul li:hover .preview {
+.menulcont li:hover .preview {
 	display: block;
 }
-.menuitem_1ul li:hover .cat_preview {
+.menulcont li:hover .cat_preview {
 	display: block;
 }
-.menuitem_1ul li,
+.menulcont li,
 .lidrop li {
 	list-style-image: url('images/litem.png');
 }
-.menuitem_1ul li:hover {
+.menulcont li:hover {
 	background: #404040;
 	color: #ccc;
 }
-.menuitem_1ul li.ql_cat_li:hover {
+.menulcont li.ql_cat_li:hover {
 	background: #404040 url('images/litem.png') 410px center no-repeat;
 	color: #ccc;
 }
@@ -326,7 +360,7 @@ input[type=reset]:hover {
 	display: none;
 	position: absolute;
 	top: 0;
-	left: 421px;
+	left: 424px;
 	width: 427px;
 	height: 200px;
 	padding: 0;
@@ -356,9 +390,9 @@ input[type=reset]:hover {
 	display: none;
 }
 .preview img.wp-post-image {
-	-moz-box-shadow: 2px 2px 3px #444;
-	-webkit-box-shadow: 2px 2px 3px #444;
-	box-shadow: 2px 2px 3px #444;
+	-moz-box-shadow: 2px 2px 3px #555;
+	-webkit-box-shadow: 2px 2px 3px #555;
+	box-shadow: 2px 2px 3px #555;
 	display: block;
 	margin: 0 5px 0 0;
 }
@@ -406,24 +440,32 @@ input[type=reset]:hover {
 	-khtml-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
-	-moz-box-shadow: 2px 2px 3px #444;
-	-webkit-box-shadow: 2px 2px 3px #444;
-	box-shadow: 2px 2px 3px #444;
+	-moz-box-shadow: 2px 2px 3px #555;
+	-webkit-box-shadow: 2px 2px 3px #555;
+	box-shadow: 2px 2px 3px #555;
 	border: 1px solid #fff;
 	padding-bottom: 5px;
 }
-#navbuttons a {
+.minib_img {
 	display: block;
 	text-align: center;
-	margin: 6px 0 0;
-	padding: 5px 2px;
+	height: 20px;
+	width: 20px;
+	background-color: transparent;
+	background-image: url('images/minibuttons.png');
+	background-repeat: no-repeat;
+	cursor: pointer;
+	padding: 2px 0;
 }
-#navbuttons a:hover {
+.minib_img:hover {
 	background-color: #aaa;
+}
+.minibutton:hover a {
 	color: #404040;
 }
 .minibutton {
 	position: relative;
+	margin: 6px 0 0;
 }
 .minibutton .nb_tooltip {
 	-moz-border-radius: 5px;
@@ -469,7 +511,7 @@ input[type=reset]:hover {
 #mainmenu > li.menu-item > ul.sub-menu {
 	position: absolute;
 	display: none;
-	z-index: 3;
+	z-index: 30;
 	max-width: 300px;
 	min-width: 150px;
 	-moz-border-radius: 5px;
@@ -572,13 +614,47 @@ body.single .top_meta {
 }
 .metafield_trigger {
 	position: absolute;
-	top: 2px;
+	top: 3px;
 	height: 16px;
-	background-position: left bottom;
-	background-repeat: no-repeat;
 }
-.metafield:hover .metafield_trigger {
-	background-position: left top;
+.mft_date,
+.mft_cat,
+.mft_tag,
+.mft_comm,
+.mft_hier {
+	background-image: url('images/meta_icons.png');
+	background-repeat: no-repeat;
+	background-color: transparent;
+}
+.mft_date {
+	background-position: 0 -16px;
+}
+.mft_comm {
+	background-position: -16px -16px;
+}
+.mft_tag {
+	background-position: -32px -16px;
+}
+.mft_cat {
+	background-position: -48px -16px;
+}
+.mft_hier {
+	background-position: -64px -16px;
+}
+.metafield:hover .mft_date {
+	background-position: 0 0;
+}
+.metafield:hover .mft_comm {
+	background-position: -16px 0;
+}
+.metafield:hover .mft_tag {
+	background-position: -32px 0;
+}
+.metafield:hover .mft_cat {
+	background-position: -48px 0;
+}
+.metafield:hover .mft_hier {
+	background-position: -64px 0;
 }
 .shadowed_box {
 	border: 1px solid #fff;
@@ -597,14 +673,27 @@ body.single .top_meta {
 /* =widgets (sidebar & footer)
 ----------------------------------------------------------*/
 .widget {
-	overflow: auto;
+	overflow-x: auto;
 	margin: 8px 0;
+	padding-bottom: 10px;
 }
 #footer-widget-area {
 	border-top: 2px groove #fff;
 	border-bottom: 2px groove #fff;
 	background-color: #eee;
 	padding: 5px 0;
+}
+#header-widget-area {
+	border-top: 1px solid #555;
+	background-color: #404040;
+	color: #ccc;
+}
+#header-widget-area .widget {
+	margin: 8px 0 0;
+	float: right;
+	padding: 0 11px 8px;
+	text-align: left;
+	width: 259px;
 }
 .widget-area {
 	float: left;
@@ -627,7 +716,10 @@ body.single .top_meta {
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
 	background: url('images/lens.png') no-repeat scroll 217px center #BEC0BE;
+	margin: 0 auto;
 	padding: 2px;
+	width: 238px;
+	border: 1px solid #fff;
 }
 ul.ul_fwa {
 	margin: 0;
@@ -684,6 +776,10 @@ ul.ul_fwa {
 	padding: 4px;
 }
 
+.dim_cpc {
+	background: transparent url('images/minibuttons.png') left -216px no-repeat;
+	padding: 5px 0 5px 22px;
+}
 
 /* =comments
 ----------------------------------------------------------*/
@@ -739,7 +835,7 @@ ul.children {
 	z-index: 20;
 	display: none;
 	margin-left: -22px;
-	padding: 10px 20px 0;
+	padding: 10px 20px;
 }
 #respond {
 	padding-top: 10px;
@@ -754,10 +850,12 @@ ul.children {
 	bottom: 50px;
 	margin-left: -22px;
 }
-.js-res #reply-title {
+#reply-title {
 	font-size: 1em;
 	font-weight: normal;
 	text-align: right;
+}
+.js-res #reply-title {
 	position: relative;
 	margin: 0 17px 0 0;
 }
@@ -847,9 +945,9 @@ img.aligncenter {
 	margin-bottom: 12px;
 }
 .wp-caption {
-	-moz-box-shadow: 1px 1px 1px #444;
-	-webkit-box-shadow: 1px 1px 1px #444;
-	box-shadow: 1px 1px 1px #444;
+	-moz-box-shadow: 1px 1px 1px #555;
+	-webkit-box-shadow: 1px 1px 1px #555;
+	box-shadow: 1px 1px 1px #555;
 	background-color: #ccc;
 	border: 1px solid #fff;
 	padding-top: 4px;

@@ -1,20 +1,13 @@
 <!-- begin sidebar -->
 <div id="sidebardx">
 
-	<div id="search" style="margin-bottom: 5px;">
-		<div class="search-form">
-			<form action="<?php echo home_url(); ?>" id="searchform" method="get">
-				<input type="text" onfocus="if (this.value == '<?php _e( "Search" ) ?>...')
-				{this.value = '';}" onblur="if (this.value == '')
-				{this.value = '<?php _e( "Search" ) ?>...';}" id="s" name="s" value="<?php _e( 'Search' ) ?>..." style="width: 210px;" />
-				<input type="hidden" id="searchsubmit" />
-			</form>
-		</div>
-	</div>
 
 	<?php 	/* Widgetized sidebar, if you have the plugin installed. */
 	if ( !dynamic_sidebar( 'primary-widget-area' ) ) { ?>
 
+		<div id="ff-search">
+			<?php get_search_form(); ?>
+		</div>
 		<div id="w_meta" class="widget"><div class="w_title"><?php _e( 'Meta' ); ?></div>
 			<ul>
 				<?php wp_register(); ?>
