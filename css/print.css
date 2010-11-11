@@ -1,4 +1,4 @@
-/* Fastfood v0.12 - stylesheet for print */
+/* Fastfood v0.16 - stylesheet for print */
 
 body {
 	font-size: 14px;
@@ -14,50 +14,82 @@ p {
 }
 a {
 	text-decoration: none;
-	color: #000000;
+	color: #000;
 }
+a img {
+	border: none;
+}
+pre,
+code,
+tt,
+kbd {
+	font: 1.1em "Courier New", monospace;
+	letter-spacing: 1px;
+	padding: 0 8px;
+}
+pre {
+	border: 1px solid #ccc;
+	display: block;
+	white-space: pre;
+	margin: 5px auto;
+	padding: 5px;
+}
+table {
+	border-collapse: collapse;
+}
+td,
+th {
+	border: 1px solid #ccc;
+	padding: 3px;
+}
+blockquote {
+	font-style: italic;
+}
+.avatar,
+.comment-edit-link,
+.comment-reply-link,
+.says,
+.description,
+.post-edit-link,
+#footer-widget-area,
+#header-widget-area,
+#headerimg,
+#respond,
 #pages,
 #sidebardx,
 #quickbar,
 #edit_link,
-.avatar,
-.comment-edit-link,
-.comment-reply-link,
-#respond,
-.says,
-.description,
-#footer-widget-area,
-.navigate_comments,
-#close_preview,
-.edit_link {
+#fixedfoot {
 	display: none;
 }
-.metafield_content_js {
-	display: block !important;
+.metafield div {
+	height: auto !important;
+	overflow: visible !important;
 }
 .meta,
 .comment-meta,
+.comment_tools,
 #footer,
-#head,
-.comment_tools {
+#head {
 	font-size: 11px;
 }
-.meta,
-.comment_tools {
-	border-left: 1px solid #CCCCCC;
-	padding-left: 10px;
+.meta {
+	border: 1px solid #ccc;
 	margin: 10px 0;
-}
-.comment_tools a {
-	display: none;
+	padding: 2px 2px 2px 10px;
 }
 .comment-meta {
 	position: absolute;
 	top: 2px;
 	right: 2px;
 }
+#comments {
+	border-top: 1px solid #ccc;
+	margin-top: 10px;
+	padding-top: 10px;
+}
 .comment-body {
-	border: 1px solid #CCCCCC;
+	border: 1px solid #ccc;
 	margin-bottom: 3px;
 	position: relative;
 	padding: 3px;
@@ -71,7 +103,4 @@ a {
 #head,
 #footer {
 	text-align: right;
-}
-#comments {
-	border-top: 1px solid #CCCCCC;
 }

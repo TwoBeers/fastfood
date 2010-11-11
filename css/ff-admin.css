@@ -1,0 +1,8 @@
+﻿/* Fastfood v0.16 - Admin stylesheet */
+
+body {
+	background: url('../images/main.png') repeat-x scroll left 57px #f9f9f9;
+}
+#wpcontent #wphead {
+	border-bottom: 10px solid #404040;
+}

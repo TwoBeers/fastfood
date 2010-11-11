@@ -1,26 +1,8 @@
-/* Fastfood v0.15 - Admin stylesheet */
+/* Fastfood v0.16 - Theme options stylesheet */
 
-/* Common Admin elements
-----------------------------------------------*/
-body {
-	background: url('../images/main.png') repeat-x scroll left 57px #f9f9f9;
-}
-#wpcontent #wphead {
-	border-bottom: 10px solid #404040;
-}
-
-/* Theme options elements
-----------------------------------------------*/
 #fastfood-infos ul {
 	list-style: disc inside;
 	margin-left: 30px;
-}
-#fastfood-infos-li div.wp-menu-image {
-	background: url('../../../../wp-admin/images/menu.png') no-repeat scroll -38px -39px transparent;
-}
-#fastfood-infos-li:hover div.wp-menu-image,
-#fastfood-infos-li.tab-selected div.wp-menu-image {
-	background: url('../../../../wp-admin/images/menu.png') no-repeat scroll -38px -7px transparent;
 }
 #fastfood-options div,
 #fastfood-infos div {
@@ -108,4 +90,8 @@ body {
 #fastfood-options th,
 #fastfood-options td {
 	padding: 5px;
+	font-size: 12px;
+}
+#fastfood-options tr {
+	border-bottom: 1px solid #999;
 }

@@ -20,7 +20,7 @@ $fastfood_coa = array(
 	'fastfood_rsidebpages' => array( 'default'=>'false','description'=>__( 'sidebar on pages', 'fastfood' ),'info'=>__( 'show right sidebar on pages [default = disabled]', 'fastfood' ),'req'=>'' ),
 	'fastfood_rsidebposts' => array( 'default'=>'false','description'=>__( 'sidebar on posts', 'fastfood' ),'info'=>__( 'show right sidebar on posts [default = disabled]', 'fastfood' ),'req'=>'' ),
 	'fastfood_jsani' => array( 'default'=>'true','description'=>__( 'javascript animations', 'fastfood' ),'info'=>__( 'try disable animations if you encountered problems with javascript [default = enabled]', 'fastfood' ),'req'=>'' ),
-	'fastfood_cust_comrep' => array( 'default'=>'true','description'=>__( 'custom comment reply form', 'fastfood' ),'info'=>__( 'custom floating form for post/reply comments [default = disabled]', 'fastfood' ),'req'=>'' ),
+	'fastfood_cust_comrep' => array( 'default'=>'true','description'=>__( 'custom comment reply form', 'fastfood' ),'info'=>__( 'custom floating form for post/reply comments [default = enabled]', 'fastfood' ),'req'=>'' ),
 	'fastfood_tbcred' => array( 'default'=>'true','description'=>__( 'theme credits', 'fastfood' ),'info'=>__( "please, don't hide theme credits [default = enabled]", 'fastfood' ),'req'=>'' )
 );
 
@@ -127,14 +127,14 @@ function fastfood_scripts(){
 	global $is_ff_printpreview;
 	global $fastfood_version;
 	if ( $fastfood_opt['fastfood_jsani'] == 'true' ) {
-		wp_enqueue_script( 'mootools', get_bloginfo( 'stylesheet_directory' ) . '/js/mootools.js' ); //mootools core
 		if ( !$is_ff_printpreview ) { //script not to be loaded in print preview
-			wp_enqueue_script( 'fastfoodscript', get_bloginfo( 'stylesheet_directory' ) . '/js/fastfoodscript.js' ); //fastfood js
+			wp_enqueue_script( 'fastfoodscript', get_bloginfo( 'stylesheet_directory' ) . '/js/fastfoodscript.min.js',array('jquery'),$fastfood_version, true  ); //fastfood js
+			wp_enqueue_script( 'jquery-ui-effects', get_bloginfo( 'stylesheet_directory' ) . '/js/jquery-ui-1.8.6.custom.min.js',array('jquery'),'1.8.6', false  ); //fastfood js
 		}
 	}
-	if ( is_singular() ) {
+	if ( is_singular() && !$is_ff_printpreview ) {
 		if ( $fastfood_opt['fastfood_cust_comrep'] == 'true' ) {
-			wp_enqueue_script( 'ff-comment-reply', get_bloginfo( 'stylesheet_directory' ) . '/js/comment-reply.dev.js' ); //custom comment-reply pop-up box
+			wp_enqueue_script( 'ff-comment-reply', get_bloginfo( 'stylesheet_directory' ) . '/js/comment-reply.min.js' ); //custom comment-reply pop-up box
 		} else {
 			wp_enqueue_script( 'comment-reply' ); //custom comment-reply pop-up box
 		}
@@ -300,9 +300,11 @@ function fastfood_content_replace(){
 // create custom plugin settings menu
 function fastfood_create_menu() {
 	//create new top-level menu
-	add_theme_page( __( 'Theme Options' ), __( 'Theme Options' ), 'manage_options', 'tb-fastfood-functions', 'edit_fastfood_options' );
+	$pageopt = add_theme_page( __( 'Theme Options' ), __( 'Theme Options' ), 'manage_options', 'tb-fastfood-functions', 'edit_fastfood_options' );
 	//call register settings function
 	add_action( 'admin_init', 'register_tb_fastfood_settings' );
+	add_action( 'admin_print_styles-' . $pageopt, 'my_theme_admin_styles' );
+
 }
 add_action( 'admin_menu', 'fastfood_create_menu' );
 
@@ -310,8 +312,23 @@ function register_tb_fastfood_settings() {
 	//register fastfood settings
 	register_setting( 'ff_settings_group', 'fastfood_options' );
 	//add custom stylesheet to admin
-	wp_enqueue_style( 'ff-options-style', get_bloginfo( 'stylesheet_directory' ) . '/css/ff-opt.css', false, '', 'screen' );
+	wp_enqueue_style( 'ff-admin-style', get_bloginfo( 'stylesheet_directory' ) . '/css/ff-admin.css', false, '', 'screen' );
+}
 
+/* called only on your theme options page, enqueue our stylesheet here */
+function my_theme_admin_styles() {
+	wp_enqueue_style( 'ff-options-style', get_bloginfo( 'stylesheet_directory' ) . '/css/ff-opt.css', false, '', 'screen' );
+	?>
+	<style type="text/css">
+		#fastfood-infos-li div.wp-menu-image {
+			background: url('<?php echo admin_url(); ?>/images/menu.png') no-repeat scroll -38px -39px transparent;
+		}
+		#fastfood-infos-li:hover div.wp-menu-image,
+		#fastfood-infos-li.tab-selected div.wp-menu-image {
+			background: url('<?php echo admin_url(); ?>/images/menu.png') no-repeat scroll -38px -7px transparent;
+		}
+	</style>
+	<?php
 }
 
 function edit_fastfood_options() {
@@ -492,6 +509,9 @@ if ( !function_exists( 'fastfood_admin_header_style' ) ) {
 
 // Add style customization to page - gets included in the site header
 function fastfood_header_style(){
+
+	global $is_ff_printpreview;
+	if ( $is_ff_printpreview ) return;
 
 	if ( 'blank' == get_theme_mod('header_textcolor', HEADER_TEXTCOLOR) || '' == get_theme_mod('header_textcolor', HEADER_TEXTCOLOR) || ( defined( 'NO_HEADER_TEXT' ) && NO_HEADER_TEXT ) )
 		$style = 'display:none;';

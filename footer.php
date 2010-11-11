@@ -1,4 +1,4 @@
-
+﻿
 <!-- begin footer -->
 			</div><!-- close sidebar or posts_wide -->
 
@@ -28,6 +28,13 @@
 			?>
 				<!-- begin quickbar -->
 				<div id="quickbar">
+					<!-- quickbar tool - uncomment to use
+						<div class="menutoolitem">
+							<div class="itemimg menutool_trig" style="background-image: url('<?php echo get_bloginfo( 'stylesheet_directory' ); ?>/images/qbartool.png');"></div>
+							<div class="menutool">[put here your code]</div>
+						</div>
+					quickbar tool -->
+					<br />
 					<?php if ( $fastfood_opt['fastfood_qbar_recpost'] == 'true' ) { // recent posts menu ?>
 						<div class="menuitem">
 							<div id="mii_rpost" class="itemimg"></div>

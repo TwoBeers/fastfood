@@ -1,72 +1,32 @@
-/* Fastfood v0.12 - stylesheet for print preview */
+/* Fastfood v0.16 - stylesheet for print preview */
 
 body {
-	font-size: 14px;
-	background-color: #EEEEEE;
-}
-a {
-	text-decoration: none;
-	color: #000000;
-}
-h1,
-h2,
-h3,
-h4,
-h5,
-h6,
-p {
-	margin: 5px 0;
-}
-#pages,
-#sidebardx,
-#quickbar,
-#edit_link,
-.avatar,
-.comment-edit-link,
-.comment-reply-link,
-#respond,
-.says,
-.description,
-#footer-widget-area,
-.navigate_comments,
-.edit_link,
-.metafield {
-	display: none;
-}
-#head {
-	background: none repeat scroll 0 0 transparent !important;
+	background-color: #eee;
 }
 #main {
-	-moz-box-shadow: 0 0 5px #000000;
-	box-shadow: 0 0 5px #000000;
-	-webkit-box-shadow: 0 0 5px #000000;
-	background: none repeat scroll 0 0 #FFFFFF;
-	width: 760px;
+	-moz-box-shadow: 0 0 5px #000;
+	-webkit-box-shadow: 0 0 5px #000;
+	box-shadow: 0 0 5px #000;
+	background: none repeat scroll 0 0 #fff;
+	width: 702px;
+	min-height: 1000px;
 	margin: 30px auto 0;
-}
-#content {
-	padding: 30px;
-}
-#posts_wide {
-	min-height: 800px;
-}
-#footer {
-	margin-top: 20px;
+	padding: 49px;
 }
 #close_preview {
+	background: none repeat scroll 0 0 #ccc;
+	border: 1px solid #fff;
+	display: block;
+	margin-left: 770px;
+	position: fixed;
+	top: 30px;
 	-moz-border-radius: 5px;
 	-khtml-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
-	-moz-box-shadow: 2px 2px 3px #444444;
-	box-shadow: 2px 2px 3px #444444;
-	-webkit-box-shadow: 2px 2px 3px #444444;
-	background: none repeat scroll 0 0 #CCCCCC;
-	border: 1px solid #FFFFFF;
-	display: block;
-	margin-left: 750px;
-	position: fixed;
-	top: 30px;
+	-moz-box-shadow: 2px 2px 3px #444;
+	-webkit-box-shadow: 2px 2px 3px #444;
+	box-shadow: 2px 2px 3px #444;
 	padding: 5px 0;
 }
 #close_preview a {
@@ -80,45 +40,5 @@ p {
 }
 #close_preview a#print_button {
 	display: none;
-	border-top: 1px solid #999999;
-}
-.meta,
-.comment-meta,
-#footer,
-#head,
-.comment_tools {
-	font-size: 11px;
-}
-.meta,
-.comment_tools {
-	border-left: 1px solid #CCCCCC;
-	padding-left: 10px;
-	margin: 10px 0;
-}
-.comment_tools a {
-	display: none;
-}
-.comment-meta {
-	position: absolute;
-	top: 2px;
-	right: 2px;
-}
-.comment-body {
-	border: 1px solid #CCCCCC;
-	margin-bottom: 3px;
-	position: relative;
-	padding: 3px;
-}
-#commentlist li {
-	list-style: disc outside none;
-}
-.fn {
-	font-weight: bold;
-}
-#head,
-#footer {
-	text-align: right;
-}
-#comments {
-	border-top: 1px solid #CCCCCC;
+	border-top: 1px solid #999;
 }

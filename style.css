@@ -426,6 +426,43 @@ input[type=reset]:hover {
 	margin: 5px;
 	padding: 10px;
 }
+.menutoolitem {
+	width: 50px;
+	height: 50px;
+	background-repeat: no-repeat;
+	background-color: transparent;
+}
+.menutool_trig {
+	background-repeat: no-repeat;
+	background-color: transparent;
+	background-position: right top;
+
+}
+.menutool_trig:hover {
+	background-position: right -50px;
+}
+.menutool {
+	background: url("images/litem.png") no-repeat scroll 5px center #404040;
+	border: 1px solid #FFFFFF;
+	display: none;
+	left: 50px;
+	min-height: 30px;
+	min-width: 250px;
+	padding: 10px 25px;
+	position: absolute;
+	top: 0;
+	color: #ccc;
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	-moz-box-shadow: 1px 1px 2px #000;
+	-webkit-box-shadow: 1px 1px 2px #000;
+	box-shadow: 1px 1px 2px #000;
+}
+.menutoolitem:hover .menutool {
+	display: block;
+}
 
 
 /* =navigation buttons
@@ -499,7 +536,7 @@ input[type=reset]:hover {
 .current-menu-item > a,
 .current_page_item > a,
 .current-cat > a {
-	color: #888;
+	color: #ccc;
 }
 #mainmenu > li.page_item,
 #mainmenu > li.menu-item {
@@ -585,19 +622,31 @@ input[type=reset]:hover {
 	padding: 5px;
 	font-size: 11px;
 }
-.meta:hover {
+
+.top_meta,
+.top_meta_js {
+	position: absolute;
+	width: 548px;
+}
+.top_meta:hover,
+.top_meta_js:hover {
 	z-index: 300;
+}
+.top_meta:hover {
 	border: 1px solid #fff;
 	-moz-box-shadow: 1px 1px 2px #000;
 	-webkit-box-shadow: 1px 1px 2px #000;
 	box-shadow: 1px 1px 2px #000;
 }
-.top_meta {
-	position: absolute;
-	width: 548px;
+.meta_shadowed {
+	-moz-box-shadow: 1px 1px 2px #000;
+	-webkit-box-shadow: 1px 1px 2px #000;
+	box-shadow: 1px 1px 2px #000;
 }
 body.page .top_meta,
-body.single .top_meta {
+body.single .top_meta,
+body.page .top_meta_js,
+body.single .top_meta_js {
 	width: 686px;
 }
 .metafield_content {
@@ -839,6 +888,7 @@ ul.children {
 }
 #respond {
 	padding-top: 10px;
+	min-height: 200px;
 }
 .floating-respond {
 	position: absolute;
@@ -867,7 +917,11 @@ ul.children {
 .pingback .reply {
 	display: none;
 }
-
+.must-log-in {
+	font-size: 1.4em;
+	font-weight: bold;
+	text-align: center;
+}
 
 /* =calendar
 ----------------------------------------------------------*/
