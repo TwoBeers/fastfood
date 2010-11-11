@@ -47,5 +47,11 @@
 			</div>
 			
 			<?php get_sidebar( 'header' ); // show header widgets area ?>
-
-			<div id="posts_content" <?php if ( is_singular() ) { echo 'class="posts_wide"'; } else { echo 'class="posts_narrow"'; } ?>>
+			<?php
+				$postswidth = 'posts_narrow';
+				if ( 
+					( is_page() && ( $fastfood_opt['fastfood_rsidebpages'] == 'false' ) ) ||
+					( is_single() && ( $fastfood_opt['fastfood_rsidebposts'] == 'false' ) )
+				) $postswidth = 'posts_wide';
+			?>
+			<div id="posts_content" class="<?php echo $postswidth; ?>">
