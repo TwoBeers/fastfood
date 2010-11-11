@@ -70,30 +70,29 @@
 	$('#quickbar').children('.menuitem').each( function(){ //get every quickbar item
 		var list = $(this).children('.menuback'); // get the sub list for each quickbar item
 		var trig = $(this).children('.itemimg');
-		var height_out = 60; //the exiting height of the submenu container
 			
 		trig.removeClass('itemimg').addClass('itemimg_js');
 		list.removeClass().addClass('menuback_js');
 
-		list.css({'opacity' : 0 , 'height' : 0 });
+		list.css({ 'height' : 0 });
 			
 		$(this).mouseenter( function(){ //when mouse enters, slide left the sub list, restore its shadow and animate the button
 			list.stop();
 			trig.stop();
 			list.animate(
-				{ 'opacity' : 1 , 'height': 250 },
+				{ 'height': 250 },
 				500,
 				'easeOutBack'
 			);
 			trig.animate(
-				{ 'width': 65 },
-				300
+				{ 'width': 55 },
+				200
 			);
 			
 		}).mouseleave( function(){ //when mouse leaves, hide the submenu
 			list.stop();
 			trig.stop();
-			list.css({ 'opacity' : 0 , 'height' : 0 });
+			list.css({ 'height' : 0 , 'display' : '' });
 			trig.animate(
 				{ 'width': 50 },
 				300

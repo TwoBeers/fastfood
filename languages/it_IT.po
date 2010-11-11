@@ -1,119 +1,140 @@
 msgid ""
 msgstr ""
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Project-Id-Version: Fastfood Theme v0.15\n"
+"Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: TwoBeers Crew <light@twobeers.net>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
-"X-Poedit-Language: Italian\n"
-"X-Poedit-Country: ITALY\n"
-"X-Poedit-SourceCharset: utf-8\n"
 
 #. Text in function
-#: attachment.php:103
+#: attachment.php:83
 msgid "&laquo; Previous Image"
 msgstr "&laquo; Immagine Precedente"
 
+#. Text in function
+#: functions.php:446
+msgid "-- categories"
+msgstr "-- categorie"
+
+#. Text in function
+#: functions.php:446
+msgid "-- recent comments"
+msgstr "-- commenti recenti"
+
+#. Text in function
+#: functions.php:446
+msgid "-- recent posts"
+msgstr "-- articoli recenti"
+
+#. Text in function
+#: functions.php:446
+msgid "-- user"
+msgstr "-- utente"
+
 #. Text in echo
-#: footer.php:15
+#: footer.php:18
 msgid "All rights reserved"
 msgstr "Tutti i diritti riservati"
 
+#. Text in function
+#: functions.php:446
+msgid "Ancient Tree"
+msgstr "Albero Antico"
+
+#. Text in function
+#: functions.php:446
+msgid "Bamboo Forest"
+msgstr "Foresta di Bamboo"
+
 #. Text in echo
-#: footer.php:229
-#: footer.php:231
+#: footer.php:243
+#: footer.php:245
 msgid "Bottom of page"
 msgstr "Fondo pagina"
 
 #. Text in function
-#: functions.php:225
+#: functions.php:268
 msgid "Child pages: "
 msgstr "Pagine discendenti: "
 
 #. Text in function
-#: functions.php:355
+#: functions.php:446
 msgid "First Footer Widget Area"
 msgstr "Fondo pagina: prima area widget"
 
-#. Text in echo
-#: functions.php:328
-msgid "Hide/Show sliding menu"
-msgstr "Nascondi/Visualizza il menu a scoparsa"
-
-#. Text in echo
-#: functions.php:338
-msgid "Javascript Animations"
-msgstr "Animazioni Javascript"
+#. Text in function
+#: functions.php:446
+msgid "Globe"
+msgstr "Globo"
 
 #. Text in function
-#: footer.php:81
+#: footer.php:86
 msgid "Logged in as %s"
 msgstr "Collegato come %s"
 
 #. Text in function
-#: functions.php:355
+#: functions.php:446
 msgid "Main Navigation Menu"
 msgstr "Menu di navigazione principale"
 
 #. Text in function
-#: footer.php:215
+#: functions.php:446
+msgid "Menu Widget Area"
+msgstr "Menu: area widget"
+
+#. Text in function
+#: footer.php:229
 msgid "Newer Posts"
 msgstr "Articoli pi&ugrave; recenti"
 
 #. Text in function
-#: attachment.php:104
+#: attachment.php:84
 msgid "Next Image &raquo;"
 msgstr "Immagine Successiva &raquo;"
 
 #. Text in function
-#: functions.php:355
+#: functions.php:446
 msgid "No preview: this is a comment of a protected post"
 msgstr "Nessuna anteprima: questo &egrave; un commento ad un articolo protetto"
 
 #. Text in function
-#: functions.php:355
+#: functions.php:446
 msgid "No preview: this is a protected post"
 msgstr "Nessuna anteprima: questo articolo &egrave; protetto"
 
 #. Text in function
-#: footer.php:81
+#: footer.php:86
 msgid "Not logged in"
 msgstr "Non sei collegato"
 
 #. Text in function
-#: footer.php:212
+#: footer.php:226
 msgid "Older Posts"
 msgstr "Articoli pi&ugrave; vecchi"
 
 #. Text in function
-#: functions.php:225
+#: functions.php:268
 msgid "Parent page: "
 msgstr "Pagina genitore: "
 
 #. Text in function
-#: footer.php:191
-#: footer.php:192
-#: footer.php:193
+#: footer.php:197
+#: footer.php:199
 msgid "Return to %s"
 msgstr "Ritorna a %s"
 
 #. Text in function
-#: functions.php:355
+#: functions.php:446
 msgid "Second Footer Widget Area"
 msgstr "Fondo pagina: seconda area widget"
 
 #. Text in function
-#: functions.php:355
+#: functions.php:446
 msgid "Sidebar Widget Area"
 msgstr "Barra laterale: area widget"
-
-#. Text in echo
-#: functions.php:327
-msgid "Sliding Menu"
-msgstr "Menu a scorrimento"
 
 #. Text in echo
 #: 404.php:13
@@ -121,58 +142,68 @@ msgid "Sorry, you're looking for something that isn't here"
 msgstr "Spiacente, stai cercando qualcosa che non esiste"
 
 #. Text in function
-#: functions.php:355
+#: functions.php:446
 msgid "The first footer widget area"
 msgstr "La prima area widget nel fondo pagina"
 
 #. Text in function
-#: functions.php:355
+#: functions.php:446
 msgid "The second footer widget area"
 msgstr "La seconda area widget nel fondo pagina"
 
 #. Text in function
-#: functions.php:355
+#: functions.php:446
 msgid "The sidebar widget area"
 msgstr "L&apos;area widget nella barra laterale"
 
 #. Text in function
-#: functions.php:355
+#: functions.php:446
 msgid "The third footer widget area"
 msgstr "La terza area widget nel fondo pagina"
 
 #. Text in function
-#: functions.php:355
+#: functions.php:446
+msgid "The widget area under the main menu"
+msgstr "L&apos;area widget sotto il menu"
+
+#. Text in function
+#: functions.php:446
 msgid "Third Footer Widget Area"
 msgstr "Fondo pagina: terza area widget"
 
+#. Text in function
+#: functions.php:268
+msgid "This page has hierarchy"
+msgstr "Questa pagina ha una gerarchia"
+
 #. Text in echo
-#: footer.php:222
-#: footer.php:224
+#: footer.php:236
+#: footer.php:238
 msgid "Top of page"
 msgstr "Inizio pagina"
 
 #. Text in echo
-#: functions.php:339
-msgid "Try disable animations if you encountered problems with javascript"
-msgstr "Prova a disabilitare le animazioni nel caso di problemi con javascript"
-
-#. Text in echo
-#: functions.php:350
+#: functions.php:414
 msgid "Undo Changes"
 msgstr "Annulla Modifiche"
 
 #. Text in echo
-#: functions.php:349
+#: functions.php:413
 msgid "Update Options"
 msgstr "Aggiorna Opzioni"
 
 #. Text in echo
-#: footer.php:78
+#: footer.php:83
 msgid "User"
 msgstr "Utente"
 
+#. Text in function
+#: functions.php:446
+msgid "Vector Flowers"
+msgstr "Fiori Vettoriali"
+
 #. Text in echo
-#: attachment.php:105
+#: attachment.php:85
 msgid "View full size"
 msgstr "Dimensione originale"
 
@@ -182,14 +213,14 @@ msgid "You can try the following:"
 msgstr "Vuoi un consiglio? Prova a..."
 
 #. Text in function
-#: functions.php:355
-msgid "about"
-msgstr "in"
+#: functions.php:446
+msgid "[default = enabled]"
+msgstr "[predefinito = abilitato]"
 
 #. Text in function
-#: functions.php:340
-msgid "active"
-msgstr "attivate"
+#: functions.php:446
+msgid "about"
+msgstr "in"
 
 #. Text in echo
 #: 404.php:19
@@ -197,35 +228,60 @@ msgid "browse the site throught the popup menu on bottom left"
 msgstr "navigare nel sito tramite il menu a scomparsa in basso a sinitra"
 
 #. Text in echo
-#: search.php:57
-#: attachment.php:32
-#: functions.php:355
+#: search.php:25
+#: attachment.php:36
+#: functions.php:446
 #: index.php:37
-#: single.php:31
+#: single.php:35
 msgid "by"
 msgstr "di"
 
+#. Text in function
+#: functions.php:446
+msgid "custom comment reply form"
+msgstr "modulo di risposta personalizzato"
+
+#. Text in function
+#: functions.php:446
+msgid "custom floating form for post/reply comments [default = enabled]"
+msgstr "modulo di inserimento commenti per le pagine/articoli fluttuante [predefinito = abilitato]"
+
 #. Text in echo
-#: footer.php:153
-#: footer.php:155
+#: functions.php:396
+msgid "description"
+msgstr "descrizione"
+
+#. Text in echo
+#: footer.php:149
+#: footer.php:151
 msgid "feed for comments on this post"
 msgstr "feed dei commenti per questo post"
 
 #. Text in function
-#: functions.php:340
-msgid "hide"
-msgstr "nascondi"
+#: functions.php:446
+msgid "javascript animations"
+msgstr "animazioni javascript"
+
+#. Text in echo
+#: functions.php:394
+msgid "name"
+msgstr "nome"
 
 #. Text in function
-#: functions.php:340
-msgid "inactive"
-msgstr "disattivate"
-
-#. Text in function
-#: search.php:71
+#: search.php:78
 #: index.php:93
 msgid "page %1$s of %2$s"
 msgstr "pagina %1$s di %2$s"
+
+#. Text in function
+#: functions.php:446
+msgid "please, don't hide theme credits [default = enabled]"
+msgstr "per favore, non nascondere i crediti del tema [predefinito = abilitato]"
+
+#. Text in echo
+#: functions.php:397
+msgid "require"
+msgstr "richiede"
 
 #. Text in echo
 #: 404.php:17
@@ -238,17 +294,71 @@ msgid "see the suggested pages in the above menu"
 msgstr "vedere le pagine proposte nel menu qui sopra"
 
 #. Text in function
-#: functions.php:340
-msgid "show"
-msgstr "visualizza"
+#: functions.php:446
+msgid "show right sidebar on pages [default = disabled]"
+msgstr "visualizza la sidebar destra nelle pagine [predefinito = disabilitato]"
 
 #. Text in function
-#: functions.php:478
-msgid "Fastfood Default Gravatar"
-msgstr "Gravatar predefinito di Fastfood"
+#: functions.php:446
+msgid "show right sidebar on posts [default = disabled]"
+msgstr "visualizza la sidebar destra negli articoli [predefinito = disabilitato]"
+
+#. Text in function
+#: functions.php:446
+msgid "sidebar on pages"
+msgstr "barra laterale nelle pagine"
+
+#. Text in function
+#: functions.php:446
+msgid "sidebar on posts"
+msgstr "barra laterale negli articoli"
+
+#. Text in function
+#: functions.php:446
+msgid "sliding menu"
+msgstr "menu a scorrimento"
 
 #. Text in echo
-#: functions.php:226
-msgid "This page has relationships"
-msgstr "Questa pagina ha una parentela"
+#: functions.php:395
+msgid "status"
+msgstr "stato"
 
+#. Text in function
+#: functions.php:446
+msgid "theme credits"
+msgstr "crediti del tema"
+
+#. Text in echo
+#: footer.php:113
+msgid "today is "
+msgstr "oggi &egrave; "
+
+#. Text in function
+#: functions.php:446
+msgid "try disable animations if you encountered problems with javascript [default = enabled]"
+msgstr "prova a disabilitare le animazioni se ci sono problemi con i javascript [predefinito = abilitato]"
+
+#~ msgid "Hide/Show sliding menu"
+#~ msgstr "Nascondi/Visualizza il menu a scoparsa"
+
+#~ msgid "Try disable animations if you encountered problems with javascript"
+#~ msgstr ""
+#~ "Prova a disabilitare le animazioni nel caso di problemi con javascript"
+
+#~ msgid "active"
+#~ msgstr "attivate"
+
+#~ msgid "hide"
+#~ msgstr "nascondi"
+
+#~ msgid "inactive"
+#~ msgstr "disattivate"
+
+#~ msgid "show"
+#~ msgstr "visualizza"
+
+#~ msgid "Fastfood Default Gravatar"
+#~ msgstr "Gravatar predefinito di Fastfood"
+
+#~ msgid "[default = disabled]"
+#~ msgstr "[predefinito = disabilitato]"

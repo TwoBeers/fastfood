@@ -225,12 +225,12 @@ input[type=reset]:hover {
 #ff_body {
 	height: 4000px;
 	margin: 0 auto;
-	width: 972px;
+	width: 878px;
 }
 #ff_body_overlay {
 	background: url('images/body.png') repeat-y center top transparent;
 	height: 4000px;
-	width: 972px;
+	width: 878px;
 }
 
 
@@ -260,7 +260,7 @@ input[type=reset]:hover {
 ----------------------------------------------------------*/
 #quickbar {
 	bottom: 34px;
-	left: -65px;
+	left: -50px;
 	position: absolute;
 }
 .itemimg,
@@ -303,7 +303,7 @@ input[type=reset]:hover {
 	bottom: 0;
 	display: none;
 	height: 0;
-	left: 65px;
+	left: 50px;
 	overflow: hidden;
 	padding: 0;
 	position: absolute;
@@ -470,8 +470,7 @@ input[type=reset]:hover {
 #navbuttons {
 	position: absolute;
 	bottom: 45px;
-	right: 0;
-	margin-right: -48px;
+	right: -35px;
 	background: #ccc;
 	-moz-border-radius: 5px;
 	-khtml-border-radius: 5px;
