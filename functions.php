@@ -129,7 +129,7 @@ function fastfood_scripts(){
 	if ( $fastfood_opt['fastfood_jsani'] == 'true' ) {
 		if ( !$is_ff_printpreview ) { //script not to be loaded in print preview
 			wp_enqueue_script( 'fastfoodscript', get_bloginfo( 'stylesheet_directory' ) . '/js/fastfoodscript.min.js',array('jquery'),$fastfood_version, true  ); //fastfood js
-			wp_enqueue_script( 'jquery-ui-effects', get_bloginfo( 'stylesheet_directory' ) . '/js/jquery-ui-1.8.6.custom.min.js',array('jquery'),'1.8.6', false  ); //fastfood js
+			wp_enqueue_script( 'jquery-ui-effects', get_bloginfo( 'stylesheet_directory' ) . '/js/jquery-ui-effects-1.8.6.min.js',array('jquery'),'1.8.6', false  ); //fastfood js
 		}
 	}
 	if ( is_singular() && !$is_ff_printpreview ) {
@@ -648,6 +648,29 @@ function fastfood_page_navi($this_page_id) {
 		}
 	}
 	return $page_links;
+}
+
+// display a simple login form in quickbar
+function fastfood_mini_login() {
+	$args = array(
+		'redirect' => home_url(),
+		'form_id' => 'ff-loginform',
+		'id_username' => 'ff-user_login',
+		'id_password' => 'ff-user_pass',
+		'id_remember' => 'ff-rememberme',
+		'id_submit' => 'ff-submit' );
+	?>
+	<li class="ql_cat_li">
+		<a title="<?php _e( 'Log in' ); ?>" href="<?php echo esc_url( wp_login_url() ); ?>"><?php _e( 'Log in' ); ?></a>
+		<div class="cat_preview">
+			<div class="mentit"><?php _e( 'Log in' ); ?></div>
+			<div id="ff_minilogin">
+				<?php wp_login_form($args); ?>
+			</div>
+		</div>
+	</li>
+
+	<?php
 }
 
 ?>

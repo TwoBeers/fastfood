@@ -95,12 +95,20 @@
 											}
 											?>
 										</li>
-										<?php wp_register(); ?>
-										<?php if ( is_user_logged_in() ) {?>
-										<li><a href="<?php echo home_url(); ?>/wp-admin/profile.php"><?php _e( 'Your Profile' ); ?></a></li>
-										<li><a title="<?php _e( 'Add New Post' ); ?>" href="<?php echo home_url(); ?>/wp-admin/post-new.php"><?php _e( 'New Post' ); ?></a></li>
+										<?php if ( current_user_can( 'read' ) ) { wp_register(); }?>
+										<?php if ( ( is_user_logged_in() ) && current_user_can( 'read' ) ) {?>
+											<li><a href="<?php echo esc_url( admin_url( 'profile.php' ) ); ?>"><?php _e( 'Your Profile' ); ?></a></li>
+											<?php if ( current_user_can( 'publish_posts' ) ) { ?>
+												<li><a title="<?php _e( 'Add New Post' ); ?>" href="<?php echo esc_url( admin_url( 'post-new.php' ) ); ?>"><?php _e( 'Add New Post' ); ?></a></li>
+											<?php } ?>
+											<?php if ( current_user_can( 'moderate_comments' ) ) { ?>
+												<li><a title="<?php _e( 'Comments' ); ?>" href="<?php echo esc_url( admin_url( 'edit-comments.php' ) ); ?>"><?php _e( 'Comments' ); ?></a></li>
+											<?php } ?>
+											<li><a title="<?php _e( 'Log out' ); ?>" href="<?php echo esc_url( wp_logout_url() ); ?>"><?php _e( 'Log out' ); ?></a></li>
 										<?php } ?>
-										<li><?php wp_loginout(); ?></li>
+										<?php if ( ! is_user_logged_in() ) {?>
+											<?php fastfood_mini_login(); ?>
+										<?php } ?>
 									</ul>
 								</div>
 							</div>
@@ -118,18 +126,14 @@
 
 					<div class="minibutton">
 						<a href="<?php
-							the_permalink();
-							if ( strchr( get_permalink(),'?' ) ) {
-								echo '&style=printme';
-							} else {
-								echo '?style=printme';
-							}
+							$arr_params['style'] = 'printme';
 							if ( get_query_var('page') ) {
-								echo '&page=' . esc_html( get_query_var( 'page' ) );
+								$arr_params['page'] = esc_html( get_query_var( 'page' ) );
 							}
 							if ( get_query_var('cpage') ) {
-								echo '&cpage=' . esc_html( get_query_var( 'cpage' ) );
+								$arr_params['cpage'] = esc_html( get_query_var( 'cpage' ) );
 							}
+							echo add_query_arg( $arr_params, get_permalink() );
 							?>">
 							<span class="minib_img" style="background-position: center 0px;">&nbsp;</span>
 							<span class="nb_tooltip"><?php _e( 'Print' ); ?></span>

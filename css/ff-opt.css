@@ -1,7 +1,7 @@
 /* Fastfood v0.16 - Theme options stylesheet */
 
 #fastfood-infos ul {
-	list-style: disc inside;
+	list-style: disc outside;
 	margin-left: 30px;
 }
 #fastfood-options div,
