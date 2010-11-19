@@ -68,10 +68,10 @@
 		</li>
 		<li>Fixes:
 			<ul>
-				<li>Main menu right ordered: main menu now is not only alphabetically ordered</li>
+				<li>Main menu correctly sorted: sorted as you sort it</li>
 				<li>Images grouped: the theme loads faster</li>
 				<li>Custom header: you don't need to delete your site title anymore. Just unset it in Appearance-&gt;Header panel</li>
-				<li>Links to Wordpress admin even with renamed directory</li>
+				<li>Links to Wordpress admin even in non standard installations</li>
 				<li>Previous/Next page links now follow the menu ordered sequence</li>
 				<li>No more trackbacks in recent comments (useless)</li>
 				<li>Minimum width 960px (from 1024px), for small multimedia devices (eg. IPhone4)</li>

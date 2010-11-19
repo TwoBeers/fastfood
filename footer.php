@@ -3,11 +3,11 @@
 			</div><!-- close sidebar or posts_wide -->
 
 			<?php
-				global $current_user, $fastfood_opt, $fastfood_is_allcat_page;
+				global $current_user, $fastfood_opt, $fastfood_is_allcat_page, $fastfood_version;
 				if ( 
-					( !is_page() && !is_single() ) ||
-					( is_page() && ( $fastfood_opt['fastfood_rsidebpages'] == 'true' ) ) ||
-					( is_single() && ( $fastfood_opt['fastfood_rsidebposts'] == 'true' ) )
+					( !is_page() && !is_single() && !is_attachment() ) ||
+					( is_page() && ( $fastfood_opt['fastfood_rsidebpages'] == 1 ) ) ||
+					( is_single() && ( $fastfood_opt['fastfood_rsidebposts'] == 1  && !is_attachment() ) )
 				) get_sidebar(); // show sidebar
 			?>
 
@@ -15,7 +15,7 @@
 
 				<?php	get_sidebar( 'footer' ); ?>
 
-				<small>&copy; <?php echo date( 'Y' ); ?>  <strong><?php bloginfo( 'name' ); ?></strong> <?php _e( 'All rights reserved','fastfood' ); ?> - Fastfood theme <?php global $fastfood_version; if( !empty( $fastfood_version ) ) { echo 'v' . $fastfood_version; } ?> by <a href="http://www.twobeers.net/" title="<?php _e( 'Visit author homepage' ); ?> @ TwoBeers.net">TwoBeers Crew</a> - Powered by <a href="http://wordpress.org/" title="<?php _e( 'Powered by WordPress' ); ?>">WordPress</a></small>
+				<small>&copy; <?php echo date( 'Y' ); ?>  <strong><?php bloginfo( 'name' ); ?></strong> <?php _e( 'All rights reserved','fastfood' ); ?><?php if ( $fastfood_opt['fastfood_tbcred'] == 1 ) { ?> - Fastfood theme <?php if( !empty( $fastfood_version ) ) { echo 'v' . $fastfood_version; } ?> by <a href="http://www.twobeers.net/" title="<?php _e( 'Visit author homepage' ); ?> @ TwoBeers.net">TwoBeers Crew</a><?php } ?> - Powered by <a href="http://wordpress.org/" title="<?php _e( 'Powered by WordPress' ); ?>">WordPress</a></small>
 				<!-- <?php echo get_num_queries(); ?> queries. <?php timer_stop(1); ?> seconds. -->
 
 			</div><!-- close footer -->
@@ -24,7 +24,7 @@
 
 		<div id="fixedfoot">
 			<?php
-				if ( $fastfood_opt['fastfood_qbar'] == 'true' ) {
+				if ( $fastfood_opt['fastfood_qbar'] == 1 ) {
 			?>
 				<!-- begin quickbar -->
 				<div id="quickbar">
@@ -35,7 +35,7 @@
 						</div>
 					quickbar tool -->
 					<br />
-					<?php if ( $fastfood_opt['fastfood_qbar_recpost'] == 'true' ) { // recent posts menu ?>
+					<?php if ( $fastfood_opt['fastfood_qbar_recpost'] == 1 ) { // recent posts menu ?>
 						<div class="menuitem">
 							<div id="mii_rpost" class="itemimg"></div>
 							<div class="menuback">
@@ -48,7 +48,7 @@
 							</div>
 						</div>
 					<?php } ?>
-					<?php if ( $fastfood_opt['fastfood_qbar_cat'] == 'true' ) { // popular categories menu ?>
+					<?php if ( $fastfood_opt['fastfood_qbar_cat'] == 1 ) { // popular categories menu ?>
 						<div class="menuitem">
 							<div id="mii_pcats" class="itemimg"></div>
 							<div class="menuback">
@@ -62,7 +62,7 @@
 							</div>
 						</div>
 					<?php } ?>
-					<?php if ( $fastfood_opt['fastfood_qbar_reccom'] == 'true' ) { // recent comments menu ?>
+					<?php if ( $fastfood_opt['fastfood_qbar_reccom'] == 1 ) { // recent comments menu ?>
 						<div class="menuitem">
 							<div id="mii_rcomm" class="itemimg"></div>
 							<div class="menuback">
@@ -75,7 +75,7 @@
 							</div>
 						</div>
 					<?php } ?>
-					<?php if ( $fastfood_opt['fastfood_qbar_user'] == 'true' ) { // user links menu ?>
+					<?php if ( $fastfood_opt['fastfood_qbar_user'] == 1 ) { // user links menu ?>
 						<div class="menuitem">
 							<div id="mii_cuser" class="itemimg"></div>
 							<div class="menuback">

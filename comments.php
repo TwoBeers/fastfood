@@ -10,8 +10,7 @@
 	}
 	//if comments are open
 	if ( comments_open() ) { 
-		global $fastfood_opt;
-		global $is_ff_printpreview;
+		global $fastfood_opt, $is_ff_printpreview;
 ?>
 
 	<div class="comment_tools" id="comments" style="text-align: right;">
@@ -43,7 +42,7 @@
 		//define custom argoments for comment form
 		$custom_args = array(
 			'comment_field'        => '<p class="comment-form-comment" style="text-align: center;"><textarea id="comment" name="comment" cols="45" rows="7" style="width: 95%;" aria-required="true"></textarea></p>',
-			'comment_notes_after'  => '<p class="form-allowed-tags"><small style="float: right; width: 600px; color: #999999;">' . sprintf( __( 'You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes: %s' ), allowed_tags() ) . '</small></p><input type="hidden" value="' . __('Reply to Comment') . '" id="replytocomment" name="replytocomment" /><input type="hidden" value="' . __( 'Leave a Reply' ) . '" id="replytopost" name="replytopost" />',
+			'comment_notes_after'  => '<p class="form-allowed-tags"><small style="float: right; min-width: 200px; color: #999999;">' . sprintf( __( 'You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes: %s' ), allowed_tags() ) . '</small></p><input type="hidden" value="' . __('Reply to Comment') . '" id="replytocomment" name="replytocomment" /><input type="hidden" value="' . __( 'Leave a Reply' ) . '" id="replytopost" name="replytopost" />',
 			'label_submit'         => __( 'Say It!' ),
 			'logged_in_as'         => '<p class="logged-in-as">' . sprintf( __( 'Logged in as <a href="%1$s">%2$s</a>.' ), admin_url( 'profile.php' ), $user_identity ) . '</p>',
 			'cancel_reply_link'    => '<br />' . __( 'Cancel reply' ),
@@ -52,7 +51,7 @@
 
 		//output comment form
 		comment_form($custom_args); 
-		if ( $fastfood_opt['fastfood_cust_comrep'] == 'true' ) { // disable custom script if default comment-reply is in use ?>
+		if ( $fastfood_opt['fastfood_cust_comrep'] == 1 ) { // disable custom script if default comment-reply is in use ?>
 			<script type="text/javascript">
 				/* <![CDATA[ */
 				addComment.resetForm();
