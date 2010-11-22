@@ -46,7 +46,9 @@ if ( get_theme( 'Fastfood' ) ) {
 
 // theme version's check
 if ( isset( $current_theme ) ) {
-	if ( !isset( $fastfood_opt['version'] ) && !isset( $_GET['activated'] ) ) {
+	if ( !isset( $fastfood_opt['version'] ) && isset( $_GET['activated'] ) ) {
+		$fastfood_version = $current_theme['Version'];
+	} elseif ( !isset( $fastfood_opt['version'] ) && !isset( $_GET['activated'] ) ) {
 		if ( current_user_can( 'manage_options' ) ) {
 			$fastfood_version_notice = 1;
 		}
@@ -443,6 +445,12 @@ function edit_fastfood_options() {
 						<a style="font-size: 10px; text-decoration: none; margin-left: 10px; cursor: pointer;" href="themes.php?page=functions" target="_self"><?php _e( 'Undo Changes' , 'fastfood' ); ?></a>
 					</div>
 				</form>
+				<div class="stylediv" style="clear: both;">
+					<p style="margin: 10px; text-align: center; ">
+						<?php _e( 'If you like/dislike this theme, or if you encounter any issues using it, please let us know it.', 'fastfood' ); ?><br />
+						<a href="<?php esc_url( 'http://www.twobeers.net/annunci/tema-per-wordpress-fastfood' ); ?>" title="Fastfood theme" target="_blank"><?php _e( 'Leave a feedback', 'fastfood' ); ?></a>
+					</p>
+				</div>
 			</div>
 			<div id="fastfood-infos">
 				<?php esc_attr( get_template_part( 'readme' ) ); ?>
