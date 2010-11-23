@@ -9,14 +9,14 @@ msgstr ""
 #: index.php:71
 #: single.php:63
 #: page.php:41
-#: comments.php:18
+#: comments.php:17
 msgid "% Comments"
 msgstr ""
 
 #. Text in echo
 #: search.php:12
 #: attachment.php:24
-#: functions.php:446
+#: functions.php:484
 #: index.php:24
 #: single.php:23
 #: page.php:24
@@ -29,17 +29,17 @@ msgstr ""
 #: index.php:71
 #: single.php:63
 #: page.php:41
-#: comments.php:18
+#: comments.php:17
 msgid "1 Comment"
 msgstr ""
 
 #. Text in echo
-#: functions.php:383
+#: functions.php:415
 msgid "About"
 msgstr ""
 
 #. Text in echo
-#: footer.php:101
+#: footer.php:102
 msgid "Add New Post"
 msgstr ""
 
@@ -60,7 +60,7 @@ msgid "Blogroll"
 msgstr ""
 
 #. Text in function
-#: comments.php:38
+#: comments.php:37
 msgid "Cancel reply"
 msgstr ""
 
@@ -92,6 +92,7 @@ msgstr ""
 #: index.php:70
 #: single.php:62
 #: page.php:40
+#: footer.php:105
 msgid "Comments"
 msgstr ""
 
@@ -105,35 +106,46 @@ msgid "Edit"
 msgstr ""
 
 #. Text in echo
-#: comments.php:67
+#: comments.php:66
 msgid "Enter your password to view comments."
 msgstr ""
 
 #. Text in function
-#: footer.php:113
+#: footer.php:121
 msgid "F j, Y"
 msgstr ""
 
 #. Text in echo
-#: footer.php:218
+#: footer.php:222
 msgid "Home"
 msgstr ""
 
 #. Text in function
-#: comments.php:38
+#: comments.php:37
 msgid "Leave a Reply"
 msgstr ""
 
 #. Text in echo
-#: comments.php:18
-#: comments.php:38
-#: footer.php:142
-#: footer.php:144
+#: comments.php:17
+#: comments.php:37
+#: footer.php:146
+#: footer.php:148
 msgid "Leave a comment"
 msgstr ""
 
+#. Text in echo
+#: functions.php:700
+#: functions.php:702
+msgid "Log in"
+msgstr ""
+
+#. Text in echo
+#: footer.php:107
+msgid "Log out"
+msgstr ""
+
 #. Text in function
-#: comments.php:38
+#: comments.php:37
 msgid "Logged in as <a href=\"%1$s\">%2$s</a>."
 msgstr ""
 
@@ -147,18 +159,13 @@ msgstr ""
 msgid "More..."
 msgstr ""
 
-#. Text in echo
-#: footer.php:101
-msgid "New Post"
-msgstr ""
-
 #. Text in function
-#: footer.php:205
+#: footer.php:209
 msgid "Next Post"
 msgstr ""
 
 #. Text in function
-#: footer.php:190
+#: footer.php:194
 msgid "Next page"
 msgstr ""
 
@@ -168,7 +175,7 @@ msgstr ""
 #: index.php:71
 #: single.php:63
 #: page.php:41
-#: comments.php:18
+#: comments.php:17
 msgid "No Comments"
 msgstr ""
 
@@ -180,17 +187,17 @@ msgid "No Tags"
 msgstr ""
 
 #. Text in function
-#: functions.php:446
+#: functions.php:484
 msgid "No comments yet."
 msgstr ""
 
 #. Text in echo
-#: functions.php:379
+#: functions.php:411
 msgid "Options"
 msgstr ""
 
 #. Text in function
-#: functions.php:574
+#: functions.php:709
 msgid "Options saved."
 msgstr ""
 
@@ -218,12 +225,12 @@ msgid "Powered by WordPress"
 msgstr ""
 
 #. Text in function
-#: footer.php:209
+#: footer.php:213
 msgid "Previous Post"
 msgstr ""
 
 #. Text in function
-#: footer.php:182
+#: footer.php:186
 msgid "Previous page"
 msgstr ""
 
@@ -231,7 +238,7 @@ msgstr ""
 #: attachment.php:13
 #: single.php:13
 #: page.php:13
-#: footer.php:135
+#: footer.php:139
 msgid "Print"
 msgstr ""
 
@@ -249,18 +256,18 @@ msgid "Recent Comments"
 msgstr ""
 
 #. Text in function
-#: functions.php:446
+#: functions.php:484
 #: footer.php:43
 msgid "Recent Posts"
 msgstr ""
 
 #. Text in function
-#: comments.php:38
+#: comments.php:37
 msgid "Reply to Comment"
 msgstr ""
 
 #. Text in function
-#: comments.php:38
+#: comments.php:37
 msgid "Say It!"
 msgstr ""
 
@@ -307,13 +314,13 @@ msgid "Tags:"
 msgstr ""
 
 #. Text in function
-#: functions.php:286
-#: functions.php:374
+#: functions.php:310
+#: functions.php:406
 msgid "Theme Options"
 msgstr ""
 
 #. Text in echo
-#: footer.php:160
+#: footer.php:164
 msgid "Trackback URL"
 msgstr ""
 
@@ -323,7 +330,7 @@ msgid "View all categories"
 msgstr ""
 
 #. Text in function
-#: functions.php:446
+#: functions.php:484
 msgid "View all posts in %s"
 msgstr ""
 
@@ -333,12 +340,17 @@ msgid "Visit author homepage"
 msgstr ""
 
 #. Text in echo
-#: footer.php:113
+#: footer.php:121
 msgid "Welcome"
 msgstr ""
 
 #. Text in function
-#: comments.php:38
+#: functions.php:709
+msgid "You do not have sufficient permissions to access this page."
+msgstr ""
+
+#. Text in function
+#: comments.php:37
 msgid "You may use these <abbr title=\"HyperText Markup Language\">HTML</abbr> tags and attributes: %s"
 msgstr ""
 

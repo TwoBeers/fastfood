@@ -3,7 +3,7 @@ Theme Name: Fastfood
 Theme URI: http: //www.twobeers.net/annunci/tema-per-wordpress-fastfood
 Description: Simple and clear theme with lots of features, like a "quick links" menu, widgetized footer or print preview. Full supports WP 3.0 new custom menu tool and posts thumbnails
 Version: 0.16
-Tags: translation-ready, threaded-comments, custom-menu, custom-header, theme-options, fixed-width, two-columns, white, silver, orange, light, sticky-post
+Tags: translation-ready, threaded-comments, custom-menu, custom-header, theme-options, fixed-width, one-column, two-columns, right-sidebar, white, silver, orange, light, sticky-post, custom-background
 Author: TwoBeers Crew
 Author URI: http: //www.twobeers.net/
 
@@ -65,7 +65,7 @@ ul {
 }
 ol {
 	list-style: decimal outside none;
-	margin: 0 0 0 20px;
+	margin: 0 0 0 30px;
 	padding: 0;
 }
 dt {
@@ -199,6 +199,7 @@ input[type=reset]:hover {
 	bottom: 0;
 	width: 848px;
 	padding: 0;
+	z-index:2;
 }
 #statusbar {
 	font-size: 9px;
@@ -314,7 +315,7 @@ input[type=reset]:hover {
 	height: 250px;
 }
 .menuitem:hover .itemimg {
-	width: 65px;
+	width: 55px;
 }
 .solid_ul {
 	height: 210px;
@@ -544,7 +545,8 @@ input[type=reset]:hover {
 ----------------------------------------------------------*/
 .current-menu-item > a,
 .current_page_item > a,
-.current-cat > a {
+.current-cat > a,
+li.current_page_ancestor .hiraquo {
 	color: #ccc;
 }
 #mainmenu > li.page_item,
@@ -553,6 +555,11 @@ input[type=reset]:hover {
 	margin: 0 5px;
 	padding: 2px 10px;
 }
+#mainmenu > li.page_item > a,
+#mainmenu > li.menu-item > a{
+	display: block;
+}
+
 #mainmenu > li.page_item > ul.children,
 #mainmenu > li.menu-item > ul.sub-menu {
 	position: absolute;
@@ -580,6 +587,7 @@ input[type=reset]:hover {
 	position: relative;
 	background-color: #404040;
 	padding: 10px 0;
+	z-index: 1;
 }
 #mainmenu ul.children li,
 #mainmenu ul.sub-menu li {
@@ -876,6 +884,10 @@ ul.children {
 }
 #commentlist {
 	position: relative;
+}
+.trackback ,
+.pingback  {
+	list-style: none outside none;
 }
 .js-res {
 	-moz-border-radius: 10px;

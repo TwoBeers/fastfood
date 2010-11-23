@@ -25,16 +25,16 @@ if ( ! isset( $content_width ) ) {
 
 //complete options array, with defaults values, description, infos and required option
 $fastfood_coa = array(
-	'fastfood_qbar' => array( 'default'=>1,'description'=>__( 'sliding menu', 'fastfood' ),'info'=>__( '[default = enabled]', 'fastfood' ),'req'=>'' ),
-	'fastfood_qbar_user' => array( 'default'=>1,'description'=>__( '-- user', 'fastfood' ),'info'=>__( '[default = enabled]', 'fastfood' ),'req'=>'fastfood_qbar' ),
-	'fastfood_qbar_reccom' => array( 'default'=>1,'description'=>__( '-- recent comments', 'fastfood' ),'info'=>__( '[default = enabled]', 'fastfood' ),'req'=>'fastfood_qbar' ),
-	'fastfood_qbar_cat' => array( 'default'=>1,'description'=>__( '-- categories','fastfood' ),'info'=>__( '[default = enabled]', 'fastfood' ),'req'=>'fastfood_qbar' ),
-	'fastfood_qbar_recpost' => array( 'default'=>1,'description'=>__( '-- recent posts', 'fastfood' ),'info'=>__( '[default = enabled]', 'fastfood' ),'req'=>'fastfood_qbar' ),
-	'fastfood_rsidebpages' => array( 'default'=>0,'description'=>__( 'sidebar on pages', 'fastfood' ),'info'=>__( 'show right sidebar on pages [default = disabled]', 'fastfood' ),'req'=>'' ),
-	'fastfood_rsidebposts' => array( 'default'=>0,'description'=>__( 'sidebar on posts', 'fastfood' ),'info'=>__( 'show right sidebar on posts [default = disabled]', 'fastfood' ),'req'=>'' ),
-	'fastfood_jsani' => array( 'default'=>1,'description'=>__( 'javascript animations', 'fastfood' ),'info'=>__( 'try disable animations if you encountered problems with javascript [default = enabled]', 'fastfood' ),'req'=>'' ),
-	'fastfood_cust_comrep' => array( 'default'=>1,'description'=>__( 'custom comment reply form', 'fastfood' ),'info'=>__( 'custom floating form for post/reply comments [default = enabled]', 'fastfood' ),'req'=>'' ),
-	'fastfood_tbcred' => array( 'default'=>1,'description'=>__( 'theme credits', 'fastfood' ),'info'=>__( "please, don't hide theme credits [default = enabled]", 'fastfood' ),'req'=>'' )
+	'fastfood_qbar' => array( 'default'=>1,'description'=>'sliding menu','info'=>'[default = enabled]','req'=>'' ),
+	'fastfood_qbar_user' => array( 'default'=>1,'description'=>'-- user','info'=>'[default = enabled]','req'=>'fastfood_qbar' ),
+	'fastfood_qbar_reccom' => array( 'default'=>1,'description'=>'-- recent comments','info'=>'[default = enabled]','req'=>'fastfood_qbar' ),
+	'fastfood_qbar_cat' => array( 'default'=>1,'description'=>'-- categories','fastfood','info'=>'[default = enabled]','req'=>'fastfood_qbar' ),
+	'fastfood_qbar_recpost' => array( 'default'=>1,'description'=>'-- recent posts','info'=>'[default = enabled]','req'=>'fastfood_qbar' ),
+	'fastfood_rsidebpages' => array( 'default'=>0,'description'=>'sidebar on pages','info'=>'show right sidebar on pages [default = disabled]','req'=>'' ),
+	'fastfood_rsidebposts' => array( 'default'=>0,'description'=>'sidebar on posts','info'=>'show right sidebar on posts [default = disabled]','req'=>'' ),
+	'fastfood_jsani' => array( 'default'=>1,'description'=>'javascript animations','info'=>'try disable animations if you encountered problems with javascript [default = enabled]','req'=>'' ),
+	'fastfood_cust_comrep' => array( 'default'=>1,'description'=>'custom comment reply form','info'=>'custom floating form for post/reply comments [default = enabled]','req'=>'' ),
+	'fastfood_tbcred' => array( 'default'=>1,'description'=>'theme credits','info'=>"please, don't hide theme credits [default = enabled]",'req'=>'' )
 );
 
 // load theme options in $fastfood_opt variable, globally retrieved in php files
@@ -310,7 +310,7 @@ function fastfood_multipages(){
 	<?php }
 }
 
-//add a fix for embed videos overlaing quickbar
+//add a fix for embed videos overlying quickbar
 function fastfood_content_replace(){
 	$content = get_the_content();
 	$content = apply_filters( 'the_content', $content );
@@ -320,7 +320,7 @@ function fastfood_content_replace(){
 	echo $content;
 }
 
-// create custom plugin settings menu
+// create theme option page
 function fastfood_create_menu() {
 	//create new top-level menu
 	$pageopt = add_theme_page( __( 'Theme Options' ), __( 'Theme Options' ), 'manage_options', 'tb_fastfood_functions', 'edit_fastfood_options' );
@@ -337,6 +337,7 @@ function register_tb_fastfood_settings() {
 	wp_enqueue_style( 'ff-admin-style', get_bloginfo( 'stylesheet_directory' ) . '/css/ff-admin.css', false, '', 'screen' );
 }
 
+// sanitize options value
 function fastfood_sanitaze_options($input) {
 	global $fastfood_coa, $current_theme;
 	// check updated values
@@ -356,7 +357,7 @@ function fastfood_sanitaze_options($input) {
 	return $input;
 }
 
-/* called only on your theme options page, enqueue our stylesheet here */
+// the custon header style - called only on your theme options page
 function fastfood_theme_admin_styles() {
 	wp_enqueue_style( 'ff-options-style', get_bloginfo( 'stylesheet_directory' ) . '/css/ff-opt.css', false, '', 'screen' );
 	?>
@@ -372,7 +373,7 @@ function fastfood_theme_admin_styles() {
 	<?php
 }
 
-// theme's option page
+// the theme option page
 function edit_fastfood_options() {
   if ( !current_user_can( 'manage_options' ) ) {
     wp_die( __( 'You do not have sufficient permissions to access this page.' ) );
@@ -429,12 +430,12 @@ function edit_fastfood_options() {
 							</tr>
 						<?php foreach ($fastfood_coa as $key => $val) { ?>
 							<tr>
-								<td style="width: 220px;font-weight:bold;border-right:1px solid #CCCCCC;"><?php echo $fastfood_coa[$key]['description']; ?></td>
-								<td style="width: 20px;border-right:1px solid #CCCCCC;text-align:center;">
+								<td style="width: 220px;font-weight:bold;border-right:1px solid #ccc;"><?php _e( $fastfood_coa[$key]['description'] , 'fastfood' ); ?></td>
+								<td style="width: 20px;border-right:1px solid #ccc;text-align:center;">
 									<input name="fastfood_options[<?php echo $key; ?>]" value="1" type="checkbox" class="ww_opt_p_checkbox" <?php checked( 1 , $fastfood_opt[$key] ); ?> />
 								</td>
-								<td style="font-style:italic;border-right:1px solid #CCCCCC;"><?php echo $fastfood_coa[$key]['info']; ?></td>
-								<td><?php if ( $fastfood_coa[$key]['req'] != '' ) echo $fastfood_coa[$fastfood_coa[$key]['req']]['description']; ?></td>
+								<td style="font-style:italic;border-right:1px solid #ccc;"><?php _e( $fastfood_coa[$key]['info'] , 'fastfood' ); ?></td>
+								<td><?php if ( $fastfood_coa[$key]['req'] != '' ) _e( $fastfood_coa[$fastfood_coa[$key]['req']]['description'] , 'fastfood' ); ?></td>
 							</tr>
 						<?php }	?>
 						</table>
@@ -445,11 +446,11 @@ function edit_fastfood_options() {
 						<a style="font-size: 10px; text-decoration: none; margin-left: 10px; cursor: pointer;" href="themes.php?page=functions" target="_self"><?php _e( 'Undo Changes' , 'fastfood' ); ?></a>
 					</div>
 				</form>
-				<div class="stylediv" style="clear: both;">
-					<p style="margin: 10px; text-align: center; ">
+				<div class="stylediv" style="clear: both; text-align: center; border: 1px solid #ccc;">
+					<small>
 						<?php _e( 'If you like/dislike this theme, or if you encounter any issues using it, please let us know it.', 'fastfood' ); ?><br />
-						<a href="<?php esc_url( 'http://www.twobeers.net/annunci/tema-per-wordpress-fastfood' ); ?>" title="Fastfood theme" target="_blank"><?php _e( 'Leave a feedback', 'fastfood' ); ?></a>
-					</p>
+						<a href="<?php echo esc_url( 'http://www.twobeers.net/annunci/tema-per-wordpress-fastfood' ); ?>" title="Fastfood theme" target="_blank"><?php _e( 'Leave a feedback', 'fastfood' ); ?></a>
+					</small>
 				</div>
 			</div>
 			<div id="fastfood-infos">
@@ -557,7 +558,7 @@ if ( !function_exists( 'fastfood_admin_header_style' ) ) {
 	}
 }
 
-// Add style customization to page - gets included in the site header
+//  the custon header style - add style customization to page - gets included in the site header
 function fastfood_header_style(){
 
 	global $is_ff_printpreview;
@@ -699,7 +700,7 @@ function fastfood_mini_login() {
 		<a title="<?php _e( 'Log in' ); ?>" href="<?php echo esc_url( wp_login_url() ); ?>"><?php _e( 'Log in' ); ?></a>
 		<div class="cat_preview">
 			<div class="mentit"><?php _e( 'Log in' ); ?></div>
-			<div id="ff_minilogin">
+			<div id="ff_minilogin" class="solid_ul">
 				<?php wp_login_form($args); ?>
 			</div>
 		</div>

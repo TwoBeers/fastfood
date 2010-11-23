@@ -22,6 +22,7 @@
 		<ol id="commentlist">
 			<?php
 			wp_list_comments( 'type=comment' );
+			?><li class="trackback" style="margin-top: 20px; margin-bottom: 10px;">trackbacks:</li><?php
 			wp_list_comments( 'type=pings' );
 			?>
 		</ol>

@@ -1,13 +1,17 @@
 msgid ""
 msgstr ""
+"Report-Msgid-Bugs-To: light@twobeers.net\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Project-Id-Version: \n"
+"Project-Id-Version: 0.16\n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: TwoBeers Crew <light@twobeers.net>\n"
-"Language-Team: \n"
+"Language-Team: Italian\n"
 "MIME-Version: 1.0\n"
+"X-Poedit-Language: Italian\n"
+"X-Poedit-Country: ITALY\n"
+"X-Poedit-SourceCharset: utf-8\n"
 
 #. Text in function
 #: attachment.php:83
@@ -34,41 +38,116 @@ msgstr "-- articoli recenti"
 msgid "-- user"
 msgstr "-- utente"
 
+#. Text in function
+#: functions.php:446
+msgid "[default = enabled]"
+msgstr "[predefinito = abilitato]"
+
+#. Text in function
+#: functions.php:446
+msgid "custom comment reply form"
+msgstr "modulo di risposta personalizzato"
+
+#. Text in function
+#: functions.php:446
+msgid "custom floating form for post/reply comments [default = enabled]"
+msgstr "modulo di inserimento commenti per le pagine/articoli fluttuante [predefinito = abilitato]"
+
+#. Text in function
+#: functions.php:446
+msgid "javascript animations"
+msgstr "animazioni javascript"
+
+#. Text in function
+#: functions.php:446
+msgid "sidebar on pages"
+msgstr "barra laterale nelle pagine"
+
+#. Text in function
+#: functions.php:446
+msgid "show right sidebar on pages [default = disabled]"
+msgstr "visualizza la sidebar destra nelle pagine [predefinito = disabilitato]"
+
+#. Text in function
+#: functions.php:446
+msgid "show right sidebar on posts [default = disabled]"
+msgstr "visualizza la sidebar destra negli articoli [predefinito = disabilitato]"
+
+#. Text in function
+#: functions.php:446
+msgid "sidebar on posts"
+msgstr "barra laterale negli articoli"
+
+#. Text in function
+#: functions.php:446
+msgid "sliding menu"
+msgstr "menu a scorrimento"
+
+#. Text in function
+#: functions.php:446
+msgid "theme credits"
+msgstr "crediti del tema"
+
+#. Text in function
+#: functions.php:446
+msgid "please, don't hide theme credits [default = enabled]"
+msgstr "per favore, non nascondere i crediti del tema [predefinito = abilitato]"
+
+#. Text in function
+#: functions.php:446
+msgid "try disable animations if you encountered problems with javascript [default = enabled]"
+msgstr "prova a disabilitare le animazioni se ci sono problemi con i javascript [predefinito = abilitato]"
+
 #. Text in echo
 #: footer.php:18
 msgid "All rights reserved"
 msgstr "Tutti i diritti riservati"
 
 #. Text in function
-#: functions.php:446
+#: functions.php:484
 msgid "Ancient Tree"
 msgstr "Albero Antico"
 
 #. Text in function
-#: functions.php:446
+#: functions.php:484
 msgid "Bamboo Forest"
 msgstr "Foresta di Bamboo"
 
 #. Text in echo
-#: footer.php:243
-#: footer.php:245
+#: footer.php:247
+#: footer.php:249
 msgid "Bottom of page"
 msgstr "Fondo pagina"
 
 #. Text in function
-#: functions.php:268
+#: functions.php:292
 msgid "Child pages: "
 msgstr "Pagine discendenti: "
 
 #. Text in function
-#: functions.php:446
+#: functions.php:484
+msgid "Fastfood theme says: \"Dont forget to set <a href=\"%s\">my options</a> and the header image!\""
+msgstr "Fastfood dice: \"Non dimenticarti di impostare le <a href=\"%s\">mie opzioni</a> e l'immagine di testata!\""
+
+#. Text in function
+#: functions.php:484
 msgid "First Footer Widget Area"
 msgstr "Fondo pagina: prima area widget"
 
 #. Text in function
-#: functions.php:446
+#: functions.php:484
 msgid "Globe"
 msgstr "Globo"
+
+#. Text in echo
+#: functions.php:451
+msgid "If you like/dislike this theme, or if you encounter any issues using it, please let us know it."
+msgstr "Se hai riscontrato dei problemi o se semplicemente ti piace/non ti piace questo tema , per favore faccelo sapere."
+
+#. Text in echo
+#: functions.php:452
+msgid "Leave a feedback"
+msgstr "Lascia un feedback"
 
 #. Text in function
 #: footer.php:86
@@ -76,17 +155,17 @@ msgid "Logged in as %s"
 msgstr "Collegato come %s"
 
 #. Text in function
-#: functions.php:446
+#: functions.php:484
 msgid "Main Navigation Menu"
 msgstr "Menu di navigazione principale"
 
 #. Text in function
-#: functions.php:446
+#: functions.php:484
 msgid "Menu Widget Area"
 msgstr "Menu: area widget"
 
 #. Text in function
-#: footer.php:229
+#: footer.php:233
 msgid "Newer Posts"
 msgstr "Articoli pi&ugrave; recenti"
 
@@ -96,12 +175,12 @@ msgid "Next Image &raquo;"
 msgstr "Immagine Successiva &raquo;"
 
 #. Text in function
-#: functions.php:446
+#: functions.php:484
 msgid "No preview: this is a comment of a protected post"
 msgstr "Nessuna anteprima: questo &egrave; un commento ad un articolo protetto"
 
 #. Text in function
-#: functions.php:446
+#: functions.php:484
 msgid "No preview: this is a protected post"
 msgstr "Nessuna anteprima: questo articolo &egrave; protetto"
 
@@ -111,28 +190,28 @@ msgid "Not logged in"
 msgstr "Non sei collegato"
 
 #. Text in function
-#: footer.php:226
+#: footer.php:230
 msgid "Older Posts"
 msgstr "Articoli pi&ugrave; vecchi"
 
 #. Text in function
-#: functions.php:268
+#: functions.php:292
 msgid "Parent page: "
 msgstr "Pagina genitore: "
 
 #. Text in function
-#: footer.php:197
-#: footer.php:199
+#: footer.php:201
+#: footer.php:203
 msgid "Return to %s"
 msgstr "Ritorna a %s"
 
 #. Text in function
-#: functions.php:446
+#: functions.php:484
 msgid "Second Footer Widget Area"
 msgstr "Fondo pagina: seconda area widget"
 
 #. Text in function
-#: functions.php:446
+#: functions.php:484
 msgid "Sidebar Widget Area"
 msgstr "Barra laterale: area widget"
 
@@ -142,53 +221,53 @@ msgid "Sorry, you're looking for something that isn't here"
 msgstr "Spiacente, stai cercando qualcosa che non esiste"
 
 #. Text in function
-#: functions.php:446
+#: functions.php:484
 msgid "The first footer widget area"
 msgstr "La prima area widget nel fondo pagina"
 
 #. Text in function
-#: functions.php:446
+#: functions.php:484
 msgid "The second footer widget area"
 msgstr "La seconda area widget nel fondo pagina"
 
 #. Text in function
-#: functions.php:446
+#: functions.php:484
 msgid "The sidebar widget area"
 msgstr "L&apos;area widget nella barra laterale"
 
 #. Text in function
-#: functions.php:446
+#: functions.php:484
 msgid "The third footer widget area"
 msgstr "La terza area widget nel fondo pagina"
 
 #. Text in function
-#: functions.php:446
+#: functions.php:484
 msgid "The widget area under the main menu"
 msgstr "L&apos;area widget sotto il menu"
 
 #. Text in function
-#: functions.php:446
+#: functions.php:484
 msgid "Third Footer Widget Area"
 msgstr "Fondo pagina: terza area widget"
 
 #. Text in function
-#: functions.php:268
+#: functions.php:292
 msgid "This page has hierarchy"
 msgstr "Questa pagina ha una gerarchia"
 
 #. Text in echo
-#: footer.php:236
-#: footer.php:238
+#: footer.php:240
+#: footer.php:242
 msgid "Top of page"
 msgstr "Inizio pagina"
 
 #. Text in echo
-#: functions.php:414
+#: functions.php:446
 msgid "Undo Changes"
 msgstr "Annulla Modifiche"
 
 #. Text in echo
-#: functions.php:413
+#: functions.php:445
 msgid "Update Options"
 msgstr "Aggiorna Opzioni"
 
@@ -198,7 +277,7 @@ msgid "User"
 msgstr "Utente"
 
 #. Text in function
-#: functions.php:446
+#: functions.php:484
 msgid "Vector Flowers"
 msgstr "Fiori Vettoriali"
 
@@ -213,12 +292,7 @@ msgid "You can try the following:"
 msgstr "Vuoi un consiglio? Prova a..."
 
 #. Text in function
-#: functions.php:446
-msgid "[default = enabled]"
-msgstr "[predefinito = abilitato]"
-
-#. Text in function
-#: functions.php:446
+#: functions.php:484
 msgid "about"
 msgstr "in"
 
@@ -230,40 +304,26 @@ msgstr "navigare nel sito tramite il menu a scomparsa in basso a sinitra"
 #. Text in echo
 #: search.php:25
 #: attachment.php:36
-#: functions.php:446
+#: functions.php:484
 #: index.php:37
 #: single.php:35
 msgid "by"
 msgstr "di"
 
-#. Text in function
-#: functions.php:446
-msgid "custom comment reply form"
-msgstr "modulo di risposta personalizzato"
-
-#. Text in function
-#: functions.php:446
-msgid "custom floating form for post/reply comments [default = enabled]"
-msgstr "modulo di inserimento commenti per le pagine/articoli fluttuante [predefinito = abilitato]"
-
 #. Text in echo
-#: functions.php:396
+#: functions.php:428
+#: functions.php:433
 msgid "description"
 msgstr "descrizione"
 
 #. Text in echo
-#: footer.php:149
-#: footer.php:151
+#: footer.php:153
+#: footer.php:155
 msgid "feed for comments on this post"
 msgstr "feed dei commenti per questo post"
 
-#. Text in function
-#: functions.php:446
-msgid "javascript animations"
-msgstr "animazioni javascript"
-
 #. Text in echo
-#: functions.php:394
+#: functions.php:426
 msgid "name"
 msgstr "nome"
 
@@ -273,13 +333,8 @@ msgstr "nome"
 msgid "page %1$s of %2$s"
 msgstr "pagina %1$s di %2$s"
 
-#. Text in function
-#: functions.php:446
-msgid "please, don't hide theme credits [default = enabled]"
-msgstr "per favore, non nascondere i crediti del tema [predefinito = abilitato]"
-
 #. Text in echo
-#: functions.php:397
+#: functions.php:429
 msgid "require"
 msgstr "richiede"
 
@@ -293,50 +348,15 @@ msgstr "usare lo strumento di ricerca in alto a destra"
 msgid "see the suggested pages in the above menu"
 msgstr "vedere le pagine proposte nel menu qui sopra"
 
-#. Text in function
-#: functions.php:446
-msgid "show right sidebar on pages [default = disabled]"
-msgstr "visualizza la sidebar destra nelle pagine [predefinito = disabilitato]"
-
-#. Text in function
-#: functions.php:446
-msgid "show right sidebar on posts [default = disabled]"
-msgstr "visualizza la sidebar destra negli articoli [predefinito = disabilitato]"
-
-#. Text in function
-#: functions.php:446
-msgid "sidebar on pages"
-msgstr "barra laterale nelle pagine"
-
-#. Text in function
-#: functions.php:446
-msgid "sidebar on posts"
-msgstr "barra laterale negli articoli"
-
-#. Text in function
-#: functions.php:446
-msgid "sliding menu"
-msgstr "menu a scorrimento"
-
 #. Text in echo
-#: functions.php:395
+#: functions.php:427
 msgid "status"
 msgstr "stato"
 
-#. Text in function
-#: functions.php:446
-msgid "theme credits"
-msgstr "crediti del tema"
-
 #. Text in echo
-#: footer.php:113
+#: footer.php:121
 msgid "today is "
 msgstr "oggi &egrave; "
-
-#. Text in function
-#: functions.php:446
-msgid "try disable animations if you encountered problems with javascript [default = enabled]"
-msgstr "prova a disabilitare le animazioni se ci sono problemi con i javascript [predefinito = abilitato]"
 
 #~ msgid "Hide/Show sliding menu"
 #~ msgstr "Nascondi/Visualizza il menu a scoparsa"

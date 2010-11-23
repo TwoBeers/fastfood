@@ -6,7 +6,7 @@
 		var margintop_in = 50; //the starting distance between menu item and the popup submenu
 		var margintop_out = 20; //the exiting distance between menu item and the popup submenu
 		if(d.size() !== 0){ //if the sub list exists...
-			$(this).children('a').append(" »"); //add a raquo to the main item
+			$(this).children('a').append('<span class="hiraquo"> »</span>'); //add a raquo to the main item
 			
 			d.css({'opacity' : 0 , 'margin-top' : margintop_in });
 			

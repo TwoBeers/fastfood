@@ -95,14 +95,16 @@
 											}
 											?>
 										</li>
-										<?php if ( current_user_can( 'read' ) ) { wp_register(); }?>
-										<?php if ( ( is_user_logged_in() ) && current_user_can( 'read' ) ) {?>
-											<li><a href="<?php echo esc_url( admin_url( 'profile.php' ) ); ?>"><?php _e( 'Your Profile' ); ?></a></li>
-											<?php if ( current_user_can( 'publish_posts' ) ) { ?>
-												<li><a title="<?php _e( 'Add New Post' ); ?>" href="<?php echo esc_url( admin_url( 'post-new.php' ) ); ?>"><?php _e( 'Add New Post' ); ?></a></li>
-											<?php } ?>
-											<?php if ( current_user_can( 'moderate_comments' ) ) { ?>
-												<li><a title="<?php _e( 'Comments' ); ?>" href="<?php echo esc_url( admin_url( 'edit-comments.php' ) ); ?>"><?php _e( 'Comments' ); ?></a></li>
+										<?php if ( ! is_user_logged_in() || current_user_can( 'read' ) ) { wp_register(); }?>
+										<?php if ( is_user_logged_in() ) { ?>
+											<?php if ( current_user_can( 'read' ) ) { ?>
+												<li><a href="<?php echo esc_url( admin_url( 'profile.php' ) ); ?>"><?php _e( 'Your Profile' ); ?></a></li>
+												<?php if ( current_user_can( 'publish_posts' ) ) { ?>
+													<li><a title="<?php _e( 'Add New Post' ); ?>" href="<?php echo esc_url( admin_url( 'post-new.php' ) ); ?>"><?php _e( 'Add New Post' ); ?></a></li>
+												<?php } ?>
+												<?php if ( current_user_can( 'moderate_comments' ) ) { ?>
+													<li><a title="<?php _e( 'Comments' ); ?>" href="<?php echo esc_url( admin_url( 'edit-comments.php' ) ); ?>"><?php _e( 'Comments' ); ?></a></li>
+												<?php } ?>
 											<?php } ?>
 											<li><a title="<?php _e( 'Log out' ); ?>" href="<?php echo esc_url( wp_logout_url() ); ?>"><?php _e( 'Log out' ); ?></a></li>
 										<?php } ?>
@@ -143,7 +145,7 @@
 					<?php if ( comments_open( $post->ID ) && !post_password_required() ) { ?>
 
 						<div class="minibutton">
-							<a href="#respond" title="<?php _e( 'Leave a comment' ); ?>" onclick="return addComment.viewForm()" >
+							<a href="#respond" title="<?php _e( 'Leave a comment' ); ?>"<?php if ( $fastfood_opt['fastfood_cust_comrep'] == 1 ) { echo ' onclick="return addComment.viewForm()"'; } ?> >
 								<span class="minib_img" style="background-position: center -24px; border-top:1px solid #999999;">&nbsp;</span>
 								<span class="nb_tooltip"><?php _e( 'Leave a comment' ); ?></span>
 							</a>
