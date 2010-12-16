@@ -1,6 +1,6 @@
 ﻿<p>Fastfood - WordPress theme</p>
 	<ul>
-		<li>version: 0.16</li>
+		<li>version: 0.18</li>
 	</ul>
 <p>Project page:
 	<ul>
@@ -38,6 +38,7 @@
 		<li>Custom header and background : change the look of your site header easily</li>
 		<li>Theme options : enable or disable theme special features</li>
 		<li>Funny animations : your site comes to life!</li>
+		<li>Mobile support : Fastfood has a dedicated style for mobile view (touchscreen friendly)</li>
 	</ul>
 </p>
 <p>TECHNICAL:
@@ -48,6 +49,24 @@
 		<li>if you experience any javascript problem, try disable animations in admin -&gt; theme options</li>
 		<li>print_preview.css is a stylesheet file used to emulate a print preview.</li>
 		<li>default_extracted.pot file (in languages/) contains all the Wordpress standard expressions that Fastfood use.</li>
+		<li>the theme detects the following mobile devices/browsers/os : ipod, iphone, android, opera mini, blackberry, palm, symbian</li>
+	</ul>
+</p>
+<p>CHANGE LOG (FROM VERSION 0.16):
+	<ul>
+		<li>Adds:
+			<ul>
+				<li>Mobile dedicated style (touchscreen friendly)</li>
+			</ul>
+		</li>
+		<li>Fixes:
+			<ul>
+				<li>Removed useless "trackback" label after comments list</li>
+				<li>Position of floating comment form (when sidebar is showed)</li>
+				<li>Disable mini login form in quickbar if siCaptcha Plugin is installed</li>
+				<li>"Leave a comment" link error when custom comment form is not active</li>
+			</ul>
+		</li>
 	</ul>
 </p>
 <p>CHANGE LOG (FROM VERSION 0.14):
@@ -74,7 +93,7 @@
 				<li>Links to Wordpress admin even in non standard installations</li>
 				<li>Previous/Next page links now follow the menu ordered sequence</li>
 				<li>No more trackbacks in recent comments (useless)</li>
-				<li>Minimum width 960px (from 1024px), for small multimedia devices (eg. IPhone4)</li>
+				<li>Minimum width 960px (from 1024px), for small multimedia devices</li>
 				<li>Some javascript bugs</li>
 				<li>Some graphical bugs</li>
 			</ul>

@@ -1,9 +1,9 @@
 /*
 Theme Name: Fastfood
 Theme URI: http: //www.twobeers.net/annunci/tema-per-wordpress-fastfood
-Description: Simple and clear theme with lots of features, like a "quick links" menu, widgetized footer or print preview. Full supports WP 3.0 new custom menu tool and posts thumbnails
-Version: 0.16
-Tags: translation-ready, threaded-comments, custom-menu, custom-header, theme-options, fixed-width, one-column, two-columns, right-sidebar, white, silver, orange, light, sticky-post, custom-background
+Description: Simple and clear theme with lots of features, like a "quick links" menu, widgetized footer or print preview. Full supports WP 3.0 new custom menu tool and posts thumbnails. From v0.18 it supports also mobile devices, with a dedicated style.
+Version: 0.18
+Tags: translation-ready, threaded-comments, custom-menu, custom-header, theme-options, fixed-width, two-columns, right-sidebar, white, silver, orange, light, sticky-post, custom-background
 Author: TwoBeers Crew
 Author URI: http: //www.twobeers.net/
 
@@ -182,7 +182,7 @@ input[type=reset]:hover {
 	width: 848px;
 	min-height: 500px;
 	margin: 0 auto;
-	padding: 0 15px;
+	padding: 0 56px;
 }
 #content {
 	width: 848px;
@@ -226,12 +226,12 @@ input[type=reset]:hover {
 #ff_body {
 	height: 4000px;
 	margin: 0 auto;
-	width: 878px;
+	width: 960px;
 }
 #ff_body_overlay {
 	background: url('images/body.png') repeat-y center top transparent;
 	height: 4000px;
-	width: 878px;
+	width: 960px;
 }
 
 
@@ -493,6 +493,9 @@ input[type=reset]:hover {
 	border: 1px solid #fff;
 	padding-bottom: 5px;
 }
+.minib_sep {
+	border-top: 1px solid #999;
+}
 .minib_img {
 	display: block;
 	text-align: center;
@@ -639,7 +642,16 @@ li.current_page_ancestor .hiraquo {
 	padding: 5px;
 	font-size: 11px;
 }
-
+.image_tools .alignleft {
+	min-height: 1px;
+	text-align: left;
+	width: 270px;
+}
+.image_tools .alignright {
+	min-height: 1px;
+	text-align: right;
+	width: 270px;
+}
 .top_meta,
 .top_meta_js {
 	position: absolute;
@@ -917,7 +929,7 @@ ul.children {
 .fixed-respond {
 	position: fixed;
 	bottom: 50px;
-	margin-left: -22px;
+	margin-left: -28px;
 }
 #reply-title {
 	font-size: 1em;
@@ -933,8 +945,14 @@ ul.children {
 	margin-right: -38px;
 }
 .trackback .reply,
-.pingback .reply {
+.pingback .reply,
+.trackback .says,
+.pingback .says {
 	display: none;
+}
+.trackback .comment-body,
+.pingback .comment-body {
+	border: none;
 }
 .must-log-in {
 	font-size: 1.4em;
@@ -1043,9 +1061,6 @@ img.aligncenter {
 	padding: 0 4px 5px;
 }
 
-
-div#tseCTIsmileys-comment {
-	width: auto;
-	height: auto;
-	margin: 0 -25px;
+.posts_narrow .fixed-respond {
+	margin-left: 35px;
 }

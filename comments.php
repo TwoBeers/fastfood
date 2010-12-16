@@ -10,11 +10,11 @@
 	}
 	//if comments are open
 	if ( comments_open() ) { 
-		global $fastfood_opt, $is_ff_printpreview;
+		global $fastfood_opt, $is_ff_printpreview, $is_mobile_browser;
 ?>
 
 	<div class="comment_tools" id="comments" style="text-align: right;">
-		<?php comments_number( __( 'No Comments' ), __( '1 Comment' ), __( '% Comments' ) ); ?> - <a href="#respond" title="<?php _e( "Leave a comment" ); ?>" <?php if ( !$is_ff_printpreview ) echo 'onclick="return addComment.viewForm()"'; ?> ><?php _e( "Leave a comment" ); ?></a>
+		<?php comments_number( __( 'No Comments' ), __( '1 Comment' ), __( '% Comments' ) ); ?> - <a href="#respond" title="<?php _e( "Leave a comment" ); ?>" <?php if ( !$is_ff_printpreview && ( $fastfood_opt['fastfood_cust_comrep'] == 1 ) && !$is_mobile_browser ) echo 'onclick="return addComment.viewForm()"'; ?> ><?php _e( "Leave a comment" ); ?></a>
 	</div>
 
 	<?php if ( have_comments() ) { ?>
@@ -22,8 +22,10 @@
 		<ol id="commentlist">
 			<?php
 			wp_list_comments( 'type=comment' );
-			?><li class="trackback" style="margin-top: 20px; margin-bottom: 10px;">trackbacks:</li><?php
-			wp_list_comments( 'type=pings' );
+			if ( ! $is_mobile_browser ) {
+				?><li class="trackback" style="margin-top: 20px; margin-bottom: 10px;"><br /></li><?php
+				wp_list_comments( 'type=pings' );
+			}
 			?>
 		</ol>
 
@@ -52,7 +54,7 @@
 
 		//output comment form
 		comment_form($custom_args); 
-		if ( $fastfood_opt['fastfood_cust_comrep'] == 1 ) { // disable custom script if default comment-reply is in use ?>
+		if ( ( $fastfood_opt['fastfood_cust_comrep'] == 1 ) && !$is_mobile_browser ) { // disable custom script if default comment-reply is in use ?>
 			<script type="text/javascript">
 				/* <![CDATA[ */
 				addComment.resetForm();

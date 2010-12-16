@@ -18,9 +18,25 @@ add_action( 'admin_menu', 'fastfood_create_menu' );
 add_filter( 'excerpt_length', 'new_excerpt_length' );
 /**** end theme hooks ****/
 
+// check if is mobile browser
+$is_mobile_browser = mobile_device_detect();
+
+function mobile_device_detect() {
+	$user_agent = $_SERVER['HTTP_USER_AGENT'];
+    if ( preg_match( '/(ipod|iphone|android|opera mini|blackberry|palm|symbian)/i' , $user_agent ) ) { // there were other words for mobile detecting but this is enought ;-)
+		return true;
+	} else {
+		return false;
+	}
+}
+
 // Set the content width based on the theme's design
 if ( ! isset( $content_width ) ) {
-	$content_width = 560;
+	if ( ! $is_mobile_browser ) {
+		$content_width = 560;
+	} else {
+		$content_width = 300;
+	}
 }
 
 //complete options array, with defaults values, description, infos and required option
@@ -39,6 +55,7 @@ $fastfood_coa = array(
 
 // load theme options in $fastfood_opt variable, globally retrieved in php files
 $fastfood_opt = get_option( 'fastfood_options' );
+
 // get theme version
 if ( get_theme( 'Fastfood' ) ) {
 	$current_theme = get_theme( 'Fastfood' );
@@ -137,29 +154,33 @@ function fastfood_widgets_init() {
 
 // Add stylesheets to page
 function fastfood_stylesheet(){
-	global $fastfood_version, $is_ff_printpreview;
+	global $fastfood_version, $is_ff_printpreview, $is_mobile_browser;
 	//shows print preview / normal view
 	if ( $is_ff_printpreview ) { //print preview
-		wp_enqueue_style( 'print-style-preview', get_bloginfo( 'stylesheet_directory' ) . '/css/print.css', false, $fastfood_version, 'screen' );
-		wp_enqueue_style( 'general-style-preview', get_bloginfo( 'stylesheet_directory' ) . '/css/print_preview.css', false, $fastfood_version, 'screen' );
-	} else { //normal view 
-		wp_enqueue_style( 'general-style', get_stylesheet_uri(), false, $fastfood_version, 'screen' );
+		wp_enqueue_style( 'ff_print-style-preview', get_bloginfo( 'stylesheet_directory' ) . '/css/print.css', false, $fastfood_version, 'screen' );
+		wp_enqueue_style( 'ff_general-style-preview', get_bloginfo( 'stylesheet_directory' ) . '/css/print_preview.css', false, $fastfood_version, 'screen' );
+	} else { //normal view
+		if ( $is_mobile_browser ) {
+			wp_enqueue_style( 'ff_general-style-mobile', get_bloginfo( 'stylesheet_directory' ) . '/css/mobile-style.css', false, $fastfood_version, 'screen' );
+		} else {
+			wp_enqueue_style( 'ff_general-style', get_stylesheet_uri(), false, $fastfood_version, 'screen' );
+		}
 	}
 	//print style
-	wp_enqueue_style( 'print-style', get_bloginfo( 'stylesheet_directory' ) . '/css/print.css', false, $fastfood_version, 'print' );
+	wp_enqueue_style( 'ff_print-style', get_bloginfo( 'stylesheet_directory' ) . '/css/print.css', false, $fastfood_version, 'print' );
 }
 
 // add scripts
 function fastfood_scripts(){
-	global $fastfood_opt, $is_ff_printpreview, $fastfood_version;
-	if ( $fastfood_opt['fastfood_jsani'] == 1 ) {
+	global $fastfood_opt, $is_ff_printpreview, $fastfood_version, $is_mobile_browser;
+	if ( ( $fastfood_opt['fastfood_jsani'] == 1 ) && !$is_mobile_browser ) {
 		if ( !$is_ff_printpreview ) { //script not to be loaded in print preview
 			wp_enqueue_script( 'fastfoodscript', get_bloginfo( 'stylesheet_directory' ) . '/js/fastfoodscript.min.js', array( 'jquery' ), $fastfood_version, true  ); //fastfood js
 			wp_enqueue_script( 'jquery-ui-effects', get_bloginfo( 'stylesheet_directory' ) . '/js/jquery-ui-effects-1.8.6.min.js', array( 'jquery' ), '1.8.6', false  ); //fastfood js
 		}
 	}
 	if ( is_singular() && !$is_ff_printpreview ) {
-		if ( $fastfood_opt['fastfood_cust_comrep'] == 1 ) {
+		if ( ( $fastfood_opt['fastfood_cust_comrep'] == 1 ) && !$is_mobile_browser ) {
 			wp_enqueue_script( 'ff-comment-reply', get_bloginfo( 'stylesheet_directory' ) . '/js/comment-reply.min.js' ); //custom comment-reply pop-up box
 		} else {
 			wp_enqueue_script( 'comment-reply' ); //custom comment-reply pop-up box
@@ -287,7 +308,7 @@ function fastfood_multipages(){
 
 	if ( ( $childrens ) || ( $the_parent_page ) ){ ?>
 		<div class="metafield">
-			<div class="metafield_trigger mft_hier" style="right: 40px; width:16px"> </div>
+			<div class="metafield_trigger mft_hier no-mobile" style="right: 40px; width:16px"> </div>
 			<div class="metafield_content">
 				<?php
 				echo __('This page has hierarchy','fastfood') . ' - ';
@@ -561,8 +582,8 @@ if ( !function_exists( 'fastfood_admin_header_style' ) ) {
 //  the custon header style - add style customization to page - gets included in the site header
 function fastfood_header_style(){
 
-	global $is_ff_printpreview;
-	if ( $is_ff_printpreview ) return;
+	global $is_ff_printpreview, $is_mobile_browser;
+	if ( $is_ff_printpreview || $is_mobile_browser ) return;
 
 	if ( 'blank' == get_theme_mod('header_textcolor', HEADER_TEXTCOLOR) || '' == get_theme_mod('header_textcolor', HEADER_TEXTCOLOR) || ( defined( 'NO_HEADER_TEXT' ) && NO_HEADER_TEXT ) )
 		$style = 'display:none;';
@@ -695,18 +716,37 @@ function fastfood_mini_login() {
 		'id_password' => 'ff-user_pass',
 		'id_remember' => 'ff-rememberme',
 		'id_submit' => 'ff-submit' );
-	?>
-	<li class="ql_cat_li">
-		<a title="<?php _e( 'Log in' ); ?>" href="<?php echo esc_url( wp_login_url() ); ?>"><?php _e( 'Log in' ); ?></a>
-		<div class="cat_preview">
-			<div class="mentit"><?php _e( 'Log in' ); ?></div>
-			<div id="ff_minilogin" class="solid_ul">
-				<?php wp_login_form($args); ?>
+	if (!class_exists("siCaptcha")) { //mini login form is skipped if siCaptcha plugin is active
+		?>
+		<li class="ql_cat_li">
+			<a title="<?php _e( 'Log in' ); ?>" href="<?php echo esc_url( wp_login_url() ); ?>"><?php _e( 'Log in' ); ?></a>
+			<div class="cat_preview">
+				<div class="mentit"><?php _e( 'Log in' ); ?></div>
+				<div id="ff_minilogin" class="solid_ul">
+					<?php wp_login_form($args); ?>
+				</div>
 			</div>
-		</div>
-	</li>
+		</li>
 
-	<?php
+		<?php
+	} else {
+		?>
+		<li>
+			<a title="<?php _e( 'Log in' ); ?>" href="<?php echo esc_url( wp_login_url() ); ?>"><?php _e( 'Log in' ); ?></a>
+		</li>
+		<?php
+	}
 }
+
+// add 'quoted on' before trackback/pingback comments link
+function ff_add_quoted_on( $return ) {
+	global $comment;
+	$text = '';
+	if ( get_comment_type() != 'comment' ) {
+		$text = '<span style="font-weight: normal;">' . __( 'this post is quoted by', 'fastfood' ) . ' </span>';
+	}
+	return $text . $return;
+}
+add_filter( 'get_comment_author_link', 'ff_add_quoted_on' );
 
 ?>
