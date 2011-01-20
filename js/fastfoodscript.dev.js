@@ -125,5 +125,23 @@
 			parent.css({ 'border-color' : '' });
 		});
 	});
+	
+	//add a "close" link after the submit button in minilogin form
+	$('.login-submit').append( $('#closeminilogin') );
+	$('#closeminilogin').css({ 'display' : 'inline' });
+	$('#closeminilogin').click( function() {
+		$('#ff-user_login').parents('.menuback_js').css({ 'display' : '' , 'height' : 0  });
+		$('#user_menuback').mouseleave( function(){ //when mouse leaves, hide the submenu
+			$('#ff-user_login').parents('.menuback_js').css({ 'display' : '' , 'height' : 0  });
+			$('#ff-user_login').parents('.cat_preview').css({ 'display' : '' });
+		});
+		return false;
+	});
+	
+	//preserve the menu div from disappear when loginform name input is clicked
+	$('#ff-user_login').mousedown( function() {
+		$('#user_menuback').unbind("mouseleave");
+		$('#ff-user_login').parents('.cat_preview').css({ 'display' : 'block' });
+	});
 
 });

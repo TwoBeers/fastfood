@@ -15,7 +15,7 @@
 
 				<?php if ( ! $is_mobile_browser ) get_sidebar( 'footer' ); ?>
 
-				<small>&copy; <?php echo date( 'Y' ); ?>  <strong><?php bloginfo( 'name' ); ?></strong> <?php _e( 'All rights reserved','fastfood' ); ?><?php if ( $fastfood_opt['fastfood_tbcred'] == 1 ) { ?> - Fastfood theme <?php if( !empty( $fastfood_version ) ) { echo 'v' . $fastfood_version; } if ( $is_mobile_browser ) { echo '( for mobile)'; } ?> by <a href="http://www.twobeers.net/" title="<?php _e( 'Visit author homepage' ); ?> @ TwoBeers.net">TwoBeers Crew</a><?php } ?> - Powered by <a href="http://wordpress.org/" title="<?php _e( 'Powered by WordPress' ); ?>">WordPress</a></small>
+				<small>&copy; <?php echo date( 'Y' ); ?>  <strong><?php bloginfo( 'name' ); ?></strong> <?php _e( 'All rights reserved','fastfood' ); ?><?php if ( $fastfood_opt['fastfood_tbcred'] == 1 ) { ?> - Fastfood theme <?php if( !empty( $fastfood_version ) ) { echo 'v' . $fastfood_version; } if ( $is_mobile_browser ) { _e( '(for mobile)','fastfood' ); } ?> by <a href="http://www.twobeers.net/" title="<?php _e( 'Visit author homepage','fastfood' ); ?> @ TwoBeers.net">TwoBeers Crew</a><?php } ?> - Powered by <a href="http://wordpress.org/" title="<?php _e( 'Powered by WordPress','fastfood' ); ?>">WordPress</a></small>
 				<!-- <?php echo get_num_queries(); ?> queries. <?php timer_stop(1); ?> seconds. -->
 
 			</div><!-- close footer -->
@@ -40,7 +40,7 @@
 							<div id="mii_rpost" class="itemimg"></div>
 							<div class="menuback">
 								<div class="menulcont">
-									<div class="mentit"><?php _e( 'Recent Posts' ); ?></div>
+									<div class="mentit"><?php _e( 'Recent Posts','fastfood' ); ?></div>
 									<ul class="solid_ul">
 										<?php get_fastfood_recententries() ?>
 									</ul>
@@ -53,10 +53,10 @@
 							<div id="mii_pcats" class="itemimg"></div>
 							<div class="menuback">
 								<div class="menulcont">
-									<div class="mentit"><?php _e( 'Categories' ); ?></div>
+									<div class="mentit"><?php _e( 'Categories','fastfood' ); ?></div>
 									<ul class="solid_ul">
 										<?php get_fastfood_categories_wpr(); ?>
-										<li style="text-align: right; margin:16px 0 10px;"><a title="<?php _e( 'View all categories' ); ?>" href="<?php echo home_url(); ?>/?allcat=y"><?php _e( 'More...' ); ?></a></li>
+										<li style="text-align: right; margin:16px 0 10px;"><a title="<?php _e( 'View all categories','fastfood' ); ?>" href="<?php echo home_url(); ?>/?allcat=y"><?php _e( 'More...','fastfood' ); ?></a></li>
 									</ul>
 								</div>
 							</div>
@@ -67,7 +67,7 @@
 							<div id="mii_rcomm" class="itemimg"></div>
 							<div class="menuback">
 								<div class="menulcont">
-									<div class="mentit"><?php _e( 'Recent Comments' ); ?></div>
+									<div class="mentit"><?php _e( 'Recent Comments','fastfood' ); ?></div>
 									<ul class="solid_ul">
 										<?php get_fastfood_recentcomments(); ?>
 									</ul>
@@ -76,7 +76,7 @@
 						</div>
 					<?php } ?>
 					<?php if ( $fastfood_opt['fastfood_qbar_user'] == 1 ) { // user links menu ?>
-						<div class="menuitem">
+						<div class="menuitem" id="user_menuback">
 							<div id="mii_cuser" class="itemimg"></div>
 							<div class="menuback">
 								<div class="menulcont">
@@ -88,7 +88,7 @@
 												get_currentuserinfo();
 												$email = $current_user->user_email;
 												echo get_avatar( $email, 50, $default=get_bloginfo( 'stylesheet_directory' ) . '/images/user.png','user-avatar' );
-												printf( __( 'Logged in as %s','fastfood' ), '<strong>' . $current_user->display_name . '</strong>' );
+												printf( __( 'Logged in as <a href="%1$s">%2$s</a>.','fastfood' ), admin_url( 'profile.php' ), '<strong>' . $current_user->display_name . '</strong>' );
 											} else {
 												echo get_avatar( 'dummyemail', 50, $default=get_bloginfo( 'stylesheet_directory' ) . '/images/user.png','user-avatar' );
 												echo __( 'Not logged in','fastfood' );
@@ -98,15 +98,15 @@
 										<?php if ( ! is_user_logged_in() || current_user_can( 'read' ) ) { wp_register(); }?>
 										<?php if ( is_user_logged_in() ) { ?>
 											<?php if ( current_user_can( 'read' ) ) { ?>
-												<li><a href="<?php echo esc_url( admin_url( 'profile.php' ) ); ?>"><?php _e( 'Your Profile' ); ?></a></li>
+												<li><a href="<?php echo esc_url( admin_url( 'profile.php' ) ); ?>"><?php _e( 'Your Profile','fastfood' ); ?></a></li>
 												<?php if ( current_user_can( 'publish_posts' ) ) { ?>
-													<li><a title="<?php _e( 'Add New Post' ); ?>" href="<?php echo esc_url( admin_url( 'post-new.php' ) ); ?>"><?php _e( 'Add New Post' ); ?></a></li>
+													<li><a title="<?php _e( 'Add New Post','fastfood' ); ?>" href="<?php echo esc_url( admin_url( 'post-new.php' ) ); ?>"><?php _e( 'Add New Post','fastfood' ); ?></a></li>
 												<?php } ?>
 												<?php if ( current_user_can( 'moderate_comments' ) ) { ?>
-													<li><a title="<?php _e( 'Comments' ); ?>" href="<?php echo esc_url( admin_url( 'edit-comments.php' ) ); ?>"><?php _e( 'Comments' ); ?></a></li>
+													<li><a title="<?php _e( 'Comments','fastfood' ); ?>" href="<?php echo esc_url( admin_url( 'edit-comments.php' ) ); ?>"><?php _e( 'Comments','fastfood' ); ?></a></li>
 												<?php } ?>
 											<?php } ?>
-											<li><a title="<?php _e( 'Log out' ); ?>" href="<?php echo esc_url( wp_logout_url() ); ?>"><?php _e( 'Log out' ); ?></a></li>
+											<li><a title="<?php _e( 'Log out','fastfood' ); ?>" href="<?php echo esc_url( wp_logout_url() ); ?>"><?php _e( 'Log out','fastfood' ); ?></a></li>
 										<?php } ?>
 										<?php if ( ! is_user_logged_in() ) {?>
 											<?php fastfood_mini_login(); ?>
@@ -120,16 +120,16 @@
 			<?php } ?>
 
 			<div id="statusbar" class="no-mobile">
-				<?php _e( 'Welcome' ); ?> <?php if ( is_user_logged_in() ) { echo $current_user->display_name; } ?>, <?php _e( 'today is ', 'fastfood' ); echo date_i18n( 'l' ); ?> <?php echo date_i18n( __( 'F j, Y' ) ); ?>
+				<?php _e( 'Welcome','fastfood' ); ?> <?php if ( is_user_logged_in() ) { echo $current_user->display_name; } ?>, <?php _e( 'today is ', 'fastfood' ); echo date_i18n( 'l' ); ?> <?php echo date_i18n( __( 'F j, Y' ) ); ?>
 			</div>
 
 			<div id="navbuttons_cont">
 				<?php if ( $is_mobile_browser ) { ?>
 					<div id="mini-welcome">
-						<?php _e( 'Welcome' ); ?>
+						<?php _e( 'Welcome','fastfood' ); ?>
 						<?php if ( is_user_logged_in() ) {
 							if ( current_user_can( 'read' ) )
-								echo $current_user->display_name . ' <a title="' . __( 'Log out' ) . '" href="' . esc_url( wp_logout_url() ) . '">' . __( 'Log out' ) . '</a>';
+								echo $current_user->display_name . ' <a title="' . __( 'Log out','fastfood' ) . '" href="' . esc_url( wp_logout_url() ) . '">' . __( 'Log out','fastfood' ) . '</a>';
 							else
 								echo $current_user->display_name; 
 						} else { 
@@ -151,16 +151,16 @@
 								echo add_query_arg( $arr_params, get_permalink() );
 								?>">
 								<span class="minib_img" style="background-position: center 0px;">&nbsp;</span>
-								<span class="nb_tooltip"><?php _e( 'Print' ); ?></span>
+								<span class="nb_tooltip"><?php _e( 'Print','fastfood' ); ?></span>
 							</a>
 						</div>
 
 						<?php if ( comments_open( $post->ID ) && !post_password_required() ) { ?>
 
 							<div class="minibutton">
-								<a href="#respond" title="<?php _e( 'Leave a comment' ); ?>"<?php if ( ( $fastfood_opt['fastfood_cust_comrep'] == 1 ) && !$is_mobile_browser ) { echo ' onclick="return addComment.viewForm()"'; } ?> >
+								<a href="#respond" title="<?php _e( 'Leave a comment','fastfood' ); ?>"<?php if ( ( $fastfood_opt['fastfood_cust_comrep'] == 1 ) && !$is_mobile_browser ) { echo ' onclick="return addComment.viewForm()"'; } ?> >
 									<span class="minib_img minib_sep" style="background-position: center -24px;">&nbsp;</span>
-									<span class="nb_tooltip"><?php _e( 'Leave a comment' ); ?></span>
+									<span class="nb_tooltip"><?php _e( 'Leave a comment','fastfood' ); ?></span>
 								</a>
 							</div>
 
@@ -176,7 +176,7 @@
 								<div class="minibutton">
 									<a href="<?php global $tmptrackback; echo $tmptrackback; ?>" rel="trackback" title="Trackback URL">
 										<span class="minib_img" style="background-position: center -72px;">&nbsp;</span>
-										<span class="nb_tooltip"><?php _e( 'Trackback URL' ); ?></span>
+										<span class="nb_tooltip"><?php _e( 'Trackback URL','fastfood' ); ?></span>
 									</a>
 								</div>
 
@@ -188,7 +188,7 @@
 						<div class="minibutton">
 							<a href="<?php echo home_url(); ?>" title="home">
 								<span class="minib_img minib_sep" style="background-position: center -96px;">&nbsp;</span>
-								<span class="nb_tooltip"><?php _e( 'Home' ); ?></span>
+								<span class="nb_tooltip"><?php _e( 'Home','fastfood' ); ?></span>
 							</a>
 						</div>
 
@@ -198,7 +198,7 @@
 								<div class="minibutton">
 									<a href="<?php echo $page_nav_links['prev']['link']; ?>" title="<?php echo $page_nav_links['prev']['title']; ?>">
 										<span class="minib_img" style="background-position: center -120px;">&nbsp;</span>
-										<span class="nb_tooltip"><?php echo __( 'Previous page' ) . ': ' . $page_nav_links['prev']['title']; ?></span>
+										<span class="nb_tooltip"><?php echo __( 'Previous page','fastfood' ) . ': ' . $page_nav_links['prev']['title']; ?></span>
 									</a>
 								</div>
 							<?php }
@@ -206,7 +206,7 @@
 								<div class="minibutton">
 									<a href="<?php echo $page_nav_links['next']['link']; ?>" title="<?php echo $page_nav_links['next']['title']; ?>">
 										<span class="minib_img" style="background-position: center -144px;">&nbsp;</span>
-										<span class="nb_tooltip"><?php echo __( 'Next page' ) . ': ' . $page_nav_links['next']['title']; ?></span>
+										<span class="nb_tooltip"><?php echo __( 'Next page','fastfood' ) . ': ' . $page_nav_links['next']['title']; ?></span>
 									</a>
 								</div>
 							<?php } ?>
@@ -221,11 +221,11 @@
 							<?php } ?>
 						<?php } else { ?>
 							<div class="minibutton">
-								<?php next_post_link( '%link', '<span class="minib_img" style="background-position: center -120px;">&nbsp;</span><span class="nb_tooltip">' . __( 'Next Post' ) . ': %title</span>' ); ?>
+								<?php next_post_link( '%link', '<span class="minib_img" style="background-position: center -120px;">&nbsp;</span><span class="nb_tooltip">' . __( 'Next Post','fastfood' ) . ': %title</span>' ); ?>
 							</div>
 
 							<div class="minibutton">
-								<?php previous_post_link( '%link', '<span class="minib_img" style="background-position: center -144px;">&nbsp;</span><span class="nb_tooltip">' . __( 'Previous Post' ) . ': %title</span>' ); ?>
+								<?php previous_post_link( '%link', '<span class="minib_img" style="background-position: center -144px;">&nbsp;</span><span class="nb_tooltip">' . __( 'Previous Post','fastfood' ) . ': %title</span>' ); ?>
 							</div>
 						<?php } ?>
 
@@ -234,7 +234,7 @@
 						<div class="minibutton">
 							<a href="<?php echo home_url(); ?>" title="home">
 								<span class="minib_img" style="background-position: center -96px;">&nbsp;</span>
-								<span class="nb_tooltip"><?php _e( 'Home' ); ?></span>
+								<span class="nb_tooltip"><?php _e( 'Home','fastfood' ); ?></span>
 							</a>
 						</div>
 

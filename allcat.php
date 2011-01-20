@@ -3,10 +3,10 @@ get_header(); //shows "all categories" page.
 ?>
 <div class="post">
 
-	<h2 class="storytitle"><?php _e( 'Categories' ); ?></h2>
+	<h2 class="storytitle"><?php _e( 'Categories','fastfood' ); ?></h2>
 
 	<div class="comment_tools top_meta">
-		<?php _e( 'All Categories' ); ?>
+		<?php _e( 'All Categories','fastfood' ); ?>
 	</div>
 
 	<div class="storycontent">

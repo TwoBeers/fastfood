@@ -280,7 +280,7 @@ input[type=reset]:hover {
 #mainmenu > li a:hover {
 	background-color: #aaa;
 }
-#mainmenu ul.children{
+#mainmenu > li > ul {
 	display: none;
 }
 /* =meta
@@ -321,7 +321,7 @@ input[type=reset]:hover {
 .posts_narrow,
 .posts_wide {
 	padding: 15px 5px;
-    background: url("../images/main.png") repeat-x scroll left top #F7F7F7;
+    background: #F7F7F7;
 	min-height: 200px;
 }
 #content .hentry {

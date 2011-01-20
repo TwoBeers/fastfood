@@ -6,7 +6,7 @@ $website = get_bloginfo( 'url' );
 
 <div class="post" id="post-404-not-found">
 
-	<div class="wp-caption aligncenter"><h2 class="storytitle">Error 404 - <?php _e( 'Page not found' ); ?></h2></div>
+	<div class="wp-caption aligncenter"><h2 class="storytitle">Error 404 - <?php _e( 'Page not found','fastfood' ); ?></h2></div>
 
 	<div class="storycontent">
 

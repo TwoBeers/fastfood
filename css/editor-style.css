@@ -1,0 +1,239 @@
+html .mceContentBody {
+	max-width:560px;
+	font-family: Verdana, sans-serif;
+	font-size: 12px;
+	color: #404040;
+	background-color: #f9f9f9;
+	margin: 0 auto;
+}
+a img {
+	border: none;
+}
+a {
+	text-decoration: none;
+	color: #d2691e;
+}
+a:hover {
+	color: #ff4500;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+	line-height: 1.3em;
+	margin: 1em 0;
+}
+ul {
+	list-style: none inside none;
+	margin: 0 0 0 15px;
+	padding: 0;
+}
+ol {
+	list-style: decimal outside none;
+	margin: 0 0 0 30px;
+	padding: 0;
+}
+dt {
+	font-weight: bold;
+}
+dd {
+	margin: 0 0 .5em 40px;
+}
+fieldset {
+	border: 1px solid #ccc;
+	padding: 8px;
+}
+legend {
+	color: #999;
+}
+blockquote {
+	border-left: 5px solid #ccc;
+	margin-left: 15px;
+	padding-left: 15px;
+	font-style: italic;
+}
+pre,
+code,
+tt,
+kbd {
+	font: 1.2em "Courier New", monospace;
+	letter-spacing: 1px;
+	padding: 0 8px;
+}
+pre {
+	background-color: #fff;
+	border: 1px solid #ccc;
+	display: block;
+	overflow: auto;
+	white-space: pre;
+	max-width: 100%;
+	margin: 5px auto;
+	padding: 5px;
+}
+table {
+	-moz-box-shadow: 1px 1px 1px #555;
+	-webkit-box-shadow: 1px 1px 1px #555;
+	box-shadow: 1px 1px 1px #555;
+	background-color: #ccc;
+	border-collapse: collapse;
+	text-align: left;
+	width: 100%;
+	border-color: #fff;
+}
+td {
+	border-bottom: 1px solid #fff;
+	padding: 3px;
+}
+th {
+	border-bottom: 4px solid #404040;
+	padding: 3px;
+}
+input {
+	font-size: 1.1em;
+}
+select {
+	max-width: 100%;
+	background-color: #fff;
+	border: 1px solid #ccc;
+}
+object,
+embed {
+	max-width: 100%;
+}
+textarea,
+input[type=text],
+input[type=password] {
+	border: 1px solid #BEC0BE;
+}
+input[type=password] {
+	background: #fff url('../images/lock.png') left center no-repeat;
+	min-height: 20px;
+	padding-left: 20px;
+}
+input[type=button],
+input[type=submit],
+input[type=reset] {
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	-webkit-box-shadow: 2px 2px 3px #555;
+	-moz-box-shadow: 2px 2px 3px #555;
+	box-shadow: 2px 2px 3px #555;
+	background-color: #ccc;
+	border: 1px solid #fff;
+	color: #404040;
+	font-weight: bold;
+	margin: 3px;
+}
+input[type=button]:hover,
+input[type=submit]:hover,
+input[type=reset]:hover,
+textarea:hover,
+input[type=text]:hover,
+input[type=password]:hover,
+textarea:focus,
+input[type=text]:focus,
+input[type=password]:focus {
+	border: 1px solid #d2691e;
+}
+input[type=button]:hover,
+input[type=submit]:hover,
+input[type=reset]:hover {
+	cursor: pointer;
+}
+.fixfloat {
+	clear: both;
+}
+.aligncenter,
+div.aligncenter,
+img.aligncenter {
+	clear: both;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+img.alignleft,
+.alignleft {
+	display: inline;
+	float: left;
+	margin-right: 24px;
+}
+img.alignright,
+.alignright {
+	display: inline;
+	float: right;
+	margin-left: 24px;
+}
+img.alignleft,
+img.alignright,
+img.aligncenter {
+	margin-bottom: 12px;
+}
+.wp-caption {
+	-moz-box-shadow: 1px 1px 1px #555;
+	-webkit-box-shadow: 1px 1px 1px #555;
+	box-shadow: 1px 1px 1px #555;
+	background-color: #ccc;
+	border: 1px solid #fff;
+	padding-top: 4px;
+	text-align: center;
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	margin: 10px;
+	max-width: 100%;
+}
+.wp-caption img {
+	border: 0 none;
+	margin: 0;
+	padding: 0;
+}
+.wp-caption p.wp-caption-text {
+	font-size: 11px;
+	line-height: 17px;
+	margin: 0;
+	padding: 0 4px 5px;
+}
+.wp-pagenavi {
+	text-align: center;
+}
+.category-gallery .size-thumbnail img {
+	border: 10px solid #fff;
+	margin-bottom: 0;
+}
+.category-gallery .gallery-thumb {
+	float: left;
+	margin-right: 20px;
+	margin-top: -4px;
+}
+.category-gallery .entry-utility {
+	padding-top: 4px;
+}
+.gallery {
+	margin: 0 auto 18px;
+}
+.gallery .gallery-item {
+	float: left;
+	margin-top: 0;
+	text-align: center;
+	width: 33%;
+}
+.gallery .gallery-caption {
+	color: #777;
+	font-size: 10px;
+	margin: 0 0 12px;
+}
+.gallery dl {
+	margin: 0;
+}
+.gallery img {
+	border: 1px solid #ccc;
+}
+.gallery br+br {
+	display: none;
+}

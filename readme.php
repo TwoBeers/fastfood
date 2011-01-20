@@ -1,6 +1,6 @@
 ﻿<p>Fastfood - WordPress theme</p>
 	<ul>
-		<li>version: 0.18</li>
+		<li>version: 0.19</li>
 	</ul>
 <p>Project page:
 	<ul>
@@ -48,8 +48,7 @@
 		<li>theme uses jQuery javascript framework. jquery-ui-effects-1.8.6.min.js contains extra visual effects</li>
 		<li>if you experience any javascript problem, try disable animations in admin -&gt; theme options</li>
 		<li>print_preview.css is a stylesheet file used to emulate a print preview.</li>
-		<li>default_extracted.pot file (in languages/) contains all the Wordpress standard expressions that Fastfood use.</li>
-		<li>the theme detects the following mobile devices/browsers/os : ipod, iphone, android, opera mini, blackberry, palm, symbian</li>
+		<li>the theme detects the following mobile devices/browsers/os : ipod, iphone, android, opera mini, blackberry, palm, symbian and many more</li>
 	</ul>
 </p>
 <p>CHANGE LOG (FROM VERSION 0.16):
@@ -57,6 +56,8 @@
 		<li>Adds:
 			<ul>
 				<li>Mobile dedicated style (touchscreen friendly)</li>
+				<li>editor-style support</li>
+				<li>paginated comments</li>
 			</ul>
 		</li>
 		<li>Fixes:
@@ -65,6 +66,8 @@
 				<li>Position of floating comment form (when sidebar is showed)</li>
 				<li>Disable mini login form in quickbar if siCaptcha Plugin is installed</li>
 				<li>"Leave a comment" link error when custom comment form is not active</li>
+				<li>Full translation ready</li>
+				<li>Some minor graphical and coding issues</li>
 			</ul>
 		</li>
 	</ul>

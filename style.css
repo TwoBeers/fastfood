@@ -2,8 +2,8 @@
 Theme Name: Fastfood
 Theme URI: http: //www.twobeers.net/annunci/tema-per-wordpress-fastfood
 Description: Simple and clear theme with lots of features, like a "quick links" menu, widgetized footer or print preview. Full supports WP 3.0 new custom menu tool and posts thumbnails. From v0.18 it supports also mobile devices, with a dedicated style.
-Version: 0.18
-Tags: translation-ready, threaded-comments, custom-menu, custom-header, theme-options, fixed-width, two-columns, right-sidebar, white, silver, orange, light, sticky-post, custom-background
+Version: 0.19
+Tags: translation-ready, threaded-comments, custom-menu, custom-header, theme-options, fixed-width, two-columns, right-sidebar, white, silver, orange, light, sticky-post, custom-background, editor-style
 Author: TwoBeers Crew
 Author URI: http: //www.twobeers.net/
 
@@ -140,6 +140,11 @@ input[type=text],
 input[type=password] {
 	border: 1px solid #BEC0BE;
 }
+input[type=password] {
+	background: #fff url('images/lock.png') left center no-repeat;
+	min-height: 20px;
+	padding-left: 20px;
+}
 input[type=button],
 input[type=submit],
 input[type=reset] {
@@ -154,6 +159,7 @@ input[type=reset] {
 	border: 1px solid #fff;
 	color: #404040;
 	font-weight: bold;
+	margin: 3px;
 }
 input[type=button]:hover,
 input[type=submit]:hover,
@@ -391,9 +397,6 @@ input[type=reset]:hover {
 	display: none;
 }
 .preview img.wp-post-image {
-	-moz-box-shadow: 2px 2px 3px #555;
-	-webkit-box-shadow: 2px 2px 3px #555;
-	box-shadow: 2px 2px 3px #555;
 	display: block;
 	margin: 0 5px 0 0;
 }
@@ -959,6 +962,25 @@ ul.children {
 	font-weight: bold;
 	text-align: center;
 }
+.navigate_comments {
+    font-weight: bold;
+    margin: 10px;
+    text-align: center;
+}
+.navigate_comments a {
+    background-color: #FFFFFF;
+    border: 1px solid #CCCCCC;
+    font-weight: normal;
+    padding: 0.2em 0.5em;
+    text-decoration: none;
+    -moz-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+.navigate_comments a, .navigate_comments span {
+    margin-right: 0.5em;
+}
 
 /* =calendar
 ----------------------------------------------------------*/
@@ -983,27 +1005,27 @@ ul.children {
 .home #content .category-gallery .entry-utility {
 	padding-top: 4px;
 }
-#content .gallery {
+.gallery {
 	margin: 0 auto 18px;
 }
-#content .gallery .gallery-item {
+.gallery .gallery-item {
 	float: left;
 	margin-top: 0;
 	text-align: center;
 	width: 33%;
 }
-#content .gallery img {
+.gallery img {
 	border: 10px solid #f1f1f1;
 }
-#content .gallery .gallery-caption {
+.gallery .gallery-caption {
 	color: #888;
 	font-size: 10px;
 	margin: 0 0 12px;
 }
-#content .gallery dl {
+.gallery dl {
 	margin: 0;
 }
-#content .gallery br+br {
+.gallery br+br {
 	display: none;
 }
 
@@ -1048,6 +1070,7 @@ img.aligncenter {
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
 	margin: 10px;
+	max-width: 100%;
 }
 .wp-caption img {
 	border: 0 none;
