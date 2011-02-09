@@ -2,7 +2,7 @@
 Theme Name: Fastfood
 Theme URI: http: //www.twobeers.net/annunci/tema-per-wordpress-fastfood
 Description: Simple and clear theme with lots of features, like a "quick links" menu, widgetized footer or print preview. Full supports WP 3.0 new custom menu tool and posts thumbnails. From v0.18 it supports also mobile devices, with a dedicated style.
-Version: 0.19
+Version: 0.20
 Tags: translation-ready, threaded-comments, custom-menu, custom-header, theme-options, fixed-width, two-columns, right-sidebar, white, silver, orange, light, sticky-post, custom-background, editor-style
 Author: TwoBeers Crew
 Author URI: http: //www.twobeers.net/
@@ -752,7 +752,6 @@ li.current_page_ancestor .hiraquo {
 /* =widgets (sidebar & footer)
 ----------------------------------------------------------*/
 .widget {
-	overflow-x: auto;
 	margin: 8px 0;
 	padding-bottom: 10px;
 }
@@ -803,7 +802,30 @@ li.current_page_ancestor .hiraquo {
 ul.ul_fwa {
 	margin: 0;
 }
-
+.ff_widget_popular_posts img, .ff_widget_last_commented_posts img {
+	margin-right: 4px;
+	-moz-box-shadow: 1px 1px 2px #555;
+	-webkit-box-shadow: 1px 1px 2px #555;
+	box-shadow: 1px 1px 2px #555;
+    position: absolute;
+	left: 0;
+	top: 0;
+}
+.ff_widget_popular_posts li, .ff_widget_last_commented_posts li {
+    margin-bottom: 6px;
+    min-height: 40px;
+    padding-left: 44px;
+    position: relative;
+}
+.ff_widget_popular_posts .post-thumb, .ff_widget_last_commented_posts .post-thumb {
+	background: url("images/qbarv.png") no-repeat scroll -5px -5px transparent;
+	display: block;
+	height: 40px;
+	width: 40px;
+    position: absolute;
+	left: 0;
+	top: 0;
+}
 
 /* =posts & pages
 ----------------------------------------------------------*/

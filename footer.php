@@ -1,4 +1,3 @@
-﻿
 <!-- begin footer -->
 			</div><!-- close sidebar or posts_wide -->
 
@@ -30,7 +29,7 @@
 				<div id="quickbar">
 					<!-- quickbar tool - uncomment to use
 						<div class="menutoolitem">
-							<div class="itemimg menutool_trig" style="background-image: url('<?php echo get_bloginfo( 'stylesheet_directory' ); ?>/images/qbartool.png');"></div>
+							<div class="itemimg menutool_trig" style="background-image: url('<?php echo get_template_directory_uri(); ?>/images/qbartool.png');"></div>
 							<div class="menutool">[put here your code]</div>
 						</div>
 					quickbar tool -->
@@ -87,10 +86,10 @@
 											if (is_user_logged_in()) { //fix for notice when user not log-in
 												get_currentuserinfo();
 												$email = $current_user->user_email;
-												echo get_avatar( $email, 50, $default=get_bloginfo( 'stylesheet_directory' ) . '/images/user.png','user-avatar' );
+												echo get_avatar( $email, 50, $default=get_template_directory_uri() . '/images/user.png','user-avatar' );
 												printf( __( 'Logged in as <a href="%1$s">%2$s</a>.','fastfood' ), admin_url( 'profile.php' ), '<strong>' . $current_user->display_name . '</strong>' );
 											} else {
-												echo get_avatar( 'dummyemail', 50, $default=get_bloginfo( 'stylesheet_directory' ) . '/images/user.png','user-avatar' );
+												echo get_avatar( 'dummyemail', 50, $default=get_template_directory_uri() . '/images/user.png','user-avatar' );
 												echo __( 'Not logged in','fastfood' );
 											}
 											?>
@@ -120,7 +119,7 @@
 			<?php } ?>
 
 			<div id="statusbar" class="no-mobile">
-				<?php _e( 'Welcome','fastfood' ); ?> <?php if ( is_user_logged_in() ) { echo $current_user->display_name; } ?>, <?php _e( 'today is ', 'fastfood' ); echo date_i18n( 'l' ); ?> <?php echo date_i18n( __( 'F j, Y' ) ); ?>
+				<?php _e( 'Welcome','fastfood' ); ?> <?php if ( is_user_logged_in() ) { echo $current_user->display_name; } ?>, <?php sprintf( __('Today is %1$s','fastfood'), date_i18n('l') ); ?> <?php echo date_i18n( get_option( 'date_format' ) ); ?>
 			</div>
 
 			<div id="navbuttons_cont">

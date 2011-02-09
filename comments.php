@@ -11,9 +11,17 @@
 		global $fastfood_opt, $is_ff_printpreview, $is_mobile_browser;
 ?>
 
-	<div class="comment_tools" id="comments" style="text-align: right;">
-		<?php comments_number( __( 'No Comments','fastfood' ), __( '1 Comment','fastfood' ), __( '% Comments','fastfood' ) ); ?> - <a href="#respond" title="<?php _e( "Leave a comment",'fastfood' ); ?>" <?php if ( !$is_ff_printpreview && ( $fastfood_opt['fastfood_cust_comrep'] == 1 ) && !$is_mobile_browser ) echo 'onclick="return addComment.viewForm()"'; ?> ><?php _e( "Leave a comment",'fastfood' ); ?></a>
-	</div>
+	<?php if ( comments_open() ) { ?>
+		<div class="comment_tools" id="comments" style="text-align: right;">
+			<?php comments_number( __( 'No Comments','fastfood' ), __( '1 Comment','fastfood' ), __( '% Comments','fastfood' ) ); ?> - <a href="#respond" title="<?php _e( "Leave a comment",'fastfood' ); ?>" <?php if ( !$is_ff_printpreview && ( $fastfood_opt['fastfood_cust_comrep'] == 1 ) && !$is_mobile_browser ) echo 'onclick="return addComment.viewForm()"'; ?> ><?php _e( "Leave a comment",'fastfood' ); ?></a>
+		</div>
+		<?php
+	} elseif ( have_comments() ) { ?>
+		<div class="comment_tools" id="comments" style="text-align: right;">
+			<?php comments_number( __( 'No Comments','fastfood' ), __( '1 Comment','fastfood' ), __( '% Comments','fastfood' ) ); ?>
+		</div>
+		<?php
+	} ?>
 
 	<?php if ( have_comments() ) { ?>
 		<ol id="commentlist">

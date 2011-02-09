@@ -1,7 +1,6 @@
 <!-- begin sidebar -->
 <div id="sidebardx">
 
-
 	<?php 	/* Widgetized sidebar, if you have the plugin installed. */
 	if ( !dynamic_sidebar( 'primary-widget-area' ) ) { ?>
 

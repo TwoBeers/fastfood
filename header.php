@@ -50,7 +50,7 @@
 						</form>
 					</div>
 				<?php } ?>
-				<div id="rss_imglink" class="no-mobile"><a href="<?php bloginfo( 'rss2_url' ); ?>" title="<?php _e( 'Syndicate this site using RSS 2.0','fastfood' ); ?>"><img alt="rsslink" src="<?php bloginfo( 'stylesheet_directory' ); ?>/images/rss.png" /></a></div>
+				<div id="rss_imglink" class="no-mobile"><a href="<?php bloginfo( 'rss2_url' ); ?>" title="<?php _e( 'Syndicate this site using RSS 2.0','fastfood' ); ?>"><img alt="rsslink" src="<?php echo get_template_directory_uri(); ?>/images/rss.png" /></a></div>
 				<?php wp_nav_menu( array( 'menu_id' => 'mainmenu', 'fallback_cb' => 'fastfood_pages_menu', 'theme_location' => 'primary' ) ); ?>
 				<div class="fixfloat"></div>
 			</div>

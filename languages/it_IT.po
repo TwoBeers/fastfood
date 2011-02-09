@@ -15,7 +15,7 @@ msgstr ""
 #: index.php:71
 #: single.php:63
 #: page.php:41
-#: comments.php:17
+#: comments.php:15
 msgid "% Comments"
 msgstr "% commenti"
 
@@ -25,14 +25,14 @@ msgid "&laquo; Previous Image"
 msgstr "&laquo; Immagine Precedente"
 
 #. Text in echo
-#: footer.php:18
+#: footer.php:17
 msgid "(for mobile)"
 msgstr "(per mobile)"
 
 #. Text in echo
 #: search.php:12
 #: attachment.php:24
-#: functions.php:512
+#: functions.php:539
 #: index.php:24
 #: single.php:23
 #: page.php:24
@@ -40,17 +40,42 @@ msgid "(no title)"
 msgstr "(senza titolo)"
 
 #. Text in function
+#: functions.php:539
+msgid "-- categories"
+msgstr "-- categorie"
+
+#. Text in function
+#: functions.php:539
+msgid "-- recent comments"
+msgstr "-- commenti recenti"
+
+#. Text in function
+#: functions.php:539
+msgid "-- recent posts"
+msgstr "-- articoli recenti"
+
+#. Text in function
+#: functions.php:539
+msgid "-- user"
+msgstr "-- utente"
+
+#. Text in function
 #: search.php:59
 #: attachment.php:47
 #: index.php:71
 #: single.php:63
 #: page.php:41
-#: comments.php:17
+#: comments.php:15
 msgid "1 Comment"
 msgstr "1 commento"
 
 #. Text in echo
-#: footer.php:103
+#: functions.php:470
+msgid "About"
+msgstr "in"
+
+#. Text in echo
+#: footer.php:102
 msgid "Add New Post"
 msgstr "Aggiungi un Nuovo Articolo"
 
@@ -60,39 +85,39 @@ msgid "All Categories"
 msgstr "Tutte le Categorie"
 
 #. Text in echo
-#: footer.php:18
+#: footer.php:17
 msgid "All rights reserved"
 msgstr "Tutti i diritti riservati"
 
 #. Text in function
-#: functions.php:512
+#: functions.php:539
 msgid "Ancient Tree"
 msgstr "Albero Antico"
 
 #. Text in function
 #: index.php:1
-#: sidebar.php:23
+#: sidebar.php:22
 msgid "Archives"
 msgstr "Archivi"
 
 #. Text in function
-#: functions.php:512
+#: functions.php:539
 msgid "Bamboo Forest"
 msgstr "Foresta di Bamboo"
 
 #. Text in echo
-#: sidebar.php:20
+#: sidebar.php:19
 msgid "Blogroll"
 msgstr "Blogroll"
 
 #. Text in echo
-#: footer.php:262
-#: footer.php:264
+#: footer.php:261
+#: footer.php:263
 msgid "Bottom of page"
 msgstr "Fondo pagina"
 
 #. Text in function
-#: comments.php:40
+#: comments.php:30
 msgid "Cancel reply"
 msgstr "Cancella la replica"
 
@@ -102,18 +127,19 @@ msgstr "Cancella la replica"
 #: index.php:1
 #: index.php:48
 #: single.php:48
-#: footer.php:56
-#: sidebar.php:21
+#: footer.php:55
+#: sidebar.php:20
 msgid "Categories"
 msgstr "Categorie"
 
 #. Text in function
-#: functions.php:320
+#: functions.php:348
 msgid "Child pages: "
 msgstr "Pagine discendenti: "
 
 #. Text in echo
 #: attachment.php:12
+#: functions.php:765
 #: single.php:12
 #: page.php:12
 msgid "Close"
@@ -125,7 +151,7 @@ msgstr "Chiudi"
 #: index.php:70
 #: single.php:62
 #: page.php:40
-#: footer.php:106
+#: footer.php:105
 msgid "Comments"
 msgstr "Commenti"
 
@@ -138,95 +164,99 @@ msgstr "Commenti"
 msgid "Edit"
 msgstr "Modifica"
 
-#. Text in echo
-#: comments.php:69
+#. Text in function
+#: comments.php:2
 msgid "Enter your password to view comments."
 msgstr "Inserire la password corretta per visualizzare i commenti."
 
 #. Text in function
-#: functions.php:512
+#: functions.php:539
 msgid "Fastfood theme says: \"Dont forget to set <a href=\"%s\">my options</a> and the header image!\""
 msgstr "Fastfood dice: \"Non dimenticarti di impostare le <a href=\"%s\">mie opzioni</a> e l'immagine di testata!\""
 
 #. Text in function
-#: functions.php:512
+#: functions.php:539
 msgid "First Footer Widget Area"
 msgstr "Fondo pagina: prima area widget"
 
 #. Text in function
-#: functions.php:512
+#: functions.php:539
 msgid "Globe"
 msgstr "Globo"
 
 #. Text in echo
-#: footer.php:237
+#: footer.php:236
 msgid "Home"
 msgstr "Home"
 
 #. Text in echo
-#: functions.php:479
+#: functions.php:506
 msgid "If you like/dislike this theme, or if you encounter any issues using it, please let us know it."
 msgstr "Se hai riscontrato dei problemi o se semplicemente ti piace/non ti piace questo tema , per favore faccelo sapere."
 
 #. Text in function
-#: comments.php:40
+#: widgets.php:204
+msgid "Last activity"
+msgstr "Attivit&agrave; recente"
+
+#. Text in function
+#: comments.php:30
 msgid "Leave a Reply"
 msgstr "Lascia un commento"
 
 #. Text in echo
-#: comments.php:17
-#: comments.php:40
-#: footer.php:161
-#: footer.php:163
+#: comments.php:15
+#: comments.php:30
+#: footer.php:160
+#: footer.php:162
 msgid "Leave a comment"
 msgstr "Lascia un commento"
 
 #. Text in echo
-#: functions.php:480
+#: functions.php:507
 msgid "Leave a feedback"
 msgstr "Lascia un feedback"
 
 #. Text in echo
-#: functions.php:731
-#: functions.php:733
-#: functions.php:744
+#: functions.php:774
+#: functions.php:762
 msgid "Log in"
 msgstr "Collegati"
 
 #. Text in echo
-#: footer.php:109
-#: footer.php:130
+#: footer.php:108
+#: footer.php:129
 msgid "Log out"
 msgstr "Esci da questo account"
 
 #. Text in function
-#: comments.php:40
-#: footer.php:86
+#: comments.php:30
+#: footer.php:85
 msgid "Logged in as <a href=\"%1$s\">%2$s</a>."
 msgstr "Collegato come <a href=\"%1$s\">%2$s</a>."
 
 #. Text in function
-#: functions.php:512
+#: functions.php:539
 msgid "Main Navigation Menu"
 msgstr "Menu di navigazione principale"
 
 #. Text in function
-#: functions.php:512
+#: functions.php:539
 msgid "Menu Widget Area"
 msgstr "Menu: area widget"
 
 #. Text in echo
-#: sidebar.php:11
+#: sidebar.php:10
 msgid "Meta"
 msgstr "Meta"
 
 #. Text in echo
-#: footer.php:59
+#: footer.php:58
 msgid "More..."
 msgstr "Continua..."
 
 #. Text in function
-#: footer.php:248
+#: footer.php:247
 msgid "Newer Posts"
 msgstr "Articoli pi&ugrave; recenti"
 
@@ -236,12 +266,12 @@ msgid "Next Image &raquo;"
 msgstr "Immagine Successiva &raquo;"
 
 #. Text in function
-#: footer.php:224
+#: footer.php:223
 msgid "Next Post"
 msgstr "Articolo successivo"
 
 #. Text in function
-#: footer.php:209
+#: footer.php:208
 msgid "Next page"
 msgstr "Pagina successiva "
 
@@ -251,7 +281,7 @@ msgstr "Pagina successiva "
 #: index.php:71
 #: single.php:63
 #: page.php:41
-#: comments.php:17
+#: comments.php:15
 msgid "No Comments"
 msgstr "Nessun Commento"
 
@@ -263,29 +293,44 @@ msgid "No Tags"
 msgstr "Nessun tag"
 
 #. Text in function
-#: functions.php:512
+#: functions.php:539
 msgid "No comments yet."
 msgstr "Ancora nessun commento"
 
 #. Text in function
-#: functions.php:512
+#: functions.php:539
 msgid "No preview: this is a comment of a protected post"
 msgstr "Nessuna anteprima: questo &egrave; un commento ad un articolo protetto"
 
 #. Text in function
-#: functions.php:512
+#: functions.php:539
 msgid "No preview: this is a protected post"
 msgstr "Nessuna anteprima: questo articolo &egrave; protetto"
 
 #. Text in function
-#: footer.php:86
+#: footer.php:85
 msgid "Not logged in"
 msgstr "Non sei collegato"
 
+#. Text in echo
+#: widgets.php:102
+msgid "Number of posts to show:"
+msgstr "Numero di articoli  da visualizzare:"
+
 #. Text in function
-#: footer.php:245
+#: footer.php:244
 msgid "Older Posts"
 msgstr "Articoli pi&ugrave; vecchi"
+
+#. Text in echo
+#: functions.php:466
+msgid "Options"
+msgstr "Opzioni"
+
+#. Text in function
+#: functions.php:684
+msgid "Options saved."
+msgstr "Opzioni salvate."
 
 #. Text in echo
 #: 404.php:9
@@ -296,28 +341,33 @@ msgstr "Non trovato"
 #: attachment.php:99
 #: index.php:84
 #: single.php:74
-#: sidebar.php:19
 #: page.php:56
+#: sidebar.php:18
 msgid "Pages"
 msgstr "Pagine"
 
 #. Text in function
-#: functions.php:320
+#: functions.php:348
 msgid "Parent page: "
 msgstr "Pagina genitore: "
 
+#. Text in function
+#: widgets.php:204
+msgid "Popular Posts"
+msgstr "Articoli pi&ugrave; popolari"
+
 #. Text in echo
-#: footer.php:18
+#: footer.php:17
 msgid "Powered by WordPress"
 msgstr "Utilizza WordPress"
 
 #. Text in function
-#: footer.php:228
+#: footer.php:227
 msgid "Previous Post"
 msgstr "Articolo precedente"
 
 #. Text in function
-#: footer.php:201
+#: footer.php:200
 msgid "Previous page"
 msgstr "Pagina  precedente"
 
@@ -325,7 +375,7 @@ msgstr "Pagina  precedente"
 #: attachment.php:13
 #: single.php:13
 #: page.php:13
-#: footer.php:154
+#: footer.php:153
 msgid "Print"
 msgstr "Stampa"
 
@@ -338,29 +388,29 @@ msgid "Published on: <b>%1$s</b>"
 msgstr "Pubblicato il: <b>%1$s</b>"
 
 #. Text in echo
-#: footer.php:70
+#: footer.php:69
 msgid "Recent Comments"
 msgstr "Commenti Recenti"
 
 #. Text in function
-#: functions.php:512
-#: footer.php:43
+#: functions.php:539
+#: footer.php:42
 msgid "Recent Posts"
 msgstr "Articoli Recenti"
 
 #. Text in function
-#: comments.php:40
+#: comments.php:30
 msgid "Reply to Comment"
 msgstr "Replica a questo commento"
 
 #. Text in function
-#: footer.php:216
-#: footer.php:218
+#: footer.php:215
+#: footer.php:217
 msgid "Return to %s"
 msgstr "Ritorna a %s"
 
 #. Text in function
-#: comments.php:40
+#: comments.php:30
 msgid "Say It!"
 msgstr "Dillo!"
 
@@ -377,12 +427,12 @@ msgid "Search results for &#8220;%s&#8221;"
 msgstr "Risultati della ricerca per &#8220;%s&#8221;"
 
 #. Text in function
-#: functions.php:512
+#: functions.php:539
 msgid "Second Footer Widget Area"
 msgstr "Fondo pagina: seconda area widget"
 
 #. Text in function
-#: functions.php:512
+#: functions.php:539
 msgid "Sidebar Widget Area"
 msgstr "Barra laterale: area widget"
 
@@ -414,78 +464,94 @@ msgid "Tags:"
 msgstr "Tag:"
 
 #. Text in function
-#: functions.php:512
+#: functions.php:539
 msgid "The first footer widget area"
 msgstr "La prima area widget nel fondo pagina"
 
 #. Text in function
-#: functions.php:512
+#: functions.php:539
 msgid "The second footer widget area"
 msgstr "La seconda area widget nel fondo pagina"
 
 #. Text in function
-#: functions.php:512
+#: functions.php:539
 msgid "The sidebar widget area"
 msgstr "L&apos;area widget nella barra laterale"
 
 #. Text in function
-#: functions.php:512
+#: functions.php:539
 msgid "The third footer widget area"
 msgstr "La terza area widget nel fondo pagina"
 
 #. Text in function
-#: functions.php:512
+#: functions.php:539
 msgid "The widget area under the main menu"
 msgstr "L&apos;area widget sotto il menu"
 
 #. Text in function
-#: functions.php:512
+#: functions.php:366
+#: functions.php:461
+msgid "Theme Options"
+msgstr "Opzioni del Tema"
+
+#. Text in function
+#: functions.php:539
 msgid "Third Footer Widget Area"
 msgstr "Fondo pagina: terza area widget"
 
 #. Text in function
-#: functions.php:320
+#: functions.php:348
 msgid "This page has hierarchy"
 msgstr "Questa pagina ha una gerarchia"
 
 #. Text in echo
-#: footer.php:255
-#: footer.php:257
+#: widgets.php:199
+msgid "Title:"
+msgstr "Titolo:"
+
+#. Text in function
+#: footer.php:122
+msgid "Today is %1$s"
+msgstr "Oggi &egrave; %1$s"
+
+#. Text in echo
+#: footer.php:254
+#: footer.php:256
 msgid "Top of page"
 msgstr "Inizio pagina"
 
 #. Text in echo
-#: footer.php:179
+#: footer.php:178
 msgid "Trackback URL"
 msgstr "Trackback"
 
 #. Text in echo
-#: functions.php:474
+#: functions.php:501
 msgid "Undo Changes"
 msgstr "Annulla Modifiche"
 
 #. Text in echo
-#: functions.php:473
+#: functions.php:500
 msgid "Update Options"
 msgstr "Aggiorna Opzioni"
 
 #. Text in echo
-#: footer.php:83
+#: footer.php:82
 msgid "User"
 msgstr "Utente"
 
 #. Text in function
-#: functions.php:512
+#: functions.php:539
 msgid "Vector Flowers"
 msgstr "Fiori Vettoriali"
 
 #. Text in echo
-#: footer.php:59
+#: footer.php:58
 msgid "View all categories"
 msgstr "Vedi tutte le Categorie"
 
 #. Text in function
-#: functions.php:512
+#: functions.php:539
 msgid "View all posts in %s"
 msgstr "Visualizza tutti gli articoli di %s"
 
@@ -495,13 +561,13 @@ msgid "View full size"
 msgstr "Dimensione originale"
 
 #. Text in echo
-#: footer.php:18
+#: footer.php:17
 msgid "Visit author homepage"
 msgstr "Visita la homepage dell'autore"
 
 #. Text in echo
-#: footer.php:123
-#: footer.php:129
+#: footer.php:122
+#: footer.php:128
 msgid "Welcome"
 msgstr "Benvenuto"
 
@@ -511,17 +577,32 @@ msgid "You can try the following:"
 msgstr "Vuoi un consiglio? Prova a..."
 
 #. Text in function
-#: comments.php:40
+#: comments.php:30
 msgid "You may use these <abbr title=\"HyperText Markup Language\">HTML</abbr> tags and attributes: %s"
 msgstr "&Egrave; possibile utilizzare questi tag ed attributi <abbr title=\"eXtensible HyperText Markup Language\">XHTML</abbr>: %s"
 
 #. Text in echo
-#: footer.php:101
+#: footer.php:100
 msgid "Your Profile"
 msgstr "Il tuo profilo"
 
 #. Text in function
-#: functions.php:512
+#: widgets.php:204
+msgid "[by Fastfood theme] The last commented posts/pages of your site"
+msgstr "[by Fastfood theme] Gli ultimi articoli/pagine commentati del tuo sito"
+
+#. Text in function
+#: widgets.php:204
+msgid "[by Fastfood theme] The most commented posts on your site"
+msgstr "[by Fastfood theme] Gli articoli pi&ugrave; commentati del tuo sito"
+
+#. Text in function
+#: functions.php:539
+msgid "[default = enabled]"
+msgstr "[predefinito = abilitato]"
+
+#. Text in function
+#: functions.php:539
 msgid "about"
 msgstr "in"
 
@@ -533,31 +614,50 @@ msgstr "navigare nel sito tramite il menu a scomparsa in basso a sinitra"
 #. Text in echo
 #: search.php:25
 #: attachment.php:36
-#: functions.php:512
+#: functions.php:539
 #: index.php:37
 #: single.php:35
 msgid "by"
 msgstr "di"
 
+#. Text in function
+#: functions.php:539
+msgid "custom comment reply form"
+msgstr "modulo di risposta personalizzato"
+
+#. Text in function
+#: functions.php:539
+msgid "custom floating form for post/reply comments [default = enabled]"
+msgstr "modulo di inserimento commenti per le pagine/articoli fluttuante [predefinito = abilitato]"
+
 #. Text in echo
-#: functions.php:456
-#: functions.php:461
+#: functions.php:483
 msgid "description"
 msgstr "descrizione"
 
 #. Text in echo
-#: footer.php:168
-#: footer.php:170
+#: footer.php:167
+#: footer.php:169
 msgid "feed for comments on this post"
 msgstr "feed dei commenti per questo post"
 
-#. Text in echo
-#: functions.php:465
-msgid "info"
-msgstr "info"
+#. Text in function
+#: functions.php:539
+msgid "javascript animations"
+msgstr "animazioni javascript"
 
 #. Text in echo
-#: functions.php:454
+#: functions.php:316
+msgid "last commented post"
+msgstr "l'ultimo articolo commentato"
+
+#. Text in function
+#: functions.php:539
+msgid "mobile support"
+msgstr "supporto per dispositivi mobili"
+
+#. Text in echo
+#: functions.php:481
 msgid "name"
 msgstr "nome"
 
@@ -567,8 +667,13 @@ msgstr "nome"
 msgid "page %1$s of %2$s"
 msgstr "pagina %1$s di %2$s"
 
+#. Text in function
+#: functions.php:539
+msgid "please, don't hide theme credits [default = enabled]"
+msgstr "per favore, non nascondere i crediti del tema [predefinito = abilitato]"
+
 #. Text in echo
-#: functions.php:457
+#: functions.php:484
 msgid "require"
 msgstr "richiede"
 
@@ -583,118 +688,69 @@ msgid "see the suggested pages in the above menu"
 msgstr "vedere le pagine proposte nel menu qui sopra"
 
 #. Text in function
-#: functions.php:512
-msgid "someone"
-msgstr "un tizio"
-
-#. Text in echo
-#: functions.php:455
-msgid "status"
-msgstr "stato"
-
-#. Text in function
-#: functions.php:746
-msgid "this post is quoted by"
-msgstr "questo articolo &egrave; citato da"
-
-#. Text in echo
-#: footer.php:123
-msgid "today is "
-msgstr "oggi &egrave; "
-
-#. Text in function
-#: functions.php:446
-msgid "-- categories"
-msgstr "-- categorie"
-
-#. Text in function
-#: functions.php:446
-msgid "-- recent comments"
-msgstr "-- commenti recenti"
-
-#. Text in function
-#: functions.php:446
-msgid "-- recent posts"
-msgstr "-- articoli recenti"
-
-#. Text in function
-#: functions.php:446
-msgid "-- user"
-msgstr "-- utente"
-
-#. Text in function
-#: functions.php:446
-msgid "[default = enabled]"
-msgstr "[predefinito = abilitato]"
-
-#. Text in function
-#: functions.php:446
-msgid "custom comment reply form"
-msgstr "modulo di risposta personalizzato"
-
-#. Text in function
-#: functions.php:446
-msgid "custom floating form for post/reply comments [default = enabled]"
-msgstr "modulo di inserimento commenti per le pagine/articoli fluttuante [predefinito = abilitato]"
-
-#. Text in function
-#: functions.php:446
-msgid "javascript animations"
-msgstr "animazioni javascript"
-
-#. Text in function
-#: functions.php:446
-msgid "sidebar on pages"
-msgstr "barra laterale nelle pagine"
-
-#. Text in function
-#: functions.php:446
+#: functions.php:539
 msgid "show right sidebar on pages [default = disabled]"
 msgstr "visualizza la sidebar destra nelle pagine [predefinito = disabilitato]"
 
 #. Text in function
-#: functions.php:446
+#: functions.php:539
 msgid "show right sidebar on posts [default = disabled]"
 msgstr "visualizza la sidebar destra negli articoli [predefinito = disabilitato]"
 
 #. Text in function
-#: functions.php:446
+#: functions.php:539
+msgid "sidebar on pages"
+msgstr "barra laterale nelle pagine"
+
+#. Text in function
+#: functions.php:539
 msgid "sidebar on posts"
 msgstr "barra laterale negli articoli"
 
 #. Text in function
-#: functions.php:446
+#: functions.php:539
 msgid "sliding menu"
 msgstr "menu a scorrimento"
 
 #. Text in function
-#: functions.php:446
+#: functions.php:539
+msgid "someone"
+msgstr "un tizio"
+
+#. Text in echo
+#: functions.php:482
+msgid "status"
+msgstr "stato"
+
+#. Text in function
+#: functions.php:539
 msgid "theme credits"
 msgstr "crediti del tema"
 
 #. Text in function
-#: functions.php:446
-msgid "please, don't hide theme credits [default = enabled]"
-msgstr "per favore, non nascondere i crediti del tema [predefinito = abilitato]"
+#: functions.php:776
+msgid "this post is quoted by"
+msgstr "questo articolo &egrave; citato da"
 
 #. Text in function
-#: functions.php:446
+#: functions.php:539
 msgid "try disable animations if you encountered problems with javascript [default = enabled]"
 msgstr "prova a disabilitare le animazioni se ci sono problemi con i javascript [predefinito = abilitato]"
 
-#. Text in echo
-#: function.php:121
-msgid "mobile support"
-msgstr "supporto per dispositivi mobili"
-
-#. Text in echo
-#: function.php:121
+#. Text in function
+#: functions.php:539
 msgid "use a dedicated style in mobile devices [default = enabled]"
 msgstr "usa un stile dedicato per la visualizzazione su dispositivi mobili [predefinito = abilitato]"
 
 msgid "Fastfood Default Gravatar"
 msgstr "Gravatar predefinito di Fastfood"
 
-msgid "[default = disabled]"
-msgstr "[predefinito = disabilitato]"
+msgid "Theme Info"
+msgstr "Informazioni del tema"
+
+msgid "---- mini login"
+msgstr "---- mini login"
+
+msgid "a small login form in the user panel [default = enabled]"
+msgstr "un piccolo modulo di login nella scheda utente [predefinito = abilitato]"
 

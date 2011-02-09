@@ -1,7 +1,8 @@
-﻿<p>Fastfood - WordPress theme</p>
+<p>Fastfood - WordPress theme
 	<ul>
-		<li>version: 0.19</li>
+		<li>version: 0.20</li>
 	</ul>
+</p>
 <p>Project page:
 	<ul>
 		<li><a href="http://www.twobeers.net/annunci/tema-per-wordpress-fastfood" title="Fastfood theme page" target="_blank" >http://www.twobeers.net/annunci/tema-per-wordpress-fastfood</a></li>
@@ -29,7 +30,7 @@
 		<li>Two columns : to fill with your content that will be visible and accessible</li>
 		<li>Widgets Support : use the widgets if you want to enrich the site</li>
 		<li>Translation ready : Fastfood is ready to be translated into other languages (English and Italian are included)</li>
-		<li>Up to 5 sidebars : yes, it’s true! you have up to 5 sidebars for your extra content &amp; widgets</li>
+		<li>Up to 5 sidebars : yes, it's true! you have up to 5 sidebars for your extra content &amp; widgets</li>
 		<li>Standard WordPress : fully compliant with the standards required by WordPress</li>
 		<li>WP 3.0 features : Fastfood supports the new features introduced by WordPress 3.0, like custom menus and post thumbnails</li>
 		<li>Gravatars Support : your gravatar follows you everywhere</li>
@@ -39,6 +40,7 @@
 		<li>Theme options : enable or disable theme special features</li>
 		<li>Funny animations : your site comes to life!</li>
 		<li>Mobile support : Fastfood has a dedicated style for mobile view (touchscreen friendly)</li>
+		<li>Custom widgets : two new widgets ("Popular Post" and "Last Activity") at your disposal</li>
 	</ul>
 </p>
 <p>TECHNICAL:
@@ -49,6 +51,7 @@
 		<li>if you experience any javascript problem, try disable animations in admin -&gt; theme options</li>
 		<li>print_preview.css is a stylesheet file used to emulate a print preview.</li>
 		<li>the theme detects the following mobile devices/browsers/os : ipod, iphone, android, opera mini, blackberry, palm, symbian and many more</li>
+		<li>In order to use the new widgets ("Popular Post" and "Last Activity"), you need to activate them in admin -&gt; widgets </li>
 	</ul>
 </p>
 <p>CHANGE LOG (FROM VERSION 0.16):
@@ -57,15 +60,18 @@
 			<ul>
 				<li>Mobile dedicated style (touchscreen friendly)</li>
 				<li>editor-style support</li>
-				<li>paginated comments</li>
+				<li>Paginated comments</li>
+				<li>Two new widgets ("Popular Post" and "Last Activity")</li>
+				<li>Option for disable/enable mini login form in quickbar</li>
 			</ul>
 		</li>
 		<li>Fixes:
 			<ul>
 				<li>Removed useless "trackback" label after comments list</li>
 				<li>Position of floating comment form (when sidebar is showed)</li>
-				<li>Disable mini login form in quickbar if siCaptcha Plugin is installed</li>
+				<li>Automatically disable mini login form in quickbar if siCaptcha Plugin is installed</li>
 				<li>"Leave a comment" link error when custom comment form is not active</li>
+				<li>Comments on closed posts/pages</li>
 				<li>Full translation ready</li>
 				<li>Some minor graphical and coding issues</li>
 			</ul>
@@ -96,7 +102,7 @@
 				<li>Links to Wordpress admin even in non standard installations</li>
 				<li>Previous/Next page links now follow the menu ordered sequence</li>
 				<li>No more trackbacks in recent comments (useless)</li>
-				<li>Minimum width 960px (from 1024px), for small multimedia devices</li>
+				<li>Minimum width 960px (from 1024px), for small devices</li>
 				<li>Some javascript bugs</li>
 				<li>Some graphical bugs</li>
 			</ul>

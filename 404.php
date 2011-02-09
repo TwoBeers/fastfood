@@ -1,6 +1,6 @@
 <?php get_header();
 
-$website = get_bloginfo( 'url' );
+$website = home_url();
 
 ?>
 
