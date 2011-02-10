@@ -812,13 +812,13 @@ ul.ul_fwa {
 	top: -13px;
 	border: 1px solid #fff;
 }
-.ff_widget_popular_posts li.li-with-thumbs, .ff_widget_last_commented_posts li.li-with-thumbs {
+.ff_widget_popular_posts li.li-with-thumbs, .ff_widget_latest_commented_posts li.li-with-thumbs {
 	margin-top: 15px;
 	min-height: 30px;
 	padding-left: 46px;
 	position: relative;
 }
-.ff_widget_popular_posts .post-thumb, .ff_widget_last_commented_posts .post-thumb {
+.ff_widget_popular_posts .post-thumb, .ff_widget_latest_commented_posts .post-thumb {
 	background: url("images/qbarv.png") no-repeat scroll -5px -5px #ccc;
 	display: block;
 	height: 40px;
