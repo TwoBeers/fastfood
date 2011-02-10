@@ -572,6 +572,11 @@ if ( !function_exists( 'fastfood_setup' ) ) {
 				'url' => '%s/images/headers/bamboo.jpg',
 				'thumbnail_url' => '%s/images/headers/bamboo-thumbnail.jpg',
 				'description' => __( 'Bamboo Forest', 'fastfood' )
+			),
+			'abstract' => array(
+				'url' => '%s/images/headers/abstract.jpg',
+				'thumbnail_url' => '%s/images/headers/abstract-thumbnail.jpg',
+				'description' => __( 'Abstract', 'fastfood' )
 			)
 		) );
 	}

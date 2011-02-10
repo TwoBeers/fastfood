@@ -40,7 +40,7 @@
 		<li>Theme options : enable or disable theme special features</li>
 		<li>Funny animations : your site comes to life!</li>
 		<li>Mobile support : Fastfood has a dedicated style for mobile view (touchscreen friendly)</li>
-		<li>Custom widgets : two new widgets ("Popular Post" and "Last Activity") at your disposal</li>
+		<li>Custom widgets : three new widgets ("Popular Post", "Last Activity" and "Latest comment authors") at your disposal</li>
 	</ul>
 </p>
 <p>TECHNICAL:
@@ -51,7 +51,7 @@
 		<li>if you experience any javascript problem, try disable animations in admin -&gt; theme options</li>
 		<li>print_preview.css is a stylesheet file used to emulate a print preview.</li>
 		<li>the theme detects the following mobile devices/browsers/os : ipod, iphone, android, opera mini, blackberry, palm, symbian and many more</li>
-		<li>In order to use the new widgets ("Popular Post" and "Last Activity"), you need to activate them in admin -&gt; widgets </li>
+		<li>In order to use the new widgets ("Popular Post", "Last Activity" and "Latest comment authors"), you need to activate them in admin -&gt; widgets </li>
 	</ul>
 </p>
 <p>CHANGE LOG (FROM VERSION 0.16):
@@ -61,8 +61,9 @@
 				<li>Mobile dedicated style (touchscreen friendly)</li>
 				<li>editor-style support</li>
 				<li>Paginated comments</li>
-				<li>Two new widgets ("Popular Post" and "Last Activity")</li>
+				<li>Three new widgets ("Popular Post", "Last Activity" and "Latest comment authors")</li>
 				<li>Option for disable/enable mini login form in quickbar</li>
+				<li>New header image ("abstract")</li>
 			</ul>
 		</li>
 		<li>Fixes:
