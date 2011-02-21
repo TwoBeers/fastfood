@@ -70,7 +70,7 @@
 				<?php the_content();	?>
 			</div>
 			
-			<div>
+			<div class="fixfloat">
 					<?php wp_link_pages( 'before=<div class="comment_tools">' . __( 'Pages','fastfood' ) . ':&after=</div><div class="fixfloat"></div>' ); ?>
 			</div>
 		

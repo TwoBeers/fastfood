@@ -1,6 +1,6 @@
 <p>Fastfood - WordPress theme
 	<ul>
-		<li>version: 0.20</li>
+		<li>version: 0.20.1</li>
 	</ul>
 </p>
 <p>Project page:
@@ -52,6 +52,17 @@
 		<li>print_preview.css is a stylesheet file used to emulate a print preview.</li>
 		<li>the theme detects the following mobile devices/browsers/os : ipod, iphone, android, opera mini, blackberry, palm, symbian and many more</li>
 		<li>In order to use the new widgets ("Popular Post", "Last Activity" and "Latest comment authors"), you need to activate them in admin -&gt; widgets </li>
+	</ul>
+</p>
+<p>CHANGE LOG (FROM VERSION 0.20):
+	<ul>
+		<li>Fixes:
+			<ul>
+				<li>images width</li>
+				<li>clearing floats</li>
+				<li>js bug - sliding panels in quickbar don't show up (with WordPress 3.1)</li>
+			</ul>
+		</li>
 	</ul>
 </p>
 <p>CHANGE LOG (FROM VERSION 0.16):
