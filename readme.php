@@ -1,6 +1,6 @@
 <p>Fastfood - WordPress theme
 	<ul>
-		<li>version: 0.20.1</li>
+		<li>version: 0.20.2</li>
 	</ul>
 </p>
 <p>Project page:
@@ -58,9 +58,9 @@
 	<ul>
 		<li>Fixes:
 			<ul>
-				<li>images width</li>
-				<li>clearing floats</li>
-				<li>js bug - sliding panels in quickbar don't show up (with WordPress 3.1)</li>
+				<li>Images width</li>
+				<li>Clearing floats</li>
+				<li>Compatibility issues with WordPress 3.1</li>
 			</ul>
 		</li>
 	</ul>

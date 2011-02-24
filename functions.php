@@ -209,8 +209,8 @@ function get_fastfood_recentcomments() {
 	if ( $comments ) {
 		foreach ( $comments as $comment ) {
 			$post_title = get_the_title( $comment->comment_post_ID );
-			if ( strlen( $post_title ) > 35 ) { //shrink the post title if > 35 chars
-				$post_title_short = substr( $post_title,0,35 ) . '&hellip;';
+			if ( mb_strlen( $post_title ) > 35 ) { //shrink the post title if > 35 chars
+				$post_title_short = mb_substr( $post_title,0,35 ) . '&hellip;';
 			} else {
 				$post_title_short = $post_title;
 			}
@@ -223,15 +223,14 @@ function get_fastfood_recentcomments() {
 			} else {
 				$com_auth = $comment->comment_author;
 			}
-			if ( strlen( $com_auth ) > 35 ) {  //shrink the comment author if > 35 chars
-				$com_auth = substr( $com_auth,0,35 ) . '&hellip;';
+			if ( mb_strlen( $com_auth ) > 35 ) {  //shrink the comment author if > 35 chars
+				$com_auth = mb_substr( $com_auth,0,35 ) . '&hellip;';
 			}
 		    echo '<li>'. $com_auth . ' ' . __( 'about','fastfood' ) . ' <a href="' . get_permalink( $comment->comment_post_ID ) . '#comment-' . $comment->comment_ID . '">' . $post_title_short . '</a><div class="preview">';
 			if ( post_password_required( get_post( $comment->comment_post_ID ) ) ) {
 				echo '[' . __( 'No preview: this is a comment of a protected post', 'fastfood' ) . ']';
 			} else {
-				$comment_string = improved_trim_excerpt( $comment->comment_content );
-				echo $comment_string;
+				comment_excerpt( $comment->comment_ID );
 			}
 			echo '</div></li>';
 		}
@@ -247,8 +246,8 @@ function get_fastfood_recententries( $mode = '', $limit = 10 ) {
 	foreach( $lastposts as $post ) {
 		setup_postdata( $post );
 		$post_title = esc_html( $post->post_title );
-		if ( strlen( $post_title ) > 35 ) {
-			$post_title_short = substr( $post_title,0,35 ) . '&hellip;';
+		if ( mb_strlen( $post_title ) > 35 ) {
+			$post_title_short = mb_substr( $post_title,0,35 ) . '&hellip;';
 		} else {
 			$post_title_short = $post_title;
 		}
@@ -260,8 +259,8 @@ function get_fastfood_recententries( $mode = '', $limit = 10 ) {
 			echo '<img class="alignleft wp-post-image" src="' . get_template_directory_uri() . '/images/lock.png" alt="thumb" title="' . $post_title_short . '" />';
 			echo '[' . __( 'No preview: this is a protected post','fastfood' ) . ']';
 		} else {
-			the_post_thumbnail( array( 50,50 ), array( 'class' => 'alignleft' ) );
-			echo improved_trim_excerpt( $post->post_content );
+			echo get_the_post_thumbnail( $post->ID, array( 50,50 ), array( 'class' => 'alignleft' ) );
+			the_excerpt();
 		}
 		echo '</div></li>';
 	}
@@ -286,8 +285,8 @@ function get_fastfood_categories_wpr() {
 		foreach( $lastcatposts as $post ) {
 			setup_postdata( $post );
 			$post_title = esc_html( $post->post_title );
-			if ( strlen( $post_title ) > 35 ) {
-				$post_title_short = substr( $post_title,0,35 ) . '&hellip;';
+			if ( mb_strlen( $post_title ) > 35 ) {
+				$post_title_short = mb_substr( $post_title,0,35 ) . '&hellip;';
 			} else {
 				$post_title_short = $post_title;
 			}
@@ -482,10 +481,8 @@ function edit_fastfood_options() {
 						<a href="<?php echo esc_url( 'http://www.twobeers.net/annunci/tema-per-wordpress-fastfood' ); ?>" title="Fastfood theme" target="_blank"><?php _e( 'Leave a feedback', 'fastfood' ); ?></a>
 					</small>
 				</div>
-				<div class="stylediv" style="clear: both; text-align: center; border: 1px solid #ccc;">
-					<small>
-						<a href="<?php echo esc_url( 'http://www.twobeers.net/temi-wp/wordpress-themes-translations' ); ?>" title="Themes translation" target="_blank">Support the theme in your language, provide a translation.</a>
-					</small>
+				<div class="stylediv" style="clear: both; text-align: center; border: 1px solid #ccc; margin-top: 10px;">
+					<small>Support the theme in your language, provide a <a href="<?php echo esc_url( 'http://www.twobeers.net/temi-wp/wordpress-themes-translations' ); ?>" title="Themes translation" target="_blank">translation</a>.</small>
 				</div>
 			</div>
 			<div id="fastfood-infos">
@@ -669,27 +666,9 @@ function fastfood_custom_bg() {
 	<?php
 }
 
-//custom excerpt maker
-function improved_trim_excerpt( $text ) {
-	$text = apply_filters( 'the_content', $text );
-	$text = str_replace( ']]>', ']]&gt;', $text );
-	$text = preg_replace( '@<script[^>]*?>.*?</script>@si', '', $text );
-	$text = strip_tags( $text, '<p>' );
-	$text = preg_replace( '@<p[^>]*?>@si', '', $text );
-	$text = preg_replace( '@</p>@si', '<br/>', $text );
-	$excerpt_length = 50;
-	$words = explode(' ', $text, $excerpt_length + 1);
-	if ( count( $words ) > $excerpt_length ) {
-		array_pop( $words );
-		array_push( $words, '[...]' );
-		$text = implode( ' ', $words );
-	}
-	return $text;
-}
-
 // set the custom excerpt length
 function new_excerpt_length( $length ) {
-	return 40;
+	return 50;
 }
 
 //add a default gravatar

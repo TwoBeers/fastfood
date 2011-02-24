@@ -44,7 +44,7 @@ class fastfood_ff_widget_popular_posts extends WP_Widget {
 			$number = 15;
 		$use_thumbs = ( !isset($instance['thumb']) || $thumb = (int) $instance['thumb'] ) ? 1 : 0;
 		
-		$r = new WP_Query(array('showposts' => $number, 'nopaging' => 0, 'post_status' => 'publish', 'caller_get_posts' => 1, 'orderby' => 'comment_count'));
+		$r = new WP_Query(array('showposts' => $number, 'nopaging' => 0, 'post_status' => 'publish', 'ignore_sticky_posts' => 1, 'orderby' => 'comment_count'));
 		if ($r->have_posts()) :
 ?>
 		<?php echo $before_widget; ?>
