@@ -1,4 +1,4 @@
-/* Fastfood v0.18 - stylesheet for print */
+/* Fastfood v0.21 - stylesheet for print */
 
 body {
 	font-size: 14px;
@@ -59,7 +59,8 @@ blockquote {
 #sidebardx,
 #quickbar,
 #edit_link,
-#fixedfoot {
+#fixedfoot,
+body #wpadminbar {
 	display: none;
 }
 .metafield div {

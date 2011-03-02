@@ -123,7 +123,7 @@
 			<?php } ?>
 
 			<div id="statusbar" class="no-mobile">
-				<?php _e( 'Welcome','fastfood' ); ?> <?php if ( is_user_logged_in() ) { echo $current_user->display_name; } ?>, <?php sprintf( __('Today is %1$s','fastfood'), date_i18n('l') ); ?> <?php echo date_i18n( get_option( 'date_format' ) ); ?>
+				<?php _e( 'Welcome','fastfood' ); ?> <?php if ( is_user_logged_in() ) { echo $current_user->display_name; } ?>, <?php printf( __('today is %1$s, %2$s','fastfood'), date_i18n( __( 'l','fastfood' ) ), date_i18n( get_option( 'date_format' ) ) ); ?>
 			</div>
 
 			<div id="navbuttons_cont">

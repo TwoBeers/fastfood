@@ -57,6 +57,7 @@ function fastfood_get_coa() {
 		'fastfood_jsani' => array( 'default'=>1,'description'=>__( 'javascript animations','fastfood' ),'info'=>__( 'try disable animations if you encountered problems with javascript [default = enabled]','fastfood' ),'req'=>'' ),
 		'fastfood_cust_comrep' => array( 'default'=>1,'description'=>__( 'custom comment reply form','fastfood' ),'info'=>__( 'custom floating form for post/reply comments [default = enabled]','fastfood' ),'req'=>'' ),
 		'fastfood_mobile_css' => array( 'default'=>1,'description'=>__( 'mobile support','fastfood' ),'info'=>__( 'use a dedicated style in mobile devices [default = enabled]','fastfood' ),'req'=>'' ),
+		'fastfood_wpadminbar_css' => array( 'default'=>1,'description'=>__( 'custom adminbar style','fastfood' ),'info'=>__( 'style integration with the theme for admin bar [default = enabled]','fastfood' ),'req'=>'' ),
 		'fastfood_tbcred' => array( 'default'=>1,'description'=>__( 'theme credits','fastfood' ),'info'=>__( "please, don't hide theme credits [default = enabled]",'fastfood' ),'req'=>'' )
 	);
 	return $fastfood_coa;
@@ -160,7 +161,7 @@ function fastfood_widget_area_init() {
 
 // Add stylesheets to page
 function fastfood_stylesheet(){
-	global $fastfood_version, $is_ff_printpreview, $is_mobile_browser;
+	global $fastfood_opt, $fastfood_version, $is_ff_printpreview, $is_mobile_browser;
 	//shows print preview / normal view
 	if ( $is_ff_printpreview ) { //print preview
 		wp_enqueue_style( 'ff_print-style-preview', get_template_directory_uri() . '/css/print.css', false, $fastfood_version, 'screen' );
@@ -170,6 +171,9 @@ function fastfood_stylesheet(){
 			wp_enqueue_style( 'ff_general-style-mobile', get_template_directory_uri() . '/css/mobile-style.css', false, $fastfood_version, 'screen' );
 		} else {
 			wp_enqueue_style( 'ff_general-style', get_stylesheet_uri(), false, $fastfood_version, 'screen' );
+			if ( $fastfood_opt['fastfood_wpadminbar_css'] == 1 ) {
+				wp_enqueue_style( 'ff_adminbar-style', get_template_directory_uri() . '/css/wpadminbar.css' );
+			}
 		}
 	}
 	//print style
@@ -208,6 +212,7 @@ function get_fastfood_recentcomments() {
 	$comments = get_comments( 'status=approve&number=10&type=comment' ); // valid type values (not documented) : 'pingback','trackback','comment'
 	if ( $comments ) {
 		foreach ( $comments as $comment ) {
+			//if( post_password_required( get_post( $comment->comment_post_ID ) ) ) { continue; } // uncomment to skip comments on protected posts. Hi Emma ;)
 			$post_title = get_the_title( $comment->comment_post_ID );
 			if ( mb_strlen( $post_title ) > 35 ) { //shrink the post title if > 35 chars
 				$post_title_short = mb_substr( $post_title,0,35 ) . '&hellip;';
@@ -668,7 +673,7 @@ function fastfood_custom_bg() {
 
 // set the custom excerpt length
 function new_excerpt_length( $length ) {
-	return 50;
+	return 200;
 }
 
 //add a default gravatar
