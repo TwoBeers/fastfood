@@ -158,3 +158,9 @@
 		</li>
 	</ul>
 </p>
+
+<p>CREDITS:
+	<ul>
+		<li>Eric from <a href="http://blog.mes-experts.be/" target="_blank">Mes Experts</a> for the French translation</li>
+	</ul>
+</p>
