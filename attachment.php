@@ -1,13 +1,13 @@
 <?php get_header(); ?>
 
 <?php if ( have_posts() ) {
-	global $is_ff_printpreview;
+	global $ff_is_printpreview;
 	while ( have_posts() ) {
 		the_post(); ?>
 		
 		<div <?php post_class() ?> id="post-<?php the_ID(); ?>">
 			
-			<?php if ( $is_ff_printpreview ) { ?>
+			<?php if ( $ff_is_printpreview ) { ?>
 				<div id="close_preview">
 					<a href="<?php the_permalink() ?>" rel="bookmark"><?php _e( 'Close','fastfood' ); ?></a>
 					<a href="javascript:window.print()" id="print_button"><?php _e( 'Print','fastfood' ); ?></a>
@@ -22,18 +22,18 @@
 			<h2 class="storytitle">
 				<a href="<?php the_permalink() ?>" rel="bookmark">
 				<?php 
-				$post_title = the_title_attribute( 'echo=0' );
-				if ( !$post_title ) {
+				$ff_post_title = the_title_attribute( 'echo=0' );
+				if ( !$ff_post_title ) {
 					_e( '(no title)','fastfood' );
 				} else {
-					echo $post_title;
+					echo $ff_post_title;
 				}
 				?>
 				</a>
 			</h2>
 			
 			<div class="meta top_meta">
-					<div class="metafield_trigger" style="left: 10px;"><?php _e( 'by', 'fastfood' ); ?> <?php the_author() ?></div>
+					<div class="metafield_trigger" style="left: 10px;"><?php _e( 'by', 'fastfood' ); ?> <?php printf( '<a href="' . get_author_posts_url( get_the_author_meta( 'ID' ) ) . '" title="' . sprintf( __('View all posts by %s', 'fastfood' ), esc_attr( get_the_author() ) ) . '">' . get_the_author() . '</a>' ); ?></div>
 					<div class="metafield">
 						<div class="metafield_trigger mft_date no-mobile" style="right: 40px; width:16px"> </div>
 						<div class="metafield_content">
@@ -74,10 +74,6 @@
 							$next_attachment_url = wp_get_attachment_url();
 						}
 						?>
-						<p class="attachment"><a href="<?php echo $next_attachment_url; ?>#posts_content" title="<?php echo esc_attr( get_the_title() ); ?>" rel="attachment"><?php
-							$attachment_size = apply_filters( 'fastfood_attachment_size', 686 );
-							echo wp_get_attachment_image( $post->ID, array( $attachment_size, 9999 ) ); // filterable image width with, essentially, no limit for image height.
-						?></a></p>
 						<div>
 							<div class="comment_tools image_tools" style="text-align: center;">
 								<div class="alignleft"><?php previous_image_link( false , __( '&laquo; Previous Image', 'fastfood' ) ); // link to Previous image ?></div>
@@ -86,12 +82,26 @@
 								<div class="fixfloat"></div>
 							</div>
 						</div>
+						<p class="attachment"><a href="<?php echo $next_attachment_url; ?>#posts_content" title="<?php echo esc_attr( get_the_title() ); ?>" rel="attachment"><?php
+							$attachment_size = apply_filters( 'fastfood_attachment_size', 686 );
+							echo wp_get_attachment_image( $post->ID, array( $attachment_size, 9999 ) ); // filterable image width with, essentially, no limit for image height.
+						?></a></p>
+						<div class="entry-caption"><?php if ( !empty( $post->post_excerpt ) ) the_excerpt(); ?></div>
+						<div>
+							<div class="comment_tools image_tools" style="text-align: center;">
+								<div class="alignleft"><?php previous_image_link( false , __( '&laquo; Previous Image', 'fastfood' ) ); // link to Previous image ?></div>
+								<div class="alignright"><?php next_image_link( false , __( 'Next Image &raquo;', 'fastfood' ) ); // link to Next image ?></div>
+								<a class="dim_cpc" href="<?php echo wp_get_attachment_url(); ?>" title="<?php _e('View full size','fastfood') ;  // link to Full size image ?>" rel="attachment" target="_blank">100%</a>
+								<div class="fixfloat"></div>
+							</div>
+						</div>
+						<div class="entry-caption"><?php if ( !empty( $post->post_content ) ) the_content(); ?></div>
 					<?php } else { ?>
 						<a href="<?php echo wp_get_attachment_url(); ?>" title="<?php echo esc_attr( get_the_title() ); ?>" rel="attachment"><?php echo basename( get_permalink() ); ?></a>
+						<div class="entry-caption"><?php if ( !empty( $post->post_excerpt ) ) the_excerpt(); ?></div>
 					<?php } ?>
 					</div><!-- .entry-attachment -->
 					
-					<div class="entry-caption"><?php if ( !empty( $post->post_excerpt ) ) the_excerpt(); ?></div>
 					
 				</div>
 			

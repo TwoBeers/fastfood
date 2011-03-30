@@ -109,7 +109,8 @@
 		parent.addClass('top_meta_js');
 		list.css({ 'opacity' : 0, 'display' : 'block' });
 		var mysize = list.height(); //retrieve the height of the sub list
-		list.css({ 'opacity' : 1, 'display' : '', 'height' : 0 , 'padding-top' : 0 });
+		list.removeAttr("style");
+		list.css({ 'height' : 0 , 'padding-top' : 0 });
 		$(this).mouseenter( function(){ //when mouse enters, slide down the sub list
 			list.animate(
 				{'height': mysize , 'padding-top': 25 },

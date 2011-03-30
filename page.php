@@ -1,13 +1,13 @@
 <?php get_header(); ?>
 
 <?php if ( have_posts() ) {
-	global $is_ff_printpreview;
+	global $ff_is_printpreview;
 	while ( have_posts() ) {
 		the_post(); ?>
 
 			<div <?php post_class() ?> id="post-<?php the_ID(); ?>">
 
-				<?php if ( $is_ff_printpreview ) { ?>
+				<?php if ( $ff_is_printpreview ) { ?>
 					<div id="close_preview">
 						<a href="<?php the_permalink() ?>" rel="bookmark"><?php _e( 'Close','fastfood' ); ?></a>
 						<a href="javascript:window.print()" id="print_button"><?php _e( 'Print','fastfood' ); ?></a>
@@ -22,11 +22,11 @@
 				<h2 class="storytitle">
 					<a href="<?php the_permalink() ?>" rel="bookmark">
 						<?php
-						$post_title = the_title_attribute( 'echo=0' );
-						if ( !$post_title ) {
+						$ff_post_title = the_title_attribute( 'echo=0' );
+						if ( !$ff_post_title ) {
 							_e( '(no title)','fastfood' );
 						} else {
-							echo $post_title;
+							echo $ff_post_title;
 						}
 						?>
 					</a>

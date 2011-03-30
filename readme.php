@@ -40,7 +40,7 @@
 		<li>Theme options : enable or disable theme special features</li>
 		<li>Funny animations : your site comes to life!</li>
 		<li>Mobile support : Fastfood has a dedicated style for mobile view (touchscreen friendly)</li>
-		<li>Custom widgets : three new widgets ("Popular Post", "Last Activity" and "Latest comment authors") at your disposal</li>
+		<li>Custom widgets : five new widgets ("Social network", "Popular Post", "Latest Activity", "Popular Categories" and "Latest comment authors") at your disposal</li>
 	</ul>
 </p>
 <p>TECHNICAL:
@@ -51,19 +51,27 @@
 		<li>if you experience any javascript problem, try disable animations in admin -&gt; theme options</li>
 		<li>print_preview.css is a stylesheet file used to emulate a print preview.</li>
 		<li>the theme detects the following mobile devices/browsers/os : ipod, iphone, android, opera mini, blackberry, palm, symbian and many more</li>
-		<li>In order to use the new widgets ("Popular Post", "Last Activity" and "Latest comment authors"), you need to activate them in admin -&gt; widgets </li>
+		<li>In order to use the new widgets ("Social network", "Popular Post", "Latest Activity", "Popular Categories" and "Latest comment authors"), you need to activate them in admin -&gt; widgets </li>
+		<li>the secondary menus (one on top of page and one above the footer widget area) support only one level of hierarchy</li>
 	</ul>
 </p>
 <p>CHANGE LOG (FROM VERSION 0.20.2):
 	<ul>
 		<li>Adds:
 			<ul>
-				<li>more integrated style for wp admin bar (disable/enable in theme option)</li>
+				<li>Three new widgets ("Social network" and "Popular Categories")</li>
+				<li>More integrated style for wp admin bar (disable/enable in theme option)</li>
+				<li>Two new menus, one on top of page and one above the footer widget area</li>
+				<li>"rtl" language support</li>
+				<li>New contact methods in user profile (Twitter, Facebook)</li>
 			</ul>
 		</li>
 		<li>Fixes:
 			<ul>
 				<li>"today is" issue (thanks gdgd_hirahira)</li>
+				<li>Increased compatibility with multi-byte environments</li>
+				<li>Increased compatibility with WP admin bar</li>
+				<li>Theme functions, variables, options, etc. prefixed with theme-slug (WP require)</li>
 			</ul>
 		</li>
 	</ul>

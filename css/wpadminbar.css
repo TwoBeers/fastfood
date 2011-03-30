@@ -6,9 +6,8 @@ body #wpadminbar {
 	-moz-box-shadow: 1px 1px 2px #000;
 	-webkit-box-shadow: 1px 1px 2px #000;
 	box-shadow: 1px 1px 2px #000;
-	background-color: #777;
-	background-image: -moz-linear-gradient(bottom,  #666,  #7f7f7f);
-	background-image: -webkit-gradient(linear, left bottom, left top, from(#666), to(#7f7f7f));
+	background-color: #404040;
+	background-image: none;
 	color: #ddd;
     border: 1px solid #fff;
 	border-top: none;

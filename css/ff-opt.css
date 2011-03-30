@@ -97,3 +97,6 @@
 #fastfood-options tr {
 	border-bottom: 1px solid #999;
 }
+#fastfood-options select {
+	max-width: 60px;
+}

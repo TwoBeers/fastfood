@@ -2,19 +2,19 @@
 			</div><!-- close sidebar or posts_wide -->
 
 			<?php
-				global $current_user, $fastfood_opt, $fastfood_is_allcat_page, $fastfood_version, $is_mobile_browser;
+				global $current_user, $fastfood_opt, $fastfood_is_allcat_page, $fastfood_version, $ff_is_mobile_browser;
 				if ( 
 					( !is_page() && !is_single() && !is_attachment() ) ||
 					( is_page() && ( $fastfood_opt['fastfood_rsidebpages'] == 1 ) ) ||
 					( is_single() && ( $fastfood_opt['fastfood_rsidebposts'] == 1  && !is_attachment() ) )
-				) if ( ! $is_mobile_browser ) get_sidebar(); // show sidebar
+				) if ( ! $ff_is_mobile_browser ) get_sidebar(); // show sidebar
 			?>
 
 			<div id="footer">
 
-				<?php if ( ! $is_mobile_browser ) get_sidebar( 'footer' ); ?>
+				<?php if ( ! $ff_is_mobile_browser ) get_sidebar( 'footer' ); ?>
 
-				<small>&copy; <?php echo date( 'Y' ); ?>  <strong><?php bloginfo( 'name' ); ?></strong> <?php _e( 'All rights reserved','fastfood' ); ?><?php if ( $fastfood_opt['fastfood_tbcred'] == 1 ) { ?> - Fastfood theme <?php if( !empty( $fastfood_version ) ) { echo 'v' . $fastfood_version; } if ( $is_mobile_browser ) { _e( '(for mobile)','fastfood' ); } ?> by <a href="http://www.twobeers.net/" title="<?php _e( 'Visit author homepage','fastfood' ); ?> @ TwoBeers.net">TwoBeers Crew</a><?php } ?> - Powered by <a href="http://wordpress.org/" title="<?php _e( 'Powered by WordPress','fastfood' ); ?>">WordPress</a></small>
+				<small>&copy; <?php echo date( 'Y' ); ?>  <strong><?php bloginfo( 'name' ); ?></strong> <?php _e( 'All rights reserved','fastfood' ); ?><?php if ( $fastfood_opt['fastfood_tbcred'] == 1 ) { ?> - Fastfood theme <?php if( !empty( $fastfood_version ) ) { echo 'v' . $fastfood_version; } if ( $ff_is_mobile_browser ) { _e( '(for mobile)','fastfood' ); } ?> by <a href="http://www.twobeers.net/" title="<?php _e( 'Visit author homepage','fastfood' ); ?> @ TwoBeers.net">TwoBeers Crew</a><?php } ?> - Powered by <a href="http://wordpress.org/" title="<?php _e( 'Powered by WordPress','fastfood' ); ?>">WordPress</a></small>
 				<!-- <?php echo get_num_queries(); ?> queries. <?php timer_stop(1); ?> seconds. -->
 
 			</div><!-- close footer -->
@@ -23,7 +23,7 @@
 
 		<div id="fixedfoot">
 			<?php
-				if ( ( $fastfood_opt['fastfood_qbar'] == 1 ) && ( !$is_mobile_browser ) ) {
+				if ( ( $fastfood_opt['fastfood_qbar'] == 1 ) && ( !$ff_is_mobile_browser ) ) {
 			?>
 				<!-- begin quickbar -->
 				<div id="quickbar">
@@ -41,7 +41,7 @@
 								<div class="menulcont">
 									<div class="mentit"><?php _e( 'Recent Posts','fastfood' ); ?></div>
 									<ul class="solid_ul">
-										<?php get_fastfood_recententries() ?>
+										<?php fastfood_get_recententries() ?>
 									</ul>
 								</div>
 							</div>
@@ -54,7 +54,7 @@
 								<div class="menulcont">
 									<div class="mentit"><?php _e( 'Categories','fastfood' ); ?></div>
 									<ul class="solid_ul">
-										<?php get_fastfood_categories_wpr(); ?>
+										<?php fastfood_get_categories_wpr(); ?>
 										<li style="text-align: right; margin:16px 0 10px;"><a title="<?php _e( 'View all categories','fastfood' ); ?>" href="<?php echo home_url(); ?>/?allcat=y"><?php _e( 'More...','fastfood' ); ?></a></li>
 									</ul>
 								</div>
@@ -68,7 +68,7 @@
 								<div class="menulcont">
 									<div class="mentit"><?php _e( 'Recent Comments','fastfood' ); ?></div>
 									<ul class="solid_ul">
-										<?php get_fastfood_recentcomments(); ?>
+										<?php fastfood_get_recentcomments(); ?>
 									</ul>
 								</div>
 							</div>
@@ -85,8 +85,8 @@
 											<?php
 											if (is_user_logged_in()) { //fix for notice when user not log-in
 												get_currentuserinfo();
-												$email = $current_user->user_email;
-												echo get_avatar( $email, 50, $default=get_template_directory_uri() . '/images/user.png','user-avatar' );
+												$ff_email = $current_user->user_email;
+												echo get_avatar( $ff_email, 50, $default=get_template_directory_uri() . '/images/user.png','user-avatar' );
 												printf( __( 'Logged in as <a href="%1$s">%2$s</a>.','fastfood' ), admin_url( 'profile.php' ), '<strong>' . $current_user->display_name . '</strong>' );
 											} else {
 												echo get_avatar( 'dummyemail', 50, $default=get_template_directory_uri() . '/images/user.png','user-avatar' );
@@ -127,7 +127,7 @@
 			</div>
 
 			<div id="navbuttons_cont">
-				<?php if ( $is_mobile_browser ) { ?>
+				<?php if ( $ff_is_mobile_browser ) { ?>
 					<div id="mini-welcome">
 						<?php _e( 'Welcome','fastfood' ); ?>
 						<?php if ( is_user_logged_in() ) {
@@ -161,7 +161,7 @@
 						<?php if ( comments_open( $post->ID ) && !post_password_required() ) { ?>
 
 							<div class="minibutton">
-								<a href="#respond" title="<?php _e( 'Leave a comment','fastfood' ); ?>"<?php if ( ( $fastfood_opt['fastfood_cust_comrep'] == 1 ) && !$is_mobile_browser ) { echo ' onclick="return addComment.viewForm()"'; } ?> >
+								<a href="#respond" title="<?php _e( 'Leave a comment','fastfood' ); ?>"<?php if ( ( $fastfood_opt['fastfood_cust_comrep'] == 1 ) && !$ff_is_mobile_browser ) { echo ' onclick="return addComment.viewForm()"'; } ?> >
 									<span class="minib_img minib_sep" style="background-position: center -24px;">&nbsp;</span>
 									<span class="nb_tooltip"><?php _e( 'Leave a comment','fastfood' ); ?></span>
 								</a>

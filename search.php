@@ -10,11 +10,11 @@
 
 				<h2 class="storytitle"><a href="<?php the_permalink() ?>" rel="bookmark">
 					<?php
-					$post_title = the_title_attribute( 'echo=0' );
-					if ( !$post_title ) {
+					$ff_post_title = the_title_attribute( 'echo=0' );
+					if ( !$ff_post_title ) {
 						_e( '(no title)','fastfood' );
 					} else {
-						echo $post_title;
+						echo $ff_post_title;
 					}
 					?>
 					</a>
@@ -22,7 +22,7 @@
 
 				<div class="meta top_meta">
 
-					<div class="metafield_trigger" style="left: 10px;"><?php _e( 'by','fastfood' ); ?> <?php the_author() ?></div>
+					<div class="metafield_trigger" style="left: 10px;"><?php _e( 'by', 'fastfood' ); ?> <?php printf( '<a href="' . get_author_posts_url( get_the_author_meta( 'ID' ) ) . '" title="' . sprintf( __('View all posts by %s', 'fastfood' ), esc_attr( get_the_author() ) ) . '">' . get_the_author() . '</a>' ); ?></div>
 					<div class="metafield">
 						<div class="metafield_trigger mft_date no-mobile" style="right: 100px; width:16px"> </div>
 						<div class="metafield_content">

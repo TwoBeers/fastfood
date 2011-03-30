@@ -1,0 +1,156 @@
+/*
+RTL style for FastFood v0.21
+*/
+
+body {
+	direction:rtl;
+	unicode-bidi:embed;
+}
+ul {
+	margin: 0 15px 0 0;
+}
+ol {
+	margin: 0 30px 0 0;
+}
+dd {
+	margin: 0 40px .5em 0;
+}
+blockquote {
+	border-right: 5px solid #ccc;
+	margin-right: 15px;
+	padding-right: 15px;
+	border-left: none;
+	margin-left: 0;
+	padding-left: 0;
+}
+.storycontent table {
+    text-align: right;
+}
+.storycontent ul li, .widget ul li {
+    list-style: disc outside url("images/litem_rtl.png");
+}
+input[type=password] {
+	background: #fff url('images/lock.png') right center no-repeat;
+	padding-left: 0;
+	padding-right: 20px;
+}
+#sidebardx {
+	float: right;
+}
+.preview p {
+	padding: 0 0 0 20px;
+}
+.preview img.wp-post-image {
+	margin: 0 0 0 5px;
+}
+#mainmenu ul.children li,
+#mainmenu ul.sub-menu li {
+	list-style: disc inside url('images/litem_rtl.png');
+	margin: 0 10px 0 0;
+}
+.image_tools .alignleft {
+	text-align: right;
+}
+.image_tools .alignright {
+	text-align: left;
+}
+.metafield_content_js {
+	text-align: left;
+}
+#navPages_ul ul.children {
+	padding: 0 0 0 10px;
+}
+#navPages_ul li {
+	list-style: disc inside url('images/litem_rtl.png');
+}
+#header-widget-area .widget {
+	float: left;
+	text-align: right;
+}
+.widget-area {
+	float: right;
+	text-align: right;
+}
+.ff_widget_popular_posts li.li-with-thumbs, .ff_widget_latest_commented_posts li.li-with-thumbs {
+	padding-left: 0;
+	padding-right: 46px;
+}
+div.ff_widget_latest_commentators ul li {
+	float: right;
+}
+.posts_narrow {
+	float: right;
+	border-right: none;
+	border-left: 2px groove #fff;
+}
+.posts_wide {
+	float: left;
+}
+.sticky {
+	margin-left: 0;
+	margin-right: -5px;
+}
+.dim_cpc {
+	background: transparent url('images/minibuttons.png') right -216px no-repeat;
+	padding: 5px 22px 5px 0;
+}
+.comment-body {
+	padding: 3px 40px 3px 3px;
+}
+.comment-reply-link {
+	background: url('images/comment_reply.png') no-repeat scroll right center transparent;
+	padding: 4px 24px 0 0;
+}
+ul.children {
+	padding: 0 10px 0 0;
+}
+.nav-previous-comm {
+	float: left;
+}
+.nav-next-comm {
+	float: right;
+}
+.js-res {
+	margin-left: 0;
+	margin-right: -22px;
+}
+.js-res #reply-title {
+	margin: 0 17px 0 0;
+}
+.reply {
+	text-align: left;
+	margin: 0;
+}
+.navigate_comments a, .navigate_comments span {
+	margin-right: 0;
+    margin-left: 0.5em;
+}
+.category-gallery .gallery-thumb {
+	float: right;
+	margin-right: 0;
+	margin-left: 20px;
+}
+.gallery .gallery-item {
+	float: right;
+}
+img.alignleft,
+.alignleft {
+	float: right;
+	margin-right: 0;
+	margin-left: 24px;
+}
+img.alignright,
+.alignright {
+	float: left;
+	margin-left: 0;
+	margin-right: 24px;
+}
+.menulcont li.ql_cat_li:hover {
+	background: #404040 url('images/litem.png') 410px center no-repeat;
+}
+.menulcont li.ql_cat_li {
+	padding-right: 20px;
+}
+.search-form {
+    background: url("images/lens.png") no-repeat scroll 5px center #BEC0BE;
+}

@@ -17,7 +17,7 @@
 		</title>
 
 		<?php
-			global $fastfood_opt, $is_mobile_browser;
+			global $fastfood_opt, $ff_is_mobile_browser;
 		?>
 
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
@@ -42,7 +42,7 @@
 			</div>
 
 			<div id="pages">
-				<?php if ( $is_mobile_browser ) { ?>
+				<?php if ( $ff_is_mobile_browser ) { ?>
 					<div class="search-form">
 						<form action="<?php echo home_url(); ?>" method="get">
 							<input type="text" id="s" name="s" value="" />
@@ -55,13 +55,13 @@
 				<div class="fixfloat"></div>
 			</div>
 			
-			<?php if ( ! $is_mobile_browser ) get_sidebar( 'header' ); // show header widgets area ?>
+			<?php if ( ! $ff_is_mobile_browser ) get_sidebar( 'header' ); // show header widgets area ?>
 			<?php
-				$postswidth = 'class="posts_narrow"';
+				$ff_postswidth = 'class="posts_narrow"';
 				if ( ( is_page() && ( $fastfood_opt['fastfood_rsidebpages'] == 0 ) ) || ( is_single() && ( $fastfood_opt['fastfood_rsidebposts'] == 0 ) ) || is_attachment() ) {
-					$postswidth = 'class="posts_wide"';
+					$ff_postswidth = 'class="posts_wide"';
 				}else if ( ( is_page() && ( $fastfood_opt['fastfood_rsidebpages'] == 1 ) ) || ( is_single() && ( $fastfood_opt['fastfood_rsidebposts'] == 1 ) ) ) {
-					$postswidth = 'class="posts_narrow" style="padding-bottom: 310px;"';
+					$ff_postswidth = 'class="posts_narrow" style="padding-bottom: 310px;"';
 				}
 			?>
-			<div id="posts_content" <?php echo $postswidth; ?>>
+			<div id="posts_content" <?php echo $ff_postswidth; ?>>
