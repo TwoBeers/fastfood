@@ -35,7 +35,7 @@
 		<div id="main">
 
 		<div id="content">
-
+			<?php wp_nav_menu( array( 'container_class' => 'ff-menu', 'container_id' => 'secondary1', 'fallback_cb' => false, 'theme_location' => 'secondary1', 'depth' => 1 ) ); ?>
 			<div id="head">
 				<h1><a href="<?php echo home_url(); ?>/"><?php bloginfo( 'name' ); ?></a></h1>
 				<div class="description no-mobile"><?php bloginfo( 'description' ); ?></div>

@@ -622,7 +622,23 @@ li.current_page_ancestor .hiraquo {
 	display: none;
 	padding: 5px;
 }
-
+.ff-menu {
+	background-color: #404040;
+}
+.ff-menu ul {
+	padding: 10px 0;
+	display: inline-block;
+}
+.ff-menu li,
+.ff-menu li {
+	display: inline;
+	margin: 0 10px;
+	padding: 0;
+}
+#secondary1 {
+	font-size: 1.18em;
+	text-align: right;
+}
 
 /* =meta
 ----------------------------------------------------------*/

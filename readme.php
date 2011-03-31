@@ -162,5 +162,7 @@
 <p>CREDITS:
 	<ul>
 		<li>Eric from <a href="http://blog.mes-experts.be/" target="_blank">Mes Experts</a> for the French translation</li>
+		<li>Douglas from <a href="http://www.douglascampos.eng.br/" target="_blank">Douglas Campos</a> for the Brazilian translation</li>
+		<li>Jonas from <a href="http://www.qualitybike.nu/blogg/" target="_blank">Quality Bike blogg</a> for the Swedish translation</li>
 	</ul>
 </p>

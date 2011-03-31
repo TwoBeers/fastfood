@@ -551,8 +551,10 @@ if ( !function_exists( 'fastfood_setup' ) ) {
 		
 		// Register localization support
 		load_theme_textdomain('fastfood', TEMPLATEPATH . '/languages' );
-		// Theme uses wp_nav_menu() in one location
+		// Theme uses wp_nav_menu() in three location
 		register_nav_menus( array( 'primary' => __( 'Main Navigation Menu', 'fastfood' )	) );
+		register_nav_menus( array( 'secondary1' => __( 'Secondary Navigation Menu #1', 'fastfood' )	) );
+		register_nav_menus( array( 'secondary2' => __( 'Secondary Navigation Menu #2', 'fastfood' )	) );
 		// Register Features Support
 		add_theme_support( 'automatic-feed-links' );
 		// Thumbnails support
