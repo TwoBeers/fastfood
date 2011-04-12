@@ -52,8 +52,14 @@
 				<div class="metafield">
 					<div class="metafield_trigger mft_tag no-mobile" style="right: 40px; width:16px"> </div>
 					<div class="metafield_content">
-						<?php _e( 'Tags:','fastfood' ); ?>
-						<?php if ( !get_the_tags() ) { _e( 'No Tags','fastfood' ); } else { the_tags('', ', ', ''); } ?>
+						<?php
+						echo __('Tags','fastfood' ) . ': ';
+						if ( !get_the_tags() ) {
+							_e( 'No Tags','fastfood' );
+						} else {
+							the_tags( '', ', ', '' );
+						}
+						?>
 					</div>
 				</div>
 				<div class="metafield">

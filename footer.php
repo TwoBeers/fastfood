@@ -14,7 +14,7 @@
 				<?php wp_nav_menu( array( 'container_class' => 'ff-menu', 'container_id' => 'secondary2', 'fallback_cb' => false, 'theme_location' => 'secondary2', 'depth' => 1 ) ); ?>
 				<?php if ( ! $ff_is_mobile_browser ) get_sidebar( 'footer' ); ?>
 
-				<small>&copy; <?php echo date( 'Y' ); ?>  <strong><?php bloginfo( 'name' ); ?></strong> <?php _e( 'All rights reserved','fastfood' ); ?><?php if ( $fastfood_opt['fastfood_tbcred'] == 1 ) { ?> - Fastfood theme <?php if( !empty( $fastfood_version ) ) { echo 'v' . $fastfood_version; } if ( $ff_is_mobile_browser ) { _e( '(for mobile)','fastfood' ); } ?> by <a href="http://www.twobeers.net/" title="<?php _e( 'Visit author homepage','fastfood' ); ?> @ TwoBeers.net">TwoBeers Crew</a><?php } ?> - Powered by <a href="http://wordpress.org/" title="<?php _e( 'Powered by WordPress','fastfood' ); ?>">WordPress</a></small>
+				<small>&copy; <?php echo date( 'Y' ); ?>  <strong><?php bloginfo( 'name' ); ?></strong> <?php _e( 'All rights reserved','fastfood' ); ?><?php if ( $fastfood_opt['fastfood_tbcred'] == 1 ) { ?> - Fastfood theme <?php if( !empty( $fastfood_version ) ) { echo 'v' . $fastfood_version; } if ( $ff_is_mobile_browser ) { echo ' ' . __( '(for mobile)','fastfood' ); } ?> by <a href="http://www.twobeers.net/" title="<?php _e( 'Visit author homepage','fastfood' ); ?> @ TwoBeers.net">TwoBeers Crew</a><?php } ?> - Powered by <a href="http://wordpress.org/" title="<?php _e( 'Powered by WordPress','fastfood' ); ?>">WordPress</a></small>
 				<!-- <?php echo get_num_queries(); ?> queries. <?php timer_stop(1); ?> seconds. -->
 
 			</div><!-- close footer -->

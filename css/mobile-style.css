@@ -283,6 +283,16 @@ input[type=reset]:hover {
 #mainmenu > li > ul {
 	display: none;
 }
+.ff-menu {
+	background-color: #404040;
+	text-align: center;
+}
+.ff-menu li,
+.ff-menu li {
+	display: inline;
+	margin: 0 10px;
+	padding: 0;
+}
 /* =meta
 ----------------------------------------------------------*/
 .meta,
@@ -369,6 +379,12 @@ input[type=reset]:hover {
 	font-weight: bold;
 	text-align: center;
 	text-transform: uppercase;
+}
+.format-aside .aside-cont,
+.category-aside .aside-cont {
+	background: #fff;
+	border: 1px dashed #ccc;
+	padding: 5px;
 }
 /* =comments
 ----------------------------------------------------------*/
@@ -476,38 +492,21 @@ ul.children {
 }
 /* =Gallery listing
 ----------------------------------------------------------*/
-.category-gallery .size-thumbnail img {
-	border: 10px solid #f1f1f1;
-	margin-bottom: 0;
-}
+.format-gallery .gallery-thumb,
 .category-gallery .gallery-thumb {
 	float: left;
-	margin-right: 20px;
-	margin-top: -4px;
+	margin: 0 20px 5px 0;
+	border: 2px solid #CFCFCF;
 }
-.home #content .category-gallery .entry-utility {
-	padding-top: 4px;
-}
-#content .gallery {
-	margin: 0 auto 18px;
-}
-#content .gallery .gallery-item {
-	float: left;
-	margin-top: 10px;
-	text-align: center;
-	width: 100%;
-}
-#content .gallery img {
-}
-#content .gallery .gallery-caption {
+.gallery .gallery-caption {
 	color: #888;
-	font-size: 10px;
+	font-size: .8em;
 	margin: 0 0 12px;
 }
-#content .gallery dl {
+.gallery dl {
 	margin: 0;
 }
-#content .gallery br+br {
+.gallery br+br {
 	display: none;
 }
 /* =Captions & aligment

@@ -14,7 +14,7 @@ add_action( 'template_redirect', 'fastfood_allcat' );
 add_action( 'admin_menu', 'fastfood_create_menu' );
 // Custom filters
 add_filter( 'the_content', 'fastfood_content_replace' );
-add_filter( 'excerpt_length', 'new_excerpt_length' );
+add_filter( 'excerpt_length', 'fastfood_new_excerpt_length' );
 add_filter( 'get_comment_author_link', 'fastfood_add_quoted_on' );
 add_filter('user_contactmethods','fastfood_new_contactmethods',10,1);
 /**** end theme hooks ****/
@@ -53,6 +53,9 @@ function fastfood_get_coa() {
 		'fastfood_qbar_reccom' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- recent comments','fastfood' ),'info'=>__( '[default = enabled]','fastfood' ),'req'=>'fastfood_qbar' ),
 		'fastfood_qbar_cat' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- categories','fastfood' ),'info'=>__( '[default = enabled]','fastfood' ),'req'=>'fastfood_qbar' ),
 		'fastfood_qbar_recpost' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- recent posts','fastfood' ),'info'=>__( '[default = enabled]','fastfood' ),'req'=>'fastfood_qbar' ),
+		'fastfood_post_formats' => array( 'type' =>'chk', 'default'=>1,'description'=>__( 'post formats support','fastfood' ),'info'=>__('[default = enabled]','fastfood' ),'req'=>'' ),
+		'fastfood_post_formats_gallery' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- "gallery" format','fastfood' ),'info'=>__( '[default = enabled]','fastfood' ),'req'=>'fastfood_post_formats' ),
+		'fastfood_post_formats_aside' => array( 'type' =>'chk', 'default'=>1,'description'=>__( '-- "aside" format','fastfood' ),'info'=>__( '[default = enabled]','fastfood' ),'req'=>'fastfood_post_formats' ),
 		'fastfood_rsidebpages' => array( 'type' =>'chk', 'default'=>0,'description'=>__( 'sidebar on pages','fastfood' ),'info'=>__( 'show right sidebar on pages [default = disabled]','fastfood' ),'req'=>'' ),
 		'fastfood_rsidebposts' => array( 'type' =>'chk', 'default'=>0,'description'=>__( 'sidebar on posts','fastfood' ),'info'=>__( 'show right sidebar on posts [default = disabled]','fastfood' ),'req'=>'' ),
 		'fastfood_jsani' => array( 'type' =>'chk', 'default'=>1,'description'=>__( 'javascript animations','fastfood' ),'info'=>__( 'try disable animations if you encountered problems with javascript [default = enabled]','fastfood' ),'req'=>'' ),
@@ -290,7 +293,7 @@ function fastfood_get_categories_wpr() {
 			setup_postdata( $post );
 			$post_title = esc_html( $post->post_title );
 			if ( $post->post_title == "" ) {
-				$post_title_short = __( '(no title)', 'shiword' );
+				$post_title_short = __( '(no title)', 'fastfood' );
 			} else {
 				//shrink the post title if > 35 chars
 				$post_title_short = mb_strimwidth( esc_html( $post->post_title ), 0, 35, '&hellip;' );
@@ -562,6 +565,9 @@ if ( !function_exists( 'fastfood_setup' ) ) {
 		// the editor stylesheet support
 		add_editor_style( 'css/editor-style.css' );
 	
+		// This theme uses post formats
+		add_theme_support( 'post-formats', array( 'aside', 'gallery' ) );
+
 		// Your changeable header business starts here
 		define( 'HEADER_TEXTCOLOR', '404040' );
 		// No CSS, just IMG call. The %s is a placeholder for the theme template directory URI.
@@ -605,6 +611,11 @@ if ( !function_exists( 'fastfood_setup' ) ) {
 				'url' => '%s/images/headers/bamboo.jpg',
 				'thumbnail_url' => '%s/images/headers/bamboo-thumbnail.jpg',
 				'description' => __( 'Bamboo Forest', 'fastfood' )
+			),
+			'stripes' => array(
+				'url' => '%s/images/headers/stripes.jpg',
+				'thumbnail_url' => '%s/images/headers/stripes-thumbnail.jpg',
+				'description' => __( 'Orange stripes', 'fastfood' )
 			),
 			'abstract' => array(
 				'url' => '%s/images/headers/abstract.jpg',
@@ -701,7 +712,7 @@ function fastfood_custom_bg() {
 }
 
 // set the custom excerpt length
-function new_excerpt_length( $length ) {
+function fastfood_new_excerpt_length( $length ) {
 	return 50;
 }
 

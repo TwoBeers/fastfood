@@ -21,7 +21,7 @@
 <p>REQUIREMENTS:
 	<ul>
 		<li>PHP 5+</li>
-		<li>Wordpress 3.0+ (REQUIRED)</li>
+		<li>Wordpress 3.1+ (REQUIRED)</li>
 	</ul>
 </p>
 <p>THEME FEATURES:
@@ -41,6 +41,7 @@
 		<li>Funny animations : your site comes to life!</li>
 		<li>Mobile support : Fastfood has a dedicated style for mobile view (touchscreen friendly)</li>
 		<li>Custom widgets : five new widgets ("Social network", "Popular Post", "Latest Activity", "Popular Categories" and "Latest comment authors") at your disposal</li>
+		<li>Post formats: support for post formats ("aside", "gallery")</li>
 	</ul>
 </p>
 <p>TECHNICAL:
@@ -59,11 +60,13 @@
 	<ul>
 		<li>Adds:
 			<ul>
-				<li>Three new widgets ("Social network" and "Popular Categories")</li>
-				<li>More integrated style for wp admin bar (disable/enable in theme option)</li>
+				<li>Post formats support ("aside", "gallery") (can be disabled/enabled in theme option)</li>
+				<li>Two new widgets ("Social network" and "Popular Categories")</li>
+				<li>More integrated style for wp admin bar (can be disabled/enabled in theme option)</li>
 				<li>Two new menus, one on top of page and one above the footer widget area</li>
 				<li>"rtl" language support</li>
 				<li>New contact methods in user profile (Twitter, Facebook)</li>
+				<li>New header image ("orange stripes")</li>
 			</ul>
 		</li>
 		<li>Fixes:

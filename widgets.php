@@ -361,7 +361,7 @@ class fastfood_Widget_pop_categories extends WP_Widget {
 	function widget( $args, $instance ) {
 		extract( $args );
 
-		$title = apply_filters('widget_title', empty( $instance['title'] ) ? __( 'Popular categories', 'fastfood' ) : $instance['title'], $instance, $this->id_base);
+		$title = apply_filters('widget_title', empty( $instance['title'] ) ? __( 'Popular Categories', 'fastfood' ) : $instance['title'], $instance, $this->id_base);
 		if ( !$number = (int) $instance['number'] )
 			$number = 10;
 		else if ( $number < 1 )
