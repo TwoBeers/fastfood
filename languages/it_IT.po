@@ -2,6 +2,7 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "Project-Id-Version: \n"
 "POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
@@ -920,5 +921,8 @@ msgstr "usa un stile dedicato per la visualizzazione su dispositivi mobili [pred
 msgid "use the header image as home link. The <a href=\"%s\">header image</a> must be set [default = disabled]"
 msgstr "usa l'immagine di testata come collegamento alla pagina principale del sito. L'<a href=\"%s\">immagine di testata</a> deve essere impostata [predefinito = disabilitato]"
 
-#~ msgid "[by Fastfood theme] The latest comment authors"
-#~ msgstr "[by Fastfood theme] Gli ultimi autori dei commenti"
+msgid "This gallery contains <a %1$s><strong>%2$s</strong> image</a>"
+msgid_plural "This gallery contains <a %1$s><strong>%2$s</strong> images</a>"
+msgstr[0] "Questa galleria contiene  <a %1$s><strong>%2$s</strong> immagine</a>"
+msgstr[1] "Questa galleria contiene  <a %1$s><strong>%2$s</strong> immagini</a>"
+

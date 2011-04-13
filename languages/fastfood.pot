@@ -2,6 +2,7 @@ msgid ""
 msgstr ""
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #. Text in function
 #: search.php:59
@@ -913,3 +914,8 @@ msgstr ""
 #: functions.php:549
 msgid "use the header image as home link. The <a href=\"%s\">header image</a> must be set [default = disabled]"
 msgstr ""
+
+msgid "This gallery contains <a %1$s><strong>%2$s</strong> image</a>"
+msgid_plural "This gallery contains <a %1$s><strong>%2$s</strong> images</a>"
+msgstr[0] ""
+msgstr[1] ""
