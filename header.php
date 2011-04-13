@@ -36,11 +36,15 @@
 
 		<div id="content">
 			<?php wp_nav_menu( array( 'container_class' => 'ff-menu', 'container_id' => 'secondary1', 'fallback_cb' => false, 'theme_location' => 'secondary1', 'depth' => 1 ) ); ?>
-			<div id="head">
-				<h1><a href="<?php echo home_url(); ?>/"><?php bloginfo( 'name' ); ?></a></h1>
-				<div class="description no-mobile"><?php bloginfo( 'description' ); ?></div>
-			</div>
 
+			<?php if ( ( $fastfood_opt['fastfood_head_link'] == 1 ) && (  get_header_image() != '' ) ) { ?>
+				<div id="img-head"><a href="<?php echo home_url(); ?>/"><img src="<?php esc_url ( header_image() ); ?>" /></a></div>
+			<?php } else { ?>
+				<div id="head">
+					<h1><a href="<?php echo home_url(); ?>/"><?php bloginfo( 'name' ); ?></a></h1>
+					<div class="description no-mobile"><?php bloginfo( 'description' ); ?></div>
+				</div>
+			<?php } ?>
 			<div id="pages">
 				<?php if ( $ff_is_mobile_browser ) { ?>
 					<div class="search-form">

@@ -107,17 +107,13 @@ if ( have_posts() ) {
 								$total_images = count( $images );
 								$image = array_shift( $images );
 						?>
-							<div class="gallery-thumb" style="width: <?php echo get_option('medium_size_w'); ?>px;">
-								<a class="size-thumbnail" href="<?php the_permalink(); ?>"><?php echo wp_get_attachment_image( $image->ID, 'medium' ); ?></a>
-							</div><!-- .gallery-thumb -->
+							<div class="gallery-thumb" style="width: <?php echo get_option('medium_size_w'); ?>px;"><a class="size-thumbnail" href="<?php the_permalink(); ?>"><?php echo wp_get_attachment_image( $image->ID, 'medium' ); ?></a></div><!-- .gallery-thumb -->
 							<?php 
 								$otherimgs = array_slice( $images, 0, 4 );
 								foreach ($otherimgs as $image) {
-									$image_img_tag = wp_get_attachment_image( $image->ID, 'thumbnail' );
+									$image_img_tag = wp_get_attachment_image( $image->ID, array(75,75) );
 									?>
-										<div class="gallery-thumb" style="width: <?php echo floor( get_option('thumbnail_size_w')/2 ); ?>px;">
-											<a class="size-thumbnail" href="<?php the_permalink(); ?>"><?php echo $image_img_tag; ?></a>
-										</div><!-- .gallery-thumb -->
+										<div class="gallery-thumb" style="width: <?php echo floor( get_option('thumbnail_size_w')/2 ); ?>px;"><a class="size-thumbnail" href="<?php the_permalink(); ?>"><?php echo $image_img_tag; ?></a></div><!-- .gallery-thumb -->
 									<?php
 								}
 							?>
@@ -211,7 +207,9 @@ if ( have_posts() ) {
 		if ( !$paged ) {
 			$paged = 1;
 		}
+		previous_posts_link( '&laquo; ' );
 		printf( __( 'page %1$s of %2$s','fastfood' ), $paged, $wp_query->max_num_pages );
+		next_posts_link( ' &raquo;' );
 		?>
 	</div>
 

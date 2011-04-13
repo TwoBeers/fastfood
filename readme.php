@@ -40,7 +40,7 @@
 		<li>Theme options : enable or disable theme special features</li>
 		<li>Funny animations : your site comes to life!</li>
 		<li>Mobile support : Fastfood has a dedicated style for mobile view (touchscreen friendly)</li>
-		<li>Custom widgets : five new widgets ("Social network", "Popular Post", "Latest Activity", "Popular Categories" and "Latest comment authors") at your disposal</li>
+		<li>Custom widgets : five new widgets ("Social Links", "Popular Post", "Latest Activity", "Popular Categories" and "Latest comment authors") at your disposal</li>
 		<li>Post formats: support for post formats ("aside", "gallery")</li>
 	</ul>
 </p>
@@ -52,7 +52,7 @@
 		<li>if you experience any javascript problem, try disable animations in admin -&gt; theme options</li>
 		<li>print_preview.css is a stylesheet file used to emulate a print preview.</li>
 		<li>the theme detects the following mobile devices/browsers/os : ipod, iphone, android, opera mini, blackberry, palm, symbian and many more</li>
-		<li>In order to use the new widgets ("Social network", "Popular Post", "Latest Activity", "Popular Categories" and "Latest comment authors"), you need to activate them in admin -&gt; widgets </li>
+		<li>In order to use the new widgets ("Social Links", "Popular Post", "Latest Activity", "Popular Categories" and "Latest comment authors"), you need to activate them in admin -&gt; widgets </li>
 		<li>the secondary menus (one on top of page and one above the footer widget area) support only one level of hierarchy</li>
 	</ul>
 </p>
@@ -61,12 +61,13 @@
 		<li>Adds:
 			<ul>
 				<li>Post formats support ("aside", "gallery") (can be disabled/enabled in theme option)</li>
-				<li>Two new widgets ("Social network" and "Popular Categories")</li>
+				<li>Two new widgets ("Social Links" and "Popular Categories")</li>
 				<li>More integrated style for wp admin bar (can be disabled/enabled in theme option)</li>
 				<li>Two new menus, one on top of page and one above the footer widget area</li>
 				<li>"rtl" language support</li>
 				<li>New contact methods in user profile (Twitter, Facebook)</li>
 				<li>New header image ("orange stripes")</li>
+				<li>Linked header image (can be disabled/enabled in theme option)</li>
 			</ul>
 		</li>
 		<li>Fixes:

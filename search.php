@@ -78,7 +78,9 @@
 			<?php //num of pages
 			global $paged;
 			if ( !$paged ) { $paged = 1; }
-			printf( __( 'page %1$s of %2$s','fastfood' ), $paged, $wp_query->max_num_pages);
+			previous_posts_link( '&laquo; ' );
+			printf( __( 'page %1$s of %2$s','fastfood' ), $paged, $wp_query->max_num_pages );
+			next_posts_link( ' &raquo;' );
 			?>
 		</div>
 

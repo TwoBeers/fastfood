@@ -1,9 +1,9 @@
 /*
 Theme Name: Fastfood
 Theme URI: http: //www.twobeers.net/annunci/tema-per-wordpress-fastfood
-Description: Simple and clear theme with lots of features, like a "quick links" menu, widgetized footer or print preview. Full supports WP 3.0 new custom menu tool and posts thumbnails. From v0.18 it supports also mobile devices, with a dedicated style.
+Description: Simple and clear theme with a lot of features, like a "quick links" menu, an "easy navigation" bar, the print preview, five integrated widgets ( "Social Links", "Popular Post", "Latest Activity", "Popular Categories" and "Latest comment authors" ) and many other. Fastfood has customizable header and background, one or two columns layout, up to five widgets areas and three menu. It supports custom menus, posts thumbnail, post formats ("gallery" and "aside") and also mobile devices, with a dedicated style. WP3.1 full compatible.
 Version: 0.21
-Tags: translation-ready, threaded-comments, custom-menu, custom-header, theme-options, fixed-width, two-columns, right-sidebar, white, silver, orange, light, sticky-post, custom-background, editor-style
+Tags: translation-ready, threaded-comments, custom-menu, custom-header, theme-options, fixed-width, two-columns, right-sidebar, white, silver, orange, light, sticky-post, custom-background, editor-style, rtl-language-support
 Author: TwoBeers Crew
 Author URI: http: //www.twobeers.net/
 
@@ -892,8 +892,8 @@ div.ff_widget_latest_commentators ul li {
 	margin-top: 0;
 }
 .storycontent img {
-	height: auto;
 	max-width: 100%;
+	height: auto;
 	margin: 0;
 }
 .storycontent ul li,
@@ -921,6 +921,7 @@ div.ff_widget_latest_commentators ul li {
 	background: #fff;
 	border: 1px dashed #ccc;
 	padding: 5px;
+	font-size: 1.18em;
 }
 /* =comments
 ----------------------------------------------------------*/

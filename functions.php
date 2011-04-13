@@ -62,6 +62,7 @@ function fastfood_get_coa() {
 		'fastfood_cust_comrep' => array( 'type' =>'chk', 'default'=>1,'description'=>__( 'custom comment reply form','fastfood' ),'info'=>__( 'custom floating form for post/reply comments [default = enabled]','fastfood' ),'req'=>'' ),
 		'fastfood_mobile_css' => array( 'type' =>'chk', 'default'=>1,'description'=>__( 'mobile support','fastfood' ),'info'=>__( 'use a dedicated style in mobile devices [default = enabled]','fastfood' ),'req'=>'' ),
 		'fastfood_wpadminbar_css' => array( 'type' =>'chk', 'default'=>1,'description'=>__( 'custom adminbar style','fastfood' ),'info'=>__( 'style integration with the theme for admin bar [default = enabled]','fastfood' ),'req'=>'' ),
+		'fastfood_head_link' => array( 'type' =>'chk', 'default'=>0,'description'=>__( 'linked header','fastfood' ),'info'=>sprintf( __( "use the header image as home link. The <a href=\"%s\">header image</a> must be set [default = disabled]", 'fastfood' ), get_admin_url() . 'themes.php?page=custom-header' ), 'req'=>'' ),
 		'fastfood_font_size' => array( 'type' =>'sel', 'default'=>'11px', 'options'=>array('10px','11px','12px','13px','14px'), 'description'=>__( 'font size','fastfood' ),'info'=>__( '[default = 11px]','fastfood' ),'req'=>'' ),
 		'fastfood_tbcred' => array( 'type' =>'chk', 'default'=>1,'description'=>__( 'theme credits','fastfood' ),'info'=>__( "please, don't hide theme credits [default = enabled]",'fastfood' ),'req'=>'' )
 	);
@@ -586,7 +587,7 @@ if ( !function_exists( 'fastfood_setup' ) ) {
 		add_custom_image_header( 'fastfood_header_style', 'fastfood_admin_header_style' );
 		
 		// Add a way for the custom background to be styled in the admin panel that controls
-		add_custom_background( 'fastfood_custom_bg' , '' , '' );
+		add_custom_background( '' , '' , '' );
 	
 		// ... and thus ends the changeable header business.
 	
@@ -672,42 +673,11 @@ function fastfood_header_style(){
 		.menuitem_1ul > ul > li {
 			margin-right:-2px;
 		}
+		.storycontent img.size-full {
+			width:auto;
+		}
 	</style>
 	<![endif]-->
-	<?php
-}
-
-// custom background style - gets included in the site header
-function fastfood_custom_bg() {
-	$background = get_background_image();
-	$color = get_background_color();
-	if ( ! $background && ! $color ) return;
-
-	$style = $color ? "background-color: #$color;" : '';
-
-	if ( $background ) {
-		$image = " background-image: url('$background');";
-
-		$repeat = get_theme_mod( 'background_repeat', 'repeat' );
-		if ( ! in_array( $repeat, array( 'no-repeat', 'repeat-x', 'repeat-y', 'repeat' ) ) ) $repeat = 'repeat';
-		$repeat = " background-repeat: $repeat;";
-
-		$position = get_theme_mod( 'background_position_x', 'left' );
-		if ( ! in_array( $position, array( 'center', 'right', 'left' ) ) ) $position = 'left';
-		$position = " background-position: top $position;";
-
-		$attachment = get_theme_mod( 'background_attachment', 'scroll' );
-		if ( ! in_array( $attachment, array( 'fixed', 'scroll' ) ) ) $attachment = 'scroll';
-		$attachment = " background-attachment: $attachment;";
-
-		$style .= $image . $repeat . $position . $attachment;
-	} else {
-		$style .= ' background-image: url("");';
-	}
-	?>
-	<style type="text/css"> 
-		body { <?php echo trim( $style ); ?> }
-	</style>
 	<?php
 }
 
