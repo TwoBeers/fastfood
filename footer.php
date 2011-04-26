@@ -273,6 +273,9 @@
 		</div>
 
 		</div><!-- close main -->
+		<!-- Fastfood version: <?php global $fastfood_version; echo ( !empty( $fastfood_version ) ) ? $fastfood_version : 'unknown' ; ?>
+			Wordpress version: <?php echo get_bloginfo ( 'version' ); ?>
+			Language: <?php echo get_bloginfo ( 'language' ); ?> -->
 
 		<?php wp_footer(); ?>
 	</body>

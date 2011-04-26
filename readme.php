@@ -1,6 +1,6 @@
 <p>Fastfood - WordPress theme
 	<ul>
-		<li>version: 0.21</li>
+		<li>version: 0.21.1</li>
 	</ul>
 </p>
 <p>Project page:
@@ -54,6 +54,16 @@
 		<li>the theme detects the following mobile devices/browsers/os : ipod, iphone, android, opera mini, blackberry, palm, symbian and many more</li>
 		<li>In order to use the new widgets ("Social Links", "Popular Post", "Latest Activity", "Popular Categories" and "Latest comment authors"), you need to activate them in admin -&gt; widgets </li>
 		<li>the secondary menus (one on top of page and one above the footer widget area) support only one level of hierarchy</li>
+	</ul>
+</p>
+<p>CHANGE LOG (FROM VERSION 0.21):
+	<ul>
+		<li>Fixes:
+			<ul>
+				<li>"mobile support" option now is deactivable</li>
+				<li>Minor changes in mobile style</li>
+			</ul>
+		</li>
 	</ul>
 </p>
 <p>CHANGE LOG (FROM VERSION 0.20.2):

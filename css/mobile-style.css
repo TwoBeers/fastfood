@@ -31,6 +31,7 @@ a:focus,
 .current_page_item a:hover,
 .current-cat a:hover {
 	color: #ff4500;
+    background: #aaa;
 }
 h1,
 h2,
@@ -257,11 +258,13 @@ input[type=reset]:hover {
     margin: 0;
     padding: 0;
 }
-#mainmenu > li{
+#mainmenu li{
     float: left;
+}
+#mainmenu > li{
 	width: 50%;
 }
-#mainmenu > li a{
+#mainmenu li a{
     text-align: center;
 	-moz-border-radius: 5px;
 	-khtml-border-radius: 5px;
@@ -276,11 +279,11 @@ input[type=reset]:hover {
 	padding: 5px;
     margin: 2px 5px;
 }
-#mainmenu > li a:focus,
-#mainmenu > li a:hover {
+#mainmenu li a:focus,
+#mainmenu li a:hover {
 	background-color: #aaa;
 }
-#mainmenu > li > ul {
+#mainmenu li ul {
 	display: none;
 }
 .ff-menu {
