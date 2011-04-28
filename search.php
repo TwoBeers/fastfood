@@ -74,13 +74,13 @@
 
 			<?php } ?>
 
-		<div class="w_title">
+		<div class="w_title" id="ff-page-nav">
 			<?php //num of pages
 			global $paged;
 			if ( !$paged ) { $paged = 1; }
-			previous_posts_link( '&laquo; ' );
+			previous_posts_link( '&laquo;' );
 			printf( __( 'page %1$s of %2$s','fastfood' ), $paged, $wp_query->max_num_pages );
-			next_posts_link( ' &raquo;' );
+			next_posts_link( '&raquo;' );
 			?>
 		</div>
 

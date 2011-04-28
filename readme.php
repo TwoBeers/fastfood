@@ -1,6 +1,6 @@
 <p>Fastfood - WordPress theme
 	<ul>
-		<li>version: 0.21.1</li>
+		<li>version: 0.22</li>
 	</ul>
 </p>
 <p>Project page:
@@ -58,9 +58,16 @@
 </p>
 <p>CHANGE LOG (FROM VERSION 0.21):
 	<ul>
+		<li>Adds:
+			<ul>
+				<li>floating comment form is now draggable</li>
+				<li>Child theme friendly</li>
+			</ul>
+		</li>
 		<li>Fixes:
 			<ul>
 				<li>"mobile support" option now is deactivable</li>
+				<li>Minor changes in style</li>
 				<li>Minor changes in mobile style</li>
 			</ul>
 		</li>
@@ -177,6 +184,5 @@
 	<ul>
 		<li>Eric from <a href="http://blog.mes-experts.be/" target="_blank">Mes Experts</a> for the French translation</li>
 		<li>Douglas from <a href="http://www.douglascampos.eng.br/" target="_blank">Douglas Campos</a> for the Brazilian translation</li>
-		<li>Jonas from <a href="http://www.qualitybike.nu/blogg/" target="_blank">Quality Bike blogg</a> for the Swedish translation</li>
 	</ul>
 </p>

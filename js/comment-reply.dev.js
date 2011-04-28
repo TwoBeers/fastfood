@@ -1,3 +1,7 @@
+jQuery(document).ready(function($){
+	$('#respond').appendTo('#content');
+	$("#respond").draggable({ handle: '#reply-title' });
+});
 
 addComment = {
 	moveForm : function(commId, parentId, respondId, postId) {
@@ -9,14 +13,6 @@ addComment = {
 		t.respondId = respondId;
 		postId = postId || false;
 
-		if ( ! t.I('wp-temp-form-div') ) {
-			div = document.createElement('div');
-			div.id = 'wp-temp-form-div';
-			div.style.display = 'none';
-			respond.parentNode.insertBefore(div, respond);
-		}
-
-		comm.parentNode.insertBefore(respond, comm.nextSibling);
 		if ( post && postId )
 			post.value = postId;
 		parent.value = parentId;
@@ -24,21 +20,17 @@ addComment = {
 		replytitle.innerHTML = replytocomment.value;
 		replytitle.appendChild(cancel);
 		
-		respond.className = 'floating-respond js-res';
 		respond.style.display = "block";
 
 		cancel.onclick = function() {
-			var t = addComment, temp = t.I('wp-temp-form-div'), respond = t.I(t.respondId);
+			var t = addComment, respond = t.I(t.respondId);
 
-			if ( ! temp || ! respond )
+			if ( ! respond )
 				return;
 
 			t.I('comment_parent').value = '0';
-			temp.parentNode.insertBefore(respond, temp);
-			temp.parentNode.removeChild(temp);
 			this.onclick = null;
 			respond.style.display = "none";
-			respond.className = 'fixed-respond js-res';
 			return false;
 		}
 
@@ -49,19 +41,15 @@ addComment = {
 	},
 	
 	resetForm : function() {
-		var t = addComment, temp = t.I('wp-temp-form-div'), respond = t.I('respond'), cancel = t.I('cancel-comment-reply-link'), parent = t.I('comment_parent');
+		var t = addComment, respond = t.I('respond'), cancel = t.I('cancel-comment-reply-link'), parent = t.I('comment_parent');
 
 		if ( ! cancel || ! respond )
 			return;
 
 		if ( parent ) parent.value = '0';
-		if ( temp ) {
-			temp.parentNode.insertBefore(respond, temp);
-			temp.parentNode.removeChild(temp);
-		}
 		cancel.onclick = null;
 		respond.style.display = "none";
-		respond.className = 'fixed-respond js-res';
+		respond.className = 'js-res';
 		return false;
 	},
 
@@ -71,7 +59,6 @@ addComment = {
 		if ( ! respond || ! cancel || ! replytitle)
 			return false;
 		addComment.resetForm();
-		respond.className = 'fixed-respond js-res';
 		if ( replytopost ) replytitle.innerHTML = replytopost.value;
 		replytitle.appendChild(cancel);
 		respond.style.display = "block";
@@ -90,7 +77,7 @@ addComment = {
 		if ( ! t.I('ff_reply_close') ) {
 			div = document.createElement('div');
 			div.id = 'ff_reply_close';
-			div.innerHTML = '<input type="button" title="Close" value="x" style="padding: 0 0 3px; position: absolute; top: 10px; right: 10px; width:19px;" onclick="return addComment.resetForm()" />';
+			div.innerHTML = '<input type="button" title="Close" value="x" onclick="return addComment.resetForm()" />';
 			respond.insertBefore(div, replytitle);
 		}
 	},

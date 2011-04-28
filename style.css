@@ -2,7 +2,7 @@
 Theme Name: Fastfood
 Theme URI: http: //www.twobeers.net/annunci/tema-per-wordpress-fastfood
 Description: Simple and clear theme with a lot of features, like a "quick links" menu, an "easy navigation" bar, the print preview, five integrated widgets ( "Social Links", "Popular Post", "Latest Activity", "Popular Categories" and "Latest comment authors" ) and many other. Fastfood has customizable header and background, one or two columns layout, up to five widgets areas and three menu. It supports custom menus, posts thumbnail, post formats ("gallery" and "aside") and also mobile devices, with a dedicated style. WP3.1 full compatible.
-Version: 0.21.1
+Version: 0.22
 Tags: translation-ready, threaded-comments, custom-menu, custom-header, theme-options, fixed-width, two-columns, right-sidebar, white, silver, orange, light, sticky-post, custom-background, editor-style, rtl-language-support
 Author: TwoBeers Crew
 Author URI: http: //www.twobeers.net/
@@ -152,14 +152,15 @@ input[type=reset] {
 	-khtml-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
-	-webkit-box-shadow: 2px 2px 3px #555;
-	-moz-box-shadow: 2px 2px 3px #555;
-	box-shadow: 2px 2px 3px #555;
+	-webkit-box-shadow: 1px 1px 2px #555;
+	-moz-box-shadow: 1px 1px 2px #555;
+	box-shadow: 1px 1px 2px #555;
 	background-color: #ccc;
 	border: 1px solid #fff;
 	color: #404040;
 	font-weight: bold;
 	margin: 3px;
+	padding: 2px 5px;
 }
 input[type=button]:hover,
 input[type=submit]:hover,
@@ -489,9 +490,9 @@ input[type=reset]:hover {
 	-khtml-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
-	-moz-box-shadow: 2px 2px 3px #555;
-	-webkit-box-shadow: 2px 2px 3px #555;
-	box-shadow: 2px 2px 3px #555;
+	-moz-box-shadow: 1px 1px 2px #555;
+	-webkit-box-shadow: 1px 1px 2px #555;
+	box-shadow: 1px 1px 2px #555;
 	border: 1px solid #fff;
 	padding-bottom: 5px;
 }
@@ -638,6 +639,9 @@ li.current_page_ancestor .hiraquo {
 #secondary1 {
 	font-size: 1.18em;
 	text-align: right;
+}
+#secondary2 {
+	margin-bottom: 10px;
 }
 
 /* =meta
@@ -923,6 +927,21 @@ div.ff_widget_latest_commentators ul li {
 	padding: 5px;
 	font-size: 1.18em;
 }
+#ff-page-nav {
+	padding-bottom: 5px;
+}
+#ff-page-nav a {
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	background-color: #FFFFFF;
+	border: 1px solid #CCCCCC;
+	font-weight: normal;
+	padding: 0.2em 0.5em;
+	text-decoration: none;
+	margin: 0 5px;
+}
 /* =comments
 ----------------------------------------------------------*/
 .comment-body {
@@ -974,24 +993,22 @@ ul.children {
 	background-color: #eee;
 	border: 1px solid #fff;
 	width: 715px;
-	z-index: 20;
+	z-index: 2000;
 	display: none;
-	margin-left: -22px;
+	margin-left: 46px;
 	padding: 10px 20px;
+	position: fixed;
+	top: 20%;
+}
+.js-res #reply-title {
+	cursor: move;
+	background-image: url('images/drag.png');
+	background-repeat: no-repeat;
+	background-position: 2px 2px;
 }
 #respond {
 	padding-top: 10px;
 	min-height: 200px;
-}
-.floating-respond {
-	position: absolute;
-	left: 0;
-	margin-left: -42px;
-}
-.fixed-respond {
-	position: fixed;
-	bottom: 50px;
-	margin-left: -28px;
 }
 #reply-title {
 	font-size: 1em;
@@ -1039,6 +1056,15 @@ ul.children {
 }
 .navigate_comments a, .navigate_comments span {
     margin-right: 0.5em;
+}
+
+#ff_reply_close input {
+	padding: 0 0 3px; 
+	position: absolute; 
+	top: 10px; 
+	right: 10px; 
+	width:19px;
+    margin: 0;
 }
 
 /* =calendar

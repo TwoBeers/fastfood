@@ -42,7 +42,7 @@ if ( have_posts() ) {
 						}
 						?></a>
 					</h2>
-					<div class="storycontent">
+					<div>
 						<?php the_content(); ?>
 					</div>
 <?php // display posts of the Gallery format ?>
@@ -107,7 +107,7 @@ if ( have_posts() ) {
 								$total_images = count( $images );
 								$image = array_shift( $images );
 						?>
-							<div class="gallery-thumb" style="width: <?php echo get_option('medium_size_w'); ?>px;"><a class="size-thumbnail" href="<?php the_permalink(); ?>"><?php echo wp_get_attachment_image( $image->ID, 'medium' ); ?></a></div><!-- .gallery-thumb -->
+							<div class="gallery-thumb" style="width: <?php echo get_option('medium_size_w'); ?>px; max-width: 100%;"><a class="size-thumbnail" href="<?php the_permalink(); ?>"><?php echo wp_get_attachment_image( $image->ID, 'medium' ); ?></a></div><!-- .gallery-thumb -->
 							<?php 
 								$otherimgs = array_slice( $images, 0, 4 );
 								foreach ($otherimgs as $image) {
@@ -201,15 +201,15 @@ if ( have_posts() ) {
 			</div>
 		<?php } //end while ?>
 
-	<div class="w_title">
+	<div class="w_title" id="ff-page-nav">
 		<?php //num of pages
 		global $paged;
 		if ( !$paged ) {
 			$paged = 1;
 		}
-		previous_posts_link( '&laquo; ' );
+		previous_posts_link( '&laquo;' );
 		printf( __( 'page %1$s of %2$s','fastfood' ), $paged, $wp_query->max_num_pages );
-		next_posts_link( ' &raquo;' );
+		next_posts_link( '&raquo;' );
 		?>
 	</div>
 

@@ -1,4 +1,4 @@
-/* Fastfood v0.18 - stylesheet for mobiles */
+/* Fastfood v0.22 - stylesheet for mobiles */
 
 /* =reset
 ----------------------------------------------------------*/
@@ -293,7 +293,7 @@ input[type=reset]:hover {
 .ff-menu li,
 .ff-menu li {
 	display: inline;
-	margin: 0 10px;
+	margin: 0 5px;
 	padding: 0;
 }
 /* =meta

@@ -59,7 +59,7 @@ function fastfood_get_coa() {
 		'fastfood_rsidebpages' => array( 'type' =>'chk', 'default'=>0,'description'=>__( 'sidebar on pages','fastfood' ),'info'=>__( 'show right sidebar on pages [default = disabled]','fastfood' ),'req'=>'' ),
 		'fastfood_rsidebposts' => array( 'type' =>'chk', 'default'=>0,'description'=>__( 'sidebar on posts','fastfood' ),'info'=>__( 'show right sidebar on posts [default = disabled]','fastfood' ),'req'=>'' ),
 		'fastfood_jsani' => array( 'type' =>'chk', 'default'=>1,'description'=>__( 'javascript animations','fastfood' ),'info'=>__( 'try disable animations if you encountered problems with javascript [default = enabled]','fastfood' ),'req'=>'' ),
-		'fastfood_cust_comrep' => array( 'type' =>'chk', 'default'=>1,'description'=>__( 'custom comment reply form','fastfood' ),'info'=>__( 'custom floating form for post/reply comments [default = enabled]','fastfood' ),'req'=>'' ),
+		'fastfood_cust_comrep' => array( 'type' =>'chk', 'default'=>1,'description'=>__( 'custom comment reply form','fastfood' ),'info'=>__( 'custom floating form for post/reply comments [default = enabled]','fastfood' ),'req'=>'fastfood_jsani' ),
 		'fastfood_mobile_css' => array( 'type' =>'chk', 'default'=>1,'description'=>__( 'mobile support','fastfood' ),'info'=>__( 'use a dedicated style in mobile devices [default = enabled]','fastfood' ),'req'=>'' ),
 		'fastfood_wpadminbar_css' => array( 'type' =>'chk', 'default'=>1,'description'=>__( 'custom adminbar style','fastfood' ),'info'=>__( 'style integration with the theme for admin bar [default = enabled]','fastfood' ),'req'=>'' ),
 		'fastfood_head_link' => array( 'type' =>'chk', 'default'=>0,'description'=>__( 'linked header','fastfood' ),'info'=>sprintf( __( "use the header image as home link. The <a href=\"%s\">header image</a> must be set [default = disabled]", 'fastfood' ), get_admin_url() . 'themes.php?page=custom-header' ), 'req'=>'' ),
@@ -196,8 +196,8 @@ function fastfood_scripts(){
 		}
 	}
 	if ( is_singular() && !$ff_is_printpreview ) {
-		if ( ( $fastfood_opt['fastfood_cust_comrep'] == 1 ) && !$ff_is_mobile_browser ) {
-			wp_enqueue_script( 'ff-comment-reply', get_template_directory_uri() . '/js/comment-reply.min.js' ); //custom comment-reply pop-up box
+		if ( ( $fastfood_opt['fastfood_jsani'] == 1 ) && ( $fastfood_opt['fastfood_cust_comrep'] == 1 ) && !$ff_is_mobile_browser ) {
+			wp_enqueue_script( 'ff-comment-reply', get_template_directory_uri() . '/js/comment-reply.min.js', array( 'jquery-ui-draggable' ), $fastfood_version, false   ); //custom comment-reply pop-up box
 		} else {
 			wp_enqueue_script( 'comment-reply' ); //custom comment-reply pop-up box
 		}
