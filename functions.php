@@ -587,7 +587,7 @@ if ( !function_exists( 'fastfood_setup' ) ) {
 		add_custom_image_header( 'fastfood_header_style', 'fastfood_admin_header_style' );
 		
 		// Add a way for the custom background to be styled in the admin panel that controls
-		add_custom_background( '' , '' , '' );
+		add_custom_background( 'fastfood_custom_bg' , '' , '' );
 	
 		// ... and thus ends the changeable header business.
 	
@@ -678,6 +678,40 @@ function fastfood_header_style(){
 		}
 	</style>
 	<![endif]-->
+	<?php
+}
+
+// custom background style - gets included in the site header
+function fastfood_custom_bg() {
+	$background = get_background_image();
+	$color = get_background_color();
+	if ( ! $background && ! $color ) return;
+
+	$style = $color ? "background-color: #$color;" : '';
+
+	if ( $background ) {
+		$image = " background-image: url('$background');";
+
+		$repeat = get_theme_mod( 'background_repeat', 'repeat' );
+		if ( ! in_array( $repeat, array( 'no-repeat', 'repeat-x', 'repeat-y', 'repeat' ) ) ) $repeat = 'repeat';
+		$repeat = " background-repeat: $repeat;";
+
+		$position = get_theme_mod( 'background_position_x', 'left' );
+		if ( ! in_array( $position, array( 'center', 'right', 'left' ) ) ) $position = 'left';
+		$position = " background-position: top $position;";
+
+		$attachment = get_theme_mod( 'background_attachment', 'scroll' );
+		if ( ! in_array( $attachment, array( 'fixed', 'scroll' ) ) ) $attachment = 'scroll';
+		$attachment = " background-attachment: $attachment;";
+
+		$style .= $image . $repeat . $position . $attachment;
+	} else {
+		$style .= ' background-image: url("");';
+	}
+	?>
+	<style type="text/css"> 
+		body { <?php echo trim( $style ); ?> }
+	</style>
 	<?php
 }
 
