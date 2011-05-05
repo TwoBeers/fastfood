@@ -1,18 +1,9 @@
+<?php global $current_user, $fastfood_opt, $fastfood_is_allcat_page, $fastfood_version, $ff_is_mobile_browser; ?>
+
 <!-- begin footer -->
-			</div><!-- close sidebar or posts_wide -->
-
-			<?php
-				global $current_user, $fastfood_opt, $fastfood_is_allcat_page, $fastfood_version, $ff_is_mobile_browser;
-				if ( 
-					( !is_page() && !is_single() && !is_attachment() ) ||
-					( is_page() && ( $fastfood_opt['fastfood_rsidebpages'] == 1 ) ) ||
-					( is_single() && ( $fastfood_opt['fastfood_rsidebposts'] == 1  && !is_attachment() ) )
-				) if ( ! $ff_is_mobile_browser ) get_sidebar(); // show sidebar
-			?>
-
 			<div id="footer">
 				<?php wp_nav_menu( array( 'container_class' => 'ff-menu', 'container_id' => 'secondary2', 'fallback_cb' => false, 'theme_location' => 'secondary2', 'depth' => 1 ) ); ?>
-				<?php if ( ! $ff_is_mobile_browser ) get_sidebar( 'footer' ); ?>
+				<?php get_sidebar( 'footer' ); ?>
 
 				<small>&copy; <?php echo date( 'Y' ); ?>  <strong><?php bloginfo( 'name' ); ?></strong> <?php _e( 'All rights reserved','fastfood' ); ?><?php if ( $fastfood_opt['fastfood_tbcred'] == 1 ) { ?> - Fastfood theme <?php if( !empty( $fastfood_version ) ) { echo 'v' . $fastfood_version; } if ( $ff_is_mobile_browser ) { echo ' ' . __( '(for mobile)','fastfood' ); } ?> by <a href="http://www.twobeers.net/" title="<?php _e( 'Visit author homepage','fastfood' ); ?> @ TwoBeers.net">TwoBeers Crew</a><?php } ?> - Powered by <a href="http://wordpress.org/" title="<?php _e( 'Powered by WordPress','fastfood' ); ?>">WordPress</a></small>
 				<!-- <?php echo get_num_queries(); ?> queries. <?php timer_stop(1); ?> seconds. -->
@@ -23,7 +14,7 @@
 
 		<div id="fixedfoot">
 			<?php
-				if ( ( $fastfood_opt['fastfood_qbar'] == 1 ) && ( !$ff_is_mobile_browser ) ) {
+				if ( $fastfood_opt['fastfood_qbar'] == 1 ) {
 			?>
 				<!-- begin quickbar -->
 				<div id="quickbar">
@@ -122,27 +113,14 @@
 				</div>
 			<?php } ?>
 
-			<div id="statusbar" class="no-mobile">
+			<div id="statusbar">
 				<?php _e( 'Welcome','fastfood' ); ?> <?php if ( is_user_logged_in() ) { echo $current_user->display_name; } ?>, <?php printf( __('today is %1$s, %2$s','fastfood'), date_i18n( __( 'l','fastfood' ) ), date_i18n( get_option( 'date_format' ) ) ); ?>
 			</div>
 
 			<div id="navbuttons_cont">
-				<?php if ( $ff_is_mobile_browser ) { ?>
-					<div id="mini-welcome">
-						<?php _e( 'Welcome','fastfood' ); ?>
-						<?php if ( is_user_logged_in() ) {
-							if ( current_user_can( 'read' ) )
-								echo $current_user->display_name . ' <a title="' . __( 'Log out','fastfood' ) . '" href="' . esc_url( wp_logout_url() ) . '">' . __( 'Log out','fastfood' ) . '</a>';
-							else
-								echo $current_user->display_name; 
-						} else { 
-							wp_register('',' | '); wp_loginout(); 
-						} ?>
-					</div>
-				<?php } ?>
 				<div id="navbuttons">
 					<?php if ( is_singular() ) { ?>
-						<div class="minibutton no-mobile">
+						<div class="minibutton">
 							<a href="<?php
 								$arr_params['style'] = 'printme';
 								if ( get_query_var('page') ) {
@@ -161,7 +139,7 @@
 						<?php if ( comments_open( $post->ID ) && !post_password_required() ) { ?>
 
 							<div class="minibutton">
-								<a href="#respond" title="<?php _e( 'Leave a comment','fastfood' ); ?>"<?php if ( ( $fastfood_opt['fastfood_cust_comrep'] == 1 ) && !$ff_is_mobile_browser ) { echo ' onclick="return addComment.viewForm()"'; } ?> >
+								<a href="#respond" title="<?php _e( 'Leave a comment','fastfood' ); ?>"<?php if ( $fastfood_opt['fastfood_cust_comrep'] == 1 ) { echo ' onclick="return addComment.viewForm()"'; } ?> >
 									<span class="minib_img minib_sep" style="background-position: center -24px;">&nbsp;</span>
 									<span class="nb_tooltip"><?php _e( 'Leave a comment','fastfood' ); ?></span>
 								</a>
@@ -261,7 +239,7 @@
 						</a>
 					</div>
 
-					<div class="minibutton no-mobile">
+					<div class="minibutton">
 						<a href="#footer" title="<?php _e( 'Bottom of page', 'fastfood' ); ?>">
 							<span class="minib_img" style="background-position: center -192px;">&nbsp;</span>
 							<span class="nb_tooltip"><?php _e( 'Bottom of page', 'fastfood' ); ?></span>

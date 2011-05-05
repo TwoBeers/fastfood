@@ -22,15 +22,18 @@
 }
 #fastfood-options,
 #fastfood-infos {
-	background: url('../images/mainmenu.png') repeat-x scroll left -5px #f9f9f9;
+	background: #f9f9f9;
 	-moz-box-shadow: 0px 2px 8px #404040;
 	-webkit-box-shadow: 0px 2px 8px #404040;
 	box-shadow: 0px 2px 8px #404040;
 	margin: 0 0 20px;
 	padding: 20px 10px 0;
-	border-color: #404040 #FFFFFF #FFFFFF;
+	border-color: #404040 #777 #777;
 	border-style: solid;
 	border-width: 15px 1px 1px;
+}
+#fastfood-infos {
+	background: url("../screenshot.png") no-repeat scroll 470px 40px #F9F9F9;
 }
 #fastfood-options-li div.wp-menu-image {
 	background: url('../../../../wp-admin/images/menu.png') no-repeat scroll -247px -39px transparent;

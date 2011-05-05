@@ -2,7 +2,7 @@
 /**** begin theme hooks ****/
 // Tell WordPress to run fastfood_setup() when the 'after_setup_theme' hook is run.
 add_action( 'after_setup_theme', 'fastfood_setup' );
-// Tell WordPress to run shiword_default_options()
+// Tell WordPress to run fastfood_default_options()
 add_action( 'admin_init', 'fastfood_default_options' );
 // Register sidebars by running fastfood_widget_area_init() on the widgets_init hook
 add_action( 'widgets_init', 'fastfood_widget_area_init' );
@@ -12,6 +12,8 @@ add_action( 'wp_print_styles', 'fastfood_stylesheet' );
 add_action( 'template_redirect', 'fastfood_scripts' );
 // Add custom category page
 add_action( 'template_redirect', 'fastfood_allcat' );
+// mobile redirect
+add_action( 'template_redirect', 'fastfood_mobile' );
 // Add custom menus
 add_action( 'admin_menu', 'fastfood_create_menu' );
 // Custom filters
@@ -116,6 +118,18 @@ if ( isset( $_GET['style'] ) && md5( $_GET['style'] ) == '8e77921d24c6f82c4bd783
 	$ff_is_printpreview = true;
 }
 
+// is sidebar visible?
+if ( !function_exists( 'fastfood_use_sidebar' ) ) {
+	function fastfood_use_sidebar() {
+		global $fastfood_opt;
+		if ( ( is_page() && ( $fastfood_opt['fastfood_rsidebpages'] == 0 ) ) || ( is_single() && ( $fastfood_opt['fastfood_rsidebposts'] == 0 ) ) || is_attachment() ) {
+			return false;
+		} else {
+			return true;
+		}
+	}
+}
+
 if ( !function_exists( 'fastfood_widget_area_init' ) ) {
 	function fastfood_widget_area_init() {
 		// Area 1, located at the top of the sidebar.
@@ -180,18 +194,19 @@ if ( !function_exists( 'fastfood_widget_area_init' ) ) {
 if ( !function_exists( 'fastfood_stylesheet' ) ) {
 	function fastfood_stylesheet(){
 		global $fastfood_opt, $fastfood_version, $ff_is_printpreview, $ff_is_mobile_browser;
+		// mobile style
+		if ( $ff_is_mobile_browser ) {
+			wp_enqueue_style( 'ff_mobile-style', get_template_directory_uri() . '/mobile/style.css', false, $fastfood_version, 'screen' );
+			return;
+		}
 		//shows print preview / normal view
 		if ( $ff_is_printpreview ) { //print preview
 			wp_enqueue_style( 'ff_print-style-preview', get_template_directory_uri() . '/css/print.css', false, $fastfood_version, 'screen' );
 			wp_enqueue_style( 'ff_general-style-preview', get_template_directory_uri() . '/css/print_preview.css', false, $fastfood_version, 'screen' );
 		} else { //normal view
-			if ( $ff_is_mobile_browser ) {
-				wp_enqueue_style( 'ff_general-style-mobile', get_template_directory_uri() . '/css/mobile-style.css', false, $fastfood_version, 'screen' );
-			} else {
-				wp_enqueue_style( 'ff_general-style', get_stylesheet_uri(), false, $fastfood_version, 'screen' );
-				if ( $fastfood_opt['fastfood_wpadminbar_css'] == 1 ) {
-					wp_enqueue_style( 'ff_adminbar-style', get_template_directory_uri() . '/css/wpadminbar.css' );
-				}
+			wp_enqueue_style( 'ff_general-style', get_stylesheet_uri(), false, $fastfood_version, 'screen' );
+			if ( $fastfood_opt['fastfood_wpadminbar_css'] == 1 ) {
+				wp_enqueue_style( 'ff_adminbar-style', get_template_directory_uri() . '/css/wpadminbar.css' );
 			}
 		}
 		//print style
@@ -203,14 +218,15 @@ if ( !function_exists( 'fastfood_stylesheet' ) ) {
 if ( !function_exists( 'fastfood_scripts' ) ) {
 	function fastfood_scripts(){
 		global $fastfood_opt, $ff_is_printpreview, $fastfood_version, $ff_is_mobile_browser;
-		if ( ( $fastfood_opt['fastfood_jsani'] == 1 ) && !$ff_is_mobile_browser ) {
+		if ( $ff_is_mobile_browser ) return;
+		if ( ( $fastfood_opt['fastfood_jsani'] == 1 ) ) {
 			if ( !$ff_is_printpreview ) { //script not to be loaded in print preview
 				wp_enqueue_script( 'fastfoodscript', get_template_directory_uri() . '/js/fastfoodscript.min.js', array( 'jquery' ), $fastfood_version, true  ); //fastfood js
 				wp_enqueue_script( 'jquery-ui-effects', get_template_directory_uri() . '/js/jquery-ui-effects-1.8.6.min.js', array( 'jquery' ), '1.8.6', false  ); //fastfood js
 			}
 		}
 		if ( is_singular() && !$ff_is_printpreview ) {
-			if ( ( $fastfood_opt['fastfood_jsani'] == 1 ) && ( $fastfood_opt['fastfood_cust_comrep'] == 1 ) && !$ff_is_mobile_browser ) {
+			if ( ( $fastfood_opt['fastfood_jsani'] == 1 ) && ( $fastfood_opt['fastfood_cust_comrep'] == 1 ) ) {
 				wp_enqueue_script( 'ff-comment-reply', get_template_directory_uri() . '/js/comment-reply.min.js', array( 'jquery-ui-draggable' ), $fastfood_version, false   ); //custom comment-reply pop-up box
 			} else {
 				wp_enqueue_script( 'comment-reply' ); //custom comment-reply pop-up box
@@ -225,6 +241,21 @@ if ( !function_exists( 'fastfood_allcat' ) ) {
 	function fastfood_allcat () {
 		if( isset( $_GET['allcat'] ) && ( md5( $_GET['allcat'] ) == '415290769594460e2e485922904f345d' ) ) {
 			get_template_part( 'allcat' );
+			exit;
+		}
+	}
+}
+
+// show mobile version
+if ( !function_exists( 'fastfood_mobile' ) ) {
+	function fastfood_mobile () {
+		global $ff_is_mobile_browser;
+		if ( $ff_is_mobile_browser ) {
+			if ( is_singular() ) { 
+				get_template_part( 'mobile/single' ); 
+			} else {
+				get_template_part( 'mobile/index' );
+			}
 			exit;
 		}
 	}
@@ -339,20 +370,33 @@ if ( !function_exists( 'fastfood_pages_menu' ) ) {
 	}
 }
 
+// Pages Menu (mobile)
+if ( !function_exists( 'fastfood_pages_menu_mobile' ) ) {
+	function fastfood_pages_menu_mobile() {
+		echo '<div id="ff-pri-menu" class="ff-menu "><ul id="mainmenu" class="ff-group">';
+		wp_list_pages( 'sort_column=menu_order&title_li=&depth=1' ); // menu-order sorted
+		echo '</ul></div>';
+	}
+}
+
 // page hierarchy
 if ( !function_exists( 'fastfood_multipages' ) ) {
 	function fastfood_multipages(){
 		global $post;
 		$args = array(
 			'post_type' => 'page',
-			'post_parent' => $post->ID
-			); 
-		$childrens = get_posts($args); // retrieve the child pages
+			'post_parent' => $post->ID,
+			'order' => 'ASC',
+			'orderby' => 'menu_order',
+			'numberposts' => 0
+			);
+		$childrens = get_posts( $args ); // retrieve the child pages
 		$the_parent_page = $post->post_parent; // retrieve the parent page
-	
+		$has_herarchy = false;
+
 		if ( ( $childrens ) || ( $the_parent_page ) ){ ?>
 			<div class="metafield">
-				<div class="metafield_trigger mft_hier no-mobile" style="right: 40px; width:16px"> </div>
+				<div class="metafield_trigger mft_hier" style="right: 40px; width:16px"> </div>
 				<div class="metafield_content">
 					<?php
 					echo __('This page has hierarchy','fastfood') . ' - ';
@@ -372,7 +416,96 @@ if ( !function_exists( 'fastfood_multipages' ) ) {
 					?>
 				</div>
 			</div>
-		<?php }
+		<?php 
+		$has_herarchy = true;
+		}
+		return $has_herarchy;
+	}
+}
+
+// print extra info for posts/pages
+if ( !function_exists( 'fastfood_extrainfo' ) ) {
+	function fastfood_extrainfo( $auth, $date, $comms, $tags, $cats, $hiera = false, $listview = false ) {
+		global $fastfood_opt;
+		$r_pos = 10;
+		if ( !$listview ) {
+		?>
+			<div class="meta top_meta">
+				<?php
+				if ( $auth ) { ?>
+					<div class="metafield_trigger" style="left: 10px;"><?php _e( 'by', 'fastfood' ); ?> <?php printf( '<a href="' . get_author_posts_url( get_the_author_meta( 'ID' ) ) . '" title="' . sprintf( __('View all posts by %s', 'fastfood'), esc_attr( get_the_author() ) ) . '">' . get_the_author() . '</a>' ); ?></div>
+				<?php
+				}
+				if ( $cats ) {
+				?>
+					<div class="metafield">
+						<div class="metafield_trigger mft_cat" style="right: <?php echo $r_pos; ?>px; width:16px"> </div>
+						<div class="metafield_content">
+							<?php echo __( 'Categories', 'fastfood' ) . ':'; ?>
+							<?php the_category( ', ' ) ?>
+						</div>
+					</div>
+				<?php
+					$r_pos = $r_pos + 30;
+				}
+				if ( $tags ) {
+				?>
+					<div class="metafield">
+						<div class="metafield_trigger mft_tag" style="right: <?php echo $r_pos; ?>px; width:16px"> </div>
+						<div class="metafield_content">
+							<?php _e( 'Tags:', 'fastfood' ); ?>
+							<?php if ( !get_the_tags() ) { _e( 'No Tags', 'fastfood' ); } else { the_tags('', ', ', ''); } ?>
+						</div>
+					</div>
+				<?php
+					$r_pos = $r_pos + 30;
+				}
+				if ( $comms ) {
+				?>
+					<div class="metafield">
+						<div class="metafield_trigger mft_comm" style="right: <?php echo $r_pos; ?>px; width:16px"> </div>
+						<div class="metafield_content">
+							<?php _e( 'Comments', 'fastfood' ); ?>:
+							<?php comments_popup_link( __( 'No Comments', 'fastfood' ), __( '1 Comment', 'fastfood' ), __( '% Comments', 'fastfood' ) ); // number of comments?>
+						</div>
+					</div>
+				<?php
+					$r_pos = $r_pos + 30;
+				}
+				if ( $date ) {
+				?>
+					<div class="metafield">
+						<div class="metafield_trigger mft_date" style="right: <?php echo $r_pos; ?>px; width:16px"> </div>
+						<div class="metafield_content">
+							<?php
+							printf( __( 'Published on: <b>%1$s</b>', 'fastfood' ), '' );
+							the_time( get_option( 'date_format' ) );
+							?>
+						</div>
+					</div>
+				<?php
+					$r_pos = $r_pos + 30;
+				}
+				if ( $hiera ) {
+				?>
+					<?php if ( fastfood_multipages() ) { $r_pos = $r_pos + 30; } ?>
+				<?php
+				}
+				?>
+				<div class="metafield_trigger edit_link" style="right: <?php echo $r_pos; ?>px;"><?php edit_post_link( __( 'Edit', 'fastfood' ),'' ); ?></div>
+			</div>
+		<?php
+		} else { ?>
+			<div class="meta">
+				<?php if ( $auth ) { echo __( 'by', 'fastfood' ) . ' '; printf( '<a href="' . get_author_posts_url( get_the_author_meta( 'ID' ) ) . '" title="' . sprintf( 'View all posts by %s', esc_attr( get_the_author() ) ) . '">' . get_the_author() . '</a>' ); echo '<br />'; }; ?>
+				<?php if ( $date ) { printf( __( 'Published on: %1$s', 'fastfood' ), get_the_time( get_option( 'date_format' ) ) ) ; echo '<br />'; }?>
+				<?php if ( $comms ) { echo __( 'Comments', 'fastfood' ) . ': '; comments_popup_link( __( 'No Comments', 'fastfood' ), __( '1 Comment', 'fastfood' ), __( '% Comments', 'fastfood' ) ); echo '<br />'; } ?>
+				<?php if ( $tags ) { echo __( 'Tags:', 'fastfood' ) . ' '; if ( !get_the_tags() ) { _e( 'No Tags', 'fastfood' ); } else { the_tags('', ', ', ''); }; echo '<br />';  } ?>
+				<?php if ( $cats ) { echo __( 'Categories', 'fastfood' ) . ':'; the_category( ', ' ); echo '<br />'; } ?>
+				<?php edit_post_link( __( 'Edit', 'fastfood' ) ); ?>
+			</div>
+		<?php
+		}
 	}
 }
 
@@ -683,6 +816,7 @@ if ( !function_exists( 'fastfood_header_style' ) ) {
 		<style type="text/css">
 			#head {
 				background: transparent url( '<?php esc_url ( header_image() ); ?>' ) right bottom no-repeat;
+				min-height: <?php echo HEADER_IMAGE_HEIGHT - 20; ?>px;
 			}
 			#head h1 a, #head .description {
 				<?php echo $style; ?>

@@ -4,30 +4,22 @@
 	<head profile="http://gmpg.org/xfn/11">
 		<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
 		<meta name = "viewport" content = "width = device-width">
-
-		<title>
-			<?php
+		<title><?php
 			if ( is_front_page() ) {
 				bloginfo( 'name' ); ?> - <?php bloginfo( 'description' );
 			} else {
 				wp_title( '&laquo;', true, 'right' );
 				bloginfo( 'name' );
 			}
-			?>
-		</title>
-
-		<?php
-			global $fastfood_opt, $ff_is_mobile_browser;
-		?>
-
+			?></title>
+		<?php global $fastfood_opt; ?>
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 		<?php wp_get_archives( 'type=monthly&format=link' ); ?>
 		<?php wp_head(); ?>
-
 	</head>
 
 	<body <?php body_class(); ?>>
-		<div id="ff_background" class="no-mobile">
+		<div id="ff_background">
 			<div id="ff_body" class="pad_bg">
 				<div id="ff_body_overlay"></div>
 			</div>
@@ -42,30 +34,13 @@
 			<?php } else { ?>
 				<div id="head">
 					<h1><a href="<?php echo home_url(); ?>/"><?php bloginfo( 'name' ); ?></a></h1>
-					<div class="description no-mobile"><?php bloginfo( 'description' ); ?></div>
+					<div class="description"><?php bloginfo( 'description' ); ?></div>
 				</div>
 			<?php } ?>
 			<div id="pages">
-				<?php if ( $ff_is_mobile_browser ) { ?>
-					<div class="search-form">
-						<form action="<?php echo home_url(); ?>" method="get">
-							<input type="text" id="s" name="s" value="" />
-							<input type="submit" name="submit_button" value="<?php _e( 'Search','fastfood' ) ?>" />
-						</form>
-					</div>
-				<?php } ?>
-				<div id="rss_imglink" class="no-mobile"><a href="<?php bloginfo( 'rss2_url' ); ?>" title="<?php _e( 'Syndicate this site using RSS 2.0','fastfood' ); ?>"><img alt="rsslink" src="<?php echo get_template_directory_uri(); ?>/images/rss.png" /></a></div>
+				<div id="rss_imglink"><a href="<?php bloginfo( 'rss2_url' ); ?>" title="<?php _e( 'Syndicate this site using RSS 2.0','fastfood' ); ?>"><img alt="rsslink" src="<?php echo get_template_directory_uri(); ?>/images/rss.png" /></a></div>
 				<?php wp_nav_menu( array( 'menu_id' => 'mainmenu', 'fallback_cb' => 'fastfood_pages_menu', 'theme_location' => 'primary' ) ); ?>
 				<div class="fixfloat"></div>
 			</div>
 			
-			<?php if ( ! $ff_is_mobile_browser ) get_sidebar( 'header' ); // show header widgets area ?>
-			<?php
-				$ff_postswidth = 'class="posts_narrow"';
-				if ( ( is_page() && ( $fastfood_opt['fastfood_rsidebpages'] == 0 ) ) || ( is_single() && ( $fastfood_opt['fastfood_rsidebposts'] == 0 ) ) || is_attachment() ) {
-					$ff_postswidth = 'class="posts_wide"';
-				}else if ( ( is_page() && ( $fastfood_opt['fastfood_rsidebpages'] == 1 ) ) || ( is_single() && ( $fastfood_opt['fastfood_rsidebposts'] == 1 ) ) ) {
-					$ff_postswidth = 'class="posts_narrow" style="padding-bottom: 310px;"';
-				}
-			?>
-			<div id="posts_content" <?php echo $ff_postswidth; ?>>
+			<?php get_sidebar( 'header' ); // show header widgets area ?>

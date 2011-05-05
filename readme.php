@@ -1,30 +1,30 @@
-<p>Fastfood - WordPress theme
+<h3>Fastfood - WordPress theme</h3>
 	<ul>
-		<li>version: 0.22</li>
+		<li>version: 0.23</li>
 	</ul>
-</p>
-<p>Project page:
+ 
+<h3>Project page:</h3>
 	<ul>
 		<li><a href="http://www.twobeers.net/annunci/tema-per-wordpress-fastfood" title="Fastfood theme page" target="_blank" >http://www.twobeers.net/annunci/tema-per-wordpress-fastfood</a></li>
 	</ul>
-</p>
-<p>Author page:
+ 
+<h3>Author page:</h3>
 	<ul>
 		<li><a href="http://www.twobeers.net/" title="TwoBeers.net" target="_blank" >http://www.twobeers.net/</a></li>
 	</ul>
-</p>
-<p>Licensed under GPL
+ 
+<h3>Licensed under GPL</h3>
 	<ul>
 		<li><a href="http://www.gnu.org/licenses/gpl-2.0.html" title="GNU General Public License, version 2" target="_blank" >http://www.gnu.org/licenses/gpl-2.0.html</a></li>
 	</ul>
-</p>
-<p>REQUIREMENTS:
+ 
+<h3 style="border-top:2px groove #fff; padding-top:10px">REQUIREMENTS:</h3>
 	<ul>
 		<li>PHP 5+</li>
 		<li>Wordpress 3.1+ (REQUIRED)</li>
 	</ul>
-</p>
-<p>THEME FEATURES:
+ 
+<h3>THEME FEATURES:</h3>
 	<ul>
 		<li>Fixed width : your site will look the same for everyone regardless of screen resolution</li>
 		<li>Two columns : to fill with your content that will be visible and accessible</li>
@@ -43,9 +43,10 @@
 		<li>Custom widgets : five new widgets ("Social Links", "Popular Post", "Latest Activity", "Popular Categories" and "Latest comment authors") at your disposal</li>
 		<li>Post formats: support for post formats ("aside", "gallery")</li>
 		<li>Floating comment form, now draggable (required js enabled)</li>
+		<li>Custom Template "One column, no sidebar": a custom page template without sidebar</li>
 	</ul>
-</p>
-<p>TECHNICAL:
+ 
+<h3>TECHNICAL:</h3>
 	<ul>
 		<li>theme uses a custom "comment-reply.js" file, named "comment-reply.min.js" (YUI compressed)</li>
 		<li>*.dev.js files are the same as *.min.js, but commented and uncompressed</li>
@@ -53,28 +54,30 @@
 		<li>if you experience any javascript problem, try disable animations in admin -&gt; theme options</li>
 		<li>print_preview.css is a stylesheet file used to emulate a print preview.</li>
 		<li>the theme detects the following mobile devices/browsers/os : ipod, iphone, android, opera mini, blackberry, palm, symbian and many more</li>
-		<li>In order to use the new widgets ("Social Links", "Popular Post", "Latest Activity", "Popular Categories" and "Latest comment authors"), you need to activate them in admin -&gt; widgets </li>
+		<li>in order to use the new widgets ("Social Links", "Popular Post", "Latest Activity", "Popular Categories" and "Latest comment authors"), you need to activate them in admin -&gt; widgets </li>
 		<li>the secondary menus (one on top of page and one above the footer widget area) support only one level of hierarchy</li>
 	</ul>
-</p>
-<p>CHANGE LOG (FROM VERSION 0.21):
+ 
+<h3>CHANGE LOG (FROM VERSION 0.21):</h3>
 	<ul>
 		<li>Adds:
 			<ul>
 				<li>floating comment form is now draggable</li>
-				<li>Child theme friendly</li>
+				<li>child theme friendly</li>
+				<li>custom Template "One column, no sidebar"</li>
 			</ul>
 		</li>
 		<li>Fixes:
 			<ul>
 				<li>"mobile support" option now is deactivable</li>
-				<li>Minor changes in style</li>
-				<li>Minor changes in mobile style</li>
+				<li>page hierarchy</li>
+				<li>minor changes in style</li>
+				<li>heavy changes in mobile support</li>
 			</ul>
 		</li>
 	</ul>
-</p>
-<p>CHANGE LOG (FROM VERSION 0.20.2):
+ 
+<h3>CHANGE LOG (FROM VERSION 0.20.2):</h3>
 	<ul>
 		<li>Adds:
 			<ul>
@@ -97,8 +100,8 @@
 			</ul>
 		</li>
 	</ul>
-</p>
-<p>CHANGE LOG (FROM VERSION 0.20):
+ 
+<h3>CHANGE LOG (FROM VERSION 0.20):</h3>
 	<ul>
 		<li>Fixes:
 			<ul>
@@ -108,8 +111,8 @@
 			</ul>
 		</li>
 	</ul>
-</p>
-<p>CHANGE LOG (FROM VERSION 0.16):
+ 
+<h3>CHANGE LOG (FROM VERSION 0.16):</h3>
 	<ul>
 		<li>Adds:
 			<ul>
@@ -133,8 +136,8 @@
 			</ul>
 		</li>
 	</ul>
-</p>
-<p>CHANGE LOG (FROM VERSION 0.14):
+ 
+<h3>CHANGE LOG (FROM VERSION 0.14):</h3>
 	<ul>
 		<li>Adds:
 			<ul>
@@ -164,8 +167,8 @@
 			</ul>
 		</li>
 	</ul>
-</p>
-<p>SUPPORT:
+ 
+<h3>SUPPORT:</h3>
 	<ul>
 		<li>for any question/problem contact us at
 			<ul>
@@ -179,11 +182,11 @@
 			</ul>
 		</li>
 	</ul>
-</p>
+ 
 
-<p>CREDITS:
+<h3>CREDITS:</h3>
 	<ul>
 		<li>Eric from <a href="http://blog.mes-experts.be/" target="_blank">Mes Experts</a> for the French translation</li>
 		<li>Douglas from <a href="http://www.douglascampos.eng.br/" target="_blank">Douglas Campos</a> for the Brazilian translation</li>
 	</ul>
-</p>
+ 
