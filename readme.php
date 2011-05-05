@@ -42,6 +42,7 @@
 		<li>Mobile support : Fastfood has a dedicated style for mobile view (touchscreen friendly)</li>
 		<li>Custom widgets : five new widgets ("Social Links", "Popular Post", "Latest Activity", "Popular Categories" and "Latest comment authors") at your disposal</li>
 		<li>Post formats: support for post formats ("aside", "gallery")</li>
+		<li>Floating comment form, now draggable (required js enabled)</li>
 	</ul>
 </p>
 <p>TECHNICAL:
