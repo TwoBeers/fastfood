@@ -1,24 +1,8 @@
-/* Fastfood v0.18 - Theme options stylesheet */
+/* Fastfood v0.24 - Theme options stylesheet */
 
 #fastfood-infos ul {
 	list-style: disc outside;
 	margin-left: 30px;
-}
-#fastfood-options div,
-#fastfood-infos div {
-	margin: 0 0 20px;
-}
-#fastfood-options p,
-#fastfood-infos p {
-	background-color: #ccc;
-	display: block;
-	font-weight: bold;
-	-moz-border-radius: 5px;
-	-khtml-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
-	margin: 0 0 8px;
-	padding: 3px;
 }
 #fastfood-options,
 #fastfood-infos {
@@ -26,75 +10,15 @@
 	-moz-box-shadow: 0px 2px 8px #404040;
 	-webkit-box-shadow: 0px 2px 8px #404040;
 	box-shadow: 0px 2px 8px #404040;
-	margin: 0 0 20px;
-	padding: 20px 10px 0;
-	border-color: #404040 #777 #777;
-	border-style: solid;
-	border-width: 15px 1px 1px;
-}
-#fastfood-infos {
-	background: url("../screenshot.png") no-repeat scroll 470px 40px #F9F9F9;
-}
-#fastfood-options-li div.wp-menu-image {
-	background: url('../../../../wp-admin/images/menu.png') no-repeat scroll -247px -39px transparent;
-}
-#fastfood-options-li:hover div.wp-menu-image,
-#fastfood-options-li.tab-selected div.wp-menu-image {
-	background: url('../../../../wp-admin/images/menu.png') no-repeat scroll -247px -7px transparent;
-}
-#selector {
-	list-style: none;
-	margin-left: 30px;
-}
-#selector a {
-	display: block;
-	font-weight: bold;
-	text-decoration: none;
-}
-#selector li {
-	border-left: 2px groove #fff;
-	border-right: 2px groove #fff;
-	border-top: 2px groove #fff;
-	float: left;
-	width: 200px;
 	margin: 0;
-	padding: 5px;
-	white-space: nowrap;
-}
-#selector li div.wp-menu-image {
-	float: left;
-	height: 16px;
-	width: 22px;
-}
-#selector li.tab-selected {
-	background-color: #404040;
-	border-left: 2px solid #404040;
-	border-right: 2px solid #404040;
-	border-top: 2px solid #404040;
-	-moz-box-shadow: 0px 2px 8px #404040;
-	-webkit-box-shadow: 0px 2px 8px #404040;
-	box-shadow: 0px 2px 8px #404040;
+	padding: 20px 10px;
 }
 #tabs-container {
-	width: 800px;
-	margin: 20px auto;
-}
-.ff_opt_input {
-	text-align: center;
-	padding: 3px;
-}
-.tab-hidden {
-	display: none;
-}
-.tab-selected a,
-.tab-selected a:hover,
-.tab-selected a:focus {
-	color: #fff;
-	text-shadow: 1px 1px 2px #000;
+	margin: 20px 20px 20px 150px;
 }
 #fastfood-options th,
 #fastfood-options td {
-	padding: 5px;
+	padding: 10px 5px;
 	font-size: 12px;
 }
 #fastfood-options tr {
@@ -102,4 +26,62 @@
 }
 #fastfood-options select {
 	max-width: 60px;
+}
+#ff-tabselector,
+#selector {
+	position: absolute;
+	top: 100px;
+	left: 0;
+}
+#ff-tabselector li,
+#selector li {
+	width: 130px;
+	padding: 3px 16px 3px 4px;
+}
+#ff-tabselector li a,
+#selector li a {
+	text-decoration: none;
+}
+.sel-active a {
+	color: #000;
+}
+
+.sel-active {
+	font-weight: bold;
+	background: url("../images/litem_rtl.png") no-repeat 135px center transparent;
+}
+#ff-main-wrap {
+	position: relative;
+}
+th.column-nam {
+	width: 220px;
+}
+th.column-chk {
+	width: 50px;
+}
+th.column-des {
+}
+th.column-req {
+	width: 100px;
+}
+td.column-nam {
+	width: 220px;
+	font-weight: bold;
+	border-right:1px solid #ccc;
+}
+td.column-chk {
+	width: 50px;
+	border-right:1px solid #ccc;
+	text-align:center;
+}
+td.column-des {
+	font-style:italic;
+	border-right:1px solid #ccc;
+}
+td.column-req {
+	width: 100px;
+}
+.color_preview_box {
+	width:2em;
+	border:1px solid #262626;
 }

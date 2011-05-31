@@ -5,12 +5,15 @@
 		<div class="wp-caption aligncenter"><h2 class="storytitle">Error 404 - <?php _e( 'Page not found','fastfood' ); ?></h2></div>
 		<div class="storycontent">
 			<p><?php _e( "Sorry, you're looking for something that isn't here" ,'fastfood' ); ?>: <u><?php echo home_url() . esc_html( $_SERVER['REQUEST_URI'] ); ?></u></p>
-			<p><?php _e( 'You can try the following:','fastfood' ); ?></p>
-			<ul>
-				<li><?php _e( 'search the site using the searchbox in the upper-right','fastfood' ); ?></li>
-				<li><?php _e( 'see the suggested pages in the above menu','fastfood' ); ?></li>
-				<li><?php _e( 'browse the site throught the popup menu on bottom left','fastfood' ); ?></li>
-			</ul>
+			<?php if ( is_active_sidebar( '404-widgets-area' ) ) { ?>
+				<p><?php _e( 'You can try the following:','fastfood' ); ?></p>
+				<div class="ul_fwa">
+					<?php dynamic_sidebar( '404-widgets-area' ); ?>
+				</div>
+			<?php } else { ?>
+				<p><?php _e( 'Perhaps using the search form will help...', 'fastfood' ); ?></p>
+				<?php get_search_form(); ?>
+			<?php } ?>
 		</div>
 		<div class="fixfloat"> </div>
 	</div>

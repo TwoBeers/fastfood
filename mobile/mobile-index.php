@@ -29,12 +29,12 @@
 			if ( is_archive() ) { ?>
 				<div class="ff-padded">
 					<?php 
-						if ( is_category() )	{ $strtype = __( 'Category', 'fastfood' ) . ' : %s'; }
-						elseif ( is_tag() )		{ $strtype = __( 'Tag', 'fastfood' ) . ' : %s'; }
-						elseif ( is_date() )	{ $strtype = __( 'Archives', 'fastfood' ) . ' : %s'; }
-						elseif (is_author()) 	{ $strtype = __( 'Posts by %s', 'fastfood') ; }
+						if ( is_category() )	{ $ff_strtype = __( 'Category', 'fastfood' ) . ' : %s'; }
+						elseif ( is_tag() )		{ $ff_strtype = __( 'Tag', 'fastfood' ) . ' : %s'; }
+						elseif ( is_date() )	{ $ff_strtype = __( 'Archives', 'fastfood' ) . ' : %s'; }
+						elseif (is_author()) 	{ $ff_strtype = __( 'Posts by %s', 'fastfood') ; }
 					?>
-					<?php printf( $strtype, '<strong>' . wp_title( '',false ) . '</strong>'); ?>
+					<?php printf( $ff_strtype, '<strong>' . wp_title( '',false ) . '</strong>'); ?>
 				</div>
 			<?php } elseif ( is_search() ) { ?>
 				<div class="ff-padded">
@@ -46,14 +46,14 @@
 				<ul class="ff-group">
 				<?php while ( have_posts() ) {
 					the_post(); ?>
-					<?php $sw_alter_style = ( !isset($sw_alter_style) || $sw_alter_style == 'ff-odd' ) ? 'ff-even' : 'ff-odd'; ?>
-					<li class="<?php echo $sw_alter_style; ?>">
+					<?php $ff_alter_style = ( !isset($ff_alter_style) || $ff_alter_style == 'ff-odd' ) ? 'ff-even' : 'ff-odd'; ?>
+					<li class="<?php echo $ff_alter_style; ?>">
 						<a href="<?php the_permalink() ?>" rel="bookmark"><?php 
-							$post_title = the_title( '','',false );
-							if ( !$post_title ) {
+							$ff_post_title = the_title( '','',false );
+							if ( !$ff_post_title ) {
 								_e( '(no title)', 'fastfood' );
 							} else {
-								echo $post_title;
+								echo $ff_post_title;
 							}
 							?><br /><span class="ff-details"><?php the_author(); ?> - <?php the_time( get_option( 'date_format' ) ); ?> - <?php comments_number('(0)', '(1)','(%)'); ?></span>
 						</a>

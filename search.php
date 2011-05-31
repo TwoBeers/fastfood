@@ -2,8 +2,8 @@
 
 <div id="posts_content" class="posts_narrow">
 
-	<?php printf( '<div class="wp-caption aligncenter"><p class="wp-caption-text">' . __( 'Search results for &#8220;%s&#8221;','fastfood' ) . '</p></div>', '<strong>' . esc_html( get_search_query() ) . '</strong>' ); ?>
-
+	<?php printf( '<div class="wp-caption aligncenter" style="padding-bottom: 5px;">' . __( 'Search results for &#8220;%s&#8221;','fastfood' ) . '</div>', '<strong>' . esc_html( get_search_query() ) . '</strong>' ); ?>
+	
 	<?php if ( have_posts() ) {
 		while ( have_posts() ) {
 			the_post(); ?>
@@ -20,10 +20,7 @@
 					?>
 					</a>
 				</h2>
-				<?php fastfood_extrainfo( true, true, true, true, true ); ?>
-				<div class="storycontent">
 						<?php the_excerpt(); ?>
-				</div>
 				<div class="fixfloat"> </div>
 			</div>
 		<?php } ?>

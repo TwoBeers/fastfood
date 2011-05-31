@@ -1,6 +1,6 @@
 <h3>Fastfood - WordPress theme</h3>
 	<ul>
-		<li>version: 0.23</li>
+		<li>version: 0.24</li>
 	</ul>
  
 <h3>Project page:</h3>
@@ -40,10 +40,11 @@
 		<li>Theme options : enable or disable theme special features</li>
 		<li>Funny animations : your site comes to life!</li>
 		<li>Mobile support : Fastfood has a dedicated style for mobile view (touchscreen friendly)</li>
-		<li>Custom widgets : five new widgets ("Social Links", "Popular Post", "Latest Activity", "Popular Categories" and "Latest comment authors") at your disposal</li>
-		<li>Post formats: support for post formats ("aside", "gallery")</li>
-		<li>Floating comment form, now draggable (required js enabled)</li>
+		<li>Custom widgets : 7 new widgets ("Social Links", "Popular Post", "Latest Activity", "Popular Categories", "Latest comment authors", "Recent Posts in Category" and "Besides...") at your disposal</li>
+		<li>Post formats: support for post formats ("aside", "gallery", "status")</li>
+		<li>Floating comment form: now draggable (required js enabled)</li>
 		<li>Custom Template "One column, no sidebar": a custom page template without sidebar</li>
+		<li>Inline post expander: expand a post to show the full contents when the reader clicks the "Read more..." link</li>
 	</ul>
  
 <h3>TECHNICAL:</h3>
@@ -54,8 +55,8 @@
 		<li>if you experience any javascript problem, try disable animations in admin -&gt; theme options</li>
 		<li>print_preview.css is a stylesheet file used to emulate a print preview.</li>
 		<li>the theme detects the following mobile devices/browsers/os : ipod, iphone, android, opera mini, blackberry, palm, symbian and many more</li>
-		<li>in order to use the new widgets ("Social Links", "Popular Post", "Latest Activity", "Popular Categories" and "Latest comment authors"), you need to activate them in admin -&gt; widgets </li>
-		<li>the secondary menus (one on top of page and one above the footer widget area) support only one level of hierarchy</li>
+		<li>in order to use the new widgets, you need to activate them in admin -&gt; widgets </li>
+		<li>the secondary menus (one on top of page and one above the footer widget area) are optionals and must be enabled in appearance -&gt; menu. They support only one level of hierarchy</li>
 	</ul>
  
 <h3>CHANGE LOG (FROM VERSION 0.21):</h3>
@@ -64,7 +65,15 @@
 			<ul>
 				<li>floating comment form is now draggable</li>
 				<li>child theme friendly</li>
-				<li>custom Template "One column, no sidebar"</li>
+				<li>custom template "One column, no sidebar"</li>
+				<li>option for showing content or excerpt in posts overview</li>
+				<li>inline post expander</li>
+				<li>2 custom widgets ( "Besides...", "Recent Posts in Category" )</li>
+				<li>"status" format support</li>
+				<li>page 404 can be enriched with some useful widgets</li>
+				<li>New header image ("paper and coffee")</li>
+				<li>customizable links color</li>
+				<li>customizable header height</li>
 			</ul>
 		</li>
 		<li>Fixes:
@@ -73,6 +82,8 @@
 				<li>page hierarchy</li>
 				<li>minor changes in style</li>
 				<li>heavy changes in mobile support</li>
+				<li>excerpt in quickbar</li>
+				<li>Theme functions, variables, options, etc. prefixed with theme-slug (WP require)</li>
 			</ul>
 		</li>
 	</ul>
@@ -186,7 +197,7 @@
 
 <h3>CREDITS:</h3>
 	<ul>
-		<li>Eric from <a href="http://blog.mes-experts.be/" target="_blank">Mes Experts</a> for the French translation</li>
-		<li>Douglas from <a href="http://www.douglascampos.eng.br/" target="_blank">Douglas Campos</a> for the Brazilian translation</li>
+		<li>this theme uses "iconSweets2" iconset by http://www.yummygum.com</li>
+		<li>Everyone who helped us with bug reports and suggestions. Thanks!</li>
 	</ul>
  

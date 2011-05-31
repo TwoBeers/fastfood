@@ -93,11 +93,11 @@
 													<li><a title="<?php _e( 'Add New Post','fastfood' ); ?>" href="<?php echo esc_url( admin_url( 'post-new.php' ) ); ?>"><?php _e( 'Add New Post','fastfood' ); ?></a></li>
 												<?php } ?>
 												<?php if ( current_user_can( 'moderate_comments' ) ) {
-													$awaiting_mod = wp_count_comments();
-													$awaiting_mod = $awaiting_mod->moderated;
-													$awaiting_mod = $awaiting_mod ? ' (' . number_format_i18n( $awaiting_mod ) . ')' : '';
+													$ff_awaiting_mod = wp_count_comments();
+													$ff_awaiting_mod = $ff_awaiting_mod->moderated;
+													$ff_awaiting_mod = $ff_awaiting_mod ? ' (' . number_format_i18n( $ff_awaiting_mod ) . ')' : '';
 												?>
-													<li><a title="<?php _e( 'Comments', 'fastfood' ); ?>" href="<?php echo esc_url( admin_url( 'edit-comments.php' ) ); ?>"><?php _e( 'Comments', 'fastfood' ); ?></a><?php echo $awaiting_mod; ?></li>
+													<li><a title="<?php _e( 'Comments', 'fastfood' ); ?>" href="<?php echo esc_url( admin_url( 'edit-comments.php' ) ); ?>"><?php _e( 'Comments', 'fastfood' ); ?></a><?php echo $ff_awaiting_mod; ?></li>
 												<?php } ?>
 											<?php } ?>
 											<li><a title="<?php _e( 'Log out','fastfood' ); ?>" href="<?php echo esc_url( wp_logout_url() ); ?>"><?php _e( 'Log out','fastfood' ); ?></a></li>
@@ -122,14 +122,14 @@
 					<?php if ( is_singular() ) { ?>
 						<div class="minibutton">
 							<a href="<?php
-								$arr_params['style'] = 'printme';
+								$ff_arr_params['style'] = 'printme';
 								if ( get_query_var('page') ) {
-									$arr_params['page'] = esc_html( get_query_var( 'page' ) );
+									$ff_arr_params['page'] = esc_html( get_query_var( 'page' ) );
 								}
 								if ( get_query_var('cpage') ) {
-									$arr_params['cpage'] = esc_html( get_query_var( 'cpage' ) );
+									$ff_arr_params['cpage'] = esc_html( get_query_var( 'cpage' ) );
 								}
-								echo add_query_arg( $arr_params, get_permalink() );
+								echo add_query_arg( $ff_arr_params, get_permalink() );
 								?>">
 								<span class="minib_img" style="background-position: center 0px;">&nbsp;</span>
 								<span class="nb_tooltip"><?php _e( 'Print','fastfood' ); ?></span>
@@ -155,7 +155,7 @@
 							<?php if ( pings_open() ) { ?>
 
 								<div class="minibutton">
-									<a href="<?php global $tmptrackback; echo $tmptrackback; ?>" rel="trackback" title="Trackback URL">
+									<a href="<?php global $ff_tmptrackback; echo $ff_tmptrackback; ?>" rel="trackback" title="Trackback URL">
 										<span class="minib_img" style="background-position: center -72px;">&nbsp;</span>
 										<span class="nb_tooltip"><?php _e( 'Trackback URL','fastfood' ); ?></span>
 									</a>
@@ -174,20 +174,20 @@
 						</div>
 
 						<?php if ( is_page() ) { 
-							$page_nav_links = fastfood_page_navi($post->ID); // get the menu-ordered prev/next pages links
-							if ( isset ( $page_nav_links['prev'] ) ) { // prev page link ?>
+							$ff_page_nav_links = fastfood_page_navi($post->ID); // get the menu-ordered prev/next pages links
+							if ( isset ( $ff_page_nav_links['prev'] ) ) { // prev page link ?>
 								<div class="minibutton">
-									<a href="<?php echo $page_nav_links['prev']['link']; ?>" title="<?php echo $page_nav_links['prev']['title']; ?>">
+									<a href="<?php echo $ff_page_nav_links['prev']['link']; ?>" title="<?php echo $ff_page_nav_links['prev']['title']; ?>">
 										<span class="minib_img" style="background-position: center -120px;">&nbsp;</span>
-										<span class="nb_tooltip"><?php echo __( 'Previous page','fastfood' ) . ': ' . $page_nav_links['prev']['title']; ?></span>
+										<span class="nb_tooltip"><?php echo __( 'Previous page','fastfood' ) . ': ' . $ff_page_nav_links['prev']['title']; ?></span>
 									</a>
 								</div>
 							<?php }
-							if ( isset ( $page_nav_links['next'] ) ) { // next page link ?>
+							if ( isset ( $ff_page_nav_links['next'] ) ) { // next page link ?>
 								<div class="minibutton">
-									<a href="<?php echo $page_nav_links['next']['link']; ?>" title="<?php echo $page_nav_links['next']['title']; ?>">
+									<a href="<?php echo $ff_page_nav_links['next']['link']; ?>" title="<?php echo $ff_page_nav_links['next']['title']; ?>">
 										<span class="minib_img" style="background-position: center -144px;">&nbsp;</span>
-										<span class="nb_tooltip"><?php echo __( 'Next page','fastfood' ) . ': ' . $page_nav_links['next']['title']; ?></span>
+										<span class="nb_tooltip"><?php echo __( 'Next page','fastfood' ) . ': ' . $ff_page_nav_links['next']['title']; ?></span>
 									</a>
 								</div>
 							<?php } ?>

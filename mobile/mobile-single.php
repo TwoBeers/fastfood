@@ -36,11 +36,11 @@
 					</div>
 					<div <?php post_class( 'ff-post' ) ?> id="post-<?php the_ID(); ?>">
 						<h2><?php 
-							$post_title = the_title( '','',false );
-							if ( !$post_title ) {
+							$ff_post_title = the_title( '','',false );
+							if ( !$ff_post_title ) {
 								_e( '(no title)', 'fastfood' );
 							} else {
-								echo $post_title;
+								echo $ff_post_title;
 							}
 							?>
 						</h2>
@@ -58,41 +58,41 @@
 							<?php wp_link_pages(); ?>
 						</div>
 					</div>
-					<?php comments_template('/mobile/comments.php'); ?>
+					<?php comments_template('/mobile/mobile-comments.php'); ?>
 					<div class="ff-navi halfsep">
 							<span class="ff-halfspan ff-prev"><?php next_post_link('%link'); ?></span>
 							<span class="ff-halfspan ff-next"><?php previous_post_link('%link'); ?></span>
 							<div class="fixfloat"> </div>
 					</div>
 					<?php if (is_page()) {
-						$args = array(
+						$ff_args = array(
 							'post_type' => 'page',
 							'post_parent' => $post->ID,
 							'order' => 'ASC',
 							'orderby' => 'menu_order',
 							'numberposts' => 0
 							);
-						$sub_pages = get_posts( $args ); // retrieve the child pages
+						$ff_sub_pages = get_posts( $ff_args ); // retrieve the child pages
 					} else {
-						$sub_pages = '';
+						$ff_sub_pages = '';
 					}
 
-					if (!empty($sub_pages)) { ?>
+					if (!empty($ff_sub_pages)) { ?>
 						<h2 class="ff-seztit"><a href="#head">&#8743;</a> <span><?php _e( 'Child pages: ', 'fastfood' ); ?></span> <a href="#themecredits">&#8744;</a></h2>
 						<ul class="ff-group">
 							<?php 
-							foreach ( $sub_pages as $children ) {
-								echo '<li><a href="' . get_permalink( $children ) . '" title="' . esc_attr( strip_tags( get_the_title( $children ) ) ) . '">' . get_the_title( $children ) . '</a></li>';
+							foreach ( $ff_sub_pages as $ff_children ) {
+								echo '<li><a href="' . get_permalink( $ff_children ) . '" title="' . esc_attr( strip_tags( get_the_title( $ff_children ) ) ) . '">' . get_the_title( $ff_children ) . '</a></li>';
 							}
 							?>
 						</ul>
 						
 					<?php } ?>
-					<?php $the_parent_page = $post->post_parent; // retrieve the parent page
-					if ( $the_parent_page ) {?>
+					<?php $ff_the_parent_page = $post->post_parent; // retrieve the parent page
+					if ( $ff_the_parent_page ) {?>
 						<h2 class="ff-seztit"><a href="#head">&#8743;</a> <span><?php _e( 'Parent page: ', 'fastfood' ); ?></span> <a href="#themecredits">&#8744;</a></h2>
 						<ul class="ff-group">
-								<li><a href="<?php echo get_permalink( $the_parent_page ); ?>" title="<?php echo esc_attr( strip_tags( get_the_title( $the_parent_page ) ) ); ?>"><?php echo get_the_title( $the_parent_page ); ?></a></li>
+								<li><a href="<?php echo get_permalink( $ff_the_parent_page ); ?>" title="<?php echo esc_attr( strip_tags( get_the_title( $ff_the_parent_page ) ) ); ?>"><?php echo get_the_title( $ff_the_parent_page ); ?></a></li>
 						</ul>
 					<?php } ?>
 				<?php } ?>

@@ -2,7 +2,7 @@
 Theme Name: Fastfood
 Theme URI: http: //www.twobeers.net/annunci/tema-per-wordpress-fastfood
 Description: Simple and clear theme with a lot of features, like a "quick links" menu, an "easy navigation" bar, the print preview, five integrated widgets ( "Social Links", "Popular Post", "Latest Activity", "Popular Categories" and "Latest comment authors" ) and many other. Fastfood has customizable header and background, one or two columns layout, up to five widgets areas and three menu. It supports custom menus, posts thumbnail, post formats ("gallery" and "aside") and also mobile devices, with a dedicated style. WP3.1 full compatible.
-Version: 0.23
+Version: 0.24
 Tags: translation-ready, threaded-comments, custom-menu, custom-header, theme-options, fixed-width, two-columns, right-sidebar, white, silver, orange, light, sticky-post, custom-background, editor-style, rtl-language-support
 Author: TwoBeers Crew
 Author URI: http: //www.twobeers.net/
@@ -246,7 +246,6 @@ input[type=reset]:hover {
 /* =Header
 ----------------------------------------------------------*/
 #head {
-	text-shadow: 1px 1px 0 #fff;
 	text-align: left;
 	font-style: italic;
 	min-height: 100px;
@@ -829,24 +828,28 @@ li.current_page_ancestor .hiraquo {
 ul.ul_fwa {
 	margin: 0;
 }
-.ff_widget_popular_posts .post-thumb, .ff_widget_latest_commented_posts .post-thumb,
-.ff_widget_popular_posts img, .ff_widget_latest_commented_posts img {
-	-moz-box-shadow: 1px 1px 2px #555;
-	-webkit-box-shadow: 1px 1px 2px #555;
-	box-shadow: 1px 1px 2px #555;
+.ff_widget_popular_posts .post-thumb,
+.ff_widget_popular_posts img,
+.ff_widget_recent_entries .post-thumb,
+.ff_widget_recent_entries img,
+.ff_widget_latest_commented_posts .post-thumb,
+.ff_widget_latest_commented_posts img {
     position: absolute;
 	left: 0;
 	top: -13px;
-	border: 1px solid #fff;
 }
-.ff_widget_popular_posts li.li-with-thumbs, .ff_widget_latest_commented_posts li.li-with-thumbs {
+.ff_widget_popular_posts li.li-with-thumbs,
+.ff_widget_recent_entries li.li-with-thumbs,
+.ff_widget_latest_commented_posts li.li-with-thumbs {
 	margin-top: 15px;
 	min-height: 30px;
 	padding-left: 46px;
 	position: relative;
 }
-.ff_widget_popular_posts .post-thumb, .ff_widget_latest_commented_posts .post-thumb {
-	background: url("images/qbarv.png") no-repeat scroll -5px -5px #ccc;
+.ff_widget_popular_posts .post-thumb,
+.ff_widget_recent_entries .post-thumb,
+.ff_widget_latest_commented_posts .post-thumb {
+	background: url("images/qbarv.png") no-repeat scroll -5px -5px transparent;
 	display: block;
 	height: 40px;
 	width: 40px;
@@ -855,16 +858,23 @@ div.ff_widget_latest_commentators ul li {
 	list-style: none outside none;
 	float: left;
 }
-.ff_widget_latest_commentators img {
-	background-color: #ccc;
-	border: 1px solid #fff;
+div.ff_widget_latest_commentators img {
 	margin: 4px;
-	-moz-box-shadow: 1px 1px 2px #555;
-	-webkit-box-shadow: 1px 1px 2px #555;
-	box-shadow: 1px 1px 2px #555;
 }
-.ff_widget_latest_commentators a img {
+div.ff_widget_latest_commentators a img {
 	border: 1px solid #d2691e;
+}
+.ff_widget_besides .wentry-aside {
+	background: #fff;
+	border: 1px dashed #ccc;
+	padding: 3px;
+	margin-bottom: 3px;
+}
+.ff_widget_besides .wentry-status {
+	background: #fff;
+	border: 1px solid #ccc;
+	padding: 3px;
+	margin-bottom: 3px;
 }
 
 /* =posts & pages
@@ -886,7 +896,7 @@ div.ff_widget_latest_commentators ul li {
 }
 #content .post,
 #content .page {
-	margin-bottom: 20px;
+	margin-bottom: 40px;
 }
 .storycontent {
 	margin-top: 50px;
@@ -935,13 +945,55 @@ div.ff_widget_latest_commentators ul li {
 	-khtml-border-radius: 5px;
 	-webkit-border-radius: 5px;
 	border-radius: 5px;
-	background-color: #FFFFFF;
-	border: 1px solid #CCCCCC;
+	background-color: #fff;
+	border: 1px solid #ccc;
 	font-weight: normal;
 	padding: 0.2em 0.5em;
 	text-decoration: none;
 	margin: 0 5px;
 }
+.status-cont {
+	font-size: 1.18em;
+	border: 1px solid #999;
+	padding: 5px;
+}
+.status-subcont {
+	margin-left: 60px;
+}
+.status-avatar {
+	float: left;
+}
+.more-link.ajaxed {
+	padding-left: 20px;
+	background: url('images/loading.gif') no-repeat scroll left center transparent;
+}
+.img-navi {
+	text-align: center;
+	margin: 0 0 10px;
+}
+.img-navi img {
+	vertical-align: middle;
+	background-color: #ccc;
+	padding: 2px;
+}
+.img-navi .img-navi-curimg img {
+	border: 1px solid #fff;
+	padding: 5px;
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	margin: 0 10px;
+}
+.exif-attachment-info {
+	padding:10px;
+	border:1px solid #ccc;
+	margin: 20px 0;
+	text-align: left;
+	font-size: 0.85em;
+	line-height: 2em;
+}
+
 /* =comments
 ----------------------------------------------------------*/
 .comment-body {

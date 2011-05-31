@@ -45,7 +45,7 @@
 		
 			<div class="fixfloat"> </div>
 			
-			<?php $tmptrackback = get_trackback_url(); ?>
+			<?php $ff_tmptrackback = get_trackback_url(); ?>
 			
 		</div>	
 		
