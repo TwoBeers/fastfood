@@ -84,4 +84,18 @@ td.column-req {
 .color_preview_box {
 	width:2em;
 	border:1px solid #262626;
+	cursor: crosshair;
+}
+.ff_cp {
+	background:#eee;
+	border:1px solid #ccc;
+	position:absolute;
+	display:none;
+	top: 25px;
+	left: 25px;
+	z-index: 500;
+}
+.farbtastic .wheel {
+    left: 0;
+    top: 0;
 }

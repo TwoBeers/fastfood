@@ -11,6 +11,7 @@
 					<?php dynamic_sidebar( '404-widgets-area' ); ?>
 				</div>
 			<?php } else { ?>
+				<p><?php _e( 'There are several links scattered around the page, maybe you can find what you\'re looking for', 'fastfood' ); ?></p>
 				<p><?php _e( 'Perhaps using the search form will help...', 'fastfood' ); ?></p>
 				<?php get_search_form(); ?>
 			<?php } ?>

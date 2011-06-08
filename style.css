@@ -2,7 +2,7 @@
 Theme Name: Fastfood
 Theme URI: http: //www.twobeers.net/annunci/tema-per-wordpress-fastfood
 Description: Simple and clear theme with a lot of features, like a "quick links" menu, an "easy navigation" bar, the print preview, five integrated widgets ( "Social Links", "Popular Post", "Latest Activity", "Popular Categories" and "Latest comment authors" ) and many other. Fastfood has customizable header and background, one or two columns layout, up to five widgets areas and three menu. It supports custom menus, posts thumbnail, post formats ("gallery" and "aside") and also mobile devices, with a dedicated style. WP3.1 full compatible.
-Version: 0.24
+Version: 0.25
 Tags: translation-ready, threaded-comments, custom-menu, custom-header, theme-options, fixed-width, two-columns, right-sidebar, white, silver, orange, light, sticky-post, custom-background, editor-style, rtl-language-support
 Author: TwoBeers Crew
 Author URI: http: //www.twobeers.net/
@@ -973,17 +973,8 @@ div.ff_widget_latest_commentators a img {
 }
 .img-navi img {
 	vertical-align: middle;
-	background-color: #ccc;
-	padding: 2px;
-}
-.img-navi .img-navi-curimg img {
-	border: 1px solid #fff;
-	padding: 5px;
-	-moz-border-radius: 5px;
-	-khtml-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
-	margin: 0 10px;
+	border: 2px solid #ccc;
+	margin: 0 5px;
 }
 .exif-attachment-info {
 	padding:10px;
@@ -993,7 +984,16 @@ div.ff_widget_latest_commentators a img {
 	font-size: 0.85em;
 	line-height: 2em;
 }
-
+.article-share {
+	border: 1px solid #ccc;
+	-moz-border-radius: 5px;
+	-khtml-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+	margin: 10px 0;
+	padding: 5px;
+	text-align: center;
+}
 /* =comments
 ----------------------------------------------------------*/
 .comment-body {
@@ -1144,10 +1144,46 @@ ul.children {
 .gallery dl {
 	margin: 0;
 }
-.gallery br+br {
-	display: none;
-}
 
+.ffg-slider {
+	margin: 20px 0;
+	padding: 10px;
+    border: 1px solid #CCCCCC;
+    -moz-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+	text-align: center;
+}
+.ffg-slider .loading {
+	display: block;
+	background: url('images/loading.gif') no-repeat scroll center center transparent;
+	height: 30px;
+}
+.ffg-preview-link {
+	background: url('images/preview.png') no-repeat 5px center #BEC0BE;
+	padding: 5px 5px 5px 25px;
+    border: 1px solid #fff;
+    -moz-border-radius: 5px;
+    -khtml-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+	-moz-box-shadow: 0px 0px 2px #000;
+	-webkit-box-shadow: 0px 0px 2px #000;
+	box-shadow: 0px 0px 2px #000;
+}
+.ffg-slideshow {
+	margin: 20px 0;
+}
+#posts_content .gallery.ajaxed img:hover,
+#posts_content .gallery.ajaxed img.thumbsel,
+.img-navi img:hover,
+.img-navi .img-navi-curimg img {
+    border-color: #fff;
+	-moz-box-shadow: 0px 0px 4px #000;
+	-webkit-box-shadow: 0px 0px 4px #000;
+	box-shadow: 0px 0px 4px #000;
+}
 
 /* =Captions & aligment
 ----------------------------------------------------------*/

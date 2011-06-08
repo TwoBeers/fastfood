@@ -34,6 +34,9 @@
 			<div class="storycontent">
 				<?php the_content(); ?>
 			</div>
+			
+			<?php fastfood_share_this(); ?>
+			
 			<div class="fixfloat">
 				<?php wp_link_pages( 'before=<div class="comment_tools">' . __( 'Pages','fastfood' ) . ':&after=</div><div class="fixfloat"></div>' ); ?>
 			</div>

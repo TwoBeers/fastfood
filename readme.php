@@ -1,6 +1,6 @@
 <h3>Fastfood - WordPress theme</h3>
 	<ul>
-		<li>version: 0.24</li>
+		<li>version: 0.25</li>
 	</ul>
  
 <h3>Project page:</h3>
@@ -57,6 +57,7 @@
 		<li>the theme detects the following mobile devices/browsers/os : ipod, iphone, android, opera mini, blackberry, palm, symbian and many more</li>
 		<li>in order to use the new widgets, you need to activate them in admin -&gt; widgets </li>
 		<li>the secondary menus (one on top of page and one above the footer widget area) are optionals and must be enabled in appearance -&gt; menu. They support only one level of hierarchy</li>
+		<li>the theme is compatible with Internet Explorer 6 but some elements, animations or styles could be unavailable</li>
 	</ul>
  
 <h3>CHANGE LOG (FROM VERSION 0.21):</h3>
@@ -68,12 +69,14 @@
 				<li>custom template "One column, no sidebar"</li>
 				<li>option for showing content or excerpt in posts overview</li>
 				<li>inline post expander</li>
+				<li>gallery preview on fly</li>
 				<li>2 custom widgets ( "Besides...", "Recent Posts in Category" )</li>
 				<li>"status" format support</li>
 				<li>page 404 can be enriched with some useful widgets</li>
-				<li>New header image ("paper and coffee")</li>
+				<li>new 5 cool header images</li>
 				<li>customizable links color</li>
 				<li>customizable header height</li>
+				<li>share links on posts/pages</li>
 			</ul>
 		</li>
 		<li>Fixes:
@@ -83,6 +86,7 @@
 				<li>minor changes in style</li>
 				<li>heavy changes in mobile support</li>
 				<li>excerpt in quickbar</li>
+				<li>increased compatibility with IE6</li>
 				<li>Theme functions, variables, options, etc. prefixed with theme-slug (WP require)</li>
 			</ul>
 		</li>

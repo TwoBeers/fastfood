@@ -3,7 +3,7 @@
 <div id="posts_content" class="<?php echo ( fastfood_use_sidebar() ) ? 'posts_narrow' : 'posts_wide'; ?>">
 
 <?php if ( have_posts() ) {
-	global $ff_is_printpreview;
+	global $ff_is_printpreview, $fastfood_opt;
 	while ( have_posts() ) {
 		the_post(); ?>
 		
@@ -36,14 +36,14 @@
 			<?php fastfood_extrainfo( true, true, true, true, true ); ?>
 			
 			<div class="storycontent">
-				<?php the_content();	?>
+				<?php the_content(); ?>
 			</div>
+			
+			<?php fastfood_share_this(); ?>
 			
 			<div class="fixfloat">
 					<?php wp_link_pages( 'before=<div class="comment_tools">' . __( 'Pages','fastfood' ) . ':&after=</div><div class="fixfloat"></div>' ); ?>
 			</div>
-		
-			<div class="fixfloat"> </div>
 			
 			<?php $ff_tmptrackback = get_trackback_url(); ?>
 			

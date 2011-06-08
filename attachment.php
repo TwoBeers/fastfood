@@ -44,11 +44,11 @@
 							<div class="img-navi" style="text-align: center;">
 				
 							<?php if ( isset( $ff_attachments[ $ff_prevk ] ) ) { ?>
-									<a class="size-thumbnail" title="" href="<?php echo get_attachment_link( $ff_attachments[ $ff_prevk ]->ID ); ?>">&laquo; <?php echo wp_get_attachment_image( $ff_attachments[ $ff_prevk ]->ID, array( 50, 50 ) ); ?></a>
+									<a class="size-thumbnail" title="" href="<?php echo get_attachment_link( $ff_attachments[ $ff_prevk ]->ID ); ?>">&laquo; <?php echo wp_get_attachment_image( $ff_attachments[ $ff_prevk ]->ID, array( 70, 70 ) ); ?></a>
 							<?php } ?>
-							<span class="img-navi-curimg"><?php echo wp_get_attachment_image( $post->ID, array( 50, 50 ) ); ?></span>
+							<span class="img-navi-curimg"><?php echo wp_get_attachment_image( $post->ID, array( 70, 70 ) ); ?></span>
 							<?php if ( isset( $ff_attachments[ $ff_nextk ] ) ) { ?>
-									<a class="size-thumbnail" title="" href="<?php echo get_attachment_link( $ff_attachments[ $ff_nextk ]->ID ); ?>"><?php echo wp_get_attachment_image( $ff_attachments[ $ff_nextk ]->ID, array( 50, 50 ) ); ?> &raquo;</a>
+									<a class="size-thumbnail" title="" href="<?php echo get_attachment_link( $ff_attachments[ $ff_nextk ]->ID ); ?>"><?php echo wp_get_attachment_image( $ff_attachments[ $ff_nextk ]->ID, array( 70, 70 ) ); ?> &raquo;</a>
 							<?php } ?>
 							</div>
 							<p class="attachment"><a href="<?php echo wp_get_attachment_url(); ?>" title="<?php _e( 'View full size','fastfood' ) ;  // link to Full size image ?>" rel="attachment"><?php
@@ -97,8 +97,9 @@
 							<a href="<?php echo wp_get_attachment_url(); ?>" title="<?php echo esc_attr( get_the_title() ); ?>" rel="attachment"><?php echo basename( get_permalink() ); ?></a>
 							<div class="entry-caption"><?php if ( !empty( $post->post_excerpt ) ) the_excerpt(); ?></div>
 						<?php } ?>
-						</div><!-- .entry-attachment -->
-					</div>
+					</div><!-- .entry-attachment -->
+				</div>
+				<?php fastfood_share_this(); ?>
 				<div class="fixfloat">
 						<?php wp_link_pages( 'before=<div class="comment_tools">' . __( 'Pages','fastfood' ) . ':&after=</div><div class="fixfloat"></div>' ); ?>
 				</div>

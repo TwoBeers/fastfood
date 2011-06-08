@@ -16,9 +16,22 @@ function pickColor(domid,color) {
 	jQuery(inputid).val(color);
 }
 
-jQuery(document).ready(function($){
+jQuery(document).ready(function(){
 	fastfoodSwitchTab.set('quickbar');
 	
+	jQuery('.ff_input').keyup(function() {
+		var _hex = jQuery(this).val();
+		var hex = _hex;
+		if ( hex.substr(0,1) != '#' )
+			hex = '#' + hex;
+		hex = hex.replace(/[^#a-fA-F0-9]+/, '');
+		hex = hex.substring(0,7);
+		if ( hex != _hex )
+			jQuery(this).val(hex);
+		if ( hex.length == 4 || hex.length == 7 )
+			pickColor( jQuery(this).attr("id").replace('ff_input_', '') , hex );
+	});
+
 	jQuery(document).mousedown(function(){
 		jQuery('.ff_cp').each( function() {
 			var display = jQuery(this).css('display');

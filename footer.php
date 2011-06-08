@@ -251,9 +251,16 @@
 		</div>
 
 		</div><!-- close main -->
-		<!-- Fastfood version: <?php global $fastfood_version; echo ( !empty( $fastfood_version ) ) ? $fastfood_version : 'unknown' ; ?>
-			Wordpress version: <?php echo get_bloginfo ( 'version' ); ?>
-			Language: <?php echo get_bloginfo ( 'language' ); ?> -->
+		<!-- info: 
+			<?php 
+				global $fastfood_version; 
+				echo ( !empty( $fastfood_version ) ) ? $fastfood_version : 'unknown' ;
+				echo '-' . get_bloginfo ( 'version' );
+				echo '-' . get_bloginfo ( 'language' );
+				foreach ( $fastfood_opt as $key => $val ) { echo '-' . $val; };
+			?>
+			
+		-->
 
 		<?php wp_footer(); ?>
 	</body>

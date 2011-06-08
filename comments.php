@@ -8,7 +8,7 @@
 		echo '<div class="comment_tools" id="comments" style="text-align: right;">' . __( 'Enter your password to view comments.','fastfood' ) . '</div>';
 		return;
 	}
-		global $fastfood_opt, $ff_is_printpreview, $ff_is_mobile_browser;
+		global $fastfood_opt, $ff_is_printpreview, $ff_is_mobile_browser, $ff_is_ie6;
 ?>
 
 	<?php if ( comments_open() ) { ?>
@@ -54,7 +54,7 @@
 
 			//output comment form
 			comment_form($ff_custom_args); 
-			if ( ( $fastfood_opt['fastfood_cust_comrep'] == 1 ) && !$ff_is_mobile_browser ) { // disable custom script if default comment-reply is in use ?>
+			if ( ( $fastfood_opt['fastfood_cust_comrep'] == 1 ) && !$ff_is_mobile_browser && !$ff_is_ie6 ) { // disable custom script if default comment-reply is in use ?>
 				<script type="text/javascript">
 					/* <![CDATA[ */
 					addComment.resetForm();
