@@ -1,6 +1,6 @@
 <h3>Fastfood - WordPress theme</h3>
 	<ul>
-		<li>version: 0.25</li>
+		<li>version: 0.26</li>
 	</ul>
  
 <h3>Project page:</h3>
@@ -77,6 +77,9 @@
 				<li>customizable links color</li>
 				<li>customizable header height</li>
 				<li>share links on posts/pages</li>
+				<li>Weibo (aka Sine) and Tencent services added to "Social Links" widget</li>
+				<li>new custom background page (now with the position-x missing option)</li>
+				<li>option for disabling the navigation bar</li>
 			</ul>
 		</li>
 		<li>Fixes:

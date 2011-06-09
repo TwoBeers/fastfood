@@ -458,7 +458,9 @@ class fastfood_Widget_social extends WP_Widget {
 			'Reddit',
 			'Vimeo',
 			'StumbleUpon',
+			'Sina',
 			'Technorati',
+			'Tencent',
 			'Twitter',
 			'Youtube',
 			'RSS');

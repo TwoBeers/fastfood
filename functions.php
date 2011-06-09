@@ -27,6 +27,7 @@ add_filter( 'the_content', 'fastfood_content_replace' );
 add_filter( 'excerpt_length', 'fastfood_new_excerpt_length' );
 add_filter( 'get_comment_author_link', 'fastfood_add_quoted_on' );
 add_filter('user_contactmethods','fastfood_new_contactmethods',10,1);
+add_filter('widget_text', 'do_shortcode');
 /**** end theme hooks ****/
 
 // load theme options in $fastfood_opt variable, globally retrieved in php files
@@ -98,6 +99,8 @@ function fastfood_get_coa() {
 		'fastfood_head_h' => array( 'group' =>'other', 'type' =>'sel', 'default'=>'120px', 'options'=>array( '120px', '180px', '240px', '300px' ), 'description'=>__( 'Header height','fastfood' ),'info'=>__( '[default = 120px]','fastfood' ),'req'=>'' ),
 		'fastfood_head_link' => array( 'group' =>'other', 'type' =>'chk', 'default'=>0,'description'=>__( 'linked header','fastfood' ),'info'=>sprintf( __( "use the header image as home link. The <a href=\"%s\">header image</a> must be set. If enabled, the site title and description are hidden [default = disabled]", 'fastfood' ), get_admin_url() . 'themes.php?page=custom-header' ), 'req'=>'' ),
 		'fastfood_font_size' => array( 'group' =>'other', 'type' =>'sel', 'default'=>'11px', 'options'=>array('10px','11px','12px','13px','14px'), 'description'=>__( 'font size','fastfood' ),'info'=>__( '[default = 11px]','fastfood' ),'req'=>'' ),
+		'fastfood_custom_bg' => array( 'group' =>'other', 'type' =>'chk', 'default'=>1,'description'=>__( 'custom background','fastfood' ),'info'=>sprintf( __( "use the enhanced custom background page instead of the standard one. Disable it if the <a href=\"%s\">custom background page</a> works weird [default = enabled]", 'fastfood' ), get_admin_url() . 'themes.php?page=custom-background' ), 'req'=>'' ),
+		'fastfood_navbuttons' => array( 'group' =>'other', 'type' =>'chk', 'default'=>1,'description'=>__( 'navigation buttons', 'fastfood' ),'info'=>__( "the fixed navigation bar on the right. Note: Is strongly recommended to keep it enabled [default = enabled]", 'fastfood' ),'req'=>'' ),
 		'fastfood_tbcred' => array( 'group' =>'other', 'type' =>'chk', 'default'=>1,'description'=>__( 'theme credits','fastfood' ),'info'=>__( "please, don't hide theme credits [default = enabled]",'fastfood' ),'req'=>'' )
 	);
 	return $fastfood_coa;
@@ -274,15 +277,17 @@ if ( !function_exists( 'fastfood_scripts' ) ) {
 			wp_enqueue_script( 'jquery-ui-effects', get_template_directory_uri() . '/js/jquery-ui-effects-1.8.6.min.js', array( 'jquery' ), '1.8.6', false  ); //fastfood js
 		}
 		if ( is_singular() ) {
-			if ( $fastfood_opt['fastfood_gallery_preview'] == 1 ) wp_enqueue_script( "ff-gallery-preview", get_template_directory_uri() . '/js/gallery-slideshow.min.js', array( 'jquery' ), $fastfood_version, true );
 			if ( ( $fastfood_opt['fastfood_jsani'] == 1 ) && ( $fastfood_opt['fastfood_cust_comrep'] == 1 ) ) {
 				wp_enqueue_script( 'ff-comment-reply', get_template_directory_uri() . '/js/comment-reply.min.js', array( 'jquery-ui-draggable' ), $fastfood_version, false   ); //custom comment-reply pop-up box
 			} else {
 				wp_enqueue_script( 'comment-reply' ); //custom comment-reply pop-up box
 			}
 		}
+		if ( $fastfood_opt['fastfood_gallery_preview'] == 1 ) {
+			wp_enqueue_script( "ff-gallery-preview", get_template_directory_uri() . '/js/gallery-slideshow.min.js', array( 'jquery' ), $fastfood_version, true );
+		}
 		if ( ( $fastfood_opt['fastfood_post_expand'] == 1 ) ) {
-			wp_enqueue_script( "ff-post-expander", get_template_directory_uri() . '/js/post-expander.js', array( 'jquery' ), $fastfood_version, true );
+			wp_enqueue_script( "ff-post-expander", get_template_directory_uri() . '/js/post-expander.min.js', array( 'jquery' ), $fastfood_version, true );
 		}
 
 	}
@@ -455,7 +460,7 @@ if ( !function_exists( 'fastfood_multipages' ) ) {
 					<?php
 					if ( $the_parent_page ) {
 						$the_parent_link = '<a href="' . get_permalink( $the_parent_page ) . '" title="' . get_the_title( $the_parent_page ) . '">' . get_the_title( $the_parent_page ) . '</a>';
-						echo __('Parent page: ','fastfood') . $the_parent_link ; // echoes the parent
+						echo __('Upper page: ','fastfood') . $the_parent_link ; // echoes the parent
 					}
 					if ( ( $childrens ) && ( $the_parent_page ) ) { echo ' - '; } // if parent & child, echoes the separator
 					if ( $childrens ) {
@@ -464,7 +469,7 @@ if ( !function_exists( 'fastfood_multipages' ) ) {
 							$the_child_list[] = '<a href="' . get_permalink( $children ) . '" title="' . get_the_title( $children ) . '">' . get_the_title( $children ) . '</a>';
 						}
 						$the_child_list = implode(', ' , $the_child_list);
-						echo __('Child pages: ','fastfood') . $the_child_list; // echoes the childs
+						echo __('Lower pages: ','fastfood') . $the_child_list; // echoes the childs
 					}
 					?>
 				</div>
@@ -486,7 +491,8 @@ if ( !function_exists( 'fastfood_extrainfo' ) ) {
 			<div class="meta top_meta">
 				<?php
 				if ( $auth ) { ?>
-					<div class="metafield_trigger" style="left: 10px;"><?php _e( 'by', 'fastfood' ); ?> <?php printf( '<a href="' . get_author_posts_url( get_the_author_meta( 'ID' ) ) . '" title="' . sprintf( __('View all posts by %s', 'fastfood'), esc_attr( get_the_author() ) ) . '">' . get_the_author() . '</a>' ); ?></div>
+					<?php $post_auth = ( $auth === true ) ? '<a href="' . get_author_posts_url( get_the_author_meta( 'ID' ) ) . '" title="' . sprintf( __( 'View all posts by %s', 'fastfood' ), esc_attr( get_the_author() ) ) . '">' . get_the_author() . '</a>' : $auth; ?>
+					<div class="metafield_trigger" style="left: 10px;"><?php printf( __( 'by %s', 'fastfood' ), $post_auth ); ?></div>
 				<?php
 				}
 				if ( $cats ) {
@@ -551,7 +557,10 @@ if ( !function_exists( 'fastfood_extrainfo' ) ) {
 		<?php
 		} else { ?>
 			<div class="meta">
-				<?php if ( $auth ) { echo __( 'by', 'fastfood' ) . ' '; printf( '<a href="' . get_author_posts_url( get_the_author_meta( 'ID' ) ) . '" title="' . sprintf( 'View all posts by %s', esc_attr( get_the_author() ) ) . '">' . get_the_author() . '</a>' ); echo '<br />'; }; ?>
+				<?php if ( $auth ) { ?>
+					<?php $post_auth = ( $auth === true ) ? '<a href="' . get_author_posts_url( get_the_author_meta( 'ID' ) ) . '" title="' . sprintf( __( 'View all posts by %s', 'fastfood' ), esc_attr( get_the_author() ) ) . '">' . get_the_author() . '</a>' : $auth; ?>
+					<?php printf( __( 'by %s', 'fastfood' ), $post_auth ); ?>
+				<?php } ?>
 				<?php if ( $date ) { printf( __( 'Published on: %1$s', 'fastfood' ), get_the_time( get_option( 'date_format' ) ) ) ; echo '<br />'; }?>
 				<?php if ( $comms ) { echo __( 'Comments', 'fastfood' ) . ': '; comments_popup_link( __( 'No Comments', 'fastfood' ), __( '1 Comment', 'fastfood' ), __( '% Comments', 'fastfood' ) ); echo '<br />'; } ?>
 				<?php if ( $tags ) { echo __( 'Tags:', 'fastfood' ) . ' '; if ( !get_the_tags() ) { _e( 'No Tags', 'fastfood' ); } else { the_tags('', ', ', ''); }; echo '<br />';  } ?>
@@ -570,22 +579,28 @@ if ( !function_exists( 'fastfood_share_this' ) ) {
 		if ( $fastfood_opt['fastfood_share_this'] == 1 ) { ?>
 		   <div class="article-share fixfloat">
 				<span class="share-item">
-					<a href="http://twitter.com/share" class="twitter-share-button" data-count="horizontal">Tweet</a><script type="text/javascript" src="http://platform.twitter.com/widgets.js"></script>
+					<a rel="nofollow" target="_blank" href="http://twitter.com/share?url=<?php echo get_permalink(); ?>&amp;text=<?php echo urlencode( get_the_title() ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/Twitter.png" width="24" height="24" alt="Twitter Button" title="<?php printf( __( 'Share with %s','fastfood' ), 'Twitter' ); ?>" /></a>
 				</span>
 				<span class="share-item">
-					<a href="http://digg.com/submit?url=<?php echo get_permalink(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/Digg.png" width="24" height="24" alt="Digg Button" title="<?php printf( __( 'Share with %s','fastfood' ), 'Digg' ); ?>" /></a>
+					<a rel="nofollow" target="_blank" href="http://digg.com/submit?url=<?php echo get_permalink(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/Digg.png" width="24" height="24" alt="Digg Button" title="<?php printf( __( 'Share with %s','fastfood' ), 'Digg' ); ?>" /></a>
 				</span>
 				<span class="share-item">
-					<a href="http://www.stumbleupon.com/submit?url=<?php echo get_permalink(); ?>&amp;title=<?php echo urlencode( get_the_title() ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/Stumbleupon.png" width="24" height="24" alt="Stumbleupon Button" title="<?php printf( __( 'Share with %s','fastfood' ), 'Stumbleupon' ); ?>" /></a>
+					<a rel="nofollow" target="_blank" href="http://www.stumbleupon.com/submit?url=<?php echo get_permalink(); ?>&amp;title=<?php echo urlencode( get_the_title() ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/Stumbleupon.png" width="24" height="24" alt="Stumbleupon Button" title="<?php printf( __( 'Share with %s','fastfood' ), 'Stumbleupon' ); ?>" /></a>
 				</span>
 				<span class="share-item">
-					<a target="_blank" href="http://www.facebook.com/sharer.php?u=<?php echo get_permalink(); ?>&amp;t=<?php echo urlencode( get_the_title() ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/Facebook.png" width="24" height="24" alt="Facebook Button" title="<?php printf( __( 'Share with %s','fastfood' ), 'Facebook' ); ?>" /></a>
+					<a rel="nofollow" target="_blank" href="http://www.facebook.com/sharer.php?u=<?php echo get_permalink(); ?>&amp;t=<?php echo urlencode( get_the_title() ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/Facebook.png" width="24" height="24" alt="Facebook Button" title="<?php printf( __( 'Share with %s','fastfood' ), 'Facebook' ); ?>" /></a>
 				</span>
 				<span class="share-item">
-					<a href="http://reddit.com/submit?url=<?php echo get_permalink(); ?>&amp;title=<?php echo urlencode( get_the_title() ); ?>" rel="nofollow" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/Reddit.png" width="24" height="24" alt="Reddit Button" title="<?php printf( __( 'Share with %s','fastfood' ), 'Reddit' ); ?>" /></a>
+					<a rel="nofollow" target="_blank" href="http://reddit.com/submit?url=<?php echo get_permalink(); ?>&amp;title=<?php echo urlencode( get_the_title() ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/Reddit.png" width="24" height="24" alt="Reddit Button" title="<?php printf( __( 'Share with %s','fastfood' ), 'Reddit' ); ?>" /></a>
 				</span>		
 				<span class="share-item">
-					<a href="http://www.google.com/reader/link?title=<?php echo urlencode( get_the_title() ); ?>&amp;url=<?php echo get_permalink(); ?>" target="_blank"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/Buzz.png" width="24" height="24" alt="Buzz Button" title="<?php printf( __( 'Share with %s','fastfood' ), 'Buzz' ); ?>" /></a>
+					<a rel="nofollow" target="_blank" href="http://www.google.com/reader/link?title=<?php echo urlencode( get_the_title() ); ?>&amp;url=<?php echo get_permalink(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/Buzz.png" width="24" height="24" alt="Buzz Button" title="<?php printf( __( 'Share with %s','fastfood' ), 'Buzz' ); ?>" /></a>
+				</span>
+				<span class="share-item">
+					<a rel="nofollow" target="_blank" href="http://v.t.sina.com.cn/share/share.php?url=<?php echo get_permalink(); ?>&amp;title=<?php echo urlencode( get_the_title() ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/Sina.png" width="24" height="24" alt="Sina Button" title="<?php printf( __( 'Share with %s','fastfood' ), 'Sina' ); ?>" /></a>
+				</span>
+				<span class="share-item">
+					<a rel="nofollow" target="_blank" href="http://v.t.qq.com/share/share.php?title=<?php echo urlencode( get_the_title() ); ?>&amp;url=<?php echo get_permalink(); ?>&amp;site=<?php echo home_url(); ?>&amp;source=<?php echo urlencode( get_bloginfo( $show, 'display' ) ); ?>&amp;pic=<?php echo wp_get_attachment_url( get_post_thumbnail_id() ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/Tencent.png" width="24" height="24" alt="Tencent Button" title="<?php printf( __( 'Share with %s','fastfood' ), 'Tencent' ); ?>" /></a>
 				</span>
 			</div>
 		<?php }
@@ -849,7 +864,11 @@ if ( !function_exists( 'fastfood_setup' ) ) {
 		add_custom_image_header( 'fastfood_header_style', 'fastfood_admin_header_style' );
 		
 		// Add a way for the custom background to be styled in the admin panel that controls
-		add_custom_background( 'fastfood_custom_bg' , '' , '' );
+		if ( isset( $fastfood_opt['fastfood_custom_bg'] ) && $fastfood_opt['fastfood_custom_bg'] == 1 ) {
+			fastfood_add_custom_background( 'fastfood_custom_bg' , 'fastfood_admin_custom_bg_style' , '' );
+		} else {
+			add_custom_background( 'fastfood_custom_bg' , '' , '' );
+		}
 	
 		// ... and thus ends the changeable header business.
 	
@@ -922,6 +941,14 @@ if ( !function_exists( 'fastfood_admin_header_style' ) ) {
 	}
 }
 
+// Styles the header image displayed on the Appearance > Header admin panel.
+if ( !function_exists( 'fastfood_admin_custom_bg_style' ) ) {
+	function fastfood_admin_custom_bg_style() {	
+		echo '<link rel="stylesheet" type="text/css" href="' . get_template_directory_uri() . '/css/custom-bg.css" />' . "\n";
+	}
+}
+
+
 // the custon header style - add style customization to page - gets included in the site header
 if ( !function_exists( 'fastfood_header_style' ) ) {
 	function fastfood_header_style(){
@@ -971,6 +998,7 @@ if ( !function_exists( 'fastfood_header_style' ) ) {
 				margin-right:-2px;
 			}
 			.gallery .attachment-thumbnail,
+			.ffg-img img,
 			.storycontent img.size-full {
 				width:auto;
 			}
@@ -999,9 +1027,11 @@ if ( !function_exists( 'fastfood_custom_bg' ) ) {
 			if ( ! in_array( $repeat, array( 'no-repeat', 'repeat-x', 'repeat-y', 'repeat' ) ) ) $repeat = 'repeat';
 			$repeat = " background-repeat: $repeat;";
 	
-			$position = get_theme_mod( 'background_position_x', 'left' );
-			if ( ! in_array( $position, array( 'center', 'right', 'left' ) ) ) $position = 'left';
-			$position = " background-position: top $position;";
+			$position_x = get_theme_mod( 'background_position_x', 'left' );
+			$position_y = get_theme_mod( 'background_position_y', 'top' );
+			if ( ! in_array( $position_x, array( 'center', 'right', 'left' ) ) ) $position = 'left';
+			if ( ! in_array( $position_y, array( 'center', 'top', 'bottom' ) ) ) $position = 'top';
+			$position = " background-position: $position_x $position_y;";
 	
 			$attachment = get_theme_mod( 'background_attachment', 'scroll' );
 			if ( ! in_array( $attachment, array( 'fixed', 'scroll' ) ) ) $attachment = 'scroll';
@@ -1239,7 +1269,7 @@ if ( !function_exists( 'fastfood_gallery_slide_show_post' ) ) {
 			while ( have_posts() ) {
 				the_post();
 				?>
-					<a href="<?php echo wp_get_attachment_url(); ?>" title="<?php _e( 'View full size','fastfood' ) ;  // link to Full size image ?>" rel="attachment"><?php
+					<a href="<?php echo wp_get_attachment_url(); ?>" title="<?php _e( 'View full size', 'fastfood' ) ;  // link to Full size image ?>" rel="attachment"><?php
 						$ff_attachment_width  = apply_filters( 'fastfood_attachment_size', 1000 );
 						$ff_attachment_height = apply_filters( 'fastfood_attachment_height', 1000 );
 						echo wp_get_attachment_image( $post->ID, array( $ff_attachment_width, $ff_attachment_height ) ); // filterable image width with, essentially, no limit for image height.
@@ -1267,6 +1297,27 @@ if ( !function_exists( 'mb_strimwidth' ) ) {
 			$ret_string = $string;
 		}
 		return $ret_string;
+	}
+}
+
+//Add callbacks for background image display. based on WP theme.php -> add_custom_background()
+if ( !function_exists( 'fastfood_add_custom_background' ) ) {
+	function fastfood_add_custom_background( $header_callback = '', $admin_header_callback = '', $admin_image_div_callback = '' ) {
+		if ( isset( $GLOBALS['custom_background'] ) )
+			return;
+
+		if ( empty( $header_callback ) )
+			$header_callback = '_custom_background_cb';
+
+		add_action( 'wp_head', $header_callback );
+
+		add_theme_support( 'custom-background', array( 'callback' => $header_callback ) );
+
+		if ( ! is_admin() )
+			return;
+		require_once( 'my-custom-background.php' );
+		$GLOBALS['custom_background'] =& new Custom_Background( $admin_header_callback, $admin_image_div_callback );
+		add_action( 'admin_menu', array( &$GLOBALS['custom_background'], 'init' ) );
 	}
 }
 

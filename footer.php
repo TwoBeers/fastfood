@@ -117,6 +117,9 @@
 				<?php _e( 'Welcome','fastfood' ); ?> <?php if ( is_user_logged_in() ) { echo $current_user->display_name; } ?>, <?php printf( __('today is %1$s, %2$s','fastfood'), date_i18n( __( 'l','fastfood' ) ), date_i18n( get_option( 'date_format' ) ) ); ?>
 			</div>
 
+			<?php
+				if ( $fastfood_opt['fastfood_navbuttons'] == 1 ) {
+			?>
 			<div id="navbuttons_cont">
 				<div id="navbuttons">
 					<?php if ( is_singular() ) { ?>
@@ -248,6 +251,7 @@
 					<div class="fixfloat"> </div>
 				</div>
 			</div>
+			<?php } ?>
 		</div>
 
 		</div><!-- close main -->
