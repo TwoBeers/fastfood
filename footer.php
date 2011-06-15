@@ -258,10 +258,9 @@
 		<!-- info: 
 			<?php 
 				global $fastfood_version; 
-				echo ( !empty( $fastfood_version ) ) ? $fastfood_version : 'unknown' ;
-				echo '-' . get_bloginfo ( 'version' );
-				echo '-' . get_bloginfo ( 'language' );
-				foreach ( $fastfood_opt as $key => $val ) { echo '-' . $val; };
+				echo ' | WP version - ' . get_bloginfo ( 'version' );
+				echo ' | WP language - ' . get_bloginfo ( 'language' );
+				foreach ( $fastfood_opt as $key => $val ) { echo ' | ' . $key . ' - ' . $val; };
 			?>
 			
 		-->

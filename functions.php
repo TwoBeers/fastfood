@@ -273,8 +273,8 @@ if ( !function_exists( 'fastfood_scripts' ) ) {
 			return;
 		}
 		if ( ( $fastfood_opt['fastfood_jsani'] == 1 ) ) {
-			wp_enqueue_script( 'fastfoodscript', get_template_directory_uri() . '/js/fastfoodscript.min.js', array( 'jquery' ), $fastfood_version, true  ); //fastfood js
 			wp_enqueue_script( 'jquery-ui-effects', get_template_directory_uri() . '/js/jquery-ui-effects-1.8.6.min.js', array( 'jquery' ), '1.8.6', false  ); //fastfood js
+			wp_enqueue_script( 'fastfoodscript', get_template_directory_uri() . '/js/fastfoodscript.min.js', array( 'jquery' ), $fastfood_version, true  ); //fastfood js
 		}
 		if ( is_singular() ) {
 			if ( ( $fastfood_opt['fastfood_jsani'] == 1 ) && ( $fastfood_opt['fastfood_cust_comrep'] == 1 ) ) {
@@ -585,7 +585,7 @@ if ( !function_exists( 'fastfood_share_this' ) ) {
 					<a rel="nofollow" target="_blank" href="http://digg.com/submit?url=<?php echo get_permalink(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/Digg.png" width="24" height="24" alt="Digg Button" title="<?php printf( __( 'Share with %s','fastfood' ), 'Digg' ); ?>" /></a>
 				</span>
 				<span class="share-item">
-					<a rel="nofollow" target="_blank" href="http://www.stumbleupon.com/submit?url=<?php echo get_permalink(); ?>&amp;title=<?php echo urlencode( get_the_title() ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/Stumbleupon.png" width="24" height="24" alt="Stumbleupon Button" title="<?php printf( __( 'Share with %s','fastfood' ), 'Stumbleupon' ); ?>" /></a>
+					<a rel="nofollow" target="_blank" href="http://www.stumbleupon.com/submit?url=<?php echo get_permalink(); ?>&amp;title=<?php echo urlencode( get_the_title() ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/StumbleUpon.png" width="24" height="24" alt="StumbleUpon Button" title="<?php printf( __( 'Share with %s','fastfood' ), 'StumbleUpon' ); ?>" /></a>
 				</span>
 				<span class="share-item">
 					<a rel="nofollow" target="_blank" href="http://www.facebook.com/sharer.php?u=<?php echo get_permalink(); ?>&amp;t=<?php echo urlencode( get_the_title() ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/Facebook.png" width="24" height="24" alt="Facebook Button" title="<?php printf( __( 'Share with %s','fastfood' ), 'Facebook' ); ?>" /></a>
@@ -597,7 +597,7 @@ if ( !function_exists( 'fastfood_share_this' ) ) {
 					<a rel="nofollow" target="_blank" href="http://www.google.com/reader/link?title=<?php echo urlencode( get_the_title() ); ?>&amp;url=<?php echo get_permalink(); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/Buzz.png" width="24" height="24" alt="Buzz Button" title="<?php printf( __( 'Share with %s','fastfood' ), 'Buzz' ); ?>" /></a>
 				</span>
 				<span class="share-item">
-					<a rel="nofollow" target="_blank" href="http://v.t.sina.com.cn/share/share.php?url=<?php echo get_permalink(); ?>&amp;title=<?php echo urlencode( get_the_title() ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/Sina.png" width="24" height="24" alt="Sina Button" title="<?php printf( __( 'Share with %s','fastfood' ), 'Sina' ); ?>" /></a>
+					<a rel="nofollow" target="_blank" href="http://v.t.sina.com.cn/share/share.php?url=<?php echo get_permalink(); ?>&amp;title=<?php echo urlencode( get_the_title() ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/Sina.png" width="24" height="24" alt="Sina Button" title="<?php printf( __( 'Share with %s','fastfood' ), 'Sina Weibo' ); ?>" /></a>
 				</span>
 				<span class="share-item">
 					<a rel="nofollow" target="_blank" href="http://v.t.qq.com/share/share.php?title=<?php echo urlencode( get_the_title() ); ?>&amp;url=<?php echo get_permalink(); ?>&amp;site=<?php echo home_url(); ?>&amp;source=<?php echo urlencode( get_bloginfo( $show, 'display' ) ); ?>&amp;pic=<?php echo wp_get_attachment_url( get_post_thumbnail_id() ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/Tencent.png" width="24" height="24" alt="Tencent Button" title="<?php printf( __( 'Share with %s','fastfood' ), 'Tencent' ); ?>" /></a>
@@ -639,7 +639,7 @@ if ( !function_exists( 'fastfood_theme_admin_scripts' ) ) {
 if ( !function_exists( 'fastfood_widgets_style' ) ) {
 	function fastfood_widgets_style() {
 		//add custom stylesheet
-		echo '<link rel="stylesheet" type="text/css" href="' . get_template_directory_uri() . '/css/widgets.css" />' . "\n";
+		wp_enqueue_style( 'ff-widgets-style', get_template_directory_uri() . '/css/widgets.css', false, '', 'screen' );
 	}
 }
 
@@ -1143,7 +1143,7 @@ if ( !function_exists( 'fastfood_add_quoted_on' ) ) {
 	}
 }
 
-//little add to the #more-link
+// localize js
 if ( !function_exists( 'fastfood_localize_js' ) ) {
 	function fastfood_localize_js() {
 		?>

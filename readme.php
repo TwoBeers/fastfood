@@ -90,7 +90,7 @@
 				<li>heavy changes in mobile support</li>
 				<li>excerpt in quickbar</li>
 				<li>increased compatibility with IE6</li>
-				<li>Theme functions, variables, options, etc. prefixed with theme-slug (WP require)</li>
+				<li>title in "Social Links" widget</li>
 			</ul>
 		</li>
 	</ul>

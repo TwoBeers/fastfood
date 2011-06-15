@@ -488,7 +488,7 @@ if ( get_background_image() ) {
 </fieldset></td>
 </tr>
 <tr valign="top">
-<th scope="row"><?php _e( 'Color' ); ?></th>
+<th scope="row"><?php _e( 'Color', 'fastfood' ); ?></th>
 <td><fieldset><legend class="screen-reader-text"><span><?php _e( 'Background Color', 'fastfood' ); ?></span></legend>
 <?php $show_clear = get_background_color() ? '' : ' style="display:none"'; ?>
 <input type="text" name="background-color" id="background-color" value="#<?php echo esc_attr(get_background_color()) ?>" />
