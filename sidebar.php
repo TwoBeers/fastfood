@@ -1,6 +1,6 @@
 <!-- begin sidebar -->
 <div id="sidebardx">
-
+	<?php fastfood_hook_before_right_sidebar_content(); ?>
 	<?php 	/* Widgetized sidebar, if you have the plugin installed. */
 	if ( !dynamic_sidebar( 'primary-widget-area' ) ) { ?>
 
@@ -28,6 +28,7 @@
 	<?php } ?>
 
 	<div class="fixfloat"> </div>
+	<?php fastfood_hook_after_right_sidebar_content(); ?>
 
 </div>
 <!-- end sidebar -->

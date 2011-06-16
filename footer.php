@@ -1,7 +1,9 @@
-<?php global $current_user, $fastfood_opt, $fastfood_is_allcat_page, $fastfood_version, $ff_is_mobile_browser; ?>
+<?php global $current_user, $fastfood_opt, $fastfood_is_allcat_page, $fastfood_version, $ff_is_mobile_browser, $post; ?>
 
 <!-- begin footer -->
+			<?php fastfood_hook_before_footer(); ?>
 			<div id="footer">
+				<?php fastfood_hook_footer(); ?>
 				<?php wp_nav_menu( array( 'container_class' => 'ff-menu', 'container_id' => 'secondary2', 'fallback_cb' => false, 'theme_location' => 'secondary2', 'depth' => 1 ) ); ?>
 				<?php get_sidebar( 'footer' ); ?>
 
@@ -9,6 +11,7 @@
 				<!-- <?php echo get_num_queries(); ?> queries. <?php timer_stop(1); ?> seconds. -->
 
 			</div><!-- close footer -->
+			<?php fastfood_hook_after_footer(); ?>
 
 		</div><!-- close content -->
 

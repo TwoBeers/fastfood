@@ -600,7 +600,7 @@ if ( !function_exists( 'fastfood_share_this' ) ) {
 					<a rel="nofollow" target="_blank" href="http://v.t.sina.com.cn/share/share.php?url=<?php echo get_permalink(); ?>&amp;title=<?php echo urlencode( get_the_title() ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/Sina.png" width="24" height="24" alt="Sina Button" title="<?php printf( __( 'Share with %s','fastfood' ), 'Sina Weibo' ); ?>" /></a>
 				</span>
 				<span class="share-item">
-					<a rel="nofollow" target="_blank" href="http://v.t.qq.com/share/share.php?title=<?php echo urlencode( get_the_title() ); ?>&amp;url=<?php echo get_permalink(); ?>&amp;site=<?php echo home_url(); ?>&amp;source=<?php echo urlencode( get_bloginfo( $show, 'display' ) ); ?>&amp;pic=<?php echo wp_get_attachment_url( get_post_thumbnail_id() ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/Tencent.png" width="24" height="24" alt="Tencent Button" title="<?php printf( __( 'Share with %s','fastfood' ), 'Tencent' ); ?>" /></a>
+					<a rel="nofollow" target="_blank" href="http://v.t.qq.com/share/share.php?title=<?php echo urlencode( get_the_title() ); ?>&amp;url=<?php echo get_permalink(); ?>&amp;site=<?php echo home_url(); ?>&amp;pic=<?php echo wp_get_attachment_url( get_post_thumbnail_id() ); ?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/Tencent.png" width="24" height="24" alt="Tencent Button" title="<?php printf( __( 'Share with %s','fastfood' ), 'Tencent' ); ?>" /></a>
 				</span>
 			</div>
 		<?php }
@@ -789,7 +789,8 @@ if ( !function_exists( 'fastfood_edit_options' ) ) {
 										</td>
 										<td class="column-des">
 											<input class="ff_input" id="ff_input_<?php echo $key; ?>" type="text" name="fastfood_options[<?php echo $key; ?>]" value="<?php echo $fastfood_opt[$key]; ?>" />
-											<a style="color:<?php echo $fastfood_coa[$key]['default']; ?>;" href="#" onclick="pickColor('<?php echo $key; ?>','<?php echo $fastfood_coa[$key]['default']; ?>'); return false;"><?php _e( 'Default' , 'fastfood' ); ?></a>
+											<a class="hide-if-no-js" href="#" onclick="showMeColorPicker('<?php echo $key; ?>'); return false;"><?php _e( 'Select a Color' , 'fastfood' ); ?></a>&nbsp;-&nbsp;
+											<a class="hide-if-no-js" style="color:<?php echo $fastfood_coa[$key]['default']; ?>;" href="#" onclick="pickColor('<?php echo $key; ?>','<?php echo $fastfood_coa[$key]['default']; ?>'); return false;"><?php _e( 'Default' , 'fastfood' ); ?></a>
 										</td>
 										<td class="column-req"><?php if ( $fastfood_coa[$key]['req'] != '' ) echo $fastfood_coa[$fastfood_coa[$key]['req']]['description']; ?></td>
 									</tr>
@@ -814,7 +815,7 @@ if ( !function_exists( 'fastfood_edit_options' ) ) {
 					</p>
 				</div>
 				<div id="fastfood-infos">
-					<?php esc_attr( get_template_part( 'readme' ) ); ?>
+					<?php get_template_part( 'lib/readme' ); ?>
 				</div>
 				<div class="clear"></div>
 			</div>
@@ -1315,13 +1316,16 @@ if ( !function_exists( 'fastfood_add_custom_background' ) ) {
 
 		if ( ! is_admin() )
 			return;
-		require_once( 'my-custom-background.php' );
+		require_once( 'lib/my-custom-background.php' );
 		$GLOBALS['custom_background'] =& new Custom_Background( $admin_header_callback, $admin_image_div_callback );
 		add_action( 'admin_menu', array( &$GLOBALS['custom_background'], 'init' ) );
 	}
 }
 
 // load the custom widgets module
-get_template_part('widgets');
+get_template_part('lib/widgets');
+
+// load the custom hooks
+get_template_part('lib/hooks');
 
 ?>

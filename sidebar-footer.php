@@ -7,6 +7,7 @@
 ?>
 
 <div id="footer-widget-area">
+	<div class="fixfloat"><?php fastfood_hook_before_footer_sidebar_content(); ?></div>
 
 	<?php if ( is_active_sidebar( 'first-footer-widget-area' ) ) { ?>
 		<div id="first_fwa" class="widget-area">
@@ -26,6 +27,6 @@
 		</div><!-- #third .widget-area -->
 	<?php } ?>
 
-	<div class="fixfloat"></div>
+	<div class="fixfloat"><?php fastfood_hook_after_footer_sidebar_content(); ?></div>
 
 </div><!-- #footer-widget-area -->

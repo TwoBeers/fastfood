@@ -1,6 +1,6 @@
 <h3>Fastfood - WordPress theme</h3>
 	<ul>
-		<li>version: 0.26</li>
+		<li>version: 0.27</li>
 	</ul>
  
 <h3>Project page:</h3>

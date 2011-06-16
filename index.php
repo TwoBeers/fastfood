@@ -1,5 +1,6 @@
 <?php get_header(); ?>
 
+<?php fastfood_hook_before_posts(); ?>
 <div id="posts_content" class="posts_narrow">
 
 <?php
@@ -60,7 +61,9 @@ if ( have_posts() ) {
 			) ? get_post_format( $post->ID ) : 'standard' ;
 		} ?>
 		
+		<?php fastfood_hook_before_post(); ?>
 		<?php get_template_part( 'loop/post', $ff_use_format ); ?>
+		<?php fastfood_hook_after_post(); ?>
 	
 	<?php } //end while ?>
 
@@ -83,6 +86,7 @@ if ( have_posts() ) {
 <?php } //endif ?>
 
 </div>
+<?php fastfood_hook_after_posts(); ?>
 <?php get_sidebar(); // show sidebar ?>
 
 <?php get_footer(); ?>

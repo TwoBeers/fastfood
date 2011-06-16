@@ -3,10 +3,11 @@
 ?>
 <?php get_header(); ?>
 
+<?php fastfood_hook_before_posts(); ?>
 <div id="posts_content" class="posts_narrow">
 	<div class="post">
 		<h2 class="storytitle"><?php _e( 'Categories','fastfood' ); ?></h2>
-		<div class="comment_tools top_meta">
+		<div class="comment_tools">
 			<?php _e( 'All Categories','fastfood' ); ?>
 		</div>
 		<div class="storycontent">
@@ -16,5 +17,6 @@
 		</div>
 	</div>
 </div>
+<?php fastfood_hook_after_posts(); ?>
 
 <?php get_footer(); ?>

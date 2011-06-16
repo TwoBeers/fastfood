@@ -1,5 +1,6 @@
 <?php get_header(); ?>
 
+<?php fastfood_hook_before_posts(); ?>
 <div id="posts_content" class="posts_narrow">
 
 	<?php printf( '<div class="wp-caption aligncenter" style="padding-bottom: 5px;">' . __( 'Search results for &#8220;%s&#8221;','fastfood' ) . '</div>', '<strong>' . esc_html( get_search_query() ) . '</strong>' ); ?>
@@ -7,8 +8,9 @@
 	<?php if ( have_posts() ) {
 		while ( have_posts() ) {
 			the_post(); ?>
-
+			<?php fastfood_hook_before_post(); ?>
 			<div <?php post_class() ?> id="post-<?php the_ID(); ?>">
+				<?php fastfood_hook_before_post_title(); ?>
 				<h2 class="storytitle"><a href="<?php the_permalink(); ?>" rel="bookmark">
 					<?php
 					$ff_post_title = the_title_attribute( 'echo=0' );
@@ -20,9 +22,11 @@
 					?>
 					</a>
 				</h2>
-						<?php the_excerpt(); ?>
+				<?php fastfood_hook_after_post_title(); ?>
+				<?php the_excerpt(); ?>
 				<div class="fixfloat"> </div>
 			</div>
+			<?php fastfood_hook_after_post(); ?>
 		<?php } ?>
 		<div class="w_title" id="ff-page-nav">
 			<?php //num of pages
@@ -37,6 +41,7 @@
 		<p><b><?php _e( 'Sorry, no posts matched your criteria.','fastfood' );?></b></p>
 	<?php } ?>
 </div>
+<?php fastfood_hook_after_posts(); ?>
 
 <?php get_sidebar(); // show sidebar ?>
 
