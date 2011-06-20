@@ -815,7 +815,7 @@ if ( !function_exists( 'fastfood_edit_options' ) ) {
 					</p>
 				</div>
 				<div id="fastfood-infos">
-					<?php get_template_part( 'lib/readme' ); ?>
+					<?php get_template_part( 'readme' ); ?>
 				</div>
 				<div class="clear"></div>
 			</div>
