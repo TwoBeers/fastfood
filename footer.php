@@ -263,6 +263,7 @@
 				global $fastfood_version; 
 				echo ' | WP version - ' . get_bloginfo ( 'version' );
 				echo ' | WP language - ' . get_bloginfo ( 'language' );
+				if ( phpversion() ) echo ' | PHP v' . phpversion();
 				foreach ( $fastfood_opt as $key => $val ) { echo ' | ' . $key . ' - ' . $val; };
 			?>
 			

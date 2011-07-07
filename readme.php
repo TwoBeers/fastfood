@@ -1,6 +1,6 @@
 <h3>Fastfood - WordPress theme</h3>
 	<ul>
-		<li>version: 0.27</li>
+		<li>version: 0.28</li>
 	</ul>
  
 <h3>Project page:</h3>
@@ -59,7 +59,24 @@
 		<li>the secondary menus (one on top of page and one above the footer widget area) are optionals and must be enabled in appearance -&gt; menu. They support only one level of hierarchy</li>
 		<li>the theme is compatible with Internet Explorer 6 but some elements, animations or styles could be unavailable</li>
 	</ul>
- 
+
+<h3>CHANGE LOG (FROM VERSION 0.27):</h3>
+	<ul>
+		<li>Adds:
+			<ul>
+				<li>Options for post/page details management</li>
+				<li>Qzone, WindowsLive, Odnoklassniki and VKontakte services added to "Social Links" widget</li>
+			</ul>
+		</li>
+		<li>Fixes:
+			<ul>
+				<li>links in navigation bar</li>
+				<li>gallery preview + custom permalinks</li>
+				<li>EXIF informations for attachments (can be disabled via options)</li>
+			</ul>
+		</li>
+	</ul>
+	
 <h3>CHANGE LOG (FROM VERSION 0.21):</h3>
 	<ul>
 		<li>Adds:

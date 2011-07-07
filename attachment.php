@@ -3,7 +3,7 @@
 <?php fastfood_hook_before_posts(); ?>
 <div id="posts_content" class="posts_wide">
 	<?php if ( have_posts() ) {
-		global $ff_is_printpreview;
+		global $ff_is_printpreview, $fastfood_opt;
 		while ( have_posts() ) {
 			the_post(); ?>
 			<?php fastfood_hook_before_post(); ?>
@@ -63,40 +63,42 @@
 							?></a></p>
 							<?php if ( !empty( $post->post_excerpt ) ) the_excerpt(); ?>
 							<!-- Using WordPress functions to retrieve the extracted EXIF information from database -->
-							<div class="exif-attachment-info">
-								<h3><?php _e( 'Image Details', 'fastfood' ) ?></h3>
-								<?php
-								$ff_imgmeta = wp_get_attachment_metadata( $id );
+							<?php if ( $fastfood_opt['fastfood_exif_info'] == 1) { ?>
+								<div class="exif-attachment-info">
+									<h3><?php _e( 'Image Details', 'fastfood' ) ?></h3>
+									<?php
+									$ff_imgmeta = wp_get_attachment_metadata( $id );
 
-								// Convert the shutter speed retrieve from database to fraction
-								if ((1 / $ff_imgmeta['image_meta']['shutter_speed']) > 1) {
-									if ((number_format((1 / $ff_imgmeta['image_meta']['shutter_speed']), 1)) == 1.3
-									or number_format((1 / $ff_imgmeta['image_meta']['shutter_speed']), 1) == 1.5
-									or number_format((1 / $ff_imgmeta['image_meta']['shutter_speed']), 1) == 1.6
-									or number_format((1 / $ff_imgmeta['image_meta']['shutter_speed']), 1) == 2.5){
-										$ff_pshutter = "1/" . number_format((1 / $ff_imgmeta['image_meta']['shutter_speed']), 1, '.', '');
+									// Convert the shutter speed retrieve from database to fraction
+									if ( $ff_imgmeta['image_meta']['shutter_speed'] && (1 / $ff_imgmeta['image_meta']['shutter_speed']) > 1) {
+										if ((number_format((1 / $ff_imgmeta['image_meta']['shutter_speed']), 1)) == 1.3
+										or number_format((1 / $ff_imgmeta['image_meta']['shutter_speed']), 1) == 1.5
+										or number_format((1 / $ff_imgmeta['image_meta']['shutter_speed']), 1) == 1.6
+										or number_format((1 / $ff_imgmeta['image_meta']['shutter_speed']), 1) == 2.5){
+											$ff_pshutter = "1/" . number_format((1 / $ff_imgmeta['image_meta']['shutter_speed']), 1, '.', '');
+										} else {
+											$ff_pshutter = "1/" . number_format((1 / $ff_imgmeta['image_meta']['shutter_speed']), 0, '.', '');
+										}
 									} else {
-										$ff_pshutter = "1/" . number_format((1 / $ff_imgmeta['image_meta']['shutter_speed']), 0, '.', '');
+										$ff_pshutter = $ff_imgmeta['image_meta']['shutter_speed'];
 									}
-								} else {
-									$ff_pshutter = $ff_imgmeta['image_meta']['shutter_speed'];
-								}
 
-								// Start to display EXIF and IPTC data of digital photograph
-								echo __("Width", "fastfood" ) . ": " . $ff_imgmeta['width']."px<br />";
-								echo __("Height", "fastfood" ) . ": " . $ff_imgmeta['height']."px<br />";
-								if ( $ff_imgmeta['image_meta']['created_timestamp'] ) echo __("Date Taken", "fastfood" ) . ": " . date("d-M-Y H:i:s", $ff_imgmeta['image_meta']['created_timestamp'])."<br />";
-								if ( $ff_imgmeta['image_meta']['copyright'] ) echo __("Copyright", "fastfood" ) . ": " . $ff_imgmeta['image_meta']['copyright']."<br />";
-								if ( $ff_imgmeta['image_meta']['credit'] ) echo __("Credit", "fastfood" ) . ": " . $ff_imgmeta['image_meta']['credit']."<br />";
-								if ( $ff_imgmeta['image_meta']['title'] ) echo __("Title", "fastfood" ) . ": " . $ff_imgmeta['image_meta']['title']."<br />";
-								if ( $ff_imgmeta['image_meta']['caption'] ) echo __("Caption", "fastfood" ) . ": " . $ff_imgmeta['image_meta']['caption']."<br />";
-								if ( $ff_imgmeta['image_meta']['camera'] ) echo __("Camera", "fastfood" ) . ": " . $ff_imgmeta['image_meta']['camera']."<br />";
-								if ( $ff_imgmeta['image_meta']['focal_length'] ) echo __("Focal Length", "fastfood" ) . ": " . $ff_imgmeta['image_meta']['focal_length']."mm<br />";
-								if ( $ff_imgmeta['image_meta']['aperture'] ) echo __("Aperture", "fastfood" ) . ": f/" . $ff_imgmeta['image_meta']['aperture']."<br />";
-								if ( $ff_imgmeta['image_meta']['iso'] ) echo __("ISO", "fastfood" ) . ": " . $ff_imgmeta['image_meta']['iso']."<br />";
-								if ( $ff_pshutter ) echo __("Shutter Speed", "fastfood" ) . ": " . sprintf( '%s seconds', $ff_pshutter) . "<br />"
-								?>
-							</div>
+									// Start to display EXIF and IPTC data of digital photograph
+									echo __("Width", "fastfood" ) . ": " . $ff_imgmeta['width']."px<br />";
+									echo __("Height", "fastfood" ) . ": " . $ff_imgmeta['height']."px<br />";
+									if ( $ff_imgmeta['image_meta']['created_timestamp'] ) echo __("Date Taken", "fastfood" ) . ": " . date("d-M-Y H:i:s", $ff_imgmeta['image_meta']['created_timestamp'])."<br />";
+									if ( $ff_imgmeta['image_meta']['copyright'] ) echo __("Copyright", "fastfood" ) . ": " . $ff_imgmeta['image_meta']['copyright']."<br />";
+									if ( $ff_imgmeta['image_meta']['credit'] ) echo __("Credit", "fastfood" ) . ": " . $ff_imgmeta['image_meta']['credit']."<br />";
+									if ( $ff_imgmeta['image_meta']['title'] ) echo __("Title", "fastfood" ) . ": " . $ff_imgmeta['image_meta']['title']."<br />";
+									if ( $ff_imgmeta['image_meta']['caption'] ) echo __("Caption", "fastfood" ) . ": " . $ff_imgmeta['image_meta']['caption']."<br />";
+									if ( $ff_imgmeta['image_meta']['camera'] ) echo __("Camera", "fastfood" ) . ": " . $ff_imgmeta['image_meta']['camera']."<br />";
+									if ( $ff_imgmeta['image_meta']['focal_length'] ) echo __("Focal Length", "fastfood" ) . ": " . $ff_imgmeta['image_meta']['focal_length']."mm<br />";
+									if ( $ff_imgmeta['image_meta']['aperture'] ) echo __("Aperture", "fastfood" ) . ": f/" . $ff_imgmeta['image_meta']['aperture']."<br />";
+									if ( $ff_imgmeta['image_meta']['iso'] ) echo __("ISO", "fastfood" ) . ": " . $ff_imgmeta['image_meta']['iso']."<br />";
+									if ( $ff_pshutter ) echo __("Shutter Speed", "fastfood" ) . ": " . sprintf( '%s seconds', $ff_pshutter) . "<br />"
+									?>
+								</div>
+							<?php } ?>
 							<?php if ( !empty( $post->post_content ) ) the_content(); ?>
 						<?php } else { ?>
 							<a href="<?php echo wp_get_attachment_url(); ?>" title="<?php echo esc_attr( get_the_title() ); ?>" rel="attachment"><?php echo basename( get_permalink() ); ?></a>

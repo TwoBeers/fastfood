@@ -16,18 +16,10 @@ function ff_SwitchMe(domid) {
 		jQuery(the_items).children('img').removeClass('thumbsel');
 		var link = jQuery(this);
 		link.children('img').addClass('thumbsel');
-		if ( link.attr("href").match(/\?attachment_id=/) ) {
-			jQuery.ajax({
-				type: 'POST',
-				url: link.attr("href"),
-				beforeSend: function(XMLHttpRequest) {the_slider_info.html('<span class="loading"></span>').slideDown(); the_slider_img.stop().animate( { 'opacity' : '0.3' },200 );},
-				data: 'ff_gallery_slide=1',
-				success: function(data) { the_slider_info.slideUp(); the_slider_img.stop().html(jQuery(data)).animate( { 'opacity' : 1 },600 ); }
-			});	
-		} else {
-			the_slider_info.html('<span class="loading"></span>').slideDown();
-			the_slider_img.stop().fadeOut(600, function(){the_slider_img.html('<a href="' + link.attr("href") + '"><img src="' + link.attr("href") + '" alt="image preview" /></a>').fadeIn(600); the_slider_info.slideUp();});
-		}
+		var img_ext = '.' + link.children('img').attr("src").match( /([^\.]+)$/g )
+		var img_link = link.children('img').attr("src").replace( /\-([^\-]+)$/g , img_ext );
+		the_slider_info.html('<span class="loading"></span>').slideDown();
+		the_slider_img.stop().fadeOut(600, function(){the_slider_img.html('<a href="' + link.attr("href") + '"><img src="' + img_link + '" alt="image preview" /></a>');}).delay(1000).fadeIn(600, function(){ the_slider_info.slideUp();});
 		return false;
 	});
 	var the_br = '#' + domid + ' br';

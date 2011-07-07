@@ -84,16 +84,27 @@ function fastfood_get_coa() {
 		'fastfood_postexcerpt' => array( 'group' =>'content', 'type' =>'chk', 'default'=>0,'description'=>__( 'content summary','fastfood' ),'info'=>__( 'use the summary instead of content in posts overview [default = disabled]','fastfood' ),'req'=>'' ),
 		'fastfood_post_view_aside' => array( 'group' =>'content', 'type' =>'chk', 'default'=>1,'description'=>__( '"aside" posts','fastfood' ),'info'=>__( 'show aside posts on overview [default = enabled]','fastfood' ),'req'=>'fastfood_post_formats_aside' ),
 		'fastfood_post_view_status' => array( 'group' =>'content', 'type' =>'chk', 'default'=>1,'description'=>__( '"status" posts','fastfood' ),'info'=>__( 'show status posts on overview [default = enabled]','fastfood' ),'req'=>'fastfood_post_formats_status' ),
-		'fastfood_share_this' => array( 'group' =>'content', 'type' =>'chk', 'default'=>1,'description'=>__( 'Share this','fastfood' ),'info'=>__( 'show share links after the post content [default = enabled]','fastfood' ),'req'=>'' ),
-		'fastfood_post_expand' => array( 'group' =>'ajax', 'type' =>'chk', 'default'=>1,'description'=>__( 'post expander','fastfood' ),'info'=>__( 'expands a post to show the full contents when the reader clicks the "Read more..." link [default = enabled]','fastfood' ),'req'=>'' ),
-		'fastfood_gallery_preview' => array( 'group' =>'ajax', 'type' =>'chk', 'default'=>1,'description'=>__( 'gallery preview','fastfood' ),'info'=>__( 'load gallery images on fly [default = enabled]','fastfood' ),'req'=>'' ),
+		'fastfood_share_this' => array( 'group' =>'content', 'type' =>'chk', 'default'=>1,'description'=>__( 'share this content','fastfood' ),'info'=>__( 'show share links after the post content [default = enabled]','fastfood' ),'req'=>'' ),
+		'fastfood_exif_info' => array( 'group' =>'content', 'type' =>'chk', 'default'=>1,'description'=>__( 'images informations', 'fastfood' ),'info'=>__( 'show EXIF informations on image attachments [default = enabled]', 'fastfood' ),'req'=>'' ),
+		'fastfood_xinfos_on_list' => array( 'group' =>'postinfo', 'type' =>'chk', 'default'=>1,'description'=>__( 'info in overview', 'fastfood' ),'info'=>__( 'show details (author, date, tags, etc) in posts overview [default = enabled]', 'fastfood' ),'req'=>'' ),
+		'fastfood_xinfos_on_page' => array( 'group' =>'postinfo', 'type' =>'chk', 'default'=>1,'description'=>__( 'info in pages', 'fastfood' ),'info'=>__( 'show details (author, date, tags, etc) in posts overview [default = enabled]', 'fastfood' ),'req'=>'' ),
+		'fastfood_xinfos_on_post' => array( 'group' =>'postinfo', 'type' =>'chk', 'default'=>1,'description'=>__( 'info in posts', 'fastfood' ),'info'=>__( 'show details (author, date, tags, etc) in posts overview [default = enabled]', 'fastfood' ),'req'=>'' ),
+		'fastfood_xinfos_static' => array( 'group' =>'postinfo', 'type' =>'chk', 'default'=>0,'description'=>__( '-- static info', 'fastfood' ),'info'=>__( 'show details as a static list (not dropdown animated) [default = disabled]', 'fastfood' ),'req'=>'' ),
+		'fastfood_xinfos_byauth' => array( 'group' =>'postinfo', 'type' =>'chk', 'default'=>1,'description'=>__( '-- post author', 'fastfood' ),'info'=>__( 'show author on posts details [default = enabled]', 'fastfood' ),'req'=>'' ),
+		'fastfood_xinfos_date' => array( 'group' =>'postinfo', 'type' =>'chk', 'default'=>1,'description'=>__( '-- post date', 'fastfood' ),'info'=>__( 'show date on posts details [default = enabled]', 'fastfood' ),'req'=>'' ),
+		'fastfood_xinfos_comm' => array( 'group' =>'postinfo', 'type' =>'chk', 'default'=>1,'description'=>__( '-- post comments', 'fastfood' ),'info'=>__( 'show comments on post/page details [default = enabled]', 'fastfood' ),'req'=>'' ),
+		'fastfood_xinfos_tag' => array( 'group' =>'postinfo', 'type' =>'chk', 'default'=>1,'description'=>__( '-- post tags', 'fastfood' ),'info'=>__( 'show tags on posts details [default = enabled]', 'fastfood' ),'req'=>'' ),
+		'fastfood_xinfos_cat' => array( 'group' =>'postinfo', 'type' =>'chk', 'default'=>1,'description'=>__( '-- post categories', 'fastfood' ),'info'=>__( 'show categories on posts details [default = enabled]', 'fastfood' ),'req'=>'' ),
+		'fastfood_post_expand' => array( 'group' =>'javascript', 'type' =>'chk', 'default'=>1,'description'=>__( 'post expander','fastfood' ),'info'=>__( 'expands a post to show the full contents when the reader clicks the "Read more..." link [default = enabled]','fastfood' ),'req'=>'' ),
+		'fastfood_gallery_preview' => array( 'group' =>'javascript', 'type' =>'chk', 'default'=>1,'description'=>__( 'gallery preview','fastfood' ),'info'=>__( 'load gallery images on fly [default = enabled]','fastfood' ),'req'=>'' ),
+		'fastfood_jsani' => array( 'group' =>'javascript', 'type' =>'chk', 'default'=>1,'description'=>__( 'javascript animations','fastfood' ),'info'=>__( 'try disable animations if you encountered problems with javascript [default = enabled]','fastfood' ),'req'=>'' ),
 		'fastfood_rsidebpages' => array( 'group' =>'sidebar', 'type' =>'chk', 'default'=>0,'description'=>__( 'sidebar on pages','fastfood' ),'info'=>__( 'show right sidebar on pages [default = disabled]','fastfood' ),'req'=>'' ),
 		'fastfood_rsidebposts' => array( 'group' =>'sidebar', 'type' =>'chk', 'default'=>0,'description'=>__( 'sidebar on posts','fastfood' ),'info'=>__( 'show right sidebar on posts [default = disabled]','fastfood' ),'req'=>'' ),
 		'fastfood_colors_link' => array( 'group' =>'colors', 'type' =>'col', 'default'=>'#D2691E','description'=>__( 'links','fastfood' ),'info'=>__('[default = #D2691E]','fastfood' ),'req'=>'' ),
 		'fastfood_colors_link_hover' => array( 'group' =>'colors', 'type' =>'col', 'default'=>'#FF4500','description'=>__( 'highlighted links','fastfood' ),'info'=>__('[default = #FF4500]','fastfood' ),'req'=>'' ),
 		'fastfood_colors_link_sel' => array( 'group' =>'colors', 'type' =>'col', 'default'=>'#CCCCCC','description'=>__( 'selected links','fastfood' ),'info'=>__('[default = #CCCCCC]','fastfood' ),'req'=>'' ),
-		'fastfood_jsani' => array( 'group' =>'other', 'type' =>'chk', 'default'=>1,'description'=>__( 'javascript animations','fastfood' ),'info'=>__( 'try disable animations if you encountered problems with javascript [default = enabled]','fastfood' ),'req'=>'' ),
 		'fastfood_cust_comrep' => array( 'group' =>'other', 'type' =>'chk', 'default'=>1,'description'=>__( 'custom comment reply form','fastfood' ),'info'=>__( 'custom floating form for post/reply comments [default = enabled]','fastfood' ),'req'=>'fastfood_jsani' ),
+		'fastfood_editor_style' => array( 'group' =>'other', 'type' =>'chk', 'default'=>1,'description'=>__( 'editor style', 'fastfood' ),'info'=>__( "add style to the editor in order to write the post exactly how it will appear on the site [default = enabled]", 'fastfood' ),'req'=>'' ),
 		'fastfood_mobile_css' => array( 'group' =>'other', 'type' =>'chk', 'default'=>1,'description'=>__( 'mobile support','fastfood' ),'info'=>__( 'use a dedicated style in mobile devices [default = enabled]','fastfood' ),'req'=>'' ),
 		'fastfood_wpadminbar_css' => array( 'group' =>'other', 'type' =>'chk', 'default'=>1,'description'=>__( 'custom adminbar style','fastfood' ),'info'=>__( 'style integration with the theme for admin bar [default = enabled]','fastfood' ),'req'=>'' ),
 		'fastfood_head_h' => array( 'group' =>'other', 'type' =>'sel', 'default'=>'120px', 'options'=>array( '120px', '180px', '240px', '300px' ), 'description'=>__( 'Header height','fastfood' ),'info'=>__( '[default = 120px]','fastfood' ),'req'=>'' ),
@@ -485,9 +496,21 @@ if ( !function_exists( 'fastfood_multipages' ) ) {
 if ( !function_exists( 'fastfood_extrainfo' ) ) {
 	function fastfood_extrainfo( $auth, $date, $comms, $tags, $cats, $hiera = false, $listview = false ) {
 		global $fastfood_opt;
+		// extra info management
+		if ( is_page() && $fastfood_opt['fastfood_xinfos_on_page'] == 0) return;
+		if ( is_single() && $fastfood_opt['fastfood_xinfos_on_post'] == 0) return;
+		if ( !is_singular() && $fastfood_opt['fastfood_xinfos_on_list'] == 0) return;
+		if ( $fastfood_opt['fastfood_xinfos_static'] == 1) $listview = true;
+		if ( $fastfood_opt['fastfood_xinfos_byauth'] == 0) $auth = false;
+		if ( $fastfood_opt['fastfood_xinfos_date'] == 0) $date = false;
+		if ( $fastfood_opt['fastfood_xinfos_comm'] == 0) $comms = false;
+		if ( $fastfood_opt['fastfood_xinfos_tag'] == 0) $tags = false;
+		if ( $fastfood_opt['fastfood_xinfos_cat'] == 0) $cats = false;
+
 		$r_pos = 10;
 		if ( !$listview ) {
 		?>
+		<div class="meta_container">
 			<div class="meta top_meta">
 				<?php
 				if ( $auth ) { ?>
@@ -554,6 +577,7 @@ if ( !function_exists( 'fastfood_extrainfo' ) ) {
 				?>
 				<div class="metafield_trigger edit_link" style="right: <?php echo $r_pos; ?>px;"><?php edit_post_link( __( 'Edit', 'fastfood' ),'' ); ?></div>
 			</div>
+		</div>
 		<?php
 		} else { ?>
 			<div class="meta">
@@ -647,8 +671,6 @@ if ( !function_exists( 'fastfood_register_tb_settings' ) ) {
 	function fastfood_register_tb_settings() {
 		//register fastfood settings
 		register_setting( 'ff_settings_group', 'fastfood_options', 'fastfood_sanitaze_options' );
-		//add custom stylesheet to admin
-		wp_enqueue_style( 'ff-admin-style', get_template_directory_uri() . '/css/ff-admin.css', false, '', 'screen' );
 	}
 }
 
@@ -731,9 +753,10 @@ if ( !function_exists( 'fastfood_edit_options' ) ) {
 			<ul id="ff-tabselector" class="hide-if-no-js">
 				<li id="ff-selgroup-quickbar"><a href="#" onClick="fastfoodSwitchTab.set('quickbar'); return false;"><?php _e( 'Quickbar' , 'fastfood' ); ?></a></li>
 				<li id="ff-selgroup-content"><a href="#" onClick="fastfoodSwitchTab.set('content'); return false;"><?php _e( 'Content' , 'fastfood' ); ?></a></li>
+				<li id="ff-selgroup-postinfo"><a href="#" onClick="fastfoodSwitchTab.set('postinfo'); return false;"><?php _e( 'Post/Page details' , 'fastfood' ); ?></a></li>
 				<li id="ff-selgroup-postformats"><a href="#" onClick="fastfoodSwitchTab.set('postformats'); return false;"><?php _e( 'Post formats' , 'fastfood' ); ?></a></li>
 				<li id="ff-selgroup-sidebar"><a href="#" onClick="fastfoodSwitchTab.set('sidebar'); return false;"><?php _e( 'Sidebar' , 'fastfood' ); ?></a></li>
-				<li id="ff-selgroup-ajax"><a href="#" onClick="fastfoodSwitchTab.set('ajax'); return false;"><?php _e( 'Ajax' , 'fastfood' ); ?></a></li>
+				<li id="ff-selgroup-javascript"><a href="#" onClick="fastfoodSwitchTab.set('javascript'); return false;"><?php _e( 'Javascript' , 'fastfood' ); ?></a></li>
 				<li id="ff-selgroup-other"><a href="#" onClick="fastfoodSwitchTab.set('other'); return false;"><?php _e( 'Other' , 'fastfood' ); ?></a></li>
 				<li id="ff-selgroup-colors"><a href="#" onClick="fastfoodSwitchTab.set('colors'); return false;"><?php _e( 'Colors' , 'fastfood' ); ?></a></li>
 				<li id="ff-selgroup-info"><a href="#" onClick="fastfoodSwitchTab.set('info'); return false;"><?php _e( 'Theme Info' , 'fastfood' ); ?></a></li>
@@ -839,8 +862,8 @@ if ( !function_exists( 'fastfood_setup' ) ) {
 		add_theme_support( 'automatic-feed-links' );
 		// Thumbnails support
 		add_theme_support( 'post-thumbnails' );
-		// the editor stylesheet support
-		add_editor_style( 'css/editor-style.css' );
+		// Add the editor style
+		if ( isset( $fastfood_opt['fastfood_editor_style'] ) && ( $fastfood_opt['fastfood_editor_style'] == 1 ) ) add_editor_style( 'css/editor-style.css' );
 	
 		// This theme uses post formats
 		add_theme_support( 'post-formats', array( 'aside', 'gallery', 'status' ) );

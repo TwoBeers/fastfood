@@ -454,14 +454,18 @@ class fastfood_Widget_social extends WP_Widget {
 			'Hi5',
 			'LinkedIn',
 			'Myspace',
+			'Odnoklassniki',
 			'Orkut',
+			'Qzone',
 			'Reddit',
-			'Vimeo',
-			'StumbleUpon',
 			'Sina',
+			'StumbleUpon',
 			'Technorati',
 			'Tencent',
 			'Twitter',
+			'Vimeo',
+			'VKontakte',
+			'WindowsLive',
 			'Youtube',
 			'RSS');
 	}
@@ -542,7 +546,7 @@ class fastfood_Widget_social extends WP_Widget {
 	function widget( $args, $instance ) {
 		extract($args);
         $title = apply_filters('widget_title', empty($instance['title']) ? '' : $instance['title']);
-        $icon_size = $instance['icon_size'];
+		$icon_size = ( isset($instance['icon_size']) ) ? $instance['icon_size'] : '48px';
         echo $before_widget;
         if (!empty($title)) {
             echo $before_title;
@@ -553,12 +557,12 @@ class fastfood_Widget_social extends WP_Widget {
     <div class="fix" style="text-align: center;">
 <?php
         foreach ($this->follow_urls as $follow_service ) {
-            $show = $instance['show_'.$follow_service];
-            $account = $instance[$follow_service.'_account'];
-            if ($follow_service == 'RSS') {
-                $account = get_bloginfo( 'rss2_url' );
-            }
-            if ($show && !empty($account)) {
+			$show = ( isset($instance['show_'.$follow_service]) ) ? $instance['show_'.$follow_service] : false;
+			$account = ( isset($instance[$follow_service.'_account']) ) ? $instance[$follow_service.'_account'] : '';
+			if ($follow_service == 'RSS') {
+				$account = get_bloginfo( 'rss2_url' );
+			}
+			if ($show && !empty($account)) {
 ?>
         <a href="<?php echo $account; ?>" class="ff-social-icon" title="<?php echo $follow_service;?>">
             <img src="<?php echo get_template_directory_uri(); ?>/images/follow/<?php echo $follow_service;?>.png" alt="<?php echo $follow_service;?>" style='width: <?php echo $icon_size;?>; height: <?php echo $icon_size;?>;' />
