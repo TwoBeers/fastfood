@@ -2,7 +2,7 @@
 Theme Name: Fastfood
 Theme URI: http: //www.twobeers.net/annunci/tema-per-wordpress-fastfood
 Description: Simple and clear theme with a lot of features, like a "quick links" menu, an "easy navigation" bar, the print preview, 7 integrated widgets ( "Social Links", "Popular Post", "Latest Activity" and many more ). Fastfood has customizable header, customizable background (with a lot of predefined themes), one or two columns layout, up to five widgets areas and three menu. It supports custom menus, posts thumbnail, post formats ("gallery" and "aside") and also mobile devices, with a dedicated style. WP3.1.3 full compatible.
-Version: 0.28
+Version: 0.28.1
 Tags: translation-ready, threaded-comments, custom-menu, custom-header, theme-options, fixed-width, two-columns, right-sidebar, white, silver, orange, light, sticky-post, custom-background, editor-style, rtl-language-support, custom-colors, post-formats
 Author: TwoBeers Crew
 Author URI: http: //www.twobeers.net/
@@ -105,7 +105,8 @@ pre {
 	margin: 5px auto;
 	padding: 5px;
 }
-.storycontent table {
+.storycontent table,
+.comment-body table {
 	-moz-box-shadow: 1px 1px 1px #555;
 	-webkit-box-shadow: 1px 1px 1px #555;
 	box-shadow: 1px 1px 1px #555;
@@ -115,11 +116,13 @@ pre {
 	width: 100%;
 	border-color: #fff;
 }
-.storycontent td {
+.storycontent td,
+.comment-body td {
 	border-bottom: 1px solid #fff;
 	padding: 3px;
 }
-.storycontent th {
+.storycontent th,
+.comment-body th {
 	border-bottom: 4px solid #404040;
 	padding: 3px;
 }
@@ -935,7 +938,8 @@ div.ff_widget_latest_commentators a img {
 	margin: 0;
 }
 .storycontent ul li,
-.widget ul li {
+.widget ul li,
+.comment-body ul li {
 	list-style: disc outside url('images/litem.png');
 }
 .sticky {
