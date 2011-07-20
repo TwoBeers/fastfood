@@ -1,6 +1,6 @@
 <h3>Fastfood - WordPress theme</h3>
 	<ul>
-		<li>version: 0.28.1</li>
+		<li>version: 0.28.2</li>
 	</ul>
  
 <h3>Project page:</h3>
@@ -221,7 +221,7 @@
 
 <h3>CREDITS:</h3>
 	<ul>
-		<li>this theme uses "iconSweets2" iconset by http://www.yummygum.com</li>
+		<li>this theme uses "iconSweets2" iconset by http://www.yummygum.com. See "images/iconSweets2 - License.rtf"</li>
 		<li>Everyone who helped us with bug reports and suggestions. Thanks!</li>
 	</ul>
  

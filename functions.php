@@ -82,8 +82,8 @@ function fastfood_get_coa() {
 		'fastfood_post_formats_aside' => array( 'group' =>'postformats', 'type' =>'chk', 'default'=>1,'description'=>__( '-- "aside" format','fastfood' ),'info'=>__( '[default = enabled]','fastfood' ),'req'=>'fastfood_post_formats' ),
 		'fastfood_post_formats_status' => array( 'group' =>'postformats', 'type' =>'chk', 'default'=>1,'description'=>__( '-- "status" format','fastfood' ),'info'=>__( '[default = enabled]','fastfood' ),'req'=>'fastfood_post_formats' ),
 		'fastfood_postexcerpt' => array( 'group' =>'content', 'type' =>'chk', 'default'=>0,'description'=>__( 'content summary','fastfood' ),'info'=>__( 'use the summary instead of content in posts overview [default = disabled]','fastfood' ),'req'=>'' ),
-		'fastfood_post_view_aside' => array( 'group' =>'content', 'type' =>'chk', 'default'=>1,'description'=>__( '"aside" posts','fastfood' ),'info'=>__( 'show aside posts on overview [default = enabled]','fastfood' ),'req'=>'fastfood_post_formats_aside' ),
-		'fastfood_post_view_status' => array( 'group' =>'content', 'type' =>'chk', 'default'=>1,'description'=>__( '"status" posts','fastfood' ),'info'=>__( 'show status posts on overview [default = enabled]','fastfood' ),'req'=>'fastfood_post_formats_status' ),
+		'fastfood_post_view_aside' => array( 'group' =>'content', 'type' =>'chk', 'default'=>1,'description'=>__( '"aside" posts','fastfood' ),'info'=>__( 'show aside posts on overview [default = enabled]','fastfood' ),'req'=>'' ),
+		'fastfood_post_view_status' => array( 'group' =>'content', 'type' =>'chk', 'default'=>1,'description'=>__( '"status" posts','fastfood' ),'info'=>__( 'show status posts on overview [default = enabled]','fastfood' ),'req'=>'' ),
 		'fastfood_share_this' => array( 'group' =>'content', 'type' =>'chk', 'default'=>1,'description'=>__( 'share this content','fastfood' ),'info'=>__( 'show share links after the post content [default = enabled]','fastfood' ),'req'=>'' ),
 		'fastfood_exif_info' => array( 'group' =>'content', 'type' =>'chk', 'default'=>1,'description'=>__( 'images informations', 'fastfood' ),'info'=>__( 'show EXIF informations on image attachments [default = enabled]', 'fastfood' ),'req'=>'' ),
 		'fastfood_xinfos_on_list' => array( 'group' =>'postinfo', 'type' =>'chk', 'default'=>1,'description'=>__( 'info in overview', 'fastfood' ),'info'=>__( 'show details (author, date, tags, etc) in posts overview [default = enabled]', 'fastfood' ),'req'=>'' ),
@@ -768,6 +768,7 @@ if ( !function_exists( 'fastfood_edit_options' ) ) {
 			<div id="tabs-container">
 				<div class="clear"></div>
 				<div id="fastfood-options">
+					<h2 class="hide-if-js" style="text-align: center;"><?php _e( 'Options','fastfood' ); ?><h2>
 					<form method="post" action="options.php">
 						<?php settings_fields( 'ff_settings_group' ); ?>
 						<div id="stylediv">
@@ -838,6 +839,7 @@ if ( !function_exists( 'fastfood_edit_options' ) ) {
 					</p>
 				</div>
 				<div id="fastfood-infos">
+					<h2 class="hide-if-js" style="text-align: center;"><?php _e( 'Theme Info','fastfood' ); ?><h2>
 					<?php get_template_part( 'readme' ); ?>
 				</div>
 				<div class="clear"></div>

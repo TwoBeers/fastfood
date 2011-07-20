@@ -1,7 +1,5 @@
 <!-- begin comments -->
 <?php
-	if ( isset( $_SERVER['SCRIPT_FILENAME'] ) && 'comments.php' == basename( $_SERVER['SCRIPT_FILENAME'] ) ) die ('Please do not load this page directly. Thanks!');
-
 	if ( post_password_required() ) { ?>
 		<div class="meta" id="comments" style="text-align: right;"><?php _e( 'Enter your password to view comments.', 'fastfood' ); ?></div>
 		<?php return;

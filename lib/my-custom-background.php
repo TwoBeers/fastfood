@@ -210,16 +210,6 @@ class Custom_Background {
 				'attach' => 'fixed',
 				'color' => '#F9FFD9'
 			),
-			'globe' => array(
-				'url' => '%s/images/backgrounds/globe.jpg',
-				'thumbnail_url' => '%s/images/backgrounds/globe-thumbnail.jpg',
-				'description' => __( 'Globe', 'fastfood' ),
-				'position_x' => 'left',
-				'position_y' => 'bottom',
-				'repeat' => 'no-repeat',
-				'attach' => 'fixed',
-				'color' => '#ffffff'
-			),
 			'heart' => array(
 				'url' => '%s/images/backgrounds/heart.jpg',
 				'thumbnail_url' => '%s/images/backgrounds/heart-thumbnail.jpg',
