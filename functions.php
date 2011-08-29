@@ -451,7 +451,7 @@ if ( !function_exists( 'fastfood_pages_menu_mobile' ) ) {
 
 // page hierarchy
 if ( !function_exists( 'fastfood_multipages' ) ) {
-	function fastfood_multipages(){
+	function fastfood_multipages( $r_pos ){
 		global $post;
 		$args = array(
 			'post_type' => 'page',
@@ -466,12 +466,12 @@ if ( !function_exists( 'fastfood_multipages' ) ) {
 
 		if ( ( $childrens ) || ( $the_parent_page ) ){ ?>
 			<div class="metafield">
-				<div class="metafield_trigger mft_hier" style="right: 40px; width:16px"> </div>
+				<div class="metafield_trigger mft_hier" style="right: <?php echo $r_pos; ?>px; width:16px"> </div>
 				<div class="metafield_content">
 					<?php
 					if ( $the_parent_page ) {
 						$the_parent_link = '<a href="' . get_permalink( $the_parent_page ) . '" title="' . get_the_title( $the_parent_page ) . '">' . get_the_title( $the_parent_page ) . '</a>';
-						echo __('Upper page: ','fastfood') . $the_parent_link ; // echoes the parent
+						echo __( 'Upper page: ', 'fastfood' ) . $the_parent_link ; // echoes the parent
 					}
 					if ( ( $childrens ) && ( $the_parent_page ) ) { echo ' - '; } // if parent & child, echoes the separator
 					if ( $childrens ) {
@@ -480,7 +480,7 @@ if ( !function_exists( 'fastfood_multipages' ) ) {
 							$the_child_list[] = '<a href="' . get_permalink( $children ) . '" title="' . get_the_title( $children ) . '">' . get_the_title( $children ) . '</a>';
 						}
 						$the_child_list = implode(', ' , $the_child_list);
-						echo __('Lower pages: ','fastfood') . $the_child_list; // echoes the childs
+						echo __( 'Lower pages: ', 'fastfood' ) . $the_child_list; // echoes the childs
 					}
 					?>
 				</div>
@@ -571,7 +571,7 @@ if ( !function_exists( 'fastfood_extrainfo' ) ) {
 				}
 				if ( $hiera ) {
 				?>
-					<?php if ( fastfood_multipages() ) { $r_pos = $r_pos + 30; } ?>
+					<?php if ( fastfood_multipages( $r_pos ) ) { $r_pos = $r_pos + 30; } ?>
 				<?php
 				}
 				?>
