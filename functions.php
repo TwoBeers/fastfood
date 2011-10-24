@@ -370,7 +370,6 @@ if ( !function_exists( 'fastfood_get_recentcomments' ) ) {
 // Get Recent Entries
 if ( !function_exists( 'fastfood_get_recententries' ) ) {
 	function fastfood_get_recententries( $mode = '', $limit = 10 ) {
-		global $post;
 		$lastposts = get_posts( 'numberposts=10' );
 		foreach( $lastposts as $post ) {
 			setup_postdata( $post );
