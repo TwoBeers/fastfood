@@ -42,7 +42,7 @@ class fastfood_ff_widget_popular_posts extends WP_Widget {
 			$number = 15;
 		$use_thumbs = ( !isset($instance['thumb']) || $thumb = (int) $instance['thumb'] ) ? 1 : 0;
 		
-		$r = new WP_Query(array('showposts' => $number, 'nopaging' => 0, 'post_status' => 'publish', 'ignore_sticky_posts' => 1, 'orderby' => 'comment_count'));
+		$r = new WP_Query(array('showposts' => $number, 'no_found_rows' => true, 'nopaging' => 0, 'post_status' => 'publish', 'ignore_sticky_posts' => 1, 'orderby' => 'comment_count'));
 		if ($r->have_posts()) :
 ?>
 		<?php echo $before_widget; ?>
@@ -296,7 +296,7 @@ class fastfood_widget_latest_commentators extends WP_Widget {
 					if ( $comment->comment_author_url == '' ) {
 						$output .=  '<li title="' .  $comment->comment_author . '">' . get_avatar( $comment, $icon_size, $default=get_option('avatar_default') ) . '</li>';
 					} else {
-						$output .=  '<li><a href="' . $comment->comment_author_url . '" title="' .  $comment->comment_author . '">' . get_avatar( $comment, $icon_size, $default=get_option('avatar_default')) . '</a></li>';
+						$output .=  '<li><a target="_blank" href="' . $comment->comment_author_url . '" title="' .  $comment->comment_author . '">' . get_avatar( $comment, $icon_size, $default=get_option('avatar_default')) . '</a></li>';
 					}
 					$post_array[] = $comment->comment_author_email;
 					if ( ++$counter >= $number ) break;
@@ -451,6 +451,7 @@ class fastfood_Widget_social extends WP_Widget {
 			'Facebook',
 			'Flickr',
 			'Github',
+			'GooglePlus',
 			'Hi5',
 			'LinkedIn',
 			'Myspace',
@@ -564,7 +565,7 @@ class fastfood_Widget_social extends WP_Widget {
 			}
 			if ($show && !empty($account)) {
 ?>
-        <a href="<?php echo $account; ?>" class="ff-social-icon" title="<?php echo $follow_service;?>">
+        <a href="<?php echo $account; ?>" target="_blank" class="ff-social-icon" title="<?php echo $follow_service;?>">
             <img src="<?php echo get_template_directory_uri(); ?>/images/follow/<?php echo $follow_service;?>.png" alt="<?php echo $follow_service;?>" style='width: <?php echo $icon_size;?>; height: <?php echo $icon_size;?>;' />
         </a>
 <?php
@@ -631,6 +632,7 @@ class fastfood_Widget_besides extends WP_Widget {
 		$besides_args = array(
 			'order' => 'DESC',
 			'posts_per_page' => $number,
+			'no_found_rows' => true,
 			'nopaging' => 0,
 			'post_status' => 'publish',
 			'post__not_in' => get_option( 'sticky_posts' ),
@@ -764,7 +766,7 @@ class fastfood_Widget_recent_posts extends WP_Widget {
 		if ( ! $number = absint( $instance['number'] ) )
  			$number = 10;
 
-		$r = new WP_Query( array( 'cat' => $category, 'posts_per_page' => $number, 'nopaging' => 0, 'post_status' => 'publish', 'ignore_sticky_posts' => true ) );
+		$r = new WP_Query( array( 'cat' => $category, 'posts_per_page' => $number, 'no_found_rows' => true, 'nopaging' => 0, 'post_status' => 'publish', 'ignore_sticky_posts' => true ) );
 		if ($r->have_posts()) :
 ?>
 		<?php echo $before_widget; ?>

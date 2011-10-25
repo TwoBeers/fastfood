@@ -9,7 +9,9 @@ add_action( 'widgets_init', 'fastfood_widget_area_init' );
 // Add stylesheets
 add_action( 'wp_print_styles', 'fastfood_stylesheet' );
 // Add js animations
+add_action( 'wp_head', 'fastfood_localize_js' );
 add_action( 'template_redirect', 'fastfood_scripts' );
+add_action( 'wp_footer', 'fastfood_init_scripts' );
 // Add custom category page
 add_action( 'template_redirect', 'fastfood_allcat' );
 // mobile redirect
@@ -18,10 +20,6 @@ add_action( 'template_redirect', 'fastfood_mobile' );
 add_action( 'admin_menu', 'fastfood_create_menu' );
 // post expander ajax request
 add_action('init', 'fastfood_post_expander_activate');
-// gallery slide ajax request
-add_action('init', 'fastfood_gallery_slide_activate');
-// localize javascripts
-add_action( 'wp_head', 'fastfood_localize_js' );
 // Custom filters
 add_filter( 'the_content', 'fastfood_content_replace' );
 add_filter( 'excerpt_length', 'fastfood_new_excerpt_length' );
@@ -95,9 +93,9 @@ function fastfood_get_coa() {
 		'fastfood_xinfos_comm' => array( 'group' =>'postinfo', 'type' =>'chk', 'default'=>1,'description'=>__( '-- post comments', 'fastfood' ),'info'=>__( 'show comments on post/page details [default = enabled]', 'fastfood' ),'req'=>'' ),
 		'fastfood_xinfos_tag' => array( 'group' =>'postinfo', 'type' =>'chk', 'default'=>1,'description'=>__( '-- post tags', 'fastfood' ),'info'=>__( 'show tags on posts details [default = enabled]', 'fastfood' ),'req'=>'' ),
 		'fastfood_xinfos_cat' => array( 'group' =>'postinfo', 'type' =>'chk', 'default'=>1,'description'=>__( '-- post categories', 'fastfood' ),'info'=>__( 'show categories on posts details [default = enabled]', 'fastfood' ),'req'=>'' ),
-		'fastfood_post_expand' => array( 'group' =>'javascript', 'type' =>'chk', 'default'=>1,'description'=>__( 'post expander','fastfood' ),'info'=>__( 'expands a post to show the full contents when the reader clicks the "Read more..." link [default = enabled]','fastfood' ),'req'=>'' ),
-		'fastfood_gallery_preview' => array( 'group' =>'javascript', 'type' =>'chk', 'default'=>1,'description'=>__( 'gallery preview','fastfood' ),'info'=>__( 'load gallery images on fly [default = enabled]','fastfood' ),'req'=>'' ),
 		'fastfood_jsani' => array( 'group' =>'javascript', 'type' =>'chk', 'default'=>1,'description'=>__( 'javascript animations','fastfood' ),'info'=>__( 'try disable animations if you encountered problems with javascript [default = enabled]','fastfood' ),'req'=>'' ),
+		'fastfood_post_expand' => array( 'group' =>'javascript', 'type' =>'chk', 'default'=>1,'description'=>__( 'post expander','fastfood' ),'info'=>__( 'expands a post to show the full contents when the reader clicks the "Read more..." link [default = enabled]','fastfood' ),'req'=>'fastfood_jsani' ),
+		'fastfood_gallery_preview' => array( 'group' =>'javascript', 'type' =>'chk', 'default'=>1,'description'=>__( 'gallery preview','fastfood' ),'info'=>__( 'load gallery images on fly [default = enabled]','fastfood' ),'req'=>'fastfood_jsani' ),
 		'fastfood_rsidebpages' => array( 'group' =>'sidebar', 'type' =>'chk', 'default'=>0,'description'=>__( 'sidebar on pages','fastfood' ),'info'=>__( 'show right sidebar on pages [default = disabled]','fastfood' ),'req'=>'' ),
 		'fastfood_rsidebposts' => array( 'group' =>'sidebar', 'type' =>'chk', 'default'=>0,'description'=>__( 'sidebar on posts','fastfood' ),'info'=>__( 'show right sidebar on posts [default = disabled]','fastfood' ),'req'=>'' ),
 		'fastfood_colors_link' => array( 'group' =>'colors', 'type' =>'col', 'default'=>'#D2691E','description'=>__( 'links','fastfood' ),'info'=>__('[default = #D2691E]','fastfood' ),'req'=>'' ),
@@ -280,7 +278,7 @@ if ( !function_exists( 'fastfood_scripts' ) ) {
 		if ( $ff_is_mobile_browser || $ff_is_printpreview ) return; //no scripts in print preview or mobile view
 		// ie6 scripts
 		if ( $ff_is_ie6 ) {
-			wp_enqueue_script( 'comment-reply' ); //standard comment-reply
+			wp_enqueue_script( 'comment-reply' ); //standard comment-reply box
 			return;
 		}
 		if ( ( $fastfood_opt['fastfood_jsani'] == 1 ) ) {
@@ -291,19 +289,32 @@ if ( !function_exists( 'fastfood_scripts' ) ) {
 			if ( ( $fastfood_opt['fastfood_jsani'] == 1 ) && ( $fastfood_opt['fastfood_cust_comrep'] == 1 ) ) {
 				wp_enqueue_script( 'ff-comment-reply', get_template_directory_uri() . '/js/comment-reply.min.js', array( 'jquery-ui-draggable' ), $fastfood_version, false   ); //custom comment-reply pop-up box
 			} else {
-				wp_enqueue_script( 'comment-reply' ); //custom comment-reply pop-up box
+				wp_enqueue_script( 'comment-reply' ); //standard comment-reply box
 			}
 		}
-		if ( $fastfood_opt['fastfood_gallery_preview'] == 1 ) {
-			wp_enqueue_script( "ff-gallery-preview", get_template_directory_uri() . '/js/gallery-slideshow.min.js', array( 'jquery' ), $fastfood_version, true );
-		}
-		if ( ( $fastfood_opt['fastfood_post_expand'] == 1 ) ) {
-			wp_enqueue_script( "ff-post-expander", get_template_directory_uri() . '/js/post-expander.min.js', array( 'jquery' ), $fastfood_version, true );
-		}
-
 	}
 }
 
+// initialize scripts
+if ( !function_exists( 'fastfood_init_scripts' ) ) {
+	function fastfood_init_scripts(){
+		global $fastfood_opt, $ff_is_printpreview, $ff_is_mobile_browser, $ff_is_ie6;
+		if ( $ff_is_mobile_browser || $ff_is_printpreview || $ff_is_ie6 || ( $fastfood_opt['fastfood_jsani'] == 0 ) ) return;
+		?>
+<script type="text/javascript">
+	/* <![CDATA[ */
+	jQuery(document).ready(function($){
+		$.ff_animation();
+		<?php if ( ( $fastfood_opt['fastfood_post_expand'] == 1 ) ) { ?>
+		$('a.more-link').ff_postexpander();<?php } ?>
+		<?php if ( $fastfood_opt['fastfood_gallery_preview'] == 1 ) { ?>
+		$('.storycontent .gallery').ff_gallery_slider();<?php } ?>
+	});
+	/* ]]> */
+</script>
+		<?php
+	}
+}
 
 // show all categories list (redirect to allcat.php if allcat=y)
 if ( !function_exists( 'fastfood_allcat' ) ) {
@@ -353,7 +364,7 @@ if ( !function_exists( 'fastfood_get_recentcomments' ) ) {
 					$com_auth = mb_strimwidth( $comment->comment_author, 0, 20, '&hellip;' );
 				}
 			    echo '<li>'. $com_auth . ' ' . __( 'about','fastfood' ) . ' <a href="' . get_permalink( $post->ID ) . '#comment-' . $comment->comment_ID . '">' . $post_title_short . '</a><div class="preview">';
-				if ( post_password_required( get_post( $comment->comment_post_ID ) ) ) {
+				if ( post_password_required( $post ) ) {
 					echo '[' . __( 'No preview: this is a comment of a protected post', 'fastfood' ) . ']';
 				} else {
 					comment_excerpt( $comment->comment_ID );
@@ -369,29 +380,28 @@ if ( !function_exists( 'fastfood_get_recentcomments' ) ) {
 
 // Get Recent Entries
 if ( !function_exists( 'fastfood_get_recententries' ) ) {
-	function fastfood_get_recententries( $mode = '', $limit = 10 ) {
-		global $post;
-		$lastposts = get_posts( 'numberposts=10' );
-		foreach( $lastposts as $post ) {
-			setup_postdata( $post );
-			$post_title = esc_html( $post->post_title );
-			if ( $post_title == "" ) {
-				$post_title_short = __( '(no title)', 'fastfood' );
-			} else {
-				//shrink the post title if > 35 chars
-				$post_title_short = mb_strimwidth( esc_html( $post_title ), 0, 35, '&hellip;' );
+	function fastfood_get_recententries( $number = 10 ) {
+		$r = new WP_Query(array('posts_per_page' => $number, 'no_found_rows' => true, 'post_status' => 'publish', 'ignore_sticky_posts' => true));
+		if ($r->have_posts()) {
+			while ($r->have_posts()) {
+				$r->the_post();
+
+				$post_title = get_the_title();
+				$post_title_short = get_the_title() ? mb_strimwidth( esc_html( $post_title ), 0, 35, '&hellip;' ) : __( '(no title)', 'fastfood' );
+				$post_auth = mb_strimwidth( get_the_author(), 0, 20, '&hellip;' );
+
+				echo '<li><a href="' . get_permalink() . '" title="' . $post_title . '">' . $post_title_short . '</a> ' . __( 'by','fastfood' ) . ' ' . $post_auth . '<div class="preview">';
+				if ( post_password_required() ) {
+					echo '<img class="alignleft wp-post-image" src="' . get_template_directory_uri() . '/images/lock.png" alt="thumb" />';
+					echo '[' . __( 'No preview: this is a protected post','fastfood' ) . ']';
+				} else {
+					echo get_the_post_thumbnail( get_the_ID(), array( 50,50 ), array( 'class' => 'alignleft' ) );
+					the_excerpt();
+				}
+				echo '</div></li>';
 			}
-			//shrink the post author if > 20 chars
-			$post_auth = mb_strimwidth( get_the_author(), 0, 20, '&hellip;' );
-			echo '<li><a href="' . get_permalink( $post->ID ) . '" title="' . $post_title . '">' . $post_title_short . '</a> ' . __( 'by','fastfood' ) . ' ' . $post_auth . '<div class="preview">';
-			if ( post_password_required( $post ) ) {
-				echo '<img class="alignleft wp-post-image" src="' . get_template_directory_uri() . '/images/lock.png" alt="thumb" title="' . $post_title_short . '" />';
-				echo '[' . __( 'No preview: this is a protected post','fastfood' ) . ']';
-			} else {
-				echo get_the_post_thumbnail( $post->ID, array( 50,50 ), array( 'class' => 'alignleft' ) );
-				the_excerpt();
-			}
-			echo '</div></li>';
+			// Reset the global $the_post as this query will have stomped on it
+			wp_reset_postdata();
 		}
 	}
 }
@@ -410,7 +420,8 @@ if ( !function_exists( 'fastfood_get_categories_wpr' ) ) {
 			$tmp_cat_ID = $category->cat_ID;
 			$post_search_args = array(
 				'numberposts' => 5,
-				'category' => $tmp_cat_ID
+				'category' => $tmp_cat_ID,
+				'no_found_rows' => true
 				);
 			$lastcatposts = get_posts( $post_search_args );
 			foreach( $lastcatposts as $post ) {
@@ -458,7 +469,8 @@ if ( !function_exists( 'fastfood_multipages' ) ) {
 			'post_parent' => $post->ID,
 			'order' => 'ASC',
 			'orderby' => 'menu_order',
-			'numberposts' => 0
+			'numberposts' => 0,
+			'no_found_rows' => true
 			);
 		$childrens = get_posts( $args ); // retrieve the child pages
 		$the_parent_page = $post->post_parent; // retrieve the parent page
@@ -650,6 +662,7 @@ if ( !function_exists( 'fastfood_create_menu' ) ) {
 		add_action( 'admin_print_styles-' . $pageopt, 'fastfood_theme_admin_styles' );
 		add_action( 'admin_print_scripts-' . $pageopt, 'fastfood_theme_admin_scripts' );
 		add_action( 'admin_print_styles-widgets.php', 'fastfood_widgets_style' );
+		add_action( 'admin_print_scripts-widgets.php', 'fastfood_widgets_scripts' );
 	}
 }
 
@@ -664,6 +677,13 @@ if ( !function_exists( 'fastfood_widgets_style' ) ) {
 	function fastfood_widgets_style() {
 		//add custom stylesheet
 		wp_enqueue_style( 'ff-widgets-style', get_template_directory_uri() . '/css/widgets.css', false, '', 'screen' );
+	}
+}
+
+if ( !function_exists( 'fastfood_widgets_scripts' ) ) {
+	function fastfood_widgets_scripts() {
+		global $boozurk_version;
+		wp_enqueue_script( 'ff-widgets-scripts', get_template_directory_uri() . '/js/fastfood-widgets.dev.js', array('jquery'), $boozurk_version, true );
 	}
 }
 
@@ -1285,32 +1305,6 @@ if ( !function_exists( 'fastfood_post_expander_show_post' ) ) {
 function fastfood_post_expander_activate ( ) {
 	if ( isset( $_POST["ff_post_expander"] ) ) {
 		add_action( 'wp', 'fastfood_post_expander_show_post' );
-	}
-}
-
-// retrieve the post content, then die (for "ff_gallery_slide" ajax request)
-if ( !function_exists( 'fastfood_gallery_slide_show_post' ) ) {
-	function fastfood_gallery_slide_show_post (  ) {
-		if ( have_posts() ) {
-			while ( have_posts() ) {
-				the_post();
-				?>
-					<a href="<?php echo wp_get_attachment_url(); ?>" title="<?php _e( 'View full size', 'fastfood' ) ;  // link to Full size image ?>" rel="attachment"><?php
-						$ff_attachment_width  = apply_filters( 'fastfood_attachment_size', 1000 );
-						$ff_attachment_height = apply_filters( 'fastfood_attachment_height', 1000 );
-						echo wp_get_attachment_image( $post->ID, array( $ff_attachment_width, $ff_attachment_height ) ); // filterable image width with, essentially, no limit for image height.
-					?></a>
-				<?php
-			}
-		}
-		die();
-	}
-}
-
-//is a "ff_gallery_slide" ajax request?
-function fastfood_gallery_slide_activate ( ) {
-	if ( isset( $_POST["ff_gallery_slide"] ) ) {
-		add_action( 'wp', 'fastfood_gallery_slide_show_post' );
 	}
 }
 

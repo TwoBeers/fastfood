@@ -58,7 +58,7 @@ if ( have_posts() ) {
 				function_exists( 'get_post_format' ) && 
 				isset( $fastfood_opt['fastfood_post_formats_' . get_post_format( $post->ID ) ] ) && 
 				$fastfood_opt['fastfood_post_formats_' . get_post_format( $post->ID ) ] == 1 
-			) ? get_post_format( $post->ID ) : 'standard' ;
+			) ? get_post_format( $post->ID ) : '' ;
 		} ?>
 		
 		<?php fastfood_hook_before_post(); ?>

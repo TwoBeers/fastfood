@@ -3,7 +3,7 @@
 
 	<head profile="http://gmpg.org/xfn/11">
 		<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
-		<meta name = "viewport" content = "width = device-width">
+		<meta name = "viewport" content = "width = device-width" />
 		<title><?php
 			if ( is_front_page() ) {
 				bloginfo( 'name' ); ?> - <?php bloginfo( 'description' );
@@ -14,7 +14,7 @@
 			?></title>
 		<?php global $fastfood_opt; ?>
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
-		<?php wp_get_archives( 'type=monthly&format=link' ); ?>
+		<?php wp_get_archives( 'type=monthly&format=link&limit=10' ); ?>
 		<?php wp_head(); ?>
 	</head>
 

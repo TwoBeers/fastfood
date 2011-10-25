@@ -1,6 +1,6 @@
 <h3>Fastfood - WordPress theme</h3>
 	<ul>
-		<li>version: 0.28.2</li>
+		<li>version: 0.29</li>
 	</ul>
  
 <h3>Project page:</h3>
@@ -60,6 +60,26 @@
 		<li>the theme is compatible with Internet Explorer 6 but some elements, animations or styles could be unavailable</li>
 	</ul>
 
+<h3>CHANGE LOG (FROM VERSION 0.28.2):</h3>
+	<ul>
+		<li>Adds:
+			<ul>
+				<li>Google Plus added to "Social Links" widget</li>
+				<li>javascripts grouped</li>
+			</ul>
+		</li>
+		<li>Fixes:
+			<ul>
+				<li>links in navigation bar</li>
+				<li>fallback file for non-supported post formats</li>
+				<li>style for status/aside posts with float images inside</li>
+				<li>Odnoklassniki icon</li>
+				<li>post info rollover not working in Safari and Chrome</li>
+				<li>"Follow me" widget links and "Recent Comment Authors" widget links now open in new tab/window</li>
+			</ul>
+		</li>
+	</ul>
+	
 <h3>CHANGE LOG (FROM VERSION 0.27):</h3>
 	<ul>
 		<li>Adds:

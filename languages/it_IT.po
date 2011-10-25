@@ -37,7 +37,7 @@ msgstr "%s fa"
 #. Text in function
 #: functions.php:1210
 msgid "%s months ago"
-msgstr "% mesi fa"
+msgstr "%s mesi fa"
 
 #. Text in function
 #: footer.php:10
@@ -1676,3 +1676,4 @@ msgid "This gallery contains <a %1$s><strong>%2$s</strong> image</a>"
 msgid_plural "This gallery contains <a %1$s><strong>%2$s</strong> images</a>"
 msgstr[0] "Questa galleria contiene  <a %1$s><strong>%2$s</strong> immagine</a>"
 msgstr[1] "Questa galleria contiene  <a %1$s><strong>%2$s</strong> immagini</a>"
+

@@ -77,7 +77,7 @@ class Custom_Background {
 	 * @since 3.0.0
 	 */
 	function admin_load() {
-		wp_enqueue_script( 'ff-custom-background', get_template_directory_uri() . '/js/my-custom-background.min.js', array( 'jquery', 'farbtastic' ), '', true  );
+		wp_enqueue_script( 'ff-custom-background', get_template_directory_uri() . '/js/my-custom-background.dev.js', array( 'jquery', 'farbtastic' ), '', true  );
 		wp_enqueue_style('farbtastic');
 	}
 
