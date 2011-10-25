@@ -363,6 +363,7 @@ if ( !function_exists( 'fastfood_get_recentcomments' ) ) {
 		} else {
 			echo '<li>' . __( 'No comments yet.','fastfood' ) . '</li>';
 		}
+		wp_reset_postdata();
 	}
 }
 
@@ -392,6 +393,7 @@ if ( !function_exists( 'fastfood_get_recententries' ) ) {
 			}
 			echo '</div></li>';
 		}
+		wp_reset_postdata();
 	}
 }
 
@@ -427,6 +429,7 @@ if ( !function_exists( 'fastfood_get_categories_wpr' ) ) {
 			}
 			echo '</ul></div></li>';
 		}
+		wp_reset_postdata();
 	}
 }
 
