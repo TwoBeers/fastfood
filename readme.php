@@ -93,6 +93,7 @@
 				<li>links in navigation bar</li>
 				<li>gallery preview + custom permalinks</li>
 				<li>EXIF informations for attachments (can be disabled via options)</li>
+				<li>small bug in multipages menu dropdown</li>
 			</ul>
 		</li>
 	</ul>
@@ -242,6 +243,6 @@
 <h3>CREDITS:</h3>
 	<ul>
 		<li>this theme uses "iconSweets2" iconset by http://www.yummygum.com. See "images/iconSweets2 - License.rtf"</li>
-		<li>Everyone who helped us with bug reports and suggestions. Thanks!</li>
+		<li>Everyone who helped us with bug reports, suggestions and translations. Thanks!</li>
 	</ul>
  
