@@ -1,40 +1,27 @@
 <?php get_header(); ?>
 
 <?php fastfood_hook_before_posts(); ?>
-<div id="posts_content" class="posts_narrow">
+<div id="posts_content" class="<?php echo ( fastfood_use_sidebar() ) ? 'posts_narrow' : 'posts_wide'; ?>">
 
 <?php
 global $fastfood_opt;
 
 // search reminder
-if ( is_category() ) {
-	echo '<div class="wp-caption aligncenter" style="padding-bottom: 5px;">' . __( 'Categories','fastfood' ) . ': <strong>' . wp_title( '',false,'right' ) . '</strong></div>';
-} elseif ( is_tag() ) {
-	echo '<div class="wp-caption aligncenter" style="padding-bottom: 5px;">' . __( 'Tags','fastfood' ) . ': <strong>' . wp_title( '',false,'right' ) . '</strong></div>';
-} elseif ( is_date() ) {
-	echo '<div class="wp-caption aligncenter" style="padding-bottom: 5px;">' . __( 'Archives','fastfood' ) . ': <strong>' . wp_title( '',false,'right' ) . '</strong></div>';
-} elseif (is_author()) {
-	echo '<div class="wp-caption aligncenter vcard" style="padding-bottom: 5px;">' . __( 'Author','fastfood' ) . ': <span class="fn"><strong>' . wp_title( '',false,'right' ) . '</strong></span>';
+if ( is_archive() && !$fastfood_opt['fastfood_breadcrumb'] ) {
+	printf( '<div class="ff-search-reminder"><div class="ff-search-term">' . __( 'Archives for %s','fastfood' ) . ' <span class="ff-search-found">('.$wp_query->found_posts.')</span>' . '</div></div>', '<strong>' . wp_title( '',false,'right' ) . '</strong>' );
+} elseif ( is_search() && !$fastfood_opt['fastfood_breadcrumb'] ) {
+	printf( '<div class="ff-search-reminder ff-search-term">' . __( 'Search results for &#8220;%s&#8221;','fastfood' ) . ' <span class="ff-search-found">('.$wp_query->found_posts.')</span>' . '</div>', '<strong>' . esc_html( get_search_query() ) . '</strong>' );
+}
+if (is_author()) {
 	$ff_author = get_queried_object();
 	// If a user has filled out their description, show a bio on their entries.
-	if ( $ff_author->description ) { ?>
-		<div id="entry-author-info">
-			<?php echo get_avatar( $ff_author->user_email, 32, $default= get_template_directory_uri() . '/images/user.png','user-avatar' ); ?>
-			<?php
-				if ( $ff_author->twitter ) echo '<a class="url" title="' . sprintf( __('follow %s on Twitter', 'fastfood'), $ff_author->display_name ) . '" href="'.$ff_author->twitter.'"><img alt="twitter" class="avatar" width=32 height=32 src="' . get_template_directory_uri() . '/images/follow/Twitter.png" /></a>';
-				if ( $ff_author->facebook ) echo '<a class="url" title="' . sprintf( __('follow %s on Facebook', 'fastfood'), $ff_author->display_name ) . '" href="'.$ff_author->facebook.'"><img alt="facebook" class="avatar" width=32 height=32 src="' . get_template_directory_uri() . '/images/follow/Facebook.png" /></a>';
-			?>
-			<br />
-			<?php echo $ff_author->description; ?>
-		</div><!-- #entry-author-info -->
-	<?php }
-	echo '</div>';
+	if ( $ff_author->description ) fastfood_post_details( true,false,false,false);
 }
 
 //skip posts with aside/status format (via options)
 if ( isset( $fastfood_opt['fastfood_post_view_aside'] ) && $fastfood_opt['fastfood_post_view_aside'] == 0	) $ff_terms[] = 'post-format-aside';
 if ( isset( $fastfood_opt['fastfood_post_view_status'] ) && $fastfood_opt['fastfood_post_view_status'] == 0	) $ff_terms[] = 'post-format-status';
-if ( isset( $ff_terms ) ) {
+if ( isset( $ff_terms ) && !is_search() ) {
 	global $query_string;
 	parse_str( $query_string, $args );
 	$args['tax_query'] = array(
@@ -67,16 +54,20 @@ if ( have_posts() ) {
 	
 	<?php } //end while ?>
 
-	<div class="w_title" id="ff-page-nav">
-		<?php //num of pages
-		global $paged;
-		if ( !$paged ) {
-			$paged = 1;
-		}
-		previous_posts_link( '&laquo;' );
-		printf( __( 'page %1$s of %2$s','fastfood' ), $paged, $wp_query->max_num_pages );
-		next_posts_link( '&raquo;' );
-		?>
+	<div id="ff-page-nav">
+		<?php if ( function_exists( 'wp_pagenavi' ) ) { ?>
+			<?php wp_pagenavi(); ?>
+		<?php } else { ?>
+			<?php //num of pages
+			global $paged;
+			if ( !$paged ) {
+				$paged = 1;
+			}
+			previous_posts_link( '&laquo;' );
+			printf( __( 'page %1$s of %2$s','fastfood' ), $paged, $wp_query->max_num_pages );
+			next_posts_link( '&raquo;' );
+			?>
+		<?php } ?>
 	</div>
 
 <?php } else { ?>
@@ -87,6 +78,6 @@ if ( have_posts() ) {
 
 </div>
 <?php fastfood_hook_after_posts(); ?>
-<?php get_sidebar(); // show sidebar ?>
+<?php if ( fastfood_use_sidebar() ) get_sidebar(); // show sidebar ?>
 
 <?php get_footer(); ?>

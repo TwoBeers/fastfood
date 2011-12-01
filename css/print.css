@@ -14,7 +14,7 @@ p {
 }
 a {
 	text-decoration: none;
-	color: #000;
+	color: #000 !important;
 }
 a img {
 	border: none;
@@ -45,12 +45,18 @@ th {
 blockquote {
 	font-style: italic;
 }
+img {
+	max-width: 100%;
+	height: auto;
+	margin: 0;
+}
 .avatar,
 .comment-edit-link,
 .comment-reply-link,
 .says,
 .description,
 .post-edit-link,
+.article-share,
 #footer-widget-area,
 #header-widget-area,
 #headerimg,
@@ -105,4 +111,10 @@ body #wpadminbar {
 #head,
 #footer {
 	text-align: right;
+}
+.wp-caption {
+	max-width: 100%;
+}
+.fixfloat {
+	clear: both;
 }

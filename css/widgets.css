@@ -20,14 +20,12 @@
 	background: url("../images/widgets/widget_h1.png") no-repeat center 10px transparent;
 	padding-top: 80px;
 }
+#post-widgets-area {
+	background: url("../images/widgets/widget_p1.png") no-repeat center 10px transparent;
+	padding-top: 80px;
+}
 
-div[id*=ff-recent-comments] .widget-title,
-div[id*=ff-recent-posts] .widget-title,
-div[id*=ff-social] .widget-title,
-div[id*=ff-categories] .widget-title,
-div[id*=ff-recent-commentators] .widget-title,
-div[id*=ff-popular-posts] .widget-title,
-div[id*=ff-widget-besides] .widget-title {
+div[id*=_ff-] .widget-title {
 	background: url("../images/tb_micrologo.png") no-repeat 2px center transparent;
 	padding-left: 42px;
 }

@@ -289,21 +289,19 @@ class fastfood_widget_latest_commentators extends WP_Widget {
 		if ( $title )
 			$output .= $before_title . $title . $after_title;
 
-		$output .= '<ul>';
 		if ( $comments ) {
 			foreach ( (array) $comments as $comment) {
 				if ( !in_array( $comment->comment_author_email, $post_array ) ) {
 					if ( $comment->comment_author_url == '' ) {
-						$output .=  '<li title="' .  $comment->comment_author . '">' . get_avatar( $comment, $icon_size, $default=get_option('avatar_default') ) . '</li>';
+						$output .=  '<span title="' .  $comment->comment_author . '">' . get_avatar( $comment, $icon_size, $default=get_option('avatar_default') ) . '</span>';
 					} else {
-						$output .=  '<li><a target="_blank" href="' . $comment->comment_author_url . '" title="' .  $comment->comment_author . '">' . get_avatar( $comment, $icon_size, $default=get_option('avatar_default')) . '</a></li>';
+						$output .=  '<span><a target="_blank" href="' . $comment->comment_author_url . '" title="' .  $comment->comment_author . '">' . get_avatar( $comment, $icon_size, $default=get_option('avatar_default')) . '</a></span>';
 					}
 					$post_array[] = $comment->comment_author_email;
 					if ( ++$counter >= $number ) break;
 				}
 			}
  		}
-		$output .= '</ul><div class="fixfloat"></div>';
 		$output .= $after_widget;
 
 		echo $output;
@@ -467,6 +465,7 @@ class fastfood_Widget_social extends WP_Widget {
 			'Vimeo',
 			'VKontakte',
 			'WindowsLive',
+			'Xing',
 			'Youtube',
 			'RSS');
 	}
@@ -486,9 +485,10 @@ class fastfood_Widget_social extends WP_Widget {
     <div style="padding: 10px 0; border-top: 1px solid #DFDFDF;">
 
 <?php
+		$alt = ' clear: left;';
         foreach($this->follow_urls as $follow_service ) {
 ?>
-        <div style="float: left; width: 40%; margin: 0pt 5%;">
+        <div style="float: left; width: 40%; margin: 0pt 5%;<?php echo $alt; ?>">
 			<h2>
 				<input id="<?php echo $this->get_field_id('show_'.$follow_service); ?>" name="<?php echo $this->get_field_name('show_'.$follow_service); ?>" type="checkbox" <?php checked( $instance['show_'.$follow_service], 'on'); ?>  class="checkbox" />
 				<img style="vertical-align:middle; width:40px; height:40px;" src="<?php echo get_template_directory_uri(); ?>/images/follow/<?php echo $follow_service; ?>.png" alt="<?php echo $follow_service; ?>" />
@@ -512,6 +512,7 @@ class fastfood_Widget_social extends WP_Widget {
 ?>
         </div>
 <?php
+		$alt = ( $alt ) ? '' : ' clear: left;';
         }
 ?>
         <div class="clear" style="padding: 10px 0; border-top: 1px solid #DFDFDF; text-align: right;">
@@ -564,11 +565,7 @@ class fastfood_Widget_social extends WP_Widget {
 				$account = get_bloginfo( 'rss2_url' );
 			}
 			if ($show && !empty($account)) {
-?>
-        <a href="<?php echo $account; ?>" target="_blank" class="ff-social-icon" title="<?php echo $follow_service;?>">
-            <img src="<?php echo get_template_directory_uri(); ?>/images/follow/<?php echo $follow_service;?>.png" alt="<?php echo $follow_service;?>" style='width: <?php echo $icon_size;?>; height: <?php echo $icon_size;?>;' />
-        </a>
-<?php
+?><a href="<?php echo $account; ?>" target="_blank" class="ff-social-icon" title="<?php echo $follow_service;?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/<?php echo $follow_service;?>.png" alt="<?php echo $follow_service;?>" style='width: <?php echo $icon_size;?>; height: <?php echo $icon_size;?>;' /></a><?php
             }
         }
 ?>
@@ -661,14 +658,14 @@ class fastfood_Widget_besides extends WP_Widget {
 			<?php if ( $type == 'aside' ) { ?>
 			<div class="wentry-aside">
 				<?php the_content(); ?>
-				<span style="font-style: italic; color: #999;"><?php the_author(); ?> - <a href="<?php the_permalink() ?>" rel="bookmark"><?php the_time( get_option( 'date_format' ) ); ?></a> - <?php comments_popup_link('(0)', '(1)','(%)'); ?></span>
+				<span style="font-style: italic; color: #aaa;"><?php the_author(); ?> - <a href="<?php the_permalink() ?>" rel="bookmark"><?php the_time( get_option( 'date_format' ) ); ?></a> - <?php comments_popup_link('(0)', '(1)','(%)'); ?></span>
 			</div>
 			<?php } elseif ( $type == 'status' ) { ?>
 			<div class="wentry-status">
 				<?php echo get_avatar( get_the_author_meta('user_email'), 24, $default=get_option('avatar_default'), get_the_author() ); ?>
 				<a style="font-weight: bold;" href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>" title="<?php printf( 'View all posts by %s', esc_attr( get_the_author() ) ); ?>"><?php echo get_the_author(); ?></a>
 				<?php the_content(); ?>
-				<span style="color: #999;"><?php echo fastfood_friendly_date(); ?></span>
+				<span style="color: #aaa;"><?php echo fastfood_friendly_date(); ?></span>
 			</div>
 			<?php } ?>
 
@@ -759,8 +756,16 @@ class fastfood_Widget_recent_posts extends WP_Widget {
 		ob_start();
 		extract($args);
 
+		$category = isset( $instance['category']) ? intval($instance['category'] ) : '';
+		if ( $category === -1 ) {
+			if ( !is_single() || is_attachment() ) return;
+			global $post;
+			$category = get_the_category( $post->ID );
+			$category = ( $category ) ? $category[0]->cat_ID : '';
+		}
+		
 		$use_thumbs = ( !isset($instance['thumb']) || $thumb = (int) $instance['thumb'] ) ? 1 : 0;
-		$category = isset( $instance['category']) ? absint($instance['category'] ) : '';
+		$description = ( !isset($instance['description']) || $description = (int) $instance['description'] ) ? 1 : 0;
 		$title = apply_filters('widget_title', empty($instance['title']) ? __('Recent Posts in %s', 'fastfood' ) : $instance['title'], $instance, $this->id_base);
 		$title = sprintf( $title, '<a href="' . get_category_link( $category ) . '">' . get_cat_name( $category ) . '</a>' );
 		if ( ! $number = absint( $instance['number'] ) )
@@ -771,6 +776,7 @@ class fastfood_Widget_recent_posts extends WP_Widget {
 ?>
 		<?php echo $before_widget; ?>
 		<?php if ( $title ) echo $before_title . $title . $after_title; ?>
+		<?php if ( $description && category_description( $category ) ) echo '<div class="bz-cat-descr">' . category_description( $category ) . '</div>'; ?>
 		<ul>
 		<?php  while ($r->have_posts()) : $r->the_post(); ?>
 		<li<?php if ( $use_thumbs ) echo ' class="li-with-thumbs"'; ?>>
@@ -804,6 +810,7 @@ class fastfood_Widget_recent_posts extends WP_Widget {
 		$instance['number'] = (int) $new_instance['number'];
 		$instance['category'] = (int) $new_instance['category'];
 		$instance['thumb'] = (int) $new_instance['thumb'] ? 1 : 0;
+		$instance['description'] = (int) $new_instance['description'] ? 1 : 0;
 		$this->flush_widget_cache();
 
 		$alloptions = wp_cache_get( 'alloptions', 'options' );
@@ -818,25 +825,26 @@ class fastfood_Widget_recent_posts extends WP_Widget {
 	}
 
 	function form( $instance ) {
-		$title = isset($instance['title']) ? esc_attr($instance['title']) : '';
+		$title = isset($instance['title']) ? esc_attr($instance['title']) : __('Recent Posts in %s', 'fastfood' );
 		$number = isset($instance['number']) ? absint($instance['number']) : 5;
-		$category = isset($instance['category']) ? absint($instance['category']) : '';
+		$category = isset($instance['category']) ? intval($instance['category']) : '';
 		$thumb = isset($instance['thumb']) ? absint($instance['thumb']) : 1;
+		$description = isset($instance['description']) ? absint($instance['description']) : 1;
 ?>
 		<p>
-			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:', 'fastfood' ); ?></label>
+			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title', 'fastfood' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" />
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id('category'); ?>"><?php _e('Title:', 'fastfood' ); ?></label>
-			<?php wp_dropdown_categories( Array(
+			<label for="<?php echo $this->get_field_id('category'); ?>"><?php _e('Category', 'fastfood' ); ?></label>
+			<?php $dropdown_categories = wp_dropdown_categories( Array(
 						'orderby'            => 'ID', 
 						'order'              => 'ASC',
 						'show_count'         => 1,
 						'hide_empty'         => 0,
-						'hide_if_empty'      => false,
-						'echo'               => 1,
+						'hide_if_empty'      => true,
+						'echo'               => 0,
 						'selected'           => $category,
 						'hierarchical'       => 1, 
 						'name'               => $this->get_field_name('category'),
@@ -844,16 +852,304 @@ class fastfood_Widget_recent_posts extends WP_Widget {
 						'class'              => 'widefat',
 						'taxonomy'           => 'category',
 					) ); ?>
+					
+			<?php 
+			echo str_replace( '</select>', '<option ' . selected( $category , -1 , 0 ) . 'value="-1" class="level-0">' . __( '(current post category)', 'fastfood' ) . '</option></select>', $dropdown_categories );
+			?>
+			<small><?php echo __( 'by selecting "(current post category)", the widget will be visible ONLY in single posts', 'fastfood' ); ?></small>
 		</p>
 
-		<p><label for="<?php echo $this->get_field_id('number'); ?>"><?php _e('Number of posts to show:', 'fastfood' ); ?></label>
-		<input id="<?php echo $this->get_field_id('number'); ?>" name="<?php echo $this->get_field_name('number'); ?>" type="text" value="<?php echo $number; ?>" size="3" /></p>
+		<p>
+			<input id="<?php echo $this->get_field_id('description'); ?>" name="<?php echo $this->get_field_name('description'); ?>" value="1" type="checkbox" <?php checked( 1 , $description ); ?> />
+			<label for="<?php echo $this->get_field_id('description'); ?>"><?php _e('Show category description','fastfood'); ?></label>
+		</p>	
+		<p>
+			<label for="<?php echo $this->get_field_id('number'); ?>"><?php _e('Number of posts to show', 'fastfood' ); ?></label>
+			<input id="<?php echo $this->get_field_id('number'); ?>" name="<?php echo $this->get_field_name('number'); ?>" type="text" value="<?php echo $number; ?>" size="3" />
+		</p>
 
 		<p>
 			<input id="<?php echo $this->get_field_id('thumb'); ?>" name="<?php echo $this->get_field_name('thumb'); ?>" value="1" type="checkbox" <?php checked( 1 , $thumb ); ?> />
 			<label for="<?php echo $this->get_field_id('thumb'); ?>"><?php _e('Show post thumbnails','fastfood'); ?></label>
 		</p>	
 
+<?php
+	}
+}
+
+/**
+ * Image EXIF widget class
+ */
+class fastfood_Widget_image_EXIF extends WP_Widget {
+
+	function fastfood_Widget_image_EXIF() {
+		$widget_ops = array('classname' => 'ff_Widget_exif_details', 'description' => __( "Display image details. It's visible ONLY in single attachments",'fastfood') );
+		$this->WP_Widget('ff-exif-details', __('Image details','fastfood'), $widget_ops);
+		$this->alt_option_name = 'ff_Widget_exif_details';
+
+	}
+
+	function widget($args, $instance) {
+		if ( !is_attachment() || !wp_attachment_is_image() ) return;
+		extract($args);
+		
+		$title = apply_filters('widget_title', $instance['title'], $instance, $this->id_base);
+?>
+		<?php echo $before_widget; ?>
+		<?php if ( $title ) echo $before_title . $title . $after_title; ?>
+		<?php fastfood_exif_info(); ?>
+		<?php echo $after_widget; ?>
+<?php
+	}
+
+	function update( $new_instance, $old_instance ) {
+		$instance = $old_instance;
+		$instance['title'] = strip_tags($new_instance['title']);
+
+		return $instance;
+	}
+
+	function form( $instance ) {
+		$title = isset($instance['title']) ? esc_attr($instance['title']) : __('Image details','fastfood');
+?>
+		<p>
+			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title','fastfood'); ?></label>
+			<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" />
+		</p>
+
+<?php
+	}
+}
+
+/**
+ * Post share links
+ */
+class fastfood_Widget_share_this extends WP_Widget {
+
+	function fastfood_Widget_share_this() {
+		$widget_ops = array('classname' => 'ff_Widget_share_this', 'description' => __( "Show some popular sharing services links. It's visible ONLY in single posts, pages and attachments",'fastfood') );
+		$this->WP_Widget('ff-share-this', __('Share this','fastfood'), $widget_ops);
+		$this->alt_option_name = 'ff_Widget_share_this';
+
+	}
+
+	function widget($args, $instance) {
+		if ( !is_singular() ) return;
+		extract($args);
+		
+		$icon_size = isset($instance['icon_size']) ? absint($instance['icon_size']) : '16';
+
+		$title = apply_filters('widget_title', $instance['title'], $instance, $this->id_base);
+?>
+		<?php echo $before_widget; ?>
+		<?php if ( $title ) echo $before_title . $title . $after_title; ?>
+		<?php fastfood_share_this( $icon_size ); ?>
+		<?php echo $after_widget; ?>
+<?php
+	}
+
+	function update( $new_instance, $old_instance ) {
+		$instance = $old_instance;
+		$instance['title'] = strip_tags($new_instance['title']);
+        $instance["icon_size"] = in_array( $new_instance["icon_size"], array ('16', '24', '32', '48', '64') ) ? $new_instance["icon_size"] : '16' ;
+
+		return $instance;
+	}
+
+	function form( $instance ) {
+		$title = isset($instance['title']) ? esc_attr($instance['title']) : __('Share this','fastfood');
+		$icon_size = isset($instance['icon_size']) ? absint($instance['icon_size']) : '16';
+?>
+		<p>
+			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title','fastfood'); ?></label>
+			<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" />
+		</p>
+		<p>
+            <label for="<?php echo $this->get_field_id('icon_size'); ?>"><?php _e('Select icon size', 'fastfood'); ?></label>
+            <select name="<?php echo $this->get_field_name('icon_size'); ?>" id="<?php echo $this->get_field_id('icon_size'); ?>" >
+<?php
+            $size_array = array ('16', '24', '32', '48', '64');
+            foreach($size_array as $size) {
+?>
+                <option value="<?php echo $size; ?>" <?php selected( $icon_size, $size ); ?>><?php echo $size; ?>px</option>
+<?php
+            }
+?>
+            </select>
+		</p>
+
+<?php
+	}
+}
+
+/**
+ * Clean Archives Widget
+ */
+class fastfood_Widget_clean_archives extends WP_Widget {
+
+	function fastfood_Widget_clean_archives() {
+		$widget_ops = array('classname' => 'ff_Widget_clean_archives', 'description' => __( "Show archives in a cleaner way",'fastfood') );
+		$this->WP_Widget('ff-clean-archives', __('Clean Archives','fastfood'), $widget_ops);
+		$this->alt_option_name = 'ff_Widget_clean_archives';
+
+	}
+
+	function widget($args, $instance) {
+		extract($args);
+		
+		global $wpdb; // Wordpress Database
+		
+		$years = $wpdb->get_results( "SELECT distinct year(post_date) AS year, count(ID) as posts FROM $wpdb->posts WHERE post_type = 'post' AND post_status = 'publish' GROUP BY year(post_date) ORDER BY post_date DESC" );
+		
+		if ( empty( $years ) ) {
+			return; // empty archive
+		}
+		
+		$title = apply_filters('widget_title', $instance['title'], $instance, $this->id_base);
+		$month_style = ( isset($instance['month_style']) && in_array( $instance['month_style'], array ('number', 'acronym') ) ) ? $instance['month_style'] : 'number';
+?>
+		<?php echo $before_widget; ?>
+		<?php if ( $title ) echo $before_title . $title . $after_title; ?>
+		<?php
+			if ( $month_style == 'acronym' )
+				$months_short = array( '', __('jan','fastfood'), __('feb','fastfood'), __('mar','fastfood'), __('apr','fastfood'), __('may','fastfood'), __('jun','fastfood'), __('jul','fastfood'), __('aug','fastfood'), __('sep','fastfood'), __('oct','fastfood'), __('nov','fastfood'), __('dec','fastfood') );
+			else
+				$months_short = array( '', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12' );
+			
+		?>
+		<ul class="ff-clean-archives">
+		<?php foreach ( $years as $year ) {
+			echo '<li><a class="ff-year-link" href="' . get_year_link( $year->year ) . '">' . $year->year . '</a> ';
+			
+			for ( $month = 1; $month <= 12; $month++ ) {
+				if ( (int) $wpdb->get_var( "SELECT COUNT(ID) FROM $wpdb->posts WHERE post_type = 'post' AND post_status = 'publish' AND year(post_date) = '$year->year' AND month(post_date) = '$month'" ) > 0 ) {
+					echo '<a class="ff-month-link" href="' . get_month_link( $year->year, $month ) . '">' . $months_short[$month] . '</a>';
+				}
+				
+				if ( $month != 12 ) {
+					echo ' ';
+				}
+			}
+			
+			echo '</li>';
+		} ?>
+		
+		</ul>
+		<?php echo $after_widget; ?>
+<?php
+	}
+
+	function update( $new_instance, $old_instance ) {
+		$instance = $old_instance;
+		$instance['title'] = strip_tags($new_instance['title']);
+        $instance["month_style"] = in_array( $new_instance["month_style"], array ('number', 'acronym') ) ? $new_instance["month_style"] : 'number' ;
+
+		return $instance;
+	}
+
+	function form( $instance ) {
+		$title = isset($instance['title']) ? esc_attr($instance['title']) : __('Archives','fastfood');
+		$month_style = isset($instance['month_style']) ? esc_attr($instance['month_style']) : 'number';
+?>
+		<p>
+			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title','fastfood'); ?></label>
+			<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" />
+		</p>
+		<p>
+            <label for="<?php echo $this->get_field_id('month_style'); ?>"><?php _e('Select month style', 'fastfood'); ?></label>
+            <select name="<?php echo $this->get_field_name('month_style'); ?>" id="<?php echo $this->get_field_id('month_style'); ?>" >
+                <option value="number" <?php selected( $month_style, 'number' ); ?>>number</option>
+                <option value="acronym" <?php selected( $month_style, 'acronym' ); ?>>acronym</option>
+            </select>
+		</p>
+<?php
+	}
+}
+
+/**
+ * Post details widget class
+ */
+class fastfood_Widget_post_details extends WP_Widget {
+
+	function fastfood_Widget_post_details() {
+		$widget_ops = array('classname' => 'ff_Widget_post_details', 'description' => __( "Show some details and links related to the current post. It's visible ONLY in single posts",'fastfood') );
+		$this->WP_Widget('ff-post-details', __('Post details','fastfood'), $widget_ops);
+		$this->alt_option_name = 'ff_Widget_post_details';
+
+	}
+
+	function widget($args, $instance) {
+		if ( !is_single() || is_attachment() ) return;
+		extract($args);
+
+		$avatar_size = isset($instance['avatar_size']) ? absint($instance['avatar_size']) : '48';
+
+		$title = apply_filters('widget_title', $instance['title'], $instance, $this->id_base);
+		echo $before_widget;
+		if ( $title ) echo $before_title . $title . $after_title;
+		fastfood_post_details( $instance['author'], $instance['date'], $instance['tags'], $instance['categories'], false, $avatar_size, $instance['featured'] );
+		echo $after_widget;
+	}
+
+	function update( $new_instance, $old_instance ) {
+		$instance = $old_instance;
+		$instance['title'] = strip_tags($new_instance['title']);
+		$instance['featured'] = (int) $new_instance['featured'] ? 1 : 0;
+		$instance['author'] = (int) $new_instance['author'] ? 1 : 0;
+        $instance['avatar_size'] = in_array( $new_instance['avatar_size'], array ('32', '48', '64', '96', '128') ) ? $new_instance['avatar_size'] : '48' ;
+		$instance['date'] = (int) $new_instance['date'] ? 1 : 0;
+		$instance['tags'] = (int) $new_instance['tags'] ? 1 : 0;
+		$instance['categories'] = (int) $new_instance['categories'] ? 1 : 0;
+
+		return $instance;
+	}
+
+	function form( $instance ) {
+		$title = isset($instance['title']) ? esc_attr($instance['title']) : __('Post details','fastfood');
+		$featured = isset($instance['featured']) ? absint($instance['featured']) : 0;
+		$author = isset($instance['author']) ? absint($instance['author']) : 1;
+		$avatar_size = isset($instance['avatar_size']) ? absint($instance['avatar_size']) : '48';
+		$date = isset($instance['date']) ? absint($instance['date']) : 1;
+		$tags = isset($instance['tags']) ? absint($instance['tags']) : 1;
+		$categories = isset($instance['categories']) ? absint($instance['categories']) : 1;
+?>
+		<p>
+			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title','fastfood'); ?></label>
+			<input class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" type="text" value="<?php echo $title; ?>" />
+		</p>
+		<p>
+			<input id="<?php echo $this->get_field_id('featured'); ?>" name="<?php echo $this->get_field_name('featured'); ?>" value="1" type="checkbox" <?php checked( 1 , $featured ); ?> />
+			<label for="<?php echo $this->get_field_id('featured'); ?>"><?php _e('thumbnail','fastfood'); ?></label>
+		</p>
+		<p>
+			<input id="<?php echo $this->get_field_id('author'); ?>" name="<?php echo $this->get_field_name('author'); ?>" value="1" type="checkbox" <?php checked( 1 , $author ); ?> />
+			<label for="<?php echo $this->get_field_id('author'); ?>"><?php _e('Author','fastfood'); ?></label>
+		</p>
+		<p>
+            <label for="<?php echo $this->get_field_id('avatar_size'); ?>"><?php _e('Select avatar size', 'fastfood'); ?></label>
+            <select name="<?php echo $this->get_field_name('avatar_size'); ?>" id="<?php echo $this->get_field_id('avatar_size'); ?>" >
+<?php
+            $size_array = array ('32', '48', '64', '96', '128');
+            foreach($size_array as $size) {
+?>
+                <option value="<?php echo $size; ?>" <?php selected( $avatar_size, $size ); ?>><?php echo $size; ?>px</option>
+<?php
+            }
+?>
+            </select>
+		</p>
+		<p>
+			<input id="<?php echo $this->get_field_id('date'); ?>" name="<?php echo $this->get_field_name('date'); ?>" value="1" type="checkbox" <?php checked( 1 , $date ); ?> />
+			<label for="<?php echo $this->get_field_id('date'); ?>"><?php _e('Date','fastfood'); ?></label>
+		</p>
+		<p>
+			<input id="<?php echo $this->get_field_id('tags'); ?>" name="<?php echo $this->get_field_name('tags'); ?>" value="1" type="checkbox" <?php checked( 1 , $tags ); ?> />
+			<label for="<?php echo $this->get_field_id('tags'); ?>"><?php _e('Tags','fastfood'); ?></label>
+		</p>
+		<p>
+			<input id="<?php echo $this->get_field_id('categories'); ?>" name="<?php echo $this->get_field_name('categories'); ?>" value="1" type="checkbox" <?php checked( 1 , $categories ); ?> />
+			<label for="<?php echo $this->get_field_id('categories'); ?>"><?php _e('Categories','fastfood'); ?></label>
+		</p>
 <?php
 	}
 }
@@ -878,6 +1174,14 @@ function fastfood_widgets_init() {
 	register_widget('fastfood_Widget_besides');
 	
 	register_widget('fastfood_Widget_recent_posts');
+	
+	register_widget('fastfood_Widget_image_EXIF');
+	
+	register_widget('fastfood_Widget_share_this');
+	
+	register_widget('fastfood_Widget_clean_archives');
+	
+	register_widget('fastfood_Widget_post_details');
 }
 
 add_action('widgets_init', 'fastfood_widgets_init');

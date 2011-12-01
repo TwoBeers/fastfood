@@ -16,7 +16,6 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 body {
 	font-family: Verdana, sans-serif;
 	font-size: 11px;
-	background: #e1e1e1 url('../images/body.png') center top repeat-y;
 	color: #404040;
 	margin: 0;
 }
@@ -61,7 +60,7 @@ fieldset {
 	padding: 8px;
 }
 legend {
-	color: #999;
+	color: #aaa;
 }
 blockquote {
 	border-left: 5px solid #ccc;
@@ -148,7 +147,8 @@ input[type=reset] {
 }
 #content {
 	width: 848px;
-	background: transparent url('../images/main.png') left top repeat-x;
+	background: #e1e1e1 url('../images/body.png') center top repeat-y;
+	padding: 0 1px;
 }
 #sidebardx {
 	float: left;
@@ -486,7 +486,7 @@ div.ff_widget_latest_commentators a img {
 }
 .status-cont {
 	font-size: 1.18em;
-	border: 1px solid #999;
+	border: 1px solid #aaa;
 	padding: 5px;
 }
 .status-subcont {
@@ -607,7 +607,6 @@ ul.children {
 	margin: 0 auto;
 }
 
-
 /* =Gallery listing
 ----------------------------------------------------------*/
 .format-gallery .gallery-thumb,
@@ -670,4 +669,10 @@ img.aligncenter {
 	line-height: 17px;
 	margin: 0;
 	padding: 0 4px 5px;
+}
+
+/* Breadcrumb
+----------------------------------------------------------*/
+#crumbs {
+	display: none;
 }

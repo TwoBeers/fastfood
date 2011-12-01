@@ -1,12 +1,10 @@
 /* Fastfood - stylesheet for print preview */
 
 body {
-	background-color: #eee;
+	background-color: #333;
 }
 #main {
-	-moz-box-shadow: 0 0 5px #000;
-	-webkit-box-shadow: 0 0 5px #000;
-	box-shadow: 0 0 5px #000;
+	box-shadow: 0 0 10px #000;
 	background: none repeat scroll 0 0 #fff;
 	width: 702px;
 	min-height: 1000px;
@@ -14,31 +12,36 @@ body {
 	padding: 49px;
 }
 #close_preview {
-	background: none repeat scroll 0 0 #ccc;
-	border: 1px solid #fff;
-	display: block;
 	margin-left: 770px;
 	position: fixed;
-	top: 30px;
-	-moz-border-radius: 5px;
-	-khtml-border-radius: 5px;
-	-webkit-border-radius: 5px;
-	border-radius: 5px;
-	-moz-box-shadow: 2px 2px 3px #444;
-	-webkit-box-shadow: 2px 2px 3px #444;
-	box-shadow: 2px 2px 3px #444;
-	padding: 5px 0;
+	top: 60px;
 }
 #close_preview a {
 	text-decoration: none;
-	color: Chocolate;
 	display: block;
 	padding: 5px;
+	width: 32px;
+	height: 32px;
+	background-color: transparent;
+	background-image: url('../images/round-buttons.png');
+	background-repeat: no-repeat;
+	text-indent: -1000px;
+	overflow: hidden;
+	margin-bottom: 10px;
+	opacity: 0.5;
+	filter: alpha(opacity=50);
+}
+#print_button {
+	background-position: -126px top;
+}
+#close_button {
+	background-position: -84px top;
 }
 #close_preview a:hover {
-	color: OrangeRed;
+	opacity: 1;
+	filter: alpha(opacity=100);
 }
-#close_preview a#print_button {
-	display: none;
-	border-top: 1px solid #999;
+.ff-js .hide-if-js,
+.ff-no-js .hide-if-no-js {
+	display:none !important;
 }

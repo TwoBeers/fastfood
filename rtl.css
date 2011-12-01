@@ -154,3 +154,81 @@ img.alignright,
 .search-form {
     background: url("images/lens.png") no-repeat scroll 5px center #BEC0BE;
 }
+.meta_container {
+	margin: 0 0 10px 12px;
+}
+.ff_widget_popular_posts li.li-with-thumbs,
+.ff_widget_recent_entries li.li-with-thumbs,
+.ff_widget_latest_commented_posts li.li-with-thumbs {
+	padding: 0 46px 0 0;
+}
+.ff_widget_popular_posts .post-thumb,
+.ff_widget_popular_posts img,
+.ff_widget_recent_entries .post-thumb,
+.ff_widget_recent_entries img,
+.ff_widget_latest_commented_posts .post-thumb,
+.ff_widget_latest_commented_posts img {
+	left: auto;
+	right: 0;
+}
+#crumbs ul {
+	background:#404040 url(images/breadcrumb-rtl.png) no-repeat left -200px;
+	padding:0 0 0 7px;
+}
+#crumbs ul,
+#crumbs li {
+	float:right;
+}
+#crumbs li a,
+#crumbs li span {
+	padding:4px 19px 5px 10px;
+}
+#crumbs li {
+	background:#ccc url(images/breadcrumb-rtl.png) no-repeat right -100px;
+}
+#crumbs li.first a {
+	background:#ccc url(images/breadcrumb-rtl.png) no-repeat right -300px;
+	padding:4px 12px 5px 10px;
+}
+#crumbs li.first a:hover {
+	background:#ccc url(images/breadcrumb-rtl.png) no-repeat right -40px;
+}
+#crumbs li.last {
+	background:#404040 url(images/breadcrumb-rtl.png) no-repeat right 0;
+}
+#crumbs li .crumb-cat,
+#crumbs li .crumb-tag,
+#crumbs li .crumb-date,
+#crumbs li .crumb-auth {
+	padding:4px 12px 5px 34px;
+}
+#TB_window img#TB_Image {
+	margin: 15px 15px 0 0;
+}
+#TB_next a, #TB_prev a {
+    color: transparent !important;
+}
+#TB_caption {
+    float: right;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

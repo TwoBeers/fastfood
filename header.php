@@ -18,7 +18,7 @@
 		<?php wp_head(); ?>
 	</head>
 
-	<body <?php body_class(); ?>>
+	<body <?php body_class('ff-no-js'); ?>>
 		<div id="ff_background">
 			<div id="ff_body" class="pad_bg">
 				<div id="ff_body_overlay"></div>
@@ -49,3 +49,5 @@
 			</div>
 			
 			<?php get_sidebar( 'header' ); // show header widgets area ?>
+			
+			<?php if ( $fastfood_opt['fastfood_breadcrumb'] == 1 ) fastfood_breadcrumb(); // show breadcrumb ?>

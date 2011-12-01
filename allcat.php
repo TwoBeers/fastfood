@@ -4,8 +4,8 @@
 <?php get_header(); ?>
 
 <?php fastfood_hook_before_posts(); ?>
-<div id="posts_content" class="posts_narrow">
-	<div class="post">
+<div id="posts_content" class="posts_wide">
+	<div class="hentry">
 		<h2 class="storytitle"><?php _e( 'Categories','fastfood' ); ?></h2>
 		<div class="comment_tools">
 			<?php _e( 'All Categories','fastfood' ); ?>

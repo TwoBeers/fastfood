@@ -16,30 +16,8 @@
 		the_post(); ?>
 		<?php fastfood_hook_before_post(); ?>
 		<div <?php post_class() ?> id="post-<?php the_ID(); ?>">
-			<?php if ( $ff_is_printpreview ) { ?>
-				<div id="close_preview">
-					<a href="<?php the_permalink() ?>" rel="bookmark"><?php _e( 'Close','fastfood' ); ?></a>
-					<a href="javascript:window.print()" id="print_button"><?php _e( 'Print','fastfood' ); ?></a>
-					<script type="text/javascript" defer="defer">
-						/* <![CDATA[ */
-						document.getElementById("print_button").style.display = "block"; // print button (available only with js active)
-						/* ]]> */
-					</script>
-				</div>
-			<?php } ?>
 			<?php fastfood_hook_before_post_title(); ?>
-			<h2 class="storytitle">
-				<a href="<?php the_permalink(); ?>" rel="bookmark">
-					<?php
-					$ff_post_title = the_title_attribute( 'echo=0' );
-					if ( !$ff_post_title ) {
-						_e( '(no title)','fastfood' );
-					} else {
-						echo $ff_post_title;
-					}
-					?>
-				</a>
-			</h2>
+			<?php fastfood_featured_title( array( 'fallback' => sprintf ( __('page #%s','fastfood'), get_the_ID() ) ) ); ?>
 			<?php fastfood_hook_after_post_title(); ?>
 			<?php fastfood_extrainfo( false, false, true, false, false, true ); ?>
 			<?php fastfood_hook_before_post_content(); ?>
@@ -53,6 +31,8 @@
 		</div>
 		<?php fastfood_hook_after_post(); ?>
 
+		<?php $ff_tmptrackback = get_trackback_url(); ?>
+		
 		<?php comments_template(); // Get wp-comments.php template ?>
 
 	<?php } //end while

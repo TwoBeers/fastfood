@@ -43,7 +43,7 @@
 			//define custom argoments for comment form
 			$ff_custom_args = array(
 				'comment_field'        => '<p class="comment-form-comment" style="text-align: center;"><textarea id="comment" name="comment" cols="45" rows="7" style="width: 95%;max-width: 95%;" aria-required="true"></textarea></p>',
-				'comment_notes_after'  => '<p class="form-allowed-tags"><small style="float: right; min-width: 200px; color: #999999;">' . sprintf( __( 'You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes: %s','fastfood' ), allowed_tags() ) . '</small></p><input type="hidden" value="' . __('Reply to Comment','fastfood' ) . '" id="replytocomment" name="replytocomment" /><input type="hidden" value="' . __( 'Leave a Reply','fastfood' ) . '" id="replytopost" name="replytopost" />',
+				'comment_notes_after'  => '<p class="form-allowed-tags"><small style="float: right; min-width: 200px; color: #aaa;">' . sprintf( __( 'You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes: %s','fastfood' ), allowed_tags() ) . '</small></p><input type="hidden" value="' . __('Reply to Comment','fastfood' ) . '" id="replytocomment" name="replytocomment" /><input type="hidden" value="' . __( 'Leave a Reply','fastfood' ) . '" id="replytopost" name="replytopost" />',
 				'label_submit'         => __( 'Say It!','fastfood' ),
 				'logged_in_as'         => '<p class="logged-in-as">' . sprintf( __( 'Logged in as <a href="%1$s">%2$s</a>.','fastfood' ), admin_url( 'profile.php' ), $user_identity ) . '</p>',
 				'cancel_reply_link'    => '<br />' . __( 'Cancel reply','fastfood' ),
