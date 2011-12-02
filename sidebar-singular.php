@@ -1,3 +1,4 @@
+<?php global $fastfood_opt; ?>
 <!-- here should start the singular widget area -->
 			<div id="post-widgets-area" class="fixfloat">
 				<?php if ( !is_active_widget(false, false, 'ff-exif-details', true) && $fastfood_opt['fastfood_exif_info'] == 1 ) {
