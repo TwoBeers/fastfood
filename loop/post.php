@@ -5,10 +5,10 @@
 	<?php
 		switch ( $fastfood_opt['fastfood_post_formats_standard_title'] ) {
 			case 'post title':
-				fastfood_featured_title( array( 'fallback' => sprintf ( __('post #%s','fastfood'), get_the_ID() ) ) );
+				fastfood_featured_title( array( 'fallback' => sprintf ( __( 'post #%s','fastfood' ), get_the_ID() ) ) );
 				break;
 			case 'post date':
-				fastfood_featured_title( array( 'alternative' => get_the_time( get_option( 'date_format' ) ), 'fallback' => sprintf ( __('post #%s','fastfood'), get_the_ID() ) ) );
+				fastfood_featured_title( array( 'alternative' => get_the_time( get_option( 'date_format' ) ), 'fallback' => sprintf ( __( 'post #%s','fastfood' ), get_the_ID() ) ) );
 				break;
 		}
 	?>

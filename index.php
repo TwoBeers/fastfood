@@ -8,9 +8,9 @@ global $fastfood_opt;
 
 // search reminder
 if ( is_archive() && !$fastfood_opt['fastfood_breadcrumb'] ) {
-	printf( '<div class="ff-search-reminder"><div class="ff-search-term">' . __( 'Archives for %s','fastfood' ) . ' <span class="ff-search-found">('.$wp_query->found_posts.')</span>' . '</div></div>', '<strong>' . wp_title( '',false,'right' ) . '</strong>' );
+	printf( '<div class="ff-search-reminder"><div class="ff-search-term">' . __( 'Archives for %s','fastfood' ) . ' <span class="ff-search-found">(' . $wp_query->found_posts . ')</span>' . '</div></div>', '<strong>' . wp_title( '',false,'right' ) . '</strong>' );
 } elseif ( is_search() && !$fastfood_opt['fastfood_breadcrumb'] ) {
-	printf( '<div class="ff-search-reminder ff-search-term">' . __( 'Search results for &#8220;%s&#8221;','fastfood' ) . ' <span class="ff-search-found">('.$wp_query->found_posts.')</span>' . '</div>', '<strong>' . esc_html( get_search_query() ) . '</strong>' );
+	printf( '<div class="ff-search-reminder ff-search-term">' . __( 'Search results for &#8220;%s&#8221;','fastfood' ) . ' <span class="ff-search-found">(' . $wp_query->found_posts . ')</span>' . '</div>', '<strong>' . esc_html( get_search_query() ) . '</strong>' );
 }
 if (is_author()) {
 	$ff_author = get_queried_object();

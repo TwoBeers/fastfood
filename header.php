@@ -18,7 +18,7 @@
 		<?php wp_head(); ?>
 	</head>
 
-	<body <?php body_class('ff-no-js'); ?>>
+	<body <?php body_class( 'ff-no-js' ); ?>>
 		<div id="ff_background">
 			<div id="ff_body" class="pad_bg">
 				<div id="ff_body_overlay"></div>

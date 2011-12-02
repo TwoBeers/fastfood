@@ -58,13 +58,13 @@
 							<?php wp_link_pages(); ?>
 						</div>
 					</div>
-					<?php comments_template('/mobile/mobile-comments.php'); ?>
+					<?php comments_template( '/mobile/mobile-comments.php' ); ?>
 					<div class="ff-navi halfsep">
-							<span class="ff-halfspan ff-prev"><?php next_post_link('%link'); ?></span>
-							<span class="ff-halfspan ff-next"><?php previous_post_link('%link'); ?></span>
+							<span class="ff-halfspan ff-prev"><?php next_post_link( '%link' ); ?></span>
+							<span class="ff-halfspan ff-next"><?php previous_post_link( '%link' ); ?></span>
 							<div class="fixfloat"> </div>
 					</div>
-					<?php if (is_page()) {
+					<?php if ( is_page() ) {
 						$ff_args = array(
 							'post_type' => 'page',
 							'post_parent' => $post->ID,
@@ -77,7 +77,7 @@
 						$ff_sub_pages = '';
 					}
 
-					if (!empty($ff_sub_pages)) { ?>
+					if ( !empty( $ff_sub_pages ) ) { ?>
 						<h2 class="ff-seztit"><a href="#head">&#8743;</a> <span><?php _e( 'Child pages: ', 'fastfood' ); ?></span> <a href="#themecredits">&#8744;</a></h2>
 						<ul class="ff-group">
 							<?php 

@@ -46,7 +46,7 @@
 				<ul class="ff-group">
 				<?php while ( have_posts() ) {
 					the_post(); ?>
-					<?php $ff_alter_style = ( !isset($ff_alter_style) || $ff_alter_style == 'ff-odd' ) ? 'ff-even' : 'ff-odd'; ?>
+					<?php $ff_alter_style = ( !isset( $ff_alter_style ) || $ff_alter_style == 'ff-odd' ) ? 'ff-even' : 'ff-odd'; ?>
 					<li class="<?php echo $ff_alter_style; ?>">
 						<a href="<?php the_permalink() ?>" rel="bookmark"><?php 
 							$ff_post_title = the_title( '','',false );

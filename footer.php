@@ -39,7 +39,6 @@
 				if ( phpversion() ) echo ' | PHP v' . phpversion();
 				foreach ( $fastfood_opt as $key => $val ) { echo ' | ' . $key . ' - ' . $val; };
 			?>
-			
 		-->
 
 		<?php wp_footer(); ?>
