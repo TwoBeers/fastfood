@@ -7,7 +7,7 @@ add_action( 'admin_init', 'fastfood_default_options' );
 // Register sidebars by running fastfood_widget_area_init() on the widgets_init hook
 add_action( 'widgets_init', 'fastfood_widget_area_init' );
 // Add stylesheets
-add_action( 'wp_print_styles', 'fastfood_stylesheet' );
+add_action( 'wp_enqueue_scripts', 'fastfood_stylesheet' );
 // Add js animations
 add_action( 'wp_head', 'fastfood_localize_js' );
 add_action( 'template_redirect', 'fastfood_scripts' );
@@ -189,6 +189,7 @@ if ( !function_exists( 'fastfood_widget_area_init' ) ) {
 if ( !function_exists( 'fastfood_stylesheet' ) ) {
 	function fastfood_stylesheet(){
 		global $fastfood_opt, $fastfood_version, $ff_is_printpreview, $ff_is_mobile_browser, $ff_is_ie6;
+		if ( is_admin() ) return;
 		// mobile style
 		if ( $ff_is_mobile_browser ) {
 			wp_enqueue_style( 'ff_mobile-style', get_template_directory_uri() . '/mobile/mobile-style.css', false, $fastfood_version, 'screen' );
@@ -222,6 +223,8 @@ if ( !function_exists( 'fastfood_scripts' ) ) {
 	function fastfood_scripts(){
 		global $fastfood_opt, $ff_is_printpreview, $fastfood_version, $ff_is_mobile_browser, $ff_is_ie6;
 
+		if ( is_admin() ) return;
+		
 		if ( $ff_is_mobile_browser || $ff_is_printpreview ) return; //no scripts in print preview or mobile view
 
 		if ( $ff_is_ie6 ) { // ie6 scripts
@@ -845,7 +848,7 @@ if ( !function_exists( 'fastfood_quickbar' ) ) {
 		?>
 
 <!-- begin quickbar -->
-<div id="quickbar">
+<div id="quickbar"<?php if ( $fastfood_opt['fastfood_statusbar'] == 0 ) echo ' class="no-status"'; ?>>
 	<!-- quickbar tool - uncomment to use
 		<div class="menutoolitem">
 			<div class="itemimg menutool_trig" style="background-image: url('<?php echo get_template_directory_uri(); ?>/images/qbartool.png');"></div>
@@ -1167,6 +1170,7 @@ if ( !function_exists( 'fastfood_I_like_it' ) ) {
 	function fastfood_I_like_it(){
 		global $fastfood_opt;
 		if ( $fastfood_opt['fastfood_I_like_it'] == 0 ) return;
+		if ( ( $fastfood_opt['fastfood_I_like_it_plus1'] == 0 ) && ( $fastfood_opt['fastfood_I_like_it_twitter'] == 0 ) && ( $fastfood_opt['fastfood_I_like_it_facebook'] == 0 ) && ( $fastfood_opt['fastfood_I_like_it_linkedin'] == 0 ) && ( $fastfood_opt['fastfood_I_like_it_stumbleupon'] == 0 ) ) return;
 		?>
 		<div class="ff-I-like-it">
 			<?php if ( $fastfood_opt['fastfood_I_like_it_plus1']		== 1 ) { ?><div class="ff-I-like-it-button"><div class="g-plusone" data-size="tall" data-href="<?php the_permalink(); ?>"></div></div><?php } ?>
@@ -1262,7 +1266,6 @@ if ( !function_exists( 'fastfood_content_replace' ) ) {
 		return $content;
 	}
 }
-
 
 // set up custom colors and header image
 if ( !function_exists( 'fastfood_setup' ) ) {
@@ -1776,13 +1779,9 @@ if ( !function_exists( 'mb_strimwidth' ) ) {
 	}
 }
 
-// load the admin part
-get_template_part('lib/admin');
-
-// load the custom widgets module
-get_template_part('lib/widgets');
-
-// load the custom hooks
-get_template_part('lib/hooks');
+// load modules (accordingly to http://justintadlock.com/archives/2010/11/17/how-to-load-files-within-wordpress-themes)
+require_once('lib/admin.php'); // load the admin part
+require_once('lib/hooks.php'); // load the custom hooks
+if ( $fastfood_opt['fastfood_custom_widgets'] == 1 ) require_once('lib/widgets.php'); // load the custom widgets module
 
 ?>

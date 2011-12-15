@@ -322,6 +322,11 @@ input[type=reset]:hover {
 	position: absolute;
 	width: 848px;
 }
+.no-status .menuback,
+.no-status .menuback_js {
+	margin-bottom: -34px;
+}
+
 .menuitem:hover .menuback {
 	display: block;
 	height: 250px;
@@ -410,15 +415,12 @@ input[type=reset]:hover {
 	display: none;
 }
 #logged .avatar {
-	border-radius: 5px;
-	border: 2px solid #777;
+	border: 1px solid #777;
 	display: inline-block;
 	width: 50px;
 	height: 50px;
 	vertical-align: middle;
-	background-color: #eee;
 	margin: 0 10px;
-	padding: 5px;
 }
 #logged {
 	border-radius: 5px;
@@ -1382,17 +1384,24 @@ img.aligncenter {
 	margin-right: -11px;
 }
 .ff-I-like-it {
-    bottom: 230px;
-    margin-bottom: 10px;
-    position: fixed;
-    text-align: right;
-	width: 70px;
+	background: url("images/body.png") repeat-y scroll 55px top #ccc;
+	border-bottom: 1px solid #fff;
+	border-left: 1px solid #fff;
+	border-top: 1px solid #fff;
+	border-radius: 5px 0 0 5px;
+	bottom: 230px;
+	margin-bottom: 10px;
+	padding-right: 5px;
+	padding-top: 5px;
+	position: fixed;
+	text-align: right;
+	width: 65px;
 }
 .posts_wide .ff-I-like-it {
-    margin-left: -150px;
+    margin-left: -146px;
 }
 .posts_narrow .ff-I-like-it {
-    margin-left: -85px;
+    margin-left: -81px;
 }
 .ff-I-like-it-button {
 	display: block;

@@ -609,6 +609,14 @@ function fastfood_get_coa( $option = false ) {
 			'info' => __( "the fixed bar on bottom of page", 'fastfood' ),
 			'req' => ''
 		),
+		'fastfood_custom_widgets' => array(
+			'group' => 'other',
+			'type' => 'chk',
+			'default' => 1,
+			'description' => __( 'custom widgets', 'fastfood' ),
+			'info' => __( 'add a lot of new usefull widgets', 'fastfood' ),
+			'req' => ''
+		),
 		'fastfood_tbcred' => array(
 			'group' => 'other',
 			'type' => 'chk',

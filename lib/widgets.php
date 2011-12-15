@@ -943,7 +943,7 @@ class fastfood_Widget_share_this extends WP_Widget {
 ?>
 		<?php echo $before_widget; ?>
 		<?php if ( $title ) echo $before_title . $title . $after_title; ?>
-		<?php fastfood_share_this( $icon_size ); ?>
+		<?php fastfood_share_this( array( 'size' => $icon_size ) ); ?>
 		<?php echo $after_widget; ?>
 <?php
 	}
