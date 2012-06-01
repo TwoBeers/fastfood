@@ -12,7 +12,7 @@
 				<?php fastfood_hook_before_post_title(); ?>
 				<?php fastfood_featured_title( array( 'fallback' => sprintf ( __('attachment #%s','fastfood'), get_the_ID() ) ) ); ?>
 				<?php fastfood_hook_after_post_title(); ?>
-				<?php fastfood_extrainfo( false, false, true, false, false ); ?>
+				<?php fastfood_extrainfo( array( 'tags' => 0, 'cats' => 0 ) ); ?>
 				<?php fastfood_hook_before_post_content(); ?>
 				<div class="storycontent">
 					<div class="entry-attachment" style="text-align: center;">
@@ -43,21 +43,18 @@
 							<?php if ( !empty( $post->post_excerpt ) ) the_excerpt(); ?>
 							<?php if ( !empty( $post->post_content ) ) the_content(); ?>
 						<?php } else { ?>
-							<a href="<?php echo wp_get_attachment_url(); ?>" title="<?php echo esc_attr( get_the_title() ); ?>" rel="attachment"><?php echo basename( get_permalink() ); ?></a>
-							<?php fastfood_multimedia_attachment(); ?>
+							<?php echo wp_get_attachment_link( $post->ID,'thumbnail', 0,1 ); ?> 
+							<?php fastfood_video_player(); ?>
 							<div class="entry-caption"><?php if ( !empty( $post->post_excerpt ) ) the_excerpt(); ?></div>
 						<?php } ?>
 					</div><!-- .entry-attachment -->
 				</div>
 				<?php fastfood_hook_after_post_content(); ?>
-				<div class="fixfloat">
-						<?php wp_link_pages( 'before=<div class="comment_tools">' . __( 'Pages','fastfood' ) . ':&after=</div><div class="fixfloat"></div>' ); ?>
-				</div>
 				<?php $ff_tmptrackback = get_trackback_url(); ?>
 			</div>	
 			<?php fastfood_hook_after_post(); ?>
 			
-			<?php get_sidebar( 'singular' ); // show singular widgets area ?>
+			<?php fastfood_get_sidebar( 'singular' ); // show singular widgets area ?>
 			
 			<?php comments_template(); // Get wp-comments.php template ?>
 			

@@ -19,7 +19,7 @@
 			<?php fastfood_hook_before_post_title(); ?>
 			<?php fastfood_featured_title( array( 'fallback' => sprintf ( __('page #%s','fastfood'), get_the_ID() ) ) ); ?>
 			<?php fastfood_hook_after_post_title(); ?>
-			<?php fastfood_extrainfo( false, false, true, false, false, true ); ?>
+			<?php fastfood_extrainfo( array( 'auth' => 0, 'date' => 0, 'tags' => 0, 'cats' => 0, 'hiera' => 1 ) ); ?>
 			<?php fastfood_hook_before_post_content(); ?>
 			<div class="storycontent">
 				<?php the_content(); ?>

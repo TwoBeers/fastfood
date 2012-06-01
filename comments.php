@@ -1,19 +1,19 @@
 <!-- begin comments -->
 <?php
 	if ( post_password_required() ) {
-		echo '<div class="comment_tools" id="comments" style="text-align: right;">' . __( 'Enter your password to view comments.','fastfood' ) . '</div>';
+		echo '<div class="comment_tools" id="comments">' . __( 'Enter your password to view comments.','fastfood' ) . '</div>';
 		return;
 	}
 		global $fastfood_opt, $ff_is_printpreview, $ff_is_mobile_browser, $ff_is_ie6;
 ?>
 
 	<?php if ( comments_open() ) { ?>
-		<div class="comment_tools" id="comments" style="text-align: right;">
+		<div class="comment_tools" id="comments">
 			<?php comments_number( __( 'No Comments','fastfood' ), __( '1 Comment','fastfood' ), __( '% Comments','fastfood' ) ); ?> - <a href="#respond" title="<?php _e( "Leave a comment",'fastfood' ); ?>" <?php if ( !$ff_is_printpreview && ( $fastfood_opt['fastfood_cust_comrep'] == 1 ) && !$ff_is_mobile_browser ) echo 'onclick="return addComment.viewForm()"'; ?> ><?php _e( "Leave a comment",'fastfood' ); ?></a>
 		</div>
 		<?php
 	} elseif ( have_comments() ) { ?>
-		<div class="comment_tools" id="comments" style="text-align: right;">
+		<div class="comment_tools" id="comments">
 			<?php comments_number( __( 'No Comments','fastfood' ), __( '1 Comment','fastfood' ), __( '% Comments','fastfood' ) ); ?>
 		</div>
 		<?php
@@ -42,8 +42,8 @@
 		if ( !$ff_is_printpreview ) { //script not to be loaded in print preview
 			//define custom argoments for comment form
 			$ff_custom_args = array(
-				'comment_field'        => '<p class="comment-form-comment" style="text-align: center;"><textarea id="comment" name="comment" cols="45" rows="7" style="width: 95%;max-width: 95%;" aria-required="true"></textarea></p>',
-				'comment_notes_after'  => '<p class="form-allowed-tags"><small style="float: right; min-width: 200px; color: #aaa;">' . sprintf( __( 'You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes: %s','fastfood' ), allowed_tags() ) . '</small></p><input type="hidden" value="' . __('Reply to Comment','fastfood' ) . '" id="replytocomment" name="replytocomment" /><input type="hidden" value="' . __( 'Leave a Reply','fastfood' ) . '" id="replytopost" name="replytopost" />',
+				'comment_field'        => '<p class="comment-form-comment"><textarea id="comment" name="comment" cols="45" rows="7" style="width: 95%;max-width: 95%;" aria-required="true"></textarea></p>',
+				'comment_notes_after'  => '<p class="form-allowed-tags"><small>' . sprintf( __( 'You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes: %s','fastfood' ), allowed_tags() ) . '</small></p><input type="hidden" value="' . __('Reply to Comment','fastfood' ) . '" id="replytocomment" name="replytocomment" /><input type="hidden" value="' . __( 'Leave a Reply','fastfood' ) . '" id="replytopost" name="replytopost" />',
 				'label_submit'         => __( 'Say It!','fastfood' ),
 				'logged_in_as'         => '<p class="logged-in-as">' . sprintf( __( 'Logged in as <a href="%1$s">%2$s</a>.','fastfood' ), admin_url( 'profile.php' ), $user_identity ) . '</p>',
 				'cancel_reply_link'    => '<br />' . __( 'Cancel reply','fastfood' ),

@@ -24,7 +24,10 @@
 	background: url("../images/widgets/widget_p1.png") no-repeat center 10px transparent;
 	padding-top: 80px;
 }
-
+#tbm-widget-area {
+	background: url("../images/widgets/mobwig.png") no-repeat center 10px transparent;
+	padding-top: 80px;
+}
 div[id*=_ff-] .widget-title {
 	background: url("../images/tb_micrologo.png") no-repeat 2px center transparent;
 	padding-left: 42px;

@@ -15,7 +15,7 @@ if ( is_archive() && !$fastfood_opt['fastfood_breadcrumb'] ) {
 if (is_author()) {
 	$ff_author = get_queried_object();
 	// If a user has filled out their description, show a bio on their entries.
-	if ( $ff_author->description ) fastfood_post_details( true,false,false,false);
+	if ( $ff_author->description ) fastfood_post_details( array( 'author' => 1, 'date' => 0, 'tags' => 0, 'categories' => 0 ) );
 }
 
 //skip posts with aside/status format (via options)
@@ -78,6 +78,6 @@ if ( have_posts() ) {
 
 </div>
 <?php fastfood_hook_after_posts(); ?>
-<?php if ( fastfood_use_sidebar() ) get_sidebar(); // show sidebar ?>
+<?php if ( fastfood_use_sidebar() ) fastfood_get_sidebar(); // show sidebar ?>
 
 <?php get_footer(); ?>

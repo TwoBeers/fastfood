@@ -52,11 +52,11 @@ function fastfood_hook_after_post_title() {
 }
 
 function fastfood_hook_before_post_content() {
-	do_action('fastfood_hook_before_postcontent');
+	do_action('fastfood_hook_before_post_content');
 }
 
 function fastfood_hook_after_post_content() {
-	do_action('fastfood_hook_after_postcontent');
+	do_action('fastfood_hook_after_post_content');
 }
 
 function fastfood_hook_before_comments() {

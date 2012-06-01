@@ -67,7 +67,8 @@ img {
 #quickbar,
 #edit_link,
 #fixedfoot,
-body #wpadminbar {
+body #wpadminbar,
+#ff-breadcrumb-wrap {
 	display: none;
 }
 .metafield div {

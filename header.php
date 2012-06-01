@@ -40,6 +40,7 @@
 				</div>
 			<?php } ?>
 			<?php fastfood_hook_after_header(); ?>
+			<?php if ( $fastfood_opt['fastfood_primary_menu'] ) { ?>
 			<div id="pages">
 			<?php fastfood_hook_before_pages(); ?>
 				<div id="rss_imglink"><a href="<?php bloginfo( 'rss2_url' ); ?>" title="<?php _e( 'Syndicate this site using RSS 2.0','fastfood' ); ?>"><img alt="rsslink" src="<?php echo get_template_directory_uri(); ?>/images/rss.png" /></a></div>
@@ -47,7 +48,8 @@
 				<div class="fixfloat"></div>
 			<?php fastfood_hook_after_pages(); ?>
 			</div>
+			<?php } ?>
 			
-			<?php get_sidebar( 'header' ); // show header widgets area ?>
+			<?php fastfood_get_sidebar( 'header' ); // show header widgets area ?>
 			
 			<?php if ( $fastfood_opt['fastfood_breadcrumb'] == 1 ) fastfood_breadcrumb(); // show breadcrumb ?>

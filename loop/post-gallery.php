@@ -15,7 +15,7 @@
 	?>
 	<?php fastfood_hook_after_post_title(); ?>
 	
-	<?php fastfood_extrainfo( true, true, true, true, true ); ?>
+	<?php fastfood_extrainfo(); ?>
 	
 	<?php fastfood_hook_before_post_content(); ?>
 	<div class="storycontent">

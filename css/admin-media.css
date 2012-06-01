@@ -1,0 +1,78 @@
+﻿#galed-icon {
+	background: url('../images/logo-34.png') no-repeat scroll center transparent;
+}
+#galed-media-library {
+    margin: 0 auto;
+    overflow: hidden;
+    width: 500px;
+}
+.galed-media-navi a {
+	font-weight: bold;
+	border-radius: 11px;
+	border: 1px solid #bbb;
+	line-height: 13px;
+	padding: 3px 8px;
+	text-decoration: none;
+	background: #eee;
+	margin: 0 0 0 10px;
+	text-shadow:0 1px 0 #fff;
+}
+.galed-media-navi a:hover {
+	border: 1px solid #666;
+}
+a {
+	color: #464646;
+}
+a:hover {
+	color: #000;
+}
+select {
+	font-size:12px;
+	height:2em;
+	padding:2px;
+	background:#fff;
+	border: 1px solid #ddd;
+	border-radius: 3px;
+	margin: 0 10px;
+}
+.galed-media-navi {
+	border-top: 1px solid #ddd;
+	margin: 15px;
+	padding: 5px;
+	text-align: right;
+	clear: both;
+}
+.galed-media-navi:first-child {
+	border-top: none;
+	border-bottom: 1px solid #ddd;
+}
+.thumb {
+	float:left;
+	height:162px;
+	margin:0 0 15px;
+	text-align:center;
+	width:33%;
+}
+.thumb img {
+	padding: 5px;
+	margin: 5px;
+	border: 1px solid #ddd;
+	max-width: 150px;
+}
+.galed-media-navi-filter {
+    float: left;
+    margin: 0;
+    text-overflow: "...";
+    width: 150px;
+}
+.galed-media-navi-filter .first-option {
+	border-bottom: 1px solid #ddd;
+	padding-bottom: 4px;
+	margin-bottom: 4px;
+}
+.galed-img-count {
+	font-style:italic;
+	color:#777;
+	font-size:10px;
+	line-height: 2.5em;
+}

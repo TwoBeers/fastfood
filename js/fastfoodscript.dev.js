@@ -1,5 +1,11 @@
-﻿(function($) {
-	$.ff_animation = function() {
+var fastfoodAnimations;
+
+(function($) {
+
+fastfoodAnimations = {
+
+	//initialize
+	init : function() {
 
 		//main menu dropdown animation
 		$('#mainmenu').children('li').each(function(){ //get every main list item
@@ -78,6 +84,7 @@
 			list.css({ 'height' : 0 });
 				
 			$(this).mouseenter( function(){ //when mouse enters, slide left the sub list, restore its shadow and animate the button
+				if ( $('#user_menuback').hasClass('keepme') ) return;
 				list.stop();
 				trig.stop();
 				list.animate(
@@ -91,8 +98,9 @@
 				);
 				
 			}).mouseleave( function(){ //when mouse leaves, hide the submenu
+				if ( $('#user_menuback').hasClass('keepme') ) return;
 				list.stop();
-				trig.stop();
+				//trig.stop();
 				list.css({ 'height' : 0 , 'display' : '' });
 				trig.animate(
 					{ 'width': 50 },
@@ -126,23 +134,23 @@
 				parent.css({ 'border-color' : '' });
 			});
 		});
-		
+
 		//add a "close" link after the submit button in minilogin form
 		$('.login-submit').append( $('#closeminilogin') );
 		$('#closeminilogin').css({ 'display' : 'inline' });
 		$('#closeminilogin').click( function() {
-			$('#ff-user_login').parents('.menuback_js').css({ 'display' : '' , 'height' : 0  });
-			$('#user_menuback').mouseleave( function(){ //when mouse leaves, hide the submenu
-				$('#ff-user_login').parents('.menuback_js').css({ 'display' : '' , 'height' : 0  });
-				$('#ff-user_login').parents('.cat_preview').css({ 'display' : '' });
-			});
+			$('.itemimg_js').fadeIn();
+			$('#user_menuback .menuback_js').css({ 'display' : '' , 'height' : 0  });
+			$('#ff_minilogin_wrap').css({ 'display' : '' });
+			$('#user_menuback').removeClass('keepme');
 			return false;
 		});
-		
+
 		//preserve the menu div from disappear when loginform name input is clicked
 		$('#ff-user_login').mousedown( function() {
-			$('#user_menuback').unbind("mouseleave");
-			$('#ff-user_login').parents('.cat_preview').css({ 'display' : 'block' });
+			$('#ff_minilogin_wrap').css({ 'display' : 'block' });
+			$('#user_menuback').addClass('keepme');
+			$('.itemimg_js').fadeOut();
 		});
 
 		// fade in/out on scroll
@@ -166,14 +174,12 @@
 
 			});
 		});
-		
-	};
 
-    $.fn.ff_postexpander = function() {
+	},
 
-        return this.each(function() {
-            
-            $(this).click(function() {
+	//show only a set of rows
+	postexpander : function () {
+        $('a.more-link').click(function() {
 
 				var link = $(this);
 
@@ -189,8 +195,10 @@
 
 			});
 
-        });
+	}
 
-    };
+};
+
+$(document).ready(function($){ fastfoodAnimations.init(); });
 
 })(jQuery);

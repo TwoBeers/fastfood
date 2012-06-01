@@ -12,9 +12,9 @@
 			<?php fastfood_hook_before_post_title(); ?>
 			<?php fastfood_featured_title( array( 'fallback' => sprintf ( __('page #%s','fastfood'), get_the_ID() ) ) ); ?>
 			<?php fastfood_hook_after_post_title(); ?>
-			<?php fastfood_extrainfo( false, false, true, false, false, true ); ?>
+			<?php fastfood_extrainfo( array( 'auth' => 0, 'date' => 0, 'tags' => 0, 'cats' => 0, 'hiera' => 1 ) ); ?>
 			<?php fastfood_hook_before_post_content(); ?>
-			<div class="storycontent">
+			<div class="storycontent entry-content">
 				<?php the_content(); ?>
 			</div>
 			<?php fastfood_hook_after_post_content(); ?>
@@ -28,7 +28,7 @@
 		</div>
 		<?php fastfood_hook_after_post(); ?>
 		
-		<?php get_sidebar( 'singular' ); // show singular widgets area ?>
+		<?php fastfood_get_sidebar( 'singular' ); // show singular widgets area ?>
 
 		<?php comments_template(); // Get wp-comments.php template ?>
 
@@ -40,6 +40,6 @@
 </div>
 <?php fastfood_hook_after_posts(); ?>
 
-<?php if ( fastfood_use_sidebar() ) get_sidebar(); // show sidebar ?>
+<?php if ( fastfood_use_sidebar() ) fastfood_get_sidebar(); // show sidebar ?>
 
 <?php get_footer(); ?>

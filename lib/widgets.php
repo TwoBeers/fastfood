@@ -50,16 +50,9 @@ class fastfood_ff_widget_popular_posts extends WP_Widget {
 		<ul>
 		<?php while ( $r->have_posts()) : $r->the_post(); ?>
 		<li<?php if ( $use_thumbs ) echo ' class="li-with-thumbs"'; ?>>
-			<?php
-				if ( $use_thumbs ) {
-					if( has_post_thumbnail() ) {
-						the_post_thumbnail( array( 40,40 ) );
-					} else {
-						echo '<div class="post-thumb"></div>';
-					}
-				}
-			 ?>
-			<a href="<?php the_permalink() ?>" title="<?php echo esc_attr(get_the_title() ? get_the_title() : get_the_ID()); ?>"><?php if ( get_the_title() ) the_title(); else the_ID(); ?></a> <span>(<?php echo get_comments_number(); ?>)</span>
+			<?php $the_format = get_post_format( get_the_ID() ) ? get_post_format( get_the_ID() ) : 'standard'; ?>
+			<?php $the_thumb = $use_thumbs? fastfood_get_the_thumb( array( 'id' => get_the_ID(), 'default' => '<span class="tbm-format f-' . $the_format . '"></span>' ) ) : ''; ?>
+			<a href="<?php the_permalink() ?>" title="<?php echo esc_attr(get_the_title() ? get_the_title() : get_the_ID()); ?>"><?php echo $the_thumb; if ( get_the_title() ) the_title(); else the_ID(); ?> <span class="details">(<?php echo get_comments_number(); ?>)</span></a>
 		</li>
 		<?php endwhile; ?>
 		</ul>
@@ -174,17 +167,11 @@ class fastfood_widget_latest_commented_posts extends WP_Widget {
 				if ( ! in_array( $comment->comment_post_ID, $post_array ) ) {
 					$post = get_post( $comment->comment_post_ID );
 					setup_postdata( $post );
-					if ( $use_thumbs ) {
-						if( has_post_thumbnail( $post->ID ) ) {
-							$the_thumb = get_the_post_thumbnail( $post->ID, array( 40,40 ) );
-						} else {
-							$the_thumb = '<div class="post-thumb"></div>';
-						}
-					} else {
-						$the_thumb = '';
-					}
+					
+					$the_format = get_post_format( $post->ID ) ? get_post_format( $post->ID ) : 'standard';
+					$the_thumb = $use_thumbs? fastfood_get_the_thumb( array( 'id' => $post->ID, 'default' => '<span class="tbm-format f-' . $the_format . '"></span>' ) ) : '';
 
-					$output .=  '<li' . $li_class . '>' . $the_thumb . ' <a href="' . get_permalink( $post->ID ) . '" title="' .  esc_html( $post->post_title ) . '">' . $post->post_title . '</a></li>';
+					$output .=  '<li' . $li_class . '>' . ' <a href="' . get_permalink( $post->ID ) . '" title="' .  esc_html( $post->post_title ) . '">' . $the_thumb . $post->post_title . '</a></li>';
 					$post_array[] = $comment->comment_post_ID;
 					if ( ++$counter >= $number ) break;
 				}
@@ -387,10 +374,18 @@ class fastfood_Widget_pop_categories extends WP_Widget {
 ?>
 		<ul>
 <?php
-		$cat_args = 'number=' . $number . '&title_li=&orderby=count&order=DESC&hierarchical=0&show_count=1';
-		wp_list_categories( $cat_args );
+		$cat_args = array( 'orderby' => 'count', 'hierarchical' => 0, 'order' => 'DESC', 'number' => $number );
+		$categories =  get_categories( $cat_args ); 
+		foreach ($categories as $category) {
+			$item = '<li class="cat-item cat-item-' . $category->term_id . '">';
+			$cat_name = esc_attr( $category->name );
+			$cat_name = apply_filters( 'list_cats', $cat_name, $category );
+			$link = '<a href="' . esc_attr( get_term_link($category) ) . '">' .  $cat_name . ' <span class="details">(' . intval($category->count) . ')</span></a>';
+			$item .= $link . '</li>';
+			echo $item;
+		}
 ?>
-			<li style="text-align: right;margin-top:12px;"><a title="<?php _e( 'View all categories', 'fastfood' ); ?>" href="<?php  echo home_url(); ?>/?allcat=y"><?php _e( 'View all', 'fastfood' ); ?></a></li>
+			<li class="all_cat"><a title="<?php _e( 'View all categories', 'fastfood' ); ?>" href="<?php  echo home_url(); ?>/?allcat=y"><?php _e( 'View all', 'fastfood' ); ?></a></li>
 		</ul>
 <?php
 		echo $after_widget;
@@ -427,7 +422,7 @@ class fastfood_Widget_pop_categories extends WP_Widget {
 
 /**
  * Social network widget class.
- * Social media services supported: Facebook, Twitter, Myspace, Youtube, LinkedIn, Del.icio.us, Digg, Flickr, Reddit, StumbleUpon, Technorati and Github.
+ * Social media services supported: Facebook, Twitter, Myspace, Youtube, LinkedIn, Del.icio.us, Digg, Flickr, Reddit, StumbleUpon, Technorati and Github and many more.
  * Optional: RSS icon.
  *
  */
@@ -441,40 +436,41 @@ class fastfood_Widget_social extends WP_Widget {
 
 		$this->WP_Widget( "ff-social", __( "Follow Me", "fastfood" ), $widget_ops, $control_ops );
         $this->follow_urls = array(
-			'Buzz',
-			'Delicious',
-			'Deviantart',
-			'Digg',
-			'Dropbox',
-			'Facebook',
-			'Flickr',
-			'Github',
-			'GooglePlus',
-			'Hi5',
-			'LinkedIn',
-			'Myspace',
-			'Odnoklassniki',
-			'Orkut',
-			'Qzone',
-			'Reddit',
-			'Sina',
-			'StumbleUpon',
-			'Technorati',
-			'Tencent',
-			'Twitter',
-			'Vimeo',
-			'VKontakte',
-			'WindowsLive',
-			'Xing',
-			'Youtube',
-			'RSS');
+			'blogger' => 'Blogger',
+			'Delicious' => 'Delicious',
+			'Deviantart' => 'deviantART',
+			'Digg' => 'Digg',
+			'Dropbox' => 'Dropbox',
+			'Facebook' => 'Facebook',
+			'Flickr' => 'Flickr',
+			'Github' => 'GitHub',
+			'GooglePlus' => 'Google+',
+			'Hi5' => 'Hi5',
+			'LinkedIn' => 'LinkedIn',
+			'Myspace' => 'Myspace',
+			'Odnoklassniki' => 'Odnoklassniki',
+			'Picasa' => 'Picasa',
+			'pinterest' => 'Pinterest',
+			'Qzone' => 'Qzone',
+			'Reddit' => 'Reddit',
+			'Sina' => 'Weibo',
+			'StumbleUpon' => 'StumbleUpon',
+			'Technorati' => 'Technorati',
+			'Tencent' => 'Tencent',
+			'Twitter' => 'Twitter',
+			'Vimeo' => 'Vimeo',
+			'VKontakte' => 'VKontakte',
+			'WindowsLive' => 'Windows Live',
+			'Xing' => 'Xing',
+			'Youtube' => 'Youtube',
+			'RSS' => 'RSS' );
 	}
 
     function form( $instance ) {
         $defaults = array( "title" => __( "Follow Me", "fastfood" ),
             "icon_size" => '48px',
         );
-        foreach ( $this->follow_urls as $follow_service ) {
+        foreach ( $this->follow_urls as $follow_service => $service_name ) {
             $defaults[$follow_service."_icon"] = $follow_service;
             $defaults["show_".$follow_service] = false;
         }
@@ -483,16 +479,16 @@ class fastfood_Widget_social extends WP_Widget {
 	<p><label for="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>"><?php _e( 'Title:', 'fastfood' ); ?></label>
 	<input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $instance['title'] ); ?>" /></p>
     <div style="padding: 10px 0; border-top: 1px solid #DFDFDF;">
-
+		<p><?php echo __( 'NOTE: Enter the <strong>full</strong> addresses ( with <em>http://</em> )', 'fastfood' ); ?></p>
 <?php
 		$alt = ' clear: left;';
-        foreach( $this->follow_urls as $follow_service ) {
+        foreach($this->follow_urls as $follow_service => $service_name ) {
 ?>
         <div style="float: left; width: 40%; margin: 0pt 5%;<?php echo $alt; ?>">
 			<h2>
 				<input id="<?php echo $this->get_field_id( 'show_' . $follow_service ); ?>" name="<?php echo $this->get_field_name( 'show_' . $follow_service ); ?>" type="checkbox" <?php checked( $instance['show_'.$follow_service], 'on' ); ?>  class="checkbox" />
-				<img style="vertical-align:middle; width:40px; height:40px;" src="<?php echo get_template_directory_uri(); ?>/images/follow/<?php echo $follow_service; ?>.png" alt="<?php echo $follow_service; ?>" />
-				<?php echo $follow_service; ?>
+				<img style="vertical-align:middle; width:40px; height:40px;" src="<?php echo get_template_directory_uri(); ?>/images/follow/<?php echo strtolower( $follow_service ); ?>.png" alt="<?php echo $follow_service; ?>" />
+				<?php echo $service_name; ?>
 			</h2>
 <?php
             if ( $follow_service != 'RSS' ) {
@@ -501,7 +497,7 @@ class fastfood_Widget_social extends WP_Widget {
         <p>
             <label for="<?php echo $this->get_field_id( $follow_service . '_account' ); ?>">
 <?php
-				printf( __( 'Enter %1$s account link:', 'fastfood' ), $follow_service );
+				printf( __( 'Enter %1$s account link:', 'fastfood' ), $service_name );
 ?>
             </label>
             <input id="<?php echo $this->get_field_id( $follow_service . '_account' ); ?>" name="<?php echo $this->get_field_name( $follow_service . '_account' ); ?>" value="<?php if ( isset( $instance[$follow_service . '_account'] ) ) echo $instance[$follow_service . '_account']; ?>" class="widefat" />
@@ -532,12 +528,12 @@ class fastfood_Widget_social extends WP_Widget {
 <?php
     }
 
-    function update($new_instance, $old_instance) {
+    function update( $new_instance, $old_instance ) {
         $instance = $old_instance;
         $instance["title"] = strip_tags($new_instance["title"]);
         $instance["icon_size"] = $new_instance["icon_size"];
 
-        foreach ($this->follow_urls as $follow_service ) {
+        foreach ( $this->follow_urls as $follow_service => $service_name ) {
             $instance['show_'.$follow_service] = $new_instance['show_'.$follow_service];
             $instance[$follow_service.'_account'] = $new_instance[$follow_service.'_account'];
         }
@@ -558,14 +554,14 @@ class fastfood_Widget_social extends WP_Widget {
 ?>
     <div class="fix" style="text-align: center;">
 <?php
-        foreach ( $this->follow_urls as $follow_service ) {
+        foreach ( $this->follow_urls as $follow_service => $service_name ) {
 			$show = ( isset( $instance['show_'.$follow_service] ) ) ? $instance['show_'.$follow_service] : false;
 			$account = ( isset( $instance[$follow_service.'_account'] ) ) ? $instance[$follow_service.'_account'] : '';
 			if ( $follow_service == 'RSS' ) {
 				$account = get_bloginfo( 'rss2_url' );
 			}
 			if ( $show && !empty( $account ) ) {
-?><a href="<?php echo $account; ?>" target="_blank" class="ff-social-icon" title="<?php echo $follow_service;?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/<?php echo $follow_service;?>.png" alt="<?php echo $follow_service;?>" style='width: <?php echo $icon_size;?>; height: <?php echo $icon_size;?>;' /></a><?php
+?><a href="<?php echo $account; ?>" target="_blank" class="ff-social-icon" title="<?php echo $service_name;?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/<?php echo strtolower( $follow_service );?>.png" alt="<?php echo $follow_service;?>" style='width: <?php echo $icon_size;?>; height: <?php echo $icon_size;?>;' /></a><?php
             }
         }
 ?>
@@ -780,16 +776,9 @@ class fastfood_Widget_recent_posts extends WP_Widget {
 		<ul>
 		<?php  while ( $r->have_posts() ) : $r->the_post(); ?>
 		<li<?php if ( $use_thumbs ) echo ' class="li-with-thumbs"'; ?>>
-			<?php
-				if ( $use_thumbs ) {
-					if( has_post_thumbnail() ) {
-						the_post_thumbnail( array( 40,40 ) );
-					} else {
-						echo '<div class="post-thumb"></div>';
-					}
-				}
-			 ?>
-			<a href="<?php the_permalink() ?>" title="<?php echo esc_attr( get_the_title() ? get_the_title() : get_the_ID() ); ?>"><?php if ( get_the_title() ) the_title(); else the_ID(); ?></a>
+			<?php $the_format = get_post_format( get_the_ID() ) ? get_post_format( get_the_ID() ) : 'standard'; ?>
+			<?php $the_thumb = $use_thumbs? fastfood_get_the_thumb( array( 'id' => get_the_ID(), 'default' => '<span class="tbm-format f-' . $the_format . '"></span>' ) ) : ''; ?>
+			<a href="<?php the_permalink() ?>" title="<?php echo esc_attr( get_the_title() ? get_the_title() : get_the_ID() ); ?>"><?php echo $the_thumb; if ( get_the_title() ) the_title(); else the_ID(); ?></a>
 		</li>
 		<?php endwhile; ?>
 		</ul>
@@ -834,6 +823,7 @@ class fastfood_Widget_recent_posts extends WP_Widget {
 		<p>
 			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title', 'fastfood' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>" />
+			<small><?php echo __( 'use <code>%s</code> as a placeholder for the category name', 'fastfood' ); ?></small>
 		</p>
 
 		<p>
@@ -1087,7 +1077,7 @@ class fastfood_Widget_post_details extends WP_Widget {
 		$title = apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base );
 		echo $before_widget;
 		if ( $title ) echo $before_title . $title . $after_title;
-		fastfood_post_details( $instance['author'], $instance['date'], $instance['tags'], $instance['categories'], false, $avatar_size, $instance['featured'] );
+		fastfood_post_details( array( 'author' => $instance['author'], 'date' => $instance['date'], 'tags' => $instance['tags'], 'categories' => $instance['categories'], 'avatar_size' => $avatar_size, 'featured' => $instance['featured'] ) );
 		echo $after_widget;
 	}
 

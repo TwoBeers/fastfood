@@ -1,8 +1,8 @@
 /*
 Theme Name: Fastfood
 Theme URI: http: //www.twobeers.net/annunci/tema-per-wordpress-fastfood
-Description: Simple and clear theme with a lot of features, like a "quick links" menu, an "easy navigation" bar, the print preview, 7 integrated widgets ( "Social Links", "Popular Post", "Latest Activity" and many more ). Fastfood has customizable header, customizable background (with a lot of predefined themes), one or two columns layout, up to five widgets areas and three menu. It supports custom menus, posts thumbnail, post formats ("gallery", "status" and "aside") and also mobile devices, with a dedicated style. WP3.2 full compatible.
-Version: 0.30
+Description: Simple and clear theme with a lot of features, like a "quick links" menu, an "easy navigation" bar, the print preview, 7 integrated widgets ( "Social Links", "Popular Post", "Latest Activity" and many more ). Fastfood has customizable header, customizable background (with a lot of predefined themes), one or two columns layout, up to five widgets areas and three menu. It supports custom menus, posts thumbnail, post formats ("gallery", "status" and "aside") and also mobile devices, with a dedicated style. WP3.3 full compatible.
+Version: 0.31
 Tags: translation-ready, threaded-comments, custom-menu, custom-header, theme-options, fixed-width, two-columns, right-sidebar, white, silver, orange, light, sticky-post, custom-background, editor-style, rtl-language-support, custom-colors, post-formats
 Author: TwoBeers Crew
 Author URI: http: //www.twobeers.net/
@@ -28,7 +28,13 @@ html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abb
 body {
 	font-family: Verdana, sans-serif;
 	font-size: 11px;
-	background: #fff url('images/bg.png') left bottom repeat-x fixed;
+	background: #fff url('images/bg.png') left bottom repeat-x fixed; /* Old browsers */
+	background-image: -moz-linear-gradient(top,  #fff 70%, #ccc 100%); /* FF3.6+ */
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(70%,#fff), color-stop(100%,#ccc)); /* Chrome,Safari4+ */
+	background-image: -webkit-linear-gradient(top,  #fff 70%,#ccc 100%); /* Chrome10+,Safari5.1+ */
+	background-image: -o-linear-gradient(top,  #fff 70%,#ccc 100%); /* Opera 11.10+ */
+	background-image: -ms-linear-gradient(top,  #fff 70%,#ccc 100%); /* IE10+ */
+	background-image: linear-gradient(top,  #fff 70%,#ccc 100%); /* W3C */
 	color: #404040;
 	margin: 0;
 }
@@ -204,6 +210,12 @@ input[type=reset]:hover {
 #content {
 	width: 848px;
 	background: transparent url('images/main.png') left top repeat-x;
+	background-image: -moz-linear-gradient(top,  #ddd 0%, #f8f8f8 400px); /* FF3.6+ */
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ddd), color-stop(400px,#f8f8f8)); /* Chrome,Safari4+ */
+	background-image: -webkit-linear-gradient(top,  #ddd 0%,#f8f8f8 400px); /* Chrome10+,Safari5.1+ */
+	background-image: -o-linear-gradient(top,  #ddd 0%,#f8f8f8 400px); /* Opera 11.10+ */
+	background-image: -ms-linear-gradient(top,  #ddd 0%,#f8f8f8 400px); /* IE10+ */
+	background-image: linear-gradient(top,  #ddd 0%,#f8f8f8 400px); /* W3C */
 }
 #sidebardx {
 	float: left;
@@ -312,6 +324,12 @@ input[type=reset]:hover {
 .menuback,
 .menuback_js {
 	background: url("images/main.png") repeat-x left 20px #404040;
+	background-image: -moz-linear-gradient(top,  #ddd 0%, #f8f8f8 400px); /* FF3.6+ */
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ddd), color-stop(400px,#f8f8f8)); /* Chrome,Safari4+ */
+	background-image: -webkit-linear-gradient(top,  #ddd 0%,#f8f8f8 400px); /* Chrome10+,Safari5.1+ */
+	background-image: -o-linear-gradient(top,  #ddd 0%,#f8f8f8 400px); /* Opera 11.10+ */
+	background-image: -ms-linear-gradient(top,  #ddd 0%,#f8f8f8 400px); /* IE10+ */
+	background-image: linear-gradient(top,  #ddd 0%,#f8f8f8 400px); /* W3C */
 	border-top: 2px groove #FFFFFF;
 	bottom: 0;
 	display: none;
@@ -321,6 +339,10 @@ input[type=reset]:hover {
 	padding: 0;
 	position: absolute;
 	width: 848px;
+}
+.keepme .menuback_js {
+	display: block;
+	height: 250px;
 }
 .no-status .menuback,
 .no-status .menuback_js {
@@ -503,40 +525,40 @@ input[type=reset]:hover {
 	background-color: #aaa;
 }
 .minib_print{
-	background-position: center 0;
+	background-position: -2px 0;
 }
 .minib_comment{
-	background-position: center -24px;
+	background-position: -2px -24px;
 }
 .minib_rss{
-	background-position: center -48px;
+	background-position: -2px -48px;
 }
 .minib_track{
-	background-position: center -72px;
+	background-position: -2px -72px;
 }
 .minib_home{
-	background-position: center -96px;
+	background-position: -2px -96px;
 }
 .minib_ppage{
-	background-position: center -144px;
+	background-position: -2px -144px;
 }
 .minib_npage{
-	background-position: center -120px;
+	background-position: -2px -120px;
 }
 .minib_ppages{
-	background-position: center -120px;
+	background-position: -2px -120px;
 }
 .minib_npages{
-	background-position: center -144px;
+	background-position: -2px -144px;
 }
 .minib_top{
-	background-position: center -168px;
+	background-position: -2px -168px;
 }
 .minib_bottom{
-	background-position: center -192px;
+	background-position: -2px -192px;
 }
 .minib_backtopost{
-	background-position: center -144px;
+	background-position: -2px -144px;
 }
 .minibutton:hover a {
 	color: #404040;
@@ -580,6 +602,7 @@ li.current_page_ancestor .hiraquo {
 	float: left;
 	margin: 0 5px;
 	padding: 2px 10px;
+	max-height: 1.1em;
 }
 #mainmenu > li.page_item > a,
 #mainmenu > li.menu-item > a{
@@ -733,39 +756,39 @@ li.current_page_ancestor .hiraquo {
 .mft_tag,
 .mft_comm,
 .mft_hier {
-	background-image: url('images/meta_icons.png');
+	background-image: url('images/minibuttons.png');
 	background-repeat: no-repeat;
 	background-color: transparent;
 }
 .mft_date {
-	background-position: 0 -16px;
+	background-position: 0 -256px
 }
 .mft_comm {
-	background-position: -16px -16px;
+	background-position: -16px -256px
 }
 .mft_tag {
-	background-position: -32px -16px;
+	background-position: -32px -256px
 }
 .mft_cat {
-	background-position: -48px -16px;
+	background-position: -48px -256px
 }
 .mft_hier {
-	background-position: -64px -16px;
+	background-position: -64px -256px
 }
 .metafield:hover .mft_date {
-	background-position: 0 0;
+	background-position: 0 -240px
 }
 .metafield:hover .mft_comm {
-	background-position: -16px 0;
+	background-position: -16px -240px
 }
 .metafield:hover .mft_tag {
-	background-position: -32px 0;
+	background-position: -32px -240px
 }
 .metafield:hover .mft_cat {
-	background-position: -48px 0;
+	background-position: -48px -240px
 }
 .metafield:hover .mft_hier {
-	background-position: -64px 0;
+	background-position: -64px -240px
 }
 .shadowed_box {
 	border: 1px solid #fff;
@@ -870,11 +893,11 @@ li.current_page_ancestor .hiraquo {
 ul.ul_fwa {
 	margin: 0;
 }
-.ff_widget_popular_posts .post-thumb,
+.ff_widget_popular_posts .tbm-format,
 .ff_widget_popular_posts img,
-.ff_widget_recent_entries .post-thumb,
+.ff_widget_recent_entries .tbm-format,
 .ff_widget_recent_entries img,
-.ff_widget_latest_commented_posts .post-thumb,
+.ff_widget_latest_commented_posts .tbm-format,
 .ff_widget_latest_commented_posts img {
     position: absolute;
 	left: 0;
@@ -888,13 +911,45 @@ ul.ul_fwa {
 	padding-left: 46px;
 	position: relative;
 }
-.ff_widget_popular_posts .post-thumb,
-.ff_widget_recent_entries .post-thumb,
-.ff_widget_latest_commented_posts .post-thumb {
-	background: url("images/qbarv.png") no-repeat scroll -5px -5px transparent;
+.ff_widget_popular_posts .tbm-format,
+.ff_widget_recent_entries .tbm-format,
+.ff_widget_latest_commented_posts .tbm-format {
+	background: url("images/minibuttons.png") no-repeat scroll -24px -0px transparent;
 	display: block;
-	height: 40px;
-	width: 40px;
+	height: 32px;
+	width: 32px;
+	margin: 4px;
+}
+/* Post Format icons*/
+.tbm-format.f-aside {
+	background-position: -24px 0;
+}
+.tbm-format.f-audio {
+	background-position: -24px -32px;
+}
+.tbm-format.f-chat {
+	background-position: -24px -64px;
+}
+.tbm-format.f-gallery {
+	background-position: -24px -96px;
+}
+.tbm-format.f-image {
+	background-position: -24px -128px;
+}
+.tbm-format.f-link {
+	background-position: -24px -160px;
+}
+.tbm-format.f-quote {
+	background-position: -24px -192px;
+}
+.tbm-format.f-standard {
+	background-position: -56px 0;
+}
+.tbm-format.f-status {
+	background-position: -56px -32px;
+}
+.tbm-format.f-video {
+	background-position: -56px -64px;
 }
 div.ff_widget_latest_commentators img {
 	margin: 0 4px 4px 0;
@@ -949,8 +1004,7 @@ div.ff_Widget_post_details ul {
 	text-align: center;
 }
 .ff-clean-archives .ff-year-link {
-	font-weight: bold;
-	font-size: 1.2em;
+	font-size: 1.5em;
 }
 .ff_Widget_share_this .share-item {
 	margin: 0 3px 3px 0;
@@ -960,6 +1014,10 @@ div.ff_Widget_post_details ul {
 }
 .ff-social-icon {
 	margin: 4px 2px 0;
+}
+.all_cat {
+	text-align: right;
+	margin: 16px 0 10px;
 }
 
 /* author bio
@@ -1124,18 +1182,22 @@ div.ff_Widget_post_details ul {
 	text-align: center;
 	margin: 0 0 10px;
 }
+.img-navi a {
+	opacity: 0.5;
+	filter: alpha(opacity=50);
+}
 .img-navi img {
 	vertical-align: middle;
-	border: 2px solid #ccc;
-	margin: 0 5px;
-}
-.ff-media-player audio,
-.ff-media-player video {
-	padding: 15px;
-	margin: 10px;
 	border: 1px solid #ccc;
+	margin: 0 5px;
+	padding: 5px;
 	background: #eee;
 }
+.img-navi a:hover {
+	opacity: 1;
+	filter: alpha(opacity=100);
+}
+
 /* =comments
 ----------------------------------------------------------*/
 .comment-body {
@@ -1170,8 +1232,19 @@ ul.children {
 .nav-next-comm {
 	float: right;
 }
+#comments {
+	text-align: right;
+}
 #commentlist {
 	position: relative;
+}
+.comment-form-comment {
+	text-align: center;
+}
+.form-allowed-tags small {
+	float: right; 
+	min-width: 200px; 
+	color: #aaa;
 }
 .js-res {
 	border-radius: 10px;
@@ -1466,76 +1539,93 @@ img.aligncenter {
 	background:transparent url(images/details.png) no-repeat 11px -600px;
 	padding-left: 34px;
 }
-/* Thickbox
+
+/* Thickbox 
 ----------------------------------------------------------*/
-#TB_closeWindow a,
-#TB_next a,
-#TB_prev a {
-	display: block;
-	width: 42px;
-	height: 42px;
-	opacity: 0.5;
-	filter: alpha(opacity=50);
-}
-#TB_next a:hover,
-#TB_prev a:hover,
-#TB_closeWindow a:hover {
-	opacity: 1;
-	filter: alpha(opacity=100);
-}
-#TB_next a,
-#TB_prev a {
-	position: fixed;
-	top: 50%;
-	text-indent: -1000px;
-	overflow: hidden;
-	margin-top: -24px;
-}
-#TB_closeWindow a {
-	background: url('images/round-buttons.png') no-repeat -84px top transparent;
-}
-#TB_next a {
-	right: 20px;
-	background: url('images/round-buttons.png') no-repeat -42px top transparent;
-}
-#TB_prev a {
-	left: 20px;
-	background: url('images/round-buttons.png') no-repeat left top transparent;
-}
-#TB_window img#TB_Image {
-	border: 1px solid #ccc;
-}
-#TB_closeWindow {
-	float: none;
-	width: 42px;
-	height: 42px;
-	position: fixed;
-	top: 35px;
-	right: 20px;
-	padding: 0;
-}
-#TB_closeWindow a img {
-	display: none;
+#TB_overlay {
+	z-index: 310;
 }
 .TB_overlayBG {
-	opacity: 0.90;
-	filter: alpha(opacity=90);
+	opacity: 0.85;
+	filter: alpha(opacity=85);
 }
 #TB_window {
-	background: #000;
-	background: rgba(0,0,0,0.7);
-	color: #fff;
-	border: 1px solid #333;
+	z-index: 312;
+	border-color: transparent;
 }
-#TB_load {
-    border: none;
-	background: transparent;
+#TB_window img#TB_Image {
+	border-color: transparent;
+}
+#TB_prev a,
+#TB_next a {
+    display: block;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    width: 100px;
+	opacity: 0.3;
+	filter: alpha(opacity=30);
+	color: transparent;
+}
+#TB_next a:hover,
+#TB_prev a:hover {
+	opacity: 0.6;
+	filter: alpha(opacity=60);
 }
 
-#TB_load img {
-    border: 1px solid #333;
-    box-shadow: 0 0 10px #000;
-    padding: 5px;
+#TB_prev a {
+	background: url('images/arrows.png') no-repeat left center #000;
+    left: 0;
+}
+#TB_next a {
+	background: url('images/arrows.png') no-repeat right center #000;
+    right: 0;
+}
+#TB_closeWindow {
+	display: none;
+}
+#TB_load {
+	border: none;
+	z-index: 313;
+	padding: 5px 15px;
+	box-shadow: 0 4px 30px #000;
+}
+#TB_caption {
+	float: none;
+	text-align: center;
+}
+
+/* Audio player
+----------------------------------------------------------*/
+.ff-player-container {
+	margin-bottom: 20px;
+	width: 300px;
+	padding: 5px;
+	background: #fff;
+	border: 1px solid #ddd;
+}
+.single-attachment .ff-player-container {
+	margin: 20px auto;
+}
+.ff-player-container:hover {
+	border: 1px solid #777;
+}
+.ff-player-content {
+	margin-top: 10px;
+}
+.ff-player-notice {
+    background: none repeat scroll 0 0 #5C5959;
+    border-radius: 4px;
+    color: #eee;
+    display: block;
+    line-height: 25px;
+    text-align: center;
+}
+.ff-media-player video {
+	padding: 15px;
+	margin: 10px;
+	border: 1px solid #ccc;
+	background: #eee;
 }
 
 /* WP-pagenavi

@@ -3,6 +3,9 @@
 input[type="checkbox"], input[type="radio"] {
 	vertical-align: text-bottom;
 }
+input[type="radio"] {
+	margin-left: 20px;
+}
 #fastfood-infos ul {
 	list-style: disc outside;
 	margin-left: 30px;
@@ -10,11 +13,10 @@ input[type="checkbox"], input[type="radio"] {
 #fastfood-options,
 #fastfood-infos {
 	background: #f9f9f9;
-	-moz-box-shadow: 0px 2px 8px #404040;
-	-webkit-box-shadow: 0px 2px 8px #404040;
-	box-shadow: 0px 2px 8px #404040;
+	box-shadow: 0px 2px 8px #999;
 	margin: 0;
 	padding: 20px 10px;
+	min-height: 250px;
 }
 #tabs-container {
 	margin: 20px 20px 20px 150px;
@@ -85,6 +87,13 @@ input[type="checkbox"], input[type="radio"] {
 }
 .ff-sub-opt {
 	margin-top: 10px;
+	padding-top: 10px;
+	padding-left: 20px;
+	border-top: 1px solid #eee;
+}
+.column-des + .ff-sub-opt {
+	border-top: none;
+	padding-top: 0;
 }
 .ff-col-tools {
 	margin-top: 10px;
@@ -104,3 +113,12 @@ input[type="checkbox"], input[type="radio"] {
     left: 0;
     top: 0;
 }
+.extra-actions a {
+	font-size: 10px; 
+	text-decoration: none; 
+	margin: 0 10px;
+}
+label img {
+	vertical-align: middle;
+}
+

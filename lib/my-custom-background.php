@@ -2,9 +2,95 @@
 /**
  * The custom background script.
  *
- * based on WP wp-admin/custom-background.php
+ * "Custom_Background" class based on WP wp-admin/custom-background.php
  *
  */
+
+add_action( 'after_setup_theme', 'fastfood_custom_background_init' );
+
+
+// set up custom colors and header image
+if ( !function_exists( 'fastfood_custom_background_init' ) ) {
+	function fastfood_custom_background_init() {
+		global $fastfood_opt;
+
+		// Add a way for the custom background to be styled in the admin panel that controls
+		if ( isset( $fastfood_opt['fastfood_custom_bg'] ) && $fastfood_opt['fastfood_custom_bg'] == 1 ) {
+			fastfood_add_custom_background( 'fastfood_custom_bg' , 'fastfood_admin_custom_bg_style' , '' );
+		} else {
+			add_custom_background( 'fastfood_custom_bg' , '' , '' );
+		}
+
+	}
+}
+
+// Styles the header image displayed on the Appearance > Header admin panel.
+if ( !function_exists( 'fastfood_admin_custom_bg_style' ) ) {
+	function fastfood_admin_custom_bg_style() {
+		wp_enqueue_style( 'ff-custom_bg-style', get_template_directory_uri() . '/css/admin-custom_background.css', false, '', 'screen' );
+	}
+}
+
+//Add callbacks for background image display. based on WP theme.php -> add_custom_background()
+if ( !function_exists( 'fastfood_add_custom_background' ) ) {
+	function fastfood_add_custom_background( $header_callback = '', $admin_header_callback = '', $admin_image_div_callback = '' ) {
+		if ( isset( $GLOBALS['custom_background'] ) )
+			return;
+
+		if ( empty( $header_callback ) )
+			$header_callback = '_custom_background_cb';
+
+		add_action( 'wp_head', $header_callback );
+
+		add_theme_support( 'custom-background', array( 'callback' => $header_callback ) );
+
+		if ( ! is_admin() )
+			return;
+		$GLOBALS['custom_background'] =& new Custom_Background( $admin_header_callback, $admin_image_div_callback );
+		add_action( 'admin_menu', array( &$GLOBALS['custom_background'], 'init' ) );
+	}
+}
+
+// custom background style - gets included in the site header
+if ( !function_exists( 'fastfood_custom_bg' ) ) {
+	function fastfood_custom_bg() {
+		global $ff_is_printpreview, $ff_is_mobile_browser;
+		if ( $ff_is_printpreview || $ff_is_mobile_browser ) return;
+
+		$background = get_background_image();
+		$color = get_background_color();
+		if ( ! $background && ! $color ) return;
+
+		$style = $color ? "background-color: #$color;" : '';
+
+		if ( $background ) {
+			$image = " background-image: url('$background');";
+
+			$repeat = get_theme_mod( 'background_repeat', 'repeat' );
+			if ( ! in_array( $repeat, array( 'no-repeat', 'repeat-x', 'repeat-y', 'repeat' ) ) ) $repeat = 'repeat';
+			$repeat = " background-repeat: $repeat;";
+
+			$position_x = get_theme_mod( 'background_position_x', 'left' );
+			$position_y = get_theme_mod( 'background_position_y', 'top' );
+			if ( ! in_array( $position_x, array( 'center', 'right', 'left' ) ) ) $position = 'left';
+			if ( ! in_array( $position_y, array( 'center', 'top', 'bottom' ) ) ) $position = 'top';
+			$position = " background-position: $position_x $position_y;";
+
+			$attachment = get_theme_mod( 'background_attachment', 'scroll' );
+			if ( ! in_array( $attachment, array( 'fixed', 'scroll' ) ) ) $attachment = 'scroll';
+			$attachment = " background-attachment: $attachment;";
+
+			$style .= $image . $repeat . $position . $attachment;
+		} else {
+			$style .= ' background-image: url("");';
+		}
+		?>
+		<style type="text/css">
+			body { <?php echo trim( $style ); ?> }
+		</style>
+		<?php
+	}
+}
 
 class Custom_Background {
 
@@ -12,51 +98,22 @@ class Custom_Background {
 	/* Holds default background images. */
 	var $default_bg_images = array();
 
-	/**
-	 * Callback for administration header.
-	 *
-	 * @var callback
-	 * @since 3.0.0
-	 * @access private
-	 */
+	/* Callback for administration header. */
 	var $admin_header_callback;
 
-	/**
-	 * Callback for header div.
-	 *
-	 * @var callback
-	 * @since 3.0.0
-	 * @access private
-	 */
+	/* Callback for header div. */
 	var $admin_image_div_callback;
 
-	/**
-	 * Holds the page menu hook.
-	 *
-	 * @var string
-	 * @since 3.0.0
-	 * @access private
-	 */
+	/* Holds the page menu hook. */
 	var $page = '';
 
-	/**
-	 * PHP4 Constructor - Register administration header callback.
-	 *
-	 * @since 3.0.0
-	 * @param callback $admin_header_callback
-	 * @param callback $admin_image_div_callback Optional custom image div output callback.
-	 * @return Custom_Background
-	 */
+	/* PHP4 Constructor - Register administration header callback. */
 	function Custom_Background( $admin_header_callback = '', $admin_image_div_callback = '' ) {
 		$this->admin_header_callback = $admin_header_callback;
 		$this->admin_image_div_callback = $admin_image_div_callback;
 	}
 
-	/**
-	 * Set up the hooks for the Custom Background admin page.
-	 *
-	 * @since 3.0.0
-	 */
+	/* Set up the hooks for the Custom Background admin page. */
 	function init() {
 		if ( !current_user_can( 'edit_theme_options' ) )
 			return;
@@ -71,21 +128,13 @@ class Custom_Background {
 			add_action( "admin_head-$page", $this->admin_header_callback, 51 );
 	}
 
-	/**
-	 * Set up the enqueue for the CSS & JavaScript files.
-	 *
-	 * @since 3.0.0
-	 */
+	/* Set up the enqueue for the CSS & JavaScript files. */
 	function admin_load() {
-		wp_enqueue_script( 'ff-custom-background', get_template_directory_uri() . '/js/my-custom-background.dev.js', array( 'jquery', 'farbtastic' ), '', true  );
+		wp_enqueue_script( 'ff-custom-background', get_template_directory_uri() . '/js/admin-custom_background.dev.js', array( 'jquery', 'farbtastic' ), '', true  );
 		wp_enqueue_style( 'farbtastic' );
 	}
 
-	/**
-	 * Execute custom background modification.
-	 *
-	 * @since 3.0.0
-	 */
+	/* Execute custom background modification. */
 	function take_action() {
 
 		if ( empty($_POST) )
@@ -100,7 +149,6 @@ class Custom_Background {
 		}
 
 		if ( isset( $_POST['remove-background'] ) ) {
-			// @TODO: Uploaded files are not removed here.
 			check_admin_referer( 'custom-background-remove', '_wpnonce-custom-background-remove' );
 			set_theme_mod( 'background_image', '' );
 			set_theme_mod( 'background_image_thumb', '' );
@@ -167,7 +215,7 @@ class Custom_Background {
 	}
 
 
-	/* Process the default headers */
+	/* Process the default backgrounds */
 	function process_default_bg_images() {
 		$default_bg_images = array(
 			'aqua' => array(
@@ -289,11 +337,7 @@ class Custom_Background {
 		}
 	}
 
-	/**
-	 * Display UI for selecting one of several default headers.
-	 *
-	 * @since 3.0.0
-	 */
+	/* Display UI for selecting one of several default backgrounds. */
 	function show_default_bg_selector() {
 		foreach ( $this->default_bg_images as $header_key => $header ) {
 			$header_thumbnail = $header['thumbnail_url'];
@@ -315,11 +359,7 @@ class Custom_Background {
 		}
 	}
 
-	/**
-	 * Display the custom background page.
-	 *
-	 * @since 3.0.0
-	 */
+	/* Display the custom background page. */
 	function admin_page() {
 		$this->process_default_bg_images();
 ?>
@@ -497,11 +537,7 @@ if ( get_background_image() ) {
 <?php
 	}
 
-	/**
-	 * Handle an Image upload for the background image.
-	 *
-	 * @since 3.0.0
-	 */
+	/* Handle an Image upload for the background image. */
 	function handle_upload() {
 
 		if ( empty($_FILES) )
