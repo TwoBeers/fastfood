@@ -958,46 +958,6 @@ if ( !function_exists( 'fastfood_widgets_scripts' ) ) {
 	}
 }
 
-// Styles the header image displayed on the Appearance > Header admin panel.
-if ( !function_exists( 'fastfood_admin_header_style' ) ) {
-	function fastfood_admin_header_style() {
-		echo '<link rel="stylesheet" type="text/css" href="' . get_template_directory_uri() . '/css/admin-custom_header.css" />' . "\n";
-		fastfood_header_switch();
-	}
-}
-
-//script for the custom header image
-if ( !function_exists( 'fastfood_header_switch' ) ) {
-	function fastfood_header_switch() {
-		global $_wp_default_headers;
-		$default_headers = $_wp_default_headers;
-		?>
-
-<script type="text/javascript">
-	/* <![CDATA[ */
-	jQuery(document).ready( function($) {
-	  $(".default-header input").click( function() {
-		var def_header = $(this);
-		switch( def_header.attr("value") )
-		{
-		<?php foreach ( $default_headers as $header_key => $header ) { ?>
-			case "<?php echo esc_attr( $header_key ); ?>":
-				$("#headimg").css({ 'background-image' : 'url(<?php printf( $header['url'], get_template_directory_uri(), get_stylesheet_directory_uri()); ?>)' });
-				break;
-		<?php } ?>
-			default:
-				def_header_img = def_header.next('img').attr("src");
-				$("#headimg").css({ 'background-image' : 'url(' + def_header_img + ')' });
-		}
-	  });
-	});
-	/* ]]> */
-</script>
-
-		<?php
-	}
-}
-
 if ( !function_exists( 'fastfood_register_tb_settings' ) ) {
 	function fastfood_register_tb_settings() {
 		//register fastfood settings

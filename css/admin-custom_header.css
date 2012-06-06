@@ -2,12 +2,19 @@
 
 #headimg {
 	border: 1px solid #777 !important;
-	background-position:right bottom;
+	background-position:left top;
+	background-repeat: no-repeat;
 	-moz-box-shadow: 0 0 7px #000;
 	box-shadow: 0 0 7px #000;
 	-webkit-box-shadow: 0 0 7px #000;
 	-khtml-box-shadow: 0 0 7px #000;
 }
+#headimg.slide {
+	background-position:center;
+	background-color: #d4d4d4;
+	background-repeat: no-repeat;
+}
+
 #headimg h1 {
 	margin:20px 20px 5px;
 }
@@ -20,4 +27,7 @@
 	font-size:11px;
 	font-style:italic;
 	padding-left:20px;
+}
+.random-header label {
+	margin-right: 10px;
 }

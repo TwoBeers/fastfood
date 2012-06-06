@@ -45,6 +45,7 @@ require_once( 'mobile/core-mobile.php' ); // load mobile functions
 require_once( 'lib/hooks.php' ); // load the custom hooks
 require_once( 'lib/gallery-editor.php' ); // load the gallery editor
 require_once( 'lib/my-custom-background.php' ); // load the custom background feature
+require_once( 'lib/header-image-slider.php' ); // load the admin stuff
 require_once( 'lib/admin.php' ); // load the admin stuff
 if ( $fastfood_opt['fastfood_audio_player'] == 1 ) require_once( 'lib/audio-player.php' ); // load the audio player module
 if ( $fastfood_opt['fastfood_custom_widgets'] == 1 ) require_once( 'lib/widgets.php' ); // load the custom widgets module
@@ -1348,7 +1349,7 @@ if ( !function_exists( 'fastfood_setup' ) ) {
 
 		// Add a way for the custom header to be styled in the admin panel that controls
 		// custom headers. See fastfood_admin_header_style(), below.
-		add_custom_image_header( 'fastfood_header_style', 'fastfood_admin_header_style' );
+		add_custom_image_header( 'fastfood_header_style', '' );
 
 		// ... and thus ends the changeable header business.
 
@@ -1414,7 +1415,39 @@ if ( !function_exists( 'fastfood_setup' ) ) {
 }
 
 
-// the custon header style - add style customization to page - gets included in the site header
+// the custom header (filterable)
+if ( !function_exists( 'fastfood_header' ) ) {
+	function fastfood_header(){
+		global $ff_is_printpreview, $fastfood_opt;
+		
+		if ( $ff_is_printpreview ) 
+			return $output = '
+					<div id="head">
+						<h1><a href="' . home_url() . '/">' . get_bloginfo( 'name' ) . '</a></h1>
+					</div>';
+
+		// Allow plugins/themes to override the default header.
+		$output = apply_filters('fastfood_header', '');
+		if ( $output != '' )
+			return $output;
+
+		if ( ( $fastfood_opt['fastfood_head_link'] == 1 ) && (  get_header_image() != '' ) ) {
+			$output = '<div id="img-head"><a href="' . home_url() . '/"><img src="' . esc_url ( get_header_image() ) . '" /></a></div>';
+		} else {
+			$output = '<div id="head">
+						' . fastfood_hook_before_site_title() . '
+						<h1><a href="' . home_url() . '/">' . get_bloginfo( 'name' ) . '</a></h1>
+						' . fastfood_hook_after_site_title() . '
+						<div class="description">' . get_bloginfo( 'description' ) . '</div>
+					</div>';
+		}
+
+		return $output;
+
+	}
+}
+
+// the custom header style - add style customization to page - gets included in the site header
 if ( !function_exists( 'fastfood_header_style' ) ) {
 	function fastfood_header_style(){
 

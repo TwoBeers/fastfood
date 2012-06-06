@@ -36,9 +36,7 @@
 							<?php } ?>
 							</div>
 							<p class="attachment"><a href="<?php echo wp_get_attachment_url(); ?>" title="<?php _e( 'View full size','fastfood' ) ;  // link to Full size image ?>" rel="attachment"><?php
-								$ff_attachment_width  = apply_filters( 'fastfood_attachment_size', 1000 );
-								$ff_attachment_height = apply_filters( 'fastfood_attachment_height', 1000 );
-								echo wp_get_attachment_image( $post->ID, array( $ff_attachment_width, $ff_attachment_height ) ); // filterable image width with, essentially, no limit for image height.
+								echo wp_get_attachment_image( $post->ID, 'full' );
 							?></a></p>
 							<?php if ( !empty( $post->post_excerpt ) ) the_excerpt(); ?>
 							<?php if ( !empty( $post->post_content ) ) the_content(); ?>

@@ -195,6 +195,42 @@ fastfoodAnimations = {
 
 			});
 
+	},
+
+	headerSlider : function (options) {
+
+		// set default options
+		var defaults = {
+			speed : 2000, //duration of the animation
+			pause : 3000 //pause between animations
+		},
+
+		// Take the options that the user selects, and merge them with defaults.
+		options = $.extend(defaults, options);
+		
+		return $('#slide-head').each(function() {
+		
+			// cache "this."
+			var $this = $(this);
+			
+			if ($this.children().size() > 1) {
+				// call the slide function.
+				timId = slide();
+			}
+			
+			function slide() {
+				timId = setInterval(function() {
+					$this
+						.children(':last')
+						.fadeOut(options.speed, function() { 
+							$(this)
+								.prependTo($this)
+								.show();
+						});
+				}, (options.speed + options.pause));
+				return timId;
+			}
+		});
 	}
 
 };
