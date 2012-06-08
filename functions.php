@@ -28,7 +28,7 @@ add_filter( 'get_comment_author_link', 'fastfood_add_quoted_on' );
 add_filter( 'user_contactmethods', 'fastfood_new_contactmethods', 10, 1 );
 add_filter( 'img_caption_shortcode', 'fastfood_img_caption_shortcode', 10, 3 );
 add_filter( 'the_title', 'fastfood_title_tags_filter', 10, 2 );
-add_filter( 'excerpt_more', 'fastfood_new_excerpt_more' );
+add_filter( 'excerpt_more', 'fastfood_excerpt_more' );
 add_filter( 'the_content_more_link', 'fastfood_more_link', 10, 2 );
 //add_filter( 'get_search_form', 'fastfood_search_form' );
 
@@ -45,7 +45,7 @@ require_once( 'mobile/core-mobile.php' ); // load mobile functions
 require_once( 'lib/hooks.php' ); // load the custom hooks
 require_once( 'lib/gallery-editor.php' ); // load the gallery editor
 require_once( 'lib/my-custom-background.php' ); // load the custom background feature
-require_once( 'lib/header-image-slider.php' ); // load the admin stuff
+require_once( 'lib/header-image-slider.php' ); // load the custom header stuff
 require_once( 'lib/admin.php' ); // load the admin stuff
 if ( $fastfood_opt['fastfood_audio_player'] == 1 ) require_once( 'lib/audio-player.php' ); // load the audio player module
 if ( $fastfood_opt['fastfood_custom_widgets'] == 1 ) require_once( 'lib/widgets.php' ); // load the custom widgets module
@@ -1229,7 +1229,7 @@ if ( !function_exists( 'fastfood_I_like_it_js' ) ) {
 			js = d.createElement(s); js.id = id;
 			js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
 			fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk' ));
+		}(document, 'script', 'facebook-jssdk'));
 	</script>
 <?php } ?>
 
@@ -1283,8 +1283,6 @@ if ( !function_exists( 'fastfood_share_this' ) ) {
 		$share['bookmarks'] = array( 'Bookmarks', 'https://www.google.com/bookmarks/mark?op=edit&bkmk=' . $pHref . '&title=' . $pName );
 		$share['blogger'] = array( 'Blogger', 'http://www.blogger.com/blog_this.pyra?t&u=' . $pHref . '&n=' . $pName . '&pli=1' );
 		$share['delicious'] = array( 'Delicious', 'http://delicious.com/save?v=5&noui&jump=close&url=' . $pHref . '&title=' . $pName );
-		
-		//http://vk.com/share.php?url=http%3A%2F%2Ffilepost.com%2Ffiles%2Fb7d6973b%2FHMT-02.part1.rar%2F%23.T8gQS-2mFcs.vk&title=FilePost.com%3A+Download+HMT-02.part1.rar+-+fast+%26+secure!
 
 		$outer = '<div class="article-share fixfloat">';
 		foreach( $share as $key => $btn ){
@@ -1551,7 +1549,7 @@ if ( !function_exists( 'fastfood_mini_login' ) ) {
 			'redirect' => home_url(),
 			'form_id' => 'ff-loginform',
 			'id_username' => 'ff-user_login',
-			'id_pasfford' => 'ff-user_pass',
+			'id_password' => 'ff-user_pass',
 			'id_remember' => 'ff-rememberme',
 			'id_submit' => 'ff-submit' );
 		?>
@@ -1656,7 +1654,7 @@ if ( !function_exists( 'fastfood_excerpt_length' ) ) {
 }
 
 // use the "excerpt more" string as a link to the post
-function fastfood_new_excerpt_more( $more ) {
+function fastfood_excerpt_more( $more ) {
 	global $fastfood_opt, $post;
 	if ( is_admin() ) return $more;
 	if ( isset( $fastfood_opt['fastfood_excerpt_more_txt'] ) && isset( $fastfood_opt['fastfood_excerpt_more_link'] ) ) {

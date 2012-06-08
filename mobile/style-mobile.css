@@ -734,7 +734,8 @@ body.light {
 	background-image: url("images/light/arrows-dark.png");
 	background-color: #ddd;
 }
-.light .tbm-seztit > a:hover {
+.light .tbm-seztit > a:hover,
+.light .tbm-seztit > a:focus {
 	background-image: url("images/light/arrows.png");
 }
 .light .tbm-pc-navi a {

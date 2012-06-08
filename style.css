@@ -1,8 +1,8 @@
 /*
 Theme Name: Fastfood
 Theme URI: http: //www.twobeers.net/annunci/tema-per-wordpress-fastfood
-Description: Simple and clear theme with a lot of features, like a "quick links" menu, an "easy navigation" bar, the print preview, 7 integrated widgets ( "Social Links", "Popular Post", "Latest Activity" and many more ). Fastfood has customizable header, customizable background (with a lot of predefined themes), one or two columns layout, up to five widgets areas and three menu. It supports custom menus, posts thumbnail, post formats ("gallery", "status" and "aside") and also mobile devices, with a dedicated style. WP3.3 full compatible.
-Version: 0.32
+Description: Simple and clear theme with a lot of features, like a "quick links" menu, an "easy navigation" bar, the print preview, 7 integrated widgets ( "Social Links", "Popular Post", "Latest Activity" and many more ). Fastfood has customizable header, customizable background (with a lot of predefined themes), one or two columns layout, up to five widgets areas and three menu. It supports custom menus, posts thumbnail, post formats ("gallery", "status" and "aside") and also mobile devices, with a dedicated style. WP3.4 full compatible.
+Version: 0.32.1
 Tags: translation-ready, threaded-comments, custom-menu, custom-header, theme-options, fixed-width, two-columns, right-sidebar, white, silver, orange, light, sticky-post, custom-background, editor-style, rtl-language-support, custom-colors, post-formats
 Author: TwoBeers Crew
 Author URI: http: //www.twobeers.net/
@@ -243,6 +243,7 @@ input[type=reset]:hover {
 	clear: both;
 	text-align: center;
 	padding-bottom: 45px;
+	padding-top: 20px;
 }
 #ff_background {
 	top: 0;
@@ -263,8 +264,6 @@ input[type=reset]:hover {
 	width: 960px;
 }
 
-
-
 /* =Header
 ----------------------------------------------------------*/
 #head {
@@ -279,6 +278,15 @@ input[type=reset]:hover {
 #head h1 {
 	margin: 0 0 5px;
 	font-size: 3em;
+}
+
+/* =other elements
+----------------------------------------------------------*/
+#credits {
+	border-top: 1px solid #ddd;
+	display: block;
+	margin-top: 5px;
+	padding-top: 5px;
 }
 
 /* =menu items (quickbar)
@@ -320,7 +328,6 @@ input[type=reset]:hover {
 .menuitem:hover #mii_cuser {
 	background-position: right -250px;
 }
-
 .menuback,
 .menuback_js {
 	background: url("images/main.png") repeat-x left 20px #404040;

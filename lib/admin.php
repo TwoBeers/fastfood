@@ -642,7 +642,7 @@ function fastfood_get_coa( $option = false ) {
 							'type' => 'chk',
 							'default' => 1,
 							'description' => __( 'editor style', 'fastfood' ),
-							'info' => __( "add style to the editor in order to write the post exactly how it will appear in the site", 'fastfood' ),
+							'info' => __( 'add style to the editor in order to write the post exactly how it will appear in the site', 'fastfood' ),
 							'req' => ''
 		),
 		'fastfood_mobile_css' => 
@@ -659,11 +659,11 @@ function fastfood_get_coa( $option = false ) {
 						array(
 							'group' => 'mobile',
 							'type' => 'opt',
-							'default' => 'dark',
+							'default' => 'light',
 							'options' => array('light','dark'),
 							'options_readable' => array('<img src="' . get_template_directory_uri() . '/images/mobile-light.png" alt="light" />','<img src="' . get_template_directory_uri() . '/images/mobile-dark.png" alt="dark" />'),
 							'description' => __( 'colors', 'fastfood' ),
-							'info' => __( "", 'fastfood' ),
+							'info' => '',
 							'req' => '',
 							'sub' => false
 						),
@@ -787,7 +787,7 @@ function fastfood_get_coa( $option = false ) {
 							'type' => 'chk',
 							'default' => 1,
 							'description' => __( 'navigation buttons', 'fastfood' ),
-							'info' => __( "the fixed navigation bar on the right. Note: Is strongly recommended to keep it enabled", 'fastfood' ),
+							'info' => __( 'the fixed navigation bar on the right. Note: Is strongly recommended to keep it enabled', 'fastfood' ),
 							'req' => '',
 							'sub' => array('fastfood_navbuttons_print','fastfood_navbuttons_comment','fastfood_navbuttons_feed','fastfood_navbuttons_trackback','fastfood_navbuttons_home','fastfood_navbuttons_nextprev','fastfood_navbuttons_newold','fastfood_navbuttons_topbottom')
 		),
@@ -877,7 +877,7 @@ function fastfood_get_coa( $option = false ) {
 							'type' => 'chk',
 							'default' => 1,
 							'description' => __( 'status bar', 'fastfood' ),
-							'info' => __( "the fixed bar on bottom of page", 'fastfood' ),
+							'info' => __( 'the fixed bar on bottom of page', 'fastfood' ),
 							'req' => ''
 		),
 		'fastfood_custom_widgets' => 

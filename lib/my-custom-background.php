@@ -37,16 +37,11 @@ if ( !function_exists( 'fastfood_add_custom_background' ) ) {
 		if ( isset( $GLOBALS['custom_background'] ) )
 			return;
 
-		if ( empty( $header_callback ) )
-			$header_callback = '_custom_background_cb';
-
 		add_action( 'wp_head', $header_callback );
-
-		add_theme_support( 'custom-background', array( 'callback' => $header_callback ) );
 
 		if ( ! is_admin() )
 			return;
-		$GLOBALS['custom_background'] =& new Custom_Background( $admin_header_callback, $admin_image_div_callback );
+		$GLOBALS['custom_background'] =& new Fastfood_Custom_Background( $admin_header_callback, $admin_image_div_callback );
 		add_action( 'admin_menu', array( &$GLOBALS['custom_background'], 'init' ) );
 	}
 }
@@ -92,7 +87,7 @@ if ( !function_exists( 'fastfood_custom_bg' ) ) {
 	}
 }
 
-class Custom_Background {
+class Fastfood_Custom_Background {
 
 
 	/* Holds default background images. */
@@ -108,7 +103,7 @@ class Custom_Background {
 	var $page = '';
 
 	/* PHP4 Constructor - Register administration header callback. */
-	function Custom_Background( $admin_header_callback = '', $admin_image_div_callback = '' ) {
+	function Fastfood_Custom_Background( $admin_header_callback = '', $admin_image_div_callback = '' ) {
 		$this->admin_header_callback = $admin_header_callback;
 		$this->admin_image_div_callback = $admin_image_div_callback;
 	}
