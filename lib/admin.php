@@ -1,6 +1,6 @@
 <?php
 
-global $fastfood_opt, $fastfood_current_theme;
+global $fastfood_opt, $fastfood_version;
 
 //complete options array, with type, defaults values, description, infos and required option
 function fastfood_get_coa( $option = false ) {
@@ -990,14 +990,14 @@ if ( !function_exists( 'fastfood_setopt_admin_notice' ) ) {
 		echo '<div class="updated"><p><strong>' . sprintf( __( 'Fastfood theme says: "Dont forget to set <a href="%s">my options</a> and the header image!"', 'fastfood' ), get_admin_url() . 'themes.php?page=tb_fastfood_functions' ) . '</strong></p></div>';
 	}
 }
-if ( current_user_can( 'manage_options' ) && $fastfood_opt['version'] < $fastfood_current_theme['Version'] ) {
+if ( current_user_can( 'manage_options' ) && $fastfood_opt['version'] < $fastfood_version ) {
 	add_action( 'admin_notices', 'fastfood_setopt_admin_notice' );
 }
 
 // sanitize options value
 if ( !function_exists( 'fastfood_sanitaze_options' ) ) {
 	function fastfood_sanitaze_options($input) {
-		global $fastfood_current_theme;
+		global $fastfood_version;
 		$fastfood_coa = fastfood_get_coa();
 		// check for updated values and return 0 for disabled ones <- index notice prevention
 		foreach ( $fastfood_coa as $key => $val ) {
@@ -1041,14 +1041,14 @@ if ( !function_exists( 'fastfood_sanitaze_options' ) ) {
 			if ( $fastfood_coa[$key]['req'] != '' ) { if ( $input[$fastfood_coa[$key]['req']] == 0 ) $input[$key] = 0; }
 		}
 		//$input['hidden_opt'] = 'default'; //this hidden option avoids empty $fastfood_options when updated
-		$input['version'] = $fastfood_current_theme['Version']; // keep version number
+		$input['version'] = $fastfood_version; // keep version number
 		return $input;
 	}
 }
 
 // check and set default options
 function fastfood_default_options() {
-		global $fastfood_current_theme;
+		global $fastfood_version;
 		$fastfood_coa = fastfood_get_coa();
 		$fastfood_opt = get_option( 'fastfood_options' );
 
@@ -1059,7 +1059,7 @@ function fastfood_default_options() {
 			}
 			$fastfood_opt['version'] = ''; //null value to keep admin notice alive and invite user to discover theme options
 			update_option( 'fastfood_options' , $fastfood_opt );
-		} else if ( !isset( $fastfood_opt['version'] ) || $fastfood_opt['version'] < $fastfood_current_theme['Version'] ) {
+		} else if ( !isset( $fastfood_opt['version'] ) || $fastfood_opt['version'] < $fastfood_version ) {
 			// check for unset values and set them to default value -> when updated to new version
 			foreach ( $fastfood_coa as $key => $val ) {
 				if ( !isset( $fastfood_opt[$key] ) ) $fastfood_opt[$key] = $fastfood_coa[$key]['default'];
@@ -1075,7 +1075,7 @@ if ( !function_exists( 'fastfood_edit_options' ) ) {
 	  if ( !current_user_can( 'edit_theme_options' ) ) {
 	    wp_die( 'You do not have sufficient permissions to access this page.' );
 	  }
-		global $fastfood_opt, $fastfood_current_theme;
+		global $fastfood_opt, $fastfood_version, $fastfood_current_theme;
 		
 		if ( isset( $_GET['erase'] ) && ! isset( $_REQUEST['settings-updated'] ) ) {
 			delete_option( 'fastfood_options' );
@@ -1086,8 +1086,8 @@ if ( !function_exists( 'fastfood_edit_options' ) ) {
 		$fastfood_coa = fastfood_get_coa();
 
 		// update version value when admin visit options page
-		if ( $fastfood_opt['version'] < $fastfood_current_theme['Version'] ) {
-			$fastfood_opt['version'] = $fastfood_current_theme['Version'];
+		if ( $fastfood_opt['version'] < $fastfood_version ) {
+			$fastfood_opt['version'] = $fastfood_version;
 			update_option( 'fastfood_options' , $fastfood_opt );
 		}
 
@@ -1103,7 +1103,7 @@ if ( !function_exists( 'fastfood_edit_options' ) ) {
 	?>
 		<div class="wrap" id="ff-main-wrap">
 			<div class="icon32 icon-settings"><br /></div>
-			<h2><?php echo get_current_theme() . ' - ' . __( 'Theme Options','fastfood' ); ?></h2>
+			<h2><?php echo $fastfood_current_theme . ' - ' . __( 'Theme Options','fastfood' ); ?></h2>
 			<ul id="ff-tabselector" class="hide-if-no-js">
 				<?php
 				$fastfood_groups = fastfood_get_coa( 'groups' );

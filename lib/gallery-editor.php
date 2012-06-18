@@ -6,7 +6,7 @@
  * @since fastfood 3.0
  */
 
-global $fastfood_opt, $fastfood_current_theme;
+global $fastfood_opt;
 
 // media select
 add_action( 'template_redirect', 'fastfood_media' );
@@ -72,10 +72,11 @@ if ( !function_exists( 'fastfood_movegallerypage_script' ) ) {
 // the slideshow admin panel - here you can select posts to be included in slideshow
 if ( !function_exists( 'fastfood_edit_gallery' ) ) {
 	function fastfood_edit_gallery() {
+		global $fastfood_current_theme;
 		?>
 	<div class="wrap">
 			<div class="icon32" id="galed-icon"><br></div>
-			<h2><?php echo get_current_theme() . ' - ' . __( 'Gallery Editor', 'fastfood' ); ?></h2>
+			<h2><?php echo $fastfood_current_theme . ' - ' . __( 'Gallery Editor', 'fastfood' ); ?></h2>
 			<div class="hide-if-js error"><p><?php echo __( 'Javascript must be enabled in order to use this feature', 'fastfood' ); ?></p></div>
 			<div>
 				<table class="form-table">

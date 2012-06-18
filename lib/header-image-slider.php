@@ -162,8 +162,14 @@ class Fastfood_Header_Image_Slider {
 				$output .= "<img src='{$slide['url']}' alt='{$key}' />";
 		}
 		return "
-				<div style='{$width} {$height}' id='slide-head'>
-					{$output}
+				<div id='head-wrap'>
+					<div style='{$width} {$height}' id='slide-head'>
+						{$output}
+					</div>
+					<div id='head'>
+						<h1><a href='" . home_url() . "/'>" . get_bloginfo( 'name' ) . "</a></h1>
+						<div class='description'>" . get_bloginfo( 'description' ) . "</div>
+					</div>
 				</div>
 		";
 	}

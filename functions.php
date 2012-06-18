@@ -93,10 +93,14 @@ if ( ! isset( $content_width ) ) {
 }
 
 // get theme version
-if ( get_theme( 'Fastfood' ) ) {
-	$fastfood_current_theme = get_theme( 'Fastfood' );
-	$fastfood_version = $fastfood_current_theme['Version'];
+if ( function_exists( 'wp_get_theme' ) ) {
+	$fastfood_theme = wp_get_theme( 'fastfood' );
+	$fastfood_current_theme = wp_get_theme();
+} else { // Compatibility with versions of WordPress prior to 3.4.
+	$fastfood_theme = get_theme( 'Fastfood' );
+	$fastfood_current_theme = get_current_theme();
 }
+$fastfood_version = $fastfood_theme? $fastfood_theme['Version'] : '';
 
 // is sidebar visible?
 if ( !function_exists( 'fastfood_use_sidebar' ) ) {
@@ -1309,7 +1313,7 @@ if ( !function_exists( 'fastfood_setup' ) ) {
 		global $fastfood_opt;
 
 		// Register localization support
-		load_theme_textdomain( 'fastfood', TEMPLATEPATH . '/languages' );
+		load_theme_textdomain( 'fastfood', get_template_directory() . '/languages' );
 		// Theme uses wp_nav_menu() in three location
 		register_nav_menus( array( 'primary' => __( 'Main Navigation Menu', 'fastfood' ) ) );
 		register_nav_menus( array( 'secondary1' => __( 'Secondary Navigation Menu #1', 'fastfood' )	) );
@@ -1329,27 +1333,6 @@ if ( !function_exists( 'fastfood_setup' ) ) {
 			if ( $fastfood_opt['fastfood_post_formats_status'] == 1 ) $pformats[] = 'status';
 			add_theme_support( 'post-formats', $pformats );
 		}
-
-		// Your changeable header business starts here
-		define( 'HEADER_TEXTCOLOR', '404040' );
-		// No CSS, just IMG call. The %s is a placeholder for the theme template directory URI.
-		define( 'HEADER_IMAGE', '%s/images/headers/tree.jpg' );
-
-		// The height and width of your custom header. You can hook into the theme's own filters to change these values.
-		// Add a filter to fastfood_header_image_width and fastfood_header_image_height to change these values.
-		define( 'HEADER_IMAGE_WIDTH', 848 );
-
-		$head_h = ( isset( $fastfood_opt['fastfood_head_h'] ) ? str_replace( 'px', '', $fastfood_opt['fastfood_head_h'] ) : 120 );
-		define( 'HEADER_IMAGE_HEIGHT', $head_h );
-
-		// Support text inside the header image.
-		define( 'NO_HEADER_TEXT', false );
-
-		// Add a way for the custom header to be styled in the admin panel that controls
-		// custom headers. See fastfood_admin_header_style(), below.
-		add_custom_image_header( 'fastfood_header_style', '' );
-
-		// ... and thus ends the changeable header business.
 
 		// Default custom headers packaged with the theme. %s is a placeholder for the theme template directory URI.
 		register_default_headers( array(
@@ -1409,9 +1392,41 @@ if ( !function_exists( 'fastfood_setup' ) ) {
 				'description' => __( 'Fog', 'fastfood' )
 			)
 		) );
+
+		$head_h = ( isset( $fastfood_opt['fastfood_head_h'] ) ? str_replace( 'px', '', $fastfood_opt['fastfood_head_h'] ) : 120 );
+		fastfood_setup_custom_header( $head_h );
+
 	}
 }
 
+//the custom header support
+if ( !function_exists( 'fastfood_setup_custom_header' ) ) {
+	function fastfood_setup_custom_header( $head_h ) {
+		$args = array(
+			'width'					=> 848, // Header image width (in pixels)
+			'height'				=> $head_h, // Header image height (in pixels)
+			'default-image'			=> get_template_directory_uri() . '/images/headers/tree.jpg', // Header image default
+			'header-text'			=> true, // Header text display default
+			'default-text-color'	=> '404040', // Header text color default
+			'wp-head-callback'		=> 'fastfood_header_style',
+			'admin-head-callback'	=> ''
+		);
+	 
+		$args = apply_filters( 'fastfood_custom_header_args', $args );
+	 
+		if ( function_exists( 'get_custom_header' ) ) {
+			add_theme_support( 'custom-header', $args );
+		} else {
+			// Compatibility with versions of WordPress prior to 3.4.
+			define( 'HEADER_TEXTCOLOR',		$args['default-text-color'] );
+			define( 'NO_HEADER_TEXT',		$args['header-text'] );
+			define( 'HEADER_IMAGE',			$args['default-image'] );
+			define( 'HEADER_IMAGE_WIDTH',	$args['width'] );
+			define( 'HEADER_IMAGE_HEIGHT',	$args['height'] );
+			add_custom_image_header( $args['wp-head-callback'], $args['admin-head-callback'] );
+		}
+	}
+}
 
 // the custom header (filterable)
 if ( !function_exists( 'fastfood_header' ) ) {
@@ -1430,13 +1445,15 @@ if ( !function_exists( 'fastfood_header' ) ) {
 			return $output;
 
 		if ( ( $fastfood_opt['fastfood_head_link'] == 1 ) && (  get_header_image() != '' ) ) {
-			$output = '<div id="img-head"><a href="' . home_url() . '/"><img src="' . esc_url ( get_header_image() ) . '" /></a></div>';
+			$output = '<div id="head-wrap"><a href="' . home_url() . '/"><img src="' . get_header_image() . '" /></a></div>';
 		} else {
-			$output = '<div id="head">
-						' . fastfood_hook_before_site_title() . '
-						<h1><a href="' . home_url() . '/">' . get_bloginfo( 'name' ) . '</a></h1>
-						' . fastfood_hook_after_site_title() . '
-						<div class="description">' . get_bloginfo( 'description' ) . '</div>
+			$output = '<div id="head-wrap">
+						<div id="head">
+							' . fastfood_hook_before_site_title() . '
+							<h1><a href="' . home_url() . '/">' . get_bloginfo( 'name' ) . '</a></h1>
+							' . fastfood_hook_after_site_title() . '
+							<div class="description">' . get_bloginfo( 'description' ) . '</div>
+						</div>
 					</div>';
 		}
 
@@ -1452,18 +1469,25 @@ if ( !function_exists( 'fastfood_header_style' ) ) {
 		global $ff_is_printpreview, $ff_is_mobile_browser, $fastfood_opt;
 		if ( $ff_is_printpreview || $ff_is_mobile_browser ) return;
 
-		if ( 'blank' == get_theme_mod( 'header_textcolor', HEADER_TEXTCOLOR ) || '' == get_theme_mod( 'header_textcolor', HEADER_TEXTCOLOR ) || ( defined( 'NO_HEADER_TEXT' ) && NO_HEADER_TEXT ) )
+		if ( ( 'blank' == get_header_textcolor() ) || ( $fastfood_opt['fastfood_head_link'] == 1 ) )
 			$style = 'display:none;';
 		else
-			$style = 'color:#' . get_theme_mod( 'header_textcolor', HEADER_TEXTCOLOR ) . ';';
+			$style = 'color:#' . get_header_textcolor() . ';';
+
+
+		if ( function_exists( 'get_custom_header' ) )
+			$min_height = get_custom_header()->height;
+		else // Compatibility with versions of WordPress prior to 3.4.
+			$min_height = HEADER_IMAGE_HEIGHT;
+			
 
 		?>
 <style type="text/css">
-	#head {
-		background: transparent url( '<?php esc_url ( header_image() ); ?>' ) right bottom no-repeat;
-		min-height: <?php echo HEADER_IMAGE_HEIGHT - 20; ?>px;
+	#head-wrap {
+		background: transparent url( '<?php header_image(); ?>' ) right bottom no-repeat;
+		min-height: <?php echo $min_height; ?>px;
 	}
-	#head h1 a, #head .description {
+	#head {
 		<?php echo $style; ?>
 	}
 	body {
@@ -1638,7 +1662,7 @@ function fastfood_title_tags_filter( $title, $id ) {
 	
 	if ( empty( $title ) ) {
 		if ( !isset( $fastfood_opt['fastfood_blank_title'] ) || empty( $fastfood_opt['fastfood_blank_title'] ) ) return __( '(no title)', 'fastfood' );
-		$postdata = array( get_post_format( $id )? __(get_post_format( $id ), 'fastfood' ): __( 'post', 'fastfood' ), get_the_time( get_option( 'date_format' ), $id ) );
+		$postdata = array( get_post_format( $id )? __( get_post_format( $id ), 'fastfood' ): __( 'post', 'fastfood' ), get_the_time( get_option( 'date_format' ), $id ) );
 		$codes = array( '%f', '%d' );
 		return str_replace( $codes, $postdata, $fastfood_opt['fastfood_blank_title'] );
 	} else

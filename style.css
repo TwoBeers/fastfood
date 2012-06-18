@@ -266,12 +266,17 @@ input[type=reset]:hover {
 
 /* =Header
 ----------------------------------------------------------*/
+#head-wrap {
+	min-height: 100px;
+	position: relative;
+}
 #head {
 	text-align: left;
 	font-style: italic;
-	min-height: 100px;
 	padding: 10px 20px;
+	position: relative;
 }
+
 #head a {
 	color: #404040;
 }
@@ -1657,7 +1662,9 @@ img.aligncenter {
 ----------------------------------------------------------*/
 #slide-head {
 	overflow: hidden;
-	position: relative;
+	position: absolute;
+	top: 0;
+	left: 0;
 }
 #slide-head > img,
 #slide-head > a {

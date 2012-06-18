@@ -2,23 +2,36 @@
 /**
  * The custom background script.
  *
- * "Custom_Background" class based on WP wp-admin/custom-background.php
+ * "Fastfood_Custom_Background" class based on WP wp-admin/custom-background.php
  *
  */
 
 add_action( 'after_setup_theme', 'fastfood_custom_background_init' );
-
 
 // set up custom colors and header image
 if ( !function_exists( 'fastfood_custom_background_init' ) ) {
 	function fastfood_custom_background_init() {
 		global $fastfood_opt;
 
-		// Add a way for the custom background to be styled in the admin panel that controls
 		if ( isset( $fastfood_opt['fastfood_custom_bg'] ) && $fastfood_opt['fastfood_custom_bg'] == 1 ) {
+			// the enhanced 'custom background' support
 			fastfood_add_custom_background( 'fastfood_custom_bg' , 'fastfood_admin_custom_bg_style' , '' );
 		} else {
-			add_custom_background( 'fastfood_custom_bg' , '' , '' );
+			// the standard 'custom background' support
+			$args = array(
+				'default-color'          => '',
+				'default-image'          => '',
+				'wp-head-callback'       => '',
+				'admin-head-callback'    => '',
+				'admin-preview-callback' => ''
+			);
+			if ( function_exists( 'get_custom_header' ) ) {
+				add_theme_support( 'custom-background', $args );
+			} else {
+				// Compat: Versions of WordPress prior to 3.4.
+				define( 'BACKGROUND_COLOR', $args['default-color'] );
+				add_custom_background( 'fastfood_custom_bg' , '' , '' );
+			}
 		}
 
 	}
