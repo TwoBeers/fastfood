@@ -674,7 +674,7 @@ if ( !function_exists( 'fastfood_extrainfo' ) ) {
 		} else { ?>
 			<div class="meta">
 				<?php if ( $args['auth'] ) { ?>
-					<?php $post_auth = ( $args['auth'] === true ) ? '<a href="' . get_author_posts_url( get_the_author_meta( 'ID' ) ) . '" title="' . sprintf( __( 'View all posts by %s', 'fastfood' ), esc_attr( get_the_author() ) ) . '">' . get_the_author() . '</a>' : $args['auth']; ?>
+					<?php $post_auth = ( $args['auth'] === true ) || ( $args['auth'] === 1 ) ? '<a href="' . get_author_posts_url( get_the_author_meta( 'ID' ) ) . '" title="' . sprintf( __( 'View all posts by %s', 'fastfood' ), esc_attr( get_the_author() ) ) . '">' . get_the_author() . '</a>' : $args['auth']; ?>
 					<?php printf( __( 'by %s', 'fastfood' ), $post_auth ); ?>
 				<?php } ?>
 				<?php if ( $args['date'] ) { printf( __( 'Published on: %s', 'fastfood' ), get_the_time( get_option( 'date_format' ) ) ) ; echo '<br />'; }?>
