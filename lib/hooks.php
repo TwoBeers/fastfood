@@ -11,14 +11,6 @@ function fastfood_hook_after_header() {
 	do_action('fastfood_hook_after_header');
 }
 
-function fastfood_hook_before_site_title() {
-	do_action('fastfood_hook_before_site_title');
-}
-
-function fastfood_hook_after_site_title() {
-	do_action('fastfood_hook_after_site_title');
-}
-
 function fastfood_hook_before_pages() {
 	do_action('fastfood_hook_before_pages');
 }

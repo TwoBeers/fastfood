@@ -2,7 +2,7 @@
 Theme Name: Fastfood
 Theme URI: http: //www.twobeers.net/annunci/tema-per-wordpress-fastfood
 Description: Simple and clear theme with a lot of features, like a "quick links" menu, an "easy navigation" bar, the print preview, 7 integrated widgets ( "Social Links", "Popular Post", "Latest Activity" and many more ). Fastfood has customizable header, customizable background (with a lot of predefined themes), one or two columns layout, up to five widgets areas and three menu. It supports custom menus, posts thumbnail, post formats ("gallery", "status" and "aside") and also mobile devices, with a dedicated style. WP3.4 full compatible.
-Version: 0.32.2
+Version: 0.33
 Tags: translation-ready, threaded-comments, custom-menu, custom-header, theme-options, fixed-width, two-columns, right-sidebar, white, silver, orange, light, sticky-post, custom-background, editor-style, rtl-language-support, custom-colors, post-formats
 Author: TwoBeers Crew
 Author URI: http: //www.twobeers.net/
@@ -533,9 +533,6 @@ input[type=reset]:hover {
 	cursor: pointer;
 	padding: 2px 0;
 }
-.minib_img:hover {
-	background-color: #aaa;
-}
 .minib_print{
 	background-position: -2px 0;
 }
@@ -571,6 +568,42 @@ input[type=reset]:hover {
 }
 .minib_backtopost{
 	background-position: -2px -144px;
+}
+.minib_print:hover {
+	background-position: -90px 0;
+}
+.minib_comment:hover {
+	background-position: -90px -24px;
+}
+.minib_rss:hover {
+	background-position: -90px -48px;
+}
+.minib_track:hover {
+	background-position: -90px -72px;
+}
+.minib_home:hover {
+	background-position: -90px -96px;
+}
+.minib_ppage:hover {
+	background-position: -90px -144px;
+}
+.minib_npage:hover {
+	background-position: -90px -120px;
+}
+.minib_ppages:hover {
+	background-position: -90px -120px;
+}
+.minib_npages:hover {
+	background-position: -90px -144px;
+}
+.minib_top:hover {
+	background-position: -90px -168px;
+}
+.minib_bottom:hover {
+	background-position: -90px -192px;
+}
+.minib_backtopost:hover {
+	background-position: -90px -144px;
 }
 .minibutton:hover a {
 	color: #404040;
@@ -828,7 +861,7 @@ li.current_page_ancestor .hiraquo {
 	font-size: 1.2em;
 	text-align: center;
 }
-.ff-search-reminder .ff-author-bio {
+.ff-search-reminder .tb-author-bio {
 	margin: 5px 0 0;
 }
 .ff-search-found {
@@ -985,24 +1018,24 @@ div.ff_widget_latest_commentators a img {
 div.ff_Widget_post_details ul li {
 	list-style: none outside none;
 }
-.ff-post-details-cats,
-.ff-post-details-tags,
-.ff-post-details-date {
+.tb-post-details-cats,
+.tb-post-details-tags,
+.tb-post-details-date {
 	background-repeat: no-repeat;
 	background-image: url('images/details.png');
 	line-height: 25px;
 	padding: 1px 0 5px 25px;
 }
-.ff-post-details-cats {
+.tb-post-details-cats {
 	background-position: left -200px;
 }
-.ff-post-details-tags {
+.tb-post-details-tags {
 	background-position: left -100px;
 }
-.ff-post-details-date {
+.tb-post-details-date {
 	background-position: left 0;
 }
-.ff-post-details-thumb {
+.tb-post-details-thumb {
 	background-color: #ccc;
 	border: 1px solid #aaa;
 	padding: 5px;
@@ -1034,40 +1067,40 @@ div.ff_Widget_post_details ul {
 
 /* author bio
 ----------------------------------------------------------*/
-.ff-author-bio {
+.tb-author-bio {
 	background-color: #ccc;
 	border: 1px solid #aaa;
 	padding: 5px;
 	margin: 0 0 20px;
 }
-.widget .ff-author-bio {
+.widget .tb-author-bio {
 	margin: 0 0 5px;
 }
-.ff-author-bio li,
-.ff-author-bio ul {
+.tb-author-bio li,
+.tb-author-bio ul {
     margin: 0;
     padding: 0;
 }
-.ff-author-bio .author-avatar img {
+.tb-author-bio .author-avatar img {
     border-radius: 5px;
     margin-right: 10px;
 }
-.ff-author-bio .author-avatar {
+.tb-author-bio .author-avatar {
     float: left;
 }
-.ff-author-bio .author-name {
+.tb-author-bio .author-name {
     font-size: 1.5em;
     margin-bottom: 10px;
 }
-.ff-author-bio .author-description {
+.tb-author-bio .author-description {
 }
-.ff-author-bio .author-social {
+.tb-author-bio .author-social {
 	border-top:1px solid #aaa;
 	margin-top:5px;
 	padding-top:5px;
 	clear: both;
 }
-.ff-author-bio .author-description a {
+.tb-author-bio .author-description a {
 	text-decoration: underline;
 }
 
@@ -1230,7 +1263,7 @@ div.ff_Widget_post_details ul {
 	right: 2px;
 }
 .comment-reply-link {
-	background: url('images/comment_reply.png') no-repeat scroll left center transparent;
+	background: url('images/details.png') no-repeat scroll left -1200px transparent;
 	color: #ccc;
 	padding: 4px 0 0 24px;
 }
@@ -1465,9 +1498,6 @@ img.aligncenter {
 .t-twits {
 	display: inline-block;
 }
-.fb-like {
-	margin-right: -11px;
-}
 .ff-I-like-it {
 	background: url("images/body.png") repeat-y scroll 55px top #ccc;
 	border-bottom: 1px solid #fff;
@@ -1671,4 +1701,46 @@ img.aligncenter {
 	position: absolute;
 	top: 0;
 	left: 0;
+}
+
+/* Breadcrumb NavXT
+----------------------------------------------------------*/
+#navxt-crumbs {
+    background: none repeat scroll 0 0 #CCCCCC;
+    height: 22px;
+    margin: 10px 0;
+}
+#navxt-crumbs ul, #navxt-crumbs li {
+    float: left;
+    font-size: 11px;
+    height: 22px;
+    list-style-type: none;
+    margin: 0;
+}
+#navxt-crumbs ul {
+    background: url("images/details.png") no-repeat scroll right -900px #404040;
+    padding-right: 7px;
+}
+#navxt-crumbs li {
+	background: url("images/details.png") no-repeat scroll left -800px #CCCCCC;
+	display: block;
+	line-height: 20px;
+	max-width: 200px;
+	overflow: hidden;
+	padding: 0 10px 0 20px;
+	text-overflow: ellipsis;
+	white-space: pre;
+}
+#navxt-crumbs li.home {
+	background:#ccc url(images/details.png) no-repeat left -1000px;
+	padding-left:24px;
+}
+#navxt-crumbs li.home:hover {
+	background:#ccc url(images/details.png) no-repeat left -1100px;
+}
+#navxt-crumbs li.current_item {
+	background:#404040 url(images/details.png) no-repeat left -700px;
+}
+#navxt-crumbs li.home.current_item {
+	background:#404040 url(images/details.png) no-repeat left -1000px;
 }

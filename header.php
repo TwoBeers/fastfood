@@ -43,4 +43,8 @@
 			
 			<?php fastfood_get_sidebar( 'header' ); // show header widgets area ?>
 			
-			<?php if ( $fastfood_opt['fastfood_breadcrumb'] == 1 ) fastfood_breadcrumb(); // show breadcrumb ?>
+			<?php if(function_exists('bcn_display_list')) { //Breadcrumb NavXT native support ?>
+				<div id="navxt-crumbs"><ul><?php bcn_display_list(); ?></ul></div>
+			<?php } elseif ( $fastfood_opt['fastfood_breadcrumb'] == 1 ) { // show breadcrumb
+				fastfood_breadcrumb();
+			}?>

@@ -31,7 +31,7 @@ fastfoodOptions = {
 			});
 		});
 		$('#to-defaults').click (function () {
-			var answer = confirm(ff_l10n.confirm_to_defaults)
+			var answer = confirm(tb_l10n.confirm_to_defaults)
 			if (!answer){
 				return false;
 			}

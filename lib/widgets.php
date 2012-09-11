@@ -887,7 +887,7 @@ class fastfood_Widget_image_EXIF extends WP_Widget {
 ?>
 		<?php echo $before_widget; ?>
 		<?php if ( $title ) echo $before_title . $title . $after_title; ?>
-		<?php fastfood_exif_info(); ?>
+		<?php fastfood_exif_details(); ?>
 		<?php echo $after_widget; ?>
 <?php
 	}

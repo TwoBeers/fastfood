@@ -174,6 +174,23 @@ fastfoodAnimations = {
 
 			});
 		});
+		// smooth scroll top/bottom
+		top_but.click(function() {
+			$("html, body").animate({
+				scrollTop: 0
+			}, {
+				duration: 1000
+			});
+			return false;
+		});
+		bot_but.click(function() {
+			$("html, body").animate({
+				scrollTop: $('#footer').offset().top - 80
+			}, {
+				duration: 1000
+			});
+			return false;
+		});
 
 	},
 

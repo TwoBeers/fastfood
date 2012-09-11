@@ -584,7 +584,7 @@ function fastfood_get_coa( $option = false ) {
 							'group' => 'content',
 							'type' => 'int',
 							'default' => 55,
-							'description' => __( 'excerpt lenght', 'fastfood' ),
+							'description' => __( 'excerpt length', 'fastfood' ),
 							'info' => '',
 							'req' => '',
 							'sub' => false
@@ -926,48 +926,23 @@ if ( !function_exists( 'fastfood_create_menu' ) ) {
 		$pageopt = add_theme_page( __( 'Theme Options','fastfood' ), __( 'Theme Options','fastfood' ), 'edit_theme_options', 'tb_fastfood_functions', 'fastfood_edit_options' );
 		//call register settings function
 		add_action( 'admin_init', 'fastfood_register_tb_settings' );
-		add_action( 'admin_print_styles-' . $pageopt, 'fastfood_theme_admin_styles' );
+		add_action( 'admin_print_styles-' . $pageopt, 'fastfood_theme_admin_custom_styles' );
 		add_action( 'admin_print_scripts-' . $pageopt, 'fastfood_theme_admin_scripts' );
 		add_action( 'admin_print_styles-widgets.php', 'fastfood_widgets_style' );
 		add_action( 'admin_print_scripts-widgets.php', 'fastfood_widgets_scripts' );
 	}
 }
 
-if ( !function_exists( 'fastfood_theme_admin_scripts' ) ) {
-	function fastfood_theme_admin_scripts() {
-		global $fastfood_version;
-		wp_enqueue_script( 'fastfood-options-script', get_template_directory_uri() . '/js/admin-options.dev.js',array( 'jquery','farbtastic' ),$fastfood_version, true ); //fastfood js
-		$data = array(
-			'confirm_to_defaults' => __( 'Are you really sure you want to set all the options to their default values?', 'fastfood' )
-		);
-		wp_localize_script( 'fastfood-options-script', 'ff_l10n', $data );
-	}
-}
-
-if ( !function_exists( 'fastfood_widgets_style' ) ) {
-	function fastfood_widgets_style() {
-		//add custom stylesheet
-		wp_enqueue_style( 'ff-widgets-style', get_template_directory_uri() . '/css/admin-widgets.css', false, '', 'screen' );
-	}
-}
-
-if ( !function_exists( 'fastfood_widgets_scripts' ) ) {
-	function fastfood_widgets_scripts() {
-		global $fastfood_version;
-		wp_enqueue_script( 'ff-widgets-scripts', get_template_directory_uri() . '/js/admin-widgets.dev.js', array('jquery'), $fastfood_version, true );
-	}
-}
-
 if ( !function_exists( 'fastfood_register_tb_settings' ) ) {
 	function fastfood_register_tb_settings() {
 		//register fastfood settings
-		register_setting( 'ff_settings_group', 'fastfood_options', 'fastfood_sanitaze_options' );
+		register_setting( 'ff_settings_group', 'fastfood_options', 'fastfood_sanitize_options' );
 	}
 }
 
 // the custon header style - called only on your theme options page
-if ( !function_exists( 'fastfood_theme_admin_styles' ) ) {
-	function fastfood_theme_admin_styles() {
+if ( !function_exists( 'fastfood_theme_admin_custom_styles' ) ) {
+	function fastfood_theme_admin_custom_styles() {
 		wp_enqueue_style( 'farbtastic' );
 		wp_enqueue_style( 'ff-options-style', get_template_directory_uri() . '/css/admin-options.css', false, '', 'screen' );
 		?>
@@ -982,91 +957,6 @@ if ( !function_exists( 'fastfood_theme_admin_styles' ) ) {
 		</style>
 		<?php
 	}
-}
-
-// print a reminder message for set the options after the theme is installed or updated
-if ( !function_exists( 'fastfood_setopt_admin_notice' ) ) {
-	function fastfood_setopt_admin_notice() {
-		echo '<div class="updated"><p><strong>' . sprintf( __( 'Fastfood theme says: "Dont forget to set <a href="%s">my options</a> and the header image!"', 'fastfood' ), get_admin_url() . 'themes.php?page=tb_fastfood_functions' ) . '</strong></p></div>';
-	}
-}
-if ( current_user_can( 'manage_options' ) && $fastfood_opt['version'] < $fastfood_version ) {
-	add_action( 'admin_notices', 'fastfood_setopt_admin_notice' );
-}
-
-// sanitize options value
-if ( !function_exists( 'fastfood_sanitaze_options' ) ) {
-	function fastfood_sanitaze_options($input) {
-		global $fastfood_version;
-		$fastfood_coa = fastfood_get_coa();
-		// check for updated values and return 0 for disabled ones <- index notice prevention
-		foreach ( $fastfood_coa as $key => $val ) {
-
-			if( $fastfood_coa[$key]['type'] == 'chk' ) {
-				if( !isset( $input[$key] ) ) {
-					$input[$key] = 0;
-				} else {
-					$input[$key] = ( $input[$key] == 1 ? 1 : 0 );
-				}
-			} elseif( $fastfood_coa[$key]['type'] == 'txt' ) {
-				if( !isset( $input[$key] ) ) {
-					$input[$key] = '';
-				} else {
-					$input[$key] = trim( strip_tags( $input[$key] ) );
-				}
-			} elseif( $fastfood_coa[$key]['type'] == 'txtarea' ) {
-				if( !isset( $input[$key] ) ) {
-					$input[$key] = '';
-				} else {
-					$input[$key] = trim( strip_tags( $input[$key] ) );
-				}
-			} elseif( $fastfood_coa[$key]['type'] == 'int' ) {
-				if( !isset( $input[$key] ) ) {
-					$input[$key] = $fastfood_coa[$key]['default'];
-				} else {
-					$input[$key] = (int) $input[$key] ;
-				}
-			} elseif( $fastfood_coa[$key]['type'] == 'sel' ) {
-				if ( !in_array( $input[$key], $fastfood_coa[$key]['options'] ) ) $input[$key] = $fastfood_coa[$key]['default'];
-			} elseif( $fastfood_coa[$key]['type'] == 'opt' ) {
-				if ( !in_array( $input[$key], $fastfood_coa[$key]['options'] ) ) $input[$key] = $fastfood_coa[$key]['default'];
-			} elseif( $fastfood_coa[$key]['type'] == 'col' ) {
-				$color = str_replace( '#' , '' , $input[$key] );
-				$color = preg_replace( '/[^0-9a-fA-F]/' , '' , $color );
-				$input[$key] = '#' . $color;
-			}
-		}
-		// check for required options
-		foreach ( $fastfood_coa as $key => $val ) {
-			if ( $fastfood_coa[$key]['req'] != '' ) { if ( $input[$fastfood_coa[$key]['req']] == 0 ) $input[$key] = 0; }
-		}
-		//$input['hidden_opt'] = 'default'; //this hidden option avoids empty $fastfood_options when updated
-		$input['version'] = $fastfood_version; // keep version number
-		return $input;
-	}
-}
-
-// check and set default options
-function fastfood_default_options() {
-		global $fastfood_version;
-		$fastfood_coa = fastfood_get_coa();
-		$fastfood_opt = get_option( 'fastfood_options' );
-
-		// if options are empty, sets the default values
-		if ( empty( $fastfood_opt ) || !isset( $fastfood_opt ) ) {
-			foreach ( $fastfood_coa as $key => $val ) {
-				$fastfood_opt[$key] = $fastfood_coa[$key]['default'];
-			}
-			$fastfood_opt['version'] = ''; //null value to keep admin notice alive and invite user to discover theme options
-			update_option( 'fastfood_options' , $fastfood_opt );
-		} else if ( !isset( $fastfood_opt['version'] ) || $fastfood_opt['version'] < $fastfood_version ) {
-			// check for unset values and set them to default value -> when updated to new version
-			foreach ( $fastfood_coa as $key => $val ) {
-				if ( !isset( $fastfood_opt[$key] ) ) $fastfood_opt[$key] = $fastfood_coa[$key]['default'];
-			}
-			$fastfood_opt['version'] = ''; //null value to keep admin notice alive and invite user to discover theme options
-			update_option( 'fastfood_options' , $fastfood_opt );
-		}
 }
 
 // the theme option page
