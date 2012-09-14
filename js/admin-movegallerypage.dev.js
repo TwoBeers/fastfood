@@ -7,7 +7,7 @@ fastfoodMovePageLink = {
 	//initialize
 	init : function() {
 		
-		$('#menu-appearance a[href$="tb_fastfood_gallery_editor"]').parent('li').appendTo($('#menu-media ul'));
+		$('#menu-appearance a[href$="fastfood_gallery_editor"]').parent('li').appendTo($('#menu-media ul'));
 
 	}
 

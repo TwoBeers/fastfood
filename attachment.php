@@ -48,7 +48,6 @@
 					</div><!-- .entry-attachment -->
 				</div>
 				<?php fastfood_hook_after_post_content(); ?>
-				<?php $ff_tmptrackback = get_trackback_url(); ?>
 			</div>	
 			<?php fastfood_hook_after_post(); ?>
 			

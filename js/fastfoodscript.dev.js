@@ -203,7 +203,7 @@ fastfoodAnimations = {
 				$.ajax({
 					type: 'POST',
 					url: link.attr("href"),
-					beforeSend: function(XMLHttpRequest) { link.html(ff_post_expander_text).addClass('ajaxed'); },
+					beforeSend: function(XMLHttpRequest) { link.html(fastfood_l10n.post_expander_wait).addClass('ajaxed'); },
 					data: 'ff_post_expander=1',
 					success: function(data) { link.parents(".storycontent").hide().html($(data)).fadeIn(600); }
 				});	
@@ -248,6 +248,11 @@ fastfoodAnimations = {
 				return timId;
 			}
 		});
+	},
+
+	reply_link : function () {
+		htmltext = '<a id="tb-quotethis" href="#" onclick="fastfoodQuoteThis(); return false" title="' + fastfood_l10n.quote_link_info + '" >&nbsp;</a>'
+		$(htmltext).insertBefore('#comment');
 	}
 
 };
@@ -255,3 +260,26 @@ fastfoodAnimations = {
 $(document).ready(function($){ fastfoodAnimations.init(); });
 
 })(jQuery);
+
+
+function fastfoodQuoteThis() {
+	var posttext = '';
+	if (window.getSelection){
+		posttext = window.getSelection();
+	}
+	else if (document.getSelection){
+		posttext = document.getSelection();
+	}
+	else if (document.selection){
+		posttext = document.selection.createRange().text;
+	}
+	else {
+		return true;
+	}
+	posttext = posttext.toString().replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+	if ( posttext.length !== 0 ) {
+		document.getElementById("comment").value = document.getElementById("comment").value + '<blockquote>' + posttext + '</blockquote>';
+	} else {
+		alert(fastfood_l10n.quote_link_alert);
+	}
+}

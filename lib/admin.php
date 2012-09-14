@@ -15,7 +15,9 @@ function fastfood_get_coa( $option = false ) {
 							'mobile' => __( 'Mobile' , 'fastfood' ),
 							'other' => __( 'Other' , 'fastfood' )
 	);
-	
+
+	$fastfood_groups = apply_filters( 'fastfood_options_groups', $fastfood_groups );
+
 	$fastfood_coa = array(
 		'fastfood_qbar' => 
 						array(
@@ -529,6 +531,15 @@ function fastfood_get_coa( $option = false ) {
 							'info' => __( 'custom floating form for posting comments','fastfood' ),
 							'req' => 'fastfood_jsani'
 		),
+		'fastfood_quotethis'=>
+						array( 
+							'group'=>'javascript',
+							'type'=>'chk',
+							'default'=>1,
+							'description'=>__( 'quote link', 'fastfood' ),
+							'info'=>__( 'show a link for easily add the selected text as a quote inside the comment form', 'fastfood' ),
+							'req'=>'fastfood_jsani' 
+						),
 		'fastfood_breadcrumb' => 
 						array(
 							'group' => 'quickbar',
@@ -907,7 +918,9 @@ function fastfood_get_coa( $option = false ) {
 							'info' => __( "please, don't hide theme credits",'fastfood' ),
 							'req' => '' )
 	);
-	
+
+	$fastfood_coa = apply_filters( 'fastfood_options_array', $fastfood_coa );
+
 	if ( $option == 'groups' )
 		return $fastfood_groups;
 	elseif ( $option )
@@ -923,7 +936,7 @@ add_action( 'admin_menu', 'fastfood_create_menu' );
 if ( !function_exists( 'fastfood_create_menu' ) ) {
 	function fastfood_create_menu() {
 		//create new top-level menu
-		$pageopt = add_theme_page( __( 'Theme Options','fastfood' ), __( 'Theme Options','fastfood' ), 'edit_theme_options', 'tb_fastfood_functions', 'fastfood_edit_options' );
+		$pageopt = add_theme_page( __( 'Theme Options','fastfood' ), __( 'Theme Options','fastfood' ), 'edit_theme_options', 'fastfood_theme_options', 'fastfood_edit_options' );
 		//call register settings function
 		add_action( 'admin_init', 'fastfood_register_tb_settings' );
 		add_action( 'admin_print_styles-' . $pageopt, 'fastfood_theme_admin_custom_styles' );
@@ -936,7 +949,7 @@ if ( !function_exists( 'fastfood_create_menu' ) ) {
 if ( !function_exists( 'fastfood_register_tb_settings' ) ) {
 	function fastfood_register_tb_settings() {
 		//register fastfood settings
-		register_setting( 'ff_settings_group', 'fastfood_options', 'fastfood_sanitize_options' );
+		register_setting( 'fastfood_settings_group', 'fastfood_options', 'fastfood_sanitize_options' );
 	}
 }
 
@@ -944,7 +957,7 @@ if ( !function_exists( 'fastfood_register_tb_settings' ) ) {
 if ( !function_exists( 'fastfood_theme_admin_custom_styles' ) ) {
 	function fastfood_theme_admin_custom_styles() {
 		wp_enqueue_style( 'farbtastic' );
-		wp_enqueue_style( 'ff-options-style', get_template_directory_uri() . '/css/admin-options.css', false, '', 'screen' );
+		wp_enqueue_style( 'fastfood-options', get_template_directory_uri() . '/css/admin-options.css', false, '', 'screen' );
 		?>
 		<style type="text/css">
 			#fastfood-infos-li div.wp-menu-image {
@@ -958,154 +971,5 @@ if ( !function_exists( 'fastfood_theme_admin_custom_styles' ) ) {
 		<?php
 	}
 }
-
-// the theme option page
-if ( !function_exists( 'fastfood_edit_options' ) ) {
-	function fastfood_edit_options() {
-	  if ( !current_user_can( 'edit_theme_options' ) ) {
-	    wp_die( 'You do not have sufficient permissions to access this page.' );
-	  }
-		global $fastfood_opt, $fastfood_version, $fastfood_current_theme;
-		
-		if ( isset( $_GET['erase'] ) && ! isset( $_REQUEST['settings-updated'] ) ) {
-			delete_option( 'fastfood_options' );
-			fastfood_default_options();
-			$fastfood_opt = get_option( 'fastfood_options' );
-		}		
-
-		$fastfood_coa = fastfood_get_coa();
-
-		// update version value when admin visit options page
-		if ( $fastfood_opt['version'] < $fastfood_version ) {
-			$fastfood_opt['version'] = $fastfood_version;
-			update_option( 'fastfood_options' , $fastfood_opt );
-		}
-
-		// return options save message
-		if ( isset( $_REQUEST['settings-updated'] ) ) {
-			echo '<div id="message" class="updated fade"><p><strong>' . __( 'Options saved.', 'fastfood' ) . '</strong></p></div>';
-		}
-		// return options reset message
-		if ( isset( $_GET['erase'] ) && ! isset( $_REQUEST['settings-updated'] ) ) {
-			echo '<div id="message" class="updated fade"><p><strong>' . __( 'Defaults values loaded.', 'fastfood' ) . '</strong></p></div>';
-		}
-
-	?>
-		<div class="wrap" id="ff-main-wrap">
-			<div class="icon32 icon-settings"><br /></div>
-			<h2><?php echo $fastfood_current_theme . ' - ' . __( 'Theme Options','fastfood' ); ?></h2>
-			<ul id="ff-tabselector" class="hide-if-no-js">
-				<?php
-				$fastfood_groups = fastfood_get_coa( 'groups' );
-				foreach( $fastfood_groups as $key => $name ) { ?>
-					<li id="ff-selgroup-<?php echo $key; ?>"><a href="#" onClick="fastfoodOptions.switchTab('<?php echo $key; ?>'); return false;"><?php echo $name; ?></a></li>
-				<?php }	?>
-				<li id="ff-selgroup-info"><a target="_blank" href="<?php echo get_template_directory_uri() . '/readme.html'; ?>"><?php _e( 'Theme Info' , 'fastfood' ); ?></a></li>
-			</ul>
-			<ul id="selector" class="hide-if-js">
-				<li id="fastfood-options-li"><a href="#fastfood-options"><?php _e( 'Options','fastfood' ); ?></a></li>
-				<li id="fastfood-infos-li"><a target="_blank" href="<?php echo get_template_directory_uri() . '/readme.html'; ?>"><?php _e( 'Theme Info' , 'fastfood' ); ?></a></li>
-			</ul>
-			<div id="tabs-container">
-				<div class="clear"></div>
-				<form method="post" action="options.php">
-					<div id="fastfood-options">
-						<h2 class="hide-if-js" style="text-align: center;"><?php _e( 'Options','fastfood' ); ?></h2>
-						<?php settings_fields( 'ff_settings_group' ); ?>
-						<?php foreach ( $fastfood_coa as $key => $val ) { ?>
-							<?php if ( isset( $fastfood_coa[$key]['sub'] ) && !$fastfood_coa[$key]['sub'] ) continue; ?>
-							<div class="ff-tab-opt ff-tabgroup-<?php echo $fastfood_coa[$key]['group']; ?>">
-								<span class="column-nam"><?php echo $fastfood_coa[$key]['description']; ?></span>
-							<?php if ( !isset ( $fastfood_opt[$key] ) ) $fastfood_opt[$key] = $fastfood_coa[$key]['default']; ?>
-							<?php if ( $fastfood_coa[$key]['type'] == 'chk' ) { ?>
-								<input name="fastfood_options[<?php echo $key; ?>]" value="1" type="checkbox" class="ww_opt_p_checkbox" <?php checked( 1 , $fastfood_opt[$key] ); ?> />
-							<?php } elseif ( $fastfood_coa[$key]['type'] == 'sel' ) { ?>
-								<select name="fastfood_options[<?php echo $key; ?>]">
-								<?php foreach( $fastfood_coa[$key]['options'] as $optionkey => $option ) { ?>
-									<option value="<?php echo $option; ?>" <?php selected( $fastfood_opt[$key], $option ); ?>><?php echo $fastfood_coa[$key]['options_readable'][$optionkey]; ?></option>
-								<?php } ?>
-								</select>
-							<?php } elseif ( $fastfood_coa[$key]['type'] == 'opt' ) { ?>
-								<?php foreach( $fastfood_coa[$key]['options'] as $optionkey => $option ) { ?>
-									<label title="<?php echo esc_attr($option); ?>"><input type="radio" <?php checked( $fastfood_opt[$key], $option ); ?> value="<?php echo $option; ?>" name="fastfood_options[<?php echo $key; ?>]"> <span><?php echo $fastfood_coa[$key]['options_readable'][$optionkey]; ?></span></label>
-								<?php } ?>
-							<?php } elseif ( ( $fastfood_coa[$key]['type'] == 'txt' ) || ( $fastfood_coa[$key]['type'] == 'int' ) ) { ?>
-								<input name="fastfood_options[<?php echo $key; ?>]" value="<?php echo $fastfood_opt[$key]; ?>" type="text" />
-							<?php } elseif ( $fastfood_coa[$key]['type'] == 'txtarea' ) { ?>
-								<textarea name="fastfood_options[<?php echo $key; ?>]"><?php echo $fastfood_opt[$key]; ?></textarea>
-							<?php } elseif ( $fastfood_coa[$key]['type'] == 'col' ) { ?>
-								<div class="ff-col-tools">
-									<input onclick="fastfoodOptions.showColorPicker('<?php echo $key; ?>');" style="background-color:<?php echo $fastfood_opt[$key]; ?>;" class="color_preview_box" type="text" id="ff_box_<?php echo $key; ?>" value="" readonly="readonly" />
-									<div class="ff_cp" id="ff_colorpicker_<?php echo $key; ?>"></div>
-									<input class="ff_input" id="ff_input_<?php echo $key; ?>" type="text" name="fastfood_options[<?php echo $key; ?>]" value="<?php echo $fastfood_opt[$key]; ?>" />
-									<a class="hide-if-no-js" href="#" onclick="fastfoodOptions.showColorPicker('<?php echo $key; ?>'); return false;"><?php _e( 'Select a Color' , 'fastfood' ); ?></a>&nbsp;-&nbsp;
-									<a class="hide-if-no-js" style="color:<?php echo $fastfood_coa[$key]['default']; ?>;" href="#" onclick="fastfoodOptions.updateColor('<?php echo $key; ?>','<?php echo $fastfood_coa[$key]['default']; ?>'); return false;"><?php _e( 'Default' , 'fastfood' ); ?></a>
-								</div>
-							<?php }	?>
-							<?php if ( $fastfood_coa[$key]['info'] ) { ?><div class="column-des"><?php echo $fastfood_coa[$key]['info']; ?></div><?php } ?>
-							<?php if ( isset( $fastfood_coa[$key]['sub'] ) ) { ?>
-									<div class="ff-sub-opt">
-								<?php foreach ( $fastfood_coa[$key]['sub'] as $subkey => $subval ) { ?>
-									<?php if ( $subval == '' ) { echo '<br />'; continue;} ?>
-									<?php if ( !isset ($fastfood_opt[$subval]) ) $fastfood_opt[$subval] = $fastfood_coa[$subval]['default']; ?>
-									<?php if ( $fastfood_coa[$subval]['type'] == 'chk' ) { ?>
-										<input name="fastfood_options[<?php echo $subval; ?>]" value="1" type="checkbox" class="ww_opt_p_checkbox" <?php checked( 1 , $fastfood_opt[$subval] ); ?> />
-										<span class="ff-sub-opt-nam"><?php echo $fastfood_coa[$subval]['description']; ?></span>
-									<?php } elseif ( ( $fastfood_coa[$subval]['type'] == 'txt' ) || ( $fastfood_coa[$subval]['type'] == 'int' ) ) { ?>
-										<span class="ff-sub-opt-nam"><?php echo $fastfood_coa[$subval]['description']; ?></span> :
-										<input name="fastfood_options[<?php echo $subval; ?>]" value="<?php echo $fastfood_opt[$subval]; ?>" type="text" />
-									<?php } elseif ( $fastfood_coa[$subval]['type'] == 'sel' ) { ?>
-										<span class="ff-sub-opt-nam"><?php echo $fastfood_coa[$subval]['description']; ?></span> :
-										<select name="fastfood_options[<?php echo $subval; ?>]">
-										<?php foreach( $fastfood_coa[$subval]['options'] as $optionkey => $option ) { ?>
-											<option value="<?php echo $option; ?>" <?php selected( $fastfood_opt[$subval], $option ); ?>><?php echo $fastfood_coa[$subval]['options_readable'][$optionkey]; ?></option>
-										<?php } ?>
-										</select>
-									<?php } elseif ( $fastfood_coa[$subval]['type'] == 'opt' ) { ?>
-										<span class="ff-sub-opt-nam"><?php echo $fastfood_coa[$subval]['description']; ?></span> :
-										<?php foreach( $fastfood_coa[$subval]['options'] as $optionkey => $option ) { ?>
-											<label title="<?php echo esc_attr($option); ?>"><input type="radio" <?php checked( $fastfood_opt[$subval], $option ); ?> value="<?php echo $option; ?>" name="fastfood_options[<?php echo $subval; ?>]"> <span><?php echo $fastfood_coa[$subval]['options_readable'][$optionkey]; ?></span></label>
-										<?php } ?>
-									<?php } elseif ( $fastfood_coa[$subval]['type'] == 'col' ) { ?>
-										<div class="ff-col-tools">
-											<input onclick="fastfoodOptions.showColorPicker('<?php echo $subval; ?>');" style="background-color:<?php echo $fastfood_opt[$subval]; ?>;" class="color_preview_box" type="text" id="ff_box_<?php echo $subval; ?>" value="" readonly="readonly" />
-											<div class="ff_cp" id="ff_colorpicker_<?php echo $subval; ?>"></div>
-											<input class="ff_input" id="ff_input_<?php echo $subval; ?>" type="text" name="fastfood_options[<?php echo $subval; ?>]" value="<?php echo $fastfood_opt[$subval]; ?>" />
-											<a class="hide-if-no-js" href="#" onclick="fastfoodOptions.showColorPicker('<?php echo $subval; ?>'); return false;"><?php _e( 'Select a Color' , 'fastfood' ); ?></a>&nbsp;-&nbsp;
-											<a class="hide-if-no-js" style="color:<?php echo $fastfood_coa[$subval]['default']; ?>;" href="#" onclick="fastfoodOptions.updateColor('<?php echo $subval; ?>','<?php echo $fastfood_coa[$subval]['default']; ?>'); return false;"><?php _e( 'Default' , 'fastfood' ); ?></a>
-										</div>
-									<?php }	?>
-									<?php if ( $fastfood_coa[$subval]['info'] != '' ) { ?> - <span class="ff-sub-opt-des"><?php echo $fastfood_coa[$subval]['info']; ?></span><?php } ?>
-									<br />
-								<?php }	?>
-									</div>
-							<?php }	?>
-								<?php if ( $fastfood_coa[$key]['req'] != '' ) { ?><div class="column-req"><?php echo '<u>' . __('requires','fastfood') . '</u>: ' . $fastfood_coa[$fastfood_coa[$key]['req']]['description']; ?></div><?php } ?>
-							</div>
-						<?php }	?>
-					</div>
-					<p>
-						<input type="hidden" name="fastfood_options[hidden_opt]" value="default" />
-						<input class="button-primary" type="submit" name="Submit" value="<?php _e( 'Update Options' , 'fastfood' ); ?>" />
-						<span class="extra-actions"><a href="themes.php?page=functions" target="_self"><?php _e( 'Undo Changes' , 'fastfood' ); ?></a> | <a id="to-defaults" href="themes.php?page=tb_fastfood_functions&erase=1" target="_self"><?php _e( 'Back to defaults' , 'fastfood' ); ?></a></span>
-					</p>
-					<p class="stylediv">
-						<small>
-							<?php _e( 'If you like/dislike this theme, or if you encounter any issues using it, please let us know it.', 'fastfood' ); ?><br />
-							<a href="<?php echo esc_url( 'http://www.twobeers.net/annunci/tema-per-wordpress-fastfood' ); ?>" title="Fastfood theme" target="_blank"><?php _e( 'Leave a feedback', 'fastfood' ); ?></a>
-						</small>
-					</p>
-					<p class="stylediv">
-						<small>Support the theme in your language, provide a <a href="<?php echo esc_url( 'http://www.twobeers.net/temi-wp/wordpress-themes-translations' ); ?>" title="Themes translation" target="_blank">translation</a>.</small>
-					</p>
-				</form>
-				<div class="clear"></div>
-			</div>
-		</div>
-	<?php
-	}
-}
-
-
 
 ?>

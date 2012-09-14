@@ -40,7 +40,7 @@ if ( !function_exists( 'fastfood_custom_background_init' ) ) {
 // Styles the header image displayed on the Appearance > Header admin panel.
 if ( !function_exists( 'fastfood_admin_custom_bg_style' ) ) {
 	function fastfood_admin_custom_bg_style() {
-		wp_enqueue_style( 'ff-custom_bg-style', get_template_directory_uri() . '/css/admin-custom_background.css', false, '', 'screen' );
+		wp_enqueue_style( 'fastfood-custom-background', get_template_directory_uri() . '/css/admin-custom_background.css', false, '', 'screen' );
 	}
 }
 
@@ -62,8 +62,8 @@ if ( !function_exists( 'fastfood_add_custom_background' ) ) {
 // custom background style - gets included in the site header
 if ( !function_exists( 'fastfood_custom_bg' ) ) {
 	function fastfood_custom_bg() {
-		global $ff_is_printpreview, $ff_is_mobile_browser;
-		if ( $ff_is_printpreview || $ff_is_mobile_browser ) return;
+		global $fastfood_is_printpreview, $fastfood_is_mobile;
+		if ( $fastfood_is_printpreview || $fastfood_is_mobile ) return;
 
 		$background = get_background_image();
 		$color = get_background_color();
@@ -138,7 +138,7 @@ class Fastfood_Custom_Background {
 
 	/* Set up the enqueue for the CSS & JavaScript files. */
 	function admin_load() {
-		wp_enqueue_script( 'ff-custom-background', get_template_directory_uri() . '/js/admin-custom_background.dev.js', array( 'jquery', 'farbtastic' ), '', true  );
+		wp_enqueue_script( 'fastfood-custom-background', get_template_directory_uri() . '/js/admin-custom_background.dev.js', array( 'jquery', 'farbtastic' ), '', true  );
 		wp_enqueue_style( 'farbtastic' );
 	}
 

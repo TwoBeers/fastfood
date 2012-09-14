@@ -3,7 +3,7 @@
  * The gallery stuff
  *
  * @package fastfood
- * @since fastfood 3.0
+ * @since fastfood 0.30
  */
 
 global $fastfood_opt;
@@ -16,16 +16,16 @@ add_action( 'admin_menu', 'fastfood_add_gallery_menu' );
 add_filter( 'post_gallery', 'fastfood_gallery_shortcode', 10, 2 );
 
 // check if in media preview mode
-$galed_is_media = false;
+$fastfood_is_galed_mediaselect = false;
 if ( isset( $_GET['galed_media'] ) ) {
-	$galed_is_media = true;
+	$fastfood_is_galed_mediaselect = true;
 }
 
 // media preview
 if ( !function_exists( 'fastfood_media' ) ) {
 	function fastfood_media () {
-		global $galed_is_media;
-		if ( $galed_is_media ) {
+		global $fastfood_is_galed_mediaselect;
+		if ( $fastfood_is_galed_mediaselect ) {
 			locate_template( array( 'lib/media-select.php' ), true, false );
 			exit;
 		}
@@ -35,7 +35,7 @@ if ( !function_exists( 'fastfood_media' ) ) {
 // create custom theme settings menu
 if ( !function_exists( 'fastfood_add_gallery_menu' ) ) {
 	function fastfood_add_gallery_menu() {
-		$gallerypage = add_theme_page( __( 'Gallery Editor', 'fastfood' ), __( 'Gallery Editor', 'fastfood' ), 'edit_posts', 'tb_fastfood_gallery_editor', 'fastfood_edit_gallery' );
+		$gallerypage = add_theme_page( __( 'Gallery Editor', 'fastfood' ), __( 'Gallery Editor', 'fastfood' ), 'edit_posts', 'fastfood_gallery_editor', 'fastfood_edit_gallery' );
 		//call custom stylesheet function
 		add_action( 'admin_print_styles-' . $gallerypage, 'fastfood_gallerypage_style' );
 		add_action( 'admin_print_scripts-' . $gallerypage, 'fastfood_gallerypage_script' );
@@ -48,7 +48,7 @@ if ( !function_exists( 'fastfood_gallerypage_style' ) ) {
 	function fastfood_gallerypage_style() {
 		//add custom stylesheet
 		wp_enqueue_style( 'thickbox' ); //fastfood js
-		wp_enqueue_style( 'galed-css', get_stylesheet_directory_uri() . '/css/admin-gallery.css');
+		wp_enqueue_style( 'fastfood-galed', get_stylesheet_directory_uri() . '/css/admin-gallery.css');
 	}
 }
 
@@ -57,7 +57,7 @@ if ( !function_exists( 'fastfood_gallerypage_script' ) ) {
 		global $fastfood_version;
 		wp_enqueue_script( 'jquery' ); //fastfood js
 		wp_enqueue_script( 'thickbox' ); //fastfood js
-		wp_enqueue_script( 'galed-js', get_stylesheet_directory_uri() . '/js/admin-gallery.dev.js', array('jquery','jquery-ui-sortable'), '', false );
+		wp_enqueue_script( 'fastfood-galed', get_stylesheet_directory_uri() . '/js/admin-gallery.dev.js', array('jquery','jquery-ui-sortable'), '', false );
 		//wp_enqueue_script( 'farbtastic' ); //fastfood js
 	}
 }
@@ -65,7 +65,7 @@ if ( !function_exists( 'fastfood_gallerypage_script' ) ) {
 if ( !function_exists( 'fastfood_movegallerypage_script' ) ) {
 	function fastfood_movegallerypage_script() {
 		global $fastfood_version;
-		wp_enqueue_script( 'galed-movegallerypage-script', get_template_directory_uri() . '/js/admin-movegallerypage.dev.js', array('jquery'), $fastfood_version, true );
+		wp_enqueue_script( 'fastfood-galed-movegallerypage', get_template_directory_uri() . '/js/admin-movegallerypage.dev.js', array('jquery'), $fastfood_version, true );
 	}
 }
 

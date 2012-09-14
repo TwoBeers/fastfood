@@ -11,7 +11,7 @@
 <div id="posts_content" class="posts_wide">
 
 <?php if ( have_posts() ) {
-	global $ff_is_printpreview;
+	global $fastfood_is_printpreview;
 	while ( have_posts() ) {
 		the_post(); ?>
 		<?php fastfood_hook_before_post(); ?>
@@ -30,8 +30,6 @@
 			</div>
 		</div>
 		<?php fastfood_hook_after_post(); ?>
-
-		<?php $ff_tmptrackback = get_trackback_url(); ?>
 		
 		<?php comments_template(); // Get wp-comments.php template ?>
 

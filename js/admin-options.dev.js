@@ -10,7 +10,7 @@ fastfoodOptions = {
 		
 		fastfoodOptions.switchTab('quickbar');
 		
-		$('.ff_input').keyup(function() {
+		$('.col-tools .option_text').keyup(function() {
 			var _hex = $(this).val();
 			var hex = _hex;
 			if ( hex.substr(0,1) != '#' )
@@ -20,18 +20,18 @@ fastfoodOptions = {
 			if ( hex != _hex )
 				$(this).val(hex);
 			if ( hex.length == 4 || hex.length == 7 )
-				fastfoodOptions.updateColor( $(this).attr("id").replace('ff_input_', '') , hex );
+				fastfoodOptions.updateColor( $(this).attr("id").replace('option_color_input_', '') , hex );
 		});
 
 		$(document).mousedown(function(){
-			$('.ff_cp').each( function() {
+			$('.option_cp').each( function() {
 				var display = $(this).css('display');
 				if (display == 'block')
 					$(this).fadeOut(200);
 			});
 		});
 		$('#to-defaults').click (function () {
-			var answer = confirm(tb_l10n.confirm_to_defaults)
+			var answer = confirm(fastfood_l10n.confirm_to_defaults)
 			if (!answer){
 				return false;
 			}
@@ -41,28 +41,37 @@ fastfoodOptions = {
 
 	//update inputs value
 	updateColor : function (domid,color,txtcolor) {
-		boxid = '#ff_box_' + domid;
-		inputid = '#ff_input_' + domid;
+		boxid = '#option_color_box_' + domid;
+		inputid = '#option_color_input_' + domid;
 		$(boxid).css('background-color', color );
 		$(inputid).val(color);
 	},
 
 	// display the color picker
 	showColorPicker : function (domid) {
-		placeholder = '#ff_colorpicker_' + domid;
+		placeholder = '#option_colorpicker_' + domid;
 		$(placeholder).fadeIn();
 		farbtastic = $.farbtastic(placeholder, function(color) { fastfoodOptions.updateColor(domid,color); });
-		farbtastic.setColor($('#ff_input_' + domid).val());
+		farbtastic.setColor($('#option_color_input_' + domid).val());
 	},
 
 	//show only a set of rows
 	switchTab : function (thisset) {
-		thisclass = '.ff-tabgroup-' + thisset;
-		thissel = '#ff-selgroup-' + thisset;
-		$('.ff-tab-opt').css({ 'display' : 'none' });
-		$(thisclass).css({ 'display' : '' });
-		$('#ff-tabselector li').removeClass("sel-active");
-		$(thissel).addClass("sel-active");
+		if ( thisset != 'info' ) {
+			$('#theme-infos').css({ 'display' : 'none' });
+			$('#theme-options').css({ 'display' : '' });
+			thisclass = '.tabgroup-' + thisset;
+			thissel = '#selgroup-' + thisset;
+			$('.tab-opt').css({ 'display' : 'none' });
+			$(thisclass).css({ 'display' : '' });
+			$('#tabselector li').removeClass("sel-active");
+			$(thissel).addClass("sel-active");
+		} else {
+			$('#theme-infos').css({ 'display' : '' });
+			$('#theme-options').css({ 'display' : 'none' });
+			$('#tabselector li').removeClass("sel-active");
+			$('#selgroup-info').addClass("sel-active");
+		}
 	}
 
 };

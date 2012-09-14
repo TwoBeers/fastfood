@@ -77,7 +77,7 @@ addComment = {
 		if ( ! t.I('ff_reply_close') ) {
 			div = document.createElement('div');
 			div.id = 'ff_reply_close';
-			div.innerHTML = '<input type="button" title="Close" value="x" onclick="return addComment.resetForm()" />';
+			div.innerHTML = '<input type="button" title="Close" value="" onclick="return addComment.resetForm()" />';
 			respond.insertBefore(div, replytitle);
 		}
 	},

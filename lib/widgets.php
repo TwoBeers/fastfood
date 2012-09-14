@@ -462,6 +462,7 @@ class fastfood_Widget_social extends WP_Widget {
 			'VKontakte' => 'VKontakte',
 			'WindowsLive' => 'Windows Live',
 			'Xing' => 'Xing',
+			'yfrog' => 'YFrog',
 			'Youtube' => 'Youtube',
 			'RSS' => 'RSS' );
 	}
@@ -1175,3 +1176,20 @@ function fastfood_widgets_init() {
 }
 
 add_action( 'widgets_init', 'fastfood_widgets_init' );
+
+/**
+ * simple font resize widget
+ */
+wp_register_sidebar_widget('ff-font-resize', 'Font Resize', 'fastfood_widget_font_resize', array( 'description' => 'Simple javascript-based font resizer' ) );
+
+function fastfood_widget_font_resize($args) {
+	extract($args);
+	echo $before_widget;
+	echo '<a class="fontResizer_minus" href="javascript:void(0)" title="' . esc_attr( __('Decrease font size','fastfood') ) . '">A</a> ';
+	echo '<a class="fontResizer_reset" href="javascript:void(0)" title="' . esc_attr( __('Reset font size','fastfood') ) . '">A</a> ';
+	echo '<a class="fontResizer_plus" href="javascript:void(0)" title="' . esc_attr( __('Increase font size','fastfood') ) . '">A</a> ';
+	echo $after_widget;
+	wp_enqueue_script( 'fastfood-fontresize', get_template_directory_uri() . '/js/font-resize.min.js', array( 'jquery' ), '', true  );
+
+}
+

@@ -517,7 +517,7 @@ input[type=reset]:hover {
 	right: -35px;
 	background: #ccc;
 	border-radius: 5px;
-	box-shadow: 0 0 4px #000;
+	box-shadow: 0 0 2px #000;
 	border: 1px solid #fff;
 	padding-bottom: 5px;
 }
@@ -964,7 +964,26 @@ ul.ul_fwa {
 	width: 32px;
 	margin: 4px;
 }
-/* Post Format icons*/
+.fastfood_widget_font_resize {
+	font-size: 1.18em;
+	text-align: center;
+}
+.fastfood_widget_font_resize a {
+	background: #eee;
+	border: 1px solid #ccc;
+	padding: 0 3px;
+}
+.fastfood_widget_font_resize a:hover {
+	border: 1px solid #aaa;
+}
+.fontResizer_minus {
+	font-size: 0.7em;
+}
+.fontResizer_plus {
+	font-size: 1.2em;
+}
+/* Post Format icons
+----------------------------------------------------------*/
 .tbm-format.f-aside {
 	background-position: -24px 0;
 }
@@ -1048,7 +1067,8 @@ div.ff_Widget_post_details ul {
 	text-align: center;
 }
 .ff-clean-archives .ff-year-link {
-	font-size: 1.5em;
+	font-size: 1.18em;
+	font-weight: bold;
 }
 .ff_Widget_share_this .share-item {
 	margin: 0 3px 3px 0;
@@ -1284,10 +1304,9 @@ ul.children {
 }
 .comment-form-comment {
 	text-align: center;
+	position: relative;
 }
 .form-allowed-tags small {
-	float: right; 
-	min-width: 200px; 
 	color: #aaa;
 }
 .js-res {
@@ -1357,17 +1376,37 @@ ul.children {
 .navigate_comments a, .navigate_comments span {
     margin-right: 0.5em;
 }
-
 #ff_reply_close input {
-	padding: 0 0 3px; 
 	position: absolute; 
-	top: 10px; 
+	top: 14px; 
 	right: 10px; 
-	width:19px;
-    margin: 0;
+	width:16px;
+	height:16px;
+	margin: 0;
+	background: transparent url('images/minibuttons.png') -96px -240px no-repeat;
+	border: none;
+	box-shadow: none;
+	padding: 0;
+}
+#ff_reply_close input:hover {
+	background-position: -96px -256px;
 }
 .posts_narrow .fixed-respond {
 	margin-left: 35px;
+}
+#tb-quotethis {
+	display: block;
+	position: absolute;
+	right: 0;
+	width: 16px;
+	height: 16px;
+	background: transparent url('images/minibuttons.png') -80px -240px no-repeat;
+}
+.js-res #tb-quotethis {
+	right: -10px;
+}
+#tb-quotethis:hover {
+	background-position: -80px -256px;
 }
 
 /* =calendar

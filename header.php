@@ -4,14 +4,7 @@
 	<head profile="http://gmpg.org/xfn/11">
 		<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
 		<meta name = "viewport" content = "width = device-width" />
-		<title><?php
-			if ( is_front_page() ) {
-				bloginfo( 'name' ); ?> - <?php bloginfo( 'description' );
-			} else {
-				wp_title( '&laquo;', true, 'right' );
-				bloginfo( 'name' );
-			}
-			?></title>
+		<title><?php wp_title( '&laquo;', true, 'right' ); ?></title>
 		<?php global $fastfood_opt; ?>
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 		<?php wp_get_archives( 'type=monthly&format=link&limit=10' ); ?>
@@ -40,9 +33,9 @@
 			<?php fastfood_hook_after_pages(); ?>
 			</div>
 			<?php } ?>
-			
+
 			<?php fastfood_get_sidebar( 'header' ); // show header widgets area ?>
-			
+
 			<?php if(function_exists('bcn_display_list')) { //Breadcrumb NavXT native support ?>
 				<div id="navxt-crumbs"><ul><?php bcn_display_list(); ?></ul></div>
 			<?php } elseif ( $fastfood_opt['fastfood_breadcrumb'] == 1 ) { // show breadcrumb

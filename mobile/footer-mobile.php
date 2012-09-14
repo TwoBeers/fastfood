@@ -10,7 +10,7 @@
 			<?php locate_template( array( 'mobile/sidebar-mobile.php' ), true, false ); ?>
 			<?php echo fastfood_mobile_seztitle( 'before' ) . '&copy; ' . date( 'Y' ) . ' - ' . get_bloginfo( 'name' ) . fastfood_mobile_seztitle( 'after' ); ?>
 			<p id="themecredits">
-				Powered by <a href="http://wordpress.org"><strong>WordPress</strong></a> and <a href="http://www.twobeers.net/"><strong>fastfood</strong></a>
+				<?php printf( __( 'Fastfood theme by %s - Powered by %s', 'fastfood' ), '<a target="_blank" href="http://www.twobeers.net/" title="' . __( 'Visit author homepage', 'fastfood' ) . ' @ TwoBeers.net">TwoBeers Crew</a>', '<a target="_blank" href="http://wordpress.org/" title="WordPress">WordPress</a>' ); ?>
 				<br/>
 				<br/>
 				<?php wp_loginout(); wp_register(' | ', ''); ?><?php echo ' | <a href="' . home_url() . '?mobile_override=desktop">'. __('Desktop View','fastfood') .'</a>'; ?>

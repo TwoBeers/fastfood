@@ -23,8 +23,6 @@
 				<?php wp_link_pages( 'before=<div class="comment_tools">' . __( 'Pages','fastfood' ) . ':&after=</div><div class="fixfloat"></div>' ); ?>
 			</div>
 			
-			<?php $ff_tmptrackback = get_trackback_url(); ?>
-			
 		</div>
 		<?php fastfood_hook_after_post(); ?>
 		

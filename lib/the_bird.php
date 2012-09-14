@@ -1,10 +1,14 @@
 <?php
+/**
+ * The core functions
+ *
+ * @package fastfood
+ * @since fastfood 0.33
+ */
 
 /* custom actions */
 add_action( 'admin_init', 'fastfood_default_options' ); // tell WordPress to run fastfood_default_options()
 add_action( 'template_redirect', 'fastfood_allcat' ); // Add custom category page
-//add_action( 'template_redirect', 'fastfood_media' ); // media select
-//add_action( 'wp_footer', 'fastfood_quote_scripts' ); // Add the "quote" link
 add_action( 'admin_head', 'fastfood_post_manage_style' ); // column-thumbnail style
 add_action( 'manage_posts_custom_column', 'fastfood_addthumbvalue', 10, 2 ); // column-thumbnail for posts
 add_action( 'manage_pages_custom_column', 'fastfood_addthumbvalue', 10, 2 ); // column-thumbnail for pages
@@ -19,6 +23,7 @@ add_filter( 'the_title', 'fastfood_title_tags_filter' );
 add_filter( 'excerpt_length', 'fastfood_excerpt_length' );
 add_filter( 'excerpt_more', 'fastfood_excerpt_more' );
 add_filter( 'the_content_more_link', 'fastfood_more_link', 10, 2 );
+add_filter( 'wp_title', 'fastfood_filter_wp_title' );
 
 // get theme version
 if ( function_exists( 'wp_get_theme' ) ) {
@@ -84,47 +89,6 @@ if ( !function_exists( 'fastfood_setopt_admin_notice' ) ) {
 }
 if ( current_user_can( 'manage_options' ) && ( $fastfood_opt['version'] < $fastfood_version ) ) {
 	add_action( 'admin_notices', 'fastfood_setopt_admin_notice' );
-}
-
-// add "quote" link
-if ( !function_exists( 'fastfood_quote_scripts' ) ) {
-	function fastfood_quote_scripts(){
-		global $fastfood_opt, $fastfood_is_mobile_browser, $fastfood_is_printpreview;
-		if ( is_admin() || ( $fastfood_opt['fastfood_quotethis'] == 0 ) || $fastfood_is_mobile_browser || $fastfood_is_printpreview || !is_singular() ) return;
-		?>
-<script type="text/javascript">
-	/* <![CDATA[ */
-	if ( document.getElementById('reply-title') && document.getElementById("comment") ) {
-		tb_qdiv = document.createElement('small');
-		tb_qdiv.innerHTML = ' - <a id="tb-quotethis" href="#" onclick="tb_quotethis(); return false" title="<?php esc_attr_e( 'Add selected text as a quote', 'fastfood' ); ?>" ><?php _e( 'Quote', 'fastfood' ); ?></a>';
-		tb_replink = document.getElementById('reply-title');
-		tb_replink.appendChild(tb_qdiv);
-	}
-	function tb_quotethis() {
-		var posttext = '';
-		if (window.getSelection){
-			posttext = window.getSelection();
-		}
-		else if (document.getSelection){
-			posttext = document.getSelection();
-		}
-		else if (document.selection){
-			posttext = document.selection.createRange().text;
-		}
-		else {
-			return true;
-		}
-		posttext = posttext.toString().replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
-		if ( posttext.length !== 0 ) {
-			document.getElementById("comment").value = document.getElementById("comment").value + '<blockquote>' + posttext + '</blockquote>';
-		} else {
-			alert("<?php _e( 'Nothing to quote. First of all you should select some text...', 'fastfood' ) ?>");
-		}
-	}
-	/* ]]> */
-</script>
-		<?php
-	}
 }
 
 //Image EXIF details
@@ -282,7 +246,7 @@ if ( !function_exists( 'fastfood_share_this' ) ) {
 // the breadcrumb
 if ( !function_exists( 'fastfood_breadcrumb' ) ) {
 	function fastfood_breadcrumb() {
-		global $wp_query, $post, $ff_is_allcat_page;
+		global $wp_query, $post, $fastfood_is_allcat_page;
 
 		$opt 						= array();
 		$opt['home'] 				= 'Home';
@@ -298,25 +262,22 @@ if ( !function_exists( 'fastfood_breadcrumb' ) ) {
 		$opt['nofollow']			= ' rel="nofollow" ';
 
 
-		$sep = '||';
+		$sep = '%%FF_SEP%%';
 		if ( !function_exists( 'fastfood_get_category_parents' ) ) {
 			// Copied and adapted from WP source
-			function fastfood_get_category_parents( $id, $link = FALSE, $separator = '||', $nicename = FALSE ){
+			function fastfood_get_category_parents( $id, $link = FALSE, $separator = '%%FF_SEP%%' ){
 				global $wp_query;
 				$chain = '';
 				$parent = &get_category( $id );
 				if ( is_wp_error( $parent ) )
 				   return $parent;
 
-				if ( $nicename )
-				   $name = $parent->slug;
-				else
-				   $name = $parent->cat_name;
+				$name = $parent->cat_name . ' (' . $wp_query->found_posts . ')';
 
 				if ( $parent->parent && ( $parent->parent != $parent->term_id ) )
-				   $chain .= get_category_parents( $parent->parent, true, $separator, $nicename );
+				   $chain .= get_category_parents( $parent->parent, true, $separator, FALSE );
 
-				$chain .= '<span class="crumb-cat">'.$name.' (' . $wp_query->found_posts . ')</span>';
+				$chain .= '<span class="crumb-cat">' . $name . '</span>';
 				return $chain;
 			}
 		}
@@ -330,7 +291,7 @@ if ( !function_exists( 'fastfood_breadcrumb' ) ) {
 			$bloglink = $homelink;
 		}
 
-		if ( $ff_is_allcat_page ) {
+		if ( $fastfood_is_allcat_page ) {
 			$output = $homelink . $sep . '<span>' . __( 'All Categories', 'fastfood' ) . '</span>';
 		} elseif ( ( $on_front == "page" && is_front_page() ) || ( $on_front == "posts" && is_home() ) ) {
 			$output = $homelink . $sep . '<span>' . $opt['home'] . '</span>';
@@ -353,11 +314,21 @@ if ( !function_exists( 'fastfood_breadcrumb' ) ) {
 				$cat = intval( get_query_var( 'cat' ) );
 				$output .= fastfood_get_category_parents( $cat, false, $sep );
 			} elseif ( is_tag() ) {
-				$output .= '<span class="crumb-tag">' . sprintf( $opt['archive_prefix'], wp_title( '', false, 'right' ) ) . ' (' . $wp_query->found_posts . ')</span>';
+				$title = single_term_title( '', false );
+				$output .= '<span class="crumb-tag">' . sprintf( $opt['archive_prefix'], $title ) . ' (' . $wp_query->found_posts . ')</span>';
 			} elseif ( is_date() ) {
-				$output .= '<span class="crumb-date">' . sprintf( $opt['archive_prefix'], wp_title( '', false, 'right' ) ) . ' (' . $wp_query->found_posts . ')</span>';
+				if ( is_day() ) {
+					$title = get_the_date();
+				} else if ( is_month() ) {
+					$title = single_month_title( ' ', false );
+				} else if ( is_year() ) {
+					$title = get_query_var( 'year' );
+				}
+				$output .= '<span class="crumb-date">' . sprintf( $opt['archive_prefix'], $title ) . ' (' . $wp_query->found_posts . ')</span>';
 			} elseif ( is_author() ) {
-				$output .= '<span class="crumb-auth">' . sprintf( $opt['archive_prefix'], wp_title( '', false, 'right' ) ) . ' (' . $wp_query->found_posts . ')</span>';
+				$author = get_queried_object();
+				$title = $author->display_name;
+				$output .= '<span class="crumb-auth">' . sprintf( $opt['archive_prefix'], $title ) . ' (' . $wp_query->found_posts . ')</span>';
 			} elseif ( is_404() ) {
 				$output .= '<span class="crumb-error">' . __( 'Page not found', 'fastfood' ) . '</span>';
 			} elseif ( is_search() ) {
@@ -373,7 +344,7 @@ if ( !function_exists( 'fastfood_breadcrumb' ) ) {
 				$output .= '<span>' . $taxonomy->label . ': ' . $term . ' (' . $wp_query->found_posts . ')</span>';
 			} else {
 				if ( get_query_var( 'page' ) ) {
-					$output .= '<a href="' . get_permalink() . '">' . get_the_title() . '</a>' . $sep . '<span>' . __( 'Page', 'fastfood' ) . get_query_var( 'page' ) . '</span>';
+					$output .= '<a href="' . get_permalink() . '">' . get_the_title() . '</a>' . $sep . '<span>' . sprintf( __( 'Page %s', 'fastfood' ), get_query_var( 'page' ) ) . '</span>';
 				} else {
 					$output .= get_the_title() ? '<span>' . get_the_title() . '</span>' : '<span>' . sprintf ( __( 'post #%s', 'fastfood' ), get_the_ID() ) . '</span>';
 				}
@@ -384,7 +355,7 @@ if ( !function_exists( 'fastfood_breadcrumb' ) ) {
 			// If this is a top level Page, it's simple to output the breadcrumb
 			if ( 0 == $post->post_parent ) {
 				if ( get_query_var( 'page' ) ) {
-					$output = $homelink . $sep . '<a href="' . get_permalink() . '">' . get_the_title() . '</a>' . $sep . '<span>' . __( 'Page', 'fastfood' ) . get_query_var( 'page' ) . '</span>';
+					$output = $homelink . $sep . '<a href="' . get_permalink() . '">' . get_the_title() . '</a>' . $sep . '<span>' . sprintf( __( 'Page %s', 'fastfood' ), get_query_var( 'page' ) ) . '</span>';
 				} else {
 					$output = $homelink . $sep . '<span>' . get_the_title() . '</span>';
 				}
@@ -423,7 +394,7 @@ if ( !function_exists( 'fastfood_breadcrumb' ) ) {
 						$output .= '<a href="' . $link['url'] . '">' . $link['title'] . '</a>';
 					} else {
 						if ( get_query_var( 'page' ) ) {
-							$output .= '<a href="' . $link['url'] . '">' . $link['title'] . '</a>' . $sep . '<span>' . __( 'Page', 'fastfood' ) . get_query_var( 'page' ) . '</span>';
+							$output .= '<a href="' . $link['url'] . '">' . $link['title'] . '</a>' . $sep . '<span>' . sprintf( __( 'Page %s', 'fastfood' ), get_query_var( 'page' ) ) . '</span>';
 						} else {
 							$output .= '<span>' . $link['title'] . '</span>';
 						}
@@ -432,7 +403,7 @@ if ( !function_exists( 'fastfood_breadcrumb' ) ) {
 			}
 		}
 		if ( get_query_var( 'paged' ) ) {
-			$output .= $sep . '<span>' . __( 'Page', 'fastfood' ) . get_query_var( 'paged' ) . '</span>';
+			$output .= $sep . '<span>' . sprintf( __( 'Page %s', 'fastfood' ), get_query_var( 'paged' ) ) . '</span>';
 		}
 
 		$output_items = explode( $sep, $output ) ;
@@ -546,32 +517,32 @@ if ( !function_exists( 'fastfood_get_blockquote' ) ) {
 if ( !function_exists( 'fastfood_theme_admin_scripts' ) ) {
 	function fastfood_theme_admin_scripts() {
 		global $fastfood_version;
-		wp_enqueue_script( 'fastfood-options-script', get_template_directory_uri().'/js/admin-options.dev.js',array('jquery','farbtastic','thickbox'),$fastfood_version, true ); //thebird js
+		wp_enqueue_script( 'fastfood-options', get_template_directory_uri().'/js/admin-options.dev.js',array('jquery','farbtastic','thickbox'),$fastfood_version, true ); //thebird js
 		$data = array(
 			'confirm_to_defaults' => __( 'Are you really sure you want to set all the options to their default values?', 'fastfood' )
 		);
-		wp_localize_script( 'fastfood-options-script', 'tb_l10n', $data );
+		wp_localize_script( 'fastfood-options', 'fastfood_l10n', $data );
 	}
 }
 
 if ( !function_exists( 'fastfood_widgets_style' ) ) {
 	function fastfood_widgets_style() {
 		//add custom stylesheet
-		wp_enqueue_style( 'tb-widgets-style', get_template_directory_uri() . '/css/admin-widgets.css', false, '', 'screen' );
+		wp_enqueue_style( 'fastfood-widgets', get_template_directory_uri() . '/css/admin-widgets.css', false, '', 'screen' );
 	}
 }
 
 if ( !function_exists( 'fastfood_widgets_scripts' ) ) {
 	function fastfood_widgets_scripts() {
 		global $fastfood_version;
-		wp_enqueue_script( 'tb-widgets-scripts', get_template_directory_uri() . '/js/admin-widgets.dev.js', array('jquery'), $fastfood_version, true );
+		wp_enqueue_script( 'fastfood-widgets', get_template_directory_uri() . '/js/admin-widgets.dev.js', array('jquery'), $fastfood_version, true );
 	}
 }
 
 // the custon header style - called only on your theme options page
 if ( !function_exists( 'fastfood_theme_admin_styles' ) ) {
 	function fastfood_theme_admin_styles() {
-		wp_enqueue_style( 'tb-options-style', get_template_directory_uri() . '/css/options.css', array('farbtastic','thickbox'), '', 'screen' );
+		wp_enqueue_style( 'fastfood-options', get_template_directory_uri() . '/css/options.css', array('farbtastic','thickbox'), '', 'screen' );
 	}
 }
 
@@ -647,7 +618,7 @@ if ( !function_exists( 'fastfood_sanitize_options' ) ) {
 }
 
 // the theme option page
-if ( !function_exists( 'fastfood_edit_options_tmp' ) ) {
+if ( !function_exists( 'fastfood_edit_options' ) ) {
 	function fastfood_edit_options() {
 
 		if ( !current_user_can( 'edit_theme_options' ) ) wp_die( 'You do not have sufficient permissions to access this page.' );
@@ -686,7 +657,7 @@ if ( !function_exists( 'fastfood_edit_options_tmp' ) ) {
 
 	?>
 		<div class="wrap" id="main-wrap">
-			<div class="icon32" id="theme-icon"><br></div>
+			<div class="icon32 icon-settings" id="theme-icon"><br></div>
 			<h2><?php echo $fastfood_current_theme . ' - ' . __( 'Theme Options','fastfood' ); ?></h2>
 			<ul id="tabselector" class="hide-if-no-js">
 <?php
@@ -707,132 +678,90 @@ if ( !function_exists( 'fastfood_edit_options_tmp' ) ) {
 				<div id="theme-options">
 					<h2 class="hide-if-js" style="text-align: center;"><?php _e( 'Options','fastfood' ); ?></h2>
 					<form method="post" action="options.php">
-						<?php settings_fields( 'bz_settings_group' ); ?>
-						<div id="stylediv">
-							<?php foreach ($the_coa as $key => $val) { ?>
-								<?php if ( isset( $the_coa[$key]['sub'] ) && !$the_coa[$key]['sub'] ) continue; ?>
-								<div class="tab-opt tabgroup-<?php echo $the_coa[$key]['group']; ?>">
-									<span class="column-nam"><?php echo $the_coa[$key]['description']; ?></span>
-								<?php if ( !isset ( $the_opt[$key] ) ) $the_opt[$key] = $the_coa[$key]['default']; ?>
-								<?php if ( $the_coa[$key]['type'] == 'chk' ) { ?>
-										<input name="<?php echo $the_option_name; ?>[<?php echo $key; ?>]" value="1" type="checkbox" class="ww_opt_p_checkbox" <?php checked( 1 , $the_opt[$key] ); ?> />
-										<?php if ( $the_coa[$key]['info'] != '' ) { ?><div class="column-des"><?php echo $the_coa[$key]['info']; ?></div><?php } ?>
-								<?php } elseif ( $the_coa[$key]['type'] == 'sel' ) { ?>
-										<select name="<?php echo $the_option_name; ?>[<?php echo $key; ?>]">
-										<?php foreach($the_coa[$key]['options'] as $optionkey => $option) { ?>
-											<option value="<?php echo $option; ?>" <?php selected( $the_opt[$key], $option ); ?>><?php echo $the_coa[$key]['options_l10n'][$optionkey]; ?></option>
-										<?php } ?>
-										</select>
-										<?php if ( $the_coa[$key]['info'] != '' ) { ?><div class="column-des"><?php echo $the_coa[$key]['info']; ?></div><?php } ?>
-								<?php } elseif ( $the_coa[$key]['type'] == 'opt' ) { ?>
-									<?php foreach( $the_coa[$key]['options'] as $optionkey => $option ) { ?>
-										<label title="<?php echo esc_attr($option); ?>"><input type="radio" <?php checked( $the_opt[$key], $option ); ?> value="<?php echo $option; ?>" name="<?php echo $the_option_name; ?>[<?php echo $key; ?>]"> <span><?php echo $the_coa[$key]['options_readable'][$optionkey]; ?></span></label>
+						<?php settings_fields( 'fastfood_settings_group' ); ?>
+						<?php foreach ($the_coa as $key => $val) { ?>
+							<?php if ( isset( $the_coa[$key]['sub'] ) && !$the_coa[$key]['sub'] ) continue; ?>
+							<div class="tab-opt tabgroup-<?php echo $the_coa[$key]['group']; ?> type-<?php echo $the_coa[$key]['type']? $the_coa[$key]['type'] : 'container'; ?>">
+								<span class="column-nam"><?php echo $the_coa[$key]['description']; ?></span>
+							<?php if ( !isset ( $the_opt[$key] ) ) $the_opt[$key] = $the_coa[$key]['default']; ?>
+							<?php if ( $the_coa[$key]['type'] == 'chk' ) { ?>
+									<input name="<?php echo $the_option_name; ?>[<?php echo $key; ?>]" value="1" type="checkbox" class="ww_opt_p_checkbox" <?php checked( 1 , $the_opt[$key] ); ?> />
+							<?php } elseif ( $the_coa[$key]['type'] == 'sel' ) { ?>
+									<select name="<?php echo $the_option_name; ?>[<?php echo $key; ?>]">
+									<?php foreach($the_coa[$key]['options'] as $optionkey => $option) { ?>
+										<option value="<?php echo $option; ?>" <?php selected( $the_opt[$key], $option ); ?>><?php echo $the_coa[$key]['options_readable'][$optionkey]; ?></option>
 									<?php } ?>
-								<?php } elseif ( $the_coa[$key]['type'] == 'url' ) { ?>
-										<input class="fastfood_text" id="option_field_<?php echo $key; ?>" type="text" name="<?php echo $the_option_name; ?>[<?php echo $key; ?>]" value="<?php echo $the_opt[$key]; ?>" />
-										<?php if ( $key == 'fastfood_logo' ) {
-											$fastfood_arr_params['tb_media'] = '1'; 
-											$fastfood_arr_params['_wpnonce'] = wp_create_nonce( 'logo-nonce' );
-											?>
-											<input class="hide-if-no-js button" type="button" value="<?php echo __( 'Select', 'fastfood' ); ?>" onClick="tb_show( '<?php echo __( 'Click an image to select', 'fastfood' ); ?>', '<?php echo add_query_arg( $fastfood_arr_params, home_url() ); ?>&amp;TB_iframe=true'); return false;" />
-										<?php } ?>
-										<?php if ( $the_coa[$key]['info'] != '' ) { ?><div class="column-des"><?php echo $the_coa[$key]['info']; ?></div><?php } ?>
-								<?php } elseif ( $the_coa[$key]['type'] == 'txt' ) { ?>
-										<input class="fastfood_text" id="option_field_<?php echo $key; ?>" type="text" name="<?php echo $the_option_name; ?>[<?php echo $key; ?>]" value="<?php echo $the_opt[$key]; ?>" />
-										<?php if ( $the_coa[$key]['info'] != '' ) { ?><div class="column-des"><?php echo $the_coa[$key]['info']; ?></div><?php } ?>
-								<?php } elseif ( $the_coa[$key]['type'] == 'int' ) { ?>
-										<input class="fastfood_text" id="option_field_<?php echo $key; ?>" type="text" name="<?php echo $the_option_name; ?>[<?php echo $key; ?>]" value="<?php echo $the_opt[$key]; ?>" />
-										<?php if ( $the_coa[$key]['info'] != '' ) { ?><div class="column-des"><?php echo $the_coa[$key]['info']; ?></div><?php } ?>
-								<?php } elseif ( $the_coa[$key]['type'] == 'txtarea' ) { ?>
-										<textarea name="<?php echo $the_option_name; ?>[<?php echo $key; ?>]"><?php echo $the_opt[$key]; ?></textarea>
-										<?php if ( $the_coa[$key]['info'] != '' ) { ?><div class="column-des"><?php echo $the_coa[$key]['info']; ?></div><?php } ?>
-								<?php }	?>
-								<?php if ( isset( $the_coa[$key]['sub'] ) ) { ?>
-										<div class="sub-opt-wrap">
-									<?php foreach ($the_coa[$key]['sub'] as $subkey => $subval) { ?>
-										<?php if ( $subval == '' ) { echo '<br />'; continue;} ?>
-											<div class="sub-opt">
-											<?php if ( !isset ($the_opt[$subval]) ) $the_opt[$subval] = $the_coa[$subval]['default']; ?>
-												<?php if ( $the_coa[$subval]['description'] != '' ) { ?><span><?php echo $the_coa[$subval]['description']; ?> : </span><?php } ?>
-											<?php if ( $the_coa[$subval]['type'] == 'chk' ) { ?>
-													<input name="<?php echo $the_option_name; ?>[<?php echo $subval; ?>]" value="1" type="checkbox" class="ww_opt_p_checkbox" <?php checked( 1 , $the_opt[$subval] ); ?> />
-													<span><?php echo $the_coa[$subval]['info']; ?></span>
-											<?php } elseif ( $the_coa[$subval]['type'] == 'sel' ) { ?>
-													<select name="<?php echo $the_option_name; ?>[<?php echo $subval; ?>]">
-													<?php foreach($the_coa[$subval]['options'] as $optionkey => $option) { ?>
-														<option value="<?php echo $option; ?>" <?php selected( $the_opt[$subval], $option ); ?>><?php echo $the_coa[$subval]['options_l10n'][$optionkey]; ?></option>
-													<?php } ?>
-													</select>
-													<span><?php echo $the_coa[$subval]['info']; ?></span>
-											<?php } elseif ( $the_coa[$subval]['type'] == 'opt' ) { ?>
-												<?php foreach( $the_coa[$subval]['options'] as $optionkey => $option ) { ?>
-													<label title="<?php echo esc_attr($option); ?>"><input type="radio" <?php checked( $the_opt[$subval], $option ); ?> value="<?php echo $option; ?>" name="<?php echo $the_option_name; ?>[<?php echo $subval; ?>]"> <span><?php echo $the_coa[$subval]['options_readable'][$optionkey]; ?></span></label>
+									</select>
+							<?php } elseif ( $the_coa[$key]['type'] == 'opt' ) { ?>
+								<?php foreach( $the_coa[$key]['options'] as $optionkey => $option ) { ?>
+									<label title="<?php echo esc_attr($option); ?>"><input type="radio" <?php checked( $the_opt[$key], $option ); ?> value="<?php echo $option; ?>" name="<?php echo $the_option_name; ?>[<?php echo $key; ?>]"> <span><?php echo $the_coa[$key]['options_readable'][$optionkey]; ?></span></label>
+								<?php } ?>
+							<?php } elseif ( $the_coa[$key]['type'] == 'url' ) { ?>
+									<input class="option_text" id="option_field_<?php echo $key; ?>" type="text" name="<?php echo $the_option_name; ?>[<?php echo $key; ?>]" value="<?php echo $the_opt[$key]; ?>" />
+									<?php if ( $key == 'fastfood_logo' ) {
+										$fastfood_arr_params['tb_media'] = '1'; 
+										$fastfood_arr_params['_wpnonce'] = wp_create_nonce( 'logo-nonce' );
+										?>
+										<input class="hide-if-no-js button" type="button" value="<?php echo __( 'Select', 'fastfood' ); ?>" onClick="tb_show( '<?php echo __( 'Click an image to select', 'fastfood' ); ?>', '<?php echo add_query_arg( $fastfood_arr_params, home_url() ); ?>&amp;TB_iframe=true'); return false;" />
+									<?php } ?>
+							<?php } elseif ( $the_coa[$key]['type'] == 'txt' ) { ?>
+									<input class="option_text" id="option_field_<?php echo $key; ?>" type="text" name="<?php echo $the_option_name; ?>[<?php echo $key; ?>]" value="<?php echo $the_opt[$key]; ?>" />
+							<?php } elseif ( $the_coa[$key]['type'] == 'int' ) { ?>
+									<input class="option_text" id="option_field_<?php echo $key; ?>" type="text" name="<?php echo $the_option_name; ?>[<?php echo $key; ?>]" value="<?php echo $the_opt[$key]; ?>" />
+							<?php } elseif ( $the_coa[$key]['type'] == 'txtarea' ) { ?>
+									<textarea name="<?php echo $the_option_name; ?>[<?php echo $key; ?>]"><?php echo $the_opt[$key]; ?></textarea>
+							<?php }	?>
+							<?php if ( $the_coa[$key]['info'] != '' ) { ?><div class="column-des"><?php echo $the_coa[$key]['info']; ?></div><?php } ?>
+							<?php if ( isset( $the_coa[$key]['sub'] ) ) { ?>
+									<div class="sub-opt-wrap">
+								<?php foreach ($the_coa[$key]['sub'] as $subkey => $subval) { ?>
+									<?php if ( $subval == '' ) { echo '<br />'; continue;} ?>
+										<div class="sub-opt type-<?php echo $the_coa[$subval]['type']; ?>">
+										<?php if ( !isset ($the_opt[$subval]) ) $the_opt[$subval] = $the_coa[$subval]['default']; ?>
+											<?php if ( $the_coa[$subval]['description'] != '' ) { ?><span><?php echo $the_coa[$subval]['description']; ?> : </span><?php } ?>
+										<?php if ( $the_coa[$subval]['type'] == 'chk' ) { ?>
+												<input name="<?php echo $the_option_name; ?>[<?php echo $subval; ?>]" value="1" type="checkbox" class="ww_opt_p_checkbox" <?php checked( 1 , $the_opt[$subval] ); ?> />
+										<?php } elseif ( $the_coa[$subval]['type'] == 'sel' ) { ?>
+												<select name="<?php echo $the_option_name; ?>[<?php echo $subval; ?>]">
+												<?php foreach($the_coa[$subval]['options'] as $optionkey => $option) { ?>
+													<option value="<?php echo $option; ?>" <?php selected( $the_opt[$subval], $option ); ?>><?php echo $the_coa[$subval]['options_readable'][$optionkey]; ?></option>
 												<?php } ?>
-											<?php } elseif ( $the_coa[$subval]['type'] == 'url' ) { ?>
-													<input class="fastfood_text" id="option_field_<?php echo $subval; ?>" type="text" name="<?php echo $the_option_name; ?>[<?php echo $subval; ?>]" value="<?php echo $the_opt[$subval]; ?>" />
-													<span><?php echo $the_coa[$subval]['info']; ?></span>
-											<?php } elseif ( $the_coa[$subval]['type'] == 'txt' ) { ?>
-													<input class="fastfood_text" id="option_field_<?php echo $subval; ?>" type="text" name="<?php echo $the_option_name; ?>[<?php echo $subval; ?>]" value="<?php echo $the_opt[$subval]; ?>" />
-													<span><?php echo $the_coa[$subval]['info']; ?></span>
-											<?php } elseif ( $the_coa[$subval]['type'] == 'int' ) { ?>
-													<input class="fastfood_text" id="option_field_<?php echo $subval; ?>" type="text" name="<?php echo $the_option_name; ?>[<?php echo $subval; ?>]" value="<?php echo $the_opt[$subval]; ?>" />
-													<span><?php echo $the_coa[$subval]['info']; ?></span>
-											<?php } elseif ( $the_coa[$subval]['type'] == 'col' ) { ?>
-													<div class="col-tools">
-														<span><?php echo $the_coa[$subval]['info']; ?></span>
-														<input onclick="fastfoodOptions.showColorPicker('<?php echo $subval; ?>');" style="background-color:<?php echo $the_opt[$subval]; ?>;" class="color_preview_box" type="text" id="fastfood_box_<?php echo $subval; ?>" value="" readonly="readonly" />
-														<div class="fastfood_cp" id="fastfood_colorpicker_<?php echo $subval; ?>"></div>
-														<input class="fastfood_input" id="fastfood_input_<?php echo $subval; ?>" type="text" name="<?php echo $the_option_name; ?>[<?php echo $subval; ?>]" value="<?php echo $the_opt[$subval]; ?>" />
-														<br />
-														<a class="hide-if-no-js" href="#" onclick="fastfoodOptions.showColorPicker('<?php echo $subval; ?>'); return false;"><?php _e( 'Select a Color' , 'fastfood' ); ?></a>
-														<br />
-														<a class="hide-if-no-js" style="color:<?php echo $the_coa[$subval]['default']; ?>;" href="#" onclick="fastfoodOptions.updateColor('<?php echo $subval; ?>','<?php echo $the_coa[$subval]['default']; ?>'); return false;"><?php _e( 'Default' , 'fastfood' ); ?></a>
-														<br class="clear" />
-													</div>
-											<?php } elseif ( $the_coa[$subval]['type'] == 'catcol' ) { ?>
-													<?php
-														$args=array(
-															'orderby' => 'name',
-															'order' => 'ASC'
-														);
-														$categories=get_categories($args);
-														foreach($categories as $category) {
-															$hexnumber = '#';
-															for ($i2=1; $i2<=3; $i2++) {
-																$hexnumber .= dechex( rand(64,256) );
-															}
-															$catcolor = isset($the_opt[$subval][$category->term_id]) ? $the_opt[$subval][$category->term_id] : $hexnumber;
-													?>
-														<div class="col-tools">
-															<span><?php echo $category->name; ?></span>
-															<input onclick="fastfoodOptions.showColorPicker('<?php echo $subval.'-'.$category->term_id; ?>');" style="background-color:<?php echo $catcolor; ?>;" class="color_preview_box" type="text" id="fastfood_box_<?php echo $subval.'-'.$category->term_id; ?>" value="" readonly="readonly" />
-															<div class="fastfood_cp" id="fastfood_colorpicker_<?php echo $subval.'-'.$category->term_id; ?>"></div>
-															<input class="fastfood_input" id="fastfood_input_<?php echo $subval.'-'.$category->term_id; ?>" type="text" name="<?php echo $the_option_name; ?>[<?php echo $subval; ?>][<?php echo $category->term_id; ?>]" value="<?php echo $catcolor; ?>" />
-															<br />
-															<a class="hide-if-no-js" href="#" onclick="fastfoodOptions.showColorPicker('<?php echo $subval.'-'.$category->term_id; ?>'); return false;"><?php _e( 'Select a Color' , 'fastfood' ); ?></a>
-															<br />
-															<a class="hide-if-no-js" style="color:<?php echo $the_coa[$subval]['defaultcolor']; ?>;" href="#" onclick="fastfoodOptions.updateColor('<?php echo $subval.'-'.$category->term_id; ?>','<?php echo $the_coa[$subval]['defaultcolor']; ?>'); return false;"><?php _e( 'Default' , 'fastfood' ); ?></a>
-															<br class="clear" />
-															<?php if ( $category->description ) { ?><div class="column-des"><?php echo $category->description; ?></div><?php } ?>
-														</div>
-													<?php }	?>
-													
-											<?php }	?>
+												</select>
+										<?php } elseif ( $the_coa[$subval]['type'] == 'opt' ) { ?>
+											<?php foreach( $the_coa[$subval]['options'] as $optionkey => $option ) { ?>
+												<label title="<?php echo esc_attr($option); ?>"><input type="radio" <?php checked( $the_opt[$subval], $option ); ?> value="<?php echo $option; ?>" name="<?php echo $the_option_name; ?>[<?php echo $subval; ?>]"> <span><?php echo $the_coa[$subval]['options_readable'][$optionkey]; ?></span></label>
+											<?php } ?>
+										<?php } elseif ( $the_coa[$subval]['type'] == 'url' ) { ?>
+												<input class="option_text" id="option_field_<?php echo $subval; ?>" type="text" name="<?php echo $the_option_name; ?>[<?php echo $subval; ?>]" value="<?php echo $the_opt[$subval]; ?>" />
+										<?php } elseif ( $the_coa[$subval]['type'] == 'txt' ) { ?>
+												<input class="option_text" id="option_field_<?php echo $subval; ?>" type="text" name="<?php echo $the_option_name; ?>[<?php echo $subval; ?>]" value="<?php echo $the_opt[$subval]; ?>" />
+										<?php } elseif ( $the_coa[$subval]['type'] == 'int' ) { ?>
+												<input class="option_text" id="option_field_<?php echo $subval; ?>" type="text" name="<?php echo $the_option_name; ?>[<?php echo $subval; ?>]" value="<?php echo $the_opt[$subval]; ?>" />
+										<?php } elseif ( $the_coa[$subval]['type'] == 'col' ) { ?>
+												<div class="col-tools">
+													<input onclick="fastfoodOptions.showColorPicker('<?php echo $subval; ?>');" style="background-color:<?php echo $the_opt[$subval]; ?>;" class="color_preview_box" type="text" id="option_color_box_<?php echo $subval; ?>" value="" readonly="readonly" />
+													<div class="option_cp" id="option_colorpicker_<?php echo $subval; ?>"></div>
+													<input class="option_text" id="option_color_input_<?php echo $subval; ?>" type="text" name="<?php echo $the_option_name; ?>[<?php echo $subval; ?>]" value="<?php echo $the_opt[$subval]; ?>" />
+													<br />
+													<a class="hide-if-no-js" href="#" onclick="fastfoodOptions.showColorPicker('<?php echo $subval; ?>'); return false;"><?php _e( 'Select a Color' , 'fastfood' ); ?></a>
+													<br />
+													<a class="hide-if-no-js" style="color:<?php echo $the_coa[$subval]['default']; ?>;" href="#" onclick="fastfoodOptions.updateColor('<?php echo $subval; ?>','<?php echo $the_coa[$subval]['default']; ?>'); return false;"><?php _e( 'Default' , 'fastfood' ); ?></a>
+													<br class="clear" />
 												</div>
 										<?php }	?>
-											<br class="clear" />
-										</div>
-								<?php }	?>
-									<?php if ( $the_coa[$key]['req'] != '' ) { ?><div class="column-req"><?php echo '<u>' . __('requires','fastfood') . '</u>: ' . $the_coa[$the_coa[$key]['req']]['description']; ?></div><?php } ?>
-								</div>
+										<?php if ( $the_coa[$subval]['info'] != '' ) { ?> - <span class="sub-opt-des"><?php echo $the_coa[$subval]['info']; ?></span><?php } ?>
+											</div>
+									<?php }	?>
+										<br class="clear" />
+									</div>
 							<?php }	?>
-						</div>
+								<?php if ( $the_coa[$key]['req'] != '' ) { ?><div class="column-req"><?php echo '<u>' . __('requires','fastfood') . '</u>: ' . $the_coa[$the_coa[$key]['req']]['description']; ?></div><?php } ?>
+							</div>
+						<?php }	?>
 						<p id="buttons">
 							<input type="hidden" name="<?php echo $the_option_name; ?>[hidden_opt]" value="default" />
 							<input class="button-primary" type="submit" name="Submit" value="<?php _e( 'Update Options' , 'fastfood' ); ?>" />
-							<a href="themes.php?page=fastfood_functions" target="_self"><?php _e( 'Undo Changes' , 'fastfood' ); ?></a>
-							|
-							<a id="to-defaults" href="themes.php?page=fastfood_functions&erase=1" target="_self"><?php _e( 'Back to defaults' , 'fastfood' ); ?></a>
+							<span class="extra-actions"><a href="themes.php?page=fastfood_theme_options" target="_self"><?php _e( 'Undo Changes' , 'fastfood' ); ?></a> | <a id="to-defaults" href="themes.php?page=fastfood_theme_options&erase=1" target="_self"><?php _e( 'Back to defaults' , 'fastfood' ); ?></a></span>
 						</p>
 					</form>
 					<p class="stylediv" style="clear: both; text-align: center; border: 1px solid #ccc;">
@@ -1018,15 +947,6 @@ if ( !function_exists( 'fastfood_post_manage_style' ) ) {
 }
 
 //filters wp_title()
-if ( !function_exists( 'fastfood_wp_title' ) ) {
-	function fastfood_wp_title () {
-		add_filter( 'wp_title', 'fastfood_filter_wp_title' );// Hook into 'wp_title'
-		$the_title = wp_title( '&laquo;', false, 'right' );
-		remove_filter( 'wp_title', 'fastfood_filter_wp_title' );// Hook into 'wp_title'
-		echo $the_title;
-		}
-	}
-
 function fastfood_filter_wp_title( $title ) {
 	if ( is_single() && empty( $title ) ) {
 		$_post = get_queried_object();
@@ -1045,21 +965,4 @@ function fastfood_filter_wp_title( $title ) {
     }
     // Return the modified title
     return $filtered_title;
-}
-
-// check if in media preview mode
-$fastfood_is_media = false;
-if ( isset( $_GET['tb_media'] ) ) {
-	$fastfood_is_media = true;
-}
-
-// media preview
-if ( !function_exists( 'fastfood_media' ) ) {
-	function fastfood_media () {
-		global $fastfood_is_media;
-		if ( $fastfood_is_media ) {
-			get_template_part( 'lib/media' ); 
-			exit;
-		}
-	}
 }

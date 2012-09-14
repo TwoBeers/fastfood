@@ -18,7 +18,7 @@ if ( !function_exists( 'fastfood_mobile_device_detect' ) ) {
 		global $fastfood_opt;
 
 		if ( is_admin() ) return false;
-		
+
 		// #1 check: mobile support is off (via options)
 		if ( ( isset( $fastfood_opt['fastfood_mobile_css'] ) && ( $fastfood_opt['fastfood_mobile_css'] == 0) ) ) return false;
 		
@@ -54,13 +54,13 @@ if ( !function_exists( 'fastfood_mobile_device_detect' ) ) {
 		}
 	}
 }
-$ff_is_mobile_browser = fastfood_mobile_device_detect(); // check if is mobile browser
+$fastfood_is_mobile = fastfood_mobile_device_detect(); // check if is mobile browser
 
 // show mobile version
 if ( !function_exists( 'fastfood_mobile' ) ) {
 	function fastfood_mobile () {
-		global $ff_is_mobile_browser;
-		if ( $ff_is_mobile_browser ) {
+		global $fastfood_is_mobile;
+		if ( $fastfood_is_mobile ) {
 
 			// Add stylesheets
 			add_action( 'wp_enqueue_scripts', 'fastfood_mobile_stylesheet' );

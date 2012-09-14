@@ -5,9 +5,9 @@ add_action( 'template_redirect', 'fastfood_init_audio_player' );
 // setup for audio player
 if ( !function_exists( 'fastfood_init_audio_player' ) ) {
 	function fastfood_init_audio_player(){
-		global $ff_is_printpreview, $ff_is_mobile_browser;
+		global $fastfood_is_printpreview, $fastfood_is_mobile;
 
-		if ( is_admin() || $ff_is_mobile_browser || $ff_is_printpreview || !is_singular() ) return;
+		if ( is_admin() || $fastfood_is_mobile || $fastfood_is_printpreview || !is_singular() ) return;
 
 		add_action( 'wp_head', 'fastfood_localize_audio_player' );
 		add_action( 'fastfood_hook_after_post_content', 'fastfood_add_audio_player' );
@@ -20,7 +20,7 @@ if ( !function_exists( 'fastfood_audioplayer_scripts' ) ) {
 	function fastfood_audioplayer_scripts(){
 		global $fastfood_version;
 
-		wp_enqueue_script( 'ff-audioplayer', get_template_directory_uri() . '/js/audio-player.min.js', array( 'swfobject' ), $fastfood_version, true  );
+		wp_enqueue_script( 'fastfood-audioplayer', get_template_directory_uri() . '/js/audio-player.min.js', array( 'swfobject' ), $fastfood_version, true  );
 
 	}
 }
