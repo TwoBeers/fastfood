@@ -14,7 +14,6 @@ add_action( 'wp_print_styles', 'fastfood_deregister_styles', 100 ); // deregiste
 /* custom filters */
 add_filter( 'the_content', 'fastfood_content_replace' );
 add_filter( 'img_caption_shortcode', 'fastfood_img_caption_shortcode', 10, 3 );
-//add_filter( 'get_search_form', 'fastfood_search_form' );
 
 // load theme options in $fastfood_opt variable, globally retrieved in php files
 $fastfood_opt = get_option( 'fastfood_options' );

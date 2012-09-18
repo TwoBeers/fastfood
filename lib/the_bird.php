@@ -18,9 +18,9 @@ add_filter( 'get_comment_author_link', 'fastfood_add_quoted_on' );
 add_filter( 'user_contactmethods','fastfood_new_contactmethods',10,1 );
 add_filter( 'manage_posts_columns', 'fastfood_addthumbcolumn' ); // column-thumbnail for posts
 add_filter( 'manage_pages_columns', 'fastfood_addthumbcolumn' ); // column-thumbnail for pages
-if ( $fastfood_opt['fastfood_blank_title'] ) add_filter( 'the_title', 'fastfood_empty_titles_filter', 9, 2 );
-add_filter( 'the_title', 'fastfood_title_tags_filter' );
+if ( $fastfood_opt['fastfood_blank_title'] ) add_filter( 'the_title', 'fastfood_title_tags_filter', 10, 2 );
 add_filter( 'excerpt_length', 'fastfood_excerpt_length' );
+add_filter( 'excerpt_mblength' , 'fastfood_excerpt_length' ); //WP Multibyte Patch support
 add_filter( 'excerpt_more', 'fastfood_excerpt_more' );
 add_filter( 'the_content_more_link', 'fastfood_more_link', 10, 2 );
 add_filter( 'wp_title', 'fastfood_filter_wp_title' );
@@ -764,13 +764,9 @@ if ( !function_exists( 'fastfood_edit_options' ) ) {
 							<span class="extra-actions"><a href="themes.php?page=fastfood_theme_options" target="_self"><?php _e( 'Undo Changes' , 'fastfood' ); ?></a> | <a id="to-defaults" href="themes.php?page=fastfood_theme_options&erase=1" target="_self"><?php _e( 'Back to defaults' , 'fastfood' ); ?></a></span>
 						</p>
 					</form>
-					<p class="stylediv" style="clear: both; text-align: center; border: 1px solid #ccc;">
-						<small>
-							<?php _e( 'If you like/dislike this theme, or if you encounter any issues using it, please let us know it.', 'fastfood' ); ?><br />
-							<a href="<?php echo esc_url( 'http://www.twobeers.net/annunci/tema-per-wordpress-fastfood' ); ?>" title="fastfood theme" target="_blank"><?php _e( 'Leave a feedback', 'fastfood' ); ?></a>
-						</small>
-					</p>
-					<p class="stylediv" style="clear: both; text-align: center; border: 1px solid #ccc; margin-top: 10px;">
+					<p class="theme-notes">
+						<small><?php _e( 'If you like/dislike this theme, or if you encounter any issues using it, please let us know it.', 'fastfood' ); ?> &raquo; <a href="<?php echo esc_url( 'http://www.twobeers.net/annunci/tema-per-wordpress-fastfood' ); ?>" title="fastfood theme" target="_blank"><?php _e( 'Leave a feedback', 'fastfood' ); ?></a></small>
+						<br />-<br />
 						<small>Support the theme in your language, provide a <a href="<?php echo esc_url( 'http://www.twobeers.net/wp-themes/themes-translations-wordpress' ); ?>" title="Themes translation" target="_blank">translation</a>.</small>
 					</p>
 				</div>
@@ -840,22 +836,16 @@ if ( !function_exists( 'fastfood_add_quoted_on' ) ) {
 	}
 }
 
-// strip tags from titles
-function fastfood_title_tags_filter( $title ) {
+// strip tags and apply title format for blank titles
+function fastfood_title_tags_filter( $title, $id = null ) {
+	global $fastfood_opt;
 
 	if ( is_admin() ) return $title;
 
 	$title = strip_tags( $title, '<abbr><acronym><b><em><i><del><ins><bdo><strong>' );
-	return $title;
 
-}
+	if ( $id == null ) return $title;
 
-// apply title format for blank titles
-function fastfood_empty_titles_filter( $title, $id ) {
-	global $fastfood_opt;
-	
-	if ( is_admin() ) return $title;
-	
 	if ( empty( $title ) ) {
 		if ( !isset( $fastfood_opt['fastfood_blank_title_text'] ) || empty( $fastfood_opt['fastfood_blank_title_text'] ) ) return __( '(no title)', 'fastfood' );
 		$postdata = array( get_post_format( $id )? get_post_format_string( get_post_format( $id ) ): __( 'Post', 'fastfood' ), get_the_time( get_option( 'date_format' ), $id ) );

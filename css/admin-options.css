@@ -1,5 +1,8 @@
 /* Fastfood - Theme options stylesheet */
 
+#main-wrap p {
+	margin: 3em 0;
+}
 input[type="checkbox"], input[type="radio"] {
 	vertical-align: text-bottom;
 }
@@ -12,11 +15,12 @@ input[type="radio"] {
 }
 #theme-options,
 #theme-infos {
-	background: #f9f9f9;
-	box-shadow: 0px 2px 8px #999;
 	margin: 0;
-	padding: 20px 10px;
+	padding: 0;
 	min-height: 250px;
+}
+#theme-infos {
+	padding: 10px;
 }
 #tabs-container {
 	margin: 20px 20px 20px 150px;
@@ -55,7 +59,8 @@ input[type="radio"] {
 }
 .column-nam {
 	font-weight: bold;
-	font-size: 1.1em;
+	font-size: 1.2em;
+	margin-right: 5px;
 }
 .sub-opt-nam {
 	font-size: 11px;
@@ -77,7 +82,8 @@ input[type="radio"] {
 }
 .tab-opt {
 	padding: 10px;
-	border-bottom: 2px groove #fff;
+	border: 1px solid #eee;
+	margin-bottom: 20px;
 }
 .sub-opt-wrap {
 	margin-top: 10px;
@@ -136,4 +142,7 @@ input[type="radio"] {
 label img {
 	vertical-align: middle;
 }
-
+.theme-notes {
+	text-align: center;
+	border: 1px solid #eee;
+}

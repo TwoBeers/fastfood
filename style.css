@@ -374,7 +374,6 @@ input[type=reset]:hover {
 	height: 210px;
 	margin: 0;
 	padding: 5px 0;
-	background: transparent url('images/operafix.png') left top repeat;
 	width: 424px;
 }
 .menulcont {
@@ -389,7 +388,6 @@ input[type=reset]:hover {
 .menulcont li {
 	color: #404040;
 	display: block;
-	background: transparent url('images/operafix.png') left top repeat;
 	padding: 1px 5px;
 }
 .menulcont li:hover .preview {
