@@ -115,12 +115,10 @@ pre {
 }
 .storycontent table,
 .comment-body table {
-	box-shadow: 0 0 2px #000;
 	background-color: #eee;
-	border-collapse: collapse;
 	text-align: left;
 	width: 100%;
-	border-color: #fff;
+	border: 1px solid #ccc;
 }
 .storycontent td,
 .comment-body td {
@@ -970,6 +968,7 @@ ul.ul_fwa {
 	background: #eee;
 	border: 1px solid #ccc;
 	padding: 0 3px;
+	vertical-align: bottom;
 }
 .fastfood_widget_font_resize a:hover {
 	border: 1px solid #aaa;
@@ -1076,6 +1075,13 @@ div.ff_Widget_post_details ul {
 }
 .ff-social-icon {
 	margin: 4px 2px 0;
+}
+.ff-social-icon img {
+	border: 1px solid #ccc;
+	border-radius: 3px;
+}
+.ff-social-icon img:hover {
+	border: 1px solid #aaa;
 }
 .all_cat {
 	text-align: right;
