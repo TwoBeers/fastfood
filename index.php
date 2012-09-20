@@ -1,5 +1,9 @@
 <?php get_header(); ?>
-
+<?php
+if( function_exists('FA_display_slider') ){
+    FA_display_slider(1756);
+}
+?> 
 <?php fastfood_hook_before_posts(); ?>
 <div id="posts_content" class="<?php echo ( fastfood_use_sidebar() ) ? 'posts_narrow' : 'posts_wide'; ?>">
 
@@ -57,6 +61,8 @@ if ( have_posts() ) {
 	<div id="ff-page-nav">
 		<?php if ( function_exists( 'wp_pagenavi' ) ) { ?>
 			<?php wp_pagenavi(); ?>
+		<?php } elseif ( function_exists( 'wp_paginate' ) ) { ?>
+			<?php wp_paginate(); ?>
 		<?php } else { ?>
 			<?php //num of pages
 			global $paged;

@@ -209,8 +209,7 @@ if ( !function_exists( 'fastfood_scripts' ) ) {
 		}
 
 		if ( ( $fastfood_opt['fastfood_jsani'] == 1 ) ) {
-			wp_enqueue_script( 'jquery-ui-effects', get_template_directory_uri() . '/js/jquery-ui-effects-1.8.6.min.js', array( 'jquery' ), '1.8.6', false  ); //fastfood js
-			wp_enqueue_script( 'fastfood-script', get_template_directory_uri() . '/js/fastfoodscript.min.js', array( 'jquery' ), $fastfood_version, true  ); //fastfood js
+			wp_enqueue_script( 'fastfood-script', get_template_directory_uri() . '/js/fastfoodscript.min.js', array( 'jquery', 'jquery-effects-core' ), $fastfood_version, true  ); //fastfood js
 			$data = array(
 				'post_expander_wait' => __( 'Post loading, please wait...', 'fastfood' ),
 				'quote_link_info' => esc_attr( __( 'Add selected text as a quote', 'fastfood' ) ),
@@ -648,12 +647,13 @@ if ( !function_exists( 'fastfood_I_like_it' ) ) {
 		if ( ( $fastfood_opt['fastfood_I_like_it_plus1'] == 0 ) && ( $fastfood_opt['fastfood_I_like_it_twitter'] == 0 ) && ( $fastfood_opt['fastfood_I_like_it_facebook'] == 0 ) && ( $fastfood_opt['fastfood_I_like_it_linkedin'] == 0 ) && ( $fastfood_opt['fastfood_I_like_it_stumbleupon'] == 0 ) && ( ( $fastfood_opt['fastfood_I_like_it_pinterest']	== 0 ) || ( ( $fastfood_opt['fastfood_I_like_it_pinterest']	== 1 ) && !is_attachment() ) ) ) return;
 
 		$pName = rawurlencode( get_the_title( $post->ID ) );
-		$pHref = rawurlencode( home_url() . '/?p=' . $post->ID );
+		$pHref = rawurlencode( get_permalink( $post->ID ) );
+		$psHref = rawurlencode( home_url() . '/?p=' . $post->ID );
 
 		?>
 		<div class="ff-I-like-it">
 			<?php if ( $fastfood_opt['fastfood_I_like_it_plus1']		== 1 ) { ?><div class="ff-I-like-it-button"><div class="g-plusone" data-size="tall" data-href="<?php echo $pHref; ?>"></div></div><?php } ?>
-			<?php if ( $fastfood_opt['fastfood_I_like_it_twitter']		== 1 ) { ?><div class="ff-I-like-it-button"><div class="t-twits"><a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $pHref; ?>" data-text="<?php echo $pName . ': ' . $pHref; ?>" data-count="vertical"></a></div></div><?php } ?>
+			<?php if ( $fastfood_opt['fastfood_I_like_it_twitter']		== 1 ) { ?><div class="ff-I-like-it-button"><div class="t-twits"><a href="https://twitter.com/share" class="twitter-share-button" data-url="<?php echo $pHref; ?>" data-text="<?php echo $pName . ': ' . $psHref; ?>" data-count="vertical"></a></div></div><?php } ?>
 			<?php if ( $fastfood_opt['fastfood_I_like_it_facebook']		== 1 ) { ?><div class="ff-I-like-it-button"><div class="fb-like" data-href="<?php echo $pHref; ?>" data-send="false" data-layout="box_count" data-width="42" data-show-faces="false"></div></div><?php } ?>
 			<?php if ( $fastfood_opt['fastfood_I_like_it_linkedin']		== 1 ) { ?><div class="ff-I-like-it-button"><script type="IN/Share" data-url="<?php echo $pHref; ?>" data-counter="top"></script></div><?php } ?>
 			<?php if ( $fastfood_opt['fastfood_I_like_it_stumbleupon']	== 1 ) { ?><div class="ff-I-like-it-button"><script src="http://www.stumbleupon.com/hostedbadge.php?s=5&r=<?php echo $pHref; ?>"></script></div><?php } ?>

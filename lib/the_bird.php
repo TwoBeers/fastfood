@@ -18,7 +18,7 @@ add_filter( 'get_comment_author_link', 'fastfood_add_quoted_on' );
 add_filter( 'user_contactmethods','fastfood_new_contactmethods',10,1 );
 add_filter( 'manage_posts_columns', 'fastfood_addthumbcolumn' ); // column-thumbnail for posts
 add_filter( 'manage_pages_columns', 'fastfood_addthumbcolumn' ); // column-thumbnail for pages
-if ( $fastfood_opt['fastfood_blank_title'] ) add_filter( 'the_title', 'fastfood_title_tags_filter', 10, 2 );
+add_filter( 'the_title', 'fastfood_title_tags_filter', 10, 2 );
 add_filter( 'excerpt_length', 'fastfood_excerpt_length' );
 add_filter( 'excerpt_mblength' , 'fastfood_excerpt_length' ); //WP Multibyte Patch support
 add_filter( 'excerpt_more', 'fastfood_excerpt_more' );
@@ -601,12 +601,6 @@ if ( !function_exists( 'fastfood_sanitize_options' ) ) {
 			}
 		}
 
-		foreach ( $input['fastfood_cat_colors'] as $key => $val ) {				//CATCOL
-			$color = str_replace( '#' , '' , $input['fastfood_cat_colors'][$key] );
-			$color = preg_replace( '/[^0-9a-fA-F]/' , '' , $color );
-			$input['fastfood_cat_colors'][$key] = '#' . $color;
-		}
-
 		// check for required options
 		foreach ( $the_coa as $key => $val ) {
 			if ( $the_coa[$key]['req'] != '' ) { if ( $input[$the_coa[$key]['req']] == ( 0 || '') ) $input[$key] = 0; }
@@ -845,6 +839,8 @@ function fastfood_title_tags_filter( $title, $id = null ) {
 	$title = strip_tags( $title, '<abbr><acronym><b><em><i><del><ins><bdo><strong>' );
 
 	if ( $id == null ) return $title;
+
+	if ( !$fastfood_opt['fastfood_blank_title'] ) return $title;
 
 	if ( empty( $title ) ) {
 		if ( !isset( $fastfood_opt['fastfood_blank_title_text'] ) || empty( $fastfood_opt['fastfood_blank_title_text'] ) ) return __( '(no title)', 'fastfood' );

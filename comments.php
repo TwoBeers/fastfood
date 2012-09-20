@@ -20,23 +20,42 @@
 	} ?>
 
 	<?php if ( have_comments() ) { ?>
+
 		<?php fastfood_hook_before_comments(); ?>
-		<ol id="commentlist">
-			<?php //wp_list_comments(array('avatar_size' => 96)); ?>
-			<?php wp_list_comments(); ?>
-		</ol>
-		<?php fastfood_hook_after_comments(); ?>
 
 		<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) { ?>
 
 			<div class="navigate_comments">
-				<?php paginate_comments_links(); ?>
+				<?php if(function_exists('wp_paginate_comments')) {
+					wp_paginate_comments();
+				} else {
+					paginate_comments_links( array('prev_text' => '&laquo;', 'next_text' => '&raquo;') );
+				} ?>
 				<div class="fixfloat"> </div>
 			</div>
 
-		<?php
-		}
-	}
+		<?php } ?>
+
+		<ol id="commentlist">
+			<?php //wp_list_comments(array('avatar_size' => 96)); ?>
+			<?php wp_list_comments(); ?>
+		</ol>
+
+		<?php if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) { ?>
+
+			<div class="navigate_comments">
+				<?php if(function_exists('wp_paginate_comments')) {
+					wp_paginate_comments();
+				} else {
+					paginate_comments_links( array('prev_text' => '&laquo;', 'next_text' => '&raquo;') );
+				} ?>
+				<div class="fixfloat"> </div>
+			</div>
+
+		<?php } ?>
+
+		<?php fastfood_hook_after_comments(); ?>
+	<?php }
 	//if comments are open
 	if ( comments_open() ) { 
 		if ( !$fastfood_is_printpreview ) { //script not to be loaded in print preview

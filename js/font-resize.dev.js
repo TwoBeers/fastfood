@@ -9,25 +9,25 @@ fastfoodFontResize = {
 		var resizeStep = 1;
 		var baseElement = $('body');
 		var startFontSize = parseFloat(baseElement.css("font-size"));
-		var savedSize = fastfoodFontResize.cookie('fontSize');
+		var savedSize = fastfoodFontResize.cookie('fastfoodFontSize');
 		if(savedSize != null && savedSize != "" && savedSize > 4) {
 			$(baseElement).css("font-size", savedSize + "px");
 		}
-		$('.fontResizer_plus').click(function() {
+		$('.fontresizer-plus').click(function() {
 			var newFontSize = parseFloat(baseElement.css("font-size"));
 			newFontSize=newFontSize+parseFloat(resizeStep);
 			baseElement.css("font-size",newFontSize+"px");
-			fastfoodFontResize.cookie('fontSize', newFontSize);
+			fastfoodFontResize.cookie('fastfoodFontSize', newFontSize);
 		});
-		$('.fontResizer_reset').click(function() {
+		$('.fontresizer-reset').click(function() {
 			baseElement.css("font-size",startFontSize);
-			fastfoodFontResize.cookie('fontSize', startFontSize);
+			fastfoodFontResize.cookie('fastfoodFontSize', startFontSize);
 		});
-		$('.fontResizer_minus').click(function() {
+		$('.fontresizer-minus').click(function() {
 			var newFontSize = parseFloat(baseElement.css("font-size"))
 			newFontSize=newFontSize-resizeStep;
 			baseElement.css("font-size",newFontSize+"px");
-			fastfoodFontResize.cookie('fontSize', newFontSize);
+			fastfoodFontResize.cookie('fastfoodFontSize', newFontSize);
 		});
 	},
 

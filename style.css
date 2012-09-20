@@ -973,10 +973,10 @@ ul.ul_fwa {
 .fastfood_widget_font_resize a:hover {
 	border: 1px solid #aaa;
 }
-.fontResizer_minus {
+.fontresizer-minus {
 	font-size: 0.7em;
 }
-.fontResizer_plus {
+.fontresizer-plus {
 	font-size: 1.2em;
 }
 /* Post Format icons
@@ -1712,7 +1712,7 @@ img.aligncenter {
 	background: #eee;
 }
 
-/* WP-pagenavi
+/* WP-PageNavi
 ----------------------------------------------------------*/
 #ff-page-nav .wp-pagenavi a, #ff-page-nav .wp-pagenavi span {
 	border-radius: 5px;
@@ -1728,6 +1728,27 @@ img.aligncenter {
 }
 #ff-page-nav .wp-pagenavi span {
 	font-weight: bold;
+}
+
+/* WP-Paginate
+----------------------------------------------------------*/
+#ff-page-nav .wp-paginate .current,
+.navigate_comments .wp-paginate-comments .current {
+	background: #CCCCCC;
+	border: 1px solid #AAAAAA;
+	color: #404040;
+}
+.navigate_comments .wp-paginate-comments .title {
+	display: none;
+}
+.navigate_comments .wp-paginate-comments a {
+	background: #fff;
+}
+.navigate_comments .wp-paginate-comments a:hover {
+	color: #404040;
+}
+.wp-paginate .current {
+	border-radius: 5px;
 }
 
 /* header slider
