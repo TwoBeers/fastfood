@@ -1,9 +1,4 @@
 <?php get_header(); ?>
-<?php
-if( function_exists('FA_display_slider') ){
-    FA_display_slider(1756);
-}
-?> 
 <?php fastfood_hook_before_posts(); ?>
 <div id="posts_content" class="<?php echo ( fastfood_use_sidebar() ) ? 'posts_narrow' : 'posts_wide'; ?>">
 
