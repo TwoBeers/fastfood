@@ -84,7 +84,7 @@ function fastfood_default_options() {
 // print a reminder message for set the options after the theme is installed or updated
 if ( !function_exists( 'fastfood_setopt_admin_notice' ) ) {
 	function fastfood_setopt_admin_notice() {
-		echo '<div class="updated"><p><strong>' . sprintf( __( "%s theme says: \"Dont forget to set <a href=\"%s\">my options</a>!\"", 'fastfood' ), 'Fastfood', get_admin_url() . 'themes.php?page=fastfood_functions' ) . '</strong></p></div>';
+		echo '<div class="updated"><p><strong>' . sprintf( __( "%s theme says: \"Dont forget to set <a href=\"%s\">my options</a>!\"", 'fastfood' ), 'Fastfood', get_admin_url() . 'themes.php?page=fastfood_theme_options' ) . '</strong></p></div>';
 	}
 }
 if ( current_user_can( 'manage_options' ) && ( $fastfood_opt['version'] < $fastfood_version ) ) {
