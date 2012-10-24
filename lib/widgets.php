@@ -437,6 +437,7 @@ class fastfood_Widget_social extends WP_Widget {
 		$this->WP_Widget( "ff-social", __( "Follow Me", "fastfood" ), $widget_ops, $control_ops );
         $this->follow_urls = array(
 			'blogger' => 'Blogger',
+			'blurb' => 'Blurb',
 			'Delicious' => 'Delicious',
 			'Deviantart' => 'deviantART',
 			'Digg' => 'Digg',
@@ -449,17 +450,23 @@ class fastfood_Widget_social extends WP_Widget {
 			'LinkedIn' => 'LinkedIn',
 			'Myspace' => 'Myspace',
 			'Odnoklassniki' => 'Odnoklassniki',
+			'Orkut' => 'Orkut',
 			'Picasa' => 'Picasa',
 			'pinterest' => 'Pinterest',
 			'Qzone' => 'Qzone',
 			'Reddit' => 'Reddit',
-			'Sina' => 'Weibo',
+			'scribd' => 'Scribd',
+			'slideshare' => 'SlideShare',
 			'StumbleUpon' => 'StumbleUpon',
+			'soundcloud' => 'SoundCloud',
 			'Technorati' => 'Technorati',
 			'Tencent' => 'Tencent',
 			'Twitter' => 'Twitter',
+			'tumblr' => 'Tumblr',
+			'ubuntuone' => 'Ubuntu One',
 			'Vimeo' => 'Vimeo',
 			'VKontakte' => 'VKontakte',
+			'Sina' => 'Weibo',
 			'WindowsLive' => 'Windows Live',
 			'Xing' => 'Xing',
 			'yfrog' => 'YFrog',
@@ -1151,9 +1158,9 @@ class fastfood_Widget_post_details extends WP_Widget {
 function fastfood_widget_font_resize($args) {
 	extract($args);
 	echo $before_widget;
-	echo '<a class="fontresizer-minus" href="javascript:void(0)" title="' . esc_attr( __('Decrease font size','fastfood') ) . '">A</a> ';
+	echo '<a class="fontresizer-minus" href="javascript:void(0)" title="' . esc_attr( __('Decrease font size','fastfood') ) . '">-</a> ';
 	echo '<a class="fontresizer-reset" href="javascript:void(0)" title="' . esc_attr( __('Reset font size','fastfood') ) . '">A</a> ';
-	echo '<a class="fontresizer-plus" href="javascript:void(0)" title="' . esc_attr( __('Increase font size','fastfood') ) . '">A</a> ';
+	echo '<a class="fontresizer-plus" href="javascript:void(0)" title="' . esc_attr( __('Increase font size','fastfood') ) . '">+</a> ';
 	echo $after_widget;
 	wp_enqueue_script( 'fastfood-fontresize', get_template_directory_uri() . '/js/font-resize.min.js', array( 'jquery' ), '', true  );
 

@@ -25,13 +25,7 @@ if ( !function_exists( 'fastfood_custom_background_init' ) ) {
 				'admin-head-callback'    => '',
 				'admin-preview-callback' => ''
 			);
-			if ( function_exists( 'get_custom_header' ) ) {
-				add_theme_support( 'custom-background', $args );
-			} else {
-				// Compat: Versions of WordPress prior to 3.4.
-				define( 'BACKGROUND_COLOR', $args['default-color'] );
-				add_custom_background( 'fastfood_custom_bg' , '' , '' );
-			}
+			add_theme_support( 'custom-background', $args );
 		}
 
 	}

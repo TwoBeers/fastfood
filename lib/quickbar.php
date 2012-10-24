@@ -26,7 +26,6 @@ if ( !function_exists( 'fastfood_quickbar' ) ) {
 			<div class="menutool">[put here your code]</div>
 		</div>
 	quickbar tool -->
-	<br />
 	<?php if ( $args['r_posts'] && $fastfood_opt['fastfood_qbar_recpost'] == 1 ) { //							recent posts menu ?>
 		<div class="menuitem">
 			<div id="mii_rpost" class="itemimg"></div>

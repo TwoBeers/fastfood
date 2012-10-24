@@ -1,8 +1,8 @@
-/*
+﻿/*
 Theme Name: Fastfood
 Theme URI: http: //www.twobeers.net/annunci/tema-per-wordpress-fastfood
 Description: Simple and clear theme with a lot of features, like a "quick links" menu, an "easy navigation" bar, the print preview, 7 integrated widgets ( "Social Links", "Popular Post", "Latest Activity" and many more ). Fastfood has customizable header, customizable background (with a lot of predefined themes), one or two columns layout, up to five widgets areas and three menu. It supports custom menus, posts thumbnail, post formats ("gallery", "status" and "aside") and also mobile devices, with a dedicated style. WP3.4 full compatible.
-Version: 0.33
+Version: 0.34
 Tags: translation-ready, threaded-comments, custom-menu, custom-header, theme-options, fixed-width, two-columns, right-sidebar, white, silver, orange, light, sticky-post, custom-background, editor-style, rtl-language-support, custom-colors, post-formats
 Author: TwoBeers Crew
 Author URI: http: //www.twobeers.net/
@@ -544,16 +544,16 @@ input[type=reset]:hover {
 	background-position: -2px -96px;
 }
 .minib_ppage{
-	background-position: -2px -144px;
+	background-position: -2px -120px;
 }
 .minib_npage{
-	background-position: -2px -120px;
+	background-position: -2px -144px;
 }
 .minib_ppages{
-	background-position: -2px -120px;
+	background-position: -2px -144px;
 }
 .minib_npages{
-	background-position: -2px -144px;
+	background-position: -2px -120px;
 }
 .minib_top{
 	background-position: -2px -168px;
@@ -580,16 +580,16 @@ input[type=reset]:hover {
 	background-position: -90px -96px;
 }
 .minib_ppage:hover {
-	background-position: -90px -144px;
+	background-position: -90px -120px;
 }
 .minib_npage:hover {
-	background-position: -90px -120px;
+	background-position: -90px -144px;
 }
 .minib_ppages:hover {
-	background-position: -90px -120px;
+	background-position: -90px -144px;
 }
 .minib_npages:hover {
-	background-position: -90px -144px;
+	background-position: -90px -120px;
 }
 .minib_top:hover {
 	background-position: -90px -168px;
@@ -1077,11 +1077,7 @@ div.ff_Widget_post_details ul {
 	margin: 4px 2px 0;
 }
 .ff-social-icon img {
-	border: 1px solid #ccc;
-	border-radius: 3px;
-}
-.ff-social-icon img:hover {
-	border: 1px solid #aaa;
+	border: none;
 }
 .all_cat {
 	text-align: right;
@@ -1145,7 +1141,17 @@ div.ff_Widget_post_details ul {
 	padding: 0 75px 10px;
 }
 #content .hentry {
-	margin-bottom: 40px;
+	padding: 30px 0;
+	border-bottom: 3px double #eee;
+}
+#content .hentry:first-child,
+.single #content .hentry,
+.page #content .hentry {
+	padding-top: 0;
+}
+.single #content .hentry,
+.page #content .hentry {
+	border: none;
 }
 .storycontent {
 	font-size: 1.18em;
@@ -1179,12 +1185,19 @@ div.ff_Widget_post_details ul {
 	height: auto;
 	margin: 0;
 }
+img.size-full,
+img.size-large,
+img.wp-post-image {
+	max-width: 100%;
+	height: auto; /* Make sure images with WordPress-added height and width attributes are scaled correctly */
+}
+
 .storycontent ul li,
 .widget ul li,
 .comment-body ul li {
 	list-style: disc outside url('images/litem.png');
 }
-.sticky {
+#content .sticky {
 	border-radius: 5px;
 	background: #E8F5FD;
 	border: 1px solid #fff;
@@ -1214,7 +1227,6 @@ div.ff_Widget_post_details ul {
 #ff-page-nav {
 	padding-top: 10px;
 	text-align: center;
-	border-top: 1px solid #ccc;
 	font-weight: bold;
 	text-transform: uppercase;
 }
@@ -1241,6 +1253,20 @@ div.ff_Widget_post_details ul {
 }
 .status-avatar {
 	float: left;
+}
+.quote-cont .format-icon-32 {
+	float: left;
+	width: 32px;
+	height: 32px;
+	background: url('images/minibuttons.png') no-repeat scroll -24px -192px transparent;
+}
+.quote-cont blockquote {
+	min-height: 40px;
+	margin-left: 45px;
+	font-size: 1.18em;
+}
+.quote-cont .links {
+	padding: 10px 0 0 65px;
 }
 .more-link.ajaxed {
 	padding-left: 20px;
@@ -1639,6 +1665,7 @@ img.aligncenter {
 }
 #TB_window img#TB_Image {
 	border-color: transparent;
+	margin-bottom: 15px;
 }
 #TB_prev a,
 #TB_next a {
@@ -1675,10 +1702,19 @@ img.aligncenter {
 	box-shadow: 0 4px 30px #000;
 }
 #TB_caption {
+	color: #FFFFFF;
 	float: none;
+	font-size: 2em;
+	margin-top: 10px;
+	padding: 0;
+	position: absolute;
 	text-align: center;
+	width: 100%;
 }
-
+#TB_secondLine span {
+	display: block;
+	height: 0;
+}
 /* Audio player
 ----------------------------------------------------------*/
 .ff-player-container {
@@ -1737,6 +1773,7 @@ img.aligncenter {
 	background: #CCCCCC;
 	border: 1px solid #AAAAAA;
 	color: #404040;
+	margin: 0 4px;
 }
 .navigate_comments .wp-paginate-comments .title {
 	display: none;
@@ -1806,4 +1843,112 @@ img.aligncenter {
 }
 #navxt-crumbs li.home.current_item {
 	background:#404040 url(images/details.png) no-repeat left -1000px;
+}
+
+/* TB Chat Post
+----------------------------------------------------------*/
+.tb-chat .chat-select span {
+	cursor: pointer;
+	margin-left: 5px;
+}
+.tb-chat .chat-select span:hover {
+	opacity: .5;
+}
+.tb-chat .chat-select span.name {
+	cursor: inherit;
+	margin: 0;
+	font-weight: bold;
+}
+.tb-chat .chat-select span.name:hover {
+	opacity: 1;
+}
+.tb-chat .chat-select .hide,
+.tb-chat .chat-select .hidden .show,
+.tb-chat .chat-select .rightalign .toleft,
+.tb-chat .chat-select .toright {
+	display: inline;
+}
+.tb-chat .chat-select .hidden .hide,
+.tb-chat .chat-select .show,
+.tb-chat .chat-select .toleft,
+.tb-chat .chat-select .rightalign .toright {
+	display: none;
+}
+.tb-chat ul.chat-select li,
+.tb-chat ul.chat-transcript li {
+	list-style: none outside none;
+}
+.tb-chat ul.chat-select ,
+.tb-chat ul.chat-transcript {
+	margin: 0;
+	padding: 0;
+	line-height: 2em;
+}
+.tb-chat ul.chat-select {
+	overflow: hidden;
+	margin-bottom: 30px;
+	display: none;
+}
+.tb-chat.animated .chat-select {
+	display: block;
+}
+.tb-chat .chat-select li {
+	border: 1px solid #ccae93;
+	float: left;
+	list-style: none outside none;
+	margin-right: 10px;
+	padding: 0 5px;
+	background: #ffdab9;
+	border-radius: 8px;
+}
+.tb-chat .chat-select .rightalign {
+	float: right;
+}
+.tb-chat .chat-transcript .name {
+	font-size: .7em;
+	margin: 0 10px 0 0;
+	float: left
+}
+.tb-chat .speaker.rightalign .name {
+	margin: 0 0 0 10px;
+	float: right;
+}
+.tb-chat .speaker {
+	background: #ffdab9;
+	border: 1px solid #ccae93;
+	margin: 0 100px 20px 0;
+	padding: 0 10px;
+}
+.tb-chat .speaker {
+	border-radius: 8px 8px 8px 0;
+}
+.tb-chat .speaker.rightalign  {
+	border-radius: 8px 8px 0 8px;
+}
+.tb-chat li.speaker-1 {
+	background: #fffacd;
+	border: 1px solid #ccc8a3;
+}
+.tb-chat li.speaker-2 {
+	background: #d8eef4;
+	border: 1px solid #b4c7cc;
+}
+.tb-chat .chat-transcript li.speaker .name {
+	color: #ccae93;
+}
+.tb-chat .chat-transcript li.speaker-1 .name {
+	color: #ccc8a3;
+}
+.tb-chat .chat-transcript li.speaker-2 .name {
+	color: #b4c7cc;
+}
+.tb-chat .chat-transcript li.aside-text {
+	margin: 0 0 20px 0;
+	padding: 0;
+}
+.tb-chat .chat-select .rightalign {
+	margin: 0 0 0 10px;
+}
+.tb-chat .chat-transcript .rightalign {
+	margin: 0 0 20px 100px;
 }

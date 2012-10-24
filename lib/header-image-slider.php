@@ -19,6 +19,7 @@ class Fastfood_Header_Image_Slider {
 	function admin_scripts() { 
 		global $_wp_default_headers;
 		$default_headers = $_wp_default_headers;
+		$nonce = wp_create_nonce( 'fastfood_header_image_remove_nonce' );
 	?>
 		<script>
 			jQuery(function($){
@@ -37,7 +38,8 @@ class Fastfood_Header_Image_Slider {
 							url: window.location.href,
 							type: 'POST',
 							data: {
-								'header_image_remove': thiz.parent().find('img').attr('src')
+								'header_image_remove': thiz.parent().find('img').attr('src'),
+								_ajax_nonce: '<?php echo $nonce ?>'
 							},
 							success: function(data){
 								thiz.parent().fadeOut('slow', function(){
@@ -51,7 +53,7 @@ class Fastfood_Header_Image_Slider {
 			<?php } ?>
 				$('div.random-header').each(function(){
 					if( $('input[name="default-header"]', this).val() == 'random-uploaded-image' ) {
-			<?php $slider_input = "<div class='random-header'><label><input name='default-header' type='radio' value='fastfood-slider-uploaded' " . checked( 'fastfood-slider-uploaded', get_theme_mod( 'header_image', '' ), false ) . " id='fastfood-slider-uploaded'><strong>" . __( 'Slider', 'fastfood' ) . ":</strong></label><label>" . __( 'speed', 'fastfood' ) . " (ms)<input name='slider-speed' title='" . __( 'speed', 'fastfood' ) . "' type='text' value='" . get_theme_mod( 'header_slider_speed', '2000' ) . "' id='fastfood-slider-speed' /></label><label>" . __( 'pause', 'fastfood' ) . " (ms)<input name='slider-pause' title='" . __( 'pause', 'fastfood' ) . "' type='text' value='" . get_theme_mod( 'header_slider_pause', '3000' ) . "' id='fastfood-slider-pause' /></label></div>" ;?>
+			<?php $slider_input = "<div id='slider-settings' class='random-header'><label><input name='default-header' type='radio' value='fastfood-slider-uploaded' " . checked( 'fastfood-slider-uploaded', get_theme_mod( 'header_image', '' ), false ) . " id='fastfood-slider-uploaded'><strong>" . __( 'Slider', 'fastfood' ) . ":</strong></label><label>" . __( 'speed', 'fastfood' ) . " (ms)<input name='slider-speed' title='" . __( 'speed', 'fastfood' ) . "' type='text' value='" . get_theme_mod( 'header_slider_speed', '2000' ) . "' id='fastfood-slider-speed' /></label><label>" . __( 'pause', 'fastfood' ) . " (ms)<input name='slider-pause' title='" . __( 'pause', 'fastfood' ) . "' type='text' value='" . get_theme_mod( 'header_slider_pause', '3000' ) . "' id='fastfood-slider-pause' /></label></div>" ;?>
 						$(this).after("<?php echo $slider_input; ?>");
 					}
 				});
@@ -103,6 +105,13 @@ class Fastfood_Header_Image_Slider {
 		global $wpdb;
 
 		if( isset( $_POST['header_image_remove'] ) ) {
+
+			check_ajax_referer( 'fastfood_header_image_remove_nonce' );
+
+			if ( !current_user_can( 'manage_options' ) ) {
+				wp_die( 'You do not have sufficient permissions to access this page.' );
+			}
+
 			if( ! $post = $wpdb->get_row( $wpdb->prepare("SELECT * FROM $wpdb->posts WHERE post_type = 'attachment' AND post_content = %s", $_POST['header_image_remove'] ) ) ) {
 				return;
 			}
@@ -140,7 +149,7 @@ class Fastfood_Header_Image_Slider {
 	function add_script() {
 		echo "
 		<script>
-			jQuery(document).ready(function(){ fastfoodAnimations.headerSlider({speed:" . get_theme_mod( 'header_slider_speed', '2000' ) . ", pause:" . get_theme_mod( 'header_slider_pause', '3000' ) . "}); });
+			window.onload = function(){ fastfoodAnimations.headerSlider({speed:" . get_theme_mod( 'header_slider_speed', '2000' ) . ", pause:" . get_theme_mod( 'header_slider_pause', '3000' ) . "}); };
 		</script>
 		";
 	}
@@ -155,11 +164,14 @@ class Fastfood_Header_Image_Slider {
 			$height = "height: {$height}px";
 
 		$output = '';
+		shuffle( $slides );
+		$count = count( $slides ) - 1;
 		foreach( $slides as $key => $slide ) {
+			$style = ( $count == $key ) ? '' : 'style="display:none;" ';
 			if ( $fastfood_opt['fastfood_head_link'] == 1 )
-				$output .= "<a href='" . home_url() . "'><img src='{$slide['url']}' alt='{$key}' /></a>";
+				$output .= "<a href='" . home_url() . "'><img {$style}src='{$slide['url']}' alt='{$key}' /></a>";
 			else
-				$output .= "<img src='{$slide['url']}' alt='{$key}' />";
+				$output .= "<img {$style}src='{$slide['url']}' alt='{$key}' />";
 		}
 		return "
 				<div id='head-wrap'>

@@ -191,7 +191,7 @@ img.alignright,
 	padding:4px 12px 5px 10px;
 }
 #crumbs li.first a:hover {
-	background:#ccc url(images/breadcrumb-rtl.png) no-repeat right -40px;
+	background:#ccc url(images/breadcrumb-rtl.png) no-repeat right -400px;
 }
 #crumbs li.last {
 	background:#404040 url(images/breadcrumb-rtl.png) no-repeat right 0;

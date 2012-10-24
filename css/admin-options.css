@@ -85,6 +85,9 @@ input[type="radio"] {
 	border: 1px solid #eee;
 	margin-bottom: 20px;
 }
+.tab-opt:hover {
+	background: #f9f9f9;
+}
 .sub-opt-wrap {
 	margin-top: 10px;
 	padding-top: 10px;

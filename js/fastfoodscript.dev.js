@@ -224,17 +224,19 @@ fastfoodAnimations = {
 
 		// Take the options that the user selects, and merge them with defaults.
 		options = $.extend(defaults, options);
-		
+
 		return $('#slide-head').each(function() {
-		
+
 			// cache "this."
 			var $this = $(this);
-			
+
+			$('img',$this).css("display","");
+
 			if ($this.children().size() > 1) {
 				// call the slide function.
 				timId = slide();
 			}
-			
+
 			function slide() {
 				timId = setInterval(function() {
 					$this

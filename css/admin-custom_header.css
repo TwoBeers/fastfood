@@ -31,3 +31,6 @@
 .random-header label {
 	margin-right: 10px;
 }
+#slider-settings+.available-headers .default-header:nth-child(3n+1) {
+	clear: left;
+}

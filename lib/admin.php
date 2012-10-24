@@ -88,60 +88,6 @@ function fastfood_get_coa( $option = false ) {
 							'info' => sprintf ( __( 'enable the %s feature','fastfood' ), '<a href="http://codex.wordpress.org/Post_Formats" target="_blank">Post Formats</a>'),
 							'req' => ''
 		),
-		'fastfood_post_formats_gallery' => 
-						array(
-							'group' => 'postformats',
-							'type' => 'chk',
-							'default' => 1,
-							'description' => __( '"gallery" format','fastfood' ),
-							'info' => '',
-							'req' => 'fastfood_post_formats',
-							'sub' => array('fastfood_post_formats_gallery_title','fastfood_post_formats_gallery_content')
-		),
-		'fastfood_post_formats_gallery_title' => 
-						array(
-							'group' => 'postformats',
-							'type' => 'sel',
-							'default' => 'post title',
-							'options' => array( 'post title', 'post date', 'none' ),
-							'options_readable' => array( __( 'post title','fastfood' ), __( 'post date','fastfood' ), __( 'none','fastfood' ) ),
-							'description' => __( 'title','fastfood' ),
-							'info' => __( 'the title to show on indexes','fastfood' ),
-							'req' => '',
-							'sub' => false
-		),
-		'fastfood_post_formats_gallery_content' => 
-						array(
-							'group' => 'postformats',
-							'type' => 'sel',
-							'default' => 'presentation',
-							'options'=>array( 'presentation', 'content', 'excerpt', 'none'),
-							'options_readable'=>array( __( 'presentation','fastfood' ), __( 'content','fastfood' ), __( 'excerpt','fastfood' ), __( 'none','fastfood' ) ),
-							'description' => __( 'content','fastfood' ),
-							'info' => __( 'the content to show on indexes','fastfood' ),
-							'req' => '',
-							'sub' => false
-		),
-		'fastfood_post_formats_aside' => 
-						array(
-							'group' => 'postformats',
-							'type' => 'chk',
-							'default' => 1,
-							'description' => __( '"aside" format','fastfood' ),
-							'info' => '',
-							'req' => 'fastfood_post_formats',
-							'sub' => array('fastfood_post_view_aside')
-		),
-		'fastfood_post_formats_status' => 
-						array(
-							'group' => 'postformats',
-							'type' => 'chk',
-							'default' => 1,
-							'description' => __( '"status" format','fastfood' ),
-							'info' => '',
-							'req' => 'fastfood_post_formats',
-							'sub' => array('fastfood_post_view_status')
-		),
 		'fastfood_post_formats_standard' => 
 						array(
 							'group' => 'postformats',
@@ -176,6 +122,59 @@ function fastfood_get_coa( $option = false ) {
 							'req' => '',
 							'sub' => false
 		),
+		'fastfood_post_formats_gallery' => 
+						array(
+							'group' => 'postformats',
+							'type' => 'chk',
+							'default' => 1,
+							'description' => __( '"gallery" format','fastfood' ),
+							'info' => '',
+							'req' => 'fastfood_post_formats',
+							'sub' => array('fastfood_post_formats_gallery_title','fastfood_post_formats_gallery_content')
+		),
+		'fastfood_post_formats_gallery_title' => 
+						array(
+							'group' => 'postformats',
+							'type' => 'sel',
+							'default' => 'post title',
+							'options' => array( 'post title', 'post date', 'none' ),
+							'options_readable' => array( __( 'post title','fastfood' ), __( 'post date','fastfood' ), __( 'none','fastfood' ) ),
+							'description' => __( 'title','fastfood' ),
+							'info' => __( 'the title to show on indexes','fastfood' ),
+							'req' => '',
+							'sub' => false
+		),
+		'fastfood_post_formats_gallery_content' => 
+						array(
+							'group' => 'postformats',
+							'type' => 'sel',
+							'default' => 'presentation',
+							'options'=>array( 'presentation', 'content', 'excerpt', 'none'),
+							'options_readable'=>array( __( 'presentation','fastfood' ), __( 'content','fastfood' ), __( 'excerpt','fastfood' ), __( 'none','fastfood' ) ),
+							'description' => __( 'content','fastfood' ),
+							'info' => __( 'the content to show on indexes','fastfood' ),
+							'req' => '',
+							'sub' => false
+		),
+		'fastfood_post_formats_quote' => 
+						array(
+							'group' => 'postformats',
+							'type' => 'chk',
+							'default' => 1,
+							'description' => __( '"quote" format','fastfood' ),
+							'info' => '',
+							'req' => 'fastfood_post_formats'
+		),
+		'fastfood_post_formats_aside' => 
+						array(
+							'group' => 'postformats',
+							'type' => 'chk',
+							'default' => 1,
+							'description' => __( '"aside" format','fastfood' ),
+							'info' => '',
+							'req' => 'fastfood_post_formats',
+							'sub' => array('fastfood_post_view_aside')
+		),
 		'fastfood_post_view_aside' => 
 						array(
 							'group' => 'postformats',
@@ -185,6 +184,16 @@ function fastfood_get_coa( $option = false ) {
 							'info' => __( 'by deselecting this option, the "aside" posts will be ignored and will not appear on indexes','fastfood' ),
 							'req' => 'fastfood_post_formats_aside',
 							'sub' => false
+		),
+		'fastfood_post_formats_status' => 
+						array(
+							'group' => 'postformats',
+							'type' => 'chk',
+							'default' => 1,
+							'description' => __( '"status" format','fastfood' ),
+							'info' => '',
+							'req' => 'fastfood_post_formats',
+							'sub' => array('fastfood_post_view_status')
 		),
 		'fastfood_post_view_status' => 
 						array(
@@ -915,7 +924,7 @@ function fastfood_get_coa( $option = false ) {
 							'type' => 'chk',
 							'default' => 1,
 							'description' => __( 'theme credits','fastfood' ),
-							'info' => __( "please, don't hide theme credits",'fastfood' ),
+							'info' => __( 'It is completely optional, but if you like the Theme we would appreciate it if you keep the credit link at the bottom','fastfood' ),
 							'req' => '' )
 	);
 

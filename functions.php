@@ -14,6 +14,11 @@ add_action( 'wp_print_styles', 'fastfood_deregister_styles', 100 ); // deregiste
 /* custom filters */
 add_filter( 'the_content', 'fastfood_content_replace' );
 add_filter( 'img_caption_shortcode', 'fastfood_img_caption_shortcode', 10, 3 );
+add_filter( 'previous_posts_link_attributes', 'fastfood_previous_posts_link_attributes', 10, 1 );
+add_filter( 'next_posts_link_attributes', 'fastfood_next_posts_link_attributes', 10, 1 );
+add_filter( 'the_content', 'fastfood_quote_content' );
+add_filter( 'post_gallery', 'fastfood_gallery_shortcode', 10, 2 );
+add_filter( 'tb_chat_load_style', '__return_false' );
 
 // load theme options in $fastfood_opt variable, globally retrieved in php files
 $fastfood_opt = get_option( 'fastfood_options' );
@@ -26,7 +31,6 @@ require_once( 'lib/the_bird.php' ); // load "the bird" core functions
 require_once( 'mobile/core-mobile.php' ); // load mobile functions
 require_once( 'lib/hooks.php' ); // load the custom hooks
 require_once( 'lib/quickbar.php' ); // load the quickbar functions
-require_once( 'lib/gallery-editor.php' ); // load the gallery editor
 require_once( 'lib/my-custom-background.php' ); // load the custom background feature
 require_once( 'lib/header-image-slider.php' ); // load the custom header stuff
 require_once( 'lib/admin.php' ); // load the admin stuff
@@ -187,7 +191,7 @@ if ( !function_exists( 'fastfood_stylesheet' ) ) {
 				wp_enqueue_style( 'fastfood-adminbar', get_template_directory_uri() . '/css/wpadminbar.css' );
 			}
 			//google font
-			if ( $fastfood_opt['fastfood_google_font_family'] ) wp_enqueue_style( 'ff-google-fonts', 'http://fonts.googleapis.com/css?family=' . str_replace( ' ', '+' , $fastfood_opt['fastfood_google_font_family'] ) );
+			if ( $fastfood_opt['fastfood_google_font_family'] ) wp_enqueue_style( 'ff-google-fonts', 'http://fonts.googleapis.com/css?family=' . urlencode( $fastfood_opt['fastfood_google_font_family'] ) );
 		}
 		//print style
 		wp_enqueue_style( 'fastfood-print-style', get_template_directory_uri() . '/css/print.css', false, $fastfood_version, 'print' );
@@ -369,7 +373,8 @@ if ( !function_exists( 'fastfood_featured_title' ) ) {
 		if ( $fastfood_opt['fastfood_featured_title'] == 0 ) $args['featured'] = false;
 		$thumb = ( $args['featured'] && has_post_thumbnail( $post->ID ) ) ? get_the_post_thumbnail( $post->ID, array( $fastfood_opt['fastfood_featured_title_size'], $fastfood_opt['fastfood_featured_title_size'] ) ) : '';
 		$title_class = $thumb ? 'entry-title storytitle featured-' . $fastfood_opt['fastfood_featured_title_size'] : 'storytitle';
-		if ( $post_title || $thumb ) $post_title = '<h2 class="' . $title_class . '"><a title="' . $args['title'] . '" href="' . $args['href'] . '"' . $link_target . ' rel="bookmark">' . $thumb . $post_title . '</a></h2>';
+		$title_content = is_singular() ? $thumb . $post_title : '<a title="' . $args['title'] . '" href="' . $args['href'] . '"' . $link_target . ' rel="bookmark">' . $thumb . $post_title . '</a>';
+		if ( $post_title || $thumb ) $post_title = '<h2 class="' . $title_class . '">' . $title_content . '</h2>';
 
 		echo $post_title;
 	}
@@ -707,15 +712,6 @@ if ( !function_exists( 'fastfood_I_like_it_js' ) ) {
 	}
 }
 
-//add a fix for embed videos overlying quickbar
-if ( !function_exists( 'fastfood_content_replace' ) ) {
-	function fastfood_content_replace( $content ){
-		$content = str_replace( '<param name="allowscriptaccess" value="always">', '<param name="allowscriptaccess" value="always"><param name="wmode" value="transparent">', $content );
-		$content = str_replace( '<embed ', '<embed wmode="transparent" ', $content );
-		return $content;
-	}
-}
-
 // set up custom colors and header image
 if ( !function_exists( 'fastfood_setup' ) ) {
 	function fastfood_setup() {
@@ -740,6 +736,7 @@ if ( !function_exists( 'fastfood_setup' ) ) {
 			if ( $fastfood_opt['fastfood_post_formats_gallery'] == 1 ) $pformats[] = 'gallery';
 			if ( $fastfood_opt['fastfood_post_formats_aside'] == 1 ) $pformats[] = 'aside';
 			if ( $fastfood_opt['fastfood_post_formats_status'] == 1 ) $pformats[] = 'status';
+			if ( $fastfood_opt['fastfood_post_formats_quote'] == 1 ) $pformats[] = 'quote';
 			add_theme_support( 'post-formats', $pformats );
 		}
 
@@ -820,20 +817,10 @@ if ( !function_exists( 'fastfood_setup_custom_header' ) ) {
 			'wp-head-callback'		=> 'fastfood_header_style',
 			'admin-head-callback'	=> ''
 		);
-	 
+
 		$args = apply_filters( 'fastfood_custom_header_args', $args );
-	 
-		if ( function_exists( 'get_custom_header' ) ) {
-			add_theme_support( 'custom-header', $args );
-		} else {
-			// Compatibility with versions of WordPress prior to 3.4.
-			define( 'HEADER_TEXTCOLOR',		$args['default-text-color'] );
-			define( 'NO_HEADER_TEXT',		$args['header-text'] );
-			define( 'HEADER_IMAGE',			$args['default-image'] );
-			define( 'HEADER_IMAGE_WIDTH',	$args['width'] );
-			define( 'HEADER_IMAGE_HEIGHT',	$args['height'] );
-			add_custom_image_header( $args['wp-head-callback'], $args['admin-head-callback'] );
-		}
+
+		add_theme_support( 'custom-header', $args );
 	}
 }
 
@@ -882,11 +869,7 @@ if ( !function_exists( 'fastfood_header_style' ) ) {
 			$style = 'color:#' . get_header_textcolor() . ';';
 
 
-		if ( function_exists( 'get_custom_header' ) )
-			$min_height = get_custom_header()->height;
-		else // Compatibility with versions of WordPress prior to 3.4.
-			$min_height = HEADER_IMAGE_HEIGHT;
-			
+		$min_height = get_custom_header()->height;
 
 		?>
 <style type="text/css">
@@ -974,6 +957,137 @@ if ( !function_exists( 'fastfood_addgravatar' ) ) {
 	add_filter( 'avatar_defaults', 'fastfood_addgravatar' );
 }
 
+//add a fix for embed videos overlying quickbar
+if ( !function_exists( 'fastfood_content_replace' ) ) {
+	function fastfood_content_replace( $content ){
+		$content = str_replace( '<param name="allowscriptaccess" value="always">', '<param name="allowscriptaccess" value="always"><param name="wmode" value="transparent">', $content );
+		$content = str_replace( '<embed ', '<embed wmode="transparent" ', $content );
+		return $content;
+	}
+}
+
+function fastfood_quote_content( $content ) {
+	global $fastfood_opt;
+
+	/* Check if we're displaying a 'quote' post. */
+	if ( has_post_format( 'quote' ) && $fastfood_opt['fastfood_post_formats_quote'] == 1 ) {
+
+		/* Match any <blockquote> elements. */
+		preg_match( '/<blockquote.*?>/', $content, $matches );
+
+		/* If no <blockquote> elements were found, wrap the entire content in one. */
+		if ( empty( $matches ) )
+			$content = "<blockquote>{$content}</blockquote>";
+	}
+
+	return $content;
+}
+
+// the gallery shortcode filter. supports 'ids' attribute (WP3.5)
+function fastfood_gallery_shortcode( $output, $attr ) {
+	global $post, $wp_locale, $fastfood_opt;
+
+	static $instance = 0;
+	$instance++;
+
+	// We're trusting author input, so let's at least make sure it looks like a valid orderby statement
+	if ( isset( $attr['orderby'] ) ) {
+		$attr['orderby'] = sanitize_sql_orderby( $attr['orderby'] );
+		if ( !$attr['orderby'] )
+			unset( $attr['orderby'] );
+	}
+
+	extract(shortcode_atts(array(
+		'order'      => 'ASC',
+		'orderby'    => 'menu_order ID',
+		'id'         => $post->ID,
+		'itemtag'    => 'dl',
+		'icontag'    => 'dt',
+		'captiontag' => 'dd',
+		'columns'    => 3,
+		'size'       => 'thumbnail',
+		'ids'        => '',
+		'include'    => '',
+		'exclude'    => ''
+	), $attr));
+
+	if ( $fastfood_opt['fastfood_force_link_to_image'] == 1 ) $attr['link'] = 'file';
+
+	$id = intval($id);
+	if ( 'RAND' == $order )
+		$orderby = 'none';
+
+	if ( !empty( $ids ) ) {
+		// what's the difference between 'ids' and 'include'? 'ids' attribute is almost useless
+		$include = $ids;
+	}
+
+	if ( !empty( $include ) ) {
+		// 'include' is explicitly ordered
+		$orderby = 'post__in';
+	}
+
+	if ( !empty($include) ) {
+		$_attachments = get_posts( array('include' => $include, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $order, 'orderby' => $orderby) );
+
+		$attachments = array();
+		foreach ( $_attachments as $key => $val ) {
+			$attachments[$val->ID] = $_attachments[$key];
+		}
+	} elseif ( !empty($exclude) ) {
+		$attachments = get_children( array('post_parent' => $id, 'exclude' => $exclude, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $order, 'orderby' => $orderby) );
+	} else {
+		$attachments = get_children( array('post_parent' => $id, 'post_status' => 'inherit', 'post_type' => 'attachment', 'post_mime_type' => 'image', 'order' => $order, 'orderby' => $orderby) );
+	}
+
+	if ( empty($attachments) )
+		return '';
+
+	if ( is_feed() ) {
+		$output = "\n";
+		foreach ( $attachments as $att_id => $attachment )
+			$output .= wp_get_attachment_link($att_id, $size, true) . "\n";
+		return $output;
+	}
+
+	$itemtag = tag_escape($itemtag);
+	$captiontag = tag_escape($captiontag);
+	$columns = intval($columns);
+	$float = is_rtl() ? 'right' : 'left';
+
+	$selector = "gallery-{$instance}";
+
+	$size_class = sanitize_html_class( $size );
+	$gallery_div = "<div id='$selector' class='gallery galleryid-{$id} gallery-columns-{$columns} gallery-size-{$size_class}'>";
+	$output = $gallery_div;
+
+	$i = 0;
+	foreach ( $attachments as $id => $attachment ) {
+		$link = isset($attr['link']) && 'file' == $attr['link'] ? wp_get_attachment_link($id, $size, false, false) : wp_get_attachment_link($id, $size, true, false);
+
+		$output .= "<{$itemtag} class='gallery-item'>";
+		$output .= "
+			<{$icontag} class='gallery-icon'>
+				$link
+			</{$icontag}>";
+		if ( $captiontag && trim($attachment->post_excerpt) ) {
+			$output .= "
+				<{$captiontag} class='wp-caption-text gallery-caption'>
+				" . wptexturize($attachment->post_excerpt) . "
+				</{$captiontag}>";
+		}
+		$output .= "</{$itemtag}>";
+		if ( $columns > 0 && ++$i % $columns == 0 )
+			$output .= '<br style="clear: both" />';
+	}
+
+	$output .= "
+			<br style='clear: both;' />
+		</div>\n";
+
+	return $output;
+}
+
 // custom image caption
 if ( !function_exists( 'fastfood_img_caption_shortcode' ) ) {
 	function fastfood_img_caption_shortcode( $deprecated, $attr, $content = null ) {
@@ -993,6 +1107,18 @@ if ( !function_exists( 'fastfood_img_caption_shortcode' ) ) {
 		return '<div ' . $id . 'class="wp-caption ' . esc_attr( $align ) . '" style="width: ' . $width . 'px"><div class="wp-caption-inside">'
 		. do_shortcode( $content ) . '<div class="wp-caption-text">' . $caption . '</div></div></div>';
 	}
+}
+
+// add a title to previous posts link
+function fastfood_previous_posts_link_attributes( $attr ) {
+	$attr = $attr . ' title="' . esc_attr( __( 'Newer Posts', 'fastfood' ) ) . '" ';
+	return $attr;
+}
+
+// add a title to next posts link
+function fastfood_next_posts_link_attributes( $attr ) {
+	$attr = $attr . ' title="' . esc_attr( __( 'Older Posts', 'fastfood' ) ) . '" ';
+	return $attr;
 }
 
 // add links to admin bar

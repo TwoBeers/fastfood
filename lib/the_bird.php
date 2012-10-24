@@ -25,14 +25,8 @@ add_filter( 'excerpt_more', 'fastfood_excerpt_more' );
 add_filter( 'the_content_more_link', 'fastfood_more_link', 10, 2 );
 add_filter( 'wp_title', 'fastfood_filter_wp_title' );
 
-// get theme version
-if ( function_exists( 'wp_get_theme' ) ) {
-	$fastfood_theme = wp_get_theme( 'fastfood' );
-	$fastfood_current_theme = wp_get_theme();
-} else { // Compatibility with versions of WordPress prior to 3.4.
-	$fastfood_theme = get_theme( 'Fastfood' );
-	$fastfood_current_theme = get_current_theme();
-}
+$fastfood_theme = wp_get_theme( 'fastfood' );
+$fastfood_current_theme = wp_get_theme();
 $fastfood_version = $fastfood_theme? $fastfood_theme['Version'] : '';
 
 // check if in preview mode or not
@@ -210,33 +204,50 @@ if ( !function_exists( 'fastfood_share_this' ) ) {
 			'reddit' => 1,
 			'stumbleupon' => 1,
 			'digg' => 1,
+			'orkut' => 1,
 			'bookmarks' => 1,
 			'blogger' => 1,
-			'delicious' => 1
+			'delicious' => 1,
+			'linkedin' => 1,
+			'tumblr' => 1,
+			'mail' => 1
 		);
 		$args = wp_parse_args( $args, $defaults );
 
 		$share = array();
-		$pName = rawurlencode( $post->post_title );
+		$pName = rawurlencode( get_the_title( $post->ID ) );
 		$pHref = rawurlencode( home_url() . '/?p=' . $post->ID );
+		$pLongHref = rawurlencode( get_permalink( $post->ID ) );
 		$pPict = rawurlencode( wp_get_attachment_url( get_post_thumbnail_id( $post->ID ) ) );
+		$pSource = rawurlencode( get_bloginfo( 'name' ) );
+		if ( !empty( $post->post_password ) )
+			$pSum = '';
+		elseif ( has_excerpt() )
+			$pSum = rawurlencode( get_the_excerpt() );
+		else
+			$pSum = rawurlencode( wp_trim_words( $post->post_content ) );
 
-		$share['twitter'] = array( 'Twitter', 'http://twitter.com/home?status=' . $pName . ' - ' . $pHref );
-		$share['facebook'] = array( 'Facebook', 'http://www.facebook.com/sharer.php?u=' . $pHref.'&t=' . $pName );
+		$share['twitter'] = array( 'Twitter', 'http://twitter.com/home?status=' . $pName . '%20-%20' . $pHref );
+		$share['facebook'] = array( 'Facebook', 'http://www.facebook.com/sharer.php?u=' . $pHref. '&t=' . $pName );
 		$share['sina'] = array( 'Weibo', 'http://v.t.sina.com.cn/share/share.php?url=' . $pHref );
 		$share['tencent'] = array( 'Tencent', 'http://v.t.qq.com/share/share.php?url=' . $pHref . '&title=' . $pName . '&pic=' . $pPict );
 		$share['qzone'] = array( 'Qzone', 'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' . $pHref );
 		$share['reddit'] = array( 'Reddit', 'http://reddit.com/submit?url=' . $pHref . '&title=' . $pName );
 		$share['stumbleupon'] = array( 'StumbleUpon', 'http://www.stumbleupon.com/submit?url=' . $pHref . '&title=' . $pName );
 		$share['digg'] = array( 'Digg', 'http://digg.com/submit?url=' . $pHref . '&title=' . $pName );
-		$share['bookmarks'] = array( 'Bookmarks', 'https://www.google.com/bookmarks/mark?op=edit&bkmk=' . $pHref . '&title=' . $pName );
+		$share['orkut'] = array( 'Orkut', 'http://promote.orkut.com/preview?nt=orkut.com&tt=' . $pName . '&du=' . $pHref . '&tn=' . $pPict );
+		$share['bookmarks'] = array( 'Bookmarks', 'https://www.google.com/bookmarks/mark?op=edit&bkmk=' . $pHref . '&title=' . $pName . '&annotation=' . $pSum );
 		$share['blogger'] = array( 'Blogger', 'http://www.blogger.com/blog_this.pyra?t&u=' . $pHref . '&n=' . $pName . '&pli=1' );
-		$share['delicious'] = array( 'Delicious', 'http://delicious.com/save?v=5&noui&jump=close&url=' . $pHref . '&title=' . $pName );
+		$share['delicious'] = array( 'Delicious', 'http://delicious.com/post?url=' . $pHref . '&title=' . $pName . '&notes=' . $pSum );
+		$share['linkedin'] = array( 'LinkedIn', 'http://www.linkedin.com/shareArticle?mini=true&url=' . $pHref . '&title=' . $pName . '&source=' . $pSource . '&summary=' . $pSum );
+		$share['tumblr'] = array( 'Tumblr', 'http://www.tumblr.com/share?v=3&u=' . $pHref . '&t=' . $pName . '&s=' . $pSum );
+		$share['mail'] = array( 'e-mail', 'mailto:?subject=' . rawurlencode ( __( 'Check it out!', 'fastfood' ) ) . '&body=' . $pName . '%20-%20' . $pLongHref . '%0D%0A' . $pSum );
 
 		$outer = '<div class="article-share fixfloat">';
 		foreach( $share as $key => $btn ){
 			if ( $args[$key] )
-				$outer .= '<a class="share-item" rel="nofollow" target="_blank" id="tb-share-with-' . $key . '" href="' . $btn[1] . '"><img src="' . get_template_directory_uri() . '/images/follow/' . strtolower( $key ) . '.png" width="' . $args['size'] . '" height="' . $args['size'] . '" alt="' . $btn[0] . ' Button"  title="' . sprintf( __( 'Share with %s', 'fastfood' ), $btn[0] ) . '" /></a>';
+				$target = ( $key != 'mail' ) ? ' target="_blank"' : '';
+				$outer .= '<a class="share-item" rel="nofollow"' . $target . ' id="tb-share-with-' . $key . '" href="' . $btn[1] . '"><img src="' . get_template_directory_uri() . '/images/follow/' . strtolower( $key ) . '.png" width="' . $args['size'] . '" height="' . $args['size'] . '" alt="' . $btn[0] . ' Button"  title="' . sprintf( __( 'Share with %s', 'fastfood' ), $btn[0] ) . '" /></a>';
 		}
 		$outer .= '</div>';
 		if ( $args['echo'] ) echo $outer; else return $outer;
@@ -836,17 +847,15 @@ function fastfood_title_tags_filter( $title, $id = null ) {
 
 	if ( is_admin() ) return $title;
 
-	$title = strip_tags( $title, '<abbr><acronym><b><em><i><del><ins><bdo><strong>' );
+	$title = strip_tags( $title, '<abbr><acronym><b><em><i><del><ins><bdo><strong><img><sub><sup>' );
 
 	if ( $id == null ) return $title;
 
-	if ( !$fastfood_opt['fastfood_blank_title'] ) return $title;
-
 	if ( empty( $title ) ) {
-		if ( !isset( $fastfood_opt['fastfood_blank_title_text'] ) || empty( $fastfood_opt['fastfood_blank_title_text'] ) ) return __( '(no title)', 'fastfood' );
+		if ( !isset( $fastfood_opt['fastfood_blank_title'] ) || empty( $fastfood_opt['fastfood_blank_title'] ) ) return __( '(no title)', 'fastfood' );
 		$postdata = array( get_post_format( $id )? get_post_format_string( get_post_format( $id ) ): __( 'Post', 'fastfood' ), get_the_time( get_option( 'date_format' ), $id ) );
 		$codes = array( '%f', '%d' );
-		return str_replace( $codes, $postdata, $fastfood_opt['fastfood_blank_title_text'] );
+		return str_replace( $codes, $postdata, $fastfood_opt['fastfood_blank_title'] );
 	} else
 		return $title;
 }
@@ -936,7 +945,7 @@ if ( !function_exists( 'fastfood_post_manage_style' ) ) {
 function fastfood_filter_wp_title( $title ) {
 	if ( is_single() && empty( $title ) ) {
 		$_post = get_queried_object();
-		$title = fastfood_empty_titles_filter( '', $_post->ID ) . ' &laquo; ';
+		$title = fastfood_title_tags_filter( '', $_post->ID ) . ' &laquo; ';
 	}
     // Get the Site Name
     $site_name = get_bloginfo( 'name' );

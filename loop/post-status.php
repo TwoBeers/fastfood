@@ -6,7 +6,7 @@
 		<div class="status-subcont">
 			<div><small><strong><a href="<?php echo get_author_posts_url( get_the_author_meta( 'ID' ) ); ?>" title="<?php printf( __( 'View all posts by %s', 'fastfood' ), esc_attr( get_the_author() ) ); ?>"><?php echo get_the_author(); ?></a><?php edit_post_link( __( 'Edit', 'fastfood' ),' - ' ); ?></strong></small></div>
 			<?php the_content(); ?>
-			<div class="fixfloat status-date"><small><?php echo fastfood_friendly_date(); ?></small></div>
+			<div class="fixfloat status-date"><small><?php echo fastfood_friendly_date(); ?></small> <a href="<?php the_permalink() ?>" rel="bookmark">&rarr;</a></div>
 		</div>
 	</div>
 	<div class="fixfloat"> </div>
