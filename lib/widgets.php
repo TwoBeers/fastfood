@@ -1,8 +1,11 @@
 <?php
-
 /**
  * Fastfood Widgets
+ *
+ * @package fastfood
+ * @since fastfood 0.27
  */
+
 
 /**
  * Popular_Posts widget class
@@ -330,7 +333,7 @@ class fastfood_widget_latest_commentators extends WP_Widget {
 			<input id="<?php echo $this->get_field_id( 'number' ); ?>" name="<?php echo $this->get_field_name( 'number' ); ?>" type="text" value="<?php echo $number; ?>" size="3" />
 		</p>
 		<p>
-            <label for="<?php echo $this->get_field_id( 'icon_size' ); ?>"><?php _e( 'Select your icon size', 'fastfood' ); ?></label><br />
+            <label for="<?php echo $this->get_field_id( 'icon_size' ); ?>"><?php _e( 'Select your icon size', 'fastfood' ); ?></label><br>
             <select name="<?php echo $this->get_field_name( 'icon_size' ); ?>" id="<?php echo $this->get_field_id( 'icon_size' ); ?>" >
 <?php
             $size_array = array( '16', '24', '32', '40', '50', '60' );
@@ -520,7 +523,7 @@ class fastfood_Widget_social extends WP_Widget {
         }
 ?>
         <div class="clear" style="padding: 10px 0; border-top: 1px solid #DFDFDF; text-align: right;">
-            <label for="<?php echo $this->get_field_id( 'icon_size' ); ?>"><?php _e( 'Select your icon size', 'fastfood' ); ?></label><br />
+            <label for="<?php echo $this->get_field_id( 'icon_size' ); ?>"><?php _e( 'Select your icon size', 'fastfood' ); ?></label><br>
             <select name="<?php echo $this->get_field_name( 'icon_size' ); ?>" id="<?php echo $this->get_field_id( 'icon_size' ); ?>" >
 <?php
             $size_array = array ( '16px', '24px', '32px', '40px', '50px', '60px' );

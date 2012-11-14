@@ -1,3 +1,14 @@
+<?php
+/**
+ * post with 'status' format (list view)
+ *
+ * @package fastfood
+ * @since fastfood 0.24
+ */
+
+
+?>
+
 <div <?php post_class() ?> id="post-<?php the_ID(); ?>">
 	<div class="status-cont">
 		<div class="status-avatar">

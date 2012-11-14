@@ -688,6 +688,12 @@ li.current_page_ancestor .hiraquo {
 	top: -20px;
 	right: 2px;
 	width: 20px;
+	opacity: 0.8;
+	filter: alpha(opacity=80);
+}
+#rss_imglink:hover {
+	opacity: 1;
+	filter: alpha(opacity=100);
 }
 .mentit {
 	color: #ccc;
@@ -1356,7 +1362,7 @@ ul.children {
 	cursor: move;
 	background-image: url('images/drag.png');
 	background-repeat: no-repeat;
-	background-position: 2px 2px;
+	background-position: 2px 4px;
 }
 #respond {
 	padding-top: 10px;
@@ -1427,7 +1433,7 @@ ul.children {
 #tb-quotethis {
 	display: block;
 	position: absolute;
-	right: 0;
+	right: -6px;
 	width: 16px;
 	height: 16px;
 	background: transparent url('images/minibuttons.png') -80px -240px no-repeat;

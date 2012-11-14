@@ -1,3 +1,13 @@
+<?php
+/**
+ * mobile subtheme -> main index
+ *
+ * @package fastfood
+ * @since fastfood 0.31
+ */
+
+
+?>
 <?php locate_template( array( 'mobile/header-mobile.php' ), true, false ); ?>
 <?php
 	$sw_strtype = __( 'Posts', 'fastfood' );
@@ -17,7 +27,7 @@
 			<a href="<?php the_permalink() ?>" rel="bookmark">
 				<span class="tbm-format f-<?php echo get_post_format( $post->ID ); ?>"></span>
 				<?php the_title(); ?>
-				<br />
+				<br>
 				<span class="tbm-details"><?php the_author(); ?> - <?php the_time( get_option( 'date_format' ) ); ?> - <?php comments_number('(0)', '(1)','(%)'); ?></span>
 			</a>
 		</li>

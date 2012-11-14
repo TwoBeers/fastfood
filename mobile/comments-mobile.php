@@ -1,3 +1,14 @@
+<?php
+/**
+ * mobile subtheme -> comments
+ *
+ * @package fastfood
+ * @since fastfood 0.31
+ */
+
+
+?>
+
 <!-- begin comments -->
 <?php
 	if ( post_password_required() ) { ?>

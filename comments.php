@@ -4,12 +4,12 @@
 		echo '<div class="comment_tools" id="comments">' . __( 'Enter your password to view comments.','fastfood' ) . '</div>';
 		return;
 	}
-		global $fastfood_opt, $fastfood_is_printpreview, $fastfood_is_mobile, $fastfood_is_ie6;
+		global $fastfood_is_printpreview;
 ?>
 
 	<?php if ( comments_open() ) { ?>
 		<div class="comment_tools" id="comments">
-			<?php comments_number( __( 'No Comments','fastfood' ), __( '1 Comment','fastfood' ), __( '% Comments','fastfood' ) ); ?> - <a href="#respond" title="<?php _e( "Leave a comment",'fastfood' ); ?>" <?php if ( !$fastfood_is_printpreview && ( $fastfood_opt['fastfood_cust_comrep'] == 1 ) && !$fastfood_is_mobile ) echo 'onclick="return addComment.viewForm()"'; ?> ><?php _e( "Leave a comment",'fastfood' ); ?></a>
+			<?php comments_number( __( 'No Comments','fastfood' ), __( '1 Comment','fastfood' ), __( '% Comments','fastfood' ) ); ?> - <a class="show_comment_form" href="#respond" title="<?php _e( "Leave a comment",'fastfood' ); ?>" ><?php _e( "Leave a comment",'fastfood' ); ?></a>
 		</div>
 		<?php
 	} elseif ( have_comments() ) { ?>
@@ -56,31 +56,21 @@
 
 		<?php fastfood_hook_after_comments(); ?>
 	<?php }
-	//if comments are open
-	if ( comments_open() ) { 
-		if ( !$fastfood_is_printpreview ) { //script not to be loaded in print preview
-			//define custom argoments for comment form
-			$ff_custom_args = array(
-				'comment_field'        => '<p class="comment-form-comment"><textarea id="comment" name="comment" cols="45" rows="7" style="width: 95%;max-width: 95%;" aria-required="true"></textarea></p>',
-				'comment_notes_after'  => '<p class="form-allowed-tags"><small>' . sprintf( __( 'You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes: %s','fastfood' ), allowed_tags() ) . '</small></p><input type="hidden" value="' . __('Reply to Comment','fastfood' ) . '" id="replytocomment" name="replytocomment" /><input type="hidden" value="' . __( 'Leave a Reply','fastfood' ) . '" id="replytopost" name="replytopost" />',
-				'label_submit'         => __( 'Say It!','fastfood' ),
-				'logged_in_as'         => '<p class="logged-in-as">' . sprintf( __( 'Logged in as <a href="%1$s">%2$s</a>.','fastfood' ), admin_url( 'profile.php' ), $user_identity ) . '</p>',
-				'cancel_reply_link'    => '<br />' . __( 'Cancel reply','fastfood' ),
-				'title_reply'          => __( 'Leave a comment','fastfood' ),
-			);
 
-			//output comment form
-			comment_form($ff_custom_args); 
-			if ( ( $fastfood_opt['fastfood_cust_comrep'] == 1 ) && !$fastfood_is_mobile && !$fastfood_is_ie6 ) { // disable custom script if default comment-reply is in use ?>
-				<script type="text/javascript">
-					/* <![CDATA[ */
-					addComment.resetForm();
-					addComment.addCloseButton();
-					/* ]]> */
-				</script>
-			<?php } ?>
-		<?php } ?>
-		<div class="fixfloat"></div> <?php 
+	if ( comments_open() && !$fastfood_is_printpreview ) { // if comments are open and not in print preview
+		//define custom argoments for comment form
+		$fastfood_custom_args = array(
+			'comment_field'        => '<p class="comment-form-comment"><textarea id="comment" name="comment" cols="45" rows="7" style="width: 95%;max-width: 95%;" aria-required="true"></textarea></p>',
+			'comment_notes_after'  => '<p class="form-allowed-tags"><small>' . sprintf( __( 'You may use these <abbr title="HyperText Markup Language">HTML</abbr> tags and attributes: %s','fastfood' ), allowed_tags() ) . '</small></p><input type="hidden" value="' . __('Reply to Comment','fastfood' ) . '" id="replytocomment" name="replytocomment" /><input type="hidden" value="' . __( 'Leave a Reply','fastfood' ) . '" id="replytopost" name="replytopost" />',
+			'label_submit'         => __( 'Say It!','fastfood' ),
+			'logged_in_as'         => '<p class="logged-in-as">' . sprintf( __( 'Logged in as <a href="%1$s">%2$s</a>.','fastfood' ), admin_url( 'profile.php' ), $user_identity ) . '</p>',
+			'cancel_reply_link'    => '<br>' . __( 'Cancel reply','fastfood' ),
+			'title_reply'          => __( 'Leave a comment','fastfood' ),
+		);
+
+		//output comment form
+		comment_form($fastfood_custom_args); 
 	}
+	?> <div class="fixfloat"></div> <?php
 ?>
 <!-- end comments -->

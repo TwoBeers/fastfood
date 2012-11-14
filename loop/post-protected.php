@@ -1,4 +1,14 @@
-<?php global $fastfood_opt; ?>
+<?php
+/**
+ * protected post (list view)
+ *
+ * @package fastfood
+ * @since fastfood 0.24
+ */
+
+
+global $fastfood_opt;
+?>
 
 <div <?php post_class() ?> id="post-<?php the_ID(); ?>">
 	<?php fastfood_featured_title( array( 'featured' => false ) ); ?>

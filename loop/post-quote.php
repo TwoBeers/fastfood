@@ -1,4 +1,14 @@
-<?php global $fastfood_opt; ?>
+<?php
+/**
+ * post with 'quote' format (list view)
+ *
+ * @package fastfood
+ * @since fastfood 0.34
+ */
+
+
+global $fastfood_opt;
+?>
 
 <div <?php post_class() ?> id="post-<?php the_ID(); ?>">
 

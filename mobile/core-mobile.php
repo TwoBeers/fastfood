@@ -1,10 +1,11 @@
 <?php
 /**
- * The mobile theme
+ * mobile subtheme -> core functions
  *
  * @package fastfood
  * @since fastfood 0.31
  */
+
 
 // mobile support
 add_action( 'template_redirect', 'fastfood_mobile' );

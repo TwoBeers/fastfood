@@ -6,18 +6,19 @@
  * @since fastfood 0.33
  */
 
+
 /* custom actions */
 add_action( 'admin_init', 'fastfood_default_options' ); // tell WordPress to run fastfood_default_options()
 add_action( 'template_redirect', 'fastfood_allcat' ); // Add custom category page
 add_action( 'admin_head', 'fastfood_post_manage_style' ); // column-thumbnail style
-add_action( 'manage_posts_custom_column', 'fastfood_addthumbvalue', 10, 2 ); // column-thumbnail for posts
-add_action( 'manage_pages_custom_column', 'fastfood_addthumbvalue', 10, 2 ); // column-thumbnail for pages
+add_action( 'manage_posts_custom_column', 'fastfood_add_extra_value', 10, 2 ); // column-thumbnail for posts
+add_action( 'manage_pages_custom_column', 'fastfood_add_extra_value', 10, 2 ); // column-thumbnail for pages
 
 /* custom filters */
 add_filter( 'get_comment_author_link', 'fastfood_add_quoted_on' );
 add_filter( 'user_contactmethods','fastfood_new_contactmethods',10,1 );
-add_filter( 'manage_posts_columns', 'fastfood_addthumbcolumn' ); // column-thumbnail for posts
-add_filter( 'manage_pages_columns', 'fastfood_addthumbcolumn' ); // column-thumbnail for pages
+add_filter( 'manage_posts_columns', 'fastfood_add_extra_column' ); // column-thumbnail for posts
+add_filter( 'manage_pages_columns', 'fastfood_add_extra_column' ); // column-thumbnail for pages
 add_filter( 'the_title', 'fastfood_title_tags_filter', 10, 2 );
 add_filter( 'excerpt_length', 'fastfood_excerpt_length' );
 add_filter( 'excerpt_mblength' , 'fastfood_excerpt_length' ); //WP Multibyte Patch support
@@ -78,7 +79,7 @@ function fastfood_default_options() {
 // print a reminder message for set the options after the theme is installed or updated
 if ( !function_exists( 'fastfood_setopt_admin_notice' ) ) {
 	function fastfood_setopt_admin_notice() {
-		echo '<div class="updated"><p><strong>' . sprintf( __( "%s theme says: \"Dont forget to set <a href=\"%s\">my options</a>!\"", 'fastfood' ), 'Fastfood', get_admin_url() . 'themes.php?page=fastfood_theme_options' ) . '</strong></p></div>';
+		echo '<div class="updated"><p><strong>' . sprintf( __( "%s theme says: Dont forget to set <a href=\"%s\">my options</a>!", 'fastfood' ), 'Fastfood', get_admin_url() . 'themes.php?page=fastfood_theme_options' ) . '</strong></p></div>';
 	}
 }
 if ( current_user_can( 'manage_options' ) && ( $fastfood_opt['version'] < $fastfood_version ) ) {
@@ -108,18 +109,18 @@ if ( !function_exists( 'fastfood_exif_details' ) ) {
 			}
 
 			// Start to display EXIF and IPTC data of digital photograph
-			echo __("Width", "fastfood" ) . ": " . $imgmeta['width']."px<br />";
-			echo __("Height", "fastfood" ) . ": " . $imgmeta['height']."px<br />";
-			if ( $imgmeta['image_meta']['created_timestamp'] ) echo __("Date Taken", "fastfood" ) . ": " . date("d-M-Y H:i:s", $imgmeta['image_meta']['created_timestamp'])."<br />";
-			if ( $imgmeta['image_meta']['copyright'] ) echo __("Copyright", "fastfood" ) . ": " . $imgmeta['image_meta']['copyright']."<br />";
-			if ( $imgmeta['image_meta']['credit'] ) echo __("Credit", "fastfood" ) . ": " . $imgmeta['image_meta']['credit']."<br />";
-			if ( $imgmeta['image_meta']['title'] ) echo __("Title", "fastfood" ) . ": " . $imgmeta['image_meta']['title']."<br />";
-			if ( $imgmeta['image_meta']['caption'] ) echo __("Caption", "fastfood" ) . ": " . $imgmeta['image_meta']['caption']."<br />";
-			if ( $imgmeta['image_meta']['camera'] ) echo __("Camera", "fastfood" ) . ": " . $imgmeta['image_meta']['camera']."<br />";
-			if ( $imgmeta['image_meta']['focal_length'] ) echo __("Focal Length", "fastfood" ) . ": " . $imgmeta['image_meta']['focal_length']."mm<br />";
-			if ( $imgmeta['image_meta']['aperture'] ) echo __("Aperture", "fastfood" ) . ": f/" . $imgmeta['image_meta']['aperture']."<br />";
-			if ( $imgmeta['image_meta']['iso'] ) echo __("ISO", "fastfood" ) . ": " . $imgmeta['image_meta']['iso']."<br />";
-			if ( $pshutter ) echo __("Shutter Speed", "fastfood" ) . ": " . sprintf( '%s seconds', $pshutter) . "<br />"
+			echo __("Width", "fastfood" ) . ": " . $imgmeta['width']."px<br>";
+			echo __("Height", "fastfood" ) . ": " . $imgmeta['height']."px<br>";
+			if ( $imgmeta['image_meta']['created_timestamp'] ) echo __("Date Taken", "fastfood" ) . ": " . date("d-M-Y H:i:s", $imgmeta['image_meta']['created_timestamp'])."<br>";
+			if ( $imgmeta['image_meta']['copyright'] ) echo __("Copyright", "fastfood" ) . ": " . $imgmeta['image_meta']['copyright']."<br>";
+			if ( $imgmeta['image_meta']['credit'] ) echo __("Credit", "fastfood" ) . ": " . $imgmeta['image_meta']['credit']."<br>";
+			if ( $imgmeta['image_meta']['title'] ) echo __("Title", "fastfood" ) . ": " . $imgmeta['image_meta']['title']."<br>";
+			if ( $imgmeta['image_meta']['caption'] ) echo __("Caption", "fastfood" ) . ": " . $imgmeta['image_meta']['caption']."<br>";
+			if ( $imgmeta['image_meta']['camera'] ) echo __("Camera", "fastfood" ) . ": " . $imgmeta['image_meta']['camera']."<br>";
+			if ( $imgmeta['image_meta']['focal_length'] ) echo __("Focal Length", "fastfood" ) . ": " . $imgmeta['image_meta']['focal_length']."mm<br>";
+			if ( $imgmeta['image_meta']['aperture'] ) echo __("Aperture", "fastfood" ) . ": f/" . $imgmeta['image_meta']['aperture']."<br>";
+			if ( $imgmeta['image_meta']['iso'] ) echo __("ISO", "fastfood" ) . ": " . $imgmeta['image_meta']['iso']."<br>";
+			if ( $pshutter ) echo __("Shutter Speed", "fastfood" ) . ": " . sprintf( '%s seconds', $pshutter) . "<br>"
 			?>
 		</div>
 		<?php
@@ -225,7 +226,7 @@ if ( !function_exists( 'fastfood_share_this' ) ) {
 		elseif ( has_excerpt() )
 			$pSum = rawurlencode( get_the_excerpt() );
 		else
-			$pSum = rawurlencode( wp_trim_words( $post->post_content ) );
+			$pSum = rawurlencode( wp_trim_words( $post->post_content, apply_filters('excerpt_length', 55), '[...]' ) );
 
 		$share['twitter'] = array( 'Twitter', 'http://twitter.com/home?status=' . $pName . '%20-%20' . $pHref );
 		$share['facebook'] = array( 'Facebook', 'http://www.facebook.com/sharer.php?u=' . $pHref. '&t=' . $pName );
@@ -720,7 +721,7 @@ if ( !function_exists( 'fastfood_edit_options' ) ) {
 							<?php if ( isset( $the_coa[$key]['sub'] ) ) { ?>
 									<div class="sub-opt-wrap">
 								<?php foreach ($the_coa[$key]['sub'] as $subkey => $subval) { ?>
-									<?php if ( $subval == '' ) { echo '<br />'; continue;} ?>
+									<?php if ( $subval == '' ) { echo '<br>'; continue;} ?>
 										<div class="sub-opt type-<?php echo $the_coa[$subval]['type']; ?>">
 										<?php if ( !isset ($the_opt[$subval]) ) $the_opt[$subval] = $the_coa[$subval]['default']; ?>
 											<?php if ( $the_coa[$subval]['description'] != '' ) { ?><span><?php echo $the_coa[$subval]['description']; ?> : </span><?php } ?>
@@ -747,9 +748,9 @@ if ( !function_exists( 'fastfood_edit_options' ) ) {
 													<input onclick="fastfoodOptions.showColorPicker('<?php echo $subval; ?>');" style="background-color:<?php echo $the_opt[$subval]; ?>;" class="color_preview_box" type="text" id="option_color_box_<?php echo $subval; ?>" value="" readonly="readonly" />
 													<div class="option_cp" id="option_colorpicker_<?php echo $subval; ?>"></div>
 													<input class="option_text" id="option_color_input_<?php echo $subval; ?>" type="text" name="<?php echo $the_option_name; ?>[<?php echo $subval; ?>]" value="<?php echo $the_opt[$subval]; ?>" />
-													<br />
+													<br>
 													<a class="hide-if-no-js" href="#" onclick="fastfoodOptions.showColorPicker('<?php echo $subval; ?>'); return false;"><?php _e( 'Select a Color' , 'fastfood' ); ?></a>
-													<br />
+													<br>
 													<a class="hide-if-no-js" style="color:<?php echo $the_coa[$subval]['default']; ?>;" href="#" onclick="fastfoodOptions.updateColor('<?php echo $subval; ?>','<?php echo $the_coa[$subval]['default']; ?>'); return false;"><?php _e( 'Default' , 'fastfood' ); ?></a>
 													<br class="clear" />
 												</div>
@@ -771,7 +772,7 @@ if ( !function_exists( 'fastfood_edit_options' ) ) {
 					</form>
 					<p class="theme-notes">
 						<small><?php _e( 'If you like/dislike this theme, or if you encounter any issues using it, please let us know it.', 'fastfood' ); ?> &raquo; <a href="<?php echo esc_url( 'http://www.twobeers.net/annunci/tema-per-wordpress-fastfood' ); ?>" title="fastfood theme" target="_blank"><?php _e( 'Leave a feedback', 'fastfood' ); ?></a></small>
-						<br />-<br />
+						<br>-<br>
 						<small>Support the theme in your language, provide a <a href="<?php echo esc_url( 'http://www.twobeers.net/wp-themes/themes-translations-wordpress' ); ?>" title="Themes translation" target="_blank">translation</a>.</small>
 					</p>
 				</div>
@@ -849,12 +850,14 @@ function fastfood_title_tags_filter( $title, $id = null ) {
 
 	$title = strip_tags( $title, '<abbr><acronym><b><em><i><del><ins><bdo><strong><img><sub><sup>' );
 
+	if ( !isset( $fastfood_opt['fastfood_manage_blank_title'] ) || ! $fastfood_opt['fastfood_manage_blank_title'] ) return $title;
+
 	if ( $id == null ) return $title;
 
 	if ( empty( $title ) ) {
-		if ( !isset( $fastfood_opt['fastfood_blank_title'] ) || empty( $fastfood_opt['fastfood_blank_title'] ) ) return __( '(no title)', 'fastfood' );
-		$postdata = array( get_post_format( $id )? get_post_format_string( get_post_format( $id ) ): __( 'Post', 'fastfood' ), get_the_time( get_option( 'date_format' ), $id ) );
-		$codes = array( '%f', '%d' );
+		if ( !isset( $fastfood_opt['fastfood_blank_title'] ) || empty( $fastfood_opt['fastfood_blank_title'] ) ) return '';
+		$postdata = array( get_post_format( $id )? get_post_format_string( get_post_format( $id ) ): __( 'Post', 'fastfood' ), get_the_time( get_option( 'date_format' ), $id ), $id );
+		$codes = array( '%f', '%d', '%n' );
 		return str_replace( $codes, $postdata, $fastfood_opt['fastfood_blank_title'] );
 	} else
 		return $title;
@@ -907,13 +910,14 @@ if ( !function_exists( 'fastfood_new_contactmethods' ) ) {
 }
 
 // Add Thumbnail Column in Manage Posts/Pages List
-function fastfood_addthumbcolumn($cols) {
+function fastfood_add_extra_column($cols) {
+	$cols['id'] = ucwords( 'ID' );
 	$cols['thumbnail'] = ucwords( __('thumbnail', 'fastfood') );
 	return $cols;
 }
 
 // Add Thumbnails in Manage Posts/Pages List
-function fastfood_addthumbvalue($column_name, $post_id) {
+function fastfood_add_extra_value($column_name, $post_id) {
 		$width = (int) 60;
 		$height = (int) 60;
 		if ( 'thumbnail' == $column_name ) {
@@ -926,6 +930,9 @@ function fastfood_addthumbvalue($column_name, $post_id) {
 				echo '';
 			}
 		}
+		if ( 'id' == $column_name ) {
+			echo $post_id;
+		}
 }
 
 // Add Thumbnail Column style in Manage Posts/Pages List
@@ -935,6 +942,9 @@ if ( !function_exists( 'fastfood_post_manage_style' ) ) {
 <style type="text/css">
 	.fixed .column-thumbnail {
 		width: 70px;
+	}
+	.fixed .column-id {
+		width: 50px;
 	}
 </style>
 <?php

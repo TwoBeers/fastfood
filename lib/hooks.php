@@ -1,7 +1,11 @@
 <?php
 /**
  * Contains all hook wrappers.
+ *
+ * @package fastfood
+ * @since fastfood 0.27
  */
+
 
 function fastfood_hook_before_header() {
 	do_action('fastfood_hook_before_header');

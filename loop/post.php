@@ -1,4 +1,14 @@
-<?php global $fastfood_opt; ?>
+<?php
+/**
+ * standard post (without format) (list view)
+ *
+ * @package fastfood
+ * @since fastfood 0.29
+ */
+
+
+global $fastfood_opt;
+?>
 
 <div <?php post_class() ?> id="post-<?php the_ID(); ?>">
 	<?php fastfood_hook_before_post_title(); ?>

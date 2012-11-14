@@ -1,3 +1,13 @@
+<?php
+/**
+ * mobile subtheme -> widget area
+ *
+ * @package fastfood
+ * @since fastfood 0.31
+ */
+
+
+?>
 <!-- here should be the tbm widget area -->
 <?php
 	/* The tbm widget area is triggered if any of the areas have widgets. */

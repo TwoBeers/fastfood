@@ -5,14 +5,14 @@ add_action( 'after_setup_theme', 'fastfood_setup' ); // Tell WordPress to run fa
 add_action( 'widgets_init', 'fastfood_widget_area_init' ); // Register sidebars by running fastfood_widget_area_init() on the widgets_init hook
 add_action( 'wp_enqueue_scripts', 'fastfood_stylesheet' ); // Add stylesheets
 add_action( 'wp_enqueue_scripts', 'fastfood_scripts' ); // Add js animations
-add_action( 'wp_footer', 'fastfood_init_scripts' );
+add_action( 'wp_footer', 'fastfood_body_class_script' );
 add_action( 'wp_footer', 'fastfood_I_like_it_js' );
 add_action( 'init', 'fastfood_post_expander_activate' ); // post expander ajax request
 add_action( 'admin_bar_menu', 'fastfood_admin_bar_plus', 999 ); // add links to admin bar
 add_action( 'wp_print_styles', 'fastfood_deregister_styles', 100 ); // deregister styles
 
 /* custom filters */
-add_filter( 'the_content', 'fastfood_content_replace' );
+add_filter( 'embed_oembed_html', 'fastfood_wmode_transparent', 10, 3);
 add_filter( 'img_caption_shortcode', 'fastfood_img_caption_shortcode', 10, 3 );
 add_filter( 'previous_posts_link_attributes', 'fastfood_previous_posts_link_attributes', 10, 1 );
 add_filter( 'next_posts_link_attributes', 'fastfood_next_posts_link_attributes', 10, 1 );
@@ -26,17 +26,6 @@ $fastfood_opt = get_option( 'fastfood_options' );
 // check if is mobile browser
 $fastfood_is_mobile = false;
 
-// load modules (accordingly to http://justintadlock.com/archives/2010/11/17/how-to-load-files-within-wordpress-themes)
-require_once( 'lib/the_bird.php' ); // load "the bird" core functions
-require_once( 'mobile/core-mobile.php' ); // load mobile functions
-require_once( 'lib/hooks.php' ); // load the custom hooks
-require_once( 'lib/quickbar.php' ); // load the quickbar functions
-require_once( 'lib/my-custom-background.php' ); // load the custom background feature
-require_once( 'lib/header-image-slider.php' ); // load the custom header stuff
-require_once( 'lib/admin.php' ); // load the admin stuff
-if ( $fastfood_opt['fastfood_audio_player'] == 1 ) require_once( 'lib/audio-player.php' ); // load the audio player module
-if ( $fastfood_opt['fastfood_custom_widgets'] == 1 ) require_once( 'lib/widgets.php' ); // load the custom widgets module
-
 // check if is ie6
 $fastfood_is_ie6 = fastfood_ie6_detect();
 
@@ -47,6 +36,18 @@ if ( isset( $_SERVER['HTTP_USER_AGENT'] ) && ( strpos( $_SERVER['HTTP_USER_AGENT
 		return false;
 	}
 }
+
+// load modules (accordingly to http://justintadlock.com/archives/2010/11/17/how-to-load-files-within-wordpress-themes)
+require_once( 'lib/the_bird.php' ); // load "the bird" core functions
+require_once( 'mobile/core-mobile.php' ); // load mobile functions
+require_once( 'lib/hooks.php' ); // load the custom hooks
+require_once( 'lib/quickbar.php' ); // load the quickbar functions
+require_once( 'lib/my-custom-background.php' ); // load the custom background feature
+require_once( 'lib/header-image-slider.php' ); // load the custom header stuff
+require_once( 'lib/comment-reply.php' ); // load comment reply script
+require_once( 'lib/admin.php' ); // load the admin stuff
+if ( $fastfood_opt['fastfood_audio_player'] == 1 ) require_once( 'lib/audio-player.php' ); // load the audio player module
+if ( $fastfood_opt['fastfood_custom_widgets'] == 1 ) require_once( 'lib/widgets.php' ); // load the custom widgets module
 
 // Set the content width based on the theme's design
 if ( ! isset( $content_width ) ) {
@@ -187,14 +188,41 @@ if ( !function_exists( 'fastfood_stylesheet' ) ) {
 				wp_enqueue_style( 'thickbox' );
 			}
 			wp_enqueue_style( 'fastfood-general-style', get_stylesheet_uri(), false, $fastfood_version, 'screen' );
-			if ( $fastfood_opt['fastfood_wpadminbar_css'] == 1 ) {
-				wp_enqueue_style( 'fastfood-adminbar', get_template_directory_uri() . '/css/wpadminbar.css' );
-			}
 			//google font
-			if ( $fastfood_opt['fastfood_google_font_family'] ) wp_enqueue_style( 'ff-google-fonts', 'http://fonts.googleapis.com/css?family=' . urlencode( $fastfood_opt['fastfood_google_font_family'] ) );
+			if ( $fastfood_opt['fastfood_google_font_family'] ) {
+				$gwf_family = 'family=' . urlencode( $fastfood_opt['fastfood_google_font_family'] );
+				$gwf_subset = $fastfood_opt['fastfood_google_font_subset']? '&subset=' . urlencode( str_replace( array(' ','"'), '', $fastfood_opt['fastfood_google_font_subset'] ) ) : '';
+				$gwf_url = 'http://fonts.googleapis.com/css?' . $gwf_family . $gwf_subset;
+				wp_enqueue_style( 'fastfood-google-fonts', $gwf_url );
+			}
 		}
 		//print style
 		wp_enqueue_style( 'fastfood-print-style', get_template_directory_uri() . '/css/print.css', false, $fastfood_version, 'print' );
+	}
+}
+
+// get js modules
+if ( !function_exists( 'fastfood_get_js_modules' ) ) {
+	function fastfood_get_js_modules() {
+		global $fastfood_opt;
+
+		$modules = array(
+			'main_menu',
+			'navigation_buttons',
+			'quickbar_tools',
+			'quickbar_panels',
+			'entry_meta',
+			'widgets_style',
+		);
+		
+		if ( $fastfood_opt['fastfood_post_expand'] )		$modules[] = 'post_expander';
+		if ( $fastfood_opt['fastfood_gallery_preview'] )	$modules[] = 'thickbox';
+		if ( $fastfood_opt['fastfood_quotethis'] )			$modules[] = 'quote_this';
+
+		$modules = implode(',', $modules);
+
+		return $modules;
+
 	}
 }
 
@@ -207,39 +235,27 @@ if ( !function_exists( 'fastfood_scripts' ) ) {
 
 		if ( $fastfood_is_mobile || $fastfood_is_printpreview ) return; //no scripts in print preview or mobile view
 
-		if ( $fastfood_is_ie6 ) { // ie6 scripts
-			if ( is_singular() ) wp_enqueue_script( 'comment-reply' ); //standard comment-reply box
-			return;
-		}
-
 		if ( ( $fastfood_opt['fastfood_jsani'] == 1 ) ) {
-			wp_enqueue_script( 'fastfood-script', get_template_directory_uri() . '/js/fastfoodscript.min.js', array( 'jquery', 'jquery-effects-core' ), $fastfood_version, true  ); //fastfood js
+			wp_enqueue_script( 'fastfood-script', get_template_directory_uri() . '/js/fastfoodscript.dev.js', array( 'jquery', 'jquery-effects-core' ), $fastfood_version, true ); //fastfood js
 			$data = array(
+				'script_modules' => fastfood_get_js_modules(),
 				'post_expander_wait' => __( 'Post loading, please wait...', 'fastfood' ),
 				'quote_link_info' => esc_attr( __( 'Add selected text as a quote', 'fastfood' ) ),
 				'quote_link_alert' => __( 'Nothing to quote. First of all you should select some text...', 'fastfood' )
 			);
 			wp_localize_script( 'fastfood-script', 'fastfood_l10n', $data );
 		}
-		if ( is_singular() ) {
-			if ( ( $fastfood_opt['fastfood_jsani'] == 1 ) && ( $fastfood_opt['fastfood_cust_comrep'] == 1 ) ) {
-				wp_enqueue_script( 'fastfood-comment-reply', get_template_directory_uri() . '/js/comment-reply.min.js', array( 'jquery-ui-draggable' ), $fastfood_version, false   ); //custom comment-reply pop-up box
-			} else {
-				wp_enqueue_script( 'comment-reply' ); //standard comment-reply box
-			}
-		}
+
 		if ( ( $fastfood_opt['fastfood_gallery_preview'] == 1 ) ) {
 			wp_enqueue_script( 'thickbox' );
 		}
 	}
 }
 
-// initialize scripts
-if ( !function_exists( 'fastfood_init_scripts' ) ) {
-	function fastfood_init_scripts(){
-		global $fastfood_opt, $fastfood_is_printpreview, $fastfood_is_mobile, $fastfood_is_ie6;
-		?>
+if ( !function_exists( 'fastfood_body_class_script' ) ) {
+	function fastfood_body_class_script(){
 
+?>
 <script type="text/javascript">
 	/* <![CDATA[ */
 	(function(){
@@ -249,41 +265,8 @@ if ( !function_exists( 'fastfood_init_scripts' ) ) {
 	})();
 	/* ]]> */
 </script>
+<?php
 
-		<?php if ( $fastfood_is_mobile || $fastfood_is_printpreview || $fastfood_is_ie6 ) return; ?>
-
-<script type="text/javascript">
-	/* <![CDATA[ */
-	jQuery(document).ready(function($){
-		$('#post-widgets-area .widget:nth-child(odd)').css('clear', 'left');
-		$('#header-widget-area .widget:nth-child(3n+1)').css('clear', 'right');
-		$('#error404-widgets-area .widget:nth-child(odd)').css('clear', 'left');
-<?php if ( ( $fastfood_opt['fastfood_post_expand'] == 1 ) ) { ?>
-		fastfoodAnimations.postexpander();
-<?php } ?>
-<?php if ( $fastfood_opt['fastfood_gallery_preview'] == 1 ) { ?>
-		$('.storycontent a img').parent('a[href$=".jpg"],a[href$=".png"],a[href$=".gif"]').addClass('thickbox');
-		$('.storycontent .gallery').each(function() {
-			$('a[href$=".jpg"],a[href$=".png"],a[href$=".gif"]',$(this)).attr('rel', $(this).attr('id'));
-		});
-<?php } ?>
-<?php if ( ( $fastfood_opt['fastfood_quotethis'] == 1 ) && is_singular() ) { ?>
-		fastfoodAnimations.reply_link();
-<?php } ?>
-	});
-	/* ]]> */
-</script>
-<!--[if lte IE 8]>
-<script type="text/javascript">
-	jQuery(document).ready(function($){
-		$('img.size-full').each(function() {
-			$(this).css('max-width', Math.min($(this).attr('width'), this.offsetWidth) + 'px');
-		});
-	});
-</script>
-<![endif]-->
-
-		<?php
 	}
 }
 
@@ -364,8 +347,15 @@ if ( !function_exists( 'fastfood_featured_title' ) ) {
 	function fastfood_featured_title( $args = '' ) {
 		global $post, $fastfood_opt;
 
-		$defaults = array( 'alternative' => '', 'fallback' => '', 'featured' => true, 'href' => get_permalink(), 'target' => '', 'title' => the_title_attribute( array( 'echo' => 0 ) ) );
+		$defaults = array( 'alternative' => '', 'fallback' => '', 'featured' => true, 'href' => get_permalink(), 'target' => '', 'title' => the_title_attribute( array( 'echo' => 0 ) ), 'echo' => 1 );
 		$args = wp_parse_args( $args, $defaults );
+
+		if ( $fastfood_opt['fastfood_hide_pages_title'] == 1 && is_page() ) return;
+
+		if ( $fastfood_opt['fastfood_hide_posts_title'] == 1 && is_single() ) return;
+
+		$selected_ids = explode( ',', $fastfood_opt['fastfood_hide_selected_entries_title'] );
+		if ( in_array( $post->ID, $selected_ids ) ) return;
 
 		$post_title = $args['alternative'] ? $args['alternative'] : get_the_title();
 		$post_title = $post_title ? $post_title : $args['fallback'];
@@ -376,7 +366,11 @@ if ( !function_exists( 'fastfood_featured_title' ) ) {
 		$title_content = is_singular() ? $thumb . $post_title : '<a title="' . $args['title'] . '" href="' . $args['href'] . '"' . $link_target . ' rel="bookmark">' . $thumb . $post_title . '</a>';
 		if ( $post_title || $thumb ) $post_title = '<h2 class="' . $title_class . '">' . $title_content . '</h2>';
 
-		echo $post_title;
+		if ( $args['echo'] )
+			echo $post_title;
+		else 
+			return $post_title;
+
 	}
 }
 
@@ -480,10 +474,10 @@ if ( !function_exists( 'fastfood_extrainfo' ) ) {
 					<?php $post_auth = ( $args['auth'] === true ) || ( $args['auth'] === 1 ) ? '<a href="' . get_author_posts_url( get_the_author_meta( 'ID' ) ) . '" title="' . sprintf( __( 'View all posts by %s', 'fastfood' ), esc_attr( get_the_author() ) ) . '">' . get_the_author() . '</a>' : $args['auth']; ?>
 					<?php printf( __( 'by %s', 'fastfood' ), $post_auth ); ?>
 				<?php } ?>
-				<?php if ( $args['date'] ) { printf( __( 'Published on: %s', 'fastfood' ), get_the_time( get_option( 'date_format' ) ) ) ; echo '<br />'; }?>
-				<?php if ( $args['comms'] ) { echo __( 'Comments', 'fastfood' ) . ': '; comments_popup_link( __( 'No Comments', 'fastfood' ), __( '1 Comment', 'fastfood' ), __( '% Comments', 'fastfood' ) ); echo '<br />'; } ?>
-				<?php if ( $args['tags'] ) { echo __( 'Tags', 'fastfood' ) . ': '; if ( !get_the_tags() ) { _e( 'No Tags', 'fastfood' ); } else { the_tags( '', ', ', '' ); }; echo '<br />';  } ?>
-				<?php if ( $args['cats'] ) { echo __( 'Categories', 'fastfood' ) . ': '; the_category( ', ' ); echo '<br />'; } ?>
+				<?php if ( $args['date'] ) { printf( __( 'Published on: %s', 'fastfood' ), get_the_time( get_option( 'date_format' ) ) ) ; echo '<br>'; }?>
+				<?php if ( $args['comms'] ) { echo __( 'Comments', 'fastfood' ) . ': '; comments_popup_link( __( 'No Comments', 'fastfood' ), __( '1 Comment', 'fastfood' ), __( '% Comments', 'fastfood' ) ); echo '<br>'; } ?>
+				<?php if ( $args['tags'] ) { echo __( 'Tags', 'fastfood' ) . ': '; if ( !get_the_tags() ) { _e( 'No Tags', 'fastfood' ); } else { the_tags( '', ', ', '' ); }; echo '<br>';  } ?>
+				<?php if ( $args['cats'] ) { echo __( 'Categories', 'fastfood' ) . ': '; the_category( ', ' ); echo '<br>'; } ?>
 				<?php edit_post_link( __( 'Edit', 'fastfood' ) ); ?>
 			</div>
 		<?php
@@ -532,7 +526,7 @@ if ( !function_exists( 'fastfood_navbuttons' ) ) {
 		<?php // ------- Leave a comment -------
 			if ( $fastfood_opt['fastfood_navbuttons_comment'] && $args['comment'] && $is_singular && comments_open( $post->ID ) && !post_password_required() ) { ?>
 			<div class="minibutton">
-				<a href="#respond"<?php if ( $fastfood_opt['fastfood_cust_comrep'] == 1 ) { echo ' onclick="return addComment.viewForm()"'; } ?>>
+				<a class="show_comment_form" href="#respond">
 					<span class="minib_img minib_comment">&nbsp;</span>
 				</a>
 				<span class="nb_tooltip"><?php _e( 'Leave a comment', 'fastfood' ); ?></span>
@@ -958,11 +952,16 @@ if ( !function_exists( 'fastfood_addgravatar' ) ) {
 }
 
 //add a fix for embed videos overlying quickbar
-if ( !function_exists( 'fastfood_content_replace' ) ) {
-	function fastfood_content_replace( $content ){
-		$content = str_replace( '<param name="allowscriptaccess" value="always">', '<param name="allowscriptaccess" value="always"><param name="wmode" value="transparent">', $content );
-		$content = str_replace( '<embed ', '<embed wmode="transparent" ', $content );
-		return $content;
+if ( !function_exists( 'fastfood_wmode_transparent' ) ) {
+	function fastfood_wmode_transparent( $html, $url = null, $attr = null ) {
+		if ( strpos( $html, '<embed ' ) !== false ) {
+			$html = str_replace('</param><embed', '</param><param name="wmode" value="transparent"></param><embed', $html);
+			$html = str_replace('<embed ', '<embed wmode="transparent" ', $html);
+			return $html;
+		} elseif ( strpos ( $html, 'feature=oembed' ) !== false )
+			return str_replace( 'feature=oembed', 'feature=oembed&wmode=transparent', $html );
+		else
+			return $html;
 	}
 }
 

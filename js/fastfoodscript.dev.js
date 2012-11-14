@@ -5,7 +5,61 @@ var fastfoodAnimations;
 fastfoodAnimations = {
 
 	//initialize
-	init : function() {
+	init : function( in_modules ) {
+
+		var modules = in_modules.split(',');
+
+		for (i in modules) {
+
+			switch(modules[i]) {
+
+				case 'main_menu':
+					this.main_menu();
+					break;
+
+				case 'navigation_buttons':
+					this.navigation_buttons();
+					break;
+
+				case 'quickbar_tools':
+					this.quickbar_tools();
+					break;
+
+				case 'quickbar_panels':
+					this.quickbar_panels();
+					break;
+
+				case 'entry_meta':
+					this.entry_meta();
+					break;
+
+				case 'widgets_style':
+					this.widgets_style();
+					break;
+
+				case 'post_expander':
+					this.post_expander();
+					break;
+
+				case 'thickbox':
+					this.thickbox();
+					break;
+
+				case 'quote_this':
+					this.quote_this();
+					break;
+
+				default :
+					//no default action
+					break;
+
+			}
+
+		}
+
+	},
+
+	main_menu : function() {
 
 		//main menu dropdown animation
 		$('#mainmenu').children('li').each(function(){ //get every main list item
@@ -35,7 +89,10 @@ fastfoodAnimations = {
 				});
 			}
 		});
-		
+
+	},
+
+	navigation_buttons : function() {
 
 		//navbuttons tooltip animation
 		$('#navbuttons').children('.minibutton').each( function(){ //get every minibutton
@@ -54,7 +111,53 @@ fastfoodAnimations = {
 				list.css({ 'opacity' : 0, 'display' : '', 'right' : marginright_in });
 			});	
 		});
-		
+
+		// fade in/out on scroll
+		top_but = $('#navbuttons a[href="#"] span');
+		bot_but = $('#navbuttons a[href="#footer"] span');
+		top_but.hide();
+		$(function () {
+			$(window).scroll(function () {
+				// check for top action
+				if ($(this).scrollTop() > 100) {
+					top_but.fadeIn();
+				} else {
+					top_but.fadeOut();
+				}
+				// check for bottom action
+				if ( $('body').height()-$(window).scrollTop()-$(window).height() < 100) {
+					bot_but.fadeOut();
+				} else {
+					bot_but.fadeIn();
+				}
+
+			});
+		});
+
+		// smooth scroll top
+		top_but.click(function() {
+			$("html, body").animate({
+				scrollTop: 0
+			}, {
+				duration: 1000
+			});
+			return false;
+		});
+
+		// smooth scroll bottom
+		bot_but.click(function() {
+			$("html, body").animate({
+				scrollTop: $('#footer').offset().top - 80
+			}, {
+				duration: 1000
+			});
+			return false;
+		});
+
+	},
+
+	quickbar_tools : function() {
+
 		//quickbar tools animation
 		$('#quickbar').children('.menutoolitem').each( function(){ //get every menutoolitem
 			var list = $(this).find('.menutool');
@@ -72,6 +175,10 @@ fastfoodAnimations = {
 				list.css({ 'opacity' : 0, 'display' : '', 'left' : marginleft_in });
 			});	
 		});
+
+	},
+
+	quickbar_panels : function() {
 
 		//quickbar animation
 		$('#quickbar').children('.menuitem').each( function(){ //get every quickbar item
@@ -108,7 +215,28 @@ fastfoodAnimations = {
 				);
 			});	
 		});
-		
+
+		//add a "close" link after the submit button in minilogin form
+		$('.login-submit').append( $('#closeminilogin') );
+		$('#closeminilogin').css({ 'display' : 'inline' });
+		$('#closeminilogin').click( function() {
+			$('.itemimg_js').fadeIn();
+			$('#user_menuback .menuback_js').css({ 'display' : '' , 'height' : 0  });
+			$('#ff_minilogin_wrap').css({ 'display' : '' });
+			$('#user_menuback').removeClass('keepme');
+			return false;
+		});
+
+		//preserve the menu div from disappear when loginform name input is clicked
+		$('#ff-user_login').mousedown( function() {
+			$('#ff_minilogin_wrap').css({ 'display' : 'block' });
+			$('#user_menuback').addClass('keepme');
+			$('.itemimg_js').fadeOut();
+		});
+
+	},
+
+	entry_meta : function() {
 
 		//meta animation
 		$('.top_meta').removeClass('top_meta').addClass('top_meta_js');
@@ -135,67 +263,57 @@ fastfoodAnimations = {
 			});
 		});
 
-		//add a "close" link after the submit button in minilogin form
-		$('.login-submit').append( $('#closeminilogin') );
-		$('#closeminilogin').css({ 'display' : 'inline' });
-		$('#closeminilogin').click( function() {
-			$('.itemimg_js').fadeIn();
-			$('#user_menuback .menuback_js').css({ 'display' : '' , 'height' : 0  });
-			$('#ff_minilogin_wrap').css({ 'display' : '' });
-			$('#user_menuback').removeClass('keepme');
-			return false;
-		});
+	},
 
-		//preserve the menu div from disappear when loginform name input is clicked
-		$('#ff-user_login').mousedown( function() {
-			$('#ff_minilogin_wrap').css({ 'display' : 'block' });
-			$('#user_menuback').addClass('keepme');
-			$('.itemimg_js').fadeOut();
-		});
+	widgets_style : function() {
 
-		// fade in/out on scroll
-		top_but = $('#navbuttons a[href="#"] span');
-		bot_but = $('#navbuttons a[href="#footer"] span');
-		top_but.hide();
-		$(function () {
-			$(window).scroll(function () {
-				// check for top action
-				if ($(this).scrollTop() > 100) {
-					top_but.fadeIn();
-				} else {
-					top_but.fadeOut();
-				}
-				// check for bottom action
-				if ( $('body').height()-$(window).scrollTop()-$(window).height() < 100) {
-					bot_but.fadeOut();
-				} else {
-					bot_but.fadeIn();
-				}
+		// add style to some widgets areas
+		$('#post-widgets-area .widget:nth-child(odd)').css('clear', 'left');
+		$('#header-widget-area .widget:nth-child(3n+1)').css('clear', 'right');
+		$('#error404-widgets-area .widget:nth-child(odd)').css('clear', 'left');
 
-			});
-		});
-		// smooth scroll top/bottom
-		top_but.click(function() {
-			$("html, body").animate({
-				scrollTop: 0
-			}, {
-				duration: 1000
-			});
-			return false;
-		});
-		bot_but.click(function() {
-			$("html, body").animate({
-				scrollTop: $('#footer').offset().top - 80
-			}, {
-				duration: 1000
-			});
-			return false;
+	},
+
+	thickbox : function() {
+
+		$('.storycontent a img').parent('a[href$=".jpg"],a[href$=".png"],a[href$=".gif"]').addClass('thickbox');
+		$('.storycontent .gallery').each(function() {
+			$('a[href$=".jpg"],a[href$=".png"],a[href$=".gif"]',$(this)).attr('rel', $(this).attr('id'));
 		});
 
 	},
 
+	quote_this : function () {
+		htmltext = '<a id="tb-quotethis" href="#" onclick="fastfoodAnimations.add_quote(); return false" title="' + fastfood_l10n.quote_link_info + '" >&nbsp;</a>'
+		$(htmltext).insertBefore('#comment');
+	},
+
+	add_quote : function() {
+
+		var posttext = '';
+		if (window.getSelection){
+			posttext = window.getSelection();
+		}
+		else if (document.getSelection){
+			posttext = document.getSelection();
+		}
+		else if (document.selection){
+			posttext = document.selection.createRange().text;
+		}
+		else {
+			return true;
+		}
+		posttext = posttext.toString().replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+		if ( posttext.length !== 0 ) {
+			document.getElementById("comment").value = document.getElementById("comment").value + '<blockquote>' + posttext + '</blockquote>';
+		} else {
+			alert(fastfood_l10n.quote_link_alert);
+		}
+
+	},
+
 	//show only a set of rows
-	postexpander : function () {
+	post_expander : function () {
         $('a.more-link').click(function() {
 
 				var link = $(this);
@@ -250,38 +368,10 @@ fastfoodAnimations = {
 				return timId;
 			}
 		});
-	},
-
-	reply_link : function () {
-		htmltext = '<a id="tb-quotethis" href="#" onclick="fastfoodQuoteThis(); return false" title="' + fastfood_l10n.quote_link_info + '" >&nbsp;</a>'
-		$(htmltext).insertBefore('#comment');
 	}
 
 };
 
-$(document).ready(function($){ fastfoodAnimations.init(); });
+$(document).ready(function($){ fastfoodAnimations.init(fastfood_l10n.script_modules); });
 
 })(jQuery);
-
-
-function fastfoodQuoteThis() {
-	var posttext = '';
-	if (window.getSelection){
-		posttext = window.getSelection();
-	}
-	else if (document.getSelection){
-		posttext = document.getSelection();
-	}
-	else if (document.selection){
-		posttext = document.selection.createRange().text;
-	}
-	else {
-		return true;
-	}
-	posttext = posttext.toString().replace(/&/g,"&amp;").replace(/"/g,"&quot;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
-	if ( posttext.length !== 0 ) {
-		document.getElementById("comment").value = document.getElementById("comment").value + '<blockquote>' + posttext + '</blockquote>';
-	} else {
-		alert(fastfood_l10n.quote_link_alert);
-	}
-}

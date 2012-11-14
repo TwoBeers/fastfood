@@ -1,3 +1,14 @@
+<?php
+/**
+ * post with 'aside' format (list view)
+ *
+ * @package fastfood
+ * @since fastfood 0.24
+ */
+
+
+?>
+
 <div <?php post_class() ?> id="post-<?php the_ID(); ?>">
 	<div class="aside-cont">
 		<?php the_content(); ?>

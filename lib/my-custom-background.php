@@ -2,8 +2,8 @@
 /**
  * The custom background script.
  *
- * "Fastfood_Custom_Background" class based on WP wp-admin/custom-background.php
- *
+ * @package fastfood
+ * @since fastfood 0.27
  */
 
 add_action( 'after_setup_theme', 'fastfood_custom_background_init' );
@@ -93,6 +93,8 @@ if ( !function_exists( 'fastfood_custom_bg' ) ) {
 		<?php
 	}
 }
+
+// "Fastfood_Custom_Background" class based on WP wp-admin/custom-background.php
 
 class Fastfood_Custom_Background {
 
@@ -398,7 +400,7 @@ if ( get_background_image() ) {
 ?>
 <div id="custom-background-image" style="<?php echo $background_styles; ?>"><?php // must be double quote, see above ?>
 <?php if ( get_background_image() ) { ?>
-<img class="custom-background-image" src="<?php echo get_background_image(); ?>" style="visibility:hidden;" alt="" /><br />
+<img class="custom-background-image" src="<?php echo get_background_image(); ?>" style="visibility:hidden;" alt="" /><br>
 <img class="custom-background-image" src="<?php echo get_background_image(); ?>" style="visibility:hidden;" alt="" />
 <?php } ?>
 </div>
@@ -434,7 +436,7 @@ if ( get_background_image() ) {
 <tr valign="top">
 <th scope="row"><?php _e( 'Upload Image', 'fastfood' ); ?></th>
 <td><form enctype="multipart/form-data" id="upload-form" method="post" action="">
-<label for="upload"><?php _e( 'Choose an image from your computer:', 'fastfood' ); ?></label><br /><input type="file" id="upload" name="import" />
+<label for="upload"><?php _e( 'Choose an image from your computer:', 'fastfood' ); ?></label><br><input type="file" id="upload" name="import" />
 <input type="hidden" name="action" value="save" />
 <?php wp_nonce_field( 'custom-background-upload', '_wpnonce-custom-background-upload' ) ?>
 <?php submit_button( __( 'Upload', 'fastfood' ), 'button', 'submit', false ); ?>

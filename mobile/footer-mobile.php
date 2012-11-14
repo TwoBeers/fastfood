@@ -1,3 +1,13 @@
+<?php
+/**
+ * mobile subtheme -> footer
+ *
+ * @package fastfood
+ * @since fastfood 0.31
+ */
+
+
+?>
 
 
 <?php if ( has_nav_menu( 'mobile' ) ) { ?>

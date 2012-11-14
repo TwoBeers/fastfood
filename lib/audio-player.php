@@ -1,4 +1,11 @@
 <?php
+/**
+ * audio player script.
+ *
+ * @package fastfood
+ * @since fastfood 0.31
+ */
+
 
 add_action( 'template_redirect', 'fastfood_init_audio_player' );
 

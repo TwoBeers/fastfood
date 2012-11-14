@@ -10,7 +10,7 @@
 		<?php fastfood_I_like_it();?>
 		<div <?php post_class() ?> id="post-<?php the_ID(); ?>">
 			<?php fastfood_hook_before_post_title(); ?>
-			<?php fastfood_featured_title( array( 'fallback' => sprintf ( __('post #%s','fastfood'), get_the_ID() ) ) ); ?>
+			<?php fastfood_featured_title(); ?>
 			<?php fastfood_hook_after_post_title(); ?>
 			<?php fastfood_extrainfo(); ?>
 			<?php fastfood_hook_before_post_content(); ?>

@@ -1,4 +1,11 @@
 <?php
+/**
+ * Header Image Slider script.
+ *
+ * @package fastfood
+ * @since fastfood 0.32
+ */
+
 
 class Fastfood_Header_Image_Slider {
 

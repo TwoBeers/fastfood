@@ -1,9 +1,24 @@
-jQuery(document).ready(function($){
-	$('#respond').appendTo('#content');
-	$("#respond").draggable({ handle: '#reply-title' });
-});
+var fastfoodCustomReply;
 
-addComment = {
+(function($) {
+
+fastfoodCustomReply = {
+
+	//initialize
+	init : function() {
+
+		this.resetForm();
+		this.addCloseButton();
+		$('#respond').appendTo('#content');
+		$("#respond").draggable({ handle: '#reply-title' });
+		$(".show_comment_form").click(function() {
+			fastfoodCustomReply.viewForm();
+			return false;
+		});
+
+
+	},
+
 	moveForm : function(commId, parentId, respondId, postId) {
 		var t = this, div, comm = t.I(commId), respond = t.I(respondId), cancel = t.I('cancel-comment-reply-link'), parent = t.I('comment_parent'), post = t.I('comment_post_ID'), replytitle = t.I('reply-title'), replytocomment = t.I('replytocomment');
 
@@ -23,7 +38,7 @@ addComment = {
 		respond.style.display = "block";
 
 		cancel.onclick = function() {
-			var t = addComment, respond = t.I(t.respondId);
+			var t = fastfoodCustomReply, respond = t.I(t.respondId);
 
 			if ( ! respond )
 				return;
@@ -41,7 +56,7 @@ addComment = {
 	},
 	
 	resetForm : function() {
-		var t = addComment, respond = t.I('respond'), cancel = t.I('cancel-comment-reply-link'), parent = t.I('comment_parent');
+		var t = this, respond = t.I('respond'), cancel = t.I('cancel-comment-reply-link'), parent = t.I('comment_parent');
 
 		if ( ! cancel || ! respond )
 			return;
@@ -54,11 +69,11 @@ addComment = {
 	},
 
 	viewForm : function() {
-		var t = addComment, respond = t.I('respond'), cancel = t.I('cancel-comment-reply-link'), replytitle = t.I('reply-title'), replytopost = t.I('replytopost');
+		var t = this, respond = t.I('respond'), cancel = t.I('cancel-comment-reply-link'), replytitle = t.I('reply-title'), replytopost = t.I('replytopost');
 		
 		if ( ! respond || ! cancel || ! replytitle)
 			return false;
-		addComment.resetForm();
+		this.resetForm();
 		if ( replytopost ) replytitle.innerHTML = replytopost.value;
 		replytitle.appendChild(cancel);
 		respond.style.display = "block";
@@ -70,14 +85,14 @@ addComment = {
 	},
 	
 	addCloseButton : function() {
-		var t = addComment, respond = t.I('respond'), replytitle = t.I('reply-title');
+		var t = this, respond = t.I('respond'), replytitle = t.I('reply-title');
 
 		if ( ! respond || ! replytitle )
 			return;
 		if ( ! t.I('ff_reply_close') ) {
 			div = document.createElement('div');
 			div.id = 'ff_reply_close';
-			div.innerHTML = '<input type="button" title="Close" value="" onclick="return addComment.resetForm()" />';
+			div.innerHTML = '<input type="button" title="Close" value="" onclick="return fastfoodCustomReply.resetForm()" />';
 			respond.insertBefore(div, replytitle);
 		}
 	},
@@ -85,4 +100,9 @@ addComment = {
 	I : function(e) {
 		return document.getElementById(e);
 	}
-}
+
+};
+
+$(document).ready(function($){ fastfoodCustomReply.init(); });
+
+})(jQuery);

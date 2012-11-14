@@ -1,5 +1,12 @@
 <?php
-	//shows "all categories" page.
+/**
+ * "all categories" page.
+ *
+ * @package fastfood
+ * @since fastfood 0.15
+ */
+
+
 ?>
 <?php get_header(); ?>
 

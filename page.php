@@ -9,12 +9,10 @@
 		<?php fastfood_hook_before_post(); ?>
 		<?php fastfood_I_like_it();?>
 		<div <?php post_class() ?> id="post-<?php the_ID(); ?>">
-			<?php if ( !is_front_page() ) { ?>
-				<?php fastfood_hook_before_post_title(); ?>
-				<?php fastfood_featured_title( array( 'fallback' => sprintf ( __('page #%s','fastfood'), get_the_ID() ) ) ); ?>
-				<?php fastfood_hook_after_post_title(); ?>
-				<?php fastfood_extrainfo( array( 'auth' => 0, 'date' => 0, 'tags' => 0, 'cats' => 0, 'hiera' => 1 ) ); ?>
-			<?php } ?>
+			<?php fastfood_hook_before_post_title(); ?>
+			<?php fastfood_featured_title(); ?>
+			<?php fastfood_hook_after_post_title(); ?>
+			<?php if ( !is_front_page() ) fastfood_extrainfo( array( 'auth' => 0, 'date' => 0, 'tags' => 0, 'cats' => 0, 'hiera' => 1 ) ); ?>
 			<?php fastfood_hook_before_post_content(); ?>
 			<div class="storycontent entry-content">
 				<?php the_content(); ?>

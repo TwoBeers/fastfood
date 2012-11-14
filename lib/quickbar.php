@@ -6,6 +6,7 @@
  * @since fastfood 0.33
  */
 
+
 //quickbar
 if ( !function_exists( 'fastfood_quickbar' ) ) {
 	function fastfood_quickbar( $args = '' ) {

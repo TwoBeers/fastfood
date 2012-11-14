@@ -1,3 +1,13 @@
+<?php
+/**
+ * mobile subtheme -> single post
+ *
+ * @package fastfood
+ * @since fastfood 0.31
+ */
+
+
+?>
 <?php locate_template( array( 'mobile/header-mobile.php' ), true, false ); ?>
 <?php if ( have_posts() ) { ?>
 	<?php while ( have_posts() ) { 

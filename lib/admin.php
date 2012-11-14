@@ -1,4 +1,11 @@
 <?php
+/**
+ * audio player script.
+ *
+ * @package fastfood
+ * @since fastfood 0.30
+ */
+
 
 global $fastfood_opt, $fastfood_version;
 
@@ -205,15 +212,6 @@ function fastfood_get_coa( $option = false ) {
 							'req' => 'fastfood_post_formats_status',
 							'sub' => false
 		),
-		'fastfood_share_this' => 
-						array(
-							'group' => 'social',
-							'type' => 'chk',
-							'default' => 0,
-							'description' => __( 'share this content','fastfood' ),
-							'info' => sprintf ( __( 'show share links after the post content. also available as <a href="%s">widget</a>','fastfood' ), esc_url( admin_url( 'widgets.php' ) ) ),
-							'req' => ''
-		),
 		'fastfood_I_like_it' => 
 						array(
 							'group' => 'social',
@@ -284,15 +282,6 @@ function fastfood_get_coa( $option = false ) {
 							'req' => 'fastfood_I_like_it',
 							'sub' => false
 		),
-		'fastfood_blank_title' =>
-						array(
-							'group' => 'content',
-							'type' => 'txt',
-							'default' => __( '(no title)', 'fastfood' ),
-							'description' => __( 'blank titles', 'fastfood' ),
-							'info' => __( 'set the standard text for blank titles. you may use these codes:<br /><code>%d</code> for post date<br /><code>%f</code> for post format (if any)', 'fastfood' ),
-							'req' => ''
-						),
 		'fastfood_xinfos_global' => 
 						array(
 							'group' => 'content',
@@ -533,12 +522,12 @@ function fastfood_get_coa( $option = false ) {
 		),
 		'fastfood_cust_comrep' => 
 						array(
-							'group' => 'other',
+							'group' => 'javascript',
 							'type' => 'chk',
 							'default' => 1,
 							'description' => __( 'custom comment form','fastfood' ),
 							'info' => __( 'custom floating form for posting comments','fastfood' ),
-							'req' => 'fastfood_jsani'
+							'req' => ''
 		),
 		'fastfood_quotethis'=>
 						array( 
@@ -567,6 +556,26 @@ function fastfood_get_coa( $option = false ) {
 							'info' => __( 'uncheck if you want to hide it','fastfood' ),
 							'req' => ''
 						),
+		'fastfood_manage_blank_title' =>
+						array(
+							'group' => 'content',
+							'type' => 'chk',
+							'default' => 1,
+							'description' => __( 'blank titles', 'fastfood' ),
+							'info' => __( 'set a standard text for blank titles', 'fastfood' ),
+							'req' => '',
+							'sub' => array('fastfood_blank_title')
+						),
+		'fastfood_blank_title' =>
+						array(
+							'group' => 'content',
+							'type' => 'txt',
+							'default' => __( '(no title)', 'fastfood' ),
+							'description' => __( 'format', 'fastfood' ),
+							'info' => __( 'you may use these codes:<br><code>%d</code> for post date<br><code>%f</code> for post format (if any)<br><code>%n</code> for post ID', 'fastfood' ),
+							'req' => '',
+							'sub' => false
+						),
 		'fastfood_featured_title' => 
 						array(
 							'group' => 'content',
@@ -589,6 +598,46 @@ function fastfood_get_coa( $option = false ) {
 							'req' => '',
 							'sub' => false
 		),
+		'fastfood_hide_titles' =>
+						array(
+							'group' => 'content',
+							'type' => '',
+							'default' => 1,
+							'description' => __( 'Hide titles', 'fastfood' ),
+							'info' => __( 'Hide posts/pages title in single view', 'fastfood' ),
+							'req' => '',
+							'sub' => array('fastfood_hide_pages_title','fastfood_hide_posts_title','fastfood_hide_selected_entries_title')
+						),
+		'fastfood_hide_pages_title' =>
+						array(
+							'group' => 'content',
+							'type' => 'chk',
+							'default' => 0,
+							'description' => __( 'Hide pages title', 'fastfood' ),
+							'info' => '',
+							'req' => '',
+							'sub' => false
+						),
+		'fastfood_hide_posts_title' =>
+						array(
+							'group' => 'content',
+							'type' => 'chk',
+							'default' => 0,
+							'description' => __( 'Hide posts title', 'fastfood' ),
+							'info' => '',
+							'req' => '',
+							'sub' => false
+						),
+		'fastfood_hide_selected_entries_title' =>
+						array(
+							'group' => 'content',
+							'type' => 'txt',
+							'default' => '',
+							'description' => __( 'Hide title for selected posts/pages', 'fastfood' ),
+							'info' => __( 'comma-separated list of IDs ( eg. <em>23,86,120</em> )', 'fastfood' ),
+							'req' => '',
+							'sub' => false
+						),
 		'fastfood_excerpt' =>
 						array(
 							'group' => 'content',
@@ -638,15 +687,6 @@ function fastfood_get_coa( $option = false ) {
 							'info' => __( 'only plain text. use <code>%t</code> as placeholder for the post title', 'fastfood' ) . ' (<a href="http://codex.wordpress.org/Customizing_the_Read_More" target="_blank">Codex</a>)',
 							'req' => ''
 						),
-		'fastfood_exif_info' => 
-						array(
-							'group' => 'content',
-							'type' => 'chk',
-							'default' => 0,
-							'description' => __( 'images informations', 'fastfood' ),
-							'info' => sprintf ( __( 'show informations (even EXIF, if present) in image attachments. also available as <a href="%s">widget</a>','fastfood' ), esc_url( admin_url( 'widgets.php' ) ) ),
-							'req' => ''
-		),
 		'fastfood_audio_player' => 
 						array(
 							'group' => 'content',
@@ -687,15 +727,6 @@ function fastfood_get_coa( $option = false ) {
 							'req' => '',
 							'sub' => false
 						),
-		'fastfood_wpadminbar_css' => 
-						array(
-							'group' => 'other',
-							'type' => 'chk',
-							'default' => 0,
-							'description' => __( 'custom adminbar style','fastfood' ),
-							'info' => __( 'style integration with the theme for admin bar','fastfood' ),
-							'req' => ''
-		),
 		'fastfood_head' => 
 						array(
 							'group' => 'quickbar',
@@ -760,7 +791,17 @@ function fastfood_get_coa( $option = false ) {
 							'description' => __( 'Google web font', 'fastfood' ),
 							'info' => __( 'Copy and paste <a href="http://www.google.com/webfonts" target="_blank"><strong>Google web font</strong></a> name here. Example: <code>Architects Daughter</code>', 'fastfood' ),
 							'req' => '',
-							'sub' => array( 'fastfood_google_font_body', 'fastfood_google_font_post_title', 'fastfood_google_font_post_content' )
+							'sub' => array( 'fastfood_google_font_subset', '', 'fastfood_google_font_body', 'fastfood_google_font_post_title', 'fastfood_google_font_post_content' )
+						),
+		'fastfood_google_font_subset' =>
+						array(
+							'group' => 'colors',
+							'type' => 'txt',
+							'default' => '',
+							'description' => __( 'subset', 'fastfood' ),
+							'info' => __( 'comma-separated list of subsets ( eg. "latin,latin-ext,cyrillic" )', 'fastfood' ),
+							'req' => '',
+							'sub' => false
 						),
 		'fastfood_google_font_body' =>
 						array(
