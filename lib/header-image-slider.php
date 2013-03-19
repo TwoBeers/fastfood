@@ -188,7 +188,6 @@ class Fastfood_Header_Image_Slider {
 
 
 	function build_slider( $slides = array(), $width = null, $height = null ) {
-		global $fastfood_opt;
 
 		add_action( 'wp_footer', array( &$this, 'add_script' ) );
 
@@ -205,7 +204,7 @@ class Fastfood_Header_Image_Slider {
 
 		foreach( $slides as $key => $slide ) {
 			$style = ( $count == $key ) ? '' : 'style="display:none;" ';
-			if ( $fastfood_opt['fastfood_head_link'] == 1 )
+			if ( fastfood_get_opt( 'fastfood_head_link' ) )
 				$output .= "<a href='" . home_url() . "'><img {$style}src='{$slide['url']}' alt='{$key}' /></a>";
 			else
 				$output .= "<img {$style}src='{$slide['url']}' alt='{$key}' />";

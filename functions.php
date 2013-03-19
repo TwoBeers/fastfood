@@ -178,13 +178,12 @@ if ( ! isset( $content_width ) )
 // is sidebar visible?
 if ( !function_exists( 'fastfood_use_sidebar' ) ) {
 	function fastfood_use_sidebar() {
-		global $fastfood_opt;
 
-		if ( !is_singular() && $fastfood_opt['fastfood_rsidebindexes'] == 0 ) return false;
+		if ( !is_singular() && ! fastfood_get_opt( 'fastfood_rsidebindexes' ) ) return false;
 
-		if ( is_page() && $fastfood_opt['fastfood_rsidebpages'] == 0 ) return false;
+		if ( is_page() && ! fastfood_get_opt( 'fastfood_rsidebpages' ) ) return false;
 
-		if ( is_single() && $fastfood_opt['fastfood_rsidebposts'] == 0 ) return false;
+		if ( is_single() && ! fastfood_get_opt( 'fastfood_rsidebposts' ) ) return false;
 
 		return true;
 
@@ -219,7 +218,6 @@ function fastfood_deregister_styles() {
 // Add stylesheets to page
 if ( !function_exists( 'fastfood_stylesheet' ) ) {
 	function fastfood_stylesheet(){
-		global $fastfood_opt;
 
 		if ( is_admin() || fastfood_is_mobile() ) return;
 
@@ -235,15 +233,15 @@ if ( !function_exists( 'fastfood_stylesheet' ) ) {
 
 		} else { //normal view
 
-			if ( ( $fastfood_opt['fastfood_gallery_preview'] == 1 ) )
+			if ( fastfood_get_opt( 'fastfood_gallery_preview' ) )
 				wp_enqueue_style( 'thickbox' );
 
 			wp_enqueue_style( 'fastfood-general-style', get_stylesheet_uri(), false, fastfood_get_info( 'version' ), 'screen' );
 
 			//google font
-			if ( $fastfood_opt['fastfood_google_font_family'] ) {
-				$gwf_family = 'family=' . urlencode( $fastfood_opt['fastfood_google_font_family'] );
-				$gwf_subset = $fastfood_opt['fastfood_google_font_subset']? '&subset=' . urlencode( str_replace( array(' ','"'), '', $fastfood_opt['fastfood_google_font_subset'] ) ) : '';
+			if ( fastfood_get_opt( 'fastfood_google_font_family' ) ) {
+				$gwf_family = 'family=' . urlencode( fastfood_get_opt( 'fastfood_google_font_family' ) );
+				$gwf_subset = fastfood_get_opt( 'fastfood_google_font_subset' )? '&subset=' . urlencode( str_replace( array(' ','"'), '', fastfood_get_opt( 'fastfood_google_font_subset' ) ) ) : '';
 				$gwf_url = 'http://fonts.googleapis.com/css?' . $gwf_family . $gwf_subset;
 				wp_enqueue_style( 'fastfood-google-fonts', $gwf_url );
 			}
@@ -260,7 +258,6 @@ if ( !function_exists( 'fastfood_stylesheet' ) ) {
 // get js modules
 if ( !function_exists( 'fastfood_get_js_modules' ) ) {
 	function fastfood_get_js_modules() {
-		global $fastfood_opt;
 
 		$modules = array(
 			'main_menu',
@@ -271,9 +268,9 @@ if ( !function_exists( 'fastfood_get_js_modules' ) ) {
 			'widgets_style',
 		);
 		
-		if ( $fastfood_opt['fastfood_post_expand'] )		$modules[] = 'post_expander';
-		if ( $fastfood_opt['fastfood_gallery_preview'] )	$modules[] = 'thickbox';
-		if ( $fastfood_opt['fastfood_quotethis'] )			$modules[] = 'quote_this';
+		if ( fastfood_get_opt( 'fastfood_post_expand' ) )		$modules[] = 'post_expander';
+		if ( fastfood_get_opt( 'fastfood_gallery_preview' ) )	$modules[] = 'thickbox';
+		if ( fastfood_get_opt( 'fastfood_quotethis' ) )			$modules[] = 'quote_this';
 
 		$modules = implode(',', $modules);
 
@@ -285,19 +282,18 @@ if ( !function_exists( 'fastfood_get_js_modules' ) ) {
 // add scripts
 if ( !function_exists( 'fastfood_scripts' ) ) {
 	function fastfood_scripts(){
-		global $fastfood_opt;
 
 		if ( is_admin() ) return;
 
 		if ( fastfood_is_mobile() || fastfood_is_printpreview() || fastfood_is_ie6() ) return; //no scripts in print preview, mobile view or ie6
 
-		if ( ( $fastfood_opt['fastfood_jsani'] == 1 ) ) {
+		if ( fastfood_get_opt( 'fastfood_jsani' ) ) {
 
 			$deps = array(
 				'jquery',
 				'jquery-effects-core',
 			);
-			if ( ( $fastfood_opt['fastfood_gallery_preview'] == 1 ) )
+			if ( fastfood_get_opt( 'fastfood_gallery_preview' ) )
 				$deps[] = 'thickbox';
 
 			wp_enqueue_script( 'fastfood-script', get_template_directory_uri() . '/js/fastfoodscript.min.js', $deps, fastfood_get_info( 'version' ), true ); //fastfood js
@@ -382,9 +378,9 @@ if ( !function_exists( 'fastfood_exif_details' ) ) {
 //Display navigation to next/previous post when applicable
 if ( !function_exists( 'fastfood_single_nav' ) ) {
 	function fastfood_single_nav() {
-		global $post, $fastfood_opt;
+		global $post;
 
-		if ( $fastfood_opt['fastfood_browse_links'] == 0 ) return;
+		if ( ! fastfood_get_opt( 'fastfood_browse_links' ) ) return;
 
 		$next = get_previous_post();
 		$prev = get_next_post();
@@ -919,7 +915,7 @@ function fastfood_get_the_thumb( $args = '' ) {
 
 // display the post title with the featured image
 	function fastfood_featured_title( $args = '' ) {
-		global $post, $fastfood_opt;
+		global $post;
 
 		$defaults = array(
 			'alternative' => '',
@@ -932,19 +928,19 @@ function fastfood_get_the_thumb( $args = '' ) {
 		);
 		$args = wp_parse_args( $args, $defaults );
 
-		if ( $fastfood_opt['fastfood_hide_pages_title'] == 1 && is_page() ) return;
+		if ( fastfood_get_opt( 'fastfood_hide_pages_title' ) && is_page() ) return;
 
-		if ( $fastfood_opt['fastfood_hide_posts_title'] == 1 && is_single() ) return;
+		if ( fastfood_get_opt( 'fastfood_hide_posts_title' ) && is_single() ) return;
 
-		$selected_ids = explode( ',', $fastfood_opt['fastfood_hide_selected_entries_title'] );
+		$selected_ids = explode( ',', fastfood_get_opt( 'fastfood_hide_selected_entries_title' ) );
 		if ( in_array( $post->ID, $selected_ids ) ) return;
 
 		$post_title = $args['alternative'] ? $args['alternative'] : get_the_title();
 		$post_title = $post_title ? $post_title : $args['fallback'];
 		$link_target = $args['target'] ? ' target="'.$args['target'].'"' : '';
-		if ( $fastfood_opt['fastfood_featured_title'] == 0 ) $args['featured'] = false;
-		$thumb = ( $args['featured'] && has_post_thumbnail( $post->ID ) ) ? get_the_post_thumbnail( $post->ID, array( $fastfood_opt['fastfood_featured_title_size'], $fastfood_opt['fastfood_featured_title_size'] ) ) : '';
-		$title_class = $thumb ? 'entry-title storytitle featured-' . $fastfood_opt['fastfood_featured_title_size'] : 'storytitle';
+		if ( !fastfood_get_opt( 'fastfood_featured_title' ) ) $args['featured'] = false;
+		$thumb = ( $args['featured'] && has_post_thumbnail( $post->ID ) ) ? get_the_post_thumbnail( $post->ID, array( fastfood_get_opt( 'fastfood_featured_title_size' ), fastfood_get_opt( 'fastfood_featured_title_size' ) ) ) : '';
+		$title_class = $thumb ? 'entry-title storytitle featured-' . fastfood_get_opt( 'fastfood_featured_title_size' ) : 'storytitle';
 		$title_content = is_singular() ? $thumb . $post_title : '<a title="' . $args['title'] . '" href="' . $args['href'] . '"' . $link_target . ' rel="bookmark">' . $thumb . $post_title . '</a>';
 		if ( $post_title || $thumb ) $post_title = '<h2 class="' . $title_class . '">' . $title_content . '</h2>';
 
@@ -961,7 +957,6 @@ function fastfood_get_the_thumb( $args = '' ) {
 // print extra info for posts/pages
 if ( !function_exists( 'fastfood_extrainfo' ) ) {
 	function fastfood_extrainfo( $args = '' ) {
-		global $fastfood_opt;
 
 		$defaults = array(
 			'auth' => 1,
@@ -976,18 +971,18 @@ if ( !function_exists( 'fastfood_extrainfo' ) ) {
 
 
 		//xinfos disabled when...
-		if ( ! $fastfood_opt['fastfood_xinfos_global'] ) return; //xinfos globally disabled
-		if ( is_front_page() && $fastfood_opt['fastfood_xinfos_on_front'] == 0 ) return; // is front page
-		if ( is_page() && $fastfood_opt['fastfood_xinfos_on_page'] == 0 ) return;
-		if ( is_single() && $fastfood_opt['fastfood_xinfos_on_post'] == 0 ) return;
-		if ( !is_singular() && $fastfood_opt['fastfood_xinfos_on_list'] == 0 ) return;
-		if ( $fastfood_opt['fastfood_xinfos_static'] == 1 ) $args['list_view'] = true;
-		if ( $fastfood_opt['fastfood_xinfos_byauth'] == 0 ) $args['auth'] = false;
-		if ( $fastfood_opt['fastfood_xinfos_date'] == 0 ) $args['date'] = false;
-		if ( $fastfood_opt['fastfood_xinfos_comm'] == 0 ) $args['comms'] = false;
-		if ( $fastfood_opt['fastfood_xinfos_tag'] == 0 ) $args['tags'] = false;
-		if ( $fastfood_opt['fastfood_xinfos_cat'] == 0 ) $args['cats'] = false;
-		if ( $fastfood_opt['fastfood_xinfos_hiera'] == 0 ) $args['hiera'] = false;
+		if ( ! fastfood_get_opt( 'fastfood_xinfos_global' ) ) return; //xinfos globally disabled
+		if ( is_front_page() && ! fastfood_get_opt( 'fastfood_xinfos_on_front' ) ) return; // is front page
+		if ( is_page() && ! fastfood_get_opt( 'fastfood_xinfos_on_page' ) ) return;
+		if ( is_single() && ! fastfood_get_opt( 'fastfood_xinfos_on_post' ) ) return;
+		if ( !is_singular() && ! fastfood_get_opt( 'fastfood_xinfos_on_list' ) ) return;
+		if ( fastfood_get_opt( 'fastfood_xinfos_static' ) ) $args['list_view'] = true;
+		if ( ! fastfood_get_opt( 'fastfood_xinfos_byauth' ) ) $args['auth'] = false;
+		if ( ! fastfood_get_opt( 'fastfood_xinfos_date' ) ) $args['date'] = false;
+		if ( ! fastfood_get_opt( 'fastfood_xinfos_comm' ) ) $args['comms'] = false;
+		if ( ! fastfood_get_opt( 'fastfood_xinfos_tag' ) ) $args['tags'] = false;
+		if ( ! fastfood_get_opt( 'fastfood_xinfos_cat' ) ) $args['cats'] = false;
+		if ( ! fastfood_get_opt( 'fastfood_xinfos_hiera' ) ) $args['hiera'] = false;
 
 		$r_pos = 10;
 		if ( !$args['list_view'] ) {
@@ -1086,9 +1081,9 @@ if ( !function_exists( 'fastfood_extrainfo' ) ) {
 //add "like" badges to post/page
 if ( !function_exists( 'fastfood_I_like_it' ) ) {
 	function fastfood_I_like_it(){
-		global $fastfood_opt, $post;
+		global $post;
 
-		if ( ( $fastfood_opt['fastfood_I_like_it'] == 0 ) || fastfood_is_printpreview() || ! is_singular() ) return;
+		if ( ! fastfood_get_opt( 'fastfood_I_like_it' ) || fastfood_is_printpreview() || ! is_singular() ) return;
 
 		$pName = rawurlencode( get_the_title() );
 		$pHref = rawurlencode( get_permalink() );
@@ -1121,11 +1116,10 @@ if ( !function_exists( 'fastfood_I_like_it' ) ) {
 // the "like" badges scripts
 if ( !function_exists( 'fastfood_like_it_scripts' ) ) {
 	function fastfood_like_it_scripts(){
-		global $fastfood_opt;
 
 ?>
 
-<?php if ( $fastfood_opt['fastfood_I_like_it_plus1'] == 1 ) { ?>
+<?php if ( fastfood_get_opt( 'fastfood_I_like_it_plus1' ) ) { ?>
 	<script type="text/javascript">
 		(function() {
 			var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
@@ -1135,11 +1129,11 @@ if ( !function_exists( 'fastfood_like_it_scripts' ) ) {
 	</script>
 <?php } ?>
 
-<?php if ( $fastfood_opt['fastfood_I_like_it_twitter'] == 1 ) { ?>
+<?php if ( fastfood_get_opt( 'fastfood_I_like_it_twitter' ) ) { ?>
 	<script type="text/javascript" src="//platform.twitter.com/widgets.js"></script>
 <?php } ?>
 
-<?php if ( $fastfood_opt['fastfood_I_like_it_facebook'] == 1 ) { ?>
+<?php if ( fastfood_get_opt( 'fastfood_I_like_it_facebook' ) ) { ?>
 	<div id="fb-root"></div>
 	<script>
 		(function(d, s, id) {
@@ -1152,11 +1146,11 @@ if ( !function_exists( 'fastfood_like_it_scripts' ) ) {
 	</script>
 <?php } ?>
 
-<?php if ( $fastfood_opt['fastfood_I_like_it_linkedin'] == 1 ) { ?>
+<?php if ( fastfood_get_opt( 'fastfood_I_like_it_linkedin' ) ) { ?>
 	<script src="//platform.linkedin.com/in.js" type="text/javascript"></script>
 <?php } ?>
 
-<?php if ( ( $fastfood_opt['fastfood_I_like_it_pinterest']	== 1 ) && is_attachment() && ( wp_attachment_is_image() ) ) { ?>
+<?php if ( fastfood_get_opt( 'fastfood_I_like_it_pinterest' ) && is_attachment() && ( wp_attachment_is_image() ) ) { ?>
 	<script type="text/javascript" src="//assets.pinterest.com/js/pinit.js"></script>
 <?php } ?>
 
@@ -1390,7 +1384,6 @@ function fastfood_link_pages() {
 
 // set up custom colors and header image
 function fastfood_setup() {
-	global $fastfood_opt;
 
 	// Register localization support
 	load_theme_textdomain( 'fastfood', get_template_directory() . '/languages' );
@@ -1407,16 +1400,16 @@ function fastfood_setup() {
 	add_theme_support( 'post-thumbnails' );
 
 	// Add the editor style
-	if ( isset( $fastfood_opt['fastfood_editor_style'] ) && ( $fastfood_opt['fastfood_editor_style'] == 1 ) )
+	if ( fastfood_get_opt( 'fastfood_editor_style' ) )
 		add_editor_style( 'css/editor-style.css' );
 
 	// This theme uses post formats
-	if ( $fastfood_opt['fastfood_post_formats'] == 1 ) {
+	if ( fastfood_get_opt( 'fastfood_post_formats' ) ) {
 		$pformats = array();
-		if ( $fastfood_opt['fastfood_post_formats_gallery'] == 1 ) $pformats[] = 'gallery';
-		if ( $fastfood_opt['fastfood_post_formats_aside'] == 1 ) $pformats[] = 'aside';
-		if ( $fastfood_opt['fastfood_post_formats_status'] == 1 ) $pformats[] = 'status';
-		if ( $fastfood_opt['fastfood_post_formats_quote'] == 1 ) $pformats[] = 'quote';
+		if ( fastfood_get_opt( 'fastfood_post_formats_gallery' ) ) $pformats[] = 'gallery';
+		if ( fastfood_get_opt( 'fastfood_post_formats_aside' ) ) $pformats[] = 'aside';
+		if ( fastfood_get_opt( 'fastfood_post_formats_status' ) ) $pformats[] = 'status';
+		if ( fastfood_get_opt( 'fastfood_post_formats_quote' ) ) $pformats[] = 'quote';
 		$pformats = apply_filters( 'fastfood_filter_post_formats', $pformats );
 		if ( ! empty( $pformats ) )
 			add_theme_support( 'post-formats', $pformats );
@@ -1461,7 +1454,7 @@ function fastfood_setup() {
 		)
 	) );
 
-	$head_h = ( isset( $fastfood_opt['fastfood_head_h'] ) ? str_replace( 'px', '', $fastfood_opt['fastfood_head_h'] ) : 120 );
+	$head_h = ( fastfood_get_opt( 'fastfood_head_h' ) ? str_replace( 'px', '', fastfood_get_opt( 'fastfood_head_h' ) ) : 120 );
 	fastfood_setup_custom_header( $head_h );
 
 }
@@ -1491,14 +1484,13 @@ if ( !function_exists( 'fastfood_setup_custom_header' ) ) {
 
 // the custom header (filterable)
 function fastfood_header(){
-	global $fastfood_opt;
 
 	// Allow plugins/themes to override the default header.
 	$output = apply_filters('fastfood_header', '');
 	if ( $output != '' )
 		return $output;
 
-	if ( ( $fastfood_opt['fastfood_head_link'] == 1 ) && (  get_header_image() != '' ) ) {
+	if ( fastfood_get_opt( 'fastfood_head_link' ) && (  get_header_image() != '' ) ) {
 		$output = '<a href="' . home_url() . '/"><img src="' . get_header_image() . '" /></a>';
 	} else {
 		$output = '
@@ -1515,11 +1507,10 @@ function fastfood_header(){
 
 // the custom header style - add style customization to page - gets included in the site header
 function fastfood_header_style(){
-	global $fastfood_opt;
 
 	if ( fastfood_is_printpreview() || fastfood_is_mobile() ) return;
 
-	if ( ( 'blank' == get_header_textcolor() ) || ( $fastfood_opt['fastfood_head_link'] == 1 ) )
+	if ( ( 'blank' == get_header_textcolor() ) || fastfood_get_opt( 'fastfood_head_link' ) )
 		$style = 'display:none;';
 	else
 		$style = 'color:#' . get_header_textcolor() . ';';
@@ -1537,31 +1528,31 @@ function fastfood_header_style(){
 			<?php echo $style; ?>
 		}
 		body {
-			font-size: <?php echo $fastfood_opt['fastfood_font_size']; ?>;
-	<?php if ( $fastfood_opt['fastfood_google_font_family'] && $fastfood_opt['fastfood_google_font_body'] ) { ?>
-			font-family: <?php echo $fastfood_opt['fastfood_google_font_family']; ?>;
+			font-size: <?php echo fastfood_get_opt( 'fastfood_font_size' ); ?>;
+	<?php if ( fastfood_get_opt( 'fastfood_google_font_family' ) && fastfood_get_opt( 'fastfood_google_font_body' ) ) { ?>
+			font-family: <?php echo fastfood_get_opt( 'fastfood_google_font_family' ); ?>;
 	<?php } else { ?>
-			font-family: <?php echo $fastfood_opt['fastfood_font_family']; ?>;
+			font-family: <?php echo fastfood_get_opt( 'fastfood_font_family' ); ?>;
 	<?php } ?>
 		}
-	<?php if ( $fastfood_opt['fastfood_google_font_family'] && $fastfood_opt['fastfood_google_font_post_title'] ) { ?>
+	<?php if ( fastfood_get_opt( 'fastfood_google_font_family' ) && fastfood_get_opt( 'fastfood_google_font_post_title' ) ) { ?>
 		h2.storytitle {
-			font-family: <?php echo $fastfood_opt['fastfood_google_font_family']; ?>;
+			font-family: <?php echo fastfood_get_opt( 'fastfood_google_font_family' ); ?>;
 		}
 	<?php } ?>
-	<?php if ( $fastfood_opt['fastfood_google_font_family'] && $fastfood_opt['fastfood_google_font_post_content'] ) { ?>
+	<?php if ( fastfood_get_opt( 'fastfood_google_font_family' ) && fastfood_get_opt( 'fastfood_google_font_post_content' ) ) { ?>
 		.storycontent {
-			font-family: <?php echo $fastfood_opt['fastfood_google_font_family']; ?>;
+			font-family: <?php echo fastfood_get_opt( 'fastfood_google_font_family' ); ?>;
 		}
 	<?php } ?>
 		a {
-			color: <?php echo $fastfood_opt['fastfood_colors_link']; ?>;
+			color: <?php echo fastfood_get_opt( 'fastfood_colors_link' ); ?>;
 		}
 		a:hover,
 		.current-menu-item a:hover,
 		.current_page_item a:hover,
 		.current-cat a:hover {
-			color: <?php echo $fastfood_opt['fastfood_colors_link_hover']; ?>;
+			color: <?php echo fastfood_get_opt( 'fastfood_colors_link_hover' ); ?>;
 		}
 		.current-menu-item > a,
 		.current_page_item > a,
@@ -1569,11 +1560,11 @@ function fastfood_header_style(){
 		#crumbs .last,
 		#navxt-crumbs li.current_item,
 		li.current-menu-ancestor .hiraquo {
-			color: <?php echo $fastfood_opt['fastfood_colors_link_sel']; ?>;
+			color: <?php echo fastfood_get_opt( 'fastfood_colors_link_sel' ); ?>;
 		}
 		<?php 
-			if ( $fastfood_opt['fastfood_custom_css'] )
-				echo $fastfood_opt['fastfood_custom_css']; 
+			if ( fastfood_get_opt( 'fastfood_custom_css' ) )
+				echo fastfood_get_opt( 'fastfood_custom_css' ); 
 		?>
 	</style>
 	<!-- InternetExplorer really sucks! -->
@@ -1628,10 +1619,9 @@ function fastfood_wmode_transparent( $html, $url = null, $attr = null ) {
 
 //wrap the post content with a <blockquote> if no <blockquote>s found
 function fastfood_quote_content( $content ) {
-	global $fastfood_opt;
 
 	/* Check if we're displaying a 'quote' post. */
-	if ( has_post_format( 'quote' ) && $fastfood_opt['fastfood_post_formats_quote'] == 1 ) {
+	if ( has_post_format( 'quote' ) && fastfood_get_opt( 'fastfood_post_formats_quote' ) ) {
 
 		/* Match any <blockquote> elements. */
 		preg_match( '/<blockquote.*?>/', $content, $matches );
@@ -1832,21 +1822,20 @@ function fastfood_add_quoted_on( $return ) {
 
 // strip tags and apply title format for blank titles
 function fastfood_title_tags_filter( $title = '', $id = null ) {
-	global $fastfood_opt;
 
 	if ( is_admin() ) return $title;
 
 	$title = strip_tags( $title, '<abbr><acronym><b><em><i><del><ins><bdo><strong><img><sub><sup>' );
 
-	if ( !isset( $fastfood_opt['fastfood_manage_blank_title'] ) || ! $fastfood_opt['fastfood_manage_blank_title'] ) return $title;
+	if ( ! fastfood_get_opt( 'fastfood_manage_blank_title' ) ) return $title;
 
 	if ( $id == null ) return $title;
 
 	if ( empty( $title ) ) {
-		if ( !isset( $fastfood_opt['fastfood_blank_title'] ) || empty( $fastfood_opt['fastfood_blank_title'] ) ) return '';
+		if ( ! fastfood_get_opt( 'fastfood_blank_title' ) ) return '';
 		$postdata = array( get_post_format( $id )? get_post_format_string( get_post_format( $id ) ): __( 'Post', 'fastfood' ), get_the_time( get_option( 'date_format' ), $id ), $id );
 		$codes = array( '%f', '%d', '%n' );
-		return str_replace( $codes, $postdata, $fastfood_opt['fastfood_blank_title'] );
+		return str_replace( $codes, $postdata, fastfood_get_opt( 'fastfood_blank_title' ) );
 	} else
 		return $title;
 
@@ -1855,28 +1844,25 @@ function fastfood_title_tags_filter( $title = '', $id = null ) {
 
 //set the excerpt length
 function fastfood_excerpt_length( $length ) {
-	global $fastfood_opt;
 
 	if ( is_admin() ) return $length;
 
-	return (int) $fastfood_opt['fastfood_excerpt_lenght'];
+	return (int) fastfood_get_opt( 'fastfood_excerpt_lenght' );
 
 }
 
 
 // use the "excerpt more" string as a link to the post
 function fastfood_excerpt_more( $more ) {
-	global $fastfood_opt;
 
 	if ( is_admin() ) return $more;
 
-	if ( isset( $fastfood_opt['fastfood_excerpt_more_txt'] ) && isset( $fastfood_opt['fastfood_excerpt_more_link'] ) ) {
-		if ( $fastfood_opt['fastfood_excerpt_more_link'] ) {
-			return '<a href="' . get_permalink() . '">' . $fastfood_opt['fastfood_excerpt_more_txt'] . '</a>';
-		} else {
-			return $fastfood_opt['fastfood_excerpt_more_txt'];
-		}
+	if ( fastfood_get_opt( 'fastfood_excerpt_more_link' ) ) {
+		return '<a href="' . get_permalink() . '">' . fastfood_get_opt( 'fastfood_excerpt_more_txt' ) . '</a>';
+	} else {
+		return fastfood_get_opt( 'fastfood_excerpt_more_txt' );
 	}
+
 	return $more;
 
 }
@@ -1884,12 +1870,12 @@ function fastfood_excerpt_more( $more ) {
 
 // custom text for the "more" tag
 function fastfood_more_link( $more_link, $more_link_text ) {
-	global $fastfood_opt;
-	
-	if ( isset( $fastfood_opt['fastfood_more_tag'] ) && !is_admin() ) {
-		$text = str_replace ( '%t', get_the_title(), $fastfood_opt['fastfood_more_tag'] );
+
+	if ( fastfood_get_opt( 'fastfood_more_tag' ) && !is_admin() ) {
+		$text = str_replace ( '%t', get_the_title(), fastfood_get_opt( 'fastfood_more_tag' ) );
 		return str_replace( $more_link_text, $text, $more_link );
 	}
+
 	return $more_link;
 
 }
@@ -1931,7 +1917,7 @@ function fastfood_filter_wp_title( $title ) {
 
 // add links to admin bar
 function fastfood_admin_bar_plus() {
-	global $wp_admin_bar, $fastfood_opt;
+	global $wp_admin_bar;
 	if ( !current_user_can( 'edit_theme_options' ) || !is_admin_bar_showing() )
 		return;
 	$add_menu_meta = array(

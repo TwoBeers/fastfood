@@ -7,7 +7,6 @@
  */
 
 
-global $fastfood_opt;
 ?>
 
 <div <?php post_class() ?> id="post-<?php the_ID(); ?>">

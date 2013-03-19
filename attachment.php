@@ -11,8 +11,6 @@
 
 get_header(); ?>
 
-<?php global $fastfood_opt; ?>
-
 <?php fastfood_hook_content_before(); ?>
 
 <div id="posts_content" class="posts_wide">

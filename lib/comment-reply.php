@@ -24,7 +24,6 @@ if ( !class_exists( 'FastfoodCommentReply' ) ) {
 		* PHP 5 Constructor
 		*/
 		function __construct() {
-			global $fastfood_opt;
 
 			if ( is_admin() || fastfood_is_mobile() || fastfood_is_printpreview() ) return;
 
