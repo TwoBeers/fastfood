@@ -31,6 +31,9 @@ fastfoodAnimations = {
 
 				case 'entry_meta':
 					this.entry_meta();
+					$('body').on('post-load', function(event){ //Jetpack Infinite Scroll trigger
+						fastfoodAnimations.entry_meta();
+					});
 					break;
 
 				case 'widgets_style':
@@ -39,10 +42,16 @@ fastfoodAnimations = {
 
 				case 'post_expander':
 					this.post_expander();
+					$('body').on('post-load', function(event){ //Jetpack Infinite Scroll trigger
+						fastfoodAnimations.post_expander();
+					});
 					break;
 
 				case 'thickbox':
 					this.thickbox();
+					$('body').on('post-load', function(event){ //Jetpack Infinite Scroll trigger
+						fastfoodAnimations.thickbox();
+					});
 					break;
 
 				case 'quote_this':
@@ -63,15 +72,16 @@ fastfoodAnimations = {
 
 		//main menu dropdown animation
 		$('#mainmenu').children('li').each(function(){ //get every main list item
-			var d = $(this).children('ul'); //for each main item, get the sub list
+			var $this = $(this);
+			var d = $this.children('ul'); //for each main item, get the sub list
 			var margintop_in = 50; //the starting distance between menu item and the popup submenu
 			var margintop_out = 20; //the exiting distance between menu item and the popup submenu
 			if(d.size() !== 0){ //if the sub list exists...
-				$(this).children('a').append('<span class="hiraquo"> &#187;</span>'); //add a raquo to the main item
+				$this.children('a').append('<span class="hiraquo"> &#187;</span>'); //add a raquo to the main item
 				
 				d.css({'opacity' : 0 , 'margin-top' : margintop_in });
 				
-				$(this).mouseenter(function(){ //when mouse enters, slide down the sub list
+				$this.mouseenter(function(){ //when mouse enters, slide down the sub list
 					d.css({'display' : 'block' });
 					d.animate(
 						{ 'opacity' : 1 , 'margin-top' : 0 },
@@ -96,10 +106,11 @@ fastfoodAnimations = {
 
 		//navbuttons tooltip animation
 		$('#navbuttons').children('.minibutton').each( function(){ //get every minibutton
-			var list = $(this).find('span.nb_tooltip');
+			var $this = $(this);
+			var list = $this.find('span.nb_tooltip');
 			var marginright_in = 60; //the starting distance between menu item and the popup submenu
 			list.css({ 'opacity' : 0 , 'right' : marginright_in });
-			$(this).mouseenter( function(){ //when mouse enters, shift right the tooltip
+			$this.mouseenter( function(){ //when mouse enters, shift right the tooltip
 				list.css({'display' : 'block' });
 				list.animate(
 					{ 'opacity' : 1 , 'right' : 23 },
@@ -160,10 +171,11 @@ fastfoodAnimations = {
 
 		//quickbar tools animation
 		$('#quickbar').children('.menutoolitem').each( function(){ //get every menutoolitem
-			var list = $(this).find('.menutool');
+			var $this = $(this);
+			var list = $this.find('.menutool');
 			var marginleft_in = 120; //the starting distance between menu item and the popup submenu
 			list.css({ 'opacity' : 0 , 'left' : marginleft_in });
-			$(this).mouseenter( function(){ //when mouse enters, shift right the tooltip
+			$this.mouseenter( function(){ //when mouse enters, shift right the tooltip
 				list.css({'display' : 'block' });
 				list.animate(
 					{ 'opacity' : 1 , 'left' : 50 },
@@ -182,15 +194,16 @@ fastfoodAnimations = {
 
 		//quickbar animation
 		$('#quickbar').children('.menuitem').each( function(){ //get every quickbar item
-			var list = $(this).children('.menuback'); // get the sub list for each quickbar item
-			var trig = $(this).children('.itemimg');
+			var $this = $(this);
+			var list = $this.children('.menuback'); // get the sub list for each quickbar item
+			var trig = $this.children('.itemimg');
 				
 			trig.removeClass('itemimg').addClass('itemimg_js');
 			list.removeClass().addClass('menuback_js');
 
 			list.css({ 'height' : 0 });
 				
-			$(this).mouseenter( function(){ //when mouse enters, slide left the sub list, restore its shadow and animate the button
+			$this.mouseenter( function(){ //when mouse enters, slide left the sub list, restore its shadow and animate the button
 				if ( $('#user_menuback').hasClass('keepme') ) return;
 				list.stop();
 				trig.stop();
@@ -239,15 +252,15 @@ fastfoodAnimations = {
 	entry_meta : function() {
 
 		//meta animation
-		$('.top_meta').removeClass('top_meta').addClass('top_meta_js');
-		$('.top_meta_js').children('.metafield').each( function(){  //get every metafield item
-			var list = $(this).children('.metafield_content'); // get the sub list for each metafield item
-			var parent = $(this).parent();
+		$('#posts_content').find('.top_meta').removeClass('top_meta').addClass('top_meta_js').children('.metafield').each( function(){  //get every metafield item
+			var $this = $(this);
+			var list = $this.children('.metafield_content'); // get the sub list for each metafield item
+			var parent = $this.parent();
 			list.css({ 'opacity' : 0, 'display' : 'block' });
 			var mysize = list.height(); //retrieve the height of the sub list
 			list.removeAttr("style");
 			list.css({ 'opacity' : '', 'height' : 0 , 'padding-top' : 0, 'display' : '' });
-			$(this).mouseenter( function(){ //when mouse enters, slide down the sub list
+			$this.mouseenter( function(){ //when mouse enters, slide down the sub list
 				list.animate(
 					{'height': mysize , 'padding-top': 25 },
 					200,
@@ -276,9 +289,10 @@ fastfoodAnimations = {
 
 	thickbox : function() {
 
-		$('.storycontent a img').parent('a[href$=".jpg"],a[href$=".png"],a[href$=".gif"]').addClass('thickbox');
-		$('.storycontent .gallery').each(function() {
-			$('a[href$=".jpg"],a[href$=".png"],a[href$=".gif"]',$(this)).attr('rel', $(this).attr('id'));
+		$('#posts_content').find('.storycontent a img').parent('a[href$=".jpg"],a[href$=".png"],a[href$=".gif"]').addClass('thickbox');
+		$('#posts_content').find('.storycontent .gallery').each(function() {
+			var $this = $(this);
+			$('a[href$=".jpg"],a[href$=".png"],a[href$=".gif"]',$this).attr('rel', $this.attr('id'));
 		});
 
 	},
@@ -314,21 +328,21 @@ fastfoodAnimations = {
 
 	//show only a set of rows
 	post_expander : function () {
-        $('a.more-link').click(function() {
+		$('#posts_content').find('a.more-link').click(function() {
 
-				var link = $(this);
+			var link = $(this);
 
-				$.ajax({
-					type: 'POST',
-					url: link.attr("href"),
-					beforeSend: function(XMLHttpRequest) { link.html(fastfood_l10n.post_expander_wait).addClass('ajaxed'); },
-					data: 'ff_post_expander=1',
-					success: function(data) { link.parents(".storycontent").hide().html($(data)).fadeIn(600); }
-				});	
+			$.ajax({
+				type: 'POST',
+				url: link.attr("href"),
+				beforeSend: function(XMLHttpRequest) { link.html(fastfood_l10n.post_expander_wait).addClass('ajaxed'); },
+				data: 'ff_post_expander=1',
+				success: function(data) { link.parents(".storycontent").hide().html($(data)).fadeIn(600); }
+			});	
 
-				return false;
+			return false;
 
-			});
+		});
 
 	},
 

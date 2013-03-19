@@ -1,100 +1,223 @@
 <?php
 /**
- * Contains all hook wrappers.
+ * hooks.php
+ *
+ * Defines every wrapping function for the theme hooks
+ * Includes The Hook Alliance support file (https://github.com/zamoose/themehookalliance)
  *
  * @package fastfood
- * @since fastfood 0.27
+ * @since 0.27
  */
 
 
-function fastfood_hook_before_header() {
-	do_action('fastfood_hook_before_header');
+/** Grab the THA theme hooks file */
+require_once( get_template_directory() . '/tha/tha-theme-hooks.php' );
+
+function fastfood_hook_head_top() {
+	tha_head_top();
+	do_action( 'fastfood_hook_head_top' );
 }
 
-function fastfood_hook_after_header() {
-	do_action('fastfood_hook_after_header');
+function fastfood_hook_head_bottom() {
+	do_action( 'fastfood_hook_head_bottom' );
+	tha_head_bottom();
 }
 
-function fastfood_hook_before_pages() {
-	do_action('fastfood_hook_before_pages');
+function fastfood_hook_header_before() {
+	tha_header_before();
+	do_action( 'fastfood_hook_header_before' );
 }
 
-function fastfood_hook_after_pages() {
-	do_action('fastfood_hook_after_pages');
+function fastfood_hook_header_after() {
+	do_action( 'fastfood_hook_header_after' );
+	tha_header_after();
 }
 
-function fastfood_hook_before_posts() {
-	do_action('fastfood_hook_before_posts');
+function fastfood_hook_header_top() {
+	tha_header_top();
+	do_action( 'fastfood_hook_header_top' );
 }
 
-function fastfood_hook_after_posts() {
-	do_action('fastfood_hook_after_posts');
+function fastfood_hook_header_bottom() {
+	do_action( 'fastfood_hook_header_bottom' );
+	tha_header_bottom();
 }
 
-function fastfood_hook_before_post() {
-	do_action('fastfood_hook_before_post');
+function fastfood_hook_content_before() {
+	tha_content_before();
+	do_action( 'fastfood_hook_content_before' );
 }
 
-function fastfood_hook_after_post() {
-	do_action('fastfood_hook_after_post');
+function fastfood_hook_content_after() {
+	do_action( 'fastfood_hook_content_after' );
+	tha_content_after();
 }
 
-function fastfood_hook_before_post_title() {
-	do_action('fastfood_hook_before_post_title');
+function fastfood_hook_content_top() {
+	tha_content_top();
+	do_action( 'fastfood_hook_content_top' );
 }
 
-function fastfood_hook_after_post_title() {
-	do_action('fastfood_hook_after_post_title');
+function fastfood_hook_content_bottom() {
+	do_action( 'fastfood_hook_content_bottom' );
+	tha_content_bottom();
 }
 
-function fastfood_hook_before_post_content() {
-	do_action('fastfood_hook_before_post_content');
+function fastfood_hook_entry_before() {
+	tha_entry_before();
+	do_action( 'fastfood_hook_entry_before' );
 }
 
-function fastfood_hook_after_post_content() {
-	do_action('fastfood_hook_after_post_content');
+function fastfood_hook_entry_after() {
+	do_action( 'fastfood_hook_entry_after' );
+	tha_entry_after();
 }
 
-function fastfood_hook_before_comments() {
-	do_action('fastfood_hook_before_comments');
+function fastfood_hook_entry_top() {
+	tha_entry_top();
+	do_action( 'fastfood_hook_entry_top' );
 }
 
-function fastfood_hook_after_comments() {
-	do_action('fastfood_hook_after_comments');
+function fastfood_hook_entry_bottom() {
+	do_action( 'fastfood_hook_entry_bottom' );
+	tha_entry_bottom();
 }
 
-function fastfood_hook_before_right_sidebar_content() {
-	do_action('fastfood_hook_before_right_sidebar_content');
+function fastfood_hook_comments_before() {
+	tha_comments_before();
+	do_action( 'fastfood_hook_comments_before' );
 }
 
-function fastfood_hook_after_right_sidebar_content() {
-	do_action('fastfood_hook_after_right_sidebar_content');
+function fastfood_hook_comments_after() {
+	do_action( 'fastfood_hook_comments_after' );
+	tha_comments_after();
 }
 
-function fastfood_hook_before_404_sidebar() {
-	do_action('fastfood_hook_before_404_sidebar');
+function fastfood_hook_sidebars_before() {
+	tha_sidebars_before();
+	do_action( 'fastfood_hook_sidebars_before' );
 }
 
-function fastfood_hook_after_404_sidebar() {
-	do_action('fastfood_hook_after_404_sidebar');
+function fastfood_hook_sidebars_after() {
+	do_action( 'fastfood_hook_sidebars_after' );
+	tha_sidebars_after();
 }
 
-function fastfood_hook_before_footer() {
-	do_action('fastfood_hook_before_footer');
+function fastfood_hook_sidebar_top() {
+	tha_sidebar_top();
+	do_action( 'fastfood_hook_sidebar_top' );
 }
 
-function fastfood_hook_footer() {
-	do_action('fastfood_hook_footer');
+function fastfood_hook_sidebar_bottom() {
+	do_action( 'fastfood_hook_sidebar_bottom' );
+	tha_sidebar_bottom();
 }
 
-function fastfood_hook_after_footer() {
-	do_action('fastfood_hook_after_footer');
+function fastfood_hook_sidebar_primary_top() {
+	do_action('fastfood_hook_sidebar_primary_top');
 }
 
-function fastfood_hook_before_footer_sidebar_content() {
-	do_action('fastfood_hook_before_footer_sidebar_content');
+function fastfood_hook_sidebar_primary_bottom() {
+	do_action('fastfood_hook_sidebar_primary_bottom');
 }
 
-function fastfood_hook_after_footer_sidebar_content() {
-	do_action('fastfood_hook_after_footer_sidebar_content');
+function fastfood_hook_sidebar_footer_top() {
+	do_action('fastfood_hook_sidebar_footer_top');
+}
+
+function fastfood_hook_sidebar_footer_bottom() {
+	do_action('fastfood_hook_sidebar_footer_bottom');
+}
+
+function fastfood_hook_footer_before() {
+	tha_footer_before();
+	do_action( 'fastfood_hook_footer_before' );
+}
+
+function fastfood_hook_footer_after() {
+	do_action( 'fastfood_hook_footer_after' );
+	tha_footer_after();
+}
+
+function fastfood_hook_footer_top() {
+	tha_footer_top();
+	do_action( 'fastfood_hook_footer_top' );
+}
+
+function fastfood_hook_footer_bottom() {
+	do_action( 'fastfood_hook_footer_bottom' );
+	tha_footer_bottom();
+}
+
+function fastfood_hook_statusbar() {
+	do_action('fastfood_hook_statusbar');
+}
+
+function fastfood_hook_post_title_before() {
+	do_action('fastfood_hook_post_title_before');
+}
+
+function fastfood_hook_post_title_after() {
+	do_action('fastfood_hook_post_title_after');
+}
+function fastfood_hook_post_content_before () {
+	do_action('fastfood_hook_post_content_before');
+}
+function fastfood_hook_post_content_after () {
+	do_action('fastfood_hook_post_content_after');
+}
+function fastfood_hook_comments_list_before() {
+	do_action('fastfood_hook_comments_list_before');
+}
+
+function fastfood_hook_comments_list_after() {
+	do_action('fastfood_hook_comments_list_after');
+}
+
+function fastfood_hook_sidebar_404_before() {
+	do_action('fastfood_hook_sidebar_404_before');
+}
+
+function fastfood_hook_sidebar_404_after() {
+	do_action('fastfood_hook_sidebar_404_after');
+}
+
+function fastfood_hook_body_top() {
+	do_action('fastfood_hook_body_top');
+}
+
+function fastfood_hook_body_bottom() {
+	do_action('fastfood_hook_body_bottom');
+}
+
+function fastfood_hook_menu_top() {
+	do_action('fastfood_hook_menu_top');
+}
+
+function fastfood_hook_menu_bottom() {
+	do_action('fastfood_hook_menu_bottom');
+}
+
+function fastfood_hook_change_view() {
+	do_action('fastfood_hook_change_view');
+}
+
+function fastfood_hook_attachment_before() {
+	do_action('fastfood_hook_attachment_before');
+}
+
+function fastfood_hook_attachment_after() {
+	do_action('fastfood_hook_attachment_after');
+}
+
+function fastfood_hook_breadcrumb_navigation() {
+	do_action('fastfood_hook_breadcrumb_navigation');
+}
+
+function fastfood_hook_loop_before() {
+	do_action('fastfood_hook_loop_before');
+}
+
+function fastfood_hook_loop_after() {
+	do_action('fastfood_hook_loop_after');
 }

@@ -1,13 +1,13 @@
 <?php
 /**
- * mobile subtheme -> widget area
+ * The mobile theme - Widget area template
  *
  * @package fastfood
- * @since fastfood 0.31
+ * @subpackage mobile
+ * @since 0.31
  */
-
-
 ?>
+
 <!-- here should be the tbm widget area -->
 <?php
 	/* The tbm widget area is triggered if any of the areas have widgets. */
@@ -18,5 +18,5 @@
 
 <div id="tbm-widget-area">
 	<?php dynamic_sidebar( 'tbm-widget-area' ); ?>
-	<div class="fixfloat"></div> 
+	<br class="fixfloat"> 
 </div><!-- #tbm-widget-area -->

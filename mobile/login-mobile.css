@@ -1,4 +1,10 @@
-﻿/* fastfood - stylesheet for login */
+﻿/**
+ * The mobile theme - stylesheet for login
+ *
+ * @package fastfood
+ * @subpackage mobile
+ * @since 0.31
+*/
 
 body { 
 	background: #fff !important; 

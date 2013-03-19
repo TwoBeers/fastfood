@@ -1,34 +1,46 @@
 /* Fastfood - Widgets page */
 
-#primary-widget-area {
-	background: url("../images/widgets/widget_s1.png") no-repeat center 10px transparent;
-	padding-top: 80px;
+#primary-widget-area:before,
+#first-footer-widget-area:before,
+#second-footer-widget-area:before,
+#third-footer-widget-area:before,
+#header-widget-area:before,
+#error404-widgets-area:before,
+#post-widgets-area:before {
+	content: ' ';
+	display: block;
+	width: 24px;
+	height:24px;
+	background: url("../images/widgets/icons-sprite.png") no-repeat center transparent;
+	margin: 10px auto;
 }
-#first-footer-widget-area {
-	background: url("../images/widgets/widget_f1.png") no-repeat center 10px transparent;
-	padding-top: 80px;
+
+#primary-widget-area:before {
+	background-position: right bottom;
 }
-#second-footer-widget-area {
-	background: url("../images/widgets/widget_f2.png") no-repeat center 10px transparent;
-	padding-top: 80px;
+#first-footer-widget-area:before {
+	background-position: -25px bottom;
 }
-#third-footer-widget-area {
-	background: url("../images/widgets/widget_f3.png") no-repeat center 10px transparent;
-	padding-top: 80px;
+#second-footer-widget-area:before {
+	background-position: -20px bottom;
 }
-#header-widget-area {
-	background: url("../images/widgets/widget_h1.png") no-repeat center 10px transparent;
-	padding-top: 80px;
+#third-footer-widget-area:before {
+	background-position: -15px bottom;
 }
-#post-widgets-area {
-	background: url("../images/widgets/widget_p1.png") no-repeat center 10px transparent;
-	padding-top: 80px;
+#header-widget-area:before {
+	background-position: -25px -15px;
+}
+#post-widgets-area:before {
+	background-position: -25px -5px;
+}
+#error404-widgets-area:before {
+	background-position: left bottom;
 }
 #tbm-widget-area {
 	background: url("../images/widgets/mobwig.png") no-repeat center 10px transparent;
 	padding-top: 80px;
 }
 div[id*=_ff-] .widget-title {
-	background: url("../images/ff34_logo.png") no-repeat 2px center transparent;
-	padding-left: 42px;
+	background: url("../images/ff34_logo.png") no-repeat scroll 8px 5px transparent;
+	padding-left: 32px;
 }

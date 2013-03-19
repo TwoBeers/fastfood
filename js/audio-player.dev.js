@@ -2,75 +2,7 @@ var fastfoodAudioPlayer;
 
 (function($) {
 
-fastfoodAudioPlayer = {
-
-	//initialize
-	init : function() {
-
-		ff_AudioPlayer.setup( ff_SWFPlayer, {
-			width: 300,
-			loop: "yes",
-			transparentpagebg: "yes",
-			animation: "no",
-			bg: "5C5959",
-			leftbg: "5C5959",
-			rightbg: "5C5959",
-			rightbghover : "5C5959",
-			righticon: "FFFFFF",
-			lefticon: "FFFFFF",
-			track: "5C5959",
-			text: "FFFFFF",
-			tracker: "828282",
-			border: "828282"
-		});
-		fastfoodAudioPlayer.start();
-	},
-
-    start : function() {
-
-		var the_id = 0;
-		return $('audio').each(function() {
-			the_id++;
-			$(this).attr('id', 'ff-player-id' + the_id );
-			var the_source = $(this).children('source:first-child');
-			if ( the_source.size() !== 0 ) {
-				the_href = the_source.attr('src');
-				var the_type = the_href.substr( the_href.length - 4, 4 )
-				switch (the_type)
-				{
-				case '.ogg':
-					if ( !document.createElement("audio").canPlayType ) {
-						$(this).parent().html('<span class="ff-player-notice">' + ff_unknown_media_format + '</span>');
-					}
-					break;
-				case '.mp3':
-					if ( !document.createElement("audio").canPlayType || (document.createElement("audio").canPlayType && !document.createElement("audio").canPlayType('audio/mpeg')) ) {
-						ff_AudioPlayer.embed(this.id, {  
-							soundFile: the_href
-						});  
-					}
-					break;
-				case '.m4a':
-					if ( !document.createElement("audio").canPlayType || (document.createElement("audio").canPlayType && !document.createElement("audio").canPlayType('audio/x-m4a')) ) {
-						$(this).parent().html('<span class="ff-player-notice">' + ff_unknown_media_format + '</span>');
-					}
-					break;
-				default:
-					$(this).parent().html('<span class="ff-player-notice">' + ff_unknown_media_format + '</span>');
-				}				
-			}
-			
-        });
-        
-    }
-
-};
-
-$(document).ready(function($){ fastfoodAudioPlayer.init(); });
-
-})(jQuery);
-
-var ff_AudioPlayer = function () {
+fastfoodAudioPlayer = function () {
 	var instances = [];
 	var activePlayerID;
 	var playerURL = "";
@@ -194,8 +126,74 @@ var ff_AudioPlayer = function () {
 		
 		getVolume: function (playerID) {
 			return currentVolume;
+		},
+		
+		start : function() {
+
+			return $('audio.no-player').removeClass('no-player').each(function() {
+				$this = $(this);
+				var the_source = $this.children('source:first-child');
+				if ( the_source.size() !== 0 ) {
+					the_href = the_source.attr('src');
+					var the_type = the_href.substr( the_href.length - 4, 4 )
+					switch (the_type)
+					{
+					case '.ogg':
+						if ( !document.createElement("audio").canPlayType ) {
+							$this.parent().html('<span class="ff-player-notice">' + fastfoodAudioPlayer_l10n.unknown_media + ' (ogg)</span>');
+						}
+						break;
+					case '.mp3':
+						if ( !document.createElement("audio").canPlayType || (document.createElement("audio").canPlayType && !document.createElement("audio").canPlayType('audio/mpeg')) ) {
+							fastfoodAudioPlayer.embed(this.id, {  
+								soundFile: the_href
+							});  
+						}
+						break;
+					case '.m4a':
+						if ( !document.createElement("audio").canPlayType || (document.createElement("audio").canPlayType && !document.createElement("audio").canPlayType('audio/x-m4a')) ) {
+							$this.parent().html('<span class="ff-player-notice">' + fastfoodAudioPlayer_l10n.unknown_media + ' (m4a)</span>');
+						}
+						break;
+					default:
+						$this.parent().html('<span class="ff-player-notice">' + fastfoodAudioPlayer_l10n.unknown_media + '</span>');
+					}				
+				}
+				
+			});
+			
+		},
+		
+		//initialize
+		init : function() {
+
+			fastfoodAudioPlayer.setup( fastfoodAudioPlayer_l10n.player_path, {
+				width: 300,
+				loop: "yes",
+				transparentpagebg: "yes",
+				animation: "no",
+				bg: "5C5959",
+				leftbg: "5C5959",
+				rightbg: "5C5959",
+				rightbghover : "5C5959",
+				righticon: "FFFFFF",
+				lefticon: "FFFFFF",
+				track: "5C5959",
+				text: "FFFFFF",
+				tracker: "828282",
+				border: "828282"
+			});
+			$('body').on('post-load', function(event){ //Jetpack Infinite Scroll trigger
+				fastfoodAudioPlayer.start();
+			});
+			fastfoodAudioPlayer.start();
 		}
 		
 	}
 	
 }();
+
+
+$(document).ready(function($){ fastfoodAudioPlayer.init(); });
+
+})(jQuery);

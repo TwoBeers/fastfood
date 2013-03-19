@@ -50,6 +50,9 @@ img {
 	height: auto;
 	margin: 0;
 }
+#slide-head,
+.ff-I-like-it,
+.hide_if_print,
 .avatar,
 .comment-edit-link,
 .comment-reply-link,
@@ -68,7 +71,7 @@ img {
 #edit_link,
 #fixedfoot,
 body #wpadminbar,
-#ff-breadcrumb-wrap {
+.breadcrumb-navigation {
 	display: none;
 }
 .metafield div {
@@ -112,6 +115,10 @@ body #wpadminbar,
 #head,
 #footer {
 	text-align: right;
+}
+div#header {
+	background: transparent;
+	min-height: 0;
 }
 .wp-caption {
 	max-width: 100%;
