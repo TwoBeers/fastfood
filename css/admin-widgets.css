@@ -16,7 +16,7 @@
 }
 
 #primary-widget-area:before {
-	background-position: right bottom;
+	background-position: -35px bottom;
 }
 #first-footer-widget-area:before {
 	background-position: -25px bottom;

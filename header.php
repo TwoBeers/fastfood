@@ -1,4 +1,16 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<?php
+/**
+ * header.php
+ *
+ * Template part file that contains the HTML document head and 
+ * opening HTML body elements, as well as the site header and 
+ * the "breadcrumb" bar.
+ *
+ *
+ * @package fastfood
+ * @since 0.15
+ */
+?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" <?php language_attributes( 'xhtml' ); ?>>
 
 	<head profile="http://gmpg.org/xfn/11">
@@ -7,7 +19,7 @@
 
 		<meta http-equiv="Content-Type" content="<?php bloginfo( 'html_type' ); ?>; charset=<?php bloginfo( 'charset' ); ?>" />
 
-		<meta name = "viewport" content = "width = device-width" />
+		<meta name="viewport" content="width=100%; initial-scale=1; maximum-scale=1; minimum-scale=1; user-scalable=no;" />
 
 		<title><?php wp_title( '&laquo;', true, 'right' ); ?></title>
 

@@ -193,15 +193,9 @@ if ( !function_exists( 'fastfood_use_sidebar' ) ) {
 
 // skip every sidebar if in print preview
 if ( !function_exists( 'fastfood_get_sidebar' ) ) {
-	function fastfood_get_sidebar( $name = '' ) {
-
-		if ( fastfood_is_printpreview() ) return;
-
-		fastfood_hook_sidebars_before();
+	function fastfood_get_sidebar( $name = 'primary' ) {
 
 		get_sidebar( $name );
-
-		fastfood_hook_sidebars_after();
 
 	}
 }

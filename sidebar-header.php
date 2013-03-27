@@ -16,14 +16,32 @@
 		return;
 ?>
 
+<?php fastfood_hook_sidebars_before(); ?>
+
+<?php fastfood_hook_this_sidebar_before( 'header' ); ?>
+
 <div id="header-widget-area">
 
-	<?php fastfood_hook_sidebar_top(); ?>
+	<div class="fixfloat">
+
+		<?php fastfood_hook_sidebar_top(); ?>
+
+		<?php fastfood_hook_this_sidebar_top( 'header' ); ?>
+
+	</div>
 
 	<?php dynamic_sidebar( 'header-widget-area' ); ?>
 
-	<?php fastfood_hook_sidebar_bottom(); ?>
+	<div class="fixfloat">
 
-	<br class="fixfloat">
+		<?php fastfood_hook_this_sidebar_bottom( 'header' ); ?>
+
+		<?php fastfood_hook_sidebar_bottom(); ?>
+
+	</div> 
 
 </div><!-- #header-widget-area -->
+
+<?php fastfood_hook_this_sidebar_after( 'header' ); ?>
+
+<?php fastfood_hook_sidebars_after(); ?>

@@ -18,9 +18,19 @@
 	}
 ?>
 
+<?php fastfood_hook_sidebars_before(); ?>
+
+<?php fastfood_hook_this_sidebar_before( 'footer' ); ?>
+
 <div id="footer-widget-area">
 
-	<div class="fixfloat"><?php fastfood_hook_sidebar_top(); ?></div>
+	<div class="fixfloat">
+
+		<?php fastfood_hook_sidebar_top(); ?>
+
+		<?php fastfood_hook_this_sidebar_top( 'footer' ); ?>
+
+	</div>
 
 	<div id="first_fwa" class="widget-area">
 			<?php if ( is_active_sidebar( 'first-footer-widget-area' ) ) dynamic_sidebar( 'first-footer-widget-area' ); ?>
@@ -34,6 +44,16 @@
 			<?php if ( is_active_sidebar( 'third-footer-widget-area' ) ) dynamic_sidebar( 'third-footer-widget-area' ); ?>
 	</div><!-- #third .widget-area -->
 
-	<div class="fixfloat"><?php fastfood_hook_sidebar_bottom(); ?></div>
+	<div class="fixfloat">
+
+		<?php fastfood_hook_this_sidebar_bottom( 'footer' ); ?>
+
+		<?php fastfood_hook_sidebar_bottom(); ?>
+
+	</div> 
 
 </div><!-- #footer-widget-area -->
+
+<?php fastfood_hook_this_sidebar_after( 'footer' ); ?>
+
+<?php fastfood_hook_sidebars_after(); ?>
