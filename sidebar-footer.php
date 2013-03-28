@@ -18,17 +18,13 @@
 	}
 ?>
 
-<?php fastfood_hook_sidebars_before(); ?>
-
-<?php fastfood_hook_this_sidebar_before( 'footer' ); ?>
+<?php fastfood_hook_sidebars_before( 'footer' ); ?>
 
 <div id="footer-widget-area">
 
 	<div class="fixfloat">
 
-		<?php fastfood_hook_sidebar_top(); ?>
-
-		<?php fastfood_hook_this_sidebar_top( 'footer' ); ?>
+		<?php fastfood_hook_sidebar_top( 'footer' ); ?>
 
 	</div>
 
@@ -46,14 +42,10 @@
 
 	<div class="fixfloat">
 
-		<?php fastfood_hook_this_sidebar_bottom( 'footer' ); ?>
-
-		<?php fastfood_hook_sidebar_bottom(); ?>
+		<?php fastfood_hook_sidebar_bottom( 'footer' ); ?>
 
 	</div> 
 
 </div><!-- #footer-widget-area -->
 
-<?php fastfood_hook_this_sidebar_after( 'footer' ); ?>
-
-<?php fastfood_hook_sidebars_after(); ?>
+<?php fastfood_hook_sidebars_after( 'footer' ); ?>

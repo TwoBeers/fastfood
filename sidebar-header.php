@@ -16,17 +16,13 @@
 		return;
 ?>
 
-<?php fastfood_hook_sidebars_before(); ?>
-
-<?php fastfood_hook_this_sidebar_before( 'header' ); ?>
+<?php fastfood_hook_sidebars_before( 'header' ); ?>
 
 <div id="header-widget-area">
 
 	<div class="fixfloat">
 
-		<?php fastfood_hook_sidebar_top(); ?>
-
-		<?php fastfood_hook_this_sidebar_top( 'header' ); ?>
+		<?php fastfood_hook_sidebar_top( 'header' ); ?>
 
 	</div>
 
@@ -34,14 +30,10 @@
 
 	<div class="fixfloat">
 
-		<?php fastfood_hook_this_sidebar_bottom( 'header' ); ?>
-
-		<?php fastfood_hook_sidebar_bottom(); ?>
+		<?php fastfood_hook_sidebar_bottom( 'header' ); ?>
 
 	</div> 
 
 </div><!-- #header-widget-area -->
 
-<?php fastfood_hook_this_sidebar_after( 'header' ); ?>
-
-<?php fastfood_hook_sidebars_after(); ?>
+<?php fastfood_hook_sidebars_after( 'header' ); ?>

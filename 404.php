@@ -29,17 +29,13 @@ get_header(); ?>
 			<p><?php _e( 'You can try the following:','fastfood' ); ?></p>
 
 
-			<?php fastfood_hook_sidebars_before(); ?>
-
-			<?php fastfood_hook_this_sidebar_before( 'error404' ); ?>
+			<?php fastfood_hook_sidebars_before( 'error404' ); ?>
 
 			<div id="error404-widgets-area">
 
 				<div class="fixfloat">
 
-					<?php fastfood_hook_sidebar_top(); ?>
-
-					<?php fastfood_hook_this_sidebar_top( 'error404' ); ?>
+					<?php fastfood_hook_sidebar_top( 'error404' ); ?>
 
 				</div> 
 
@@ -47,17 +43,13 @@ get_header(); ?>
 
 				<div class="fixfloat">
 
-					<?php fastfood_hook_this_sidebar_bottom( 'error404' ); ?>
-
-					<?php fastfood_hook_sidebar_bottom(); ?>
+					<?php fastfood_hook_sidebar_bottom( 'error404' ); ?>
 
 				</div> 
 
 			</div>
 
-			<?php fastfood_hook_this_sidebar_after( 'error404' ); ?>
-
-			<?php fastfood_hook_sidebars_after(); ?>
+			<?php fastfood_hook_sidebars_after( 'error404' ); ?>
 
 		<?php } else { ?>
 

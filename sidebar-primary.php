@@ -11,17 +11,13 @@
 
 <!-- begin sidebar -->
 
-<?php fastfood_hook_sidebars_before(); ?>
-
-<?php fastfood_hook_this_sidebar_before( 'primary' ); ?>
+<?php fastfood_hook_sidebars_before( 'primary' ); ?>
 
 <div id="sidebardx">
 
 	<div class="fixfloat">
 
-		<?php fastfood_hook_sidebar_top(); ?>
-
-		<?php fastfood_hook_this_sidebar_top( 'primary' ); ?>
+		<?php fastfood_hook_sidebar_top( 'primary' ); ?>
 
 	</div>
 
@@ -33,16 +29,12 @@
 
 	<div class="fixfloat">
 
-		<?php fastfood_hook_this_sidebar_bottom( 'primary' ); ?>
-
-		<?php fastfood_hook_sidebar_bottom(); ?>
+		<?php fastfood_hook_sidebar_bottom( 'primary' ); ?>
 
 	</div> 
 
 </div>
 
-<?php fastfood_hook_this_sidebar_after( 'primary' ); ?>
-
-<?php fastfood_hook_sidebars_after(); ?>
+<?php fastfood_hook_sidebars_after( 'primary' ); ?>
 
 <!-- end sidebar -->
