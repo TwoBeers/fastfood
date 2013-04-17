@@ -488,7 +488,7 @@ class Fastfood_Widget_Pop_Categories extends WP_Widget {
 			echo $item;
 		}
 ?>
-			<li class="all_cat"><a title="<?php _e( 'View all categories', 'fastfood' ); ?>" href="<?php  echo home_url(); ?>/?allcat=y"><?php _e( 'View all', 'fastfood' ); ?></a></li>
+			<li class="all_cat"><a title="<?php _e( 'View all categories', 'fastfood' ); ?>" href="<?php  echo home_url(); ?>/?allcat=y">[...]</a></li>
 		</ul>
 <?php
 		echo $after_widget;
@@ -538,42 +538,45 @@ class Fastfood_Widget_Social extends WP_Widget {
 
 		$this->WP_Widget( "ff-social", __( "Follow Me", "fastfood" ), $widget_ops, $control_ops );
 		$this->follow_urls = array(
-			'blogger' => 'Blogger',
-			'blurb' => 'Blurb',
-			'Delicious' => 'Delicious',
-			'Deviantart' => 'deviantART',
-			'Digg' => 'Digg',
-			'Dropbox' => 'Dropbox',
-			'Facebook' => 'Facebook',
-			'Flickr' => 'Flickr',
-			'Github' => 'GitHub',
-			'GooglePlus' => 'Google+',
-			'Hi5' => 'Hi5',
-			'LinkedIn' => 'LinkedIn',
-			'Myspace' => 'Myspace',
-			'Odnoklassniki' => 'Odnoklassniki',
-			'Orkut' => 'Orkut',
-			'Picasa' => 'Picasa',
-			'pinterest' => 'Pinterest',
-			'Qzone' => 'Qzone',
-			'Reddit' => 'Reddit',
-			'scribd' => 'Scribd',
-			'slideshare' => 'SlideShare',
-			'StumbleUpon' => 'StumbleUpon',
-			'soundcloud' => 'SoundCloud',
-			'Technorati' => 'Technorati',
-			'Tencent' => 'Tencent',
-			'Twitter' => 'Twitter',
-			'tumblr' => 'Tumblr',
-			'ubuntuone' => 'Ubuntu One',
-			'Vimeo' => 'Vimeo',
-			'VKontakte' => 'VKontakte',
-			'Sina' => 'Weibo',
-			'WindowsLive' => 'Windows Live',
-			'Xing' => 'Xing',
-			'yfrog' => 'YFrog',
-			'Youtube' => 'Youtube',
-			'RSS' => 'RSS' );
+			'blogger'		=> 'Blogger',
+			'blurb'			=> 'Blurb',
+			'Delicious'		=> 'Delicious',
+			'Deviantart'	=> 'deviantART',
+			'Digg'			=> 'Digg',
+			'Dropbox'		=> 'Dropbox',
+			'Facebook'		=> 'Facebook',
+			'Flickr'		=> 'Flickr',
+			'Github'		=> 'GitHub',
+			'GooglePlus'	=> 'Google+',
+			'Hi5'			=> 'Hi5',
+			'LinkedIn'		=> 'LinkedIn',
+			'livejournal'	=> 'LiveJournal',
+			'Myspace'		=> 'Myspace',
+			'Odnoklassniki'	=> 'Odnoklassniki',
+			'Orkut'			=> 'Orkut',
+			'pengyou'		=> 'Pengyou',
+			'Picasa'		=> 'Picasa',
+			'pinterest'		=> 'Pinterest',
+			'Qzone'			=> 'Qzone',
+			'Reddit'		=> 'Reddit',
+			'renren'		=> 'Renren',
+			'scribd'		=> 'Scribd',
+			'slideshare'	=> 'SlideShare',
+			'StumbleUpon'	=> 'StumbleUpon',
+			'soundcloud'	=> 'SoundCloud',
+			'Technorati'	=> 'Technorati',
+			'Tencent'		=> 'Tencent',
+			'Twitter'		=> 'Twitter',
+			'tumblr'		=> 'Tumblr',
+			'ubuntuone'		=> 'Ubuntu One',
+			'Vimeo'			=> 'Vimeo',
+			'VKontakte'		=> 'VKontakte',
+			'Sina'			=> 'Weibo',
+			'WindowsLive'	=> 'Windows Live',
+			'Xing'			=> 'Xing',
+			'yfrog'			=> 'YFrog',
+			'Youtube'		=> 'Youtube',
+			'RSS'			=> 'RSS' );
 	}
 
 	function form( $instance ) {

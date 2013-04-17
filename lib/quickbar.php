@@ -61,7 +61,8 @@ if ( !function_exists( 'fastfood_quickbar' ) ) {
 
 ?>
 
-	<!-- begin quickbar -->
+<!-- begin quickbar -->
+<div id="quickbar-wrap">
 	<div id="quickbar"<?php if ( ! fastfood_get_opt( 'fastfood_statusbar' ) ) echo ' class="no-status"'; ?>>
 
 	<?php
@@ -125,7 +126,7 @@ if ( !function_exists( 'fastfood_quickbar' ) ) {
 					<div class="mentit"><?php _e( 'Categories', 'fastfood' ); ?></div>
 					<ul class="solid_ul">
 						<?php fastfood_get_categories_wpr(); ?>
-						<li class="all_cat"><a title="<?php _e( 'View all categories', 'fastfood' ); ?>" href="<?php echo home_url(); ?>/?allcat=y"><?php _e( 'More...', 'fastfood' ); ?></a></li>
+						<li class="all_cat"><a title="<?php _e( 'View all categories', 'fastfood' ); ?>" href="<?php echo home_url(); ?>/?allcat=y">[...]</a></li>
 					</ul>
 				</div>
 			</div>
@@ -194,7 +195,7 @@ if ( !function_exists( 'fastfood_quickbar' ) ) {
 			</div>
 		</div>
 	<?php } ?>
-
+	</div>
 </div>
 
 		<?php

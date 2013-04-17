@@ -25,33 +25,42 @@ class Fastfood_For_Jetpack {
 
 		//Infinite Scroll
 		add_theme_support( 'infinite-scroll', array(
-			'type'		=> 'click',
-			'container'	=> 'posts_content',
-			'render'	=> array( $this, 'infinite_scroll_render' ),
+			'type'			=> 'click',
+			'container'		=> 'posts_content',
+			'render'		=> array( $this, 'infinite_scroll_render' ),
 			'wrapper'		=> false,
 		) );
 		if ( class_exists( 'The_Neverending_Home_Page' ) ) {
-			add_filter(		'infinite_scroll_results',		array( $this, 'infinite_scroll_encode' ), 11, 1 );
+			add_filter		( 'infinite_scroll_results'		, array( $this, 'infinite_scroll_encode' ), 11, 1 );
 		}
 
 		//Sharedaddy
 		if ( function_exists( 'sharing_display' ) ) {
-			remove_filter(	'the_content',					'sharing_display', 19 );
-			remove_filter(	'the_excerpt',					'sharing_display', 19 );
-			remove_action(	'fastfood_hook_entry_before',	'fastfood_I_like_it' );
-			add_action(		'fastfood_hook_entry_bottom',	array( $this, 'sharedaddy' ) );
+			remove_filter	( 'the_content'					, 'sharing_display', 19 );
+			remove_filter	( 'the_excerpt'					, 'sharing_display', 19 );
+			remove_action	( 'fastfood_hook_entry_before'	, 'fastfood_I_like_it' );
+			add_action		( 'fastfood_hook_entry_bottom'	, array( $this, 'sharedaddy' ) );
 		}
 
 		//Carousel
 		if ( class_exists( 'Jetpack_Carousel' ) ) {
-			remove_filter(	'post_gallery',					'fastfood_gallery_shortcode', 10, 2 );
-			add_filter(		'fastfood_filter_js_modules',	array( $this, 'carousel' ) );
+			remove_filter	( 'post_gallery'				, 'fastfood_gallery_shortcode', 10, 2 );
+			add_filter		( 'fastfood_filter_js_modules'	, array( $this, 'carousel' ) );
 		}
 
 		//Likes
 		if ( class_exists( 'Jetpack_Likes' ) ) {
-			add_filter(		'wpl_is_index_disabled',		'__return_false' );
+			add_action		( 'fastfood_hook_entry_bottom'	, array( $this, 'likes' ) );
+			remove_filter	( 'the_content'					, array( Jetpack_Likes::init(), 'post_likes' ), 30, 1);
+			add_filter		( 'fastfood_filter_likes'		, array( Jetpack_Likes::init(), 'post_likes' ), 30, 1);
 		}
+
+	}
+
+	//print the "likes" button after post content
+	function likes() {
+
+		echo '<br class="fixfloat">' . apply_filters('fastfood_filter_likes','') . '<br class="fixfloat">';
 
 	}
 

@@ -10,7 +10,6 @@ label[for="locations-secondary2"]:before {
 	background: url("../images/widgets/icons-sprite.png") no-repeat center transparent;
 	margin: 20px auto 0;
 }
-
 label[for="locations-primary"]:before {
 	background-position: -15px -15px;
 }
@@ -19,4 +18,11 @@ label[for="locations-secondary1"]:before {
 }
 label[for="locations-secondary2"]:before {
 	background-position: -15px -5px;
+}
+.menu-theme-locations label[for="locations-primary"]:before,
+.menu-theme-locations label[for="locations-secondary1"]:before,
+.menu-theme-locations label[for="locations-secondary2"]:before {
+	display: inline-block;
+	margin: 0 5px;
+	vertical-align: middle;
 }

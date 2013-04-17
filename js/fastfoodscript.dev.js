@@ -21,6 +21,10 @@ fastfoodAnimations = {
 					this.navigation_buttons();
 					break;
 
+				case 'smooth_scroll':
+					this.smooth_scroll();
+					break;
+
 				case 'quickbar_tools':
 					this.quickbar_tools();
 					break;
@@ -58,6 +62,10 @@ fastfoodAnimations = {
 					this.quote_this();
 					break;
 
+				case 'tinynav':
+					this.tinynav();
+					break;
+
 				default :
 					//no default action
 					break;
@@ -71,32 +79,32 @@ fastfoodAnimations = {
 	main_menu : function() {
 
 		//main menu dropdown animation
-		$('#mainmenu').children('li').each(function(){ //get every main list item
+		$('#mainmenu').children('.menu-item-parent').each(function(){ //get every main list item
 			var $this = $(this);
 			var d = $this.children('ul'); //for each main item, get the sub list
 			var margintop_in = 50; //the starting distance between menu item and the popup submenu
 			var margintop_out = 20; //the exiting distance between menu item and the popup submenu
 			if(d.size() !== 0){ //if the sub list exists...
-				$this.children('a').append('<span class="hiraquo"> &#187;</span>'); //add a raquo to the main item
-				
+
 				d.css({'opacity' : 0 , 'margin-top' : margintop_in });
-				
-				$this.mouseenter(function(){ //when mouse enters, slide down the sub list
-					d.css({'display' : 'block' });
-					d.animate(
-						{ 'opacity' : 1 , 'margin-top' : 0 },
-						200,
-						'easeOutBack'
-					);
-				}).mouseleave(function(){ //when mouse leaves, hide the sub list
-					d.stop();
-					d.animate(
-						{ 'opacity' : 0 , 'margin-top' : margintop_out },
-						200,
-						'swing',
-						function(){ d.css({'display' : '' , 'margin-top' : margintop_in }); }
-					);
-				});
+
+				$this.hoverIntent(
+					function(){ //when mouse enters, slide down the sub list
+						d.css({'display' : 'block' }).animate(
+							{ 'opacity' : 1 , 'margin-top' : 0 },
+							200,
+							'easeOutBack'
+						);
+					},
+					function(){ //when mouse leaves, hide the sub list
+						d.stop().animate(
+							{ 'opacity' : 0 , 'margin-top' : margintop_out },
+							200,
+							'swing',
+							function(){ d.css({'display' : '' , 'margin-top' : margintop_in }); }
+						);
+					}
+				);
 			}
 		});
 
@@ -110,18 +118,23 @@ fastfoodAnimations = {
 			var list = $this.find('span.nb_tooltip');
 			var marginright_in = 60; //the starting distance between menu item and the popup submenu
 			list.css({ 'opacity' : 0 , 'right' : marginright_in });
-			$this.mouseenter( function(){ //when mouse enters, shift right the tooltip
-				list.css({'display' : 'block' });
-				list.animate(
-					{ 'opacity' : 1 , 'right' : 23 },
-					200,
-					'easeOutBack'
-				);
-			}).mouseleave( function(){ //when mouse leaves, hide the tooltip
-				list.stop();
-				list.css({ 'opacity' : 0, 'display' : '', 'right' : marginright_in });
-			});	
+			$this.hoverIntent(
+				function(){ //when mouse enters, shift right the tooltip
+					list.css({'display' : 'block' }).animate(
+						{ 'opacity' : 1 , 'right' : 23 },
+						200,
+						'easeOutBack'
+					);
+				},
+				function(){ //when mouse leaves, hide the tooltip
+					list.stop().css({ 'opacity' : 0, 'display' : '', 'right' : marginright_in });
+				}
+			);
 		});
+
+	},
+
+	smooth_scroll : function() {
 
 		// fade in/out on scroll
 		top_but = $('#navbuttons a[href="#"] span');
@@ -175,17 +188,18 @@ fastfoodAnimations = {
 			var list = $this.find('.menutool');
 			var marginleft_in = 120; //the starting distance between menu item and the popup submenu
 			list.css({ 'opacity' : 0 , 'left' : marginleft_in });
-			$this.mouseenter( function(){ //when mouse enters, shift right the tooltip
-				list.css({'display' : 'block' });
-				list.animate(
-					{ 'opacity' : 1 , 'left' : 50 },
-					200,
-					'easeOutBack'
-				);
-			}).mouseleave( function(){ //when mouse leaves, hide the tooltip
-				list.stop();
-				list.css({ 'opacity' : 0, 'display' : '', 'left' : marginleft_in });
-			});	
+			$this.hoverIntent(
+				function(){ //when mouse enters, shift right the tooltip
+					list.css({'display' : 'block' }).animate(
+						{ 'opacity' : 1 , 'left' : 50 },
+						200,
+						'easeOutBack'
+					);
+				},
+				function(){ //when mouse leaves, hide the tooltip
+					list.stop().css({ 'opacity' : 0, 'display' : '', 'left' : marginleft_in });
+				}
+			);
 		});
 
 	},
@@ -197,36 +211,33 @@ fastfoodAnimations = {
 			var $this = $(this);
 			var list = $this.children('.menuback'); // get the sub list for each quickbar item
 			var trig = $this.children('.itemimg');
-				
-			trig.removeClass('itemimg').addClass('itemimg_js');
-			list.removeClass().addClass('menuback_js');
 
-			list.css({ 'height' : 0 });
-				
-			$this.mouseenter( function(){ //when mouse enters, slide left the sub list, restore its shadow and animate the button
-				if ( $('#user_menuback').hasClass('keepme') ) return;
-				list.stop();
-				trig.stop();
-				list.animate(
-					{ 'height': 250 },
-					500,
-					'easeOutBack'
-				);
-				trig.animate(
-					{ 'width': 55 },
-					200
-				);
-				
-			}).mouseleave( function(){ //when mouse leaves, hide the submenu
-				if ( $('#user_menuback').hasClass('keepme') ) return;
-				list.stop();
-				//trig.stop();
-				list.css({ 'height' : 0 , 'display' : '' });
-				trig.animate(
-					{ 'width': 50 },
-					300
-				);
-			});	
+			trig.removeClass('itemimg').addClass('itemimg_js');
+			list.removeClass().addClass('menuback_js').css({ 'height' : 0 }).hide();
+
+			$this.hoverIntent(
+				function(){ //when mouse enters, slide left the sub list, restore its shadow and animate the button
+					if ( $('#user_menuback').hasClass('keepme') ) return;
+					list.stop().show().animate(
+						{ 'height': 250 },
+						500,
+						'easeOutBack'
+					);
+					trig.stop().animate(
+						{ 'width': 55 },
+						200
+					);
+					
+				},
+				function(){ //when mouse leaves, hide the submenu
+					if ( $('#user_menuback').hasClass('keepme') ) return;
+					list.stop().css({ 'height' : 0 , 'display' : '' }).hide();
+					trig.animate(
+						{ 'width': 50 },
+						300
+					);
+				}
+			);
 		});
 
 		//add a "close" link after the submit button in minilogin form
@@ -256,24 +267,17 @@ fastfoodAnimations = {
 			var $this = $(this);
 			var list = $this.children('.metafield_content'); // get the sub list for each metafield item
 			var parent = $this.parent();
-			list.css({ 'opacity' : 0, 'display' : 'block' });
-			var mysize = list.height(); //retrieve the height of the sub list
-			list.removeAttr("style");
-			list.css({ 'opacity' : '', 'height' : 0 , 'padding-top' : 0, 'display' : '' });
-			$this.mouseenter( function(){ //when mouse enters, slide down the sub list
-				list.animate(
-					{'height': mysize , 'padding-top': 25 },
-					200,
-					'easeOutBack'
-				);
-				parent.addClass('meta_shadowed');
-				parent.css({ 'border-color' : '#fff' });
-			}).mouseleave( function(){ //when mouse leaves, hide the sub list
-				list.stop();
-				list.css({ 'display' : '', 'height' : 0 , 'padding-top' : 0 });
-				parent.removeClass('meta_shadowed');
-				parent.css({ 'border-color' : '' });
-			});
+			list.css({ 'display' : 'block' }).hide();
+			$this.hoverIntent(
+				function(){ //when mouse enters, slide down the sub list
+					list.slideDown(200,'easeOutBack');
+					parent.addClass('meta_shadowed').css({ 'border-color' : '#fff' });
+				},
+				function(){ //when mouse leaves, hide the sub list
+					list.hide();
+					parent.removeClass('meta_shadowed').css({ 'border-color' : '' });
+				}
+			);
 		});
 
 	},
@@ -381,6 +385,15 @@ fastfoodAnimations = {
 				}, (options.speed + options.pause));
 				return timId;
 			}
+		});
+	},
+
+	tinynav : function() {
+		if ( $(window).width() > 800 ) return false;
+		$(".nav-menu").tinyNav({
+			active: 'current_page_item', // Set the "active" class for default menu
+			label: '', // String: Sets the <label> text for the <select> (if not set, no label will be added)
+			header: '' // String: Specify text for "header" and show header instead of the active item
 		});
 	}
 

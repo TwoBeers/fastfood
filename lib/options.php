@@ -440,6 +440,33 @@ function fastfood_get_coa( $option = false ) {
 							'req' => 'fastfood_gallery_preview',
 							'sub' => false
 		),
+		'fastfood_cust_comrep' => 
+						array(
+							'group' => 'javascript',
+							'type' => 'chk',
+							'default' => 1,
+							'description' => __( 'custom comment form','fastfood' ),
+							'info' => __( 'custom floating form for posting comments','fastfood' ),
+							'req' => ''
+		),
+		'fastfood_quotethis'=>
+						array( 
+							'group'=>'javascript',
+							'type'=>'chk',
+							'default'=>1,
+							'description'=>__( 'quote link', 'fastfood' ),
+							'info'=>__( 'show a link for easily add the selected text as a quote inside the comment form', 'fastfood' ),
+							'req'=>'fastfood_jsani' 
+						),
+		'fastfood_tinynav' =>
+						array(
+							'group' => 'javascript',
+							'type' => 'chk',
+							'default' => 1,
+							'description' => '<a href="https://github.com/viljamis/TinyNav.js">Tinynav</a>',
+							'info' => __( 'tiny navigation menu for small screen','fastfood' ),
+							'req' => 'fastfood_jsani'
+						),
 		'fastfood_rsideb' => 
 						array(
 							'group' => 'quickbar',
@@ -520,24 +547,6 @@ function fastfood_get_coa( $option = false ) {
 							'req' => '',
 							'sub' => false
 		),
-		'fastfood_cust_comrep' => 
-						array(
-							'group' => 'javascript',
-							'type' => 'chk',
-							'default' => 1,
-							'description' => __( 'custom comment form','fastfood' ),
-							'info' => __( 'custom floating form for posting comments','fastfood' ),
-							'req' => ''
-		),
-		'fastfood_quotethis'=>
-						array( 
-							'group'=>'javascript',
-							'type'=>'chk',
-							'default'=>1,
-							'description'=>__( 'quote link', 'fastfood' ),
-							'info'=>__( 'show a link for easily add the selected text as a quote inside the comment form', 'fastfood' ),
-							'req'=>'fastfood_jsani' 
-						),
 		'fastfood_breadcrumb' => 
 						array(
 							'group' => 'quickbar',

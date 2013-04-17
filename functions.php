@@ -25,46 +25,49 @@
 
 
 /* custom actions */
-add_action( 'after_setup_theme',					'fastfood_setup' );
-add_action( 'wp_enqueue_scripts',					'fastfood_stylesheet' );
-add_action( 'wp_enqueue_scripts',					'fastfood_scripts' );
-add_action( 'wp_footer',							'fastfood_body_class_script' );
-add_action( 'init',									'fastfood_post_expander_activate' );
-add_action( 'admin_bar_menu',						'fastfood_admin_bar_plus', 999 );
-add_action( 'wp_print_styles',						'fastfood_deregister_styles', 100 );
-add_action( 'template_redirect',					'fastfood_allcat' );
-add_action( 'fastfood_hook_header_after',			'fastfood_main_menu' );
-add_action( 'fastfood_hook_entry_before',			'fastfood_I_like_it' );
-add_action( 'fastfood_hook_attachment_before',		'fastfood_navigate_images' );
-add_action( 'fastfood_hook_attachment_after',		'fastfood_video_player' );
-add_action( 'fastfood_hook_comments_list_before',	'fastfood_navigate_comments' );
-add_action( 'fastfood_hook_comments_list_after',	'fastfood_navigate_comments' );
-add_action( 'comment_form_comments_closed',			'fastfood_comments_closed' );
-add_action( 'pre_get_posts',						'fastfood_exclude_category_from_blog' );
-add_action( 'fastfood_hook_content_top',			'fastfood_search_reminder' );
-add_action( 'fastfood_hook_loop_after',				'fastfood_navigate_archives' );
-add_action( 'fastfood_hook_post_content_after',		'fastfood_link_pages' );
+add_action( 'after_setup_theme'						, 'fastfood_setup' );
+add_action( 'wp_enqueue_scripts'					, 'fastfood_stylesheet' );
+add_action( 'wp_enqueue_scripts'					, 'fastfood_scripts' );
+add_action( 'wp_footer'								, 'fastfood_body_class_script' );
+add_action( 'init'									, 'fastfood_post_expander_activate' );
+add_action( 'admin_bar_menu'						, 'fastfood_admin_bar_plus', 999 );
+add_action( 'wp_print_styles'						, 'fastfood_deregister_styles', 100 );
+add_action( 'template_redirect'						, 'fastfood_allcat' );
+add_action( 'fastfood_hook_header_after'			, 'fastfood_main_menu' );
+add_action( 'fastfood_hook_entry_before'			, 'fastfood_I_like_it' );
+add_action( 'fastfood_hook_attachment_before'		, 'fastfood_navigate_images' );
+add_action( 'fastfood_hook_attachment_after'		, 'fastfood_video_player' );
+add_action( 'fastfood_hook_comments_list_before'	, 'fastfood_navigate_comments' );
+add_action( 'fastfood_hook_comments_list_after'		, 'fastfood_navigate_comments' );
+add_action( 'comment_form_comments_closed'			, 'fastfood_comments_closed' );
+add_action( 'pre_get_posts'							, 'fastfood_exclude_category_from_blog' );
+add_action( 'fastfood_hook_content_top'				, 'fastfood_search_reminder' );
+add_action( 'fastfood_hook_loop_after'				, 'fastfood_navigate_archives' );
+add_action( 'fastfood_hook_post_content_after'		, 'fastfood_link_pages' );
 
 /* custom filters */
-add_filter( 'embed_oembed_html',					'fastfood_wmode_transparent', 10, 3);
-add_filter( 'img_caption_shortcode',				'fastfood_img_caption_shortcode', 10, 3 );
-add_filter( 'previous_posts_link_attributes',		'fastfood_previous_posts_link_attributes', 10, 1 );
-add_filter( 'next_posts_link_attributes',			'fastfood_next_posts_link_attributes', 10, 1 );
-add_filter( 'the_content',							'fastfood_quote_content' );
-add_filter( 'post_gallery',							'fastfood_gallery_shortcode', 10, 2 );
-add_filter( 'wp_get_attachment_link',				'fastfood_get_attachment_link', 10, 6 );
-add_filter( 'use_default_gallery_style',			'__return_false' );
-add_filter( 'tb_chat_load_style',					'__return_false' );
-add_filter( 'avatar_defaults',						'fastfood_addgravatar' );
-add_filter( 'get_comment_author_link',				'fastfood_add_quoted_on' );
-add_filter( 'the_title',							'fastfood_title_tags_filter', 10, 2 );
-add_filter( 'excerpt_length',						'fastfood_excerpt_length' );
-add_filter( 'excerpt_mblength' ,					'fastfood_excerpt_length' );
-add_filter( 'excerpt_more',							'fastfood_excerpt_more' );
-add_filter( 'the_content_more_link',				'fastfood_more_link', 10, 2 );
-add_filter( 'wp_title',								'fastfood_filter_wp_title' );
-add_filter( 'body_class' ,							'fastfood_body_classes' );
-add_filter( 'comment_form_defaults',				'fastfood_comment_form_defaults' );
+add_filter( 'embed_oembed_html'						, 'fastfood_wmode_transparent', 10, 3);
+add_filter( 'img_caption_shortcode'					, 'fastfood_img_caption_shortcode', 10, 3 );
+add_filter( 'previous_posts_link_attributes'		, 'fastfood_previous_posts_link_attributes', 10, 1 );
+add_filter( 'next_posts_link_attributes'			, 'fastfood_next_posts_link_attributes', 10, 1 );
+add_filter( 'the_content'							, 'fastfood_quote_content' );
+add_filter( 'post_gallery'							, 'fastfood_gallery_shortcode', 10, 2 );
+add_filter( 'wp_get_attachment_link'				, 'fastfood_get_attachment_link', 10, 6 );
+add_filter( 'use_default_gallery_style'				, '__return_false' );
+add_filter( 'tb_chat_load_style'					, '__return_false' );
+add_filter( 'avatar_defaults'						, 'fastfood_addgravatar' );
+add_filter( 'get_comment_author_link'				, 'fastfood_add_quoted_on' );
+add_filter( 'the_title'								, 'fastfood_title_tags_filter', 10, 2 );
+add_filter( 'excerpt_length'						, 'fastfood_excerpt_length' );
+add_filter( 'excerpt_mblength'						, 'fastfood_excerpt_length' );
+add_filter( 'excerpt_more'							, 'fastfood_excerpt_more' );
+add_filter( 'the_content_more_link'					, 'fastfood_more_link', 10, 2 );
+add_filter( 'wp_title'								, 'fastfood_filter_wp_title' );
+add_filter( 'body_class'							, 'fastfood_body_classes' );
+add_filter( 'comment_form_defaults'					, 'fastfood_comment_form_defaults' );
+add_filter( 'wp_nav_menu_objects'					, 'fastfood_add_menu_parent_class' );
+add_filter( 'wp_list_categories'					, 'fastfood_wrap_categories_count' );
+add_filter( 'wp_nav_menu_items'						, 'fastfood_add_home_link', 10, 2 );
 
 
 /* load theme options in $fastfood_opt variable, globally retrieved in php files */
@@ -260,8 +263,10 @@ if ( !function_exists( 'fastfood_get_js_modules' ) ) {
 			'quickbar_panels',
 			'entry_meta',
 			'widgets_style',
+			'smooth_scroll',
 		);
-		
+
+		if ( fastfood_get_opt( 'fastfood_tinynav' ) )			$modules[] = 'tinynav';
 		if ( fastfood_get_opt( 'fastfood_post_expand' ) )		$modules[] = 'post_expander';
 		if ( fastfood_get_opt( 'fastfood_gallery_preview' ) )	$modules[] = 'thickbox';
 		if ( fastfood_get_opt( 'fastfood_quotethis' ) )			$modules[] = 'quote_this';
@@ -283,9 +288,13 @@ if ( !function_exists( 'fastfood_scripts' ) ) {
 
 		if ( fastfood_get_opt( 'fastfood_jsani' ) ) {
 
+			//tinynav script
+			if ( fastfood_get_opt( 'fastfood_tinynav' ) ) wp_enqueue_script( 'fastfood-tinynav', get_template_directory_uri().'/js/tinynav/tinynav.min.js', array( 'jquery' ), fastfood_get_info( 'version' ), true );
+
 			$deps = array(
 				'jquery',
 				'jquery-effects-core',
+				'hoverIntent',
 			);
 			if ( fastfood_get_opt( 'fastfood_gallery_preview' ) )
 				$deps[] = 'thickbox';
@@ -554,7 +563,15 @@ function fastfood_main_menu () {
 
 		<div id="rss_imglink"><a href="<?php bloginfo( 'rss2_url' ); ?>" title="<?php _e( 'Syndicate this site using RSS 2.0','fastfood' ); ?>"><img alt="rsslink" src="<?php echo get_template_directory_uri(); ?>/images/rss.png" /></a></div>
 
-		<?php wp_nav_menu( array( 'menu_id' => 'mainmenu', 'fallback_cb' => 'fastfood_pages_menu', 'theme_location' => 'primary' ) ); ?>
+		<?php
+			wp_nav_menu( array(
+				'container' => false,
+				'menu_id' => 'mainmenu',
+				'menu_class' => 'nav-menu',
+				'fallback_cb' => 'fastfood_pages_menu',
+				'theme_location' => 'primary'
+			) );
+		?>
 
 		<br class="fixfloat">
 
@@ -564,6 +581,60 @@ function fastfood_main_menu () {
 <?php
 
 	}
+
+}
+
+
+// Pages Menu
+if ( !function_exists( 'fastfood_pages_menu' ) ) {
+	function fastfood_pages_menu() {
+
+?>
+	<ul id="mainmenu" class="nav-menu">
+
+		<?php echo fastfood_add_home_link( $items = '', $args = 'theme_location=primary' ); ?>
+
+		<?php wp_list_pages( 'sort_column=menu_order&title_li=' ); // menu-order sorted ?>
+
+	</ul>
+<?php
+
+	}
+}
+
+
+//add "Home" link
+function fastfood_add_home_link( $items = '', $args = null ) {
+
+	$defaults = array(
+		'theme_location' => 'undefined',
+		'before' => '',
+		'after' => '',
+		'link_before' => '',
+		'link_after' => '',
+	);
+
+	$args = wp_parse_args( $args, $defaults );
+
+	if ( ( $args['theme_location'] === 'primary' ) && ( 'posts' == get_option( 'show_on_front' ) ) ) {
+		if ( is_front_page() || is_single() )
+			$class = ' current_page_item';
+		else
+			$class = '';
+
+		$homeMenuItem =
+				'<li class="menu-item navhome' . $class . '">' .
+				$args['before'] .
+				'<a href="' . home_url( '/' ) . '" title="' . esc_attr__( 'Home', 'fastfood' ) . '">' .
+				$args['link_before'] . __( 'Home', 'fastfood' ) . $args['link_after'] .
+				'</a>' .
+				$args['after'] .
+				'</li>';
+
+		$items = $homeMenuItem . $items;
+	}
+
+	return $items;
 
 }
 
@@ -817,14 +888,6 @@ function fastfood_friendly_date() {
 	}
 
 	return apply_filters( 'fastfood_filter_friendly_date', $dateWithNiceTone );
-
-}
-
-
-// Pages Menu ( menu-order sorted )
-function fastfood_pages_menu() {
-
-	echo apply_filters( 'fastfood_filter_pages_menu', '<ul id="mainmenu">' . wp_list_pages( 'echo=0&sort_column=menu_order&title_li=' ) . '</ul>' );
 
 }
 
@@ -1545,7 +1608,8 @@ function fastfood_header_style(){
 		a:hover,
 		.current-menu-item a:hover,
 		.current_page_item a:hover,
-		.current-cat a:hover {
+		.current-cat a:hover,
+		#mainmenu .menu-item-parent:hover > a:after { 
 			color: <?php echo fastfood_get_opt( 'fastfood_colors_link_hover' ); ?>;
 		}
 		.current-menu-item > a,
@@ -1553,7 +1617,7 @@ function fastfood_header_style(){
 		.current-cat > a,
 		#crumbs .last,
 		#navxt-crumbs li.current_item,
-		li.current-menu-ancestor .hiraquo {
+		li.current-menu-ancestor > a:after {
 			color: <?php echo fastfood_get_opt( 'fastfood_colors_link_sel' ); ?>;
 		}
 		<?php 
@@ -1882,6 +1946,50 @@ function fastfood_body_classes($classes) {
 
 	return $classes;
 
+}
+
+
+/**
+ * Add parent class to wp_page_menu top parent list items
+ */
+function fastfood_add_parent_class( $css_class, $page, $depth, $args ) {
+
+	if ( ! empty( $args['has_children'] ) && $depth == 0 )
+		$css_class[] = 'menu-item-parent';
+
+	return $css_class;
+
+}
+
+
+/**
+ * Add parent class to wp_nav_menu top parent list items
+ */
+function fastfood_add_menu_parent_class( $items ) {
+
+	$parents = array();
+	foreach ( $items as $item ) {
+		if ( $item->menu_item_parent && $item->menu_item_parent > 0 ) {
+			$parents[] = $item->menu_item_parent;
+		}
+	}
+
+	foreach ( $items as $item ) {
+		if ( in_array( $item->ID, $parents ) ) {
+			if ( ! $item->menu_item_parent )
+				$item->classes[] = 'menu-item-parent'; 
+		}
+	}
+
+	return $items;    
+}
+
+
+// wrap the categories count with a span
+function fastfood_wrap_categories_count( $output ) {
+	$pattern = '/<\/a>\s(\(\d+\))/i';
+	$replacement = ' <span class="details">$1</span></a>';
+	return preg_replace( $pattern, $replacement, $output );
 }
 
 

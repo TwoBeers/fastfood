@@ -310,9 +310,12 @@ br.fixfloat {
 /* =menu items (quickbar)
 ----------------------------------------------------------*/
 #quickbar {
-	bottom: 34px;
 	left: -50px;
 	position: absolute;
+	bottom: 0;
+}
+#quickbar li {
+	list-style: none outside none;
 }
 .itemimg,
 .itemimg_js {
@@ -373,7 +376,9 @@ br.fixfloat {
 .no-status .menuback_js {
 	margin-bottom: -34px;
 }
-
+#quickbar.no-status {
+	margin-bottom: 34px;
+}
 .menuitem:hover .menuback {
 	display: block;
 	height: 250px;
@@ -401,7 +406,6 @@ br.fixfloat {
 }
 .menulcont li {
 	color: #404040;
-	display: block;
 	padding: 1px 5px;
 }
 .menulcont li:hover .preview {
@@ -649,9 +653,12 @@ br.fixfloat {
 ----------------------------------------------------------*/
 .current-menu-item > a,
 .current_page_item > a,
-.current-cat > a,
-li.current-menu-ancestor .hiraquo {
+.current-cat > a {
 	color: #ccc;
+}
+#mainmenu .menu-item-parent > a:after { 
+	padding-left: 5px;
+	content: '\00bb';
 }
 #mainmenu > li.page_item,
 #mainmenu > li.menu-item {
@@ -742,6 +749,12 @@ li.current-menu-ancestor .hiraquo {
 }
 #secondary2 {
 	margin-bottom: 10px;
+}
+.tinynav {
+	display: none;
+}
+.navhome {
+	display: none;
 }
 
 /* =meta
@@ -1072,8 +1085,6 @@ div.tb_post_details ul {
 	border: none;
 }
 .all_cat {
-	text-align: right;
-	margin: 16px 0 10px;
 }
 /* Post Format icons
 ----------------------------------------------------------*/
@@ -2041,10 +2052,15 @@ img.aligncenter {
 	margin: 0 auto;
 	width: 30px;
 }
-/* Sharedaddy
+/* Jetpack Sharedaddy
 ----------------------------------------------------------*/
 #main div.sharedaddy div.sd-block {
 	border-top: none;
+}
+/* Jetpack Likes
+----------------------------------------------------------*/
+#main div.jetpack-likes-widget-wrapper {
+	margin-top: 10px;
 }
 /* Low Resolutions
 ----------------------------------------------------------*/
@@ -2081,6 +2097,9 @@ img.aligncenter {
 	.posts_narrow {
 		border: none;
 	}
+	.posts_wide {
+		padding: 0 10px 10px;
+	}
 	.posts_narrow,
 	.posts_wide,
 	#sidebardx {
@@ -2103,6 +2122,20 @@ img.aligncenter {
 	}
 	.js-res {
 		width: 80%;
+	}
+	.tinynav {
+		display: block;
+		width: 100%;
+		padding: 5px;
+		border: none;
+		background: #404040;
+		color: #fff;
+	}
+	.tinynav option {
+		margin: 5px 0;
+	}
+	.ff-js .nav-menu {
+		display: none !important;
 	}
 }
 
