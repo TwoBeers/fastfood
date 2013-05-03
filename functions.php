@@ -1163,7 +1163,7 @@ if ( !function_exists( 'fastfood_I_like_it' ) ) {
 		if ( fastfood_get_opt( 'fastfood_I_like_it_stumbleupon' ) )
 			$text .='<div class="ff-I-like-it-button"><script src="//www.stumbleupon.com/hostedbadge.php?s=5&r=' . $enc_href . '"></script></div>';
 		if ( fastfood_get_opt( 'fastfood_I_like_it_pinterest' ) && is_attachment() && wp_attachment_is_image() )
-			$text .='<div class="ff-I-like-it-button"><a href="//pinterest.com/pin/create/button/?url=' . $enc_href . '&media=' . rawurlencode( wp_get_attachment_url() ) . '&description=' . rawurlencode( $post->post_excerpt ) . '" data-pin-do="buttonPin" data-pin-config="beside"><img src="//assets.pinterest.com/images/pidgets/pin_it_button.png" /></a></div>';
+			$text .='<div class="ff-I-like-it-button"><a href="//pinterest.com/pin/create/button/?url=' . $enc_href . '&media=' . rawurlencode( wp_get_attachment_url() ) . '&description=' . rawurlencode( $post->post_excerpt ) . '" data-pin-do="buttonPin" data-pin-config="above"><img src="//assets.pinterest.com/images/pidgets/pin_it_button.png" /></a></div>';
 
 		if ( $text ) {
 			echo '<div class="ff-I-like-it">' . apply_filters( 'fastfood_filter_like_it', $text ) . '</div>';
