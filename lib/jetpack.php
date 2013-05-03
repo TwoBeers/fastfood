@@ -57,6 +57,7 @@ class Fastfood_For_Jetpack {
 
 	}
 
+
 	//print the "likes" button after post content
 	function likes() {
 

@@ -1642,6 +1642,7 @@ img.aligncenter {
 	position: fixed;
 	text-align: right;
 	width: 65px;
+	z-index: 100;
 }
 .posts_wide .ff-I-like-it {
 	margin-left: -146px;

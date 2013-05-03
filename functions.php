@@ -505,33 +505,33 @@ if ( !function_exists( 'fastfood_share_this' ) ) {
 		);
 		$args = wp_parse_args( $args, $defaults );
 
-		$pName = rawurlencode( get_the_title( $post->ID ) );
-		$pHref = rawurlencode( home_url() . '/?p=' . $post->ID );
-		$pLongHref = rawurlencode( get_permalink( $post->ID ) );
-		$pPict = rawurlencode( wp_get_attachment_url( get_post_thumbnail_id( $post->ID ) ) );
-		$pSource = rawurlencode( get_bloginfo( 'name' ) );
+		$enc_title			= rawurlencode( get_the_title( $post->ID ) );
+		$enc_href_short		= rawurlencode( home_url() . '/?p=' . $post->ID );
+		$enc_href			= rawurlencode( get_permalink( $post->ID ) );
+		$enc_thumb			= rawurlencode( wp_get_attachment_url( get_post_thumbnail_id( $post->ID ) ) );
+		$enc_source			= rawurlencode( get_bloginfo( 'name' ) );
 		if ( !empty( $post->post_password ) )
-			$pSum = '';
+			$enc_summary	= '';
 		elseif ( has_excerpt() )
-			$pSum = rawurlencode( get_the_excerpt() );
+			$enc_summary	= rawurlencode( get_the_excerpt() );
 		else
-			$pSum = rawurlencode( wp_trim_words( $post->post_content, apply_filters('excerpt_length', 55), '[...]' ) );
+			$enc_summary	= rawurlencode( wp_trim_words( $post->post_content, apply_filters('excerpt_length', 55), '[...]' ) );
 
-		$share['twitter']		= array( 'Twitter',		'http://twitter.com/home?status=' . $pName . '%20-%20' . $pHref );
-		$share['facebook']		= array( 'Facebook',	'http://www.facebook.com/sharer.php?u=' . $pHref. '&t=' . $pName );
-		$share['sina']			= array( 'Weibo',		'http://v.t.sina.com.cn/share/share.php?url=' . $pHref );
-		$share['tencent']		= array( 'Tencent',		'http://v.t.qq.com/share/share.php?url=' . $pHref . '&title=' . $pName . '&pic=' . $pPict );
-		$share['qzone']			= array( 'Qzone',		'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' . $pHref );
-		$share['reddit']		= array( 'Reddit',		'http://reddit.com/submit?url=' . $pHref . '&title=' . $pName );
-		$share['stumbleupon']	= array( 'StumbleUpon',	'http://www.stumbleupon.com/submit?url=' . $pHref . '&title=' . $pName );
-		$share['digg']			= array( 'Digg',		'http://digg.com/submit?url=' . $pHref . '&title=' . $pName );
-		$share['orkut']			= array( 'Orkut',		'http://promote.orkut.com/preview?nt=orkut.com&tt=' . $pName . '&du=' . $pHref . '&tn=' . $pPict );
-		$share['bookmarks']		= array( 'Bookmarks',	'https://www.google.com/bookmarks/mark?op=edit&bkmk=' . $pHref . '&title=' . $pName . '&annotation=' . $pSum );
-		$share['blogger']		= array( 'Blogger',		'http://www.blogger.com/blog_this.pyra?t&u=' . $pHref . '&n=' . $pName . '&pli=1' );
-		$share['delicious']		= array( 'Delicious',	'http://delicious.com/post?url=' . $pHref . '&title=' . $pName . '&notes=' . $pSum );
-		$share['linkedin']		= array( 'LinkedIn',	'http://www.linkedin.com/shareArticle?mini=true&url=' . $pHref . '&title=' . $pName . '&source=' . $pSource . '&summary=' . $pSum );
-		$share['tumblr']		= array( 'Tumblr',		'http://www.tumblr.com/share?v=3&u=' . $pHref . '&t=' . $pName . '&s=' . $pSum );
-		$share['mail']			= array( 'e-mail',		'mailto:?subject=' . rawurlencode ( __( 'Check it out!', 'fastfood' ) ) . '&body=' . $pName . '%20-%20' . $pLongHref . '%0D%0A' . $pSum );
+		$share['twitter']		= array( 'Twitter',		'http://twitter.com/home?status=' . $enc_title . '%20-%20' . $enc_href_short );
+		$share['facebook']		= array( 'Facebook',	'http://www.facebook.com/sharer.php?u=' . $enc_href_short. '&t=' . $enc_title );
+		$share['sina']			= array( 'Weibo',		'http://v.t.sina.com.cn/share/share.php?url=' . $enc_href_short );
+		$share['tencent']		= array( 'Tencent',		'http://v.t.qq.com/share/share.php?url=' . $enc_href_short . '&title=' . $enc_title . '&pic=' . $enc_thumb );
+		$share['qzone']			= array( 'Qzone',		'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' . $enc_href_short );
+		$share['reddit']		= array( 'Reddit',		'http://reddit.com/submit?url=' . $enc_href_short . '&title=' . $enc_title );
+		$share['stumbleupon']	= array( 'StumbleUpon',	'http://www.stumbleupon.com/submit?url=' . $enc_href_short . '&title=' . $enc_title );
+		$share['digg']			= array( 'Digg',		'http://digg.com/submit?url=' . $enc_href_short . '&title=' . $enc_title );
+		$share['orkut']			= array( 'Orkut',		'http://promote.orkut.com/preview?nt=orkut.com&tt=' . $enc_title . '&du=' . $enc_href_short . '&tn=' . $enc_thumb );
+		$share['bookmarks']		= array( 'Bookmarks',	'https://www.google.com/bookmarks/mark?op=edit&bkmk=' . $enc_href_short . '&title=' . $enc_title . '&annotation=' . $enc_summary );
+		$share['blogger']		= array( 'Blogger',		'http://www.blogger.com/blog_this.pyra?t&u=' . $enc_href_short . '&n=' . $enc_title . '&pli=1' );
+		$share['delicious']		= array( 'Delicious',	'http://delicious.com/post?url=' . $enc_href_short . '&title=' . $enc_title . '&notes=' . $enc_summary );
+		$share['linkedin']		= array( 'LinkedIn',	'http://www.linkedin.com/shareArticle?mini=true&url=' . $enc_href_short . '&title=' . $enc_title . '&source=' . $enc_source . '&summary=' . $enc_summary );
+		$share['tumblr']		= array( 'Tumblr',		'http://www.tumblr.com/share?v=3&u=' . $enc_href_short . '&t=' . $enc_title . '&s=' . $enc_summary );
+		$share['mail']			= array( 'e-mail',		'mailto:?subject=' . rawurlencode ( __( 'Check it out!', 'fastfood' ) ) . '&body=' . $enc_title . '%20-%20' . $enc_href . '%0D%0A' . $enc_summary );
 
 		$share = apply_filters( 'fastfood_filter_share_this', $share );
 
@@ -1142,24 +1142,28 @@ if ( !function_exists( 'fastfood_I_like_it' ) ) {
 
 		if ( ! fastfood_get_opt( 'fastfood_I_like_it' ) || fastfood_is_printpreview() || ! is_singular() ) return;
 
-		$pName = rawurlencode( get_the_title() );
-		$pHref = rawurlencode( get_permalink() );
-		$psHref = rawurlencode( home_url() . '/?p=' . $post->ID );
+		$enc_title			= rawurlencode( get_the_title() );
+		$enc_href			= rawurlencode( get_permalink() );
+		$enc_href_short		= rawurlencode( home_url() . '/?p=' . $post->ID );
+
+		$esc_href			= esc_url( get_permalink() );
+		$esc_title			= esc_attr( get_the_title() );
+		$esc_href_short		= esc_url( home_url() . '/?p=' . $post->ID );
 
 		$text = '';
 
 		if ( fastfood_get_opt( 'fastfood_I_like_it_plus1' ) )
-			$text .='<div class="ff-I-like-it-button"><div class="g-plusone" data-size="tall" data-href="' . $pHref . '"></div></div>';
+			$text .='<div class="ff-I-like-it-button"><div class="g-plusone" data-size="tall" data-href="' . $esc_href . '"></div></div>';
 		if ( fastfood_get_opt( 'fastfood_I_like_it_twitter' ) )
-			$text .='<div class="ff-I-like-it-button"><div class="t-twits"><a href="//twitter.com/share" class="twitter-share-button" data-url="' . $pHref . '" data-text="' . $pName . ': ' . $psHref . '" data-count="vertical"></a></div></div>';
+			$text .='<div class="ff-I-like-it-button"><div class="t-twits"><a href="//twitter.com/share" class="twitter-share-button" data-url="' . $esc_href . '" data-text="' . $esc_title . ': ' . $esc_href_short . '" data-count="vertical"></a></div></div>';
 		if ( fastfood_get_opt( 'fastfood_I_like_it_facebook' ) )
-			$text .='<div class="ff-I-like-it-button"><div class="fb-like" data-href="' . $pHref . '" data-send="false" data-layout="box_count" data-width="42" data-show-faces="false"></div></div>';
+			$text .='<div class="ff-I-like-it-button"><div class="fb-like" data-href="' . $esc_href . '" data-send="false" data-layout="box_count" data-width="42" data-show-faces="false"></div></div>';
 		if ( fastfood_get_opt( 'fastfood_I_like_it_linkedin' ) )
-			$text .='<div class="ff-I-like-it-button"><script type="IN/Share" data-url="' . $pHref . '" data-counter="top"></script></div>';
+			$text .='<div class="ff-I-like-it-button"><script type="IN/Share" data-url="' . $esc_href . '" data-counter="top"></script></div>';
 		if ( fastfood_get_opt( 'fastfood_I_like_it_stumbleupon' ) )
-			$text .='<div class="ff-I-like-it-button"><script src="//www.stumbleupon.com/hostedbadge.php?s=5&r=' . $pHref . '"></script></div>';
+			$text .='<div class="ff-I-like-it-button"><script src="//www.stumbleupon.com/hostedbadge.php?s=5&r=' . $enc_href . '"></script></div>';
 		if ( fastfood_get_opt( 'fastfood_I_like_it_pinterest' ) && is_attachment() && wp_attachment_is_image() )
-			$text .='<div class="ff-I-like-it-button"><a href="//pinterest.com/pin/create/button/?url=' . $pHref . '&media=' . urlencode( wp_get_attachment_url() ) . '&description=' . urlencode( $post->post_excerpt ) . '" class="pin-it-button" count-layout="vertical"><img border="0" src="//assets.pinterest.com/images/PinExt.png" title="Pin It" /></a></div>';
+			$text .='<div class="ff-I-like-it-button"><a href="//pinterest.com/pin/create/button/?url=' . $enc_href . '&media=' . rawurlencode( wp_get_attachment_url() ) . '&description=' . rawurlencode( $post->post_excerpt ) . '" data-pin-do="buttonPin" data-pin-config="beside"><img src="//assets.pinterest.com/images/pidgets/pin_it_button.png" /></a></div>';
 
 		if ( $text ) {
 			echo '<div class="ff-I-like-it">' . apply_filters( 'fastfood_filter_like_it', $text ) . '</div>';
@@ -1177,13 +1181,7 @@ if ( !function_exists( 'fastfood_like_it_scripts' ) ) {
 ?>
 
 <?php if ( fastfood_get_opt( 'fastfood_I_like_it_plus1' ) ) { ?>
-	<script type="text/javascript">
-		(function() {
-			var po = document.createElement('script'); po.type = 'text/javascript'; po.async = true;
-			po.src = '//apis.google.com/js/plusone.js';
-			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(po, s);
-		})();
-	</script>
+	<script type="text/javascript" src="//apis.google.com/js/plusone.js"></script>
 <?php } ?>
 
 <?php if ( fastfood_get_opt( 'fastfood_I_like_it_twitter' ) ) { ?>
@@ -1192,15 +1190,7 @@ if ( !function_exists( 'fastfood_like_it_scripts' ) ) {
 
 <?php if ( fastfood_get_opt( 'fastfood_I_like_it_facebook' ) ) { ?>
 	<div id="fb-root"></div>
-	<script>
-		(function(d, s, id) {
-			var js, fjs = d.getElementsByTagName(s)[0];
-			if (d.getElementById(id)) {return;}
-			js = d.createElement(s); js.id = id;
-			js.src = "//connect.facebook.net/en_US/all.js#xfbml=1";
-			fjs.parentNode.insertBefore(js, fjs);
-		}(document, 'script', 'facebook-jssdk'));
-	</script>
+	<script type="text/javascript" src="//connect.facebook.net/en_US/all.js#xfbml=1"></script>
 <?php } ?>
 
 <?php if ( fastfood_get_opt( 'fastfood_I_like_it_linkedin' ) ) { ?>
