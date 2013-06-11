@@ -3,9 +3,6 @@
 #tabs-container p {
 	margin: 3em 0;
 }
-input[type="checkbox"], input[type="radio"] {
-	vertical-align: text-bottom;
-}
 input[type="radio"] {
 	margin-left: 20px;
 }
@@ -19,17 +16,23 @@ input[type="radio"] {
 	padding: 0;
 	min-height: 250px;
 }
-#theme-infos {
-	padding: 10px;
+#theme-infos h3:first-of-type {
+	margin-top:0;
 }
 #tabs-container {
-	margin: 20px 20px 20px 150px;
+	margin: 0 20px 20px 150px;
+}
+h2.section-tile {
+	background: #fff;
+	margin: 0 0 20px;
+	padding: 10px;
+	text-align: center;
 }
 #tabselector,
 #selector {
 	position: absolute;
-	top: 100px;
 	left: 0;
+	margin: 0;
 }
 #tabselector li,
 #selector li {
@@ -79,9 +82,10 @@ input[type="radio"] {
 	border-top: 1px solid #eee;
 	margin-top: 10px;
 	color: #999;
+	text-align: right;
 }
 .tab-opt {
-	padding: 10px;
+	padding: 20px 10px 20px;
 	border: 1px solid #eee;
 	margin-bottom: 20px;
 }
@@ -98,45 +102,6 @@ input[type="radio"] {
 	border-top: none;
 	padding-top: 0;
 }
-.sub-opt.type-col {
-	float: left;
-	margin: 0 20px 20px 0;
-	width: 260px;
-	position: relative;
-}
-.col-tools {
-	border: 1px solid #DFDFDF;
-	padding: 10px;
-	background-color: #fff;
-}
-
-.col-tools span {
-	font-weight: bold;
-}
-.color_preview_box {
-	width:80px;
-	height:80px;
-	float: left;
-	cursor: crosshair;
-}
-.col-tools input {
-	margin: 0 10px 0 0;
-}
-.option_cp {
-	background:#828c95;
-	background: -moz-linear-gradient(-45deg, #c6c6c6 0%, #828c95 36%, #3a3a3a 100%); /* FF3.6+ */
-	border-radius: 0 100px 100px 100px;	
-	position:absolute;
-	display:none;
-	top: 70px;
-	left: 55px;
-	z-index: 500;
-	box-shadow: 0 0 2px #000;
-}
-.farbtastic .wheel {
-    left: 0;
-    top: 0;
-}
 .extra-actions a {
 	font-size: 10px; 
 	text-decoration: none; 
@@ -149,3 +114,55 @@ label img {
 	text-align: center;
 	border: 1px solid #eee;
 }
+br.clear {
+	display: block;
+}
+.wp-picker-container {
+	vertical-align: middle;
+}
+.wp-picker-holder {
+	position: absolute;
+	z-index: 10;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+.wp-color-result.wp-picker-open {
+	top: 1px;
+}
+.col-preview {
+	background: #f8f8f8;
+	padding: 0 4px;
+}
+.admin-color-mp6 .tab-opt {
+	border:none;
+	border-bottom: 1px solid #DFDFDF;
+}
+.admin-color-mp6 .tab-opt:hover {
+	background: transparent;
+}
+.admin-color-mp6 #tabselector li, #selector li {
+	border-left: 3px solid transparent;
+	padding: 0.5em 16px 0.5em 4px;
+}
+.admin-color-mp6 .sel-active {
+	background: none repeat scroll 0 0 #fff;
+	border-left: 3px solid #0074A2 !important;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+	font-weight: normal;
+}
+.admin-color-mp6 #tabs-container {
+	margin: 0px 20px 20px 200px;
+}
+.admin-color-mp6 .tab-opt {
+	padding: 0 10px 20px;
+}
+
+
+
+
+
+
+
+
+
+
+

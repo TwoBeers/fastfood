@@ -1020,6 +1020,7 @@ class Fastfood_Widget_Image_Exif extends WP_Widget {
 
 <?php
 	}
+
 }
 
 

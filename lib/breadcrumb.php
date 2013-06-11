@@ -86,12 +86,12 @@ class fastfood_Breadcrumb {
 
 		if ( get_option( 'show_on_front' ) == "page" ) {
 
-			$homelink = '<a class="crumb-home"' . $opt['nofollow'] . 'href="' . get_permalink( get_option( 'page_on_front' ) ) . '">&nbsp;</a>';
-			$bloglink = $homelink . $sep . '<a href="' . get_permalink( get_option( 'page_for_posts' ) ) . '">' . get_the_title( get_option( 'page_for_posts' ) ) . '</a>';
+			$homelink = '<a class="crumb-home"' . $opt['nofollow'] . 'href="' . esc_url( get_permalink( get_option( 'page_on_front' ) ) ) . '">&nbsp;</a>';
+			$bloglink = $homelink . $sep . '<a href="' . esc_url( get_permalink( get_option( 'page_for_posts' ) ) ) . '">' . get_the_title( get_option( 'page_for_posts' ) ) . '</a>';
 
 		} else {
 
-			$homelink = '<a class="crumb-home"' . $opt['nofollow'] . 'href="' . home_url() . '">&nbsp;</a>';
+			$homelink = '<a class="crumb-home"' . $opt['nofollow'] . 'href="' . esc_url( home_url() ) . '">&nbsp;</a>';
 			$bloglink = $homelink;
 
 		}
@@ -119,7 +119,7 @@ class fastfood_Breadcrumb {
 					if ( $cat->parent != 0 ) {
 						$output .= get_category_parents( $cat->term_id, true, $sep );
 					} else {
-						$output .= '<a href="' . get_category_link( $cat->term_id ) . '">' . $cat->name . '</a>' . $sep;
+						$output .= '<a href="' . esc_url( get_category_link( $cat->term_id ) ) . '">' . $cat->name . '</a>' . $sep;
 					}
 				}
 			}
@@ -162,7 +162,7 @@ class fastfood_Breadcrumb {
 			} elseif ( is_attachment() ) {
 
 				if ( $post->post_parent ) {
-					$output .= '<a href="' . get_permalink( $post->post_parent ) . '">' . get_the_title( $post->post_parent ) . '</a>' . $sep;
+					$output .= '<a href="' . esc_url( get_permalink( $post->post_parent ) ) . '">' . get_the_title( $post->post_parent ) . '</a>' . $sep;
 				}
 				$output .= '<span>' . get_the_title() . '</span>';
 
@@ -175,7 +175,7 @@ class fastfood_Breadcrumb {
 			} else {
 
 				if ( get_query_var( 'page' ) ) {
-					$output .= '<a href="' . get_permalink() . '">' . get_the_title() . '</a>' . $sep . '<span>' . sprintf( __( 'Page %s', 'fastfood' ), get_query_var( 'page' ) ) . '</span>';
+					$output .= '<a href="' . esc_url( get_permalink() ) . '">' . get_the_title() . '</a>' . $sep . '<span>' . sprintf( __( 'Page %s', 'fastfood' ), get_query_var( 'page' ) ) . '</span>';
 				} else {
 					$output .= get_the_title() ? '<span>' . get_the_title() . '</span>' : '<span>' . sprintf ( __( 'post #%s', 'fastfood' ), get_the_ID() ) . '</span>';
 				}
@@ -189,7 +189,7 @@ class fastfood_Breadcrumb {
 			if ( 0 == $post->post_parent ) {
 
 				if ( get_query_var( 'page' ) ) {
-					$output = $homelink . $sep . '<a href="' . get_permalink() . '">' . get_the_title() . '</a>' . $sep . '<span>' . sprintf( __( 'Page %s', 'fastfood' ), get_query_var( 'page' ) ) . '</span>';
+					$output = $homelink . $sep . '<a href="' . esc_url( get_permalink() ) . '">' . get_the_title() . '</a>' . $sep . '<span>' . sprintf( __( 'Page %s', 'fastfood' ), get_query_var( 'page' ) ) . '</span>';
 				} else {
 					$output = $homelink . $sep . '<span>' . get_the_title() . '</span>';
 				}
@@ -215,7 +215,7 @@ class fastfood_Breadcrumb {
 				foreach ( $ancestors as $ancestor ) {
 					$tmp  = array();
 					$tmp['title'] 	= strip_tags( get_the_title( $ancestor ) );
-					$tmp['url'] 	= get_permalink( $ancestor );
+					$tmp['url'] 	= esc_url( get_permalink( $ancestor ) );
 					$tmp['cur'] = false;
 					if ( $ancestor == $post->ID ) {
 						$tmp['cur'] = true;

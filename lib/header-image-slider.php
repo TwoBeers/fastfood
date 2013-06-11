@@ -14,7 +14,6 @@ class Fastfood_Header_Image_Slider {
 	function Fastfood_Header_Image_Slider() {
 
 		add_action( 'admin_head-appearance_page_custom-header'	, array( &$this, 'admin_scripts' ), 99 );
-		add_action( 'admin_head-appearance_page_custom-header'	, array( &$this, 'admin_style' ) );
 		add_action( 'admin_init'								, array( &$this, 'remove_image' ) );
 		add_action( 'admin_init'								, array( &$this, 'set_theme_mod' ) );
 		add_filter( 'fastfood_header'							, array( &$this, 'slider_filter' ) );
@@ -35,7 +34,7 @@ class Fastfood_Header_Image_Slider {
 		$nonce = wp_create_nonce( 'fastfood_header_image_remove_nonce' );
 
 ?>
-	<script>
+	<script type="text/javascript">
 		jQuery(function($){
 		<?php
 		$uploaded_headers = get_uploaded_header_images();
@@ -99,18 +98,6 @@ class Fastfood_Header_Image_Slider {
 		});
 	</script>
 <?php
-
-	}
-
-
-	/**
-	 * Prints css code in the header admin page
-	 *
-	 * @return void
-	 */
-	function admin_style() {
-
-		echo '<link rel="stylesheet" type="text/css" href="' . get_template_directory_uri() . '/css/admin-custom_header.css" />' . "\n";
 
 	}
 
@@ -214,7 +201,7 @@ class Fastfood_Header_Image_Slider {
 			<div style='{$width} {$height}' id='slide-head'>
 				{$output}
 			</div>
-			<div id='head'>
+			<div id='head' class='" . get_theme_mod( 'header_text_background', 'transparent' ) . "'>
 				<h1><a href='" . home_url() . "/'>" . get_bloginfo( 'name' ) . "</a></h1>
 				<div class='description'>" . get_bloginfo( 'description' ) . "</div>
 			</div>

@@ -59,7 +59,7 @@ get_header(); ?>
 
 		<?php } ?>
 
-		<br class="fixfloat">
+		<br class="fixfloat" />
 
 	</div>
 

@@ -61,7 +61,7 @@ class Fastfood_For_Jetpack {
 	//print the "likes" button after post content
 	function likes() {
 
-		echo '<br class="fixfloat">' . apply_filters('fastfood_filter_likes','') . '<br class="fixfloat">';
+		echo '<br class="fixfloat" />' . apply_filters('fastfood_filter_likes','') . '<br class="fixfloat" />';
 
 	}
 

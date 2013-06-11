@@ -15,11 +15,9 @@
 
 <div id="sidebardx">
 
-	<div class="fixfloat">
+	<?php fastfood_hook_sidebar_top( 'primary' ); ?>
 
-		<?php fastfood_hook_sidebar_top( 'primary' ); ?>
-
-	</div>
+	<br class="fixfloat" />
 
 	<?php if ( !dynamic_sidebar( 'primary-widget-area' ) ) { //if the widget area is empty, we print some standard wigets ?>
 
@@ -27,11 +25,9 @@
 
 	<?php } ?>
 
-	<div class="fixfloat">
+	<br class="fixfloat" />
 
-		<?php fastfood_hook_sidebar_bottom( 'primary' ); ?>
-
-	</div> 
+	<?php fastfood_hook_sidebar_bottom( 'primary' ); ?>
 
 </div>
 

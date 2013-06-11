@@ -178,6 +178,7 @@ if ( !function_exists( 'fastfood_edit_options' ) ) {
 		<div class="wrap" id="main-wrap">
 			<div class="icon32 icon-settings" id="theme-icon"><br></div>
 			<h2><?php echo fastfood_get_info( 'current_theme' ) . ' - ' . __( 'Theme Options','fastfood' ); ?></h2>
+			<br />
 			<ul id="tabselector" class="hide-if-no-js">
 <?php
 				foreach( $the_groups as $key => $name ) {
@@ -195,7 +196,7 @@ if ( !function_exists( 'fastfood_edit_options' ) ) {
 			<div id="tabs-container">
 				<div class="clear"></div>
 				<div id="theme-options">
-					<h2 class="hide-if-js" style="text-align: center;"><?php _e( 'Options','fastfood' ); ?></h2>
+					<h2 class="hide-if-js section-tile"><?php _e( 'Options','fastfood' ); ?></h2>
 					<form method="post" action="options.php">
 						<?php settings_fields( 'fastfood_settings_group' ); ?>
 						<?php foreach ($the_coa as $key => $val) { ?>
@@ -257,16 +258,8 @@ if ( !function_exists( 'fastfood_edit_options' ) ) {
 										<?php } elseif ( $the_coa[$subval]['type'] == 'int' ) { ?>
 												<input class="option_text" id="option_field_<?php echo $subval; ?>" type="text" name="<?php echo $the_option_name; ?>[<?php echo $subval; ?>]" value="<?php echo $the_opt[$subval]; ?>" />
 										<?php } elseif ( $the_coa[$subval]['type'] == 'col' ) { ?>
-												<div class="col-tools">
-													<input onclick="fastfoodOptions.showColorPicker('<?php echo $subval; ?>');" style="background-color:<?php echo $the_opt[$subval]; ?>;" class="color_preview_box" type="text" id="option_color_box_<?php echo $subval; ?>" value="" readonly="readonly" />
-													<div class="option_cp" id="option_colorpicker_<?php echo $subval; ?>"></div>
-													<input class="option_text" id="option_color_input_<?php echo $subval; ?>" type="text" name="<?php echo $the_option_name; ?>[<?php echo $subval; ?>]" value="<?php echo $the_opt[$subval]; ?>" />
-													<br>
-													<a class="hide-if-no-js" href="#" onclick="fastfoodOptions.showColorPicker('<?php echo $subval; ?>'); return false;"><?php _e( 'Select a Color' , 'fastfood' ); ?></a>
-													<br>
-													<a class="hide-if-no-js" style="color:<?php echo $the_coa[$subval]['default']; ?>;" href="#" onclick="fastfoodOptions.updateColor('<?php echo $subval; ?>','<?php echo $the_coa[$subval]['default']; ?>'); return false;"><?php _e( 'Default' , 'fastfood' ); ?></a>
-													<br class="clear" />
-												</div>
+												<input class="option_text option_color_picker" type="text" name="<?php echo $the_option_name; ?>[<?php echo $subval; ?>]" id="option_field_<?php echo $subval; ?>" value="<?php echo $the_opt[$subval]; ?>" data-default-color="<?php echo $the_coa[$subval]['default']; ?>" />
+												<span class="description hide-if-js"><?php _e( 'Default' , 'fastfood' ); ?>: <?php echo '<span class="col-preview" style="color:' . $the_coa[$subval]['default'] . ';">' . $the_coa[$subval]['default'] . '</span>'; ?></span>
 										<?php }	?>
 										<?php if ( $the_coa[$subval]['info'] != '' ) { ?> - <span class="sub-opt-des"><?php echo $the_coa[$subval]['info']; ?></span><?php } ?>
 											</div>
@@ -286,11 +279,13 @@ if ( !function_exists( 'fastfood_edit_options' ) ) {
 					<p class="theme-notes">
 						<small><?php _e( 'If you like/dislike this theme, or if you encounter any issues using it, please let us know it.', 'fastfood' ); ?> &raquo; <a href="<?php echo esc_url( 'http://www.twobeers.net/annunci/tema-per-wordpress-fastfood' ); ?>" title="fastfood theme" target="_blank"><?php _e( 'Leave a feedback', 'fastfood' ); ?></a></small>
 						<br>-<br>
-						<small>Support the theme in your language, provide a <a href="<?php echo esc_url( 'http://www.twobeers.net/wp-themes/themes-translations-wordpress' ); ?>" title="Themes translation" target="_blank">translation</a>.</small>
+						<small><?php //this text is untranslated intentionally
+							echo 'Support the theme in your language, provide a <a href="' . esc_url( 'http://www.twobeers.net/wp-themes/themes-translations-wordpress' ) . '" title="Themes translation" target="_blank">translation</a>.';
+						?></small>
 					</p>
 				</div>
 				<div id="theme-infos">
-					<h2 class="hide-if-js" style="text-align: center;"><?php _e( 'Theme Info', 'fastfood' ); ?></h2>
+					<h2 class="hide-if-js section-tile"><?php _e( 'Theme Info', 'fastfood' ); ?></h2>
 					<?php locate_template( 'readme.html',true ); ?>
 				</div>
 				<div class="clear"></div>
@@ -395,7 +390,7 @@ function fastfood_register_tb_settings() {
 // add custom stylesheet for options page
 function fastfood_theme_admin_custom_styles() {
 
-	wp_enqueue_style( 'farbtastic' );
+	wp_enqueue_style( 'wp-color-picker' );
 	wp_enqueue_style( 'fastfood-options', get_template_directory_uri() . '/css/admin-options.css', false, '', 'screen' );
 
 ?>
@@ -416,7 +411,8 @@ function fastfood_theme_admin_custom_styles() {
 // add custom script for options page
 function fastfood_theme_admin_scripts() {
 
-	wp_enqueue_script( 'fastfood-options', get_template_directory_uri().'/js/admin-options.dev.js',array('jquery','farbtastic','thickbox'),fastfood_get_info( 'version' ), true ); //thebird js
+	wp_enqueue_script( 'wp-color-picker' );
+	wp_enqueue_script( 'fastfood-options', get_template_directory_uri().'/js/admin-options.js',array('jquery','thickbox'),fastfood_get_info( 'version' ), true ); //thebird js
 
 	$data = array(
 		'confirm_to_defaults' => esc_js( __( 'Are you really sure you want to set all the options to their default values?', 'fastfood' ) )
@@ -437,7 +433,7 @@ function fastfood_widgets_style() {
 // add custom script for widgets page
 function fastfood_widgets_scripts() {
 
-	wp_enqueue_script( 'fastfood-widgets', get_template_directory_uri() . '/js/admin-widgets.dev.js', array('jquery'), fastfood_get_info( 'version' ), true );
+	wp_enqueue_script( 'fastfood-widgets', get_template_directory_uri() . '/js/admin-widgets.js', array('jquery'), fastfood_get_info( 'version' ), true );
 
 }
 

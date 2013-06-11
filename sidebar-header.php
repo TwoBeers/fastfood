@@ -20,19 +20,15 @@
 
 <div id="header-widget-area">
 
-	<div class="fixfloat">
+	<?php fastfood_hook_sidebar_top( 'header' ); ?>
 
-		<?php fastfood_hook_sidebar_top( 'header' ); ?>
-
-	</div>
+	<br class="fixfloat" />
 
 	<?php dynamic_sidebar( 'header-widget-area' ); ?>
 
-	<div class="fixfloat">
+	<br class="fixfloat" />
 
-		<?php fastfood_hook_sidebar_bottom( 'header' ); ?>
-
-	</div> 
+	<?php fastfood_hook_sidebar_bottom( 'header' ); ?>
 
 </div><!-- #header-widget-area -->
 

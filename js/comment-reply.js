@@ -20,9 +20,9 @@ fastfoodCustomReply = {
 	},
 
 	moveForm : function(commId, parentId, respondId, postId) {
-		var t = this, div, comm = t.I(commId), respond = t.I(respondId), cancel = t.I('cancel-comment-reply-link'), parent = t.I('comment_parent'), post = t.I('comment_post_ID'), replytitle = t.I('reply-title'), replytocomment = t.I('replytocomment');
+		var t = this, div, comm = t.I(commId), respond = t.I(respondId), cancel = t.I('cancel-comment-reply-link'), parent = t.I('comment_parent'), post = t.I('comment_post_ID'), replytitle = t.I('reply-title');
 
-		if ( ! comm || ! respond || ! cancel || ! parent || ! replytocomment || ! replytitle)
+		if ( ! comm || ! respond || ! cancel || ! parent || ! replytitle)
 			return;
 
 		t.respondId = respondId;
@@ -32,7 +32,7 @@ fastfoodCustomReply = {
 			post.value = postId;
 		parent.value = parentId;
 		
-		replytitle.innerHTML = replytocomment.value;
+		replytitle.innerHTML = fastfood_comment_reply_l10n.replytocomment;
 		replytitle.appendChild(cancel);
 		
 		respond.style.display = "block";
@@ -69,12 +69,12 @@ fastfoodCustomReply = {
 	},
 
 	viewForm : function() {
-		var t = this, respond = t.I('respond'), cancel = t.I('cancel-comment-reply-link'), replytitle = t.I('reply-title'), replytopost = t.I('replytopost');
+		var t = this, respond = t.I('respond'), cancel = t.I('cancel-comment-reply-link'), replytitle = t.I('reply-title');
 		
 		if ( ! respond || ! cancel || ! replytitle)
 			return false;
 		this.resetForm();
-		if ( replytopost ) replytitle.innerHTML = replytopost.value;
+		replytitle.innerHTML = fastfood_comment_reply_l10n.replytopost;
 		replytitle.appendChild(cancel);
 		respond.style.display = "block";
 		
@@ -92,7 +92,7 @@ fastfoodCustomReply = {
 		if ( ! t.I('ff_reply_close') ) {
 			div = document.createElement('div');
 			div.id = 'ff_reply_close';
-			div.innerHTML = '<input type="button" title="Close" value="" onclick="return fastfoodCustomReply.resetForm()" />';
+			div.innerHTML = '<input type="button" title="' + fastfood_comment_reply_l10n.close + '" value="" onclick="return fastfoodCustomReply.resetForm()" />';
 			respond.insertBefore(div, replytitle);
 		}
 	},

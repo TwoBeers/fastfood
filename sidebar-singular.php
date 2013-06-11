@@ -21,19 +21,15 @@
 
 <div id="post-widgets-area" class="fixfloat">
 
-	<div class="fixfloat">
+	<?php fastfood_hook_sidebar_top( 'singular' ); ?>
 
-		<?php fastfood_hook_sidebar_top( 'singular' ); ?>
+	<br class="fixfloat" />
 
-	</div> 
+	<?php dynamic_sidebar( 'post-widgets-area' ); ?>
 
-	<div><?php dynamic_sidebar( 'post-widgets-area' ); ?></div>
+	<br class="fixfloat" />
 
-	<div class="fixfloat">
-
-		<?php fastfood_hook_sidebar_bottom( 'singular' ); ?>
-
-	</div> 
+	<?php fastfood_hook_sidebar_bottom( 'singular' ); ?>
 
 </div><!-- #post-widgets-area -->
 

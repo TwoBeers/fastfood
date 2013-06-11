@@ -48,13 +48,9 @@
 
 <?php } ?>
 
-<?php if ( comments_open() && !fastfood_is_printpreview() ) { // if comments are open and not in print preview ?>
+<?php comment_form();  ?>
 
-	<?php comment_form();  ?>
-
-<?php } ?>
-
-<br class="fixfloat">
+<br class="fixfloat" />
 
 <?php fastfood_hook_comments_after(); ?>
 

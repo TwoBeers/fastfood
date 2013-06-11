@@ -40,10 +40,6 @@ fastfoodAnimations = {
 					});
 					break;
 
-				case 'widgets_style':
-					this.widgets_style();
-					break;
-
 				case 'post_expander':
 					this.post_expander();
 					$('body').on('post-load', function(event){ //Jetpack Infinite Scroll trigger
@@ -64,6 +60,10 @@ fastfoodAnimations = {
 
 				case 'tinynav':
 					this.tinynav();
+					break;
+
+				case 'captions':
+					this.captions();
 					break;
 
 				default :
@@ -121,7 +121,7 @@ fastfoodAnimations = {
 			$this.hoverIntent(
 				function(){ //when mouse enters, shift right the tooltip
 					list.css({'display' : 'block' }).animate(
-						{ 'opacity' : 1 , 'right' : 23 },
+						{ 'opacity' : 0.9 , 'right' : 23 },
 						200,
 						'easeOutBack'
 					);
@@ -282,15 +282,6 @@ fastfoodAnimations = {
 
 	},
 
-	widgets_style : function() {
-
-		// add style to some widgets areas
-		$('#post-widgets-area .widget:nth-child(odd)').css('clear', 'left');
-		$('#header-widget-area .widget:nth-child(3n+1)').css('clear', 'right');
-		$('#error404-widgets-area .widget:nth-child(odd)').css('clear', 'left');
-
-	},
-
 	thickbox : function() {
 
 		$('#posts_content').find('.storycontent a img').parent('a[href$=".jpg"],a[href$=".png"],a[href$=".gif"]').addClass('thickbox');
@@ -332,7 +323,7 @@ fastfoodAnimations = {
 
 	//show only a set of rows
 	post_expander : function () {
-		$('#posts_content').find('a.more-link').click(function() {
+		$('#posts_content').find('a.more-link').unbind().click(function() {
 
 			var link = $(this);
 
@@ -389,12 +380,30 @@ fastfoodAnimations = {
 	},
 
 	tinynav : function() {
-		if ( $(window).width() > 800 ) return false;
+		//if ( $(window).width() > 800 ) return false;
 		$(".nav-menu").tinyNav({
 			active: 'current_page_item', // Set the "active" class for default menu
 			label: '', // String: Sets the <label> text for the <select> (if not set, no label will be added)
 			header: '' // String: Specify text for "header" and show header instead of the active item
 		});
+	},
+
+	captions : function() {
+		$('#content').find('.wp-caption').each( function() {
+			var $this = $(this);
+			var list = $('.wp-caption-text',this);
+			list.css('display', 'block');
+			$this.unbind().hoverIntent(
+				function(){ //when mouse enters, slide down the sub list
+					list.slideUp(200);
+				},
+				function(){ //when mouse leaves, hide the sub list
+					list.slideDown(200);
+				}
+			);
+
+		});
+
 	}
 
 };

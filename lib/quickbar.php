@@ -439,28 +439,28 @@ if ( !function_exists( 'fastfood_navbuttons' ) ) {
 
 ?>
 
-	<div id="navbuttons">
+	<div id="navbuttons-wrap">
+		<div id="navbuttons">
+			<?php
+				foreach ( $buttons as $button ) {
 
-		<?php
-			foreach ( $buttons as $button ) {
+					$button['class'] = $button['class'] ? ' ' . esc_attr( trim( $button['class'] ) ) : '';
+					$button['a_class'] = $button['a_class'] ? ' class="' . esc_attr( trim( $button['a_class'] ) ) . '"' : '';
+					$button['a_rel'] = $button['a_rel'] ? ' rel="' . esc_attr( trim( $button['a_rel'] ) ) . '"' : '';
+					$button['a_href'] = esc_url( $button['a_href'] );
+					$button['icon_class'] = $button['icon_class'] ? ' ' . esc_attr( trim( $button['icon_class'] ) ) : '';
+					$button['tooltip'] = esc_html( $button['tooltip'] );
+			?>
 
-				$button['class'] = $button['class'] ? ' ' . esc_attr( trim( $button['class'] ) ) : '';
-				$button['a_class'] = $button['a_class'] ? ' class="' . esc_attr( trim( $button['a_class'] ) ) . '"' : '';
-				$button['a_rel'] = $button['a_rel'] ? ' rel="' . esc_attr( trim( $button['a_rel'] ) ) . '"' : '';
-				$button['a_href'] = esc_url( $button['a_href'] );
-				$button['icon_class'] = $button['icon_class'] ? ' ' . esc_attr( trim( $button['icon_class'] ) ) : '';
-				$button['tooltip'] = esc_html( $button['tooltip'] );
-		?>
+			<div class="minibutton<?php echo $button['class']; ?>">
+				<a href="<?php echo $button['a_href']; ?>"<?php echo $button['a_class']; ?><?php echo $button['a_rel']; ?>>
+					<span class="minib_img<?php echo $button['icon_class']; ?>">&nbsp;</span>
+				</a>
+				<span class="nb_tooltip"><?php echo $button['tooltip']; ?></span>
+			</div>
 
-		<div class="minibutton<?php echo $button['class']; ?>">
-			<a href="<?php echo $button['a_href']; ?>"<?php echo $button['a_class']; ?><?php echo $button['a_rel']; ?>>
-				<span class="minib_img<?php echo $button['icon_class']; ?>">&nbsp;</span>
-			</a>
-			<span class="nb_tooltip"><?php echo $button['tooltip']; ?></span>
+			<?php } ?>
 		</div>
-
-		<?php } ?>
-
 	</div>
 
 <?php

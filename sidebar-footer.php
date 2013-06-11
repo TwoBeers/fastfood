@@ -22,11 +22,9 @@
 
 <div id="footer-widget-area">
 
-	<div class="fixfloat">
+	<?php fastfood_hook_sidebar_top( 'footer' ); ?>
 
-		<?php fastfood_hook_sidebar_top( 'footer' ); ?>
-
-	</div>
+	<br class="fixfloat" />
 
 	<div id="first_fwa" class="widget-area">
 			<?php if ( is_active_sidebar( 'first-footer-widget-area' ) ) dynamic_sidebar( 'first-footer-widget-area' ); ?>
@@ -40,11 +38,9 @@
 			<?php if ( is_active_sidebar( 'third-footer-widget-area' ) ) dynamic_sidebar( 'third-footer-widget-area' ); ?>
 	</div><!-- #third .widget-area -->
 
-	<div class="fixfloat">
+	<br class="fixfloat" />
 
-		<?php fastfood_hook_sidebar_bottom( 'footer' ); ?>
-
-	</div> 
+	<?php fastfood_hook_sidebar_bottom( 'footer' ); ?>
 
 </div><!-- #footer-widget-area -->
 

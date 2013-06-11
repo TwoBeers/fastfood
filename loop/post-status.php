@@ -29,7 +29,7 @@
 
 	</div>
 
-	<br class="fixfloat">
+	<br class="fixfloat" />
 
 	<?php fastfood_hook_entry_bottom(); ?>
 

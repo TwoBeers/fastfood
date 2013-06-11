@@ -199,7 +199,7 @@ class fastfood_Mobile {
 			<div class="tbm-navi">
 					<?php if ( get_next_post() ) { ?><span class="tbm-halfspan tbm-prev"><?php next_post_link( '%link', '&#60;&#60;' ); ?></span><?php } ?>
 					<?php if ( get_previous_post() ) { ?><span class="tbm-halfspan tbm-next"><?php previous_post_link( '%link', '&#62;&#62;' ); ?></span><?php } ?>
-					<br class="fixfloat">
+					<br class="fixfloat" />
 			</div>
 		<?php
 

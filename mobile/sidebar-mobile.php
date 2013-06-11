@@ -18,5 +18,5 @@
 
 <div id="tbm-widget-area">
 	<?php dynamic_sidebar( 'tbm-widget-area' ); ?>
-	<br class="fixfloat"> 
+	<br class="fixfloat" /> 
 </div><!-- #tbm-widget-area -->

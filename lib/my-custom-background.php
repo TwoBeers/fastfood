@@ -160,7 +160,7 @@ class Fastfood_Custom_Background {
 	 */
 	function admin_load() {
 
-		wp_enqueue_script( 'fastfood-custom-background', get_template_directory_uri() . '/js/admin-custom_background.dev.js', array( 'jquery', 'farbtastic' ), '', true  );
+		wp_enqueue_script( 'fastfood-custom-background', get_template_directory_uri() . '/js/admin-custom_background.js', array( 'jquery', 'farbtastic' ), '', true  );
 		wp_enqueue_style( 'fastfood-admin-custom-background', get_template_directory_uri() . '/css/admin-custom_background.css', false, '', 'screen' );
 		wp_enqueue_media();
 		wp_enqueue_script('custom-background');
@@ -244,7 +244,7 @@ class Fastfood_Custom_Background {
 
 			check_admin_referer( 'custom-background' );
 			$this->process_default_bg_images();
-			if ( in_array( $_POST['default-bg'], array( 'aqua', 'pink', 'wood', 'greenwave', 'globe', 'heart', 'clouds', 'violet', 'paper', 'squarednight', 'cork', 'yellow' ) ) ) {
+			if ( in_array( $_POST['default-bg'], array( 'aqua', 'pink', 'wood', 'greenwave', 'globe', 'heart', 'clouds', 'violet', 'paper', 'squarednight', 'cork', 'yellow', 'graphite' ) ) ) {
 				set_theme_mod( 'background_image', esc_url( $this->default_bg_images[$_POST['default-bg']]['url'] ) );
 				set_theme_mod( 'background_image_thumb', esc_url( $this->default_bg_images[$_POST['default-bg']]['thumbnail_url'] ) );
 			}
@@ -350,7 +350,17 @@ class Fastfood_Custom_Background {
 				'repeat'			=> 'repeat-x',
 				'attach'			=> 'fixed',
 				'color'				=> '#DBE8F9'
-			)
+			),
+			'graphite' => array(
+				'url'				=> '%s/images/backgrounds/graphite.jpg',
+				'thumbnail_url'		=> '%s/images/backgrounds/graphite-thumbnail.jpg',
+				'description'		=> __( 'Graphite', 'fastfood' ),
+				'position_x'		=> 'left',
+				'position_y'		=> 'top',
+				'repeat'			=> 'repeat',
+				'attach'			=> 'scroll',
+				'color'				=> '#212121'
+			),
 		);
 
 		$this->default_bg_images = $default_bg_images;

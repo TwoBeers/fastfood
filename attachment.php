@@ -2,7 +2,7 @@
 /**
  * attachment.php
  *
- * Template for Image mime-type attachment pages
+ * Template for attachment pages
  *
  * @package fastfood
  * @since 0.15
