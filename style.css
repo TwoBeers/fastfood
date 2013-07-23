@@ -2,7 +2,7 @@
 Theme Name: Fastfood
 Theme URI: http: //www.twobeers.net/annunci/tema-per-wordpress-fastfood
 Description: Simple and clear theme with a lot of features, like a "quick links" menu, an "easy navigation" bar, the print preview, 7 integrated widgets ( "Social Links", "Popular Post", "Latest Activity" and many more ). Fastfood has customizable header, customizable background (with a lot of predefined themes), one or two columns layout, up to five widgets areas and three menu. It supports custom menus, posts thumbnail, post formats ("gallery", "status" and "aside") and also mobile devices, with a dedicated style. WP3.4 full compatible.
-Version: 0.36
+Version: 0.37
 Tags: translation-ready, threaded-comments, custom-menu, custom-header, theme-options, fixed-width, two-columns, right-sidebar, white, silver, orange, light, sticky-post, custom-background, editor-style, rtl-language-support, custom-colors, post-formats
 Author: TwoBeers Crew
 Author URI: http: //www.twobeers.net/
@@ -159,6 +159,7 @@ input[type=password] {
 	background: #fff url('images/lock.png') right center no-repeat;
 	min-height: 20px;
 }
+button,
 input[type=button],
 input[type=submit],
 input[type=reset] {
@@ -171,6 +172,7 @@ input[type=reset] {
 	padding: 0.3em 0.5em;
 	font-size: 13px;
 }
+button:hover,
 input[type=button]:hover,
 input[type=submit]:hover,
 input[type=reset]:hover,
@@ -182,6 +184,7 @@ input[type=text]:focus,
 input[type=password]:focus {
 	border: 1px solid #d2691e;
 }
+button:hover,
 input[type=button]:hover,
 input[type=submit]:hover,
 input[type=reset]:hover {
@@ -1548,34 +1551,6 @@ ul.children {
 	margin: 0 auto;
 }
 
-/* =Aligments
-----------------------------------------------------------*/
-.aligncenter,
-div.aligncenter,
-img.aligncenter {
-	clear: both;
-	display: block;
-	margin-left: auto;
-	margin-right: auto;
-}
-img.alignleft,
-.alignleft {
-	display: inline;
-	float: left;
-	margin-right: 24px;
-}
-img.alignright,
-.alignright {
-	display: inline;
-	float: right;
-	margin-left: 24px;
-}
-img.alignleft,
-img.alignright,
-img.aligncenter {
-	margin-bottom: 12px;
-}
-
 /* Captions
 ----------------------------------------------------------*/
 .wp-caption img {
@@ -1617,6 +1592,34 @@ img.aligncenter {
 }
 .wp-caption img:hover {
 	box-shadow: 0 0 4px #000;
+}
+
+/* =Aligments
+----------------------------------------------------------*/
+.aligncenter,
+div.aligncenter,
+img.aligncenter {
+	clear: both;
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+img.alignleft,
+.alignleft {
+	display: inline;
+	float: left;
+	margin-right: 24px;
+}
+img.alignright,
+.alignright {
+	display: inline;
+	float: right;
+	margin-left: 24px;
+}
+img.alignleft,
+img.alignright,
+img.aligncenter {
+	margin-bottom: 12px;
 }
 
 /* =Gallery
@@ -1697,7 +1700,6 @@ img.aligncenter {
 
 #ff-I-like-it-wrap {
 	background: url("images/body.png") repeat-y scroll 56px top #fff;
-
 	bottom: 230px;
 	position: fixed;
 	text-align: right;
@@ -1715,9 +1717,11 @@ img.aligncenter {
 	background: -ms-linear-gradient(top,  rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.2) 100%); /* IE10+ */
 	background: linear-gradient(to bottom,  rgba(0,0,0,0.1) 0%,rgba(0,0,0,0.2) 100%); /* W3C */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1a000000', endColorstr='#33000000',GradientType=0 ); /* IE6-9 */
-
-	padding: 5px 5px 1px 0;
+	padding: 5px 2px 1px 3px;
 	width: 65px;
+	border-radius: 0;
+	position: static;
+	text-align: left;
 }
 .posts_wide #ff-I-like-it-wrap {
 	margin-left: -146px;
@@ -1765,14 +1769,15 @@ img.aligncenter {
 	background:#ccc url(images/details.png) no-repeat left -800px;
 	overflow: hidden;
 }
-#crumbs li.first a {
+#crumbs li a.crumb-home {
 	background:#ccc url(images/details.png) no-repeat left -1000px;
 	padding-left:12px;
 }
-#crumbs li.first a:hover {
+#crumbs li a.crumb-home:hover {
 	background:#ccc url(images/details.png) no-repeat left -1100px;
 }
-#crumbs li.last {
+#crumbs li.last,
+#crumbs li:last-of-type {
 	background:#404040 url(images/details.png) no-repeat left -700px;
 }
 #crumbs li .crumb-cat {
@@ -2193,4 +2198,9 @@ img.aligncenter {
 ----------------------------------------------------------*/
 #main div.jetpack-likes-widget-wrapper {
 	margin-top: 10px;
+}
+/* BuddyPress
+----------------------------------------------------------*/
+#buddypress div.dir-search {
+	margin: 0;
 }

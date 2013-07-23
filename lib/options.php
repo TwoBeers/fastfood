@@ -17,7 +17,6 @@ function fastfood_get_coa( $option = false ) {
 							'postformats'	=> __( 'Post formats' , 'fastfood' ),
 							'content'		=> __( 'Contents' , 'fastfood' ),
 							'javascript'	=> __( 'Javascript' , 'fastfood' ),
-							'social'		=> __( 'Social tools' , 'fastfood' ),
 							'colors'		=> __( 'Style' , 'fastfood' ),
 							'mobile'		=> __( 'Mobile' , 'fastfood' ),
 							'other'			=> __( 'Other' , 'fastfood' ),
@@ -210,76 +209,6 @@ function fastfood_get_coa( $option = false ) {
 							'description'		=> __( 'show on indexes', 'fastfood' ),
 							'info'				=> __( 'by deselecting this option, the "status" posts will be ignored and will not appear on indexes', 'fastfood' ),
 							'req'				=> 'fastfood_post_formats_status',
-							'sub'				=> false
-		),
-		'fastfood_I_like_it' => 
-						array(
-							'group'				=> 'social',
-							'type'				=> 'chk',
-							'default'			=> 1,
-							'description'		=> __( 'I like it', 'fastfood' ),
-							'info'				=> __( 'show "like" badges beside the post content', 'fastfood' ),
-							'req'				=> '',
-							'sub'				=> array( 'fastfood_I_like_it_plus1', 'fastfood_I_like_it_twitter', 'fastfood_I_like_it_facebook', 'fastfood_I_like_it_linkedin', 'fastfood_I_like_it_stumbleupon', 'fastfood_I_like_it_pinterest' )
-		),
-		'fastfood_I_like_it_plus1' => 
-						array(
-							'group'				=> 'social',
-							'type'				=> 'chk',
-							'default'			=> 1,
-							'description'		=> 'Google +1',
-							'info'				=> '',
-							'req'				=> 'fastfood_I_like_it',
-							'sub'				=> false
-		),
-		'fastfood_I_like_it_twitter' => 
-						array(
-							'group'				=> 'social',
-							'type'				=> 'chk',
-							'default'			=> 0,
-							'description'		=> 'Twitter',
-							'info'				=> '',
-							'req'				=> 'fastfood_I_like_it',
-							'sub'				=> false
-		),
-		'fastfood_I_like_it_facebook' => 
-						array(
-							'group'				=> 'social',
-							'type'				=> 'chk',
-							'default'			=> 0,
-							'description'		=> 'Facebook',
-							'info'				=> '',
-							'req'				=> 'fastfood_I_like_it',
-							'sub'				=> false
-		),
-		'fastfood_I_like_it_linkedin' => 
-						array(
-							'group'				=> 'social',
-							'type'				=> 'chk',
-							'default'			=> 0,
-							'description'		=> 'LinkedIn',
-							'info'				=> '',
-							'req'				=> 'fastfood_I_like_it',
-							'sub'				=> false
-		),
-		'fastfood_I_like_it_stumbleupon' => 
-						array(
-							'group'				=> 'social',
-							'type'				=> 'chk',
-							'default'			=> 0,
-							'description'		=> 'StumbleUpon',
-							'info'				=> '',
-							'req'				=> 'fastfood_I_like_it',
-							'sub'				=> false
-		),
-		'fastfood_I_like_it_pinterest' =>
-						array(
-							'group'				=> 'social',
-							'type'				=> 'chk',
-							'default'			=> 0,
-							'description'		=> 'Pinterest',
-							'info'				=> __( 'visible ONLY in attachments', 'fastfood' ),
-							'req'				=> 'fastfood_I_like_it',
 							'sub'				=> false
 		),
 		'fastfood_xinfos_global' => 
@@ -490,6 +419,15 @@ function fastfood_get_coa( $option = false ) {
 							'info'				=> '',
 							'req'				=> '',
 							'sub'				=> false
+		),
+		'fastfood_I_like_it' => 
+						array(
+							'group'				=> 'javascript',
+							'type'				=> 'chk',
+							'default'			=> 1,
+							'description'		=> __( 'I like it', 'fastfood' ),
+							'info'				=> __( 'show "like" badges beside the post content', 'fastfood' ),
+							'req'				=> '',
 		),
 		'fastfood_post_expand' => 
 						array(
@@ -1082,7 +1020,7 @@ function fastfood_get_coa( $option = false ) {
 	if ( $option == 'groups' )
 		return $fastfood_groups;
 	elseif ( $option )
-		return isset( $fastfood_coa[$option] ) ? $fastfood_coa[$option] : null;
+		return isset( $fastfood_coa[$option] ) ? $fastfood_coa[$option] : false;
 	else
 		return $fastfood_coa;
 }
@@ -1093,10 +1031,10 @@ if ( !function_exists( 'fastfood_get_opt' ) ) {
 	function fastfood_get_opt( $opt ) {
 		global $fastfood_opt;
 
-		if ( isset( $fastfood_opt[$opt] ) ) return apply_filters( 'fastfood_option_override', $fastfood_opt[$opt], $opt );
+		if ( isset( $fastfood_opt[$opt] ) ) return apply_filters( 'fastfood_option_' . $opt, $fastfood_opt[$opt], $opt );
 
 		$defopt = fastfood_get_coa( $opt );
-		
+
 		if ( ! $defopt ) return null;
 
 		if ( ( $defopt['req'] == '' ) || ( fastfood_get_opt( $defopt['req'] ) ) )

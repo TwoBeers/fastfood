@@ -10,7 +10,7 @@
  */
 
 
-class fastfood_Breadcrumb {
+class Fastfood_Breadcrumb {
 
 	function __construct() {
 
@@ -276,4 +276,4 @@ class fastfood_Breadcrumb {
 
 }
 
-new fastfood_Breadcrumb;
+new Fastfood_Breadcrumb;

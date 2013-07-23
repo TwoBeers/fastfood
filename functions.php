@@ -130,6 +130,10 @@ require_once( 'lib/audio-player.php' ); // load the audio player module
 
 require_once( 'lib/jetpack.php' ); // load the jetpack support module
 
+require_once( 'lib/bbpress-functions.php' ); // load the bbpress support module
+
+require_once( 'lib/buddypress-functions.php' ); // load the buddypress support module
+
 
 /* conditional tags */
 
@@ -1223,83 +1227,18 @@ if ( !function_exists( 'fastfood_I_like_it' ) ) {
 
 		if ( ! fastfood_get_opt( 'fastfood_I_like_it' ) || fastfood_is_printpreview() || ! is_singular() ) return;
 
-		$enc_title			= rawurlencode( get_the_title() );
-		$enc_href			= rawurlencode( get_permalink() );
-		$enc_href_short		= rawurlencode( home_url() . '/?p=' . $post->ID );
-
-		$esc_href			= esc_url( get_permalink() );
-		$esc_title			= esc_attr( get_the_title() );
-		$esc_href_short		= esc_url( home_url() . '/?p=' . $post->ID );
-
-		$text = '';
-
-		if ( fastfood_get_opt( 'fastfood_I_like_it_plus1' ) )
-			$text .='<div class="ff-I-like-it-button I-like-plusone"><div class="g-plusone" data-size="tall" data-href="' . $esc_href . '"></div></div>';
-
-		if ( fastfood_get_opt( 'fastfood_I_like_it_twitter' ) )
-			$text .='<div class="ff-I-like-it-button I-like-twitter"><div class="t-twits"><a href="//twitter.com/share" class="twitter-share-button" data-url="' . $esc_href . '" data-text="' . $esc_title . ': ' . $esc_href_short . '" data-count="vertical"></a></div></div>';
-
-		if ( fastfood_get_opt( 'fastfood_I_like_it_facebook' ) )
-			$text .='<div class="ff-I-like-it-button I-like-facebook"><div class="fb-like" data-href="' . $esc_href . '" data-send="false" data-layout="box_count" data-width="42" data-show-faces="false"></div></div>';
-
-		if ( fastfood_get_opt( 'fastfood_I_like_it_linkedin' ) )
-			$text .='<div class="ff-I-like-it-button I-like-linkedin"><script type="IN/Share" data-url="' . $esc_href . '" data-counter="top"></script></div>';
-
-		if ( fastfood_get_opt( 'fastfood_I_like_it_stumbleupon' ) )
-			$text .='<div class="ff-I-like-it-button I-like-stumbleupon"><su:badge layout="5"></su:badge></div>';
-
-		if ( fastfood_get_opt( 'fastfood_I_like_it_pinterest' ) && is_attachment() && wp_attachment_is_image() )
-			$text .='<div class="ff-I-like-it-button I-like-pinterest"><a href="//pinterest.com/pin/create/button/?url=' . $enc_href . '&media=' . rawurlencode( wp_get_attachment_url() ) . '&description=' . rawurlencode( $post->post_excerpt ) . '" data-pin-do="buttonPin" data-pin-config="above"><img src="//assets.pinterest.com/images/pidgets/pin_it_button.png" /></a></div>';
-
-		if ( $text ) {
-			echo '<div id="ff-I-like-it-wrap"><div id="ff-I-like-it">' . apply_filters( 'fastfood_filter_like_it', $text ) . '</div></div>';
-			add_action( 'wp_footer', 'fastfood_like_it_scripts' );
-		}
-
-	}
-}
-
-
-// the "like" badges scripts (asynchronously loaded)
-if ( !function_exists( 'fastfood_like_it_scripts' ) ) {
-	function fastfood_like_it_scripts(){
-
 ?>
-	<div id="fb-root"></div>
-	<script type="text/javascript">
-		(function(doc, script) {
-			var js, 
-				fjs = doc.getElementsByTagName(script)[0],
-				add = function(url, id) {
-					if (doc.getElementById(id)) {return;}
-					js = doc.createElement(script);
-					js.src = url;
-					id && (js.id = id);
-					fjs.parentNode.insertBefore(js, fjs);
-				};
-
-			<?php
-				if ( fastfood_get_opt( 'fastfood_I_like_it_plus1' ) )
-					echo "add( '//apis.google.com/js/plusone.js' );\n";
-
-				if ( fastfood_get_opt( 'fastfood_I_like_it_twitter' ) ) 
-					echo "add( '//platform.twitter.com/widgets.js', 'twitter-wjs' );\n";
-
-				if ( fastfood_get_opt( 'fastfood_I_like_it_facebook' ) ) 
-					echo "add( '//connect.facebook.net/en_US/all.js#xfbml=1', 'facebook-jssdk' );\n";
-
-				if ( fastfood_get_opt( 'fastfood_I_like_it_linkedin' ) ) 
-					echo "add( '//platform.linkedin.com/in.js' );\n";
-
-				if ( fastfood_get_opt( 'fastfood_I_like_it_stumbleupon' ) ) 
-					echo "add( '//platform.stumbleupon.com/1/widgets.js' );\n";
-
-				if ( fastfood_get_opt( 'fastfood_I_like_it_pinterest' ) && is_attachment() && ( wp_attachment_is_image() ) ) 
-					echo "add( '//assets.pinterest.com/js/pinit.js' );\n";
-			?>
-		}(document, 'script'));
-	</script>
-
+	<!-- AddThis Button BEGIN -->
+	<div id="ff-I-like-it-wrap" class="hide-if-no-js">
+		<div id="ff-I-like-it" class="addthis_toolbox addthis_floating_style addthis_counter_style">
+			<a class="addthis_button_facebook_like" fb:like:layout="box_count"></a>
+			<a class="addthis_button_tweet" tw:count="vertical"></a>
+			<a class="addthis_button_google_plusone" g:plusone:size="tall"></a>
+			<a class="addthis_counter"></a>
+		</div>
+	</div>
+	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-51bf525d69afa016"></script>
+	<!-- AddThis Button END -->
 <?php
 
 	}
@@ -1667,10 +1606,12 @@ function fastfood_custom_css(){
 		a {
 			color: <?php echo fastfood_get_opt( 'fastfood_colors_link' ); ?>;
 		}
+		button:hover,
 		input[type=button]:hover,
 		input[type=submit]:hover,
 		input[type=reset]:hover,
 		textarea:hover,
+		.bbpress .wp-editor-area:hover,
 		input[type=text]:hover,
 		input[type=password]:hover,
 		textarea:focus,
@@ -1689,6 +1630,7 @@ function fastfood_custom_css(){
 		.current_page_item > a,
 		.current-cat > a,
 		#crumbs .last,
+		#crumbs li:last-of-type,
 		.menu-item-parent:hover > a:after,
 		.current-menu-ancestor > a:after,
 		.current-menu-parent > a:after,
