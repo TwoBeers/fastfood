@@ -501,7 +501,7 @@ function fastfood_get_coa( $option = false ) {
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'in indexes', 'fastfood' ),
-							'info'				=> __( 'show right sidebar in indexes (archives, search, main index...)', 'fastfood' ),
+							'info'				=> __( '(archives, search, main index...)', 'fastfood' ),
 							'req'				=> '',
 							'sub'				=> false
 		),
@@ -511,7 +511,7 @@ function fastfood_get_coa( $option = false ) {
 							'type'				=> 'chk',
 							'default'			=> 0,
 							'description'		=> __( 'in pages', 'fastfood' ),
-							'info'				=> __( 'show right sidebar in pages', 'fastfood' ),
+							'info'				=> '',
 							'req'				=> '',
 							'sub'				=> false
 		),
@@ -521,7 +521,7 @@ function fastfood_get_coa( $option = false ) {
 							'type'				=> 'chk',
 							'default'			=> 0,
 							'description'		=> __( 'in posts', 'fastfood' ),
-							'info'				=> __( 'show right sidebar in posts', 'fastfood' ),
+							'info'				=> '',
 							'req'				=> '',
 							'sub'				=> false
 		),

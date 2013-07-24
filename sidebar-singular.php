@@ -13,7 +13,7 @@
 <!-- here should be the Single widget area -->
 <?php
 	/* The Single widget area is triggered if any of the areas have widgets. */
-	if ( !is_active_sidebar( 'post-widgets-area'  ) )
+	if ( !is_active_sidebar( 'post-widgets-area'  ) || apply_filters( 'fastfood_skip_post_widgets_area', false ) )
 		return;
 ?>
 

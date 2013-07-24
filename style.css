@@ -2204,3 +2204,16 @@ img.aligncenter {
 #buddypress div.dir-search {
 	margin: 0;
 }
+#buddypress button,
+#buddypress a.button,
+#buddypress input[type="submit"],
+#buddypress input[type="button"],
+#buddypress input[type="reset"],
+#buddypress ul.button-nav li a,
+#buddypress div.generic-button a,
+#buddypress .comment-reply-link,
+a.bp-title-button {
+	box-shadow: none;
+	margin: 0;
+	font-weight: normal;
+}

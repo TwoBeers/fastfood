@@ -157,9 +157,6 @@ li.bbp-header div.bbp-reply-content span#favorite-toggle {
 }
 
 .bbp-header #subscription-toggle {
-	border-left: 2px solid #ddd;
-	margin-left: 10px;
-	padding-left: 10px;
 }
 
 #subscription-toggle,

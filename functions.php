@@ -128,11 +128,7 @@ require_once( 'lib/admin.php' ); // load the admin stuff
 
 require_once( 'lib/audio-player.php' ); // load the audio player module
 
-require_once( 'lib/jetpack.php' ); // load the jetpack support module
-
-require_once( 'lib/bbpress-functions.php' ); // load the bbpress support module
-
-require_once( 'lib/buddypress-functions.php' ); // load the buddypress support module
+require_once( 'lib/plug-n-play.php' ); // load the plugins support module
 
 
 /* conditional tags */
@@ -196,18 +192,26 @@ if ( ! isset( $content_width ) )
 
 
 // is sidebar visible?
-if ( !function_exists( 'fastfood_use_sidebar' ) ) {
-	function fastfood_use_sidebar() {
+function fastfood_use_sidebar() {
+	static $bool;
 
-		if ( !is_singular() && ! fastfood_get_opt( 'fastfood_rsidebindexes' ) ) return false;
+	if ( ! isset( $bool ) ) {
 
-		if ( is_page() && ! fastfood_get_opt( 'fastfood_rsidebpages' ) ) return false;
+		$bool = true;
 
-		if ( is_single() && ! fastfood_get_opt( 'fastfood_rsidebposts' ) ) return false;
+		if (
+			( ! is_singular() && ! fastfood_get_opt( 'fastfood_rsidebindexes' ) ) ||
+			( is_page() && ! fastfood_get_opt( 'fastfood_rsidebpages' ) ) ||
+			( is_single() && ! fastfood_get_opt( 'fastfood_rsidebposts' ) )
+		)
+			$bool = false;
 
-		return true;
+		$bool = apply_filters( 'fastfood_use_sidebar', $bool );
 
 	}
+
+	return $bool;
+
 }
 
 
