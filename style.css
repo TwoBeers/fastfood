@@ -724,18 +724,6 @@ br.fixfloat {
 #mainmenu .sub-menu li > div {
 	display: inline;
 }
-#rss_imglink {
-	position: absolute;
-	top: -20px;
-	right: 2px;
-	width: 20px;
-	opacity: 0.8;
-	filter: alpha(opacity=80);
-}
-#rss_imglink:hover {
-	opacity: 1;
-	filter: alpha(opacity=100);
-}
 .mentit {
 	color: #ccc;
 	font-weight: bold;
@@ -1756,8 +1744,8 @@ img.aligncenter {
 	list-style-type:none;
 	margin:0;
 }
-#crumbs li a,
-#crumbs li span {
+#crumbs li > a,
+#crumbs li > span {
 	display:block;
 	padding:4px 10px 5px 19px;
 	max-width: 200px;
@@ -2216,4 +2204,18 @@ a.bp-title-button {
 	box-shadow: none;
 	margin: 0;
 	font-weight: normal;
+}
+#crumbs a.button.bp-title-button {
+	display: inline;
+	padding: 0;
+	margin: 0 0 0 4px;
+	font-size: 1em;
+	background: transparent;
+	border: none;
+}
+#crumbs a.button.bp-title-button:before {
+	content:'[';
+}
+#crumbs a.button.bp-title-button:after {
+	content:']';
 }

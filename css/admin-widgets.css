@@ -44,3 +44,12 @@ div[id*=_ff-] .widget-title {
 	background: url("../images/ff34_logo.png") no-repeat scroll 8px 5px transparent;
 	padding-left: 32px;
 }
+.sector-header {
+	border-bottom: 1px solid #ddd;
+}
+.mp6 .sector-header {
+	background:#0074A2;
+	padding: 5px;
+	color: #fff;
+	margin: 10px -6px;
+}

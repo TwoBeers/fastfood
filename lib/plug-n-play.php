@@ -221,11 +221,13 @@ class Fastfood_BuddyPress {
 
 		if ( ! is_buddypress() ) return;
 
-		add_filter( 'fastfood_option_fastfood_xinfos_global'	, '__return_false' );
-		add_filter( 'fastfood_option_fastfood_I_like_it'		, '__return_false' );
-		add_filter( 'fastfood_skip_post_widgets_area'			, '__return_true' );
-		add_filter( 'fastfood_use_sidebar'						, array( $this, 'show_sidebar' ) );
-		add_filter( 'fastfood_filter_navbuttons'				, array( $this, 'navbuttons' ) );
+		add_filter( 'fastfood_option_fastfood_xinfos_global'		, '__return_false' );
+		add_filter( 'fastfood_option_fastfood_I_like_it'			, '__return_false' );
+		add_filter( 'fastfood_option_fastfood_hide_frontpage_title'	, '__return_false' );
+		add_filter( 'fastfood_skip_post_widgets_area'				, '__return_true' );
+		add_filter( 'fastfood_use_sidebar'							, array( $this, 'show_sidebar' ) );
+		add_filter( 'fastfood_filter_featured_title'				, array( $this, 'show_title' ) );
+		add_filter( 'fastfood_filter_navbuttons'					, array( $this, 'navbuttons' ) );
 
 	}
 
@@ -235,13 +237,24 @@ class Fastfood_BuddyPress {
 			'group'				=> 'quickbar',
 			'type'				=> 'chk',
 			'default'			=> 0,
-			'description'		=> __( 'in BuddyPress activity', 'fastfood' ),
+			'description'		=> __( 'in BuddyPress', 'fastfood' ),
 			'info'				=> '',
 			'req'				=> '',
 			'sub'				=> false
 		);
 
-		$coa['fastfood_rsideb']['sub'][] = 'fastfood_rsideb_buddypress';
+		$coa['fastfood_hide_buddypress_title'] = array(
+			'group'				=> 'content',
+			'type'				=> 'chk',
+			'default'			=> 0,
+			'description'		=> __( 'in BuddyPress', 'fastfood' ),
+			'info'				=> '',
+			'req'				=> '',
+			'sub'				=> false
+		);
+
+		$coa['fastfood_rsideb']['sub'][]		= 'fastfood_rsideb_buddypress';
+		$coa['fastfood_hide_titles']['sub'][]	= 'fastfood_hide_buddypress_title';
 
 		return $coa;
 
@@ -253,6 +266,15 @@ class Fastfood_BuddyPress {
 			$bool = false;
 
 		return $bool;
+
+	}
+
+	function show_title( $title ) {
+
+		if ( fastfood_get_opt( 'fastfood_hide_buddypress_title' ) )
+			$title = '';
+
+		return $title;
 
 	}
 

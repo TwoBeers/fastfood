@@ -651,8 +651,6 @@ function fastfood_main_menu () {
 
 		<?php fastfood_hook_menu_top(); ?>
 
-		<div id="rss_imglink"><a href="<?php bloginfo( 'rss2_url' ); ?>" title="<?php _e( 'Syndicate this site using RSS 2.0','fastfood' ); ?>"><img alt="rsslink" src="<?php echo get_template_directory_uri(); ?>/images/rss.png" /></a></div>
-
 		<?php
 			wp_nav_menu( array(
 				'container'			=> false,
@@ -1079,8 +1077,10 @@ function fastfood_get_the_thumb( $args = '' ) {
 
 		if ( fastfood_get_opt( 'fastfood_hide_posts_title' ) && is_single() ) return;
 
-		$selected_ids = explode( ',', fastfood_get_opt( 'fastfood_hide_selected_entries_title' ) );
-		if ( in_array( $post->ID, $selected_ids ) ) return;
+		if ( $selected_ids = fastfood_get_opt( 'fastfood_hide_selected_entries_title' ) ) {
+			$selected_ids = explode( ',', $selected_ids );
+			if ( in_array( $post->ID, $selected_ids ) ) return;
+		}
 
 		$post_title = $args['alternative'] ? $args['alternative'] : get_the_title();
 		$post_title = $post_title ? $post_title : $args['fallback'];
@@ -1918,7 +1918,7 @@ function fastfood_title_tags_filter( $title = '', $id = null ) {
 
 	if ( is_admin() ) return $title;
 
-	$title = strip_tags( $title, '<abbr><acronym><b><em><i><del><ins><bdo><strong><img><sub><sup>' );
+	$title = strip_tags( $title, '<abbr><acronym><b><em><i><del><ins><bdo><strong><img><sub><sup><a>' );
 
 	if ( ! fastfood_get_opt( 'fastfood_manage_blank_title' ) ) return $title;
 
