@@ -537,53 +537,159 @@ class Fastfood_Widget_Social extends WP_Widget {
 		$control_ops = array('width' => 650);
 
 		$this->WP_Widget( "ff-social", __( "Follow Me", "fastfood" ), $widget_ops, $control_ops );
-		$this->follow_urls = array(
-			'blogger'		=> 'Blogger',
-			'blurb'			=> 'Blurb',
-			'Delicious'		=> 'Delicious',
-			'Deviantart'	=> 'deviantART',
-			'Digg'			=> 'Digg',
-			'Dropbox'		=> 'Dropbox',
-			'Facebook'		=> 'Facebook',
-			'Flickr'		=> 'Flickr',
-			'Github'		=> 'GitHub',
-			'GooglePlus'	=> 'Google+',
-			'Hi5'			=> 'Hi5',
-			'LinkedIn'		=> 'LinkedIn',
-			'livejournal'	=> 'LiveJournal',
-			'Myspace'		=> 'Myspace',
-			'Odnoklassniki'	=> 'Odnoklassniki',
-			'Orkut'			=> 'Orkut',
-			'pengyou'		=> 'Pengyou',
-			'Picasa'		=> 'Picasa',
-			'pinterest'		=> 'Pinterest',
-			'Qzone'			=> 'Qzone',
-			'Reddit'		=> 'Reddit',
-			'renren'		=> 'Renren',
-			'scribd'		=> 'Scribd',
-			'slideshare'	=> 'SlideShare',
-			'StumbleUpon'	=> 'StumbleUpon',
-			'soundcloud'	=> 'SoundCloud',
-			'Technorati'	=> 'Technorati',
-			'Tencent'		=> 'Tencent',
-			'Twitter'		=> 'Twitter',
-			'tumblr'		=> 'Tumblr',
-			'ubuntuone'		=> 'Ubuntu One',
-			'Vimeo'			=> 'Vimeo',
-			'VKontakte'		=> 'VKontakte',
-			'Sina'			=> 'Weibo',
-			'WindowsLive'	=> 'Windows Live',
-			'Xing'			=> 'Xing',
-			'yfrog'			=> 'YFrog',
-			'Youtube'		=> 'Youtube',
-			'RSS'			=> 'RSS' );
+
+		$icons_path = get_template_directory_uri() . '/images/follow/';
+		$this->follow_urls = apply_filters( 'fastdood_follow_services', array(
+			'blogger'		=> array(
+				'name' => 'Blogger',
+				'icon' => $icons_path . 'blogger.png' ),
+			'blurb'			=> array(
+				'name' => 'Blurb',
+				'icon' => $icons_path . 'blurb.png' ),
+			'Delicious'		=> array(
+				'name' => 'Delicious',
+				'icon' => $icons_path . 'delicious.png' ),
+			'Deviantart'	=> array(
+				'name' => 'deviantART',
+				'icon' => $icons_path . 'deviantart.png' ),
+			'Digg'			=> array(
+				'name' => 'Digg',
+				'icon' => $icons_path . 'digg.png' ),
+			'Dropbox'		=> array(
+				'name' => 'Dropbox',
+				'icon' => $icons_path . 'dropbox.png' ),
+			'Facebook'		=> array(
+				'name' => 'Facebook',
+				'icon' => $icons_path . 'facebook.png' ),
+			'Flickr'		=> array(
+				'name' => 'Flickr',
+				'icon' => $icons_path . 'flickr.png' ),
+			'Github'		=> array(
+				'name' => 'GitHub',
+				'icon' => $icons_path . 'github.png' ),
+			'GooglePlus'	=> array(
+				'name' => 'Google+',
+				'icon' => $icons_path . 'googleplus.png' ),
+			'Hi5'			=> array(
+				'name' => 'Hi5',
+				'icon' => $icons_path . 'hi5.png' ),
+			'instagram'		=> array(
+				'name' => 'Instagram',
+				'icon' => $icons_path . 'instagram.png' ),
+			'LinkedIn'		=> array(
+				'name' => 'LinkedIn',
+				'icon' => $icons_path . 'linkedin.png' ),
+			'livejournal'	=> array(
+				'name' => 'LiveJournal',
+				'icon' => $icons_path . 'livejournal.png' ),
+			'Myspace'		=> array(
+				'name' => 'Myspace',
+				'icon' => $icons_path . 'myspace.png' ),
+			'Odnoklassniki'	=> array(
+				'name' => 'Odnoklassniki',
+				'icon' => $icons_path . 'odnoklassniki.png' ),
+			'Orkut'			=> array(
+				'name' => 'Orkut',
+				'icon' => $icons_path . 'orkut.png' ),
+			'pengyou'		=> array(
+				'name' => 'Pengyou',
+				'icon' => $icons_path . 'pengyou.png' ),
+			'Picasa'		=> array(
+				'name' => 'Picasa',
+				'icon' => $icons_path . 'picasa.png' ),
+			'pinterest'		=> array(
+				'name' => 'Pinterest',
+				'icon' => $icons_path . 'pinterest.png' ),
+			'Qzone'			=> array(
+				'name' => 'Qzone',
+				'icon' => $icons_path . 'qzone.png' ),
+			'Reddit'		=> array(
+				'name' => 'Reddit',
+				'icon' => $icons_path . 'reddit.png' ),
+			'renren'		=> array(
+				'name' => 'Renren',
+				'icon' => $icons_path . 'renren.png' ),
+			'scribd'		=> array(
+				'name' => 'Scribd',
+				'icon' => $icons_path . 'scribd.png' ),
+			'slideshare'	=> array(
+				'name' => 'SlideShare',
+				'icon' => $icons_path . 'slideshare.png' ),
+			'StumbleUpon'	=> array(
+				'name' => 'StumbleUpon',
+				'icon' => $icons_path . 'stumbleupon.png' ),
+			'soundcloud'	=> array(
+				'name' => 'SoundCloud',
+				'icon' => $icons_path . 'soundcloud.png' ),
+			'Technorati'	=> array(
+				'name' => 'Technorati',
+				'icon' => $icons_path . 'technorati.png' ),
+			'Tencent'		=> array(
+				'name' => 'Tencent',
+				'icon' => $icons_path . 'tencent.png' ),
+			'Twitter'		=> array(
+				'name' => 'Twitter',
+				'icon' => $icons_path . 'twitter.png' ),
+			'tumblr'		=> array(
+				'name' => 'Tumblr',
+				'icon' => $icons_path . 'tumblr.png' ),
+			'ubuntuone'		=> array(
+				'name' => 'Ubuntu One',
+				'icon' => $icons_path . 'ubuntuone.png' ),
+			'Vimeo'			=> array(
+				'name' => 'Vimeo',
+				'icon' => $icons_path . 'vimeo.png' ),
+			'VKontakte'		=> array(
+				'name' => 'VKontakte',
+				'icon' => $icons_path . 'vkontakte.png' ),
+			'Sina'			=> array(
+				'name' => 'Weibo',
+				'icon' => $icons_path . 'sina.png' ),
+			'WindowsLive'	=> array(
+				'name' => 'Windows Live',
+				'icon' => $icons_path . 'windowslive.png' ),
+			'Xing'			=> array(
+				'name' => 'Xing',
+				'icon' => $icons_path . 'xing.png' ),
+			'yfrog'			=> array(
+				'name' => 'YFrog',
+				'icon' => $icons_path . 'yfrog.png' ),
+			'Youtube'		=> array(
+				'name' => 'Youtube',
+				'icon' => $icons_path . 'youtube.png' ),
+			'RSS'			=> array(
+				'name' => 'RSS',
+				'icon' => $icons_path . 'rss.png' ),
+			) );
+
+/**
+ * Customize the services by adding something like this to your child theme/plugin:
+
+	add_filter( 'fastdood_follow_services', 'my_custom_follow_services' );
+
+	function my_custom_follow_services( $services ) {
+
+		$services['my_cool_service_slug'] = array(
+			'name' => 'My Cool Service',
+			'icon' => PATH_TO_IMAGE,
+		);
+
+		return $services;
+
+	}
+
+ * PATH_TO_IMAGE may be:
+ * get_stylesheet_directory_uri() . '/my_cool_service_icon.png' (for child theme)
+ * plugins_url( 'my_cool_service_icon.png' , __FILE__ ) (for plugin)
+
+ */
 	}
 
 	function form( $instance ) {
 		$defaults = array( "title" => __( "Follow Me", "fastfood" ),
 			"icon_size" => '48px',
 		);
-		foreach ( $this->follow_urls as $follow_service => $service_name ) {
+		foreach ( $this->follow_urls as $follow_service => $service_data ) {
 			$defaults[$follow_service."_icon"] = $follow_service;
 			$defaults["show_".$follow_service] = false;
 		}
@@ -595,13 +701,13 @@ class Fastfood_Widget_Social extends WP_Widget {
 		<p><?php echo __( 'NOTE: Enter the <strong>full</strong> addresses ( with <em>http://</em> )', 'fastfood' ); ?></p>
 <?php
 		$alt = ' clear: left;';
-		foreach($this->follow_urls as $follow_service => $service_name ) {
+		foreach($this->follow_urls as $follow_service => $service_data ) {
 ?>
 		<div style="float: left; width: 40%; margin: 0pt 5%;<?php echo $alt; ?>">
 			<h2>
 				<input id="<?php echo $this->get_field_id( 'show_' . $follow_service ); ?>" name="<?php echo $this->get_field_name( 'show_' . $follow_service ); ?>" type="checkbox" <?php checked( $instance['show_'.$follow_service], 'on' ); ?>  class="checkbox" />
-				<img style="vertical-align:middle; width:40px; height:40px;" src="<?php echo get_template_directory_uri(); ?>/images/follow/<?php echo strtolower( $follow_service ); ?>.png" alt="<?php echo $follow_service; ?>" />
-				<?php echo $service_name; ?>
+				<img style="vertical-align:middle; width:40px; height:40px;" src="<?php echo esc_url( $service_data['icon'] ) ?>" alt="<?php echo $follow_service; ?>" />
+				<?php echo $service_data['name']; ?>
 			</h2>
 <?php
 			if ( $follow_service != 'RSS' ) {
@@ -610,7 +716,7 @@ class Fastfood_Widget_Social extends WP_Widget {
 		<p>
 			<label for="<?php echo $this->get_field_id( $follow_service . '_account' ); ?>">
 <?php
-				printf( __( 'Enter %1$s account link:', 'fastfood' ), $service_name );
+				printf( __( 'Enter %1$s account link:', 'fastfood' ), $service_data['name'] );
 ?>
 			</label>
 			<input id="<?php echo $this->get_field_id( $follow_service . '_account' ); ?>" name="<?php echo $this->get_field_name( $follow_service . '_account' ); ?>" value="<?php if ( isset( $instance[$follow_service . '_account'] ) ) echo $instance[$follow_service . '_account']; ?>" class="widefat" />
@@ -646,7 +752,7 @@ class Fastfood_Widget_Social extends WP_Widget {
 		$instance["title"] = strip_tags($new_instance["title"]);
 		$instance["icon_size"] = $new_instance["icon_size"];
 
-		foreach ( $this->follow_urls as $follow_service => $service_name ) {
+		foreach ( $this->follow_urls as $follow_service => $service_data ) {
 			$instance['show_'.$follow_service] = $new_instance['show_'.$follow_service];
 			$instance[$follow_service.'_account'] = $new_instance[$follow_service.'_account'];
 		}
@@ -667,14 +773,14 @@ class Fastfood_Widget_Social extends WP_Widget {
 ?>
 	<div class="fix" style="text-align: center;">
 <?php
-		foreach ( $this->follow_urls as $follow_service => $service_name ) {
+		foreach ( $this->follow_urls as $follow_service => $service_data ) {
 			$show = ( isset( $instance['show_'.$follow_service] ) ) ? $instance['show_'.$follow_service] : false;
 			$account = ( isset( $instance[$follow_service.'_account'] ) ) ? $instance[$follow_service.'_account'] : '';
 			if ( $follow_service == 'RSS' ) {
 				$account = get_bloginfo( 'rss2_url' );
 			}
 			if ( $show && !empty( $account ) ) {
-?><a href="<?php echo $account; ?>" target="_blank" class="ff-social-icon" title="<?php echo $service_name;?>"><img src="<?php echo get_template_directory_uri(); ?>/images/follow/<?php echo strtolower( $follow_service );?>.png" alt="<?php echo $follow_service;?>" style='width: <?php echo $icon_size;?>; height: <?php echo $icon_size;?>;' /></a><?php
+?><a href="<?php echo $account; ?>" target="_blank" class="ff-social-icon" title="<?php echo esc_attr( $service_data['name'] );?>"><img src="<?php echo esc_url( $service_data['icon'] ) ?>" alt="<?php echo $follow_service;?>" style='width: <?php echo $icon_size;?>; height: <?php echo $icon_size;?>;' /></a><?php
 			}
 		}
 ?>
@@ -1025,68 +1131,6 @@ class Fastfood_Widget_Image_Exif extends WP_Widget {
 
 
 /**
- * Post share links
- */
-class Fastfood_Widget_Share_This extends WP_Widget {
-
-	function Fastfood_Widget_Share_This() {
-		$widget_ops = array( 'classname' => 'tb_share_this', 'description' => __( "Show some popular sharing services links. It's visible ONLY in single posts, pages and attachments",'fastfood' ) );
-		$this->WP_Widget( 'ff-share-this', __( 'Share this','fastfood' ), $widget_ops );
-		$this->alt_option_name = 'tb_share_this';
-
-	}
-
-	function widget( $args, $instance ) {
-		if ( !is_singular() ) return;
-		extract( $args );
-
-		$icon_size = isset( $instance['icon_size'] ) ? absint( $instance['icon_size'] ) : '16';
-
-		$title = apply_filters( 'widget_title', $instance['title'], $instance, $this->id_base );
-?>
-		<?php echo $before_widget; ?>
-		<?php if ( $title ) echo $before_title . $title . $after_title; ?>
-		<?php fastfood_share_this( array( 'size' => $icon_size ) ); ?>
-		<?php echo $after_widget; ?>
-<?php
-	}
-
-	function update( $new_instance, $old_instance ) {
-		$instance = $old_instance;
-		$instance['title'] = strip_tags( $new_instance['title'] );
-		$instance["icon_size"] = in_array( $new_instance["icon_size"], array ( '16', '24', '32', '48', '64' ) ) ? $new_instance["icon_size"] : '16' ;
-
-		return $instance;
-	}
-
-	function form( $instance ) {
-		$title = isset( $instance['title'] ) ? esc_attr( $instance['title'] ) : __( 'Share this','fastfood' );
-		$icon_size = isset( $instance['icon_size'] ) ? absint( $instance['icon_size'] ) : '16';
-?>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title','fastfood' ); ?></label>
-			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>" />
-		</p>
-		<p>
-			<label for="<?php echo $this->get_field_id( 'icon_size' ); ?>"><?php _e( 'Select icon size', 'fastfood' ); ?></label>
-			<select name="<?php echo $this->get_field_name( 'icon_size' ); ?>" id="<?php echo $this->get_field_id( 'icon_size' ); ?>" >
-<?php
-			$size_array = array ( '16', '24', '32', '48', '64' );
-			foreach($size_array as $size) {
-?>
-				<option value="<?php echo $size; ?>" <?php selected( $icon_size, $size ); ?>><?php echo $size; ?>px</option>
-<?php
-			}
-?>
-			</select>
-		</p>
-
-<?php
-	}
-}
-
-
-/**
  * Clean Archives Widget
  */
 class Fastfood_Widget_Clean_Archives extends WP_Widget {
@@ -1299,8 +1343,6 @@ function fastfood_widgets_init() {
 	register_widget( 'Fastfood_Widget_Recent_Posts' );
 
 	register_widget( 'Fastfood_Widget_Image_Exif' );
-
-	register_widget( 'Fastfood_Widget_Share_This' );
 
 	register_widget( 'Fastfood_Widget_Clean_Archives' );
 

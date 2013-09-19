@@ -126,8 +126,6 @@ require_once( 'lib/comment-reply.php' ); // load comment reply script
 
 require_once( 'lib/admin.php' ); // load the admin stuff
 
-require_once( 'lib/audio-player.php' ); // load the audio player module
-
 require_once( 'lib/plug-n-play.php' ); // load the plugins support module
 
 
@@ -137,16 +135,6 @@ function fastfood_is_mobile() { // mobile
 	global $fastfood_is_mobile;
 
 	return $fastfood_is_mobile;
-
-}
-
-function fastfood_is_ie6() { // ie6
-	static $is_IE6;
-
-	if ( !isset( $is_IE6 ) ) {
-		$is_IE6 = isset( $_SERVER['HTTP_USER_AGENT'] ) && ( strpos( $_SERVER['HTTP_USER_AGENT'], 'MSIE 6' ) !== false ) && !( strpos( $_SERVER['HTTP_USER_AGENT'], 'Opera' ) !== false ) ? true : false;
-	}
-	return $is_IE6;
 
 }
 
@@ -239,11 +227,6 @@ if ( !function_exists( 'fastfood_stylesheet' ) ) {
 
 		if ( is_admin() || fastfood_is_mobile() ) return;
 
-		if ( fastfood_is_ie6() ) { // ie6 style ( NOTE: the IE6 compatibility is no more maintained )
-			wp_enqueue_style( 'fastfood-ie6', get_template_directory_uri() . '/css/ie6.css', false, fastfood_get_info( 'version' ), 'screen' );
-			return;
-		}
-
 		if ( fastfood_is_printpreview() ) { //print preview
 
 			wp_enqueue_style( 'fastfood-print-preview', get_template_directory_uri() . '/css/print.css', false, fastfood_get_info( 'version' ), 'screen' );
@@ -308,7 +291,7 @@ if ( !function_exists( 'fastfood_scripts' ) ) {
 
 		if ( is_admin() ) return;
 
-		if ( fastfood_is_mobile() || fastfood_is_printpreview() || fastfood_is_ie6() ) return; //no scripts in print preview, mobile view or ie6
+		if ( fastfood_is_mobile() || fastfood_is_printpreview() ) return; //no scripts in print preview, mobile view
 
 		if ( fastfood_get_opt( 'fastfood_jsani' ) ) {
 
@@ -550,92 +533,28 @@ if ( !function_exists( 'fastfood_get_the_thumb_url' ) ) {
 
 //add share links to post/page
 if ( !function_exists( 'fastfood_share_this' ) ) {
-	function fastfood_share_this( $args = '' ){
+	function fastfood_share_this(){
 
-		$defaults = array(
-			'size'			=> 24, 
-			'echo'			=> true,
-			'compact'		=> false,
-			'split'			=> 0, 
-			'id'			=> 0,
-			'title'			=> false,
-			'href'			=> false,
-			'href_short'	=> false,
-			'thumb'			=> false,
-			'source'		=> false,
-			'summary'		=> false,
-			'twitter'		=> 1,
-			'facebook'		=> 1,
-			'googleplus'	=> 1,
-			'sina'			=> 1,
-			'tencent'		=> 1,
-			'qzone'			=> 1,
-			'reddit'		=> 1,
-			'stumbleupon'	=> 1,
-			'digg'			=> 1,
-			'orkut'			=> 1,
-			'bookmarks'		=> 1,
-			'blogger'		=> 1,
-			'delicious'		=> 1,
-			'linkedin'		=> 1,
-			'tumblr'		=> 1,
-			'mail'			=> 1,
-		);
-		$args = wp_parse_args( $args, $defaults );
-
-		$post = get_post( $args['id'] );
-
-		$enc_title			= $args['title'] ? $args['title'] : rawurlencode( get_the_title( $post->ID ) );
-		$enc_href			= $args['href'] ? $args['href'] : rawurlencode( get_permalink( $post->ID ) );
-		$enc_href_short		= $args['href_short'] ? $args['href_short'] : rawurlencode( home_url() . '/?p=' . $post->ID );
-		$enc_thumb			= $args['thumb'] ? $args['thumb'] : rawurlencode( fastfood_get_the_thumb_url( $post->ID ) );
-		$enc_source			= $args['source'] ? $args['source'] : rawurlencode( get_bloginfo( 'name' ) );
-		if ( $args['summary'] )
-			$enc_summary	= $args['summary'];
-		elseif ( !empty( $post->post_password ) )
-			$enc_summary	= '';
-		elseif ( has_excerpt() )
-			$enc_summary	= rawurlencode( get_the_excerpt() );
-		else
-			$enc_summary	= rawurlencode( wp_trim_words( $post->post_content, apply_filters('excerpt_length', 55), '[...]' ) );
-
-		$share['twitter']		= array( 'Twitter',		'http://twitter.com/home?status=' . $enc_title . '%20-%20' . $enc_href_short );
-		$share['facebook']		= array( 'Facebook',	'http://www.facebook.com/sharer.php?u=' . $enc_href_short. '&t=' . $enc_title );
-		$share['googleplus']	= array( 'Google+',		'https://plus.google.com/share?url=' . $enc_href_short );
-		$share['sina']			= array( 'Weibo',		'http://v.t.sina.com.cn/share/share.php?url=' . $enc_href_short );
-		$share['tencent']		= array( 'Tencent',		'http://v.t.qq.com/share/share.php?url=' . $enc_href_short . '&title=' . $enc_title . '&pic=' . $enc_thumb );
-		$share['qzone']			= array( 'Qzone',		'http://sns.qzone.qq.com/cgi-bin/qzshare/cgi_qzshare_onekey?url=' . $enc_href_short );
-		$share['reddit']		= array( 'Reddit',		'http://reddit.com/submit?url=' . $enc_href_short . '&title=' . $enc_title );
-		$share['stumbleupon']	= array( 'StumbleUpon',	'http://www.stumbleupon.com/submit?url=' . $enc_href_short . '&title=' . $enc_title );
-		$share['digg']			= array( 'Digg',		'http://digg.com/submit?url=' . $enc_href_short . '&title=' . $enc_title );
-		$share['orkut']			= array( 'Orkut',		'http://promote.orkut.com/preview?nt=orkut.com&tt=' . $enc_title . '&du=' . $enc_href_short . '&tn=' . $enc_thumb );
-		$share['bookmarks']		= array( 'Bookmarks',	'https://www.google.com/bookmarks/mark?op=edit&bkmk=' . $enc_href_short . '&title=' . $enc_title . '&annotation=' . $enc_summary );
-		$share['blogger']		= array( 'Blogger',		'http://www.blogger.com/blog_this.pyra?t&u=' . $enc_href_short . '&n=' . $enc_title . '&pli=1' );
-		$share['delicious']		= array( 'Delicious',	'http://delicious.com/post?url=' . $enc_href_short . '&title=' . $enc_title . '&notes=' . $enc_summary );
-		$share['linkedin']		= array( 'LinkedIn',	'http://www.linkedin.com/shareArticle?mini=true&url=' . $enc_href_short . '&title=' . $enc_title . '&source=' . $enc_source . '&summary=' . $enc_summary );
-		$share['tumblr']		= array( 'Tumblr',		'http://www.tumblr.com/share?v=3&u=' . $enc_href_short . '&t=' . $enc_title . '&s=' . $enc_summary );
-		$share['mail']			= array( 'e-mail',		'mailto:?subject=' . rawurlencode ( __( 'Check it out!', 'fastfood' ) ) . '&body=' . $enc_title . '%20-%20' . $enc_href . '%0D%0A' . $enc_summary );
-
-		$share = apply_filters( 'fastfood_filter_share_this', $share );
-
-		$output = '';
-		$counter = 0;
-		$splitter = false;
-		foreach( $share as $key => $btn ){
-			if ( $args[$key] )
-				if ( $args['split'] && $args['split'] == $counter )
-					$output .= $splitter = '<div class="share-splitter"><span class="share-trigger" style="font-size:' . $args['size'] . 'px">+</span><div class="share-hidden">';
-				$counter++;
-				$target = ( $key != 'mail' ) ? ' target="_blank"' : '';
-				$output .= '<a class="share-item" rel="nofollow"' . $target . ' id="tb-share-with-' . $key . '" href="' . $btn[1] . '"><img src="' . get_template_directory_uri() . '/images/follow/' . strtolower( $key ) . '.png" width="' . $args['size'] . '" height="' . $args['size'] . '" alt="' . $btn[0] . ' Button"  title="' . sprintf( __( 'Share with %s', 'fastfood' ), $btn[0] ) . '" /></a>';
+?>
+	<!-- AddThis Button BEGIN -->
+	<div class="addthis_toolbox addthis_default_style addthis_32x32_style">
+		<a class="addthis_button_facebook"></a>
+		<a class="addthis_button_twitter"></a>
+		<a class="addthis_button_google_plusone_share"></a>
+		<a class="addthis_button_compact"></a>
+		<a class="addthis_counter addthis_bubble_style"></a>
+	</div>
+	<br class="fixfloat"/>
+	<script type="text/javascript">
+		var addthis_share =
+		{
+			title: '<?php echo get_bloginfo( 'name' ) ?>',
+			url : '<?php echo home_url( '/' ) ?>'
 		}
-		if ( $splitter )
-			$output .= '</div></div>';
-
-		if ( $args['echo'] )
-			echo $output;
-		else
-			return $output;
+	</script>
+	<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=xa-523ad91d38c2da47"></script>
+	<!-- AddThis Button END -->
+<?php
 
 	}
 }

@@ -724,15 +724,6 @@ function fastfood_get_coa( $option = false ) {
 							'info'				=> __( 'only plain text. use <code>%t</code> as placeholder for the post title', 'fastfood' ) . ' (<a href="http://codex.wordpress.org/Customizing_the_Read_More" target="_blank">Codex</a>)',
 							'req'				=> ''
 						),
-		'fastfood_audio_player' => 
-						array(
-							'group'				=> 'content',
-							'type'				=> 'chk',
-							'default'			=> 0,
-							'description'		=> __( 'audio player', 'fastfood' ),
-							'info'				=> __( 'an audio player for all the linked audio files in post content', 'fastfood' ),
-							'req'				=> ''
-		),
 		'fastfood_editor_style' => 
 						array(
 							'group'				=> 'other',

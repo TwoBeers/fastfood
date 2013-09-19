@@ -3,11 +3,21 @@ jQuery(document).ready(function($){
 	ff_widgets = $('#widget-list').find('.widget[id*=_ff-]');
 	$('#widget-list').append(ff_widgets);
 
-	$('#widget-list').append('<p class="clear sector-header">bbPress widgets</p>');
 	bbp_widgets = $('#widget-list').find('.widget[id*=_bbp_]');
-	$('#widget-list').append(bbp_widgets);
+	if (bbp_widgets.length > 0) {
+		$('#widget-list').append('<p class="clear sector-header">bbPress widgets</p>');
+		$('#widget-list').append(bbp_widgets);
+	}
 
-	$('#widget-list').append('<p class="clear sector-header">BuddyPress widgets</p>');
 	bp_widgets = $('#widget-list').find('.widget[id*=_bp_]');
-	$('#widget-list').append(bp_widgets);
+	if (bp_widgets.length > 0) {
+		$('#widget-list').append('<p class="clear sector-header">BuddyPress widgets</p>');
+		$('#widget-list').append(bp_widgets);
+	}
+
+	jp_widgets = $('#widget-list').find('.widget[id*=_image-],.widget[id*=_facebook-likebox-],.widget[id*=_grofile-],.widget[id*=_rss_links-],.widget[id*=_jetpack_readmill_widget-],.widget[id*=_twitter_timeline-]');
+	if (jp_widgets.length > 0) {
+		$('#widget-list').append('<p class="clear sector-header">Jetpack widgets</p>');
+		$('#widget-list').append(jp_widgets);
+	}
 });

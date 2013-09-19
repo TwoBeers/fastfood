@@ -1971,10 +1971,9 @@ img.aligncenter {
 .coming-soon .storyshare {
 	border-top: 2px groove #fff;
 	padding: 20px;
-	text-align: right;
 }
-.coming-soon .storyshare a {
-	margin-right: 10px;
+.coming-soon .storyshare .addthis_toolbox {
+	float: right;
 }
 
 /* Breadcrumb NavXT

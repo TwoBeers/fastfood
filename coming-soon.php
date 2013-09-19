@@ -51,18 +51,13 @@
 
 						<div class="storycontent">
 
-							<?php echo get_the_content(); ?>
+							<?php echo nl2br( get_the_content() ); ?>
 
 						</div>
 
 						<div class="storyshare">
 
-							<?php fastfood_share_this( array(
-								'title'			=> get_bloginfo( 'name' ),
-								'href'			=> home_url( '/' ),
-								'href_short'	=> home_url( '/' ),
-								'split'			=> 3, 
-							) ); ?>
+							<?php fastfood_share_this(); ?>
 
 						</div>
 
