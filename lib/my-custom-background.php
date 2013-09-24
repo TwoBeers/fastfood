@@ -547,8 +547,7 @@ class Fastfood_Custom_Background {
 
 				<tbody>
 
-					<?php if ( get_background_image() ) : ?>
-					<tr valign="top">
+					<tr class="hide-if-no-image" valign="top"<?php echo get_background_image()? '' : ' style="display:none"' ?>>
 
 						<th scope="row"><?php _e( 'Position', 'fastfood' ); ?></th>
 
@@ -567,7 +566,7 @@ class Fastfood_Custom_Background {
 
 					</tr>
 
-					<tr valign="top">
+					<tr class="hide-if-no-image" valign="top"<?php echo get_background_image()? '' : ' style="display:none"' ?>>
 
 						<th scope="row"><?php _e( 'Repeat', 'fastfood' ); ?></th>
 
@@ -583,7 +582,7 @@ class Fastfood_Custom_Background {
 
 					</tr>
 
-					<tr valign="top">
+					<tr class="hide-if-no-image" valign="top"<?php echo get_background_image()? '' : ' style="display:none"' ?>>
 
 						<th scope="row"><?php _e( 'Attachment', 'fastfood' ); ?></th>
 
@@ -596,7 +595,6 @@ class Fastfood_Custom_Background {
 						</td>
 
 					</tr>
-					<?php endif; // get_background_image() ?>
 
 					<tr valign="top">
 

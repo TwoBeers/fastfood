@@ -8,6 +8,7 @@
 			var bg_repeat = $this.parent().parent().find('.default-bg-info-rep').html();
 			var bg_attachment = $this.parent().parent().find('.default-bg-info-att').html();
 			var bg_color = $this.parent().parent().find('.default-bg-info-col').html();
+			$('.hide-if-no-image').show();
 			$('#custom-background-image').css('background-image', 'url(' + bg_url + ')' );
 			$('#custom-background-image').css('background-position', bg_pos_x + ' ' + bg_pos_y );
 			$('#custom-background-image').css('background-repeat', bg_repeat );

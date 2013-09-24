@@ -12,7 +12,7 @@ class Fastfood_Comment_Reply {
 
 		if ( is_admin() || fastfood_is_mobile() || fastfood_is_printpreview() ) return;
 
-		if ( fastfood_is_ie6() || ! fastfood_get_opt( 'fastfood_cust_comrep' ) ) {
+		if ( ! fastfood_get_opt( 'fastfood_cust_comrep' ) ) {
 
 			add_action( 'comment_form_before'	, array( $this, 'load_standard_scripts' ) );
 

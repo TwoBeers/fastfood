@@ -10,7 +10,7 @@
 
 
 //complete options array, with type, defaults values, description, infos and required option
-function fastfood_get_coa( $option = false ) {
+function fastfood_get_coa( $option = false, $data = false ) {
 
 	$fastfood_groups = array(
 							'quickbar'		=> __( 'Elements' , 'fastfood' ),
@@ -1011,7 +1011,10 @@ function fastfood_get_coa( $option = false ) {
 	if ( $option == 'groups' )
 		return $fastfood_groups;
 	elseif ( $option )
-		return isset( $fastfood_coa[$option] ) ? $fastfood_coa[$option] : false;
+		if ( $data )
+			return isset( $fastfood_coa[$option][$data] ) ? $fastfood_coa[$option][$data] : false;
+		else
+			return isset( $fastfood_coa[$option] ) ? $fastfood_coa[$option] : false;
 	else
 		return $fastfood_coa;
 }
