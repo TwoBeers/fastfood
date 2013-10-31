@@ -59,10 +59,10 @@ class Fastfood_Comment_Reply {
 
 	function load_custom_scripts() {
 
-			wp_enqueue_script( 'fastfood-comment-reply', get_template_directory_uri() . '/js/comment-reply.min.js', array( 'jquery-ui-draggable' ), fastfood_get_info( 'version' ), true ); //custom comment-reply pop-up box
+			wp_enqueue_script( 'fastfood-comment-reply', get_template_directory_uri() . '/js/comment-reply.min.js', array( 'jquery-ui-draggable', 'hoverIntent' ), fastfood_get_info( 'version' ), true ); //custom comment-reply pop-up box
 
 			$data = array(
-				'replytopost'		=> esc_attr( __( 'Leave a Reply', 'fastfood' ) ),
+				'replytopost'		=> esc_attr( __( 'Leave a comment', 'fastfood' ) ),
 				'replytocomment'	=> esc_attr( __( 'Reply to Comment', 'fastfood' ) ),
 				'close'				=> esc_attr( __( 'Close', 'fastfood' ) ),
 			);

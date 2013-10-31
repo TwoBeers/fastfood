@@ -9,12 +9,29 @@ fastfoodCustomReply = {
 
 		this.resetForm();
 		this.addCloseButton();
-		$('#respond').appendTo('#content');
-		$("#respond").draggable({ handle: '#reply-title' });
+		$respond = $('#respond');
+		$respond.appendTo('#content');
+		$respond.draggable({ handle: '#reply-title' });
 		$(".show_comment_form").click(function() {
 			fastfoodCustomReply.viewForm();
 			return false;
 		});
+		$respond.hoverIntent(
+			function(){ //when mouse enters, slide down the sub list
+				$respond.animate(
+					{ 'opacity' : 1 },
+					200,
+					'swing'
+				);
+			},
+			function(){ //when mouse leaves, hide the sub list
+				$respond.stop().animate(
+					{ 'opacity' : 0.3 },
+					1000,
+					'swing'
+				);
+			}
+		);
 
 
 	},
@@ -76,7 +93,11 @@ fastfoodCustomReply = {
 		this.resetForm();
 		replytitle.innerHTML = fastfood_comment_reply_l10n.replytopost;
 		replytitle.appendChild(cancel);
-		respond.style.display = "block";
+		$('#respond').css({'display' : 'block' }).animate(
+			{ 'opacity' : 1 , 'margin-top' : 0 },
+			200,
+			'easeOutBack'
+		);
 		
 		try { t.I('comment').focus(); }
 		catch(e) {}

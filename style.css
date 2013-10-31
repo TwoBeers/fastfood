@@ -1976,6 +1976,54 @@ img.aligncenter {
 	float: right;
 }
 
+/* MediaElements 
+----------------------------------------------------------*/
+div.mejs-container,
+div.mejs-embed,
+div.mejs-embed body {
+	background: transparent;
+}
+div.mejs-container .mejs-controls {
+	background: #F8F8F8;
+}
+div.mejs-container .mejs-controls .mejs-time span {
+	color: #404040;
+}
+div.mejs-controls .mejs-button button {
+	min-width: 0;
+	background-image: url(images/controls_invert.png);
+	box-shadow: none;
+}
+div.mejs-controls .mejs-time-rail .mejs-time-total,
+div.mejs-controls .mejs-horizontal-volume-slider .mejs-horizontal-volume-total {
+	background: #444;
+	border-radius: 0;
+}
+div.mejs-controls .mejs-horizontal-volume-slider .mejs-horizontal-volume-current {
+	border-radius: 0;
+	background: #aaa;
+}
+div.mejs-controls .mejs-button button:focus {
+	outline: 1px solid #aaa;
+}
+div.mejs-controls .mejs-time-rail .mejs-time-loaded {
+	background: #777;
+	border-radius: 0;
+}
+div.mejs-controls .mejs-time-rail .mejs-time-current {
+	background: #21759B;
+	border-radius: 0;
+}
+div.mejs-controls .mejs-time-rail .mejs-time-float {
+	border-color: #444;
+	box-shadow: 0 0 5px #000;
+	background: #222;
+	color: #fff;
+}
+div.mejs-controls .mejs-time-rail .mejs-time-float-corner {
+	border-color: #222 rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+}
+
 /* Breadcrumb NavXT
 ----------------------------------------------------------*/
 #navxt-crumbs {

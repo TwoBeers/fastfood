@@ -49,6 +49,7 @@ add_action( 'fastfood_hook_comments_list_before'	, 'fastfood_navigate_comments' 
 add_action( 'fastfood_hook_comments_list_after'		, 'fastfood_navigate_comments' );
 add_action( 'fastfood_hook_content_top'				, 'fastfood_search_reminder' );
 add_action( 'fastfood_hook_loop_after'				, 'fastfood_navigate_archives' );
+add_action( 'fastfood_hook_post_content_after'		, 'fastfood_always_more' );
 add_action( 'fastfood_hook_post_content_after'		, 'fastfood_link_pages' );
 
 
@@ -1466,16 +1467,14 @@ function fastfood_setup() {
 		add_editor_style( 'css/editor-style.css' );
 
 	// This theme uses post formats
-	if ( fastfood_get_opt( 'fastfood_post_formats' ) ) {
-		$pformats = array();
-		if ( fastfood_get_opt( 'fastfood_post_formats_gallery' ) )	$pformats[] = 'gallery';
-		if ( fastfood_get_opt( 'fastfood_post_formats_aside' ) )	$pformats[] = 'aside';
-		if ( fastfood_get_opt( 'fastfood_post_formats_status' ) )	$pformats[] = 'status';
-		if ( fastfood_get_opt( 'fastfood_post_formats_quote' ) )	$pformats[] = 'quote';
-		$pformats = apply_filters( 'fastfood_filter_post_formats', $pformats );
-		if ( ! empty( $pformats ) )
-			add_theme_support( 'post-formats', $pformats );
-	}
+	$pformats = array();
+	if ( fastfood_get_opt( 'fastfood_post_formats_gallery' ) )	$pformats[] = 'gallery';
+	if ( fastfood_get_opt( 'fastfood_post_formats_aside' ) )	$pformats[] = 'aside';
+	if ( fastfood_get_opt( 'fastfood_post_formats_status' ) )	$pformats[] = 'status';
+	if ( fastfood_get_opt( 'fastfood_post_formats_quote' ) )	$pformats[] = 'quote';
+	$pformats = apply_filters( 'fastfood_filter_post_formats', $pformats );
+	if ( ! empty( $pformats ) )
+		add_theme_support( 'post-formats', $pformats );
 
 }
 
@@ -1880,21 +1879,35 @@ function fastfood_excerpt_more( $more ) {
 }
 
 
-// custom text for the "more" tag
-function fastfood_more_link( $more_link, $more_link_text ) {
+// custom "more" tag
+function fastfood_more_link( $more_link, $more_link_text, $auto_hide = true ) {
 
 	if ( fastfood_get_opt( 'fastfood_more_tag' ) && !is_admin() ) {
 		$text = str_replace ( '%t', get_the_title(), fastfood_get_opt( 'fastfood_more_tag' ) );
-		return str_replace( $more_link_text, $text, $more_link );
+		$more_link = str_replace( $more_link_text, $text, $more_link );
 	}
+
+	if ( fastfood_get_opt( 'fastfood_more_tag_scroll' ) )
+		$more_link = preg_replace( '|#more-[0-9]+|', '', $more_link );
+
+	if ( fastfood_get_opt( 'fastfood_more_tag_always' ) && $auto_hide )
+		$more_link = '';
 
 	return $more_link;
 
 }
 
 
+// link to post at the end of content
+function fastfood_always_more() {
+
+	if ( fastfood_get_opt( 'fastfood_more_tag_always' ) )
+		echo fastfood_more_link( '<p><a class="moretag" href="' . get_permalink() . '">Read...</a></p>', 'Read...', false );
+
+}
+
 // Add specific CSS class by filter
-function fastfood_body_classes($classes) {
+function fastfood_body_classes( $classes ) {
 
 	$classes[] = 'ff-no-js';
 
@@ -2011,7 +2024,6 @@ function fastfood_admin_bar_plus() {
 
 // filters comments_form() default arguments
 function fastfood_comment_form_defaults( $defaults ) {
-	global $user_identity;
 
 	$defaults['comment_field']			= '<p class="comment-form-comment"><textarea id="comment" name="comment" cols="45" rows="7" aria-required="true"></textarea></p>';
 	$defaults['label_submit']			= __( 'Say It!','fastfood' );

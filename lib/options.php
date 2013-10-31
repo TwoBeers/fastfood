@@ -12,22 +12,133 @@
 //complete options array, with type, defaults values, description, infos and required option
 function fastfood_get_coa( $option = false, $data = false ) {
 
-	$fastfood_groups = array(
-							'quickbar'		=> __( 'Elements' , 'fastfood' ),
-							'postformats'	=> __( 'Post formats' , 'fastfood' ),
-							'content'		=> __( 'Contents' , 'fastfood' ),
-							'javascript'	=> __( 'Javascript' , 'fastfood' ),
-							'colors'		=> __( 'Style' , 'fastfood' ),
-							'mobile'		=> __( 'Mobile' , 'fastfood' ),
-							'other'			=> __( 'Other' , 'fastfood' ),
+	$hierarchy = array(
+		'style' => array(
+			'label'			=> __( 'Style', 'fastfood' ),
+			'description'	=> '',
+			'sub'			=> array(
+				'colors' => array(
+					'label'			=> __( 'Colors', 'fastfood' ),
+					'description'	=> '',
+					'sub'			=> array(
+						'fastfood_colors',
+					),
+				),
+				'fonts' => array(
+					'label'			=> __( 'Fonts', 'fastfood' ),
+					'description'	=> '',
+					'sub'			=> array(
+						'fastfood_font_family',
+						'fastfood_google_font_family',
+					),
+				),
+				'other' => array(
+					'label'			=> __( 'Other', 'fastfood' ),
+					'description'	=> '',
+					'sub'			=> array(
+						'fastfood_custom_css',
+					),
+				),
+			),
+		),
+		'layout' => array(
+			'label'			=> __( 'Layout', 'fastfood' ),
+			'description'	=> '',
+			'sub'			=> array(
+				'sidebars' => array(
+					'label'			=> __( 'Elements', 'fastfood' ),
+					'description'	=> '',
+					'sub'			=> array(
+						'fastfood_qbar',
+						'fastfood_rsideb',
+						'fastfood_breadcrumb',
+						'fastfood_primary_menu',
+						'fastfood_head',
+						'fastfood_navbuttons',
+						'fastfood_statusbar',
+					),
+				),
+				'mobile' => array(
+					'label'			=> __( 'Mobile', 'fastfood' ),
+					'description'	=> '',
+					'sub'			=> array(
+						'fastfood_responsive_layout',
+						'fastfood_mobile_css',
+					),
+				),
+			),
+		),
+		'contents' => array(
+			'label'			=> __( 'Contents', 'fastfood' ),
+			'description'	=> '',
+			'sub'			=> array(
+				'post_formats' => array(
+					'label'			=> sprintf( '<a href="http://codex.wordpress.org/Post_Formats" target="_blank" title="' . esc_attr__( 'learn more about the post formats', 'fastfood' ) . '">%s</a>', __( 'Post formats', 'fastfood' ) ),
+					'description'	=> __( 'the following options affect only the blog/index view, while in single posts the appearance will be the same', 'fastfood' ),
+					'sub'			=> array(
+						'fastfood_post_formats_standard',
+						'fastfood_post_formats_aside',
+						'fastfood_post_formats_gallery',
+						'fastfood_post_formats_quote',
+						'fastfood_post_formats_status',
+					),
+				),
+				'titles' => array(
+					'label'			=> __( 'Titles', 'fastfood' ),
+					'description'	=> '',
+					'sub'			=> array(
+						'fastfood_manage_blank_title',
+						'fastfood_hide_titles',
+						'fastfood_featured_title',
+					),
+				),
+				'other' => array(
+					'label'			=> __( 'Other', 'fastfood' ),
+					'description'	=> '',
+					'sub'			=> array(
+						'fastfood_xinfos_global',
+						'fastfood_excerpt',
+						'fastfood_the_more_tag',
+					),
+				),
+			),
+		),
+		'features' => array(
+			'label'			=> __( 'Features', 'fastfood' ),
+			'description'	=> '',
+			'sub'			=> array(
+				'javascript' => array(
+					'label'			=> __( 'Javascript', 'fastfood' ),
+					'description'	=> '',
+					'sub'			=> array(
+						'fastfood_jsani',
+						'fastfood_basic_animations',
+						'fastfood_post_expand',
+						'fastfood_gallery_preview',
+						'fastfood_cust_comrep',
+						'fastfood_quotethis',
+						'fastfood_tinynav',
+					),
+				),
+				'other' => array(
+					'label'			=> __( 'Other', 'fastfood' ),
+					'description'	=> '',
+					'sub'			=> array(
+						'fastfood_I_like_it',
+						'fastfood_editor_style',
+						'fastfood_custom_bg',
+						'fastfood_custom_widgets',
+						'fastfood_tbcred',
+					),
+				),
+			),
+		),
 	);
-
-	$fastfood_groups = apply_filters( 'fastfood_options_groups', $fastfood_groups );
+	$hierarchy = apply_filters( 'fastfood_options_hierarchy', $hierarchy );
 
 	$fastfood_coa = array(
 		'fastfood_qbar' => 
 						array(
-							'group'				=> 'quickbar',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'quickbar', 'fastfood' ),
@@ -37,7 +148,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_qbar_user' => 
 						array(
-							'group'				=> 'quickbar',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'user', 'fastfood' ),
@@ -47,7 +157,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_qbar_minilogin' => 
 						array(
-							'group'				=> 'quickbar',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'mini login', 'fastfood' ),
@@ -57,7 +166,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_qbar_reccom' => 
 						array(
-							'group'				=> 'quickbar',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'recent comments', 'fastfood' ),
@@ -67,7 +175,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_qbar_cat' => 
 						array(
-							'group'				=> 'quickbar',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'categories', 'fastfood' ),
@@ -77,7 +184,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_qbar_recpost' => 
 						array(
-							'group'				=> 'quickbar',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'recent posts', 'fastfood' ),
@@ -85,19 +191,9 @@ function fastfood_get_coa( $option = false, $data = false ) {
 							'req'				=> 'fastfood_qbar',
 							'sub'				=> false
 		),
-		'fastfood_post_formats' => 
-						array(
-							'group'				=> 'postformats',
-							'type'				=> 'chk',
-							'default'			=> 1,
-							'description'		=> __( 'post formats support', 'fastfood' ),
-							'info'				=> sprintf ( __( 'enable the %s feature', 'fastfood' ), '<a href="http://codex.wordpress.org/Post_Formats" target="_blank">Post Formats</a>' ),
-							'req'				=> ''
-		),
 		'fastfood_post_formats_standard' => 
 						array(
-							'group'				=> 'postformats',
-							'type'				=> '',
+							'type'				=> 'lbl',
 							'default'			=> 1,
 							'description'		=> sprintf( __( '"%s" format', 'fastfood' ), get_post_format_string( 'standard' ) ),
 							'info'				=> '',
@@ -106,7 +202,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_postexcerpt' => 
 						array(
-							'group'				=> 'postformats',
 							'type'				=> 'sel',
 							'default'			=> 0,
 							'options'			=> array( 0, 1 ),
@@ -118,7 +213,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_post_formats_standard_title' => 
 						array(
-							'group'				=> 'postformats',
 							'type'				=> 'sel',
 							'default'			=> 'post title',
 							'options'			=> array( 'post title', 'post date', 'none' ),
@@ -130,17 +224,15 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_post_formats_gallery' => 
 						array(
-							'group'				=> 'postformats',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> sprintf( __( '"%s" format', 'fastfood' ), get_post_format_string( 'gallery' ) ),
 							'info'				=> '',
-							'req'				=> 'fastfood_post_formats',
+							'req'				=> '',
 							'sub'				=> array( 'fastfood_post_formats_gallery_title', 'fastfood_post_formats_gallery_content' )
 		),
 		'fastfood_post_formats_gallery_title' => 
 						array(
-							'group'				=> 'postformats',
 							'type'				=> 'sel',
 							'default'			=> 'post title',
 							'options'			=> array( 'post title', 'post date', 'none' ),
@@ -152,7 +244,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_post_formats_gallery_content' => 
 						array(
-							'group'				=> 'postformats',
 							'type'				=> 'sel',
 							'default'			=> 'presentation',
 							'options'			=>array( 'presentation', 'content', 'excerpt', 'none' ),
@@ -164,26 +255,23 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_post_formats_quote' => 
 						array(
-							'group'				=> 'postformats',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> sprintf( __( '"%s" format', 'fastfood' ), get_post_format_string( 'quote' ) ),
 							'info'				=> '',
-							'req'				=> 'fastfood_post_formats'
+							'req'				=> '',
 		),
 		'fastfood_post_formats_aside' => 
 						array(
-							'group'				=> 'postformats',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> sprintf( __( '"%s" format', 'fastfood' ), get_post_format_string( 'aside' ) ),
 							'info'				=> '',
-							'req'				=> 'fastfood_post_formats',
+							'req'				=> '',
 							'sub'				=> array( 'fastfood_post_view_aside' )
 		),
 		'fastfood_post_view_aside' => 
 						array(
-							'group'				=> 'postformats',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'show on indexes', 'fastfood' ),
@@ -193,17 +281,15 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_post_formats_status' => 
 						array(
-							'group'				=> 'postformats',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> sprintf( __( '"%s" format', 'fastfood' ), get_post_format_string( 'status' ) ),
 							'info'				=> '',
-							'req'				=> 'fastfood_post_formats',
+							'req'				=> '',
 							'sub'				=> array( 'fastfood_post_view_status' )
 		),
 		'fastfood_post_view_status' => 
 						array(
-							'group'				=> 'postformats',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'show on indexes', 'fastfood' ),
@@ -213,7 +299,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_xinfos_global' => 
 						array(
-							'group'				=> 'content',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'post/page details', 'fastfood' ),
@@ -223,7 +308,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_xinfos_on_list' => 
 						array(
-							'group'				=> 'content',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'in indexes', 'fastfood' ),
@@ -233,7 +317,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_xinfos_on_page' => 
 						array(
-							'group'				=> 'content',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'in pages', 'fastfood' ),
@@ -243,7 +326,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_xinfos_on_post' => 
 						array(
-							'group'				=> 'content',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'in posts', 'fastfood' ),
@@ -253,7 +335,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_xinfos_on_front' => 
 						array(
-							'group'				=> 'content',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'in front page', 'fastfood' ),
@@ -263,7 +344,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_xinfos_static' => 
 						array(
-							'group'				=> 'content',
 							'type'				=> 'chk',
 							'default'			=> 0,
 							'description'		=> __( 'static info', 'fastfood' ),
@@ -273,7 +353,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_xinfos_byauth' => 
 						array(
-							'group'				=> 'content',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'author', 'fastfood' ),
@@ -283,7 +362,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_xinfos_date' => 
 						array(
-							'group'				=> 'content',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'date', 'fastfood' ),
@@ -293,7 +371,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_xinfos_comm' => 
 						array(
-							'group'				=> 'content',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'comments number', 'fastfood' ),
@@ -303,7 +380,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_xinfos_tag' => 
 						array(
-							'group'				=> 'content',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'tags', 'fastfood' ),
@@ -313,7 +389,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_xinfos_cat' => 
 						array(
-							'group'				=> 'content',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'categories', 'fastfood' ),
@@ -323,7 +398,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_xinfos_hiera' => 
 						array(
-							'group'				=> 'content',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'hierarchy', 'fastfood' ),
@@ -333,7 +407,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_jsani' => 
 						array(
-							'group'				=> 'javascript',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'javascript animations', 'fastfood' ),
@@ -342,8 +415,7 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_basic_animations' => 
 						array(
-							'group'				=> 'javascript',
-							'type'				=> '',
+							'type'				=> 'lbl',
 							'default'			=> 1,
 							'description'		=> __( 'basic animations', 'fastfood' ),
 							'info'				=> '',
@@ -352,7 +424,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_basic_animation_main_menu' => 
 						array(
-							'group'				=> 'javascript',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'main menu', 'fastfood' ),
@@ -362,7 +433,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_basic_animation_navigation_buttons' => 
 						array(
-							'group'				=> 'javascript',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'navigation buttons', 'fastfood' ),
@@ -372,7 +442,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_basic_animation_quickbar_tools' => 
 						array(
-							'group'				=> 'javascript',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'quickbar tools', 'fastfood' ),
@@ -382,7 +451,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_basic_animation_quickbar_panels' => 
 						array(
-							'group'				=> 'javascript',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'quickbar panels', 'fastfood' ),
@@ -392,7 +460,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_basic_animation_entry_meta' => 
 						array(
-							'group'				=> 'javascript',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'entry meta', 'fastfood' ),
@@ -402,7 +469,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_basic_animation_smooth_scroll' => 
 						array(
-							'group'				=> 'javascript',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'smooth scroll', 'fastfood' ),
@@ -412,7 +478,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_basic_animation_captions' => 
 						array(
-							'group'				=> 'javascript',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'caption slide', 'fastfood' ),
@@ -422,7 +487,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_I_like_it' => 
 						array(
-							'group'				=> 'javascript',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'I like it', 'fastfood' ),
@@ -431,7 +495,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_post_expand' => 
 						array(
-							'group'				=> 'javascript',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'post expander', 'fastfood' ),
@@ -440,7 +503,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_gallery_preview' => 
 						array(
-							'group'				=> 'javascript',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'thickbox', 'fastfood' ),
@@ -450,7 +512,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_force_link_to_image' => 
 						array(
-							'group'				=> 'javascript',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'gallery links', 'fastfood' ),
@@ -460,7 +521,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_cust_comrep' => 
 						array(
-							'group'				=> 'javascript',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'custom comment form', 'fastfood' ),
@@ -469,7 +529,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_quotethis'=>
 						array( 
-							'group'				=> 'javascript',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'quote link', 'fastfood' ),
@@ -478,7 +537,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 						),
 		'fastfood_tinynav' =>
 						array(
-							'group'				=> 'javascript',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> '<a href="https://github.com/viljamis/TinyNav.js">Tinynav</a>',
@@ -487,8 +545,7 @@ function fastfood_get_coa( $option = false, $data = false ) {
 						),
 		'fastfood_rsideb' => 
 						array(
-							'group'				=> 'quickbar',
-							'type'				=> '',
+							'type'				=> 'lbl',
 							'default'			=> 1,
 							'description'		=> __( 'sidebar', 'fastfood' ),
 							'info'				=> '',
@@ -497,7 +554,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_rsidebindexes' => 
 						array(
-							'group'				=> 'quickbar',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'in indexes', 'fastfood' ),
@@ -507,7 +563,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_rsidebpages' => 
 						array(
-							'group'				=> 'quickbar',
 							'type'				=> 'chk',
 							'default'			=> 0,
 							'description'		=> __( 'in pages', 'fastfood' ),
@@ -517,7 +572,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_rsidebposts' => 
 						array(
-							'group'				=> 'quickbar',
 							'type'				=> 'chk',
 							'default'			=> 0,
 							'description'		=> __( 'in posts', 'fastfood' ),
@@ -527,8 +581,7 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_colors' => 
 						array(
-							'group'				=> 'colors',
-							'type'				=> '',
+							'type'				=> 'lbl',
 							'default'			=> 1,
 							'description'		=> __( 'links colors', 'fastfood' ),
 							'info'				=> '',
@@ -537,7 +590,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_colors_link' => 
 						array(
-							'group'				=> 'colors',
 							'type'				=> 'col',
 							'default'			=> '#D2691E',
 							'description'		=> __( 'links', 'fastfood' ),
@@ -547,7 +599,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_colors_link_hover' => 
 						array(
-							'group'				=> 'colors',
 							'type'				=> 'col',
 							'default'			=> '#FF4500',
 							'description'		=> __( 'highlighted links', 'fastfood' ),
@@ -557,7 +608,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_colors_link_sel' => 
 						array(
-							'group'				=> 'colors',
 							'type'				=> 'col',
 							'default'			=> '#CCCCCC',
 							'description'		=> __( 'selected links', 'fastfood' ),
@@ -567,7 +617,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_breadcrumb' => 
 						array(
-							'group'				=> 'quickbar',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'breadcrumb navigation', 'fastfood' ),
@@ -576,7 +625,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_primary_menu' =>
 						array(
-							'group'				=> 'quickbar',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'primary menu', 'fastfood' ),
@@ -585,7 +633,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 						),
 		'fastfood_manage_blank_title' =>
 						array(
-							'group'				=> 'content',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'blank titles', 'fastfood' ),
@@ -595,7 +642,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 						),
 		'fastfood_blank_title' =>
 						array(
-							'group'				=> 'content',
 							'type'				=> 'txt',
 							'default'			=> __( '(no title)', 'fastfood' ),
 							'description'		=> __( 'format', 'fastfood' ),
@@ -605,7 +651,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 						),
 		'fastfood_featured_title' => 
 						array(
-							'group'				=> 'content',
 							'type'				=> 'chk',
 							'default'			=> 0,
 							'description'		=> __( 'featured titles', 'fastfood' ),
@@ -615,7 +660,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_featured_title_size' => 
 						array(
-							'group'				=> 'content',
 							'type'				=> 'sel',
 							'default'			=> 50,
 							'options'			=> array( 50, 75, 150 ),
@@ -627,47 +671,42 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_hide_titles' =>
 						array(
-							'group'				=> 'content',
-							'type'				=> '',
+							'type'				=> 'lbl',
 							'default'			=> 1,
-							'description'		=> __( 'Hide titles', 'fastfood' ),
-							'info'				=> __( 'Hide posts/pages title in single view', 'fastfood' ),
+							'description'		=> __( 'hide titles', 'fastfood' ),
+							'info'				=> __( 'hide posts/pages title in single view', 'fastfood' ),
 							'req'				=> '',
 							'sub'				=> array( 'fastfood_hide_frontpage_title', 'fastfood_hide_pages_title', 'fastfood_hide_posts_title', 'fastfood_hide_selected_entries_title' )
 						),
 		'fastfood_hide_frontpage_title' =>
 						array(
-							'group'				=> 'content',
 							'type'				=> 'chk',
 							'default'			=> 1,
-							'description'		=> __( 'in front page', 'fastfood' ),
+							'description'		=> __( 'in front page (if a static page is selected)', 'fastfood' ),
 							'info'				=> '',
 							'req'				=> '',
 							'sub'				=> false
 						),
 		'fastfood_hide_pages_title' =>
 						array(
-							'group'				=> 'content',
 							'type'				=> 'chk',
 							'default'			=> 0,
-							'description'		=> __( 'in every page', 'fastfood' ),
+							'description'		=> __( 'in every single page', 'fastfood' ),
 							'info'				=> '',
 							'req'				=> '',
 							'sub'				=> false
 						),
 		'fastfood_hide_posts_title' =>
 						array(
-							'group'				=> 'content',
 							'type'				=> 'chk',
 							'default'			=> 0,
-							'description'		=> __( 'in every post', 'fastfood' ),
+							'description'		=> __( 'in every single post', 'fastfood' ),
 							'info'				=> '',
 							'req'				=> '',
 							'sub'				=> false
 						),
 		'fastfood_hide_selected_entries_title' =>
 						array(
-							'group'				=> 'content',
 							'type'				=> 'txt',
 							'default'			=> '',
 							'description'		=> __( 'in selected posts/pages', 'fastfood' ),
@@ -677,8 +716,7 @@ function fastfood_get_coa( $option = false, $data = false ) {
 						),
 		'fastfood_excerpt' =>
 						array(
-							'group'				=> 'content',
-							'type'				=> '',
+							'type'				=> 'lbl',
 							'default'			=> 1,
 							'description'		=> __( 'content summary', 'fastfood' ),
 							'info'				=> '',
@@ -687,7 +725,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 						),
 		'fastfood_excerpt_lenght' =>
 						array(
-							'group'				=> 'content',
 							'type'				=> 'int',
 							'default'			=> 55,
 							'description'		=> __( 'excerpt length', 'fastfood' ),
@@ -697,7 +734,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 						),
 		'fastfood_excerpt_more_txt' =>
 						array(
-							'group'				=> 'content',
 							'type'				=> 'txt',
 							'default'			=> '[...]',
 							'description'		=> __( '<em>excerpt more</em> string', 'fastfood' ),
@@ -707,7 +743,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 						),
 		'fastfood_excerpt_more_link' =>
 						array(
-							'group'				=> 'content',
 							'type'				=> 'chk',
 							'default'			=> 0,
 							'description'		=> __( '<em>excerpt more</em> linked', 'fastfood' ),
@@ -715,18 +750,44 @@ function fastfood_get_coa( $option = false, $data = false ) {
 							'req'				=> '',
 							'sub'				=> false
 		),
+		'fastfood_the_more_tag' =>
+						array(
+							'type'				=> 'lbl',
+							'default'			=> 1,
+							'description'		=> '<a href="http://support.wordpress.com/splitting-content/more-tag/">' . __( 'The More Tag', 'fastfood' ) . '</a>',
+							'info'				=> '',
+							'req'				=> '',
+							'sub'				=> array( 'fastfood_more_tag', '', 'fastfood_more_tag_scroll', '', 'fastfood_more_tag_always' )
+						),
 		'fastfood_more_tag' =>
 						array(
-							'group'				=> 'content',
 							'type'				=> 'txt',
 							'default'			=> __( '(more...)', 'fastfood' ),
-							'description'		=> __( '"more" tag string', 'fastfood' ),
+							'description'		=> __( 'text', 'fastfood' ),
 							'info'				=> __( 'only plain text. use <code>%t</code> as placeholder for the post title', 'fastfood' ) . ' (<a href="http://codex.wordpress.org/Customizing_the_Read_More" target="_blank">Codex</a>)',
-							'req'				=> ''
+							'req'				=> '',
+							'sub'				=> false
+						),
+		'fastfood_more_tag_scroll' =>
+						array(
+							'type'				=> 'chk',
+							'default'			=> 0,
+							'description'		=> __( 'prevent page scroll', 'fastfood' ),
+							'info'				=> __( 'prevent scroll when clicking the more link', 'fastfood' ),
+							'req'				=> '',
+							'sub'				=> false
+						),
+		'fastfood_more_tag_always' =>
+						array(
+							'type'				=> 'chk',
+							'default'			=> 0,
+							'description'		=> __( 'always visible', 'fastfood' ),
+							'info'				=> __( 'show a link to the page/post even if the "more" tag is not present', 'fastfood' ),
+							'req'				=> '',
+							'sub'				=> false
 						),
 		'fastfood_editor_style' => 
 						array(
-							'group'				=> 'other',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'editor style', 'fastfood' ),
@@ -735,7 +796,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_mobile_css' => 
 						array(
-							'group'				=> 'mobile',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'mobile support', 'fastfood' ),
@@ -745,7 +805,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_mobile_css_color' =>
 						array(
-							'group'				=> 'mobile',
 							'type'				=> 'opt',
 							'default'			=> 'light',
 							'options'			=> array( 'light', 'dark' ),
@@ -757,8 +816,7 @@ function fastfood_get_coa( $option = false, $data = false ) {
 						),
 		'fastfood_head' => 
 						array(
-							'group'				=> 'quickbar',
-							'type'				=> '',
+							'type'				=> 'lbl',
 							'default'			=> 1,
 							'description'		=> __( 'header', 'fastfood' ),
 							'info'				=> '',
@@ -767,7 +825,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_head_h' => 
 						array(
-							'group'				=> 'other',
 							'type'				=> 'sel',
 							'default'			=> '120px',
 							'options'			=> array( '120px', '180px', '240px', '300px' ),
@@ -779,7 +836,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_head_link' => 
 						array(
-							'group'				=> 'other',
 							'type'				=> 'chk',
 							'default'			=> 0,
 							'description'		=> __( 'linked header', 'fastfood' ),
@@ -789,7 +845,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_font_family' => 
 						array(
-							'group'				=> 'colors',
 							'type'				=> 'sel',
 							'default'			=> 'Verdana, Geneva, sans-serif',
 							'description'		=> __( 'font family', 'fastfood' ),
@@ -801,7 +856,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_font_size' => 
 						array(
-							'group'				=> 'colors',
 							'type'				=> 'sel',
 							'default'			=> '11px',
 							'options'			=> array( '9px', '10px', '11px', '12px', '13px', '14px', '15px', '16px' ),
@@ -813,7 +867,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_google_font_family'=>
 						array(
-							'group'				=> 'colors',
 							'type'				=> 'txt',
 							'default'			=> '',
 							'description'		=> __( 'Google web font', 'fastfood' ),
@@ -823,7 +876,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 						),
 		'fastfood_google_font_subset' =>
 						array(
-							'group'				=> 'colors',
 							'type'				=> 'txt',
 							'default'			=> '',
 							'description'		=> __( 'subset', 'fastfood' ),
@@ -833,7 +885,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 						),
 		'fastfood_google_font_body' =>
 						array(
-							'group'				=> 'colors',
 							'type'				=> 'chk',
 							'default'			=> 0,
 							'description'		=> __( 'for whole site', 'fastfood' ),
@@ -843,7 +894,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 						),
 		'fastfood_google_font_post_title' =>
 						array(
-							'group'				=> 'colors',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'for posts/pages title', 'fastfood' ),
@@ -853,7 +903,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 						),
 		'fastfood_google_font_post_content' =>
 						array(
-							'group'				=> 'colors',
 							'type'				=> 'chk',
 							'default'			=> 0,
 							'description'		=> __( 'for posts/pages content', 'fastfood' ),
@@ -863,7 +912,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 						),
 		'fastfood_custom_bg' => 
 						array(
-							'group'				=> 'other',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'custom background', 'fastfood' ),
@@ -872,7 +920,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_navbuttons' => 
 						array(
-							'group'				=> 'quickbar',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'navigation buttons', 'fastfood' ),
@@ -882,7 +929,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_navbuttons_print' => 
 						array(
-							'group'				=> 'quickbar',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'print preview', 'fastfood' ),
@@ -892,7 +938,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_navbuttons_comment' => 
 						array(
-							'group'				=> 'quickbar',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'leave a comment', 'fastfood' ),
@@ -902,7 +947,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_navbuttons_feed' => 
 						array(
-							'group'				=> 'quickbar',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'RSS feed', 'fastfood' ),
@@ -912,7 +956,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_navbuttons_trackback' => 
 						array(
-							'group'				=> 'quickbar',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'trackback', 'fastfood' ),
@@ -922,7 +965,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_navbuttons_home' => 
 						array(
-							'group'				=> 'quickbar',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'home', 'fastfood' ),
@@ -932,7 +974,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_navbuttons_nextprev' => 
 						array(
-							'group'				=> 'quickbar',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'next/previous post', 'fastfood' ),
@@ -942,7 +983,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_navbuttons_newold' => 
 						array(
-							'group'				=> 'quickbar',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'newer/older posts', 'fastfood' ),
@@ -952,7 +992,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_navbuttons_topbottom' => 
 						array(
-							'group'				=> 'quickbar',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'top/bottom', 'fastfood' ),
@@ -962,7 +1001,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_statusbar' => 
 						array(
-							'group'				=> 'quickbar',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'status bar', 'fastfood' ),
@@ -971,7 +1009,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_custom_widgets' => 
 						array(
-							'group'				=> 'other',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'custom widgets', 'fastfood' ),
@@ -980,7 +1017,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_responsive_layout' =>
 						array(
-							'group'				=> 'colors',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'responsive layout', 'fastfood' ),
@@ -989,7 +1025,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_custom_css' =>
 						array(
-							'group'				=> 'colors',
 							'type'				=> 'txtarea',
 							'default'			=> '',
 							'description'		=> __( 'custom CSS code', 'fastfood' ),
@@ -998,7 +1033,6 @@ function fastfood_get_coa( $option = false, $data = false ) {
 		),
 		'fastfood_tbcred' => 
 						array(
-							'group'				=> 'other',
 							'type'				=> 'chk',
 							'default'			=> 1,
 							'description'		=> __( 'theme credits', 'fastfood' ),
@@ -1008,8 +1042,8 @@ function fastfood_get_coa( $option = false, $data = false ) {
 
 	$fastfood_coa = apply_filters( 'fastfood_options_array', $fastfood_coa );
 
-	if ( $option == 'groups' )
-		return $fastfood_groups;
+	if ( $option == 'hierarchy' )
+		return $hierarchy;
 	elseif ( $option )
 		if ( $data )
 			return isset( $fastfood_coa[$option][$data] ) ? $fastfood_coa[$option][$data] : false;
