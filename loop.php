@@ -20,7 +20,7 @@
 
 		<?php fastfood_hook_entry_before(); ?>
 
-		<?php get_template_part( 'loop/post', fastfood_get_post_format( $post->ID ) ); ?>
+		<?php get_template_part( 'post', fastfood_get_post_format( $post->ID ) ); ?>
 
 		<?php fastfood_hook_entry_after(); ?>
 
@@ -30,6 +30,6 @@
 
 <?php } else { ?>
 
-	<?php get_template_part( 'loop/post-none' ); ?>
+	<?php get_template_part( 'post', 'none' ); ?>
 
 <?php } //endif ?>

@@ -6,7 +6,7 @@
 	display: none;
 }
 body {
-	background: #f8f8f8;
+	background: #f8f8f8 !important;
 }
 #main,
 #content {
@@ -15,27 +15,34 @@ body {
 	margin: 0;
 }
 #main {
-	padding: 0 31px 0 0;
+	margin: 0 50px 0 0;
+	border-right: 1px solid #ccc;
 }
 #posts_content {
 	min-height: auto;
+	padding: 0 10px;
 }
-#navbuttons-wrap {
-	border: none;
-	border-left: 1px solid #fff;
-	border-radius: 0;
-	bottom: 0;
-	padding: 2000px 5px 5px;
-	position: fixed;
+#fixedfoot {
 	right: 0;
-	background: #ccc;
+	width: auto;
 }
 #navbuttons {
 	padding: 0;
 	background: transparent;
+	bottom: auto;
+	position: static;
+	right: auto;
 }
 .minibutton .nb_tooltip {
 	display: none !important;
+}
+.minibutton .minib_img {
+	line-height: 2em;
+}
+.minib_img.el-icon-print,
+.minib_img.el-icon-refresh,
+.minib_img.el-icon-rss {
+	display: none;
 }
 .posts_narrow {
 	border: none;
@@ -53,13 +60,24 @@ body {
 	margin-top: 30px;
 }
 #sidebardx .widget,
-#header-widget-area .widget {
-	width: 30%;
-	margin: 20px 1.5%;
+#header-widget-area .widget,
+#footer-widget-area .widget {
 	float: left;
-	padding: 0;
+	width: 50%;
+	padding: 20px 10px;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+	min-height: 0;
 }
-#sidebardx .widget:nth-of-type(3n+1) {
+#footer-widget-area .widget-area {
+	box-sizing: border-box;
+	box-sizing: border-box;
+	float: none;
+	padding: 0;
+	width: 100%;
+}
+#header-widget-area .widget:nth-of-type(2n+1),
+#sidebardx .widget:nth-of-type(2n+1) {
 	clear: left;
 }
 .comment-body .reply {
@@ -79,7 +97,7 @@ body {
 		width: 100%;
 		padding: 5px 5px 5px 20px;
 		border: none;
-		background: url("../images/details.png") no-repeat 5px -1295px #404040;
+		background: #404040;
 		color: #fff;
 		font-weight: bold;
 	}
@@ -93,23 +111,6 @@ body {
 	.tinynav option:first-child {
 		font-weight: bold;
 		margin-bottom:10px;
-	}
-
-}
-@media screen and (max-width: 640px) {
-
-	#header-widget-area .widget:nth-of-type(3n+1),
-	#sidebardx .widget:nth-of-type(3n+1) {
-		clear: none;
-	}
-	#header-widget-area .widget:nth-of-type(2n+1),
-	#sidebardx .widget:nth-of-type(2n+1) {
-		clear: left;
-	}
-	#sidebardx .widget,
-	#header-widget-area .widget {
-		width: 47%;
-		margin: 20px 1.4%;
 	}
 
 }

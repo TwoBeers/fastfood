@@ -1,27 +1,26 @@
 <?php global $post; ?>
-
-<!-- begin footer -->
-				<?php fastfood_hook_footer_before(); ?>
-
-				<div id="footer">
-
-					<?php fastfood_hook_footer_top(); ?>
-
-					<?php wp_nav_menu( array( 'container_class' => 'ff-menu', 'container_id' => 'secondary2', 'fallback_cb' => false, 'theme_location' => 'secondary2', 'depth' => 1 ) ); ?>
-
-					<?php fastfood_get_sidebar( 'footer' ); ?>
-
-					<?php fastfood_credits(); ?>
-
-					<?php fastfood_hook_footer_bottom(); ?>
-
-				</div><!-- close footer -->
-
-				<?php fastfood_hook_footer_after(); ?>
-
+<div class="fixfloat"></div>
 			</div><!-- close content -->
 
-			<?php fastfood_fixed_footer(); ?>
+			<?php fastfood_hook_content_after(); ?>
+
+			<?php fastfood_hook_footer_before(); ?>
+
+			<div id="footer"><!-- begin footer -->
+
+				<?php fastfood_hook_footer_top(); ?>
+
+				<?php wp_nav_menu( array( 'container_class' => 'ff-menu', 'container_id' => 'secondary2', 'fallback_cb' => false, 'theme_location' => 'secondary2', 'depth' => 1 ) ); ?>
+
+				<?php fastfood_get_sidebar( 'footer' ); ?>
+
+				<?php fastfood_credits(); ?>
+
+				<?php fastfood_hook_footer_bottom(); ?>
+
+			</div><!-- close footer -->
+
+			<?php fastfood_hook_footer_after(); ?>
 
 			<?php if ( fastfood_is_printpreview() ) { ?>
 			<div id="close_preview">

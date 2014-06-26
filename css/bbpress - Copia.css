@@ -1094,13 +1094,6 @@ body.my-account #bbpress-forums {
 /* =Theme Compat
 -------------------------------------------------------------- */
 
-#crumbs li a.bbp-breadcrumb-home {
-	background:#ccc url(../images/details.png) no-repeat left -1000px;
-	padding-left:12px;
-}
-#crumbs li a.bbp-breadcrumb-home:hover {
-	background:#ccc url(../images/details.png) no-repeat left -1100px;
-}
 .bbp-breadcrumb {
 	display: none;
 }

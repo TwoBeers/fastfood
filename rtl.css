@@ -6,11 +6,8 @@ body {
 	direction:rtl;
 	unicode-bidi:embed;
 }
-ul {
-	margin: 0 15px 0 0;
-}
 ol {
-	margin: 0 30px 0 0;
+	margin: 0 2em 0 0;
 }
 dd {
 	margin: 0 40px .5em 0;
@@ -24,10 +21,7 @@ blockquote {
 	padding-left: 0;
 }
 .storycontent table {
-    text-align: right;
-}
-.storycontent ul li, .widget ul li {
-    list-style: disc outside url("images/litem_rtl.png");
+	text-align: right;
 }
 input[type=password] {
 	background: #fff url('images/lock.png') right center no-repeat;
@@ -35,33 +29,48 @@ input[type=password] {
 	padding-right: 20px;
 }
 #sidebardx {
+	float: left;
+}
+.storycontent ul li,
+.widget ul li,
+.comment-body ul li {
+	padding: 0 2em 0 0;
+}
+.storycontent ul li:before,
+.widget ul li:before,
+.comment-body ul li:before {
+	margin-left: 0;
+	margin-right: -1em;
+}
+#mainmenu > li li {
+	padding: 0 1.2em 0 0;
+}
+#mainmenu > li li:before {
+	margin-left: 0;
+	margin-right: -1em;
+}
+#mainmenu .menu-item-parent > a:after {
+	padding-left: 0;
+	padding-right: 5px;
+}
+.crumbs > li,
+.crumbs > a,
+.crumbs > span {
 	float: right;
+	border-right: none;
+	border-left: 1px solid #fff;
 }
-.preview p {
-	padding: 0 0 0 20px;
+.crumbs > .bbp-breadcrumb-home:first-child,
+.crumbs > .home:first-child,
+.crumbs.wpseo > span:first-child {
+	margin-left: 0;
+	margin-right: -20px;
 }
-.preview img.wp-post-image {
-	margin: 0 0 0 5px;
-}
-#mainmenu ul.children li,
-#mainmenu ul.sub-menu li {
-	list-style: disc inside url('images/litem_rtl.png');
-	margin: 0 10px 0 0;
-}
-.image_tools .alignleft {
-	text-align: right;
-}
-.image_tools .alignright {
-	text-align: left;
+#content .metafield.metafield-author .metafield_trigger {
+	left: 20px;
 }
 .metafield_content_js {
 	text-align: left;
-}
-#navPages_ul ul.children {
-	padding: 0 0 0 10px;
-}
-#navPages_ul li {
-	list-style: disc inside url('images/litem_rtl.png');
 }
 #header-widget-area .widget {
 	float: left;
@@ -81,21 +90,33 @@ div.ff_widget_latest_commentators ul li {
 .posts_narrow {
 	float: right;
 	border-right: none;
-	border-left: 2px groove #fff;
+	border-left: 1px solid #ccc;
+	padding: 0 0 0 10px;
 }
 .posts_wide {
 	float: left;
 }
-.sticky {
-	margin-left: 0;
-	margin-right: -5px;
+#content .hentry.sticky {
+	margin-right: -20px;
+	margin-left: -10px;
+	padding-right: 20px;
+	padding-left: 10px;
 }
-.dim_cpc {
-	background: transparent url('images/minibuttons.png') right -216px no-repeat;
-	padding: 5px 22px 5px 0;
+.menulcont {
+	margin-right: 50%;
 }
-.comment-body {
-	padding: 3px 40px 3px 3px;
+.preview {
+	padding-left: 1px;
+}
+.preview img.wp-post-image {
+	margin: 0 0 0 5px;
+}
+.preview img.avatar {
+	float: right;
+	margin: 0 0 0.5em 0.5em;
+}
+#logged .avatar {
+	margin: 0 0 0 10px;
 }
 .comment-reply-link {
 	background: url('images/comment_reply.png') no-repeat scroll right center transparent;
@@ -104,26 +125,13 @@ div.ff_widget_latest_commentators ul li {
 ul.children {
 	padding: 0 10px 0 0;
 }
-.nav-previous-comm {
-	float: left;
-}
-.nav-next-comm {
-	float: right;
-}
-.js-res {
-	margin-left: 0;
-	margin-right: -22px;
-}
-.js-res #reply-title {
-	margin: 0 17px 0 0;
-}
 .reply {
 	text-align: left;
 	margin: 0;
 }
 .navigate_comments a, .navigate_comments span {
 	margin-right: 0;
-    margin-left: 0.5em;
+	margin-left: 0.5em;
 }
 .category-gallery .gallery-thumb {
 	float: right;
@@ -145,90 +153,25 @@ img.alignright,
 	margin-left: 0;
 	margin-right: 24px;
 }
-.menulcont li.ql_cat_li:hover {
-	background: #404040 url('images/litem.png') 410px center no-repeat;
-}
-.menulcont li.ql_cat_li {
-	padding-right: 20px;
-}
 .search-form {
-    background: url("images/lens.png") no-repeat scroll 5px center #BEC0BE;
+	background: url("images/lens.png") no-repeat scroll 5px center #BEC0BE;
 }
-.meta_container {
-	margin: 0 0 10px 12px;
-}
-.ff_widget_popular_posts li.li-with-thumbs,
-.ff_widget_recent_entries li.li-with-thumbs,
-.ff_widget_latest_commented_posts li.li-with-thumbs {
-	padding: 0 46px 0 0;
-}
-.ff_widget_popular_posts .post-thumb,
-.ff_widget_popular_posts img,
-.ff_widget_recent_entries .post-thumb,
-.ff_widget_recent_entries img,
-.ff_widget_latest_commented_posts .post-thumb,
-.ff_widget_latest_commented_posts img {
-	left: auto;
-	right: 0;
-}
-#crumbs ul {
-	background:#404040 url(images/breadcrumb-rtl.png) no-repeat left -200px;
-	padding:0 0 0 7px;
-}
-#crumbs ul,
-#crumbs li {
-	float:right;
-}
-#crumbs li a,
-#crumbs li span {
-	padding:4px 19px 5px 10px;
-}
-#crumbs li {
-	background:#ccc url(images/breadcrumb-rtl.png) no-repeat right -100px;
-}
-#crumbs li.first a {
-	background:#ccc url(images/breadcrumb-rtl.png) no-repeat right -300px;
-	padding:4px 12px 5px 10px;
-}
-#crumbs li.first a:hover {
-	background:#ccc url(images/breadcrumb-rtl.png) no-repeat right -400px;
-}
-#crumbs li.last {
-	background:#404040 url(images/breadcrumb-rtl.png) no-repeat right 0;
-}
-#crumbs li .crumb-cat,
-#crumbs li .crumb-tag,
-#crumbs li .crumb-date,
-#crumbs li .crumb-auth {
-	padding:4px 12px 5px 34px;
+.widget .tbm-format,
+.widget.tb_popular_posts img,
+.widget.tb_recent_entries img,
+.widget.tb_latest_commented_posts img {
+	margin-right: 0;
+	margin-left: 5px;
 }
 #TB_window img#TB_Image {
-	margin: 15px 15px 0 0;
+	margin: 14px 14px 14px 0;
 }
-#TB_next a, #TB_prev a {
-    color: transparent !important;
+.minibutton .nb_tooltip:after {
+	content: "";
 }
-#TB_caption {
-    float: right;
+.minibutton .nb_tooltip:before {
+	content: "‹";
+	display: inline-block;
+	font-weight: bold;
+	width: 1em;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

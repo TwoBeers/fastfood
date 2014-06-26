@@ -39,29 +39,21 @@
 
 				<div <?php post_class() ?> id="post-<?php the_ID(); ?>">
 
-					<div class="content-wrap">
+					<div class="storytitle">
 
-						<div class="storytitle">
+						<span><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php bloginfo( 'name' ); ?></a></span>
 
-							<span><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php bloginfo( 'name' ); ?></a></span>
-
-							<h1><?php the_title(); ?></h1>
-
-						</div>
-
-						<div class="storycontent">
-
-							<?php echo nl2br( get_the_content() ); ?>
-
-						</div>
-
-						<div class="storyshare">
-
-							<?php fastfood_share_this(); ?>
-
-						</div>
+						<h1><?php the_title(); ?></h1>
 
 					</div>
+
+					<div class="storycontent">
+
+						<?php echo nl2br( get_the_content() ); ?>
+
+					</div>
+
+					<?php fastfood_hook_entry_bottom(); ?>
 
 				</div>
 

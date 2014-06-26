@@ -27,7 +27,7 @@ class fastfood_Mobile {
 
 	function get_option ( $option ) {
 
-		return fastfood_get_opt( $option );
+		return FastfoodOptions::get_opt( $option );
 
 	}
 

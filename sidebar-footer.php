@@ -24,8 +24,6 @@
 
 	<?php fastfood_hook_sidebar_top( 'footer' ); ?>
 
-	<br class="fixfloat" />
-
 	<div id="first_fwa" class="widget-area">
 			<?php if ( is_active_sidebar( 'first-footer-widget-area' ) ) dynamic_sidebar( 'first-footer-widget-area' ); ?>
 	</div><!-- #first .widget-area -->
@@ -37,8 +35,6 @@
 	<div id="third_fwa" class="widget-area">
 			<?php if ( is_active_sidebar( 'third-footer-widget-area' ) ) dynamic_sidebar( 'third-footer-widget-area' ); ?>
 	</div><!-- #third .widget-area -->
-
-	<br class="fixfloat" />
 
 	<?php fastfood_hook_sidebar_bottom( 'footer' ); ?>
 

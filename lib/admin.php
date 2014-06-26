@@ -27,7 +27,7 @@ add_filter( 'user_contactmethods',			'fastfood_new_contactmethods',10,1 );
 // check and set default options 
 function fastfood_default_options() {
 
-		$the_coa = fastfood_get_coa();
+		$the_coa = FastfoodOptions::get_coa();
 		$the_opt = get_option( 'fastfood_options' );
 
 		// if options are empty, sets the default values
@@ -56,7 +56,7 @@ function fastfood_default_options() {
 // print a reminder message for set the options after the theme is installed or updated
 function fastfood_setopt_admin_notice() {
 
-	if ( current_user_can( 'manage_options' ) && ( fastfood_get_opt( 'version' ) < fastfood_get_info( 'version' ) ) ) {
+	if ( current_user_can( 'manage_options' ) && ( FastfoodOptions::get_opt( 'version' ) < fastfood_get_info( 'version' ) ) ) {
 		echo '<div class="updated"><p><strong>' . sprintf( __( "%s theme says: Dont forget to set <a href=\"%s\">my options</a>!", 'fastfood' ), 'Fastfood', get_admin_url() . 'themes.php?page=fastfood_theme_options' ) . '</strong></p></div>';
 	}
 
@@ -66,7 +66,7 @@ function fastfood_setopt_admin_notice() {
 // the custon header style - called only on your theme options page
 function fastfood_theme_admin_styles() {
 
-	wp_enqueue_style( 'fastfood-options', get_template_directory_uri() . '/css/options.css', array('farbtastic','thickbox'), '', 'screen' );
+	wp_enqueue_style( 'fastfood-options', get_template_directory_uri() . '/css/options.css', array(), '', 'screen' );
 
 }
 
@@ -74,7 +74,7 @@ function fastfood_theme_admin_styles() {
 // sanitize options value
 function fastfood_sanitize_options($input) {
 
-	$the_coa = fastfood_get_coa();
+	$the_coa = FastfoodOptions::get_coa();
 
 	foreach ( $the_coa as $key => $val ) {
 
@@ -113,6 +113,10 @@ function fastfood_sanitize_options($input) {
 				$input[$key] = $the_coa[$key]['default'];
 			} else {
 				$input[$key] = (int) $input[$key] ;
+			}
+			if( isset( $the_coa[$key]['range'] ) ) {
+				$input[$key] = min( $input[$key], $the_coa[$key]['range'][1] );
+				$input[$key] = max( $input[$key], $the_coa[$key]['range'][0] );
 			}
 
 		} elseif( $the_coa[$key]['type'] == 'txtarea' ) {					//TXTAREA
@@ -204,8 +208,8 @@ if ( !function_exists( 'fastfood_edit_options' ) ) {
 
 		global $fastfood_opt;
 
-		$the_coa = fastfood_get_coa();
-		$the_hierarchy = fastfood_get_coa( 'hierarchy' );
+		$the_coa = FastfoodOptions::get_coa();
+		$the_hierarchy = FastfoodOptions::get_hierarchy();
 		$the_option_name = 'fastfood_options';
 
 		if ( isset( $_GET['erase'] ) ) {
@@ -241,7 +245,7 @@ if ( !function_exists( 'fastfood_edit_options' ) ) {
 		<div id="theme_donation">
 			<small><?php _e( 'Our developers need coffee (and beer). How about a small donation?', 'fastfood' ); ?></small>
 			<br />
-			<a href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5FWKWFH62RRC8"><img src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" alt="PayPal - The safer, easier way to pay online."/></a>
+			<a target="_blank" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=5FWKWFH62RRC8"><img src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" alt="PayPal - The safer, easier way to pay online."/></a>
 		</div>
 
 		<h2 id="tabselector" class="nav-tab-wrapper">
@@ -288,8 +292,6 @@ if ( !function_exists( 'fastfood_edit_options' ) ) {
 													break;
 
 												case 'url':
-													if ( $key == 'fastfood_logo' )
-														$after = '<a id="choose-logo-from-library-link" class="button hide-if-no-js" data-choose="' . esc_attr__( 'Choose a Logo Image' , 'fastfood' ) . '" data-update="' . esc_attr__( 'Set as logo' , 'fastfood' ) . '">' . __( 'Choose Image' , 'fastfood' ) . '</a>';
 													fastfood_print_option( $the_coa[$key], $the_opt[$key], false, $the_option_name, $key , '<span class="column-nam">' . $the_coa[$key]['description'] . '</span>', $after );
 													break;
 
@@ -355,8 +357,6 @@ if ( !function_exists( 'fastfood_edit_options' ) ) {
 																	break;
 
 																case 'url':
-																	if ( $subkey == 'fastfood_logo' )
-																		$after = '<a id="choose-logo-from-library-link" class="button hide-if-no-js" data-choose="' . esc_attr__( 'Choose a Logo Image' , 'fastfood' ) . '" data-update="' . esc_attr__( 'Set as logo' , 'fastfood' ) . '">' . __( 'Choose Image' , 'fastfood' ) . '</a>' . $after;
 																	fastfood_print_option( $the_coa[$subkey], $the_opt[$subkey], false, $the_option_name, $subkey , '<span>' . $the_coa[$subkey]['description'] . ' : </span>', $after );
 																	break;
 
@@ -412,17 +412,16 @@ if ( !function_exists( 'fastfood_edit_options' ) ) {
 					<br />
 					-
 					<br />
-					<a class="button" href="themes.php?page=fastfood_functions" target="_self"><?php _e( 'Undo Changes' , 'fastfood' ); ?></a>
+					<a class="button" href="themes.php?page=fastfood_theme_options" target="_self"><?php _e( 'Undo Changes' , 'fastfood' ); ?></a>
 					<br />
 					-
 					<br />
-					<a class="button" id="to-defaults" href="themes.php?page=fastfood_functions&erase=1" target="_self"><?php _e( 'Back to defaults' , 'fastfood' ); ?></a>
+					<a class="button" id="to-defaults" href="themes.php?page=fastfood_theme_options&erase=1" target="_self"><?php _e( 'Back to defaults' , 'fastfood' ); ?></a>
 				</div>
 			</form>
 			<div id="theme_bottom">
 				<small>
-					<?php _e( 'If you like/dislike this theme, or if you encounter any issues using it, please let us know it.', 'fastfood' ); ?><br />
-					<a href="<?php echo esc_url( 'http://www.twobeers.net/annunci/tema-per-wordpress-fastfood' ); ?>" title="fastfood theme" target="_blank"><?php _e( 'Leave a feedback', 'fastfood' ); ?></a>
+					<?php _e( 'If you like/dislike this theme, or if you encounter any issues using it, please let us know it.', 'fastfood' ); ?> <a href="<?php echo esc_url( 'http://www.twobeers.net/annunci/tema-per-wordpress-fastfood' ); ?>" title="fastfood theme" target="_blank"><?php _e( 'Leave a feedback', 'fastfood' ); ?></a>
 				</small>
 				<br />
 				-

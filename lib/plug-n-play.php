@@ -24,6 +24,8 @@ class Fastfood_For_Jetpack {
 	/* initialize Jetpack support */
 	function init() {
 
+		if ( ! class_exists( 'Jetpack' ) ) return;
+
 		if ( fastfood_is_mobile() ) return;
 
 		//Infinite Scroll
@@ -33,26 +35,25 @@ class Fastfood_For_Jetpack {
 			'render'		=> array( $this, 'infinite_scroll_render' ),
 			'wrapper'		=> false,
 		) );
-		if ( class_exists( 'The_Neverending_Home_Page' ) ) {
-			add_filter		( 'infinite_scroll_results'		, array( $this, 'infinite_scroll_encode' ), 11, 1 );
+		if ( Jetpack::is_module_active( 'infinite-scroll' ) ) {
+			//add_filter		( 'infinite_scroll_results'		, array( $this, 'infinite_scroll_encode' ), 11, 1 );
+			remove_action( 'fastfood_hook_loop_after'						, 'fastfood_navigate_archives' );
 		}
 
 		//Sharedaddy
-		if ( function_exists( 'sharing_display' ) ) {
+		if ( Jetpack::is_module_active( 'sharedaddy' ) ) {
 			remove_filter	( 'the_content'									, 'sharing_display', 19 );
 			remove_filter	( 'the_excerpt'									, 'sharing_display', 19 );
-			remove_action	( 'fastfood_hook_entry_before'					, 'fastfood_I_like_it' );
 			add_action		( 'fastfood_hook_entry_bottom'					, array( $this, 'sharedaddy' ) );
 		}
 
 		//Carousel
-		if ( class_exists( 'Jetpack_Carousel' ) ) {
-			remove_filter	( 'post_gallery'								, 'fastfood_gallery_shortcode', 10, 2 );
+		if ( Jetpack::is_module_active( 'carousel' ) ) {
 			add_filter		( 'fastfood_option_fastfood_gallery_preview'	, '__return_false' );
 		}
 
 		//Likes
-		if ( class_exists( 'Jetpack_Likes' ) ) {
+		if ( Jetpack::is_module_active( 'likes' ) ) {
 			add_action		( 'fastfood_hook_entry_bottom'					, array( $this, 'likes' ) );
 			remove_filter	( 'the_content'									, array( Jetpack_Likes::init(), 'post_likes' ), 30, 1);
 			add_filter		( 'fastfood_filter_likes'						, array( Jetpack_Likes::init(), 'post_likes' ), 30, 1);
@@ -121,10 +122,9 @@ class Fastfood_bbPress {
 
 		if ( ! is_bbpress() ) return;
 
-		add_filter( 'fastfood_filter_breadcrumb'				, array( $this, 'breadcrumb' ) );
-		add_filter( 'bbp_breadcrumb_separator'					, array( $this, 'breadcrumb_sep' ) );
+		add_filter( 'fastfood_breadcrumb'				, array( $this, 'breadcrumb' ) );
+		//add_filter( 'bbp_breadcrumb_separator'					, array( $this, 'breadcrumb_sep' ) );
 		add_filter( 'fastfood_option_fastfood_xinfos_global'	, '__return_false' );
-		add_filter( 'fastfood_option_fastfood_I_like_it'		, '__return_false' );
 		add_filter( 'fastfood_filter_navbuttons'				, array( $this, 'navbuttons' ) );
 		add_filter( 'fastfood_use_sidebar'						, array( $this, 'show_sidebar' ) );
 		add_filter( 'fastfood_skip_post_widgets_area'			, '__return_true' );
@@ -137,11 +137,9 @@ class Fastfood_bbPress {
 	function breadcrumb() {
 
 		$args = array(
-			'before'		=> '<div id="crumbs" class="breadcrumb-navigation"><ul>',
-			'after'			=> '<br class="fixfloat" /></ul></div>',
-			'crumb_before'	=> '<li>',
-			'crumb_after'	=> '</li>',
-			'home_text'		=> '&nbsp;',
+			'before'	=> '<div class="crumbs">',
+			'after'		=> '</div>',
+			'home_text'	=> '<i class="el-icon-home"></i><span class="screen-reader-text">Home</span>',
 		);
 
 		if ( bbp_is_user_home() )
@@ -177,7 +175,7 @@ class Fastfood_bbPress {
 
 	function show_sidebar( $bool ) {
 
-		if ( ! fastfood_get_opt( 'fastfood_rsideb_bbpress' ) )
+		if ( ! FastfoodOptions::get_opt( 'fastfood_rsideb_bbpress' ) )
 			$bool = false;
 
 		return $bool;
@@ -222,7 +220,6 @@ class Fastfood_BuddyPress {
 		if ( ! is_buddypress() ) return;
 
 		add_filter( 'fastfood_option_fastfood_xinfos_global'		, '__return_false' );
-		add_filter( 'fastfood_option_fastfood_I_like_it'			, '__return_false' );
 		add_filter( 'fastfood_option_fastfood_hide_frontpage_title'	, '__return_false' );
 		add_filter( 'fastfood_skip_post_widgets_area'				, '__return_true' );
 		add_filter( 'fastfood_use_sidebar'							, array( $this, 'show_sidebar' ) );
@@ -262,7 +259,7 @@ class Fastfood_BuddyPress {
 
 	function show_sidebar( $bool ) {
 
-		if ( ! fastfood_get_opt( 'fastfood_rsideb_buddypress' ) )
+		if ( ! FastfoodOptions::get_opt( 'fastfood_rsideb_buddypress' ) )
 			$bool = false;
 
 		return $bool;
@@ -271,7 +268,7 @@ class Fastfood_BuddyPress {
 
 	function show_title( $title ) {
 
-		if ( fastfood_get_opt( 'fastfood_hide_buddypress_title' ) )
+		if ( FastfoodOptions::get_opt( 'fastfood_hide_buddypress_title' ) )
 			$title = '';
 
 		return $title;
@@ -291,3 +288,191 @@ class Fastfood_BuddyPress {
 }
 
 new Fastfood_BuddyPress;
+
+
+/**
+ * Functions and hooks for Breadcrumb NavXT integration
+ */
+class Fastfood_For_NavXT {
+
+	function __construct() {
+
+		add_filter( 'fastfood_breadcrumb'	, array( $this, 'display_breadcrumb' ), 10, 2 );
+
+	}
+
+	function display_breadcrumb( $output, $base_link ) {
+
+		if ( function_exists( 'bcn_display_list' ) ) {
+
+			$base_link = '<li class="home">' . $base_link . '</li>';
+
+			$output = '<ul class="crumbs navxt">' . $base_link . bcn_display_list( $return = true ) . '</ul>';
+
+		}
+
+		return $output;
+
+	}
+
+}
+
+new Fastfood_For_NavXT;
+
+
+/**
+ * Functions and hooks for Yoast Breadcrumbs integration
+ */
+class Fastfood_For_Yoast_Breadcrumbs {
+
+	function __construct() {
+
+		add_filter( 'wpseo_breadcrumb_output_wrapper'	, array( $this, 'breadcrumb_output_wrapper' ) );
+		add_filter( 'wpseo_breadcrumb_output_class'		, array( $this, 'breadcrumb_output_class' ) );
+		add_filter( 'wpseo_breadcrumb_separator'		, array( $this, 'breadcrumb_separator' ) );
+		add_filter( 'wpseo_breadcrumb_links'			, array( $this, 'breadcrumb_links' ) );
+		add_filter( 'fastfood_breadcrumb'				, array( $this, 'display_breadcrumb' ), 10, 2 );
+
+	}
+
+	function breadcrumb_output_wrapper( $data ) {
+
+		return 'div';
+
+	}
+
+	function breadcrumb_output_class( $data ) {
+
+		return 'crumbs wpseo';
+
+	}
+
+	function breadcrumb_separator( $data ) {
+
+		return '<span class="delimiter">'. $data . '</span>';
+
+	}
+
+	function breadcrumb_links( $data ) {
+
+		$home = array(
+			'text'			=> '<i class="el-icon-home"></i><span class="screen-reader-text">Home</span>',
+			'url'			=> home_url( '/' ),
+			'allow_html'	=> true,
+		);
+		$i = array_unshift( $data, $home );
+		if ( isset( $data[ $i - 1 ]['text'] ) )
+			$data[ $i - 1 ]['text'] = '<i class="el-icon-placeholder"></i>' . $data[ $i - 1 ]['text'];
+		return $data;
+
+	}
+
+	function display_breadcrumb( $output, $base_link ) {
+
+		if ( function_exists( 'yoast_breadcrumb' ) ) {
+
+			$_output = yoast_breadcrumb( '', '', false );
+
+			if ( $_output )
+				$output = $_output ;
+
+		}
+
+		return $output;
+
+	}
+
+}
+
+new Fastfood_For_Yoast_Breadcrumbs;
+
+
+/**
+ * Functions and hooks for WP Paginate integration
+ */
+class Fastfood_For_WP_Paginate {
+
+	function __construct() {
+
+		add_action( 'wp_print_styles', array( $this, 'dequeue_style' ), 99 );
+
+		add_filter( 'fastfood_filter_navigation_comments'	, array( $this, 'navigate_comments' ) );
+		add_filter( 'fastfood_filter_navigation_archives'	, array( $this, 'navigate_archives' ) );
+
+	}
+
+	function dequeue_style() {
+
+		wp_dequeue_style( 'wp-paginate' );
+
+	}
+
+	function navigate_comments( $bool ) {
+
+		if ( function_exists( 'wp_paginate_comments' ) ) {
+
+			wp_paginate_comments();
+
+			$bool = true;
+
+		}
+
+		return $bool;
+
+	}
+
+	function navigate_archives( $bool ) {
+
+		if ( function_exists( 'wp_paginate' ) ) {
+
+			wp_paginate();
+
+			$bool = true;
+
+		}
+
+		return $bool;
+
+	}
+
+}
+
+new Fastfood_For_WP_Paginate;
+
+
+/**
+ * Functions and hooks for WP-Pagenavi integration
+ */
+class Fastfood_For_WP_Pagenavi {
+
+	function __construct() {
+
+		add_action( 'wp_print_styles', array( $this, 'dequeue_style' ), 99 );
+
+		add_filter( 'fastfood_filter_navigation_archives', array( $this, 'navigate_archives' ) );
+
+	}
+
+	function dequeue_style() {
+
+		wp_dequeue_style( 'wp-pagenavi' );
+
+	}
+
+	function navigate_archives( $bool ) {
+
+		if ( function_exists( 'wp_pagenavi' ) ) {
+
+			wp_pagenavi();
+
+			$bool = true;
+
+		}
+
+		return $bool;
+
+	}
+
+}
+
+new Fastfood_For_WP_Pagenavi;

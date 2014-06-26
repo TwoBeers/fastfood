@@ -16,7 +16,7 @@ add_action( 'after_setup_theme', 'fastfood_custom_background_init' );
 // set up custom colors and header image
 function fastfood_custom_background_init() {
 
-	if ( fastfood_get_opt('fastfood_custom_bg' ) ) {
+	if ( FastfoodOptions::get_opt('fastfood_custom_bg' ) ) {
 
 		add_action( 'wp_head',			'fastfood_custom_background_style' );
 		add_action( 'admin_bar_menu',	'fastfood_custom_background_admin_bar', 998 );
@@ -50,7 +50,20 @@ function fastfood_custom_background_style() {
 
 	if ( ! $background && ! $color ) return;
 
-	$style = $color ? "background-color: #$color;" : '';
+	$style = '';
+	$iconfont_color = '404040';
+
+	if ( $color ) {
+
+		$style = "background-color: #$color;";
+
+		$r = hexdec( substr( $color, 0, 2 ) );
+		$g = hexdec( substr( $color, 2, 2) );
+		$b = hexdec( substr( $color, 4, 2) );
+		$yiq = ( ( $r*299 )+( $g*587 )+( $b*114 ) )/1000;
+		$iconfont_color = ( $yiq >= 120 ) ? '404040' : 'FFFFFF';
+
+	}
 
 	if ( $background ) {
 
@@ -81,6 +94,7 @@ function fastfood_custom_background_style() {
 ?>
 	<style type="text/css">
 		body { <?php echo trim( $style ); ?> }
+		.menuitem .itemimg, .menuitem .itemimg_js, .minibutton .minib_img { color: #<?php echo trim( $iconfont_color ); ?> }
 	</style>
 <?php
 
@@ -279,7 +293,7 @@ class Fastfood_Custom_Background {
 				'position_y'		=> 'top',
 				'repeat'			=> 'repeat',
 				'attach'			=> 'fixed',
-				'color'				=> '#000000'
+				'color'				=> '#343027'
 			),
 			'greenwave' => array(
 				'url'				=> '%s/images/backgrounds/greenwave.jpg',
@@ -309,7 +323,7 @@ class Fastfood_Custom_Background {
 				'position_y'		=> 'top',
 				'repeat'			=> 'repeat',
 				'attach'			=> 'scroll',
-				'color'				=> '#000000'
+				'color'				=> '#EEE5D2'
 			),
 			'squarednight' => array(
 				'url'				=> '%s/images/backgrounds/squarednight.jpg',
@@ -321,16 +335,6 @@ class Fastfood_Custom_Background {
 				'attach'			=> 'scroll',
 				'color'				=> '#0E111A'
 			),
-			'cork' => array(
-				'url'				=> '%s/images/backgrounds/cork.jpg',
-				'thumbnail_url'		=> '%s/images/backgrounds/cork-thumbnail.jpg',
-				'description'		=> __( 'Cork', 'fastfood' ),
-				'position_x'		=> 'left',
-				'position_y'		=> 'top',
-				'repeat'			=> 'repeat',
-				'attach'			=> 'fixed',
-				'color'				=> '#000000'
-			),
 			'yellow' => array(
 				'url'				=> '%s/images/backgrounds/yellow.jpg',
 				'thumbnail_url'		=> '%s/images/backgrounds/yellow-thumbnail.jpg',
@@ -339,7 +343,7 @@ class Fastfood_Custom_Background {
 				'position_y'		=> 'top',
 				'repeat'			=> 'repeat',
 				'attach'			=> 'scroll',
-				'color'				=> '#000000'
+				'color'				=> '#F7DE5F'
 			),
 			'clouds' => array(
 				'url'				=> '%s/images/backgrounds/clouds.jpg',

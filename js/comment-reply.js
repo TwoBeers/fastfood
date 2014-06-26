@@ -49,10 +49,13 @@ fastfoodCustomReply = {
 			post.value = postId;
 		parent.value = parentId;
 		
-		replytitle.innerHTML = fastfood_comment_reply_l10n.replytocomment;
+		replytitle.innerHTML = fastfood_comment_reply_l10n.replytocomment + t.addCloseButton();
 		replytitle.appendChild(cancel);
-		
-		respond.style.display = "block";
+
+		$('#respond').css({'display' : 'block' , 'opacity' : 0 }).animate(
+			{ 'opacity' : 1 , 'margin-top' : 0 },
+			500
+		);
 
 		cancel.onclick = function() {
 			var t = fastfoodCustomReply, respond = t.I(t.respondId);
@@ -80,7 +83,7 @@ fastfoodCustomReply = {
 
 		if ( parent ) parent.value = '0';
 		cancel.onclick = null;
-		respond.style.display = "none";
+		$('#respond').css({ 'display' : 'none' , 'opacity' : 0, 'margin-top' : 20 });
 		respond.className = 'js-res';
 		return false;
 	},
@@ -91,12 +94,11 @@ fastfoodCustomReply = {
 		if ( ! respond || ! cancel || ! replytitle)
 			return false;
 		this.resetForm();
-		replytitle.innerHTML = fastfood_comment_reply_l10n.replytopost;
+		replytitle.innerHTML = fastfood_comment_reply_l10n.replytopost + t.addCloseButton();
 		replytitle.appendChild(cancel);
-		$('#respond').css({'display' : 'block' }).animate(
+		$('#respond').css({'display' : 'block' , 'opacity' : 0 }).animate(
 			{ 'opacity' : 1 , 'margin-top' : 0 },
-			200,
-			'easeOutBack'
+			500
 		);
 		
 		try { t.I('comment').focus(); }
@@ -104,18 +106,15 @@ fastfoodCustomReply = {
 
 		return false;
 	},
-	
+
 	addCloseButton : function() {
 		var t = this, respond = t.I('respond'), replytitle = t.I('reply-title');
 
 		if ( ! respond || ! replytitle )
-			return;
-		if ( ! t.I('ff_reply_close') ) {
-			div = document.createElement('div');
-			div.id = 'ff_reply_close';
-			div.innerHTML = '<input type="button" title="' + fastfood_comment_reply_l10n.close + '" value="" onclick="return fastfoodCustomReply.resetForm()" />';
-			respond.insertBefore(div, replytitle);
-		}
+			return '';
+
+		return '<i id="ff_reply_close" class="el-icon-remove" title="' + fastfood_comment_reply_l10n.close + '" onclick="return fastfoodCustomReply.resetForm()" ></i>';
+
 	},
 	
 	I : function(e) {

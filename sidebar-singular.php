@@ -23,11 +23,7 @@
 
 	<?php fastfood_hook_sidebar_top( 'singular' ); ?>
 
-	<br class="fixfloat" />
-
 	<?php dynamic_sidebar( 'post-widgets-area' ); ?>
-
-	<br class="fixfloat" />
 
 	<?php fastfood_hook_sidebar_bottom( 'singular' ); ?>
 

@@ -71,12 +71,15 @@ img {
 #edit_link,
 #fixedfoot,
 body #wpadminbar,
-.breadcrumb-navigation {
+.breadcrumb-navigation,
+.crumbs,
+[class*="el-icon-"] {
 	display: none;
 }
 .metafield div {
 	height: auto !important;
 	overflow: visible !important;
+	display: inline !important;
 }
 .meta,
 .comment-meta,
@@ -118,7 +121,7 @@ body #wpadminbar,
 }
 div#header {
 	background: transparent;
-	min-height: 0;
+	height: auto;
 }
 .wp-caption {
 	max-width: 100%;

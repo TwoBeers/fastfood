@@ -14,43 +14,37 @@
 
 <?php fastfood_hook_comments_before(); ?>
 
+<div id="comments">
+
 <?php
 	if ( post_password_required() ) {
-		echo '<div class="comment_tools" id="comments">' . __( 'Enter your password to view comments.','fastfood' ) . '</div>';
-		return;
+
+		echo '<div class="comment_tools">' . __( 'Enter your password to view comments.','fastfood' ) . '</div>';
+
+	} elseif ( comments_open() ) {
+
+		echo '<div class="comment_tools">';
+		comments_number( __( 'No Comments','fastfood' ), __( '1 Comment','fastfood' ), __( '% Comments','fastfood' ) );
+		echo sprintf( '<span class="hide_if_print"> - <a class="show_comment_form" href="#respond" title="%s">%s</a></span>',
+			esc_attr__( 'Leave a comment', 'fastfood' ),
+			esc_html__( 'Leave a comment', 'fastfood' )
+		);
+		echo '</div>';
+
+	} elseif ( have_comments() ) {
+
+		echo '<div class="comment_tools">';
+		comments_number( __( 'No Comments','fastfood' ), __( '1 Comment','fastfood' ), __( '% Comments','fastfood' ) );
+		echo '</div>';
+
 	}
 ?>
 
-
-<?php if ( comments_open() ) { ?>
-
-	<div id="comments" class="comment_tools">
-		<?php comments_number( __( 'No Comments','fastfood' ), __( '1 Comment','fastfood' ), __( '% Comments','fastfood' ) ); ?><span class="hide_if_print"> - <a class="show_comment_form" href="#respond" title="<?php esc_attr_e( "Leave a comment",'fastfood' ); ?>"><?php _e( "Leave a comment",'fastfood' ); ?></a></span>
-	</div>
-
-<?php } elseif ( have_comments() ) { ?>
-
-	<div id="comments" class="comment_tools">
-		<?php comments_number( __( 'No Comments','fastfood' ), __( '1 Comment','fastfood' ), __( '% Comments','fastfood' ) ); ?>
-	</div>
-
-<?php } ?>
-
-<?php if ( have_comments() ) { ?>
-
-	<?php fastfood_hook_comments_list_before(); ?>
-
-	<ol id="commentlist">
-		<?php wp_list_comments(); ?>
-	</ol>
-
-	<?php fastfood_hook_comments_list_after(); ?>
-
-<?php } ?>
+<?php get_template_part( 'comments-list' ); ?>
 
 <?php comment_form();  ?>
 
-<br class="fixfloat" />
+</div>
 
 <?php fastfood_hook_comments_after(); ?>
 

@@ -15,7 +15,7 @@
 
 	<div class="quote-cont">
 
-		<div class="format-icon-32"></div>
+		<i class="el-icon-quotes"></i>
 
 		<?php the_content(); ?>
 

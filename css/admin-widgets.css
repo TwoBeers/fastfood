@@ -6,7 +6,8 @@
 #third-footer-widget-area:before,
 #header-widget-area:before,
 #error404-widgets-area:before,
-#post-widgets-area:before {
+#post-widgets-area:before,
+#tbm-widget-area:before {
 	content: ' ';
 	display: block;
 	width: 24px;
@@ -14,9 +15,8 @@
 	background: url("../images/widgets/icons-sprite.png") no-repeat center transparent;
 	margin: 10px auto;
 }
-
 #primary-widget-area:before {
-	background-position: -35px bottom;
+	background-position: -40px -20px;
 }
 #first-footer-widget-area:before {
 	background-position: -25px bottom;
@@ -28,7 +28,7 @@
 	background-position: -15px bottom;
 }
 #header-widget-area:before {
-	background-position: -25px -15px;
+	background-position: -15px -15px;
 }
 #post-widgets-area:before {
 	background-position: -25px -5px;
@@ -36,13 +36,16 @@
 #error404-widgets-area:before {
 	background-position: left bottom;
 }
-#tbm-widget-area {
-	background: url("../images/widgets/mobwig.png") no-repeat center 10px transparent;
-	padding-top: 80px;
+#tbm-widget-area:before {
+	background: url("../images/widgets/mobile.png") no-repeat center transparent;
 }
 div[id*=_ff-] .widget-title {
-	background: url("../images/ff34_logo.png") no-repeat scroll 8px 5px transparent;
-	padding-left: 32px;
+	background: url("../images/ff34_logo.png") no-repeat scroll 8px 50% transparent;
+	padding-left: 16px;
+}
+.wp-customizer div[id*=_ff-] .widget-title {
+	background-position: 0 50%;
+	padding-left: 20px;
 }
 .sector-header {
 	border-bottom: 1px solid #ddd;

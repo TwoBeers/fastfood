@@ -12,15 +12,11 @@
 
 get_header(); ?>
 
-<?php fastfood_hook_content_before(); ?>
-
 <div id="posts_content" class="posts_wide">
 
 	<?php fastfood_hook_content_top(); ?>
 
 	<div class="hentry" id="post-404-not-found">
-
-		<div class="ff-search-reminder ff-search-term"><strong><?php _e( 'Error 404','fastfood' ); ?> - <?php _e( 'Page not found','fastfood' ); ?></strong></div>
 
 		<p><?php _e( "Sorry, you&#39;re looking for something that isn&#39;t here" ,'fastfood' ); ?>: <u><?php echo home_url() . esc_html( $_SERVER['REQUEST_URI'] ); ?></u></p>
 
@@ -33,19 +29,11 @@ get_header(); ?>
 
 			<div id="error404-widgets-area">
 
-				<div class="fixfloat">
-
-					<?php fastfood_hook_sidebar_top( 'error404' ); ?>
-
-				</div> 
+				<?php fastfood_hook_sidebar_top( 'error404' ); ?>
 
 				<?php dynamic_sidebar( 'error404-widgets-area' ); ?>
 
-				<div class="fixfloat">
-
-					<?php fastfood_hook_sidebar_bottom( 'error404' ); ?>
-
-				</div> 
+				<?php fastfood_hook_sidebar_bottom( 'error404' ); ?>
 
 			</div>
 
@@ -66,7 +54,5 @@ get_header(); ?>
 	<?php fastfood_hook_content_bottom(); ?>
 
 </div>
-
-<?php fastfood_hook_content_after(); ?>
 
 <?php get_footer(); ?>

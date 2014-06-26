@@ -191,7 +191,7 @@ class Fastfood_Header_Image_Slider {
 
 		foreach( $slides as $key => $slide ) {
 			$style = ( $count == $key ) ? '' : 'style="display:none;" ';
-			if ( fastfood_get_opt( 'fastfood_head_link' ) )
+			if ( FastfoodOptions::get_opt( 'fastfood_head_link' ) )
 				$output .= "<a href='" . home_url() . "'><img {$style}src='{$slide['url']}' alt='{$key}' /></a>";
 			else
 				$output .= "<img {$style}src='{$slide['url']}' alt='{$key}' />";

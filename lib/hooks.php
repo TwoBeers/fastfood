@@ -141,6 +141,14 @@ function fastfood_hook_statusbar() {
 	do_action( 'fastfood_hook_statusbar' );
 }
 
+function fastfood_hook_quickbar_top() {
+	do_action( 'fastfood_hook_quickbar_top' );
+}
+
+function fastfood_hook_quickbar_bottom() {
+	do_action( 'fastfood_hook_quickbar_bottom' );
+}
+
 function fastfood_hook_post_title_before() {
 	do_action( 'fastfood_hook_post_title_before' );
 }

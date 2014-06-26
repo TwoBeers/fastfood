@@ -18,7 +18,9 @@
 	<?php fastfood_extrainfo( array( 'comms' => 0, 'tags' => 0, 'cats' => 0 ) ); ?>
 
 	<div class="storycontent">
+
 		<?php the_content(); ?>
+
 	</div>
 
 	<br class="fixfloat" />

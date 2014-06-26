@@ -17,15 +17,7 @@
 
 	<?php fastfood_hook_sidebar_top( 'primary' ); ?>
 
-	<br class="fixfloat" />
-
-	<?php if ( !dynamic_sidebar( 'primary-widget-area' ) ) { //if the widget area is empty, we print some standard wigets ?>
-
-		<?php fastfood_default_widgets(); ?>
-
-	<?php } ?>
-
-	<br class="fixfloat" />
+	<?php if ( !dynamic_sidebar( 'primary-widget-area' ) ) fastfood_default_widgets(); //if the widget area is empty, we print some standard wigets ?>
 
 	<?php fastfood_hook_sidebar_bottom( 'primary' ); ?>
 

@@ -41,24 +41,26 @@
 
 		<div id="main">
 
+			<?php wp_nav_menu( array( 'container_class' => 'ff-menu', 'container_id' => 'secondary1', 'fallback_cb' => false, 'theme_location' => 'secondary1', 'depth' => 1 ) ); ?>
+
+			<?php fastfood_hook_header_before(); ?>
+
+			<div id="header">
+
+				<?php fastfood_hook_header_top(); ?>
+
+				<?php echo fastfood_header(); ?>
+
+				<?php fastfood_hook_header_bottom(); ?>
+
+			</div>
+
+			<?php fastfood_hook_header_after(); ?>
+
+			<?php fastfood_get_sidebar( 'header' ); // show header widgets area ?>
+
+			<?php fastfood_hook_breadcrumb_navigation(); ?>
+
+			<?php fastfood_hook_content_before(); ?>
+
 			<div id="content">
-
-				<?php wp_nav_menu( array( 'container_class' => 'ff-menu', 'container_id' => 'secondary1', 'fallback_cb' => false, 'theme_location' => 'secondary1', 'depth' => 1 ) ); ?>
-
-				<?php fastfood_hook_header_before(); ?>
-
-				<div id="header">
-
-					<?php fastfood_hook_header_top(); ?>
-
-					<?php echo fastfood_header(); ?>
-
-					<?php fastfood_hook_header_bottom(); ?>
-
-				</div>
-
-				<?php fastfood_hook_header_after(); ?>
-
-				<?php fastfood_get_sidebar( 'header' ); // show header widgets area ?>
-
-				<?php fastfood_hook_breadcrumb_navigation(); ?>

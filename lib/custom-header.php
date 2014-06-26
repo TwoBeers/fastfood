@@ -63,8 +63,8 @@ class Fastfood_Custom_Header {
 		) );
 
 		$args = array(
-			'width'						=> 848, // Header image width (in pixels)
-			'height'					=> ( fastfood_get_opt( 'fastfood_head_h' ) ? str_replace( 'px', '', fastfood_get_opt( 'fastfood_head_h' ) ) : 120 ), // Header image height (in pixels)
+			'width'						=> 860, // Header image width (in pixels)
+			'height'					=> str_replace( 'px', '', FastfoodOptions::get_opt( 'fastfood_head_h', 120 ) ), // Header image height (in pixels)
 			'default-image'				=> get_template_directory_uri() . '/images/headers/tree.jpg', // Header image default
 			'header-text'				=> true, // Header text display default
 			'default-text-color'		=> '404040', // Header text color default
@@ -162,7 +162,7 @@ class Fastfood_Custom_Header {
 
 		if ( fastfood_is_mobile() ) return;
 
-		if ( ( 'blank' == get_header_textcolor() ) || fastfood_get_opt( 'fastfood_head_link' ) )
+		if ( ( 'blank' == get_header_textcolor() ) || FastfoodOptions::get_opt( 'fastfood_head_link' ) )
 			$style = 'display:none;';
 		else
 			$style = 'color:#' . get_header_textcolor() . ';';
@@ -205,7 +205,7 @@ class Fastfood_Custom_Header {
 			$style = ' style="display:none;"';
 		?>
 		<div id="head-text" class="displaying-header-text <?php echo $header_text_background; ?>" <?php echo $style; ?>>
-			<h1><a id="name" class="displaying-header-text" <?php echo $style; ?> onclick="return false;" href="<?php bloginfo('url'); ?>"><?php bloginfo( 'name' ); ?></a></h1>
+			<h1><a id="name" class="displaying-header-text" <?php echo $style; ?> onclick="return false;" href="<?php echo esc_url( home_url() ); ?>"><?php bloginfo( 'name' ); ?></a></h1>
 			<div id="desc" class="displaying-header-text" <?php echo $style; ?>><?php bloginfo( 'description' ); ?></div>
 		</div>
 	</div>

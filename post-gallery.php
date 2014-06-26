@@ -16,7 +16,7 @@
 	<?php fastfood_hook_post_title_before(); ?>
 
 	<?php
-		switch ( fastfood_get_opt( 'fastfood_post_formats_gallery_title' ) ) {
+		switch ( FastfoodOptions::get_opt( 'fastfood_post_formats_gallery_title' ) ) {
 			case 'post title':
 				fastfood_featured_title( array( 'fallback' => sprintf ( __( 'gallery #%s','fastfood' ), get_the_ID() ) ) );
 				break;
@@ -34,7 +34,7 @@
 
 	<div class="storycontent">
 		<?php
-			switch ( fastfood_get_opt( 'fastfood_post_formats_gallery_content' ) ) {
+			switch ( FastfoodOptions::get_opt( 'fastfood_post_formats_gallery_content' ) ) {
 				case 'presentation':
 					if ( ! fastfood_gallery_preview() ) the_content();
 					break;
