@@ -12,11 +12,18 @@ body {
 #content {
 	padding: 0;
 	width: auto;
-	margin: 0;
 }
 #main {
 	margin: 0 50px 0 0;
 	border-right: 1px solid #ccc;
+}
+.has-header-image #head-text {
+	position: static;
+	background: transparent;
+}
+#head-text h1 a,
+#head-text {
+	color: #404040 !important;
 }
 #posts_content {
 	min-height: auto;
@@ -75,6 +82,9 @@ body {
 	float: none;
 	padding: 0;
 	width: 100%;
+}
+#header-widget-area .widget:nth-of-type(3n+1) {
+	clear: none;
 }
 #header-widget-area .widget:nth-of-type(2n+1),
 #sidebardx .widget:nth-of-type(2n+1) {

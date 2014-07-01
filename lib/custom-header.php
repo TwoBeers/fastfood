@@ -63,8 +63,8 @@ class Fastfood_Custom_Header {
 		) );
 
 		$args = array(
-			'width'						=> 860, // Header image width (in pixels)
-			'height'					=> str_replace( 'px', '', FastfoodOptions::get_opt( 'fastfood_head_h', 120 ) ), // Header image height (in pixels)
+			'width'						=> 864, // Header image width (in pixels)
+			'height'					=> intval( FastfoodOptions::get_opt( 'fastfood_head_h', 120 ) ), // Header image height (in pixels)
 			'default-image'				=> get_template_directory_uri() . '/images/headers/tree.jpg', // Header image default
 			'header-text'				=> true, // Header text display default
 			'default-text-color'		=> '404040', // Header text color default
@@ -171,12 +171,8 @@ class Fastfood_Custom_Header {
 
 ?>
 	<style type="text/css">
-		#header {
-			background: transparent url( '<?php header_image(); ?>' ) center no-repeat;
-			height: <?php echo $height; ?>px;
-		}
-		#head h1 a,
-		#head {
+		#head-text h1 a,
+		#head-text {
 			<?php echo $style; ?>
 		}
 	</style>

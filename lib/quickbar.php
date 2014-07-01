@@ -63,7 +63,7 @@ if ( !function_exists( 'fastfood_quickbar' ) ) {
 ?>
 
 	<!-- begin quickbar -->
-	<div id="quickbar"<?php if ( ! FastfoodOptions::get_opt( 'fastfood_statusbar' ) ) echo ' class="no-status"'; ?>>
+	<div id="quickbar" class="no-grav<?php if ( ! FastfoodOptions::get_opt( 'fastfood_statusbar' ) ) echo ' no-status'; ?>">
 
 	<?php fastfood_hook_quickbar_top(); ?>
 
@@ -223,7 +223,7 @@ function fastfood_statusbar () {
 	$output = apply_filters( 'fastfood_filter_statusbar', $welcome . ', ' . $today_is . $avatar );
 
 	if ( $output )
-		echo '<div id="statusbar">' . $output . '</div>';
+		echo '<div id="statusbar" class="no-grav">' . $output . '</div>';
 
 }
 

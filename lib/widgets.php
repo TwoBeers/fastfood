@@ -654,7 +654,7 @@ class Fastfood_Widget_Social extends WP_Widget {
 		$this->WP_Widget( "ff-social", __( "Follow Me", "fastfood" ), $widget_ops, $control_ops );
 
 		$icons_path = get_template_directory_uri() . '/images/follow/';
-		$this->follow_urls = apply_filters( 'fastdood_follow_services', array(
+		$this->follow_urls = apply_filters( 'fastfood_follow_services', array(
 			'blogger'		=> array(
 				'name' => 'Blogger',
 				'icon' => $icons_path . 'blogger.png' ),

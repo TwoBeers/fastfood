@@ -344,29 +344,36 @@ fastfoodAnimations = {
 		// Take the options that the user selects, and merge them with defaults.
 		options = $.extend(defaults, options);
 
-		return $('#slide-head').each(function() {
+		return $('#head-image.slider').each(function() {
 
 			// cache "this."
 			var $this = $(this);
+			var $images = $('img',$this);
+			var $parent = $images.parent();
 
-			$('img',$this).css("display","");
-
-			if ($this.children().size() > 1) {
+			if ($images.size() > 1) {
 				// call the slide function.
-				timId = slide();
+				slide();
+				timId = loo_slide();
+			}
+
+			function loo_slide() {
+				timId = setInterval(function() {
+					slide();
+				}, (options.speed + options.pause));
+				return timId;
 			}
 
 			function slide() {
-				timId = setInterval(function() {
+				setTimeout( function() {
 					$this
-						.children(':last')
-						.fadeOut(options.speed, function() { 
+						.find('img:last')
+						.fadeIn(options.speed, function() { 
 							$(this)
-								.prependTo($this)
-								.show();
-						});
-				}, (options.speed + options.pause));
-				return timId;
+								.prependTo($parent)
+								.css("display","");
+					});
+				},options.pause);
 			}
 		});
 	},
@@ -406,7 +413,7 @@ fastfoodAnimations = {
 
 	},
 
-	sticky_menu : function() { //return;
+	sticky_menu : function() {
 		var body    = $( 'body' ),
 			_window = $( window ),
 			_menu   = $( '#pages' ),
@@ -414,17 +421,18 @@ fastfoodAnimations = {
 			toolbarOffset,
 			mastheadOffset;
 
+		if ( _window.width() < 988 ) return;
+
 		toolbarOffset  = body.is( '.admin-bar' ) ? $( '#wpadminbar' ).height() : 0;
 		mastheadOffset = _menu.offset().top - toolbarOffset;
 		_menu.css( 'top', toolbarOffset );
+		$( '<div id="pages-placeholder"></div>' ).css('height',mastheadHeight).insertBefore(_menu);
 
 		_window.on( 'scroll', function() {
 			if ( ( window.scrollY > mastheadOffset ) ) {
 				body.addClass( 'fixed-menu' );
-				$('#header').css('marginBottom',mastheadHeight + 40);
 			} else {
 				body.removeClass( 'fixed-menu' );
-				$('#header').css('marginBottom',0);
 			}
 		} );
 

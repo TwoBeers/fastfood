@@ -1063,6 +1063,8 @@ class FastfoodOptions {
 			),
 		) );
 
+		do_action( 'fastfood_hook_options_init' );
+
 	}
 
 

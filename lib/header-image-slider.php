@@ -178,34 +178,30 @@ class Fastfood_Header_Image_Slider {
 
 		add_action( 'wp_footer', array( &$this, 'add_script' ) );
 
-		if( $width )
-			$width = "width: {$width}px;";
-		if( $height )
-			$height = "height: {$height}px";
-
-		$output = '';
+		$text = '';
+		$images = '';
+		$class = get_theme_mod( 'header_text_background', 'transparent' );
 
 		shuffle( $slides );
 
 		$count = count( $slides ) - 1;
 
-		foreach( $slides as $key => $slide ) {
-			$style = ( $count == $key ) ? '' : 'style="display:none;" ';
-			if ( FastfoodOptions::get_opt( 'fastfood_head_link' ) )
-				$output .= "<a href='" . home_url() . "'><img {$style}src='{$slide['url']}' alt='{$key}' /></a>";
-			else
-				$output .= "<img {$style}src='{$slide['url']}' alt='{$key}' />";
-		}
+		if ( display_header_text() )
+			$text = '
+				<div id="head-text" class="' . esc_attr( $class ) . '">
+					<h1><a href="' . esc_url( home_url( '/' ) ) . '">' . get_bloginfo( 'name' ) . '</a></h1>
+					<div class="description">' . get_bloginfo( 'description' ) . '</div>
+				</div>';
 
-		return "
-			<div style='{$width} {$height}' id='slide-head'>
-				{$output}
-			</div>
-			<div id='head' class='" . get_theme_mod( 'header_text_background', 'transparent' ) . "'>
-				<h1><a href='" . home_url() . "/'>" . get_bloginfo( 'name' ) . "</a></h1>
-				<div class='description'>" . get_bloginfo( 'description' ) . "</div>
-			</div>
-		";
+		foreach( $slides as $key => $slide ) {
+			$images .= '<img src="' . esc_url( $slide['url'] ) . '" alt="' . esc_attr( $key ) . '" />';
+		}
+		if ( ! display_header_text() )
+			$images = '<a href="' . esc_url( home_url( '/' ) ) . '">' . $images . '</a>';
+		$images = '<div id="head-image" class="slider">' . $images . '</div>';
+
+		$output = $text . $images;
+		return $output;
 
 	}
 

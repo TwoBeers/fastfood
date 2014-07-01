@@ -58,12 +58,12 @@ h4,
 h5,
 h6,
 p {
-	margin: .5em 0;
+	margin: 0 0 0.5em;
 	line-height: 1.5em;
 }
 .storycontent p {
 	line-height: 1.3em;
-	margin: 1em 0;
+	margin: 0 0 1em;
 }
 ul {
 	list-style: none outside none;
@@ -170,7 +170,9 @@ input[type=button],
 input[type=submit],
 input[type=reset] {
 	font-weight: bold;
-	color: #000;
+	color: #fff;
+	background: #d2691e;
+	border: none;
 }
 textarea {
 	height:auto;
@@ -188,10 +190,6 @@ input[type=password] {
 .storycontent input[type=reset] {
 	font-size: 1em;
 }
-button:hover,
-input[type=button]:hover,
-input[type=submit]:hover,
-input[type=reset]:hover,
 textarea:hover,
 input[type=text]:hover,
 input[type=password]:hover,
@@ -205,6 +203,7 @@ input[type=button]:hover,
 input[type=submit]:hover,
 input[type=reset]:hover {
 	cursor: pointer;
+	background: #ff4500;
 }
 
 /* Utils
@@ -234,7 +233,7 @@ br.fixfloat {
 #main {
 	margin: 0 auto;
 	min-height: 500px;
-	width: 860px;
+	width: 864px;
 	background: transparent url('images/main.png') left top repeat-x;
 	background-image: -moz-linear-gradient(top,  #ccc 0%, #f8f8f8 400px); /* FF3.6+ */
 	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ccc), color-stop(400px,#f8f8f8)); /* Chrome,Safari4+ */
@@ -244,16 +243,17 @@ br.fixfloat {
 	background-image: linear-gradient(top,  #ccc 0%,#f8f8f8 400px); /* W3C */
 }
 #content {
-	padding: 0 20px;
+	padding: 0 10px;
+	margin-top: 20px;
 }
 #sidebardx {
 	float: right;
-	width: 260px;
+	width: 268px;
 }
 #fixedfoot {
 	position: fixed;
 	bottom: 0;
-	width: 860px;
+	width: 864px;
 	padding: 0;
 	z-index:99;
 }
@@ -268,7 +268,7 @@ br.fixfloat {
 }
 #footer {
 	clear: both;
-	padding-bottom: 45px;
+	padding-bottom: 54px;
 }
 #credits {
 	text-align: center;
@@ -284,35 +284,54 @@ br.fixfloat {
 	box-shadow: 0 0 5px #000;
 	height: 4000px;
 	margin: 0 auto;
-	width: 860px;
+	width: 864px;
 }
 
 /* =Header
 ----------------------------------------------------------*/
 #header {
-	min-height: 100px;
 	position: relative;
 }
-#head {
-	text-align: left;
-	padding: 10px 20px;
-	position: relative;
-	top: 10px;
+#head-text {
+	box-sizing: border-box;
+	padding: 10px;
+	width: 100%;
 }
-#head.black {
+.has-header-image #head-text {
+	position: absolute;
+	z-index: 1;
+}
+#head-text.black {
 	background: rgba(0,0,0,0.7);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3000000', endColorstr='#b3000000',GradientType=0 ); /* IE6-9 */
 }
-#head.white {
+#head-text.white {
 	background: rgba(255,255,255,0.7);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3ffffff', endColorstr='#b3ffffff',GradientType=0 ); /* IE6-9 */
 }
-#head a {
+#head-text a {
 	color: #404040;
 }
-#head h1 {
+#head-text h1 {
 	margin: 0 0 5px;
 	font-size: 3em;
+}
+#header img {
+	max-width: 100%;
+	height: auto;
+}
+#head-image {
+	position: relative;
+}
+#head-image img {
+	position: absolute;
+	top: 0;
+	left: 0;
+	display: none;
+}
+#head-image img:first-child {
+	position: static;
+	display: block;
 }
 
 /* =other elements
@@ -331,7 +350,7 @@ br.fixfloat {
 /* =menu items (quickbar)
 ----------------------------------------------------------*/
 #quickbar {
-	left: -50px;
+	left: -48px;
 	position: absolute;
 	bottom: 34px;
 }
@@ -341,7 +360,7 @@ br.fixfloat {
 #panel_categories .menulcont > ul > li:hover:after {
 	content: '›';
 	float: right;
-	margin-right: -1em;
+	margin-right: -9px;
 	position: static;
 	font-weight: bold;
 }
@@ -350,9 +369,9 @@ br.fixfloat {
 }
 .menuitem .itemimg,
 .menuitem .itemimg_js {
-	width: 50px;
-	height: 50px;
-	line-height: 50px;
+	width: 48px;
+	height: 48px;
+	line-height: 48px;
 	font-size: 32px;
 	text-align: center;
 	cursor: default;
@@ -375,11 +394,11 @@ br.fixfloat {
 	bottom: 0;
 	display: none;
 	height: 0;
-	left: 50px;
+	left: 48px;
 	overflow: hidden;
 	padding: 0;
 	position: absolute;
-	width: 860px;
+	width: 864px;
 }
 .keepme .menuback_js {
 	display: block;
@@ -407,7 +426,7 @@ br.fixfloat {
 	border-right: 1px solid #ddd;
 }
 .menulcont li {
-	padding: 0 20px;
+	padding: 0 10px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -463,7 +482,7 @@ br.fixfloat {
 	color: #404040;
 	list-style-image: none;
 	margin: 0 0 20px;
-	padding: 20px;
+	padding: 10px;
 }
 #ff_minilogin {
 	padding: 20px;
@@ -500,7 +519,7 @@ br.fixfloat {
 #navbuttons {
 	bottom: 34px;
 	position: absolute;
-	right: -50px;
+	right: -48px;
 }
 .minibutton {
 	position: relative;
@@ -515,7 +534,7 @@ br.fixfloat {
 	font-size: 18px;
 	line-height: 1.5em;
 	text-align: center;
-	width: 50px;
+	width: 48px;
 	color: #404040;
 }
 .minibutton .minib_img:hover {
@@ -559,7 +578,7 @@ br.fixfloat {
 #mainmenu {
 	overflow:hidden;
 	margin: 0;
-	padding: 0 20px;
+	padding: 0 10px;
 	color: #ccc;
 	line-height: 2em;
 }
@@ -594,12 +613,18 @@ br.fixfloat {
 	background-color: #404040;
 	padding: 10px 0;
 	z-index: 1;
-	margin-bottom: 20px;
 	border-bottom: 1px solid #555;
 }
 .fixed-menu #pages {
 	position: fixed;
-	width: 860px;
+	width: 864px;
+}
+#pages-placeholder {
+	display: none;
+	padding: 10px;
+}
+.fixed-menu #pages-placeholder {
+	display: block;
 }
 #tmp_div {
 	display:none;
@@ -638,7 +663,8 @@ br.fixfloat {
 	text-align: right;
 }
 #secondary2 {
-	margin-bottom: 10px;
+	font-size: 1.18em;
+	margin-top: 20px;
 }
 .tinynav {
 	display: none;
@@ -656,7 +682,7 @@ br.fixfloat {
 	min-height: 2em;
 	position: relative;
 	box-shadow: none;
-	margin: 0 0 20px;
+	margin: 20px 0 0;
 	padding: 0 20px;
 	font-size: 1em;
 	line-height: 2em;
@@ -679,6 +705,7 @@ br.fixfloat {
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	border: 1px solid transparent;
+	margin: 0;
 }
 .top_meta:hover,
 .top_meta_js:hover {
@@ -774,14 +801,15 @@ br.fixfloat {
 	border-top: 1px solid #ccc;
 	background-color: #eee;
 	overflow: hidden;
+	margin-top: 20px;
+}
+#secondary2 + #footer-widget-area {
+	margin-top: 0;
+	border-top: none;
 }
 #header-widget-area {
 	background-color: #404040;
 	color: #ccc;
-	margin-bottom: 20px;
-}
-#pages + #header-widget-area {
-	margin-top: -20px;
 }
 #error404-widgets-area,
 #post-widgets-area  {
@@ -789,8 +817,8 @@ br.fixfloat {
 }
 #header-widget-area .widget {
 	float: left;
-	padding: 20px 0 20px 20px;
-	width: 260px;
+	padding: 20px 10px 20px;
+	width: 268px;
 }
 #footer-widget-area .widget {
 	padding-top: 20px;
@@ -804,7 +832,7 @@ br.fixfloat {
 }
 .posts_narrow #error404-widgets-area .widget,
 .posts_narrow #post-widgets-area .widget {
-	width: 260px;
+	width: 268px;
 }
 #sidebardx .widget {
 	padding: 20px 0;
@@ -822,11 +850,10 @@ br.fixfloat {
 }
 .widget-area {
 	float: left;
-	width: 260px;
-	padding-left: 20px;
+	width: 268px;
+	padding: 0 10px;
 	min-height: 1px;
 }
-.fwa_title,
 .w_title {
 	margin-bottom: .5em;
 	font-weight: bold;
@@ -988,16 +1015,16 @@ div.tb_post_details ul {
 ----------------------------------------------------------*/
 .posts_narrow {
 	float: left;
-	width: 540px;
+	width: 556px;
 	min-height: 680px;
 	border-right: 1px solid #ccc;
 	padding: 0 10px 0 0;
 }
 .posts_wide {
 	float: left;
-	width: 680px;
+	width: 748px;
 	min-height: 680px;
-	padding: 0 70px;
+	padding: 0 48px;
 }
 #content .hentry {
 	padding: 30px 0;
@@ -1011,6 +1038,7 @@ div.tb_post_details ul {
 .single #content .hentry,
 .page #content .hentry {
 	border: none;
+	padding: 0;
 }
 .storycontent {
 	font-size: 1.18em;
@@ -1074,9 +1102,9 @@ img.wp-post-image {
 	background: #EFF9FF;
 	border-top: 1px solid #fff;
 	border-bottom: 1px solid #fff;
-	margin-left: -20px;
+	margin-left: -10px;
 	margin-right: -10px;
-	padding-left: 20px;
+	padding-left: 10px;
 	padding-right: 10px;
 	padding-top: 30px;
 }
@@ -1161,7 +1189,7 @@ img.wp-post-image {
 .tb-author-bio {
 	background-color: #ccc;
 	padding: 10px;
-	margin: 0 0 20px;
+	margin: 20px 0 0;
 }
 .widget .tb-author-bio {
 	margin: 0 0 5px;
@@ -1238,7 +1266,7 @@ ul.children {
 }
 #commentlist {
 	position: relative;
-	margin-bottom: 20px;
+	margin-top: 20px;
 }
 .comment-form-comment {
 	text-align: center;
@@ -1262,22 +1290,23 @@ ul.children {
 	box-shadow: 0px 0px 7px #000;
 	background-color: #eee;
 	border: 1px solid #fff;
-	width: 680px;
+	width: 652px;
 	z-index: 2000;
 	display: none;
-	margin-left: 49px;
-	padding: 20px;
+	margin-left: 85px;
+	padding: 10px;
 	position: fixed;
 	top: 20%;
 }
 #respond {
-	padding-top: 20px;
-	margin-bottom: 20px;
+	padding-top: 10px;
+	margin-top: 20px;
 }
 #reply-title {
 	font-size: 1em;
 	font-weight: normal;
 	text-align: right;
+	margin: 0;
 }
 #reply-title small {
 	font-size: 1em;
@@ -1287,7 +1316,6 @@ ul.children {
 }
 .js-res #reply-title {
 	position: relative;
-	margin: 0;
 	padding: 0;
 	cursor: move;
 }
@@ -1303,6 +1331,9 @@ ul.children {
 	float: left;
 	width: 2em;
 	text-align: center;
+}
+#commentform > p {
+	margin: 10px 0 0;
 }
 .reply {
 	text-align: right;
@@ -1358,7 +1389,7 @@ ul.children {
 ----------------------------------------------------------*/
 .navigation_links {
 	font-weight: bold;
-	margin-bottom: 20px;
+	margin-top: 20px;
 	text-align: center;
 }
 .hentry + .navigation_links {
@@ -1534,7 +1565,7 @@ img.aligncenter {
 	font-size: .8em;
 	margin: 0;
 }
-.ff-js.fading-capitions .gallery-caption {
+.ff-js.fading-captions .gallery-caption {
 	display: none;
 }
 .gallery-columns-0 .gallery-item {
@@ -1584,7 +1615,7 @@ img.aligncenter {
 .crumbs {
 	background: none repeat scroll 0 0 #CCCCCC;
 	line-height: 2em;
-	margin: 0 0 20px 0;
+	margin: 20px 0 0 0;
 	overflow: hidden;
 	padding: 0 20px;
 }
@@ -1724,7 +1755,7 @@ body.error404 .crumbs.wpseo > span:last-child i:before {
 /* Audio player
 ----------------------------------------------------------*/
 .ff-player-container {
-	margin-bottom: 20px;
+	margin-top: 20px;
 	width: 300px;
 	padding: 5px;
 	background: #fff;
@@ -1754,21 +1785,6 @@ body.error404 .crumbs.wpseo > span:last-child i:before {
 	background: #eee;
 }
 
-/* header slider
-----------------------------------------------------------*/
-#slide-head {
-	overflow: hidden;
-	position: absolute;
-	top: 0;
-	left: 0;
-}
-#slide-head > img,
-#slide-head > a {
-	position: absolute;
-	top: 0;
-	left: 0;
-}
-
 /* Coming Soon template
 ----------------------------------------------------------*/
 .coming-soon #ff_background {
@@ -1781,7 +1797,7 @@ body.error404 .crumbs.wpseo > span:last-child i:before {
 .coming-soon .hentry {
 	box-shadow: 0 0 5px #000000;
 	margin: 50px auto;
-	max-width: 860px;
+	max-width: 864px;
 	background: none repeat scroll 0 0 #F8F8F8;
 	border: 1px solid #fff;
 	box-sizing: border-box;
@@ -1892,7 +1908,7 @@ div.mejs-controls .mejs-time-rail .mejs-time-float-corner {
 }
 .tb-chat ul.chat-select {
 	overflow: hidden;
-	margin-bottom: 30px;
+	margin-bottom: 20px;
 	display: none;
 }
 .tb-chat.animated .chat-select {
@@ -1965,9 +1981,8 @@ div.mejs-controls .mejs-time-rail .mejs-time-float-corner {
 /* Jetpack Infinite Scroll
 ----------------------------------------------------------*/
 #posts_content #infinite-handle span {
-	border: 1px solid #ccc;
-	background: #fff;
-	color: #000;
+	border: none;
+	color: #fff;
 	font-weight: bold;
 }
 #posts_content #infinite-handle span:after {
@@ -1995,13 +2010,11 @@ div.mejs-controls .mejs-time-rail .mejs-time-float-corner {
 	margin: 0 auto;
 	width: 30px;
 }
-.sd-button {
-	box-shadow: none !important;
-}
 /* Jetpack Sharedaddy
 ----------------------------------------------------------*/
-#main div.sharedaddy div.sd-block {
-	border-top: none;
+.sd-button {
+	box-shadow: none !important;
+	border-radius: 0 !important;
 }
 /* Jetpack Likes
 ----------------------------------------------------------*/
@@ -2020,7 +2033,7 @@ div.mejs-controls .mejs-time-rail .mejs-time-float-corner {
 }
 .pagination-links {
 	font-weight: bold;
-	margin-bottom: 20px;
+	margin-top: 20px;
 	text-align: center;
 }
 .pagination-links a {

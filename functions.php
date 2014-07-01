@@ -1591,16 +1591,26 @@ function fastfood_header(){
 	if ( $output != '' )
 		return $output;
 
-	if ( FastfoodOptions::get_opt( 'fastfood_head_link' ) && (  get_header_image() != '' ) ) {
-		$output = '<a href="' . home_url() . '/"><img src="' . get_header_image() . '" /></a>';
-	} else {
-		$output = '
-			<div id="head" class="' . get_theme_mod( 'header_text_background', 'transparent' ) . '">
-				<h1><a href="' . home_url() . '/">' . get_bloginfo( 'name' ) . '</a></h1>
+	$class = get_theme_mod( 'header_text_background', 'transparent' );
+
+	$text = '';
+	$image = '';
+
+	if ( display_header_text() )
+		$text = '
+			<div id="head-text" class="' . esc_attr( $class ) . '">
+				<h1><a href="' . esc_url( home_url( '/' ) ) . '">' . get_bloginfo( 'name' ) . '</a></h1>
 				<div class="description">' . get_bloginfo( 'description' ) . '</div>
 			</div>';
+
+	if (  get_header_image() != '' ) {
+		$image = '<img src="' . esc_url( get_header_image() ) . '" />';
+		if ( ! display_header_text() )
+			$image = '<a href="' . esc_url( home_url( '/' ) ) . '">' . $image . '</a>';
+		$image = '<div id="head-image">' . $image . '</div>';
 	}
 
+	$output = $text . $image;
 	return $output;
 
 }
@@ -1632,19 +1642,28 @@ function fastfood_custom_css(){
 		a {
 			color: <?php echo esc_attr( FastfoodOptions::get_opt( 'fastfood_colors_link' ) ); ?>;
 		}
-		button:hover,
-		input[type=button]:hover,
-		input[type=submit]:hover,
-		input[type=reset]:hover,
 		textarea:hover,
 		.bbpress .wp-editor-area:hover,
 		input[type=text]:hover,
 		input[type=password]:hover,
 		textarea:focus,
 		input[type=text]:focus,
-		input[type=password]:focus,
-		#posts_content #infinite-handle span:hover {
+		input[type=password]:focus {
 			border: 1px solid <?php echo esc_attr( FastfoodOptions::get_opt( 'fastfood_colors_link_hover' ) ); ?>;
+		}
+		button,
+		input[type=button],
+		input[type=submit],
+		input[type=reset],
+		#posts_content #infinite-handle span {
+			background: <?php echo esc_attr( FastfoodOptions::get_opt( 'fastfood_colors_link' ) ); ?>;
+		}
+		button:hover,
+		input[type=button]:hover,
+		input[type=submit]:hover,
+		input[type=reset]:hover,
+		#posts_content #infinite-handle span:hover {
+			background: <?php echo esc_attr( FastfoodOptions::get_opt( 'fastfood_colors_link_hover' ) ); ?>;
 		}
 		a:hover,
 		.current-menu-item a:hover,
@@ -1833,7 +1852,7 @@ function fastfood_title_tags_filter( $title = '', $id = null ) {
 		$title = str_replace( $codes, $postdata, FastfoodOptions::get_opt( 'fastfood_blank_title' ) );
 	}
 
-	return esc_html( strip_tags( $title, '<abbr><acronym><b><em><i><del><ins><bdo><strong><img><sub><sup>' ) );
+	return strip_tags( $title, '<abbr><acronym><b><em><i><del><ins><bdo><strong><img><sub><sup>' );
 
 }
 
@@ -1897,7 +1916,8 @@ function fastfood_body_classes( $classes ) {
 	$classes[] = 'ff-no-js';
 
 	if ( FastfoodOptions::get_opt( 'fastfood_tinynav' ) ) $classes[] = 'tinynav-support';
-	if ( FastfoodOptions::get_opt( 'fastfood_basic_animation_captions' ) ) $classes[] = 'fading-capitions';
+	if ( FastfoodOptions::get_opt( 'fastfood_basic_animation_captions' ) ) $classes[] = 'fading-captions';
+	if (  get_header_image() !== '' ) $classes[] = 'has-header-image';
 
 
 	return $classes;

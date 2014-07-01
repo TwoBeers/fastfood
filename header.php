@@ -35,7 +35,7 @@
 
 	<body <?php body_class(); ?>>
 
-		<div id="ff_background"><div id="ff_body" class="pad_bg"><div id="ff_body_overlay"></div></div></div>
+		<div id="ff_background"><div id="ff_body"></div></div>
 
 		<?php fastfood_hook_body_top(); ?>
 
