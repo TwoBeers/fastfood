@@ -45,6 +45,7 @@ body {
 }
 .minibutton .minib_img {
 	line-height: 2em;
+	color: #404040 !important;
 }
 .minib_img.el-icon-print,
 .minib_img.el-icon-refresh,

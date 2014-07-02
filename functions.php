@@ -1583,39 +1583,6 @@ function fastfood_setup() {
 }
 
 
-// the custom header (filterable)
-function fastfood_header(){
-
-	// Allow plugins/themes to override the default header.
-	$output = apply_filters('fastfood_header', '');
-	if ( $output != '' )
-		return $output;
-
-	$class = get_theme_mod( 'header_text_background', 'transparent' );
-
-	$text = '';
-	$image = '';
-
-	if ( display_header_text() )
-		$text = '
-			<div id="head-text" class="' . esc_attr( $class ) . '">
-				<h1><a href="' . esc_url( home_url( '/' ) ) . '">' . get_bloginfo( 'name' ) . '</a></h1>
-				<div class="description">' . get_bloginfo( 'description' ) . '</div>
-			</div>';
-
-	if (  get_header_image() != '' ) {
-		$image = '<img src="' . esc_url( get_header_image() ) . '" />';
-		if ( ! display_header_text() )
-			$image = '<a href="' . esc_url( home_url( '/' ) ) . '">' . $image . '</a>';
-		$image = '<div id="head-image">' . $image . '</div>';
-	}
-
-	$output = $text . $image;
-	return $output;
-
-}
-
-
 // the custom header style - add style customization to page - gets included in the site header
 function fastfood_custom_css(){
 

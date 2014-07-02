@@ -713,34 +713,15 @@ class FastfoodOptions {
 								'req'				=> '',
 								'sub'				=> false,
 							),
-			'fastfood_head' =>
-							array(
-								'type'				=> 'lbl',
-								'default'			=> 1,
-								'description'		=> __( 'header', 'fastfood' ),
-								'info'				=> '',
-								'req'				=> '',
-								'sub'				=> array( 'fastfood_head_h', '', 'fastfood_head_link' ),
-							),
 			'fastfood_head_h' =>
 							array(
 								'type'				=> 'sel',
 								'default'			=> '120px',
 								'options'			=> array( '120px', '180px', '240px', '300px' ),
 								'options_readable'	=> array( '120px', '180px', '240px', '300px' ),
-								'description'		=> __( 'Header height', 'fastfood' ),
+								'description'		=> __( 'header height', 'fastfood' ),
 								'info'				=> '',
 								'req'				=> '',
-								'sub'				=> false,
-							),
-			'fastfood_head_link' =>
-							array(
-								'type'				=> 'chk',
-								'default'			=> 0,
-								'description'		=> __( 'linked header', 'fastfood' ),
-								'info'				=> sprintf( __( 'use the header image as home link. The <a href="%s">header image</a> must be set. If enabled, the site title and description are hidden', 'fastfood' ), get_admin_url() . 'themes.php?page=custom-header' ),
-								'req'				=> '',
-								'sub'				=> false,
 							),
 			'fastfood_font_family' =>
 							array(
@@ -977,7 +958,7 @@ class FastfoodOptions {
 						'label'			=> __( 'Elements', 'fastfood' ),
 						'description'	=> '',
 						'sub'			=> array(
-							'fastfood_head',
+							'fastfood_head_h',
 							'fastfood_primary_menu',
 							'fastfood_breadcrumb',
 							'fastfood_rsideb',

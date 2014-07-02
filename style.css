@@ -317,11 +317,12 @@ br.fixfloat {
 	font-size: 3em;
 }
 #header img {
-	max-width: 100%;
+	width: 100%;
 	height: auto;
 }
 #head-image {
 	position: relative;
+	overflow: hidden;
 }
 #head-image img {
 	position: absolute;

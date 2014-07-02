@@ -157,24 +157,52 @@ class Fastfood_Custom_Header {
 	}
 
 
+	// the custom header (filterable)
+	public static function the_header(){
+
+		// Allow plugins/themes to override the default header.
+		$output = apply_filters( 'fastfood_header', '' );
+		if ( $output != '' )
+			return $output;
+
+		$class = get_theme_mod( 'header_text_background', 'transparent' );
+
+		$text = '';
+		$image = apply_filters( 'fastfood_filter_header_image', get_header_image() );
+
+		$text = '
+			<div id="head-text" class="' . esc_attr( $class ) . '">
+				<h1><a href="' . esc_url( home_url( '/' ) ) . '">' . get_bloginfo( 'name' ) . '</a></h1>
+				<div class="description">' . get_bloginfo( 'description' ) . '</div>
+			</div>';
+
+		if ( $image != '' ) {
+			$image = '<img src="' . esc_url( $image ) . '" />';
+			if ( ! display_header_text() )
+				$image = '<a href="' . esc_url( home_url( '/' ) ) . '">' . $image . '</a>';
+			$image = '<div id="head-image">' . $image . '</div>';
+		}
+
+		$output = $text . $image;
+		return $output;
+
+	}
+
+
 	// included in the front head
 	function header_style_front() {
 
 		if ( fastfood_is_mobile() ) return;
 
-		if ( ( 'blank' == get_header_textcolor() ) || FastfoodOptions::get_opt( 'fastfood_head_link' ) )
+		if ( 'blank' == get_header_textcolor() )
 			$style = 'display:none;';
 		else
 			$style = 'color:#' . get_header_textcolor() . ';';
 
-		$height = defined( 'HEADER_IMAGE_HEIGHT' ) ? HEADER_IMAGE_HEIGHT : 'auto';
-
 ?>
 	<style type="text/css">
-		#head-text h1 a,
-		#head-text {
-			<?php echo $style; ?>
-		}
+		#head-text a, #head-text { <?php echo $style; ?> }
+		#head-image { max-height : <?php echo intval( FastfoodOptions::get_opt( 'fastfood_head_h' ) ); ?>px }
 	</style>
 <?php
 
@@ -214,4 +242,8 @@ class Fastfood_Custom_Header {
 
 new Fastfood_Custom_Header;
 
+function fastfood_header() {
 
+	return Fastfood_Custom_Header::the_header();
+
+}
