@@ -1884,8 +1884,6 @@ function fastfood_body_classes( $classes ) {
 
 	if ( FastfoodOptions::get_opt( 'fastfood_tinynav' ) ) $classes[] = 'tinynav-support';
 	if ( FastfoodOptions::get_opt( 'fastfood_basic_animation_captions' ) ) $classes[] = 'fading-captions';
-	if (  get_header_image() !== '' ) $classes[] = 'has-header-image';
-
 
 	return $classes;
 

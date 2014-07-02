@@ -234,13 +234,6 @@ br.fixfloat {
 	margin: 0 auto;
 	min-height: 500px;
 	width: 864px;
-	background: transparent url('images/main.png') left top repeat-x;
-	background-image: -moz-linear-gradient(top,  #ccc 0%, #f8f8f8 400px); /* FF3.6+ */
-	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ccc), color-stop(400px,#f8f8f8)); /* Chrome,Safari4+ */
-	background-image: -webkit-linear-gradient(top,  #ccc 0%,#f8f8f8 400px); /* Chrome10+,Safari5.1+ */
-	background-image: -o-linear-gradient(top,  #ccc 0%,#f8f8f8 400px); /* Opera 11.10+ */
-	background-image: -ms-linear-gradient(top,  #ccc 0%,#f8f8f8 400px); /* IE10+ */
-	background-image: linear-gradient(top,  #ccc 0%,#f8f8f8 400px); /* W3C */
 }
 #content {
 	padding: 0 10px;
@@ -269,6 +262,7 @@ br.fixfloat {
 #footer {
 	clear: both;
 	padding-bottom: 54px;
+	margin-top: 20px;
 }
 #credits {
 	text-align: center;
@@ -285,6 +279,13 @@ br.fixfloat {
 	height: 4000px;
 	margin: 0 auto;
 	width: 864px;
+	background: #f8f8f8;
+	background-image: -moz-linear-gradient(top,  #ccc 0%, #f8f8f8 400px); /* FF3.6+ */
+	background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#ccc), color-stop(400px,#f8f8f8)); /* Chrome,Safari4+ */
+	background-image: -webkit-linear-gradient(top,  #ccc 0%,#f8f8f8 400px); /* Chrome10+,Safari5.1+ */
+	background-image: -o-linear-gradient(top,  #ccc 0%,#f8f8f8 400px); /* Opera 11.10+ */
+	background-image: -ms-linear-gradient(top,  #ccc 0%,#f8f8f8 400px); /* IE10+ */
+	background-image: linear-gradient(top,  #ccc 0%,#f8f8f8 400px); /* W3C */
 }
 
 /* =Header
@@ -301,11 +302,11 @@ br.fixfloat {
 	position: absolute;
 	z-index: 1;
 }
-#head-text.black {
+.has-header-image #head-text.black {
 	background: rgba(0,0,0,0.7);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3000000', endColorstr='#b3000000',GradientType=0 ); /* IE6-9 */
 }
-#head-text.white {
+.has-header-image #head-text.white {
 	background: rgba(255,255,255,0.7);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3ffffff', endColorstr='#b3ffffff',GradientType=0 ); /* IE6-9 */
 }
@@ -441,6 +442,8 @@ br.fixfloat {
 }
 .solid_ul > li:hover {
 	background: #ccc;
+	margin-right: -1px;
+	border-right: 1px solid #ddd;
 }
 .menulcont ul {
 	height: 210px;
@@ -652,10 +655,11 @@ br.fixfloat {
 }
 .ff-menu ul {
 	padding: 10px 0;
-	display: inline-block;
+	display: block;
+	line-height: 2em;
 }
 .ff-menu li {
-	display: inline;
+	display: inline-block;
 	margin: 0 10px;
 	padding: 0;
 }
@@ -665,7 +669,6 @@ br.fixfloat {
 }
 #secondary2 {
 	font-size: 1.18em;
-	margin-top: 20px;
 }
 .tinynav {
 	display: none;
@@ -802,10 +805,8 @@ br.fixfloat {
 	border-top: 1px solid #ccc;
 	background-color: #eee;
 	overflow: hidden;
-	margin-top: 20px;
 }
 #secondary2 + #footer-widget-area {
-	margin-top: 0;
 	border-top: none;
 }
 #header-widget-area {
@@ -942,12 +943,14 @@ div.tb_latest_commentators a img {
 }
 .tb_besides .wentry-aside {
 	background: rgba(0, 0, 0, 0.1);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1a000000', endColorstr='#1a000000',GradientType=0 ); /* IE6-9 */
 	border: 1px dashed #ccc;
 	padding: 10px;
 	margin-bottom: 5px;
 }
 .tb_besides .wentry-status {
 	background: rgba(0, 0, 0, 0.1);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1a000000', endColorstr='#1a000000',GradientType=0 ); /* IE6-9 */
 	border: 1px solid #ccc;
 	padding: 10px;
 	margin-bottom: 5px;
@@ -1452,6 +1455,7 @@ ul.children {
 }
 #wp-calendar tbody td {
 	background: rgba(0,0,0,.1);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1a000000', endColorstr='#1a000000',GradientType=0 ); /* IE6-9 */
 	text-align: center;
 }
 #wp-calendar tbody td a {
@@ -1460,6 +1464,7 @@ ul.children {
 }
 #wp-calendar tbody td:hover {
 	background: rgba(255,255,255,.2);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#33ffffff', endColorstr='#33ffffff',GradientType=0 ); /* IE6-9 */
 }
 #wp-calendar tbody .pad,
 #wp-calendar tbody .pad:hover {
@@ -1653,37 +1658,58 @@ img.aligncenter {
 }
 .crumbs > span.current,
 .crumbs > span.bbp-breadcrumb-current,
-.crumbs.navxt > li.current_item,
+.crumbs.navxt > li.current_item {
+	background: transparent;
+	color: #404040;
+}
 .crumbs.wpseo > span:last-child {
 	background: transparent;
 	color: #404040;
 }
-body.archive.date .crumbs > span.current i:before,
+body.archive.date .crumbs > span.current i:before {
+	content: "\e70a";
+	padding-right: 11px;
+}
+body.archive.author .crumbs > span.current i:before {
+	content: "\e615";
+	padding-right: 11px;
+}
+body.archive.tag .crumbs > span.current i:before {
+	content: "\e62c";
+	padding-right: 11px;
+}
+body.archive.category .crumbs > span.current i:before {
+	content: "\e6c8";
+	padding-right: 11px;
+}
+body.search .crumbs > span.current i:before {
+	content: "\e643";
+	padding-right: 11px;
+}
+body.error404 .crumbs > span.current i:before {
+	content: "\e609";
+	padding-right: 11px;
+}
 body.archive.date .crumbs.wpseo > span:last-child i:before {
 	content: "\e70a";
 	padding-right: 11px;
 }
-body.archive.author .crumbs > span.current i:before,
 body.archive.author .crumbs.wpseo > span:last-child i:before {
 	content: "\e615";
 	padding-right: 11px;
 }
-body.archive.tag .crumbs > span.current i:before,
 body.archive.tag .crumbs.wpseo > span:last-child i:before {
 	content: "\e62c";
 	padding-right: 11px;
 }
-body.archive.category .crumbs > span.current i:before,
 body.archive.category .crumbs.wpseo > span:last-child i:before {
 	content: "\e6c8";
 	padding-right: 11px;
 }
-body.search .crumbs > span.current i:before,
 body.search .crumbs.wpseo > span:last-child i:before {
 	content: "\e643";
 	padding-right: 11px;
 }
-body.error404 .crumbs > span.current i:before,
 body.error404 .crumbs.wpseo > span:last-child i:before {
 	content: "\e609";
 	padding-right: 11px;
@@ -1863,7 +1889,7 @@ div.mejs-controls .mejs-time-rail .mejs-time-float {
 	color: #fff;
 }
 div.mejs-controls .mejs-time-rail .mejs-time-float-corner {
-	border-color: #222 rgba(0, 0, 0, 0) rgba(0, 0, 0, 0);
+	border-color: #222 transparent transparent;
 }
 
 /* TB Chat Post

@@ -17,6 +17,7 @@ class Fastfood_Custom_Header {
 		add_action( 'admin_init'								, array( &$this, 'save_theme_mod' ) );
 		add_action( 'admin_head-appearance_page_custom-header'	, array( &$this, 'admin_scripts' ) );
 		add_action( 'admin_head-appearance_page_custom-header'	, array( &$this, 'admin_style' ) );
+		add_filter( 'body_class'								, array( &$this, 'body_classes' ) );
 
 	}
 
@@ -141,6 +142,16 @@ class Fastfood_Custom_Header {
 	/* ]]> */
 	</script>
 <?php
+
+	}
+
+
+	// Add specific CSS class by filter
+	function body_classes( $classes ) {
+
+		if ( apply_filters( 'fastfood_filter_header_image', get_header_image() ) ) $classes[] = 'has-header-image';
+
+		return $classes;
 
 	}
 
