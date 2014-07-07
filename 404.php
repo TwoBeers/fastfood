@@ -18,36 +18,23 @@ get_header(); ?>
 
 	<div class="hentry" id="post-404-not-found">
 
-		<p><?php _e( "Sorry, you&#39;re looking for something that isn&#39;t here" ,'fastfood' ); ?>: <u><?php echo home_url() . esc_html( $_SERVER['REQUEST_URI'] ); ?></u></p>
+		<p><?php _e( "Sorry, you&#39;re looking for something that isn&#39;t here" ,'fastfood' ); ?>:<span class="search-string"><?php echo home_url() . esc_html( $_SERVER['REQUEST_URI'] ); ?></span></p>
 
 		<?php if ( is_active_sidebar( 'error404-widgets-area' ) ) { ?>
 
 			<p><?php _e( 'You can try the following:','fastfood' ); ?></p>
 
-
-			<?php fastfood_hook_sidebars_before( 'error404' ); ?>
-
-			<div id="error404-widgets-area">
-
-				<?php fastfood_hook_sidebar_top( 'error404' ); ?>
-
-				<?php dynamic_sidebar( 'error404-widgets-area' ); ?>
-
-				<?php fastfood_hook_sidebar_bottom( 'error404' ); ?>
-
-			</div>
-
-			<?php fastfood_hook_sidebars_after( 'error404' ); ?>
+			<?php fastfood_get_sidebar( 'error404' ); // show error404 widgets area ?>
 
 		<?php } else { ?>
 
 			<p><?php _e( 'There are several links scattered around the page, maybe you can find what you&#39;re looking for', 'fastfood' ); ?></p>
-			<p><?php _e( 'Perhaps using the search form will help...', 'fastfood' ); ?></p>
+
+			<p><?php _e( 'Perhaps using the search form will help too...', 'fastfood' ); ?></p>
+
 			<?php get_search_form(); ?>
 
 		<?php } ?>
-
-		<br class="fixfloat" />
 
 	</div>
 

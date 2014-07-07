@@ -10,33 +10,35 @@
 #tbm-widget-area:before {
 	content: ' ';
 	display: block;
-	width: 24px;
-	height:24px;
+	width: 14px;
+	height:14px;
 	background: url("../images/widgets/icons-sprite.png") no-repeat center transparent;
 	margin: 10px auto;
 }
 #primary-widget-area:before {
-	background-position: -40px -20px;
+	background-position: 0 -15px;
 }
 #first-footer-widget-area:before {
-	background-position: -25px bottom;
+	background-position: -10px -10px;
 }
 #second-footer-widget-area:before {
-	background-position: -20px bottom;
+	background-position: -5px -10px;
 }
 #third-footer-widget-area:before {
-	background-position: -15px bottom;
+	background-position: 0 -10px;
 }
 #header-widget-area:before {
-	background-position: -15px -15px;
+	background-position: 0 -5px;
 }
 #post-widgets-area:before {
-	background-position: -25px -5px;
+	background-position: -5px 0;
 }
 #error404-widgets-area:before {
-	background-position: left bottom;
+	background-position: 0 -25px;
 }
 #tbm-widget-area:before {
+	width: 24px;
+	height:24px;
 	background: url("../images/widgets/mobile.png") no-repeat center transparent;
 }
 div[id*=_ff-] .widget-title {

@@ -13,7 +13,7 @@
 
 <?php fastfood_hook_sidebars_before( 'primary' ); ?>
 
-<div id="sidebardx">
+<div id="primary-widget-area" class="widget-area">
 
 	<?php fastfood_hook_sidebar_top( 'primary' ); ?>
 

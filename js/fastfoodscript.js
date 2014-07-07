@@ -7,16 +7,18 @@ fastfoodAnimations = {
 	//initialize
 	init : function( modules ) {
 
+		var is_wide_display = fastfoodAnimations.display_res();
+
 		for (i in modules) {
 
 			switch(modules[i]) {
 
 				case 'main_menu':
-					this.main_menu();
+					if ( is_wide_display ) this.main_menu();
 					break;
 
 				case 'navigation_buttons':
-					this.navigation_buttons();
+					if ( is_wide_display ) this.navigation_buttons();
 					break;
 
 				case 'smooth_scroll':
@@ -24,7 +26,7 @@ fastfoodAnimations = {
 					break;
 
 				case 'quickbar_panels':
-					this.quickbar_panels();
+					if ( is_wide_display ) this.quickbar_panels();
 					break;
 
 				case 'entry_meta':
@@ -65,7 +67,7 @@ fastfoodAnimations = {
 					break;
 
 				case 'sticky_menu':
-					this.sticky_menu();
+					if ( is_wide_display ) this.sticky_menu();
 					break;
 
 				default :
@@ -78,10 +80,15 @@ fastfoodAnimations = {
 
 	},
 
+	display_res : function () {
+		if ( $(window).width() < 988 ) return false;
+		return true;
+	},
+
 	main_menu : function() {
 
 		//main menu dropdown animation
-		$('#mainmenu').children('.menu-item-parent').each(function(){ //get every main list item
+		$('.nav-menu.all-levels').children('.menu-item-parent').each(function(){ //get every main list item
 			var $this = $(this);
 			var d = $this.children('ul'); //for each main item, get the sub list
 			var margintop_in = 50; //the starting distance between menu item and the popup submenu
@@ -118,12 +125,12 @@ fastfoodAnimations = {
 		$('#navbuttons').children('.minibutton').each( function(){ //get every minibutton
 			var $this = $(this);
 			var list = $this.find('span.nb_tooltip');
-			var marginright_in = 60; //the starting distance between menu item and the popup submenu
+			var marginright_in = 61; //the starting distance between menu item and the popup submenu
 			list.css({ 'opacity' : 0 , 'right' : marginright_in });
 			$this.hoverIntent(
 				function(){ //when mouse enters, shift right the tooltip
 					list.css({'display' : 'block' }).animate(
-						{ 'opacity' : 0.9 , 'right' : 40 },
+						{ 'opacity' : 0.9 , 'right' : 41 },
 						200,
 						'easeOutBack'
 					);
@@ -388,7 +395,7 @@ fastfoodAnimations = {
 	},
 
 	captions : function() {
-		$('#content').find('.gallery-item').unbind().hoverIntent(
+		$('#main').find('.gallery-item').unbind().hoverIntent(
 			function(){ //when mouse enters, slide down the sub list
 				$('.gallery-caption',this).stop().slideDown();
 			},
@@ -396,16 +403,16 @@ fastfoodAnimations = {
 				$('.gallery-caption',this).stop().slideUp();
 			}
 		);
-		$('#content').find('.wp-caption').each( function() {
+		$('#main').find('.wp-caption').each( function() {
 			var $this = $(this);
 			var list = $('.wp-caption-text',this);
-			list.css('display', 'none');
+			list.css('display', 'block').hide();
 			$this.unbind().hoverIntent(
 				function(){ //when mouse enters, slide down the sub list
 					list.stop().slideDown(200);
 				},
 				function(){ //when mouse leaves, hide the sub list
-					list.stop().css('display', 'block').slideUp(200);
+					list.stop().slideUp(200);
 				}
 			);
 
@@ -416,7 +423,7 @@ fastfoodAnimations = {
 	sticky_menu : function() {
 		var body    = $( 'body' ),
 			_window = $( window ),
-			_menu   = $( '#pages' ),
+			_menu   = $( '#primary-menu-container' ),
 			mastheadHeight = _menu.height(),
 			toolbarOffset,
 			mastheadOffset;

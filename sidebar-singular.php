@@ -19,7 +19,7 @@
 
 <?php fastfood_hook_sidebars_before( 'singular' ); ?>
 
-<div id="post-widgets-area" class="fixfloat">
+<div id="post-widgets-area" class="widget-area fixfloat">
 
 	<?php fastfood_hook_sidebar_top( 'singular' ); ?>
 

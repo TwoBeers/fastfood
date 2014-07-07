@@ -41,7 +41,16 @@
 
 		<div id="main">
 
-			<?php wp_nav_menu( array( 'container_class' => 'ff-menu', 'container_id' => 'secondary1', 'fallback_cb' => false, 'theme_location' => 'secondary1', 'depth' => 1 ) ); ?>
+			<?php
+				wp_nav_menu( array(
+					'container_class'	=> 'menu-container',
+					'menu_id'			=> 'menu-secondary1',
+					'menu_class'		=> 'nav-menu one-level secondary',
+					'fallback_cb'		=> false,
+					'theme_location'	=> 'secondary1',
+					'depth'				=> 1,
+				) );
+			?>
 
 			<?php fastfood_hook_header_before(); ?>
 

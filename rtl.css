@@ -28,7 +28,7 @@ input[type=password] {
 	padding-left: 0;
 	padding-right: 20px;
 }
-#sidebardx {
+#primary-widget-area {
 	float: left;
 }
 .storycontent ul li,

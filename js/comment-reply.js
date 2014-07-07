@@ -6,7 +6,7 @@ fastfoodCustomReply = {
 
 	//initialize
 	init : function() {
-
+		if ( $(window).width() < 988 ) return;
 		this.resetForm();
 		this.addCloseButton();
 		$respond = $('#respond');

@@ -547,15 +547,15 @@ function fastfood_main_menu () {
 	if ( FastfoodOptions::get_opt('fastfood_primary_menu' ) ) {
 
 ?>
-	<div id="pages">
+	<div id="menu-primary-container" class="menu-container">
 
 		<?php fastfood_hook_menu_top(); ?>
 
 		<?php
 			wp_nav_menu( array(
 				'container'			=> false,
-				'menu_id'			=> 'mainmenu',
-				'menu_class'		=> 'nav-menu',
+				'menu_id'			=> 'menu-primary',
+				'menu_class'		=> 'nav-menu all-levels',
 				'fallback_cb'		=> 'fastfood_pages_menu',
 				'theme_location'	=> 'primary',
 			) );
@@ -576,7 +576,7 @@ if ( !function_exists( 'fastfood_pages_menu' ) ) {
 	function fastfood_pages_menu() {
 
 ?>
-	<ul id="mainmenu" class="nav-menu">
+	<ul id="primary-menu" class="nav-menu all-levels">
 
 		<?php echo fastfood_add_home_link( $items = '', $args = 'theme_location=primary' ); ?>
 

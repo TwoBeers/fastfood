@@ -18,15 +18,11 @@
 
 <?php fastfood_hook_sidebars_before( 'header' ); ?>
 
-<div id="header-widget-area">
+<div id="header-widget-area" class="widget-area">
 
 	<?php fastfood_hook_sidebar_top( 'header' ); ?>
 
-	<br class="fixfloat" />
-
 	<?php dynamic_sidebar( 'header-widget-area' ); ?>
-
-	<br class="fixfloat" />
 
 	<?php fastfood_hook_sidebar_bottom( 'header' ); ?>
 

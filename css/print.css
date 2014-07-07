@@ -60,19 +60,18 @@ img {
 .description,
 .post-edit-link,
 .article-share,
-#footer-widget-area,
-#header-widget-area,
-#headerimg,
+#head-image,
 #respond,
-#pages,
 .ff-menu,
-#sidebardx,
 #quickbar,
 #edit_link,
 #fixedfoot,
 body #wpadminbar,
 .breadcrumb-navigation,
 .crumbs,
+.nav-menu,
+.widget-area,
+.tinynav,
 [class*="el-icon-"] {
 	display: none;
 }

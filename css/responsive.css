@@ -27,7 +27,6 @@ body {
 }
 #posts_content {
 	min-height: auto;
-	padding: 0 10px;
 }
 #fixedfoot {
 	right: 0;
@@ -46,6 +45,7 @@ body {
 .minibutton .minib_img {
 	line-height: 2em;
 	color: #404040 !important;
+	width: 50px;
 }
 .minib_img.el-icon-print,
 .minib_img.el-icon-refresh,
@@ -56,23 +56,20 @@ body {
 	border: none;
 }
 .posts_wide {
-	padding: 0 10px 10px;
 }
 .posts_narrow,
 .posts_wide,
-#sidebardx {
+#primary-widget-area {
 	width: auto;
 	float: none;
 }
-#sidebardx {
+#primary-widget-area {
 	margin-top: 30px;
 }
-#sidebardx .widget,
-#header-widget-area .widget,
-#footer-widget-area .widget {
+#main .widget {
 	float: left;
 	width: 50%;
-	padding: 20px 10px;
+	padding: 20px;
 	-moz-box-sizing: border-box;
 	box-sizing: border-box;
 	min-height: 0;
@@ -88,14 +85,14 @@ body {
 	clear: none;
 }
 #header-widget-area .widget:nth-of-type(2n+1),
-#sidebardx .widget:nth-of-type(2n+1) {
+#primary-widget-area .widget:nth-of-type(2n+1) {
 	clear: left;
 }
 .comment-body .reply {
 	display: none;
 }
-.js-res {
-	width: 80%;
+#respond {
+	display: block !important;
 }
 .coming-soon .hentry {
 	border: none;
