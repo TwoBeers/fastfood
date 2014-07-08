@@ -962,7 +962,7 @@ function fastfood_multipages(){
 	$the_separator = '';
 
 	if ( $parent ) {
-		$the_parent_link = __( 'Upper page: ', 'fastfood' ) . fastfood_build_link( array(
+		$the_parent_link = __( 'Upper page', 'fastfood' ) . ': ' . fastfood_build_link( array(
 			'href'		=> get_permalink( $parent ),
 			'text'		=> get_the_title( $parent ),
 			'title'		=> get_the_title( $parent ),
@@ -979,7 +979,7 @@ function fastfood_multipages(){
 				'title'		=> get_the_title( $children ),
 			) );
 		}
-		$the_childrens_list = __( 'Lower pages: ', 'fastfood' ) . implode( ', ' , $the_childrens_list );
+		$the_childrens_list = __( 'Lower pages', 'fastfood' ) . ': ' . implode( ', ' , $the_childrens_list );
 	}
 
 	$output = $the_parent_link . $the_separator . $the_childrens_list;

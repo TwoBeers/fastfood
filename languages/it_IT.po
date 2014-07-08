@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Fastfood v0.37\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2014-06-25 16:57+0100\n"
+"PO-Revision-Date: 2014-07-08 11:14+0100\n"
 "Last-Translator: TwoBeers Crew <light@twobeers.net>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -19,12 +19,12 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 
 # @ fastfood
-#: comments.php:27 comments.php:37 functions.php:1506
+#: comments.php:27 comments.php:37 functions.php:1510
 msgid "% Comments"
 msgstr "% commenti"
 
 # @ fastfood
-#: lib/quickbar.php:551
+#: lib/quickbar.php:552
 #, php-format
 msgid "%s about %s"
 msgstr "%s su %s"
@@ -54,7 +54,7 @@ msgid "(no title)"
 msgstr "(senza titolo)"
 
 # @ fastfood
-#: comments.php:27 comments.php:37 functions.php:1505
+#: comments.php:27 comments.php:37 functions.php:1509
 msgid "1 Comment"
 msgstr "1 Commento"
 
@@ -69,7 +69,7 @@ msgid "<em>excerpt more</em> string"
 msgstr "testo di <em>excerpt more</em>"
 
 # @ fastfood
-#: lib/options.php:930
+#: lib/options.php:911
 msgid ""
 "<strong>For advanced users only</strong>: paste here your custom css code. "
 "it will be added after the defatult style"
@@ -83,7 +83,7 @@ msgid "A list of popular categories"
 msgstr "Una lista delle categorie più popolari"
 
 # @ fastfood
-#: lib/custom-header.php:56
+#: lib/custom-header.php:57
 msgid "Abstract"
 msgstr "Astratto"
 
@@ -93,22 +93,22 @@ msgid "Add New Post"
 msgstr "Aggiungi un Nuovo Articolo"
 
 # @ fastfood
-#: lib/breadcrumb.php:235
+#: lib/breadcrumb.php:241
 msgid "All Categories"
 msgstr "Tutte le Categorie"
 
 # @ fastfood
-#: functions.php:630
+#: functions.php:634
 msgid "All rights reserved"
 msgstr "Tutti i diritti riservati"
 
 # @ fastfood
-#: lib/custom-header.php:31
+#: lib/custom-header.php:32
 msgid "Ancient Tree"
 msgstr "Albero Antico"
 
 # @ fastfood
-#: functions.php:381
+#: functions.php:385
 msgid "Aperture"
 msgstr "Apertura"
 
@@ -131,12 +131,12 @@ msgstr ""
 "predefiniti?"
 
 # @ fastfood
-#: lib/my-custom-background.php:410 lib/my-custom-background.php:601
+#: lib/my-custom-background.php:400 lib/my-custom-background.php:591
 msgid "Attachment"
-msgstr "Allegato"
+msgstr "Attaccamento"
 
 # @ fastfood
-#: functions.php:1368 lib/widgets.php:1532 mobile/core-mobile.php:303
+#: functions.php:1372 lib/widgets.php:1532 mobile/core-mobile.php:303
 msgid "Author"
 msgstr "Autore"
 
@@ -151,32 +151,32 @@ msgid "Background"
 msgstr "Sfondo"
 
 # @ fastfood
-#: lib/my-custom-background.php:605
+#: lib/my-custom-background.php:595
 msgid "Background Attachment"
-msgstr "Sfondo allegato"
+msgstr "Attaccamento dello Sfondo"
 
 # @ fastfood
-#: lib/my-custom-background.php:615 lib/my-custom-background.php:619
+#: lib/my-custom-background.php:605 lib/my-custom-background.php:609
 msgid "Background Color"
-msgstr "Colore di sfondo"
+msgstr "Colore dello Sfondo"
 
 # @ fastfood
-#: lib/my-custom-background.php:441
+#: lib/my-custom-background.php:431
 msgid "Background Image"
-msgstr "Immagine di sfondo"
+msgstr "Immagine dello sfondo"
 
 # @ fastfood
-#: lib/my-custom-background.php:570
+#: lib/my-custom-background.php:560
 msgid "Background Position"
-msgstr "Posizione sfondo"
+msgstr "Posizione dello Sfondo"
 
 # @ fastfood
-#: lib/my-custom-background.php:589
+#: lib/my-custom-background.php:579
 msgid "Background Repeat"
 msgstr "Ripetizione sfondo"
 
 # @ fastfood
-#: lib/my-custom-background.php:437
+#: lib/my-custom-background.php:427
 #, php-format
 msgid ""
 "Background updated. <a href=\"%s\">Visit your site</a> to see how it looks."
@@ -185,48 +185,48 @@ msgstr ""
 "appare."
 
 # @ fastfood
-#: lib/custom-header.php:46
+#: lib/custom-header.php:47
 msgid "Bamboo Forest"
 msgstr "Foresta di Bamboo"
 
 # @ fastfood
-#: lib/my-custom-background.php:577
+#: lib/my-custom-background.php:567
 msgid "Bottom"
 msgstr "Basso"
 
 # @ fastfood
-#: lib/quickbar.php:461
+#: lib/quickbar.php:462
 msgid "Bottom of page"
 msgstr "Fondo pagina"
 
 # @ fastfood
-#: functions.php:375
+#: functions.php:379
 msgid "Camera"
 msgstr "Fotocamera"
 
 # @ fastfood
-#: functions.php:372
+#: functions.php:376
 msgid "Caption"
 msgstr "Didascalia"
 
 # @ fastfood
-#: lib/custom-header.php:61
+#: lib/custom-header.php:62
 msgid "Carps"
 msgstr "Carpe"
 
 # @ fastfood
-#: allcat.php:21 functions.php:448 functions.php:1095 lib/quickbar.php:127
+#: allcat.php:21 functions.php:452 functions.php:1099 lib/quickbar.php:127
 #: lib/widgets.php:1557
 msgid "Categories"
 msgstr "Categorie"
 
 # @ fastfood
-#: functions.php:1354 lib/widgets.php:1212 mobile/core-mobile.php:289
+#: functions.php:1358 lib/widgets.php:1212 mobile/core-mobile.php:289
 msgid "Category"
 msgstr "Categoria"
 
 # @ fastfood
-#: lib/my-custom-background.php:572 lib/my-custom-background.php:576
+#: lib/my-custom-background.php:562 lib/my-custom-background.php:566
 msgid "Center"
 msgstr "Centro"
 
@@ -236,7 +236,7 @@ msgid "Child pages"
 msgstr "Pagine inferiori"
 
 # @ fastfood
-#: lib/my-custom-background.php:513
+#: lib/my-custom-background.php:503
 msgid "Choose an image from your computer:"
 msgstr "Seleziona una immagine dal tuo computer:"
 
@@ -246,17 +246,17 @@ msgid "Clean Archives"
 msgstr "Archivi Semplici"
 
 # @ fastfood
-#: footer.php:27 lib/comment-reply.php:67 lib/quickbar.php:738
+#: footer.php:36 lib/comment-reply.php:67 lib/quickbar.php:739
 msgid "Close"
 msgstr "Chiudi"
 
 # @ fastfood
-#: lib/my-custom-background.php:361
+#: lib/my-custom-background.php:351
 msgid "Clouds"
 msgstr "Nuvole"
 
 # @ fastfood
-#: lib/my-custom-background.php:411
+#: lib/my-custom-background.php:401
 msgid "Color"
 msgstr "Colore"
 
@@ -272,42 +272,37 @@ msgstr ""
 "\">Impostazioni discussione</a>"
 
 # @ fastfood
-#: functions.php:1099 lib/quickbar.php:183 mobile/comments-mobile.php:21
+#: functions.php:1103 lib/quickbar.php:183 mobile/comments-mobile.php:21
 msgid "Comments"
 msgstr "Commenti"
 
 # @ fastfood
-#: lib/options.php:1000
+#: lib/options.php:981
 msgid "Contents"
 msgstr "Contenuti"
 
 # @ fastfood
-#: functions.php:363
+#: functions.php:367
 msgid "Copyright"
 msgstr "Copyright"
 
 # @ fastfood
-#: lib/my-custom-background.php:341
-msgid "Cork"
-msgstr "Sughero"
-
-# @ fastfood
-#: functions.php:366
+#: functions.php:370
 msgid "Credit"
 msgstr "Crediti"
 
 # @ fastfood
-#: lib/my-custom-background.php:433
+#: lib/my-custom-background.php:423
 msgid "Custom Background"
-msgstr "Sfondo personalizzato"
+msgstr "Sfondo Personalizzato"
 
 # @ fastfood
-#: functions.php:1359 lib/widgets.php:1549 mobile/core-mobile.php:294
+#: functions.php:1363 lib/widgets.php:1549 mobile/core-mobile.php:294
 msgid "Date"
 msgstr "Data"
 
 # @ fastfood
-#: functions.php:360
+#: functions.php:364
 msgid "Date Taken"
 msgstr "Data di Acquisizione"
 
@@ -327,7 +322,7 @@ msgid "Desktop View"
 msgstr "Modalità Desktop"
 
 # @ fastfood
-#: lib/my-custom-background.php:558
+#: lib/my-custom-background.php:548
 msgid "Display Options"
 msgstr "Opzioni di visualizzazione"
 
@@ -339,13 +334,13 @@ msgstr ""
 "allegati"
 
 # @ fastfood
-#: functions.php:1164 functions.php:1165 functions.php:1193 post-aside.php:18
+#: functions.php:1168 functions.php:1169 functions.php:1197 post-aside.php:18
 #: post-quote.php:22 post-status.php:24
 msgid "Edit"
 msgstr "Modifica"
 
 # @ fastfood
-#: lib/options.php:977
+#: lib/options.php:958
 msgid "Elements"
 msgstr "Elementi"
 
@@ -371,7 +366,7 @@ msgid "Enter your password to view comments."
 msgstr "Inserire la password corretta per visualizzare i commenti."
 
 # @ fastfood
-#: functions.php:1706
+#: functions.php:1697
 msgid "Fastfood Default Gravatar"
 msgstr "Gravatar predefinito di Fastfood"
 
@@ -381,12 +376,12 @@ msgid "First Footer Widget Area"
 msgstr "Fondo pagina: prima area widget"
 
 # @ fastfood
-#: lib/my-custom-background.php:607
+#: lib/my-custom-background.php:597
 msgid "Fixed"
 msgstr "Fisso"
 
 # @ fastfood
-#: functions.php:378
+#: functions.php:382
 msgid "Focal Length"
 msgstr "Lunghezza Focale"
 
@@ -396,12 +391,12 @@ msgid "Follow Me"
 msgstr "Seguimi"
 
 # @ fastfood
-#: lib/custom-header.php:41
+#: lib/custom-header.php:42
 msgid "Globe"
 msgstr "Globo"
 
 # @ fastfood
-#: lib/options.php:771
+#: lib/options.php:752
 msgid "Google web font"
 msgstr "Google web font"
 
@@ -411,22 +406,17 @@ msgid "Green Wave"
 msgstr "Onda verde"
 
 # @ fastfood
-#: lib/options.php:731
-msgid "Header height"
-msgstr "altezza testata"
-
-# @ fastfood
-#: functions.php:357
+#: functions.php:361
 msgid "Height"
 msgstr "Altezza"
 
 # @ fastfood
-#: functions.php:610 functions.php:611 lib/quickbar.php:334
+#: functions.php:614 functions.php:615 lib/quickbar.php:335
 msgid "Home"
 msgstr "Home"
 
 # @ fastfood
-#: functions.php:384
+#: functions.php:388
 msgid "ISO"
 msgstr "ISO"
 
@@ -442,10 +432,10 @@ msgstr ""
 # @ fastfood
 #: lib/widgets.php:1263 lib/widgets.php:1267
 msgid "Image details"
-msgstr "Dettagli Immagine"
+msgstr "Dettagli dell'immagine"
 
 # @ fastfood
-#: lib/options.php:1039
+#: lib/options.php:1020
 msgid "Javascript"
 msgstr "Javascript"
 
@@ -466,8 +456,8 @@ msgid "Leave a Reply to %s"
 msgstr "Replica al commento di %s"
 
 # @ fastfood
-#: comments.php:29 comments.php:30 functions.php:2013 lib/comment-reply.php:65
-#: lib/quickbar.php:292 mobile/core-mobile.php:349
+#: comments.php:29 comments.php:30 functions.php:2001 lib/comment-reply.php:65
+#: lib/quickbar.php:293 mobile/core-mobile.php:349
 msgid "Leave a comment"
 msgstr "Lascia un commento"
 
@@ -477,12 +467,12 @@ msgid "Leave a feedback"
 msgstr "Lascia un feedback"
 
 # @ fastfood
-#: lib/my-custom-background.php:571
+#: lib/my-custom-background.php:561
 msgid "Left"
 msgstr "Sinistra"
 
 # @ fastfood
-#: lib/quickbar.php:190 lib/quickbar.php:734
+#: lib/quickbar.php:190 lib/quickbar.php:735
 msgid "Log in"
 msgstr "Collegati"
 
@@ -498,12 +488,7 @@ msgid "Logged in as <a href=\"%1$s\">%2$s</a>."
 msgstr "Collegato come <a href=\"%1$s\">%2$s</a>."
 
 # @ fastfood
-#: functions.php:978
-msgid "Lower pages: "
-msgstr "Pagine inferiori: "
-
-# @ fastfood
-#: functions.php:1553
+#: functions.php:1557
 msgid "Main Navigation Menu"
 msgstr "Menu di navigazione principale"
 
@@ -518,7 +503,7 @@ msgid "Menu Widget Area"
 msgstr "Menu: area widget"
 
 # @ fastfood
-#: lib/options.php:990
+#: lib/options.php:971
 msgid "Mobile"
 msgstr "Mobile"
 
@@ -555,12 +540,12 @@ msgstr ""
 "livello</small>"
 
 # @ fastfood
-#: functions.php:1795 lib/quickbar.php:417
+#: functions.php:1784 lib/quickbar.php:418
 msgid "Newer Posts"
 msgstr "Articoli pi&ugrave; recenti"
 
 # @ fastfood
-#: functions.php:404 functions.php:409 lib/quickbar.php:389
+#: functions.php:408 functions.php:413 lib/quickbar.php:390
 msgid "Next Post"
 msgstr "Articolo successivo"
 
@@ -570,32 +555,32 @@ msgid "Next page"
 msgstr "Pagina successiva"
 
 # @ fastfood
-#: comments.php:27 comments.php:37 functions.php:1504
+#: comments.php:27 comments.php:37 functions.php:1508
 msgid "No Comments"
 msgstr "Nessun Commento"
 
 # @ fastfood
-#: lib/my-custom-background.php:590
+#: lib/my-custom-background.php:580
 msgid "No Repeat"
 msgstr "Nessuna ripetizione"
 
 # @ fastfood
-#: functions.php:451 functions.php:1097
+#: functions.php:455 functions.php:1101
 msgid "No Tags"
 msgstr "Nessun tag"
 
 # @ fastfood
-#: lib/quickbar.php:578
+#: lib/quickbar.php:579
 msgid "No comments yet."
 msgstr "Ancora nessun commento"
 
 # @ fastfood
-#: lib/quickbar.php:562
+#: lib/quickbar.php:563
 msgid "No preview: this is a comment of a protected post"
 msgstr "Nessuna anteprima: questo &egrave; un commento ad un articolo protetto"
 
 # @ fastfood
-#: lib/quickbar.php:625
+#: lib/quickbar.php:626
 msgid "No preview: this is a protected post"
 msgstr "Nessuna anteprima: questo articolo &egrave; protetto"
 
@@ -621,7 +606,7 @@ msgid "Number of users to show:"
 msgstr "Numero di utenti  da visualizzare:"
 
 # @ fastfood
-#: functions.php:1804 lib/quickbar.php:433
+#: functions.php:1793 lib/quickbar.php:434
 msgid "Older Posts"
 msgstr "Articoli pi&ugrave; vecchi"
 
@@ -631,12 +616,12 @@ msgid "Options saved."
 msgstr "Opzioni salvate."
 
 # @ fastfood
-#: lib/custom-header.php:51
+#: lib/custom-header.php:52
 msgid "Orange stripes"
 msgstr "Striscie arancioni"
 
 # @ fastfood
-#: lib/options.php:964 lib/options.php:1024 lib/options.php:1053
+#: lib/options.php:945 lib/options.php:1005 lib/options.php:1034
 msgid "Other"
 msgstr "Altro"
 
@@ -646,12 +631,12 @@ msgid "Page 404"
 msgstr "Pagina 404"
 
 # @ fastfood
-#: lib/breadcrumb.php:215
+#: lib/breadcrumb.php:217
 msgid "Page not found"
 msgstr "Non trovato"
 
 # @ fastfood
-#: functions.php:1477 mobile/loop-front-page-mobile.php:23
+#: functions.php:1481 mobile/loop-front-page-mobile.php:23
 #: mobile/loop-single-mobile.php:24
 msgid "Pages"
 msgstr "Pagine"
@@ -667,11 +652,6 @@ msgid "Parent page"
 msgstr "Pagina superiore"
 
 # @ fastfood
-#: 404.php:45
-msgid "Perhaps using the search form will help..."
-msgstr "Forse il modulo di ricerca ti potrebbe tornare utile..."
-
-# @ fastfood
 #: lib/widgets.php:542 lib/widgets.php:550
 msgid "Popular Categories"
 msgstr "Categorie Popolari"
@@ -682,7 +662,7 @@ msgid "Popular Posts"
 msgstr "Articoli pi&ugrave; popolari"
 
 # @ fastfood
-#: lib/my-custom-background.php:408 lib/my-custom-background.php:566
+#: lib/my-custom-background.php:398 lib/my-custom-background.php:556
 msgid "Position"
 msgstr "Posizione"
 
@@ -692,12 +672,12 @@ msgid "Post details"
 msgstr "Dettagli dell'articolo"
 
 # @ fastfood
-#: lib/options.php:1004
+#: lib/options.php:985
 msgid "Post formats"
 msgstr "Formato degli articoli"
 
 # @ fastfood
-#: functions.php:296
+#: functions.php:300
 msgid "Post loading, please wait..."
 msgstr "Articolo in caricamento, attendi..."
 
@@ -712,17 +692,17 @@ msgid "Posts"
 msgstr "Articoli"
 
 # @ fastfood
-#: lib/my-custom-background.php:543
+#: lib/my-custom-background.php:533
 msgid "Predefined themes"
 msgstr "temi predefiniti"
 
 # @ fastfood
-#: lib/my-custom-background.php:449
+#: lib/my-custom-background.php:439
 msgid "Preview"
 msgstr "Anteprima"
 
 # @ fastfood
-#: functions.php:403 functions.php:412 lib/quickbar.php:403
+#: functions.php:407 functions.php:416 lib/quickbar.php:404
 msgid "Previous Post"
 msgstr "Articolo precedente"
 
@@ -732,28 +712,28 @@ msgid "Previous page"
 msgstr "Pagina  precedente"
 
 # @ fastfood
-#: footer.php:28
+#: footer.php:37
 msgid "Print"
 msgstr "Stampa"
 
 # @ fastfood
-#: lib/quickbar.php:278
+#: lib/quickbar.php:279
 msgid "Print preview"
 msgstr "Anteprima di stampa"
 
 # @ fastfood
-#: functions.php:455
+#: functions.php:459
 msgid "Published on"
 msgstr "Pubblicato il"
 
 # @ fastfood
-#: functions.php:1101
+#: functions.php:1105
 #, php-format
 msgid "Published on: %s"
 msgstr "Pubblicato il: %s"
 
 # @ fastfood
-#: lib/options.php:851
+#: lib/options.php:832
 msgid "RSS feed"
 msgstr "RSS feed"
 
@@ -763,7 +743,7 @@ msgid "Recent Comments"
 msgstr "Commenti Recenti"
 
 # @ fastfood
-#: lib/quickbar.php:113 lib/quickbar.php:670
+#: lib/quickbar.php:113 lib/quickbar.php:671
 msgid "Recent Posts"
 msgstr "Articoli Recenti"
 
@@ -784,17 +764,17 @@ msgid "Remove"
 msgstr "Rimuovi"
 
 # @ fastfood
-#: lib/my-custom-background.php:482
+#: lib/my-custom-background.php:472
 msgid "Remove Background Image"
 msgstr "Rimuovi immagine di sfondo"
 
 # @ fastfood
-#: lib/my-custom-background.php:477
+#: lib/my-custom-background.php:467
 msgid "Remove Image"
 msgstr "Rimuovi immagine"
 
 # @ fastfood
-#: lib/my-custom-background.php:409 lib/my-custom-background.php:585
+#: lib/my-custom-background.php:399 lib/my-custom-background.php:575
 msgid "Repeat"
 msgstr "Ripeti"
 
@@ -804,38 +784,38 @@ msgid "Reply to Comment"
 msgstr "Replica a questo commento"
 
 # @ fastfood
-#: lib/my-custom-background.php:493 lib/my-custom-background.php:498
+#: lib/my-custom-background.php:483 lib/my-custom-background.php:488
 msgid "Restore Original Image"
 msgstr "Ripristina l'immagine originale"
 
 # @ fastfood
-#: lib/quickbar.php:348
+#: lib/quickbar.php:349
 #, php-format
 msgid "Return to %s"
 msgstr "Ritorna a %s"
 
 # @ fastfood
-#: lib/my-custom-background.php:573
+#: lib/my-custom-background.php:563
 msgid "Right"
 msgstr "Destra"
 
 # @ fastfood
-#: functions.php:2012 mobile/core-mobile.php:347
+#: functions.php:2000 mobile/core-mobile.php:347
 msgid "Say It!"
 msgstr "Dillo!"
 
 # @ fastfood
-#: lib/my-custom-background.php:606
+#: lib/my-custom-background.php:596
 msgid "Scroll"
 msgstr "Scorri"
 
 # @ fastfood
-#: functions.php:1949
+#: functions.php:1937
 msgid "Search"
 msgstr "Cerca"
 
 # @ fastfood
-#: functions.php:1376 mobile/core-mobile.php:311
+#: functions.php:1380 mobile/core-mobile.php:311
 #, php-format
 msgid "Search results for &#8220;%s&#8221;"
 msgstr "Risultati della ricerca per &#8220;%s&#8221;"
@@ -846,12 +826,12 @@ msgid "Second Footer Widget Area"
 msgstr "Fondo pagina: seconda area widget"
 
 # @ fastfood
-#: functions.php:1554
+#: functions.php:1558
 msgid "Secondary Navigation Menu #1"
 msgstr "Menu di navigazione secondario #1"
 
 # @ fastfood
-#: functions.php:1555
+#: functions.php:1559
 msgid "Secondary Navigation Menu #2"
 msgstr "Menu di navigazione secondario #2"
 
@@ -895,7 +875,7 @@ msgstr ""
 "SOLAMENTE nei singoli articoli"
 
 # @ fastfood
-#: functions.php:387
+#: functions.php:391
 msgid "Shutter Speed"
 msgstr "Velocit&agrave; Otturatore"
 
@@ -921,17 +901,17 @@ msgid "Squared Night"
 msgstr "Notte squadrata"
 
 # @ fastfood
-#: lib/options.php:945
+#: lib/options.php:926
 msgid "Style"
 msgstr "Stile"
 
 # @ fastfood
-#: functions.php:1355 mobile/core-mobile.php:290
+#: functions.php:1359 mobile/core-mobile.php:290
 msgid "Tag"
 msgstr "Tag"
 
 # @ fastfood
-#: functions.php:452 functions.php:1097 lib/widgets.php:1553
+#: functions.php:456 functions.php:1101 lib/widgets.php:1553
 msgid "Tags"
 msgstr "Tag"
 
@@ -995,7 +975,7 @@ msgid "Theme Info"
 msgstr "Informazioni del tema"
 
 # @ fastfood
-#: functions.php:2001 lib/admin.php:243 lib/admin.php:513
+#: functions.php:1989 lib/admin.php:243 lib/admin.php:513
 msgid "Theme Options"
 msgstr "Opzioni del Tema"
 
@@ -1014,7 +994,7 @@ msgstr ""
 "sui più popolari social network quali Twitter, Facebook etc."
 
 # @ fastfood
-#: lib/my-custom-background.php:483
+#: lib/my-custom-background.php:473
 msgid ""
 "This will remove the background image. You will not be able to restore any "
 "customizations."
@@ -1023,7 +1003,7 @@ msgstr ""
 "potranno pi&ugrave; recuperare eventuali personalizzazioni."
 
 # @ fastfood
-#: lib/my-custom-background.php:499
+#: lib/my-custom-background.php:489
 msgid ""
 "This will restore the original background image. You will not be able to "
 "restore any customizations."
@@ -1032,22 +1012,22 @@ msgstr ""
 "potranno pi&ugrave; recuperare eventuali personalizzazioni."
 
 # @ fastfood
-#: lib/my-custom-background.php:591
+#: lib/my-custom-background.php:581
 msgid "Tile"
 msgstr "Affianca"
 
 # @ fastfood
-#: lib/my-custom-background.php:592
+#: lib/my-custom-background.php:582
 msgid "Tile Horizontally"
 msgstr "Affianca orizzontalmente"
 
 # @ fastfood
-#: lib/my-custom-background.php:593
+#: lib/my-custom-background.php:583
 msgid "Tile Vertically"
 msgstr "Affianca verticalmente"
 
 # @ fastfood
-#: functions.php:369 lib/widgets.php:1206 lib/widgets.php:1313
+#: functions.php:373 lib/widgets.php:1206 lib/widgets.php:1313
 #: lib/widgets.php:1432 lib/widgets.php:1523
 msgid "Title"
 msgstr "Titolo"
@@ -1059,17 +1039,17 @@ msgid "Title:"
 msgstr "Titolo:"
 
 # @ fastfood
-#: lib/my-custom-background.php:575
+#: lib/my-custom-background.php:565
 msgid "Top"
 msgstr "Alto"
 
 # @ fastfood
-#: lib/quickbar.php:447
+#: lib/quickbar.php:448
 msgid "Top of page"
 msgstr "Inizio pagina"
 
 # @ fastfood
-#: lib/quickbar.php:320
+#: lib/quickbar.php:321
 msgid "Trackback URL"
 msgstr "Trackback"
 
@@ -1089,14 +1069,9 @@ msgid "Update Options"
 msgstr "Aggiorna Opzioni"
 
 # @ fastfood
-#: lib/my-custom-background.php:517
+#: lib/my-custom-background.php:507
 msgid "Upload"
 msgstr "Carica"
-
-# @ fastfood
-#: functions.php:961
-msgid "Upper page: "
-msgstr "Pagina superiore: "
 
 # @ fastfood
 #: lib/widgets.php:919
@@ -1111,7 +1086,7 @@ msgid "User"
 msgstr "Utente"
 
 # @ fastfood
-#: lib/custom-header.php:36
+#: lib/custom-header.php:37
 msgid "Vector Flowers"
 msgstr "Fiori Vettoriali"
 
@@ -1121,13 +1096,13 @@ msgid "View all categories"
 msgstr "Vedi tutte le Categorie"
 
 # @ fastfood
-#: functions.php:1092 post-status.php:24
+#: functions.php:1096 post-status.php:24
 #, php-format
 msgid "View all posts by %s"
 msgstr "Visualizza tutti gli articoli di %s"
 
 # @ fastfood
-#: lib/quickbar.php:666
+#: lib/quickbar.php:667
 #, php-format
 msgid "View all posts in %s"
 msgstr "Visualizza tutti gli articoli in %s"
@@ -1138,7 +1113,7 @@ msgid "View full size"
 msgstr "Dimensione originale"
 
 # @ fastfood
-#: functions.php:882
+#: functions.php:886
 msgid "View gallery"
 msgstr "Visualizza galleria"
 
@@ -1148,7 +1123,7 @@ msgid "Violet"
 msgstr "Viola"
 
 # @ fastfood
-#: functions.php:636
+#: functions.php:640
 msgid "Visit author homepage"
 msgstr "Visita la homepage dell'autore"
 
@@ -1158,7 +1133,7 @@ msgid "Website"
 msgstr "Sito web"
 
 # @ fastfood
-#: functions.php:354
+#: functions.php:358
 msgid "Width"
 msgstr "Larghezza"
 
@@ -1168,7 +1143,7 @@ msgid "Wood"
 msgstr "Legno"
 
 # @ fastfood
-#: lib/my-custom-background.php:351
+#: lib/my-custom-background.php:341
 msgid "Yellow"
 msgstr "Giallo"
 
@@ -1188,7 +1163,7 @@ msgid "a small login form in the user panel"
 msgstr "un piccolo modulo di login nella scheda utente"
 
 # @ fastfood
-#: lib/options.php:914
+#: lib/options.php:895
 msgid "add a lot of new usefull widgets"
 msgstr "aggiungi un sacco di widget utili"
 
@@ -1291,12 +1266,12 @@ msgid "content summary"
 msgstr "riassunto"
 
 # @ fastfood
-#: lib/options.php:929
+#: lib/options.php:910
 msgid "custom CSS code"
 msgstr "codice CSS personalizzato"
 
 # @ fastfood
-#: lib/options.php:816
+#: lib/options.php:797
 msgid "custom background"
 msgstr "sfondo personalizzato"
 
@@ -1311,7 +1286,7 @@ msgid "custom floating form for posting comments"
 msgstr "modulo di inserimento commenti per le pagine/articoli fluttuante"
 
 # @ fastfood
-#: lib/options.php:913
+#: lib/options.php:894
 msgid "custom widgets"
 msgstr "widget personalizzati"
 
@@ -1355,32 +1330,32 @@ msgid "feb"
 msgstr "feb"
 
 # @ fastfood
-#: lib/quickbar.php:306
+#: lib/quickbar.php:307
 msgid "feed for comments on this post"
 msgstr "feed dei commenti per questo post"
 
 # @ fastfood
-#: lib/options.php:749
+#: lib/options.php:730
 msgid "font family"
 msgstr "tipo di carattere"
 
 # @ fastfood
-#: lib/options.php:762
+#: lib/options.php:743
 msgid "font size"
 msgstr "dimensione del testo"
 
 # @ fastfood
-#: lib/options.php:807
+#: lib/options.php:788
 msgid "for posts/pages content"
 msgstr "per il contenuto degli articoli/pagine"
 
 # @ fastfood
-#: lib/options.php:798
+#: lib/options.php:779
 msgid "for posts/pages title"
 msgstr "per il titolo dell'articolo"
 
 # @ fastfood
-#: lib/options.php:789
+#: lib/options.php:770
 msgid "for whole site"
 msgstr "per tutto il sito"
 
@@ -1403,11 +1378,6 @@ msgid "gallery links"
 msgstr "link della galleria"
 
 # @ fastfood
-#: lib/options.php:720
-msgid "header"
-msgstr "testata"
-
-# @ fastfood
 #: lib/options.php:292
 msgid "hierarchy"
 msgstr "gerarchia"
@@ -1418,7 +1388,7 @@ msgid "highlighted links"
 msgstr "collegamenti evidenziati"
 
 # @ fastfood
-#: lib/options.php:869
+#: lib/options.php:850
 msgid "home"
 msgstr "home"
 
@@ -1463,19 +1433,14 @@ msgid "jun"
 msgstr "giu"
 
 # @ fastfood
-#: lib/quickbar.php:220
+#: lib/quickbar.php:221
 msgid "l"
 msgstr "l"
 
 # @ fastfood
-#: lib/options.php:842
+#: lib/options.php:823
 msgid "leave a comment"
 msgstr "lascia un commento"
-
-# @ fastfood
-#: lib/options.php:740
-msgid "linked header"
-msgstr "testata collegata"
 
 # @ fastfood
 #: lib/options.php:484
@@ -1508,17 +1473,17 @@ msgid "mobile support"
 msgstr "supporto per dispositivi mobili"
 
 # @ fastfood
-#: lib/options.php:327 lib/options.php:824
+#: lib/options.php:327 lib/options.php:805
 msgid "navigation buttons"
 msgstr "pulsanti di navigazione"
 
 # @ fastfood
-#: lib/options.php:887
+#: lib/options.php:868
 msgid "newer/older posts"
 msgstr "articoli pi&ugrave; recenti/vecchi"
 
 # @ fastfood
-#: lib/options.php:878
+#: lib/options.php:859
 msgid "next/previous post"
 msgstr "articolo precedente/successivo"
 
@@ -1546,7 +1511,7 @@ msgstr ""
 "dell&#39;articolo"
 
 # @ fastfood
-#: functions.php:1460 mobile/core-mobile.php:215
+#: functions.php:1464 mobile/core-mobile.php:215
 #, php-format
 msgid "page %1$s of %2$s"
 msgstr "pagina %1$s di %2$s"
@@ -1593,7 +1558,7 @@ msgid "primary menu"
 msgstr "menu principale"
 
 # @ fastfood
-#: lib/options.php:833
+#: lib/options.php:814
 msgid "print preview"
 msgstr "anteprima di stampa"
 
@@ -1712,7 +1677,7 @@ msgid "sidebar"
 msgstr "barra laterale"
 
 # @ fastfood
-#: lib/quickbar.php:542
+#: lib/quickbar.php:543
 msgid "someone"
 msgstr "un tizio"
 
@@ -1727,7 +1692,7 @@ msgid "static info"
 msgstr "informazioni statiche"
 
 # @ fastfood
-#: lib/options.php:905
+#: lib/options.php:886
 msgid "status bar"
 msgstr "barra di stato"
 
@@ -1742,12 +1707,12 @@ msgid "the content to show on indexes"
 msgstr "il contenuto da visualizza nelle liste"
 
 # @ fastfood
-#: lib/options.php:906
+#: lib/options.php:887
 msgid "the fixed bar on bottom of page"
 msgstr "la barra fissa in fondo alla pagina"
 
 # @ fastfood
-#: lib/options.php:825
+#: lib/options.php:806
 msgid ""
 "the fixed navigation bar on the right. Note: Is strongly recommended to keep "
 "it enabled"
@@ -1770,7 +1735,7 @@ msgid "the title to show on indexes"
 msgstr "il titolo da visualizza nelle liste"
 
 # @ fastfood
-#: lib/options.php:937
+#: lib/options.php:918
 msgid "theme credits"
 msgstr "crediti del tema"
 
@@ -1780,7 +1745,7 @@ msgid "thickbox"
 msgstr "thickbox"
 
 # @ fastfood
-#: functions.php:2087
+#: functions.php:2075
 msgid "this video type is not supported by your browser"
 msgstr "questo tipo di file video non &egrave; supportato dal tuo browser"
 
@@ -1800,18 +1765,18 @@ msgid "title"
 msgstr "titolo"
 
 # @ fastfood
-#: lib/quickbar.php:220
+#: lib/quickbar.php:221
 #, php-format
 msgid "today is %1$s, %2$s"
 msgstr "oggi &egrave; %1$s, %2$s"
 
 # @ fastfood
-#: lib/options.php:896
+#: lib/options.php:877
 msgid "top/bottom"
 msgstr "alto/basso"
 
 # @ fastfood
-#: lib/options.php:860
+#: lib/options.php:841
 msgid "trackback"
 msgstr "trackback"
 
@@ -1840,7 +1805,7 @@ msgstr ""
 "completo"
 
 # @ fastfood
-#: lib/options.php:817
+#: lib/options.php:798
 #, php-format
 msgid ""
 "use the enhanced custom background page instead of the standard one. Disable "
@@ -1851,61 +1816,50 @@ msgstr ""
 "stranamente"
 
 # @ fastfood
-#: lib/options.php:741
-#, php-format
-msgid ""
-"use the header image as home link. The <a href=\"%s\">header image</a> must "
-"be set. If enabled, the site title and description are hidden"
-msgstr ""
-"usa l'immagine di testata come collegamento alla pagina principale del sito. "
-"L'<a href=\"%s\">immagine di testata</a> deve essere impostata. Se attivata, "
-"il titolo del sito e la descrizione non vengono visualizzati"
-
-# @ fastfood
 #: lib/options.php:42
 msgid "user"
 msgstr "utente"
 
 # @ fastfood
-#: functions.php:915
+#: functions.php:919
 msgid "quite a long while ago..."
 msgstr "parecchio tempo fa..."
 
 # @ fastfood
-#: functions.php:919
+#: functions.php:923
 msgid "over a year ago"
 msgstr "più di un anno fa"
 
 # @ fastfood
-#: functions.php:924
+#: functions.php:928
 #, php-format
 msgid "%s months ago"
 msgstr "%s mesi fa"
 
 # @ fastfood
-#: functions.php:928
+#: functions.php:932
 msgid "a month ago"
 msgstr "un mese fa"
 
 # @ fastfood
-#: functions.php:933
+#: functions.php:937
 #, php-format
 msgid "%s ago"
 msgstr "%s fa"
 
 # @ fastfood
-#: functions.php:636
+#: functions.php:640
 #, php-format
 msgid "Fastfood theme by %s - Powered by %s"
 msgstr "tema Fastfood di %s - Utilizza %s"
 
 # @ fastfood
-#: functions.php:297
+#: functions.php:301
 msgid "Add selected text as a quote"
 msgstr "Aggiunge il testo selezionato come citazione"
 
 # @ fastfood
-#: functions.php:298
+#: functions.php:302
 msgid "Nothing to quote. First of all you should select some text..."
 msgstr "Nulla da citare. Prima di tutto devi selezionare un testo..."
 
@@ -1929,12 +1883,12 @@ msgid "excerpt length"
 msgstr "lunghezza estratto"
 
 # @ fastfood
-#: functions.php:1815
+#: functions.php:1804
 msgid "quoted on"
 msgstr "citato in"
 
 # @ fastfood
-#: functions.php:1828
+#: functions.php:1817
 msgid "Post"
 msgstr "Articolo"
 
@@ -1954,7 +1908,7 @@ msgid "Increase font size"
 msgstr "Aumenta la dimensione del testo"
 
 # @ fastfood
-#: lib/options.php:938
+#: lib/options.php:919
 msgid ""
 "It is completely optional, but if you like the Theme we would appreciate it "
 "if you keep the credit link at the bottom"
@@ -1986,12 +1940,12 @@ msgid "comma-separated list of IDs ( eg. <em>23,86,120</em> )"
 msgstr "lista di ID separati da virgola ( es. <em>32,86,120</em> )"
 
 # @ fastfood
-#: lib/options.php:780
+#: lib/options.php:761
 msgid "subset"
 msgstr "sottogruppo"
 
 # @ fastfood
-#: lib/options.php:781
+#: lib/options.php:762
 msgid "comma-separated list of subsets ( eg. \"latin,latin-ext,cyrillic\" )"
 msgstr ""
 "lista di sottogruppi separti da virgola ( es. \"latin,latin-ext,cyrillic\" )"
@@ -2004,7 +1958,7 @@ msgstr ""
 "%s dice: Non dimenticarti di impostare le <a href=\"%s\">mie opzioni</a>!"
 
 # @ fastfood
-#: lib/breadcrumb.php:215 mobile/core-mobile.php:315
+#: lib/breadcrumb.php:217 mobile/core-mobile.php:315
 msgid "Error 404"
 msgstr "Errore 404"
 
@@ -2014,7 +1968,7 @@ msgid "Sorry, you&#39;re looking for something that isn&#39;t here"
 msgstr "Spiacente ma stai cercando qualcosa che non esiste"
 
 # @ fastfood
-#: 404.php:44
+#: 404.php:31
 msgid ""
 "There are several links scattered around the page, maybe you can find what "
 "you&#39;re looking for"
@@ -2023,74 +1977,74 @@ msgstr ""
 "che fa per te"
 
 # @ fastfood
-#: functions.php:482
+#: functions.php:486
 #, php-format
 msgid "Follow %s on %s"
 msgstr "Segui %s su %s"
 
 # @ fastfood
-#: functions.php:1301
+#: functions.php:1305
 msgid "Comments are closed."
 msgstr "Commenti chiusi"
 
 # @ fastfood
-#: functions.php:1356 mobile/core-mobile.php:291
+#: functions.php:1360 mobile/core-mobile.php:291
 msgid "Taxonomy"
 msgstr "Tassonomia"
 
 # @ fastfood
-#: functions.php:1372
+#: functions.php:1376
 #, php-format
 msgid "%s archive"
 msgstr "Archivi di %s"
 
 # @ fastfood
-#: lib/my-custom-background.php:508
+#: lib/my-custom-background.php:498
 msgid "Select Image"
 msgstr "Seleziona Immagine"
 
 # @ fastfood
-#: lib/my-custom-background.php:520
+#: lib/my-custom-background.php:510
 msgid "Or choose an image from your media library:"
 msgstr "Oppure selezionare una immagine dalla libreria media:"
 
 # @ fastfood
-#: lib/my-custom-background.php:522
+#: lib/my-custom-background.php:512
 msgid "Choose a Background Image"
 msgstr "Scegli un'immagine di sfondo"
 
 # @ fastfood
-#: lib/my-custom-background.php:523
+#: lib/my-custom-background.php:513
 msgid "Set as background"
 msgstr "Imposta come sfondo"
 
 # @ fastfood
-#: lib/my-custom-background.php:523
+#: lib/my-custom-background.php:513
 msgid "Choose Image"
 msgstr "Seleziona Immagine"
 
 # @ fastfood
-#: lib/my-custom-background.php:652
+#: lib/my-custom-background.php:642
 msgid "The uploaded file is not a valid image. Please try again."
 msgstr "Il file caricato non è una immagine valida. Riprova"
 
 # @ fastfood
-#: lib/my-custom-background.php:693
+#: lib/my-custom-background.php:683
 msgid "Thumbnail"
 msgstr "Miniatura"
 
 # @ fastfood
-#: lib/my-custom-background.php:693
+#: lib/my-custom-background.php:683
 msgid "Medium"
 msgstr "Media"
 
 # @ fastfood
-#: lib/my-custom-background.php:693
+#: lib/my-custom-background.php:683
 msgid "Large"
 msgstr "Larga"
 
 # @ fastfood
-#: lib/my-custom-background.php:693
+#: lib/my-custom-background.php:683
 msgid "Full Size"
 msgstr "Dimensione Reale"
 
@@ -2117,27 +2071,27 @@ msgid "Visit theme authors homepage"
 msgstr "Visita il sito degli autori del tema"
 
 # @ fastfood
-#: functions.php:1770
+#: functions.php:1759
 msgid "Missing Attachment"
 msgstr "Allegato Mancante"
 
 # @ fastfood
-#: lib/custom-header.php:90
+#: lib/custom-header.php:91
 msgid "Text Background"
 msgstr "Sfondo Del Testo"
 
 # @ fastfood
-#: lib/custom-header.php:94
+#: lib/custom-header.php:95
 msgid "black"
 msgstr "nero"
 
 # @ fastfood
-#: lib/custom-header.php:95
+#: lib/custom-header.php:96
 msgid "white"
 msgstr "bianco"
 
 # @ fastfood
-#: lib/custom-header.php:96
+#: lib/custom-header.php:97
 msgid "transparent"
 msgstr "trasparente"
 
@@ -2167,23 +2121,23 @@ msgid "smooth scroll"
 msgstr "scorrimento automatico"
 
 # @ fastfood
-#: functions.php:1507
+#: functions.php:1511
 msgid "Comments Off"
 msgstr "Commenti disabilitati"
 
 # @ fastfood
-#: functions.php:1519
+#: functions.php:1523
 msgid "Enter your password to view comments"
 msgstr "Inserisci la tua password per vedere i commenti"
 
 # @ fastfood
-#: functions.php:1525
+#: functions.php:1529
 #, php-format
 msgid "Comment on %s"
 msgstr "Commenti su %s"
 
 # @ fastfood
-#: lib/my-custom-background.php:371
+#: lib/my-custom-background.php:361
 msgid "Graphite"
 msgstr "Grafite"
 
@@ -2207,12 +2161,12 @@ msgid "in selected posts/pages"
 msgstr "negli articoli/pagine selezionati"
 
 # @ fastfood
-#: lib/options.php:921
+#: lib/options.php:902
 msgid "responsive layout"
 msgstr "impaginazione reattiva"
 
 # @ fastfood
-#: lib/options.php:922
+#: lib/options.php:903
 msgid "the theme fits to small screens (less than 1024px wide)"
 msgstr ""
 "il tema si adatta a schermi di piccole dimensioni (larghi meno di 1024px)"
@@ -2247,27 +2201,27 @@ msgstr ""
 "piccola donazione?"
 
 # @ fastfood
-#: lib/options.php:949
+#: lib/options.php:930
 msgid "Colors"
 msgstr "Colori"
 
 # @ fastfood
-#: lib/options.php:956
+#: lib/options.php:937
 msgid "Fonts"
 msgstr "Caratteri"
 
 # @ fastfood
-#: lib/options.php:973
+#: lib/options.php:954
 msgid "Layout"
 msgstr "Impaginazione"
 
 # @ fastfood
-#: lib/options.php:1004
+#: lib/options.php:985
 msgid "learn more about the post formats"
 msgstr "informati sul formato degli articoli"
 
 # @ fastfood
-#: lib/options.php:1005
+#: lib/options.php:986
 msgid ""
 "the following options affect only the blog/index view, while in single posts "
 "the appearance will be the same"
@@ -2277,12 +2231,12 @@ msgstr ""
 "medesimo"
 
 # @ fastfood
-#: lib/options.php:1015
+#: lib/options.php:996
 msgid "Titles"
 msgstr "Titoli"
 
 # @ fastfood
-#: lib/options.php:1035
+#: lib/options.php:1016
 msgid "Features"
 msgstr "Funzionalità"
 
@@ -2346,18 +2300,18 @@ msgstr ""
 "è presente"
 
 # @ fastfood
-#: functions.php:351
+#: functions.php:355
 msgid "File Size"
 msgstr "Dimensione File"
 
 # @ fastfood
-#: functions.php:387
+#: functions.php:391
 #, php-format
 msgid "%s seconds"
 msgstr "%s secondi"
 
 # @ fastfood
-#: functions.php:878
+#: functions.php:882
 #, php-format
 msgid "This gallery contains %s image</a>"
 msgid_plural "This gallery contains %s images</a>"
@@ -2392,17 +2346,17 @@ msgstr ""
 "basso"
 
 # @ fastfood
-#: lib/quickbar.php:365
+#: lib/quickbar.php:366
 msgid "Previous Image"
 msgstr "Immagine Precedente"
 
 # @ fastfood
-#: lib/quickbar.php:375
+#: lib/quickbar.php:376
 msgid "Next Image"
 msgstr "Immagine Successiva"
 
 # @ fastfood
-#: lib/quickbar.php:614 lib/quickbar.php:694
+#: lib/quickbar.php:615 lib/quickbar.php:695
 #, php-format
 msgid "%s by %s"
 msgstr "%s di %s"
@@ -2423,10 +2377,30 @@ msgid "A"
 msgstr "A"
 
 # @ fastfood
-#: lib/options.php:772
+#: lib/options.php:753
 #, php-format
 msgid ""
 "Copy and paste here the name of a font from the %s library . Example: %s"
 msgstr ""
 "Copia ed incolla qui il nome della famiglia di caratteri dalla libreria di "
 "%s. Esempio: %s"
+
+# @ fastfood
+#: 404.php:33
+msgid "Perhaps using the search form will help too..."
+msgstr "Forse il modulo di ricerca potrebbe anche essere utile..."
+
+# @ fastfood
+#: lib/options.php:722
+msgid "header height"
+msgstr "altezza della testata"
+
+# @ fastfood
+#: functions.php:965
+msgid "Upper page"
+msgstr "Pagina superiore"
+
+# @ fastfood
+#: functions.php:982
+msgid "Lower pages"
+msgstr "Pagine inferiori"

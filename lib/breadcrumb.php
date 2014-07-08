@@ -228,9 +228,13 @@ class Fastfood_Breadcrumb {
 			$post_type_name = $post_type_object->labels->name;
 			$current_location = $post_type_name;
 		}
-		if ( is_front_page() ) { 
+		if ( is_front_page() && ( 'page' == get_option( 'show_on_front' ) ) ) { 
 			$hierarchy = $delimiter;
 			$current_location = get_the_title();
+		}
+		if ( is_front_page() && ! ( 'page' == get_option( 'show_on_front' ) ) ) { 
+			$hierarchy = $delimiter;
+			$current_location = $blogname;
 		}
 		if ( fastfood_is_allcat() ) {
 			$hierarchy = $delimiter;
