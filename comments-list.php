@@ -11,8 +11,6 @@
 
 <?php if ( !post_password_required() && have_comments() ) { ?>
 
-<div id="commentlist-wrap">
-
 	<?php fastfood_hook_comments_list_before(); ?>
 
 	<ol id="commentlist">
@@ -20,7 +18,5 @@
 	</ol>
 
 	<?php fastfood_hook_comments_list_after(); ?>
-
-</div>
 
 <?php } ?>

@@ -21,8 +21,6 @@
 
 		<meta name="viewport" content="width=100%; initial-scale=1; maximum-scale=1; minimum-scale=1; user-scalable=no;" />
 
-		<title><?php wp_title( '&laquo;', true, 'right' ); ?></title>
-
 		<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>" />
 
 		<?php wp_get_archives( 'type=monthly&format=link&limit=10' ); ?>
@@ -35,7 +33,7 @@
 
 	<body <?php body_class(); ?>>
 
-		<div id="ff_background"><div id="ff_body"></div></div>
+		<div id="ff_background"></div>
 
 		<?php fastfood_hook_body_top(); ?>
 
@@ -66,7 +64,7 @@
 
 			<?php fastfood_hook_header_after(); ?>
 
-			<?php fastfood_get_sidebar( 'header' ); // show header widgets area ?>
+			<?php fastfood_get_sidebar( 'header', true ); // show header widgets area ?>
 
 			<?php fastfood_hook_breadcrumb_navigation(); ?>
 

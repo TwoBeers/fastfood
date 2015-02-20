@@ -11,7 +11,7 @@
 
 get_header(); ?>
 
-<div id="posts_content" class="<?php echo ( fastfood_use_sidebar() ) ? 'posts_narrow' : 'posts_wide'; ?>">
+<div id="posts_content"<?php fastfood_posts_content_class(); ?>>
 
 	<?php fastfood_hook_content_top(); ?>
 
@@ -21,6 +21,6 @@ get_header(); ?>
 
 </div>
 
-<?php if ( fastfood_use_sidebar() ) fastfood_get_sidebar(); // show sidebar ?>
+<?php fastfood_get_sidebar(); // show sidebar ?>
 
 <?php get_footer(); ?>

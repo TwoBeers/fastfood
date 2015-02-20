@@ -18,9 +18,9 @@ get_header(); ?>
 
 	<div class="hentry">
 
-		<h2 class="storytitle"><?php _e( 'Categories','fastfood' ); ?></h2>
+		<h2 class="entry-title"><?php _e( 'Categories','fastfood' ); ?></h2>
 
-		<div class="storycontent">
+		<div class="entry-content">
 
 			<ul>
 				<?php wp_list_categories( 'title_li=' ); ?>

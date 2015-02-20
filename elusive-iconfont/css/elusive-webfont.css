@@ -7,11 +7,15 @@
 }
 
 [class*="el-icon-"] {
-	display: inline-block;
-	font-family: Elusive-Icons;
+	font-family: 'Elusive-Icons';
+	speak: none;
 	font-style: normal;
 	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
 	line-height: 1;
+
+	/* Better Font Rendering =========== */
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
@@ -912,11 +916,4 @@
 }
 .el-icon-asterisk:before {
 	content: "\e72a";
-}
-.el-icon-2x {
-	font-size: 2em;
-}
-.el-icon-dot5 {
-	font-size: .5em;
-	vertical-align: middle;
 }

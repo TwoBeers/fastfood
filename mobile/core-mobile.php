@@ -38,15 +38,17 @@ class fastfood_Mobile {
 		if ( is_admin() || is_feed() ) return false;
 
 		// #1 check: mobile support is off (via options)
-		if ( ! $this->get_option( 'fastfood_mobile_css' ) ) return false;
+		if ( !$this->get_option( 'fastfood_mobile_css' ) ) return false;
 
 		// #2 check: mobile override, the user clicked the "switch to desktop/mobile" link. a cookie will be set
+		$url = parse_url( get_bloginfo( 'url' ) );
+		$domain = $url['host'];
 		if ( isset( $_GET['mobile_override'] ) ) {
 			if ( md5( $_GET['mobile_override'] ) == '532c28d5412dd75bf975fb951c740a30' ) { // 'mobile'
-				setcookie( "mobile_override", "mobile", time()+(60*60*24*30*12) );
+				setcookie( "mobile_override", "mobile", time()+(60*60*24*30*12), '/', $domain );
 				return true;
 			} else {
-				setcookie( "mobile_override", "desktop", time()+(60*60*24*30*12) );
+				setcookie( "mobile_override", "desktop", time()+(60*60*24*30*12), '/', $domain );
 				return false;
 			}
 		}
@@ -77,7 +79,7 @@ class fastfood_Mobile {
 	function init () {
 		global $content_width;
 
-		if ( ! $this->is_mobile ) return;
+		if ( !$this->is_mobile ) return;
 
 		add_action( 'wp_enqueue_scripts',					array( $this, 'stylesheet' ) );
 		add_action( 'fastfood_mobile_hook_comments_before',	array( $this, 'comments_navigation' ) );
@@ -120,7 +122,7 @@ class fastfood_Mobile {
 
 	function setup() {
 
-		register_nav_menus( array( 'mobile' => __( 'Navigation Menu for mobiles<br><small>only supports the first level of hierarchy</small>', 'fastfood' ) ) );
+		register_nav_menus( array( 'mobile' => __( 'Navigation Menu for mobiles', 'fastfood' ) ) );
 
 	}
 
@@ -192,8 +194,8 @@ class fastfood_Mobile {
 
 	function posts_navigation(){
 
-		if ( ! is_single() ) return;
-		if ( ! get_next_post() && ! get_previous_post() ) return;
+		if ( !is_single() ) return;
+		if ( !get_next_post() && !get_previous_post() ) return;
 
 		?>
 			<div class="tbm-navi">
@@ -235,7 +237,7 @@ class fastfood_Mobile {
 	function page_hierarchy(){
 		global $post;
 
-		if ( ! is_page() ) return;
+		if ( !is_page() ) return;
 
 		$args = array(
 			'post_type' => 'page',

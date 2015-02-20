@@ -1,5 +1,3 @@
-<?php global $post; ?>
-<div class="fixfloat"></div>
 			</div><!-- close content -->
 
 			<?php fastfood_hook_content_after(); ?>
@@ -21,7 +19,7 @@
 					) );
 				?>
 
-				<?php fastfood_get_sidebar( 'footer' ); ?>
+				<?php fastfood_get_sidebar( 'footer', true ); ?>
 
 				<?php fastfood_credits(); ?>
 
@@ -31,18 +29,13 @@
 
 			<?php fastfood_hook_footer_after(); ?>
 
-			<?php if ( fastfood_is_printpreview() ) { ?>
-			<div id="close_preview">
-				<a id="close_button" title="<?php _e( 'Close','fastfood' ); ?>" href="<?php echo get_permalink( $post->ID ); ?>"><?php _e( 'Close','fastfood' ); ?></a>
-				<a href="javascript:window.print()" title="<?php _e( 'Print','fastfood' ); ?>" id="print_button" class="hide-if-no-js"><?php _e( 'Print','fastfood' ); ?></a>
-			</div>
-			<?php } ?>
-
 		</div><!-- close main -->
 
 		<!-- <?php echo get_num_queries(); ?> queries. <?php timer_stop(1); ?> seconds. -->
 
 		<?php fastfood_hook_body_bottom(); ?>
+
+		<?php fastfood_get_sidebar( 'hidden', true ); ?>
 
 		<?php wp_footer(); ?>
 

@@ -1,4 +1,3 @@
-var farbtastic;
 var fastfoodOptions;
 
 (function($) {
@@ -9,6 +8,13 @@ fastfoodOptions = {
 	init : function() {
 
 		var frame;
+
+		$( "#theme-options h3" ).each(function() {
+			$(this).prependTo( $(this).next() );
+		});
+		$( "#theme-options .form-table" ).each(function() {
+			$(this).appendTo( $(this).prev() );
+		});
 
 		fastfoodOptions.switchTab('style');
 
@@ -21,14 +27,13 @@ fastfoodOptions = {
 
 		$('#theme-options .fastfood_cp').each(function() {
 			$this = $(this);
+			$('<span class="visibility-preview"><span>lorem ipsum</span></span>').insertAfter( $this ).css({'color' : $this.val()});
+			$preview = $this.next('.visibility-preview');
 			$this.wpColorPicker({
 				change: function( event, ui ) {
-					$this.val( $this.wpColorPicker('color') );
+					$(this).closest('.wp-picker-container').next().css({'color': ui.color.toString()});
 				},
-				clear: function() {
-					$this.val( '' );
-				},
-				palettes: ['#21759b','#404040','#87ceeb','#000','#fff','#aaa','#ff7b0a','#f7009c']
+				palettes: ['#d54e21','#b78f21','#a2aa2a','#2ea2cc','#bf6391','#000000','#aaaaaa','#ffffff']
 			});
 		});
 
@@ -39,9 +44,9 @@ fastfoodOptions = {
 		if ( thisset != 'info' ) {
 			$('#theme-infos').css({ 'display' : 'none' });
 			$('#theme-options').css({ 'display' : '' });
-			thisclass = '.tabgroup-' + thisset;
+			thisclass = '#theme-options .group-' + thisset;
 			thissel = '#selgroup-' + thisset;
-			$('.tabgroup').css({ 'display' : 'none' });
+			$( "#theme-options [class^='group']" ).css({ 'display' : 'none' });
 			$(thisclass).css({ 'display' : '' });
 			$('#tabselector a').removeClass("nav-tab-active");
 			$(thissel).addClass("nav-tab-active");

@@ -1,24 +1,26 @@
 var fastfoodAnimations;
 
-(function($) {
+( function($) {
 
 fastfoodAnimations = {
 
 	//initialize
 	init : function( modules ) {
 
-		var is_wide_display = fastfoodAnimations.display_res();
+		//this.widgets_layout();
 
 		for (i in modules) {
 
 			switch(modules[i]) {
 
 				case 'main_menu':
-					if ( is_wide_display ) this.main_menu();
+					if ( $( 'body' ).is( '.layout-2,.layout-1' ) )
+						this.main_menu();
 					break;
 
 				case 'navigation_buttons':
-					if ( is_wide_display ) this.navigation_buttons();
+					if ( $( 'body' ).is( '.layout-2' ) )
+						this.navigation_buttons();
 					break;
 
 				case 'smooth_scroll':
@@ -26,28 +28,25 @@ fastfoodAnimations = {
 					break;
 
 				case 'quickbar_panels':
-					if ( is_wide_display ) this.quickbar_panels();
+					this.quickbar_panels();
 					break;
 
 				case 'entry_meta':
 					this.entry_meta();
-					$('body').on('post-load', function(event){ //Jetpack Infinite Scroll trigger
+					$( 'body' ).on( 'post-load', function(event){ //Jetpack Infinite Scroll trigger
 						fastfoodAnimations.entry_meta();
-					});
+					} );
 					break;
 
 				case 'post_expander':
 					this.post_expander();
-					$('body').on('post-load', function(event){ //Jetpack Infinite Scroll trigger
-						fastfoodAnimations.post_expander();
-					});
 					break;
 
 				case 'thickbox':
 					this.thickbox();
-					$('body').on('post-load', function(event){ //Jetpack Infinite Scroll trigger
+					$( 'body' ).on( 'post-load', function(event){ //Jetpack Infinite Scroll trigger
 						fastfoodAnimations.thickbox();
-					});
+					} );
 					break;
 
 				case 'get_comments':
@@ -64,10 +63,18 @@ fastfoodAnimations = {
 
 				case 'captions':
 					this.captions();
+					$( 'body' ).on( 'post-load', function(event){ //Jetpack Infinite Scroll trigger
+						fastfoodAnimations.captions();
+					} );
 					break;
 
 				case 'sticky_menu':
-					if ( is_wide_display ) this.sticky_menu();
+					if ( $( 'body' ).is( '.layout-2,.layout-1' ) )
+						this.sticky_menu();
+					break;
+
+				case 'comment_reply':
+					this.comment_reply();
 					break;
 
 				default :
@@ -80,198 +87,252 @@ fastfoodAnimations = {
 
 	},
 
-	display_res : function () {
-		if ( $(window).width() < 988 ) return false;
-		return true;
+	widgets_layout : function () {
+
+		$( '#header-widget-area, #footer-widget-area' ).each( function() {
+			var widget_area = $( this );
+
+			count = 0;
+			widget_area.find( '.widget' ).each( function() {
+
+				if ( $( this ).hasClass( 'colspan-2' ) )
+					span = 2;
+				else if ( $( this ).hasClass( 'colspan-3' ) )
+					span = 3;
+				else
+					span = 1;
+
+				count = count + span;
+
+				if ( count > 3) {
+					$( this ).addClass( 'clearleft' );
+					count = span;
+				}
+
+			} );
+
+		} );
+
+	},
+
+	comment_reply : function () {
+
+		$( '#commentlist-wrap' ).addClass( 'mini-reply' ).hoverIntent(
+			function() {
+				$( '.comment-reply-link',this).stop().animate(
+					{ 'border-width' : 10},
+					100
+				);
+			},
+			function() {
+				$( '.comment-reply-link',this).stop().animate(
+					{ 'border-width' : 5},
+					200
+				);
+			},
+			'.comment-body'
+		);
+
 	},
 
 	main_menu : function() {
 
 		//main menu dropdown animation
-		$('.nav-menu.all-levels').children('.menu-item-parent').each(function(){ //get every main list item
-			var $this = $(this);
-			var d = $this.children('ul'); //for each main item, get the sub list
-			var margintop_in = 50; //the starting distance between menu item and the popup submenu
+		$( '.nav-menu.all-levels' ).children( '.menu-item-parent' ).each( function(){ //get every main list item
+			var $this         = $( this );
+			var d             = $this.children( 'ul' ); //for each main item, get the sub list
+			var margintop_in  = 20; //the starting distance between menu item and the popup submenu
 			var margintop_out = 20; //the exiting distance between menu item and the popup submenu
+
 			if(d.size() !== 0){ //if the sub list exists...
 
-				d.css({'opacity' : 0 , 'margin-top' : margintop_in });
+				d.css( { 'opacity' : 0 , 'margin-top' : margintop_in } );
 
 				$this.hoverIntent(
 					function(){ //when mouse enters, slide down the sub list
-						d.css({'display' : 'block' }).animate(
+						offset = d.offset();
+						if ( ( offset.left + d.outerWidth( true ) + 5 ) > $( document ).width() )
+							d.addClass( 'right' );
+						d.css( { 'display' : 'block' } ).animate(
 							{ 'opacity' : 1 , 'margin-top' : 0 },
-							200,
-							'easeOutBack'
+							400
 						);
 					},
 					function(){ //when mouse leaves, hide the sub list
 						d.stop().animate(
 							{ 'opacity' : 0 , 'margin-top' : margintop_out },
 							200,
-							'swing',
-							function(){ d.css({'display' : '' , 'margin-top' : margintop_in }); }
+							function(){ d.css( { 'display' : '' , 'margin-top' : margintop_in } ).removeClass( 'right' ); }
 						);
 					}
 				);
 			}
-		});
+		} );
 
 	},
 
 	navigation_buttons : function() {
 
 		//navbuttons tooltip animation
-		$('#navbuttons').children('.minibutton').each( function(){ //get every minibutton
-			var $this = $(this);
-			var list = $this.find('span.nb_tooltip');
+		$( '#navbuttons' ).children( '.minibutton' ).each( function(){ //get every minibutton
+			var $this          = $( this );
+			var list           = $this.find( 'span.nb_tooltip' );
 			var marginright_in = 61; //the starting distance between menu item and the popup submenu
-			list.css({ 'opacity' : 0 , 'right' : marginright_in });
+
+			list.css( { 'opacity' : 0 , 'right' : marginright_in } );
+
 			$this.hoverIntent(
 				function(){ //when mouse enters, shift right the tooltip
-					list.css({'display' : 'block' }).animate(
+					list.css( { 'display' : 'block' } ).animate(
 						{ 'opacity' : 0.9 , 'right' : 41 },
-						200,
-						'easeOutBack'
+						200
 					);
 				},
 				function(){ //when mouse leaves, hide the tooltip
-					list.stop().css({ 'opacity' : 0, 'display' : '', 'right' : marginright_in });
+					list.stop().css( { 'opacity' : 0, 'display' : '', 'right' : marginright_in } );
 				}
 			);
-		});
+		} );
 
 	},
 
 	smooth_scroll : function() {
 
+		var scroll_TO = false; //the TimeOut for functions fired on window scroll
+
 		// fade in/out on scroll
-		top_but = $('#navbuttons a[href="#"]');
-		bot_but = $('#navbuttons a[href="#footer"]');
+		top_but = $( '#navbuttons a[href="#"]' );
+		bot_but = $( '#navbuttons a[href="#footer"]' );
 		top_but.hide();
-		$(function () {
-			$(window).scroll(function () {
+		$(window).scroll( function () {
+
+			if( scroll_TO !== false )
+				clearTimeout( scroll_TO );
+
+			scroll_TO = setTimeout( function() {
+
 				// check for top action
-				if ($(this).scrollTop() > 100) {
-					top_but.fadeIn();
+				if ($( this ).scrollTop() > 100) {
+					top_but.stop().fadeIn();
 				} else {
-					top_but.fadeOut();
-				}
-				// check for bottom action
-				if ( $('body').height()-$(window).scrollTop()-$(window).height() < 100) {
-					bot_but.fadeOut();
-				} else {
-					bot_but.fadeIn();
+					top_but.stop().fadeOut();
 				}
 
-			});
-		});
+				// check for bottom action
+				if ( $( 'body' ).height()-$(window).scrollTop()-$(window).height() < 100) {
+					bot_but.stop().fadeOut();
+				} else {
+					bot_but.stop().fadeIn();
+				}
+
+			}, 200 ); //200 is time in miliseconds
+
+		} );
 
 		// smooth scroll top
-		top_but.click(function() {
-			$("html, body").animate({
+		top_but.click( function() {
+			$("html, body").animate( {
 				scrollTop: 0
 			}, {
 				duration: 1000
-			});
+			} );
 			return false;
-		});
+		} );
 
 		// smooth scroll bottom
-		bot_but.click(function() {
-			$("html, body").animate({
-				scrollTop: $('#footer').offset().top - 80
+		bot_but.click( function() {
+			$("html, body").animate( {
+				scrollTop: $( '#footer' ).offset().top - 80
 			}, {
 				duration: 1000
-			});
+			} );
 			return false;
-		});
+		} );
 
 	},
 
 	quickbar_panels : function() {
 
 		//quickbar animation
-		$('#quickbar').children('.menuitem').each( function(){ //get every quickbar item
-			var $this = $(this);
-			var list = $this.children('.menuback'); // get the sub list for each quickbar item
-			var trig = $this.children('.itemimg');
+		$( '#quickbar' ).children( '.menuitem' ).each( function(){ //get every quickbar item
+			var $this = $( this );
+			var list = $this.children( '.menuback' ); // get the sub list for each quickbar item
+			var trig = $this.children( '.itemimg' );
 
-			trig.removeClass('itemimg').addClass('itemimg_js');
-			list.removeClass().addClass('menuback_js').css({ 'height' : 0 }).hide();
+			trig.removeClass( 'itemimg' ).addClass( 'itemimg_js' );
+			list.removeClass().addClass( 'menuback_js' ).css( { 'height' : 0 } ).hide();
 
 			$this.hoverIntent(
 				function(){ //when mouse enters, slide left the sub list, restore its shadow and animate the button
-					if ( $('#panel_user').hasClass('keepme') ) return;
+					if ( $( '#panel_user' ).hasClass( 'keepme' ) ) return;
 					list.stop().show().animate(
 						{ 'height': 250 },
-						500,
-						'easeOutBack'
+						400
 					);
 				},
 				function(){ //when mouse leaves, hide the submenu
-					if ( $('#panel_user').hasClass('keepme') ) return;
-					list.stop().css({ 'height' : 0 , 'display' : '' }).hide();
+					if ( $( '#panel_user' ).hasClass( 'keepme' ) ) return;
+					list.stop().css( { 'height' : 0 , 'display' : '' } ).hide();
 				}
 			);
-		});
+		} );
 
 		//add a "close" link after the submit button in minilogin form
-		$('.login-submit').append( $('#closeminilogin') );
-		$('#closeminilogin').css({ 'display' : 'inline' });
-		$('#closeminilogin').click( function() {
-			$('.itemimg_js').fadeIn();
-			$('#panel_user .menuback_js').css({ 'display' : '' , 'height' : 0  });
-			$('#ff_minilogin_wrap').css({ 'display' : '' });
-			$('#panel_user').removeClass('keepme');
+		$( '.login-submit' ).append( $( '#closeminilogin' ) );
+		$( '#closeminilogin' ).css( { 'display' : 'inline' } );
+		$( '#closeminilogin' ).click( function() {
+			$( '.itemimg_js' ).fadeIn();
+			$( '#panel_user .menuback_js' ).css( { 'display' : '' , 'height' : 0  } );
+			$( '#ff_minilogin_wrap' ).css( { 'display' : '' } );
+			$( '#panel_user' ).removeClass( 'keepme' );
 			return false;
-		});
+		} );
 
 		//preserve the menu div from disappear when loginform name input is clicked
-		$('#ff-user_login').mousedown( function() {
-			$('#ff_minilogin_wrap').css({ 'display' : 'block' });
-			$('#panel_user').addClass('keepme');
-			$('.itemimg_js').fadeOut();
-		});
+		$( '#ff-user_login' ).mousedown( function() {
+			$( '#ff_minilogin_wrap' ).css( { 'display' : 'block' } );
+			$( '#panel_user' ).addClass( 'keepme' );
+			$( '.itemimg_js' ).fadeOut();
+		} );
 
 	},
 
 	entry_meta : function() {
 
 		//meta animation
-		$('#posts_content').find('.top_meta').removeClass('top_meta').addClass('top_meta_js').children('.metafield').each( function(){  //get every metafield item
-			var $this = $(this);
-			var list = $this.children('.metafield_content'); // get the sub list for each metafield item
+		$( '#posts_content' ).find( '.top_meta' ).removeClass( 'top_meta' ).addClass( 'top_meta_js' ).children( '.metafield' ).each( function(){  //get every metafield item
+			var $this = $( this );
+			var list = $this.children( '.metafield_content' ); // get the sub list for each metafield item
 			if ( list.length == 0 ) return;
 			var parent = $this.parent();
-			list.css({ 'display' : 'block' }).hide();
+			list.css( { 'display' : 'block' } ).hide();
 			$this.hoverIntent(
 				function(){ //when mouse enters, slide down the sub list
-					list.slideDown(200,'easeOutBack');
-					parent.addClass('meta_shadowed').css({ 'border-color' : '#fff' });
+					list.slideDown(200);
+					parent.addClass( 'meta_shadowed' );
 				},
 				function(){ //when mouse leaves, hide the sub list
 					list.hide();
-					parent.removeClass('meta_shadowed').css({ 'border-color' : '' });
+					parent.removeClass( 'meta_shadowed' );
 				}
 			);
-		});
+		} );
 
 	},
 
 	thickbox : function() {
 
-		$('#posts_content').find('.storycontent a img').parent('a[href$=".jpg"],a[href$=".png"],a[href$=".gif"]').addClass('thickbox');
-		$('#posts_content').find('.storycontent .gallery').each(function() {
-			var $this = $(this);
-			$('a[href$=".jpg"],a[href$=".png"],a[href$=".gif"]',$this).attr('rel', $this.attr('id'));
-		});
+		$( '#posts_content' ).find( '.entry-content a img' ).parent( 'a[href$=".jpg"],a[href$=".png"],a[href$=".gif"]' ).addClass( 'thickbox' );
+		$( '#posts_content' ).find( '.entry-content .gallery' ).each( function() {
+			var $this = $( this );
+			$( 'a[href$=".jpg"],a[href$=".png"],a[href$=".gif"]',$this).attr( 'rel', $this.attr( 'id' ));
+		} );
 
 	},
 
 	quote_this : function () {
 		htmltext = '<a id="tb-quotethis" href="#" onclick="fastfoodAnimations.add_quote(); return false" title="' + fastfood_l10n.quote_link_info + '" ><i class="el-icon-quotes"></i></a>'
-		$(htmltext).insertBefore('#comment');
+		$(htmltext).insertBefore( '#comment' );
 	},
 
 	add_quote : function() {
@@ -299,44 +360,45 @@ fastfoodAnimations = {
 	},
 
 	post_expander : function () {
-		$('#posts_content').find('a.more-link').unbind().click(function() {
 
-			var link = $(this);
+		$( '#posts_content' ).on( 'click.postexpander', 'a.more-link', function ( e ) {
+			e.preventDefault();
 
-			$.ajax({
+			var link = $( this );
+
+			$.ajax( {
 				type: 'POST',
 				url: link.attr("href"),
-				beforeSend: function(XMLHttpRequest) { link.html(fastfood_l10n.post_expander_wait).addClass('ajaxed'); },
+				beforeSend: function(XMLHttpRequest) { link.html(fastfood_l10n.post_expander_wait).addClass( 'ajaxed' ); },
 				data: 'ff_post_expander=1',
-				success: function(data) { link.parents(".storycontent").hide().html($(data)).fadeIn(600); }
-			});	
+				success: function(data) { link.parents(".entry-content").hide().html($(data)).fadeIn(600); }
+			} );
 
-			return false;
-
-		});
+		} );
 
 	},
 
 	get_comments : function () {
-		var navigation = $('.navigate_comments');
-		navigation.find('a').click(function() {
+		var navigation = $( '.navigate_comments' );
+		navigation.find( 'a' ).click( function() {
 
-			var link = $(this);
+			var link = $( this );
 
-			$.ajax({
+			$.ajax( {
 				type: 'POST',
 				url: link.attr("href"),
-				beforeSend: function(XMLHttpRequest) { link.addClass('ajaxed'); },
+				beforeSend: function(XMLHttpRequest) { link.addClass( 'ajaxed' ); },
 				data: 'ff_get_comments_page=1',
 				success: function(data) {
-					$('#commentlist-wrap').html($(data));
+					$( '#commentlist-wrap' ).html($(data));
 					fastfoodAnimations.get_comments();
+					$( 'body' ).trigger( 'comments-loaded' );
 				}
-			});	
+			} );	
 
 			return false;
 
-		});
+		} );
 
 	},
 
@@ -351,11 +413,11 @@ fastfoodAnimations = {
 		// Take the options that the user selects, and merge them with defaults.
 		options = $.extend(defaults, options);
 
-		return $('#head-image.slider').each(function() {
+		return $( '#head-image.slider' ).each( function() {
 
 			// cache "this."
-			var $this = $(this);
-			var $images = $('img',$this);
+			var $this = $( this );
+			var $images = $( 'img',$this);
 			var $parent = $images.parent();
 
 			if ($images.size() > 1) {
@@ -365,7 +427,7 @@ fastfoodAnimations = {
 			}
 
 			function loo_slide() {
-				timId = setInterval(function() {
+				timId = setInterval( function() {
 					slide();
 				}, (options.speed + options.pause));
 				return timId;
@@ -374,66 +436,53 @@ fastfoodAnimations = {
 			function slide() {
 				setTimeout( function() {
 					$this
-						.find('img:last')
+						.find( 'img:last' )
 						.fadeIn(options.speed, function() { 
-							$(this)
+							$( this )
 								.prependTo($parent)
 								.css("display","");
-					});
+					} );
 				},options.pause);
 			}
-		});
+		} );
 	},
 
 	tinynav : function() {
 		//if ( $(window).width() > 800 ) return false;
-		$(".nav-menu").tinyNav({
+		$(".nav-menu").tinyNav( {
 			active: 'current_page_item', // Set the "active" class for default menu
 			label: '', // String: Sets the <label> text for the <select> (if not set, no label will be added)
 			header: '' // String: Specify text for "header" and show header instead of the active item
-		});
+		} );
 	},
 
 	captions : function() {
-		$('#main').find('.gallery-item').unbind().hoverIntent(
+		$( '#main' ).find( '.gallery-item img' ).unbind().hoverIntent(
 			function(){ //when mouse enters, slide down the sub list
-				$('.gallery-caption',this).stop().slideDown();
+				$( this ).closest( '.gallery-item' ).find( '.gallery-caption' ).stop().slideDown();
 			},
 			function(){ //when mouse leaves, hide the sub list
-				$('.gallery-caption',this).stop().slideUp();
+				$( this ).closest( '.gallery-item' ).find( '.gallery-caption' ).stop().slideUp();
 			}
 		);
-		$('#main').find('.wp-caption').each( function() {
-			var $this = $(this);
-			var list = $('.wp-caption-text',this);
-			list.css('display', 'block').hide();
-			$this.unbind().hoverIntent(
-				function(){ //when mouse enters, slide down the sub list
-					list.stop().slideDown(200);
-				},
-				function(){ //when mouse leaves, hide the sub list
-					list.stop().slideUp(200);
-				}
-			);
-
-		});
-
 	},
 
 	sticky_menu : function() {
 		var body    = $( 'body' ),
 			_window = $( window ),
-			_menu   = $( '#primary-menu-container' ),
+			_menu   = $( '#menu-primary-container' ),
 			mastheadHeight = _menu.height(),
 			toolbarOffset,
 			mastheadOffset;
 
 		if ( _window.width() < 988 ) return;
 
+		if ( _menu.length == 0 ) return;
+
 		toolbarOffset  = body.is( '.admin-bar' ) ? $( '#wpadminbar' ).height() : 0;
 		mastheadOffset = _menu.offset().top - toolbarOffset;
 		_menu.css( 'top', toolbarOffset );
-		$( '<div id="pages-placeholder"></div>' ).css('height',mastheadHeight).insertBefore(_menu);
+		$( '<div id="menu-primary-placeholder"></div>' ).css( 'height',mastheadHeight).insertBefore(_menu);
 
 		_window.on( 'scroll', function() {
 			if ( ( window.scrollY > mastheadOffset ) ) {
@@ -447,6 +496,6 @@ fastfoodAnimations = {
 
 };
 
-$(document).ready(function($){ fastfoodAnimations.init(fastfood_l10n.script_modules); });
+$(document).ready( function($){ fastfoodAnimations.init(fastfood_l10n.script_modules); } );
 
-})(jQuery);
+} )(jQuery);

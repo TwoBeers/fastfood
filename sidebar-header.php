@@ -9,13 +9,6 @@
  */
 ?>
 
-<!-- here should be the Header widget area -->
-<?php
-	/* The Header widget area is triggered if any of the areas have widgets. */
-	if ( !is_active_sidebar( 'header-widget-area'  ) )
-		return;
-?>
-
 <?php fastfood_hook_sidebars_before( 'header' ); ?>
 
 <div id="header-widget-area" class="widget-area">

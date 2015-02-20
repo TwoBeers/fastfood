@@ -24,7 +24,7 @@ class Fastfood_For_Jetpack {
 	/* initialize Jetpack support */
 	function init() {
 
-		if ( ! class_exists( 'Jetpack' ) ) return;
+		if ( !class_exists( 'Jetpack' ) ) return;
 
 		if ( fastfood_is_mobile() ) return;
 
@@ -91,6 +91,8 @@ class Fastfood_For_Jetpack {
 	//print the sharedaddy buttons inside the "I-like-it" container instead of after post content
 	function sharedaddy() {
 
+		if ( ( function_exists( 'is_buddypress' ) && is_buddypress() ) || ( function_exists( 'is_bbpress' ) && is_bbpress() ) ) return;
+
 		echo sharing_display();
 
 	}
@@ -108,10 +110,11 @@ class Fastfood_bbPress {
 
 	function __construct() {
 
-		if ( ! function_exists( 'is_bbpress' ) ) return;
+		if ( !function_exists( 'is_bbpress' ) ) return;
 
 		add_action( 'wp_head'									, array( $this, 'init' ), 999 );
 		add_filter( 'fastfood_options_array'					, array( $this, 'extra_options' ), 10, 1 );
+		add_filter( 'fastfood_options_hierarchy'				, array( $this, 'update_options_hierarchy' ), 10, 1 );
 
 	}
 
@@ -120,14 +123,15 @@ class Fastfood_bbPress {
 	 */
 	function init() {
 
-		if ( ! is_bbpress() ) return;
+		if ( !is_bbpress() ) return;
 
-		add_filter( 'fastfood_breadcrumb'				, array( $this, 'breadcrumb' ) );
 		//add_filter( 'bbp_breadcrumb_separator'					, array( $this, 'breadcrumb_sep' ) );
+		add_filter( 'fastfood_breadcrumb'						, array( $this, 'breadcrumb' ) );
 		add_filter( 'fastfood_option_fastfood_xinfos_global'	, '__return_false' );
 		add_filter( 'fastfood_filter_navbuttons'				, array( $this, 'navbuttons' ) );
+		add_filter( 'fastfood_filter_featured_title'			, array( $this, 'show_title' ) );
 		add_filter( 'fastfood_use_sidebar'						, array( $this, 'show_sidebar' ) );
-		add_filter( 'fastfood_skip_post_widgets_area'			, '__return_true' );
+		add_filter( 'fastfood_get_sidebar_singular'				, '__return_false' );
 
 	}
 
@@ -142,9 +146,6 @@ class Fastfood_bbPress {
 			'home_text'	=> '<i class="el-icon-home"></i><span class="screen-reader-text">Home</span>',
 		);
 
-		if ( bbp_is_user_home() )
-			$args['current_text'] = bbp_get_displayed_user_field( 'display_name' );
-
 		return $breadcrumb = bbp_get_breadcrumb( $args );
 
 	}
@@ -158,27 +159,61 @@ class Fastfood_bbPress {
 	function extra_options( $coa ) {
 
 		$coa['fastfood_rsideb_bbpress'] = array(
-			'group'				=> 'quickbar',
-			'type'				=> 'chk',
-			'default'			=> 0,
-			'description'		=> __( 'in bbPress forums', 'fastfood' ),
-			'info'				=> '',
-			'req'				=> '',
-			'sub'				=> false
+			'type'				=> 'checkbox',
+			'setting'			=> array(
+				'default'			=> 0,
+				'sanitize_method'	=> 'checkbox',
+			),
+			'control'			=> array(
+				'type'				=> 'checkbox',
+				'render_type'		=> 'checkbox',
+				'label'				=> __( 'in bbPress forums', 'fastfood' ),
+				'description'		=> '',
+			),
 		);
 
-		$coa['fastfood_rsideb']['sub'][] = 'fastfood_rsideb_bbpress';
+		$coa['fastfood_hide_bbpress_title'] = array(
+			'type'				=> 'checkbox',
+			'setting'			=> array(
+				'default'			=> 0,
+				'sanitize_method'	=> 'checkbox',
+			),
+			'control'			=> array(
+				'type'				=> 'checkbox',
+				'render_type'		=> 'checkbox',
+				'label'				=> __( 'in bbPress forums', 'fastfood' ),
+				'description'		=> '',
+			),
+		);
 
 		return $coa;
 
 	}
 
+	function update_options_hierarchy( $hierarchy ) {
+
+		$hierarchy['field']['sidebar']['options'][] = 'fastfood_rsideb_bbpress';
+		$hierarchy['field']['hide_titles']['options'][] = 'fastfood_hide_bbpress_title';
+
+		return $hierarchy;
+
+	}
+
 	function show_sidebar( $bool ) {
 
-		if ( ! FastfoodOptions::get_opt( 'fastfood_rsideb_bbpress' ) )
+		if ( !FastfoodOptions::get_opt( 'fastfood_rsideb_bbpress' ) )
 			$bool = false;
 
 		return $bool;
+
+	}
+
+	function show_title( $title ) {
+
+		if ( FastfoodOptions::get_opt( 'fastfood_hide_bbpress_title' ) )
+			$title = '';
+
+		return $title;
 
 	}
 
@@ -205,10 +240,11 @@ class Fastfood_BuddyPress {
 
 	function __construct() {
 
-		if ( ! function_exists( 'is_buddypress' ) ) return;
+		if ( !function_exists( 'is_buddypress' ) ) return;
 
 		add_action( 'wp_head'									, array( $this, 'init' ), 999 );
 		add_filter( 'fastfood_options_array'					, array( $this, 'extra_options' ), 10, 1 );
+		add_filter( 'fastfood_options_hierarchy'				, array( $this, 'update_options_hierarchy' ), 10, 1 );
 
 	}
 
@@ -217,49 +253,63 @@ class Fastfood_BuddyPress {
 	 */
 	function init() {
 
-		if ( ! is_buddypress() ) return;
+		if ( !is_buddypress() ) return;
 
 		add_filter( 'fastfood_option_fastfood_xinfos_global'		, '__return_false' );
 		add_filter( 'fastfood_option_fastfood_hide_frontpage_title'	, '__return_false' );
-		add_filter( 'fastfood_skip_post_widgets_area'				, '__return_true' );
 		add_filter( 'fastfood_use_sidebar'							, array( $this, 'show_sidebar' ) );
 		add_filter( 'fastfood_filter_featured_title'				, array( $this, 'show_title' ) );
 		add_filter( 'fastfood_filter_navbuttons'					, array( $this, 'navbuttons' ) );
+		add_filter( 'fastfood_get_sidebar_singular'					, '__return_false' );
 
 	}
 
 	function extra_options( $coa ) {
 
 		$coa['fastfood_rsideb_buddypress'] = array(
-			'group'				=> 'quickbar',
-			'type'				=> 'chk',
-			'default'			=> 0,
-			'description'		=> __( 'in BuddyPress', 'fastfood' ),
-			'info'				=> '',
-			'req'				=> '',
-			'sub'				=> false
+			'type'				=> 'checkbox',
+			'setting'			=> array(
+				'default'			=> 0,
+				'sanitize_method'	=> 'checkbox',
+			),
+			'control'			=> array(
+				'type'				=> 'checkbox',
+				'render_type'		=> 'checkbox',
+				'label'				=> __( 'in BuddyPress', 'fastfood' ),
+				'description'		=> '',
+			),
 		);
 
 		$coa['fastfood_hide_buddypress_title'] = array(
-			'group'				=> 'content',
-			'type'				=> 'chk',
-			'default'			=> 0,
-			'description'		=> __( 'in BuddyPress', 'fastfood' ),
-			'info'				=> '',
-			'req'				=> '',
-			'sub'				=> false
+			'type'				=> 'checkbox',
+			'setting'			=> array(
+				'default'			=> 0,
+				'sanitize_method'	=> 'checkbox',
+			),
+			'control'			=> array(
+				'type'				=> 'checkbox',
+				'render_type'		=> 'checkbox',
+				'label'				=> __( 'in BuddyPress', 'fastfood' ),
+				'description'		=> '',
+			),
 		);
-
-		$coa['fastfood_rsideb']['sub'][]		= 'fastfood_rsideb_buddypress';
-		$coa['fastfood_hide_titles']['sub'][]	= 'fastfood_hide_buddypress_title';
 
 		return $coa;
 
 	}
 
+	function update_options_hierarchy( $hierarchy ) {
+
+		$hierarchy['field']['sidebar']['options'][] = 'fastfood_rsideb_buddypress';
+		$hierarchy['field']['hide_titles']['options'][] = 'fastfood_hide_buddypress_title';
+
+		return $hierarchy;
+
+	}
+
 	function show_sidebar( $bool ) {
 
-		if ( ! FastfoodOptions::get_opt( 'fastfood_rsideb_buddypress' ) )
+		if ( !FastfoodOptions::get_opt( 'fastfood_rsideb_buddypress' ) )
 			$bool = false;
 
 		return $bool;

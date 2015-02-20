@@ -46,4 +46,4 @@ v1.00 (2011-12-31) - Release
 Want to do a pull request?
 ======
 
-Great! New ideas are more than welcome, but please check the [Pull Request Guidelines](https://github.com/viljamis/TinyNav.js/wiki/Pull-Request-Guidelines) first before doing so.
+Great!New ideas are more than welcome, but please check the [Pull Request Guidelines](https://github.com/viljamis/TinyNav.js/wiki/Pull-Request-Guidelines) first before doing so.

@@ -32,7 +32,7 @@
 
 	<?php fastfood_hook_post_content_before(); ?>
 
-	<div class="storycontent">
+	<div class="entry-content">
 		<?php
 			switch ( FastfoodOptions::get_opt('fastfood_postexcerpt' ) ) {
 				case 0: //the content

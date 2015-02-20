@@ -1,0 +1,280 @@
+#customize-preview iframe {
+	min-width: 1024px;
+}
+#customize-preview {
+	overflow-x: auto;
+	overflow-y: hidden;
+}
+.more-info-link {
+	border: 1px solid;
+	border-radius: 13px;
+	display: inline-block;
+	font-size: 11px;
+	line-height: 15px;
+	margin-top: 1px;
+	text-align: center;
+	width: 15px;
+}
+li.customize-control-background .current .container {
+	text-align: center;
+}
+li.customize-control-background .current .container img {
+	max-height: 150px;
+	width: auto;
+	border-radius: 0;
+}
+.customize-control-top-level-title {
+	margin-top: 18px;
+	margin-left: -25px;
+}
+.customize-control-tbslider .slider-display {
+	float: right;
+	font-weight: normal;
+}
+.customize-control-tbslider .ui-slider {
+	position: relative;
+	text-align: left;
+	background-color: #fff;
+	border: 1px solid #ddd;
+	box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07) inset;
+	display: inline-block;
+	border-radius: 3px;
+	box-sizing: border-box;
+}
+.customize-control-tbslider .ui-slider .ui-slider-handle {
+	position: absolute;
+	z-index: 2;
+	cursor: default;
+	cursor: pointer;
+	background: #f7f7f7;
+	border: 1px solid #ccc;
+	box-shadow: 0 1px 0 #fff inset, 0 1px 0 rgba(0, 0, 0, 0.08);
+	border-radius: 3px;
+	box-sizing: border-box;
+}
+.customize-control-tbslider .ui-slider .ui-slider-handle.ui-state-hover {
+	background: #fafafa;
+	border-color: #999;
+}
+.customize-control-tbslider .ui-slider .ui-slider-handle.ui-state-focus {
+	box-shadow: 0 0 0 1px #5b9dd9, 0 0 2px 1px rgba(30, 140, 190, 0.8);
+}
+
+.customize-control-tbslider .ui-slider-horizontal {
+	height: 1em;
+	margin: 0.5em 0;
+	width: 100%;
+	vertical-align: middle;
+}
+
+.customize-control-tbslider .ui-slider-horizontal .ui-slider-handle {
+	top: -.3em;
+	margin-left: -.5em;
+	width: 1em;
+	height: 1.5em;
+}
+#customize-controls li[id*=fastfood_options_panel_] > h3:before {
+	content: '';
+	display: block;
+	width: 8px;
+	height:100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background: #2ea2cc;
+}
+#customize-control-header_image .customizer-section-intro {
+	display: none;
+}
+#customize-controls .customize-control-checkbox {
+	padding-left: 25px;
+	box-sizing: border-box;
+}
+#customize-controls .customize-control-checkbox input {
+	margin-left: -25px;
+}
+.customize-control-tbslider {
+	margin-top: 5px;
+}
+.theme-option-sprite-image {
+	background: url("../images/admin/options-sprite.png") no-repeat left top transparent;
+	display: inline-block;
+	margin-right: 6px;
+	vertical-align: text-bottom;
+}
+.customize-control-smart-radio .theme-option-sprite-image {
+	position: relative;
+	border-radius: 2px;
+}
+.customize-control-smart-radio .theme-option-sprite-image:after {
+	border: 4px solid #ddd;
+	border-radius: 2px;
+	bottom: 0;
+	content: "";
+	height: auto;
+	left: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+.customize-control-smart-radio input:checked + .theme-option-sprite-image:after {
+	border: 4px solid #2ea2cc;
+}
+#customize-control-fastfood_options-fastfood_mobile_css_color .customize-control-title,
+#customize-control-fastfood_options-fastfood_rsideb_position .customize-control-title {
+	margin-bottom: 5px;
+}
+#customize-control-fastfood_options-fastfood_mobile_css_color label,
+#customize-control-fastfood_options-fastfood_rsideb_position label {
+	float: left;
+	line-height: inherit;
+	text-align: center;
+	width: 50%;
+}
+#customize-control-fastfood_options-fastfood_mobile_css_color input,
+#customize-control-fastfood_options-fastfood_rsideb_position input {
+	display: none;
+}
+#customize-control-fastfood_options-fastfood_mobile_css_color .theme-option-sprite-image,
+#customize-control-fastfood_options-fastfood_rsideb_position .theme-option-sprite-image {
+	display: block;
+	margin: 0 auto;
+}
+#customize-control-fastfood_options-fastfood_rsideb_position .theme-option-sprite-image {
+	width: 65px;
+	height: 55px;
+}
+#customize-control-fastfood_options-fastfood_rsideb_position label[title="right"] .theme-option-sprite-image {
+	background-position: -235px 0;
+}
+#customize-control-fastfood_options-fastfood_rsideb_position label[title="left"] .theme-option-sprite-image {
+	background-position: -170px 0;
+}
+#customize-control-fastfood_options-fastfood_mobile_css_color .theme-option-sprite-image {
+	height: 85px;
+	width: 85px;
+}
+#customize-control-fastfood_options-fastfood_mobile_css_color label[title="light"] .theme-option-sprite-image {
+	background-position: -85px 0;
+}
+#customize-control-fastfood_options-fastfood_mobile_css_color label[title="dark"] .theme-option-sprite-image {
+	background-position: 0 0;
+}
+#customize-control-background_scheme input {
+	display: none;
+}
+#customize-control-background_scheme label {
+	float: left;
+	line-height: 0;
+	margin-bottom: 1%;
+	margin-right: 1%;
+	width: 24%;
+}
+#customize-control-background_scheme img {
+	border-radius: 2px;
+}
+#customize-control-background_scheme label[title="0"] {
+	display: none;
+}
+#theme_donation {
+	text-align: center;
+}
+.theme-controls-header {
+	margin: 0;
+	left: 0;
+	position: relative;
+}
+.in-sub-panel .wp-full-overlay-sidebar-content > .theme-controls-header {
+	left: -300px;
+	width: 300px;
+}
+.theme-controls-header.current {
+}
+.theme-controls-header-title {
+	background-color: #fff;
+	border-bottom: 1px solid #eee;
+	color: #555;
+	background: none repeat scroll 0 0 #fff;
+	border-left: medium none;
+	border-right: medium none;
+	line-height: 21px;
+	padding: 10px 10px 11px 14px;
+	margin: 0;
+	left: 0;
+	position: relative;
+	text-transform: uppercase;
+}
+.can-expand .theme-controls-header-title {
+	cursor: pointer;
+}
+.can-expand .theme-controls-header-title:hover {
+	background-color: #f5f5f5;
+	color: #222;
+}
+.current .theme-controls-header-title {
+	background-color: #f5f5f5;
+	color: #222;
+}
+.theme-controls-header-title:before {
+	content: '';
+	display: block;
+	width: 8px;
+	height:100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+	background: #2ea2cc;
+}
+.can-expand .theme-controls-header-title:after {
+	background: #f5f5f5;
+	border: medium none;
+	display: block;
+	font: 400 20px/1 dashicons;
+	padding: 0 0 0 5px;
+	text-align: center;
+	text-decoration: none !important;
+	text-indent: 0;
+	border-left: 1px solid #eee;
+	color: #555;
+	content: "\f347";
+	height: 100%;
+	line-height: 45px;
+	margin: 0;
+	width: 38px;
+	position: absolute;
+	right: 0;
+	top: 0;
+}
+.can-expand .theme-controls-header-title:hover:after {
+	color: #555;
+	background: #ddd;
+}
+.can-expand.current .theme-controls-header-title:after {
+	content: "\f343";
+	color: #555;
+	background: #ddd;
+}
+.theme-logo {
+	display: inline-block;
+	width: 13px;
+	height:13px;
+	background: url("../images/admin/icons-sprite.png") no-repeat -30px -30px transparent;
+	vertical-align: middle;
+	margin-right: 10px;
+}
+.theme-controls-header-description {
+	background: #f5f5f5;
+	padding: 10px 20px 15px;
+	border-bottom: 1px solid #eee;
+	font-size: .8em;
+}
+.control-panel-fastfood_options .control-section.control-subsection {
+}
+.control-panel-fastfood_options .control-section.control-subsection.expanded {
+}
+.control-panel-fastfood_options .control-section.control-subsection.collapsed {
+	position: absolute;
+	top: -10000px;
+	left: -10000px;
+	width: 282px;
+}

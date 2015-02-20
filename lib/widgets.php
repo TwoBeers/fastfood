@@ -9,25 +9,22 @@
  */
 
 
-add_action( 'widgets_init',		'fastfood_widget_area_init' );
-add_action( 'widgets_init',		'fastfood_widgets_init' );
+add_action( 'widgets_init', 'fastfood_widget_area_init' );
+add_action( 'widgets_init', 'fastfood_widgets_init' );
 
 
 /**
  * Define default Widget arguments
  */
-function fastfood_get_default_widget_args( $extra_wrap_class = '' ) {
-	$widget_args = array(
-		// Widget container opening tag, with classes
-		'before_widget' => $extra_wrap_class ? '<div class="' . $extra_wrap_class . '"><div id="%1$s" class="widget %2$s">' : '<div id="%1$s" class="widget %2$s">',
-		// Widget container closing tag
-		'after_widget' => $extra_wrap_class ? '</div></div>' : '</div>',
-		// Widget Title container opening tag, with classes
-		'before_title' => '<div class="w_title">',
-		// Widget Title container closing tag
-		'after_title' => '</div>'
-	);
-	return $widget_args;
+function fastfood_get_default_widget_args( $widget_area = 'primary-widget-area', $extra_wrap_class = '' ) {
+
+	return apply_filters( 'fastfood_get_default_widget_args', array(
+		'before_widget'		=> $extra_wrap_class ? '<div class="' . $extra_wrap_class . '"><div id="%1$s" class="widget %2$s">' : '<div id="%1$s" class="widget %2$s">',
+		'after_widget'		=> $extra_wrap_class ? '</div></div>' : '</div>',
+		'before_title'		=> '<div class="w_title">',
+		'after_title'		=> '</div>',
+	), $widget_area );
+
 }
 
 
@@ -38,71 +35,67 @@ function fastfood_widget_area_init() {
 	// Area 1, located at the top of the sidebar.
 	register_sidebar( array_merge( 
 		array(
-			'name' => __( 'Sidebar Widget Area', 'fastfood' ),
-			'id' => 'primary-widget-area',
-			'description' => __( 'The sidebar widget area', 'fastfood' ),
+			'name'			=> __( 'Sidebar Widget Area', 'fastfood' ),
+			'id'			=> 'primary-widget-area',
+			'description'	=> __( 'The sidebar widget area', 'fastfood' ),
+			'columns'		=> 1,
 		),
-		fastfood_get_default_widget_args()
+		fastfood_get_default_widget_args( 'primary-widget-area' )
 	) );
 
 	// Area 2, located under the main menu.
 	register_sidebar( array_merge( 
 		array(
-			'name' => __( 'Menu Widget Area', 'fastfood' ),
-			'id' => 'header-widget-area',
-			'description' => __( 'The widget area under the main menu', 'fastfood' ),
+			'name'			=> __( 'Header Widget Area', 'fastfood' ),
+			'id'			=> 'header-widget-area',
+			'description'	=> __( 'The widget area under the main menu', 'fastfood' ),
+			'columns'		=> 3,
+		),
+		fastfood_get_default_widget_args( 'header-widget-area' )
+	) );
+
+	// Area 3, located after post/page content.
+	register_sidebar( array_merge( 
+		array(
+			'name'			=> __( 'Post/Page Widget Area', 'fastfood' ),
+			'id'			=> 'post-widgets-area',
+			'description'	=> __( "The widget area after the post/page content. It's visible only in single posts/pages/attachments", 'fastfood' ),
+			'columns'		=> 2,
 		),
 		fastfood_get_default_widget_args()
 	) );
 
-	// Area 7, located after post/page content.
+	// Area 4, located after post/page content.
 	register_sidebar( array_merge( 
 		array(
-			'name' => __( 'Post/Page Widget Area', 'fastfood' ),
-			'id' => 'post-widgets-area',
-			'description' => __( "The widget area after the post/page content. It's visible only in single posts/pages/attachments", 'fastfood' ),
+			'name'			=> __( 'Footer Widget Area', 'fastfood' ),
+			'id'			=> 'footer-widget-area',
+			'description'	=> __( 'The footer widget area', 'fastfood' ),
+			'columns'		=> 3,
 		),
-		fastfood_get_default_widget_args()
+		fastfood_get_default_widget_args( 'footer-widget-area' )
 	) );
 
-	// Area 3, located in the footer. Empty by default.
+	// Area 5, located in page 404.
 	register_sidebar( array_merge( 
 		array(
-			'name' => __( 'First Footer Widget Area', 'fastfood' ),
-			'id' => 'first-footer-widget-area',
-			'description' => __( 'The first footer widget area', 'fastfood' ),
+			'name'			=> __( 'Page 404 Widget Area', 'fastfood' ),
+			'id'			=> 'error404-widgets-area',
+			'description'	=> __( 'Enrich the page 404 with some useful widgets', 'fastfood' ),
+			'columns'		=> 2,
 		),
-		fastfood_get_default_widget_args()
+		fastfood_get_default_widget_args( 'error404-widgets-area' )
 	) );
 
-	// Area 4, located in the footer. Empty by default.
+	// Area 6, located in footer.
 	register_sidebar( array_merge( 
 		array(
-			'name' => __( 'Second Footer Widget Area', 'fastfood' ),
-			'id' => 'second-footer-widget-area',
-			'description' => __( 'The second footer widget area', 'fastfood' ),
+			'name'			=> __( 'Hidden Widget Area', 'fastfood' ),
+			'id'			=> 'hidden-widget-area',
+			'description'	=> __( 'This widget area is not visible. Drop here your widget for eg. analytics scripts or whatever you want to keep hidden', 'fastfood' ),
+			'columns'		=> 1,
 		),
-		fastfood_get_default_widget_args()
-	) );
-
-	// Area 5, located in the footer. Empty by default.
-	register_sidebar( array_merge( 
-		array(
-			'name' => __( 'Third Footer Widget Area', 'fastfood' ),
-			'id' => 'third-footer-widget-area',
-			'description' => __( 'The third footer widget area', 'fastfood' ),
-		),
-		fastfood_get_default_widget_args()
-	) );
-
-	// Area 6, located in page 404.
-	register_sidebar( array_merge( 
-		array(
-			'name' => __( 'Page 404', 'fastfood' ),
-			'id' => 'error404-widgets-area',
-			'description' => __( 'Enrich the page 404 with some useful widgets', 'fastfood' ),
-		),
-		fastfood_get_default_widget_args()
+		fastfood_get_default_widget_args( 'hidden-widget-area' )
 	) );
 
 }
@@ -280,7 +273,7 @@ class Fastfood_Widget_Latest_Commented_Posts extends WP_Widget {
 
 		$cache = wp_cache_get( 'tb_latest_commented_posts', 'widget' );
 
-		if ( ! is_array( $cache ) )
+		if ( !is_array( $cache ) )
 			$cache = array();
 
 		if ( isset( $cache[$args['widget_id']] ) ) {
@@ -308,7 +301,7 @@ class Fastfood_Widget_Latest_Commented_Posts extends WP_Widget {
 		$output .= '<ul>';
 		if ( $comments ) {
 			foreach ( ( array ) $comments as $comment) {
-				if ( ! in_array( $comment->comment_post_ID, $post_array ) ) {
+				if ( !in_array( $comment->comment_post_ID, $post_array ) ) {
 					$post = get_post( $comment->comment_post_ID );
 					setup_postdata( $post );
 
@@ -421,7 +414,7 @@ class Fastfood_Widget_Latest_Commentators extends WP_Widget {
 
 		$cache = wp_cache_get( 'tb_latest_commentators', 'widget' );
 
-		if ( ! is_array( $cache ) )
+		if ( !is_array( $cache ) )
 			$cache = array();
 
 		if ( isset( $cache[$args['widget_id']] ) ) {
@@ -559,7 +552,7 @@ class Fastfood_Widget_Pop_Categories extends WP_Widget {
 	function widget( $args, $instance ) {
 		$cache = wp_cache_get( 'tb_categories', 'widget' );
 
-		if ( ! is_array( $cache ) )
+		if ( !is_array( $cache ) )
 			$cache = array();
 
 		if ( isset( $cache[$args['widget_id']] ) ) {
@@ -941,7 +934,7 @@ class Fastfood_Widget_Besides extends WP_Widget {
 		if ( !is_array( $cache ) )
 			$cache = array();
 
-		if ( ! isset( $args['widget_id'] ) )
+		if ( !isset( $args['widget_id'] ) )
 			$args['widget_id'] = null;
 
 		if ( isset( $cache[$args['widget_id']] ) ) {
@@ -1282,8 +1275,8 @@ class Fastfood_Widget_Image_Exif extends WP_Widget {
 		<?php
 			foreach( fastfood_exif_details() as $image_meta ) {
 				echo sprintf( '%s: %s',
-					$image_meta[0],
-					$image_meta[2]
+					$image_meta['label'],
+					$image_meta['readable']
 				) . '<br />';
 			}
 		?>
@@ -1353,7 +1346,7 @@ class Fastfood_Widget_Clean_Archives extends WP_Widget {
 
 		$cache = wp_cache_get( 'tb_clean_archives', 'widget' );
 
-		if ( ! is_array( $cache ) )
+		if ( !is_array( $cache ) )
 			$cache = array();
 
 		if ( isset( $cache[$args['widget_id']] ) ) {
@@ -1594,7 +1587,7 @@ function fastfood_widgets_init() {
 	if ( !is_blog_installed() )
 		return;
 
-	if ( ! FastfoodOptions::get_opt( 'fastfood_custom_widgets' ) )
+	if ( !FastfoodOptions::get_opt( 'fastfood_custom_widgets' ) )
 		return;
 
 	register_widget( 'Fastfood_Widget_Popular_Posts' );
@@ -1621,3 +1614,93 @@ function fastfood_widgets_init() {
 
 }
 
+
+class FastfoodWidgetClasses {
+
+	public function __construct() {
+		add_action( 'in_widget_form'			, array( $this, 'in_widget_form'), 10, 3 ); 
+		add_filter( 'widget_update_callback'	, array( $this, 'widget_update_callback'), 10, 4 );
+		add_filter( 'dynamic_sidebar_params'	, array( $this, 'dynamic_sidebar_params' ) );
+	}
+
+
+	function dynamic_sidebar_params( $params ) {
+		global $wp_registered_widgets;
+		static $widget_area_id = '';
+		static $counter = 0;
+		static $current_span = 0;
+
+		if ( $widget_area_id !== $params[0]['id'] ) {
+			$widget_area_id = $params[0]['id'];
+			$counter = 0;
+			$current_span = 0;
+		}
+		$counter++;
+
+		$widget_id		= $params[0]['widget_id'];
+		$widget_obj		= $wp_registered_widgets[$widget_id];
+		$widget_opt		= get_option($widget_obj['callback'][0]->option_name);
+		$widget_num		= $widget_obj['params'][0]['number'];
+
+		$class_span		= ( isset( $widget_opt[$widget_num]['classes'] ) && !empty( $widget_opt[$widget_num]['classes'] ) ) ? $widget_opt[$widget_num]['classes'] : 'colspan-1';
+		$class_span		.= ' widget-' . $counter;
+
+		preg_match_all( '/colspan\-(.)/',$class_span, $span );
+
+		$widget_area_columns = isset( $params[0]['columns'] ) ? $params[0]['columns'] : 1;
+
+		if ( isset( $span[1][0] ) ){
+			$span = absint( $span[1][0] );
+			$current_span = $current_span + $span;
+			if( $current_span > $widget_area_columns ) {
+				$class_span .= ' clearleft';
+				$current_span = $span;
+			}
+		}
+
+		$params[0]['before_widget'] = preg_replace( '/class="/', "class=\"{$class_span} ", $params[0]['before_widget'], 1 );
+
+		return $params;
+	}
+
+
+	/**
+	 * Hook used by WP_Widget and its children
+	 */
+	function in_widget_form($widget, $return, $instance) {
+		$instance = wp_parse_args( (array) $instance, array( 'classes' => 'colspan-1' ) );
+		$class = esc_attr( $instance['classes'] );
+
+		$return		= null;
+		$id			= $widget->get_field_id('classes');
+		$name		= $widget->get_field_name('classes');
+		$value		= $class;
+?>
+
+		<div class="widget-colspan widget-colspan-hide">
+			<?php _e( 'Column Span', 'fastfood' ) ?>:<br />
+			<?php foreach ( array( '1', '2', '3' ) as $option ) { ?>
+				<label class="colspan-<?php echo $option;?>">
+					<input class="widefat" id="<?php echo $id; ?>" name="<?php echo $name; ?>" type="radio" value="colspan-<?php echo $option;?>" <?php checked( 'colspan-' . $option , esc_attr($value) ); ?>> <span><?php echo $option; ?></span>
+				</label>
+			<?php } ?>
+			<a class="button colspan-options" href="javascript:void(0)"><?php _e( 'Span', 'fastfood' ) ?></a>
+		</div>
+
+<?php
+	}
+
+
+	/**
+	 * Hook used by WP_Widget and its children
+	 */
+	function widget_update_callback($instance, $new_instance, $old_instance, $widget) {
+
+		$instance['classes'] = esc_attr( $new_instance['classes'] );
+
+		return $instance;
+
+	}
+}
+
+new FastfoodWidgetClasses;

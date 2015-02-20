@@ -1,0 +1,21 @@
+.js-res {
+	border:1px solid #333333 !important;
+}
+.menuitem_1ul > ul > li {
+	margin-right:-2px;
+}
+.attachment-thumbnail,
+.wp-caption img,
+.gallery-item img,
+.entry-content img.size-full,
+.entry-content img.attachment-full,
+.widget img.size-full,
+.widget img.attachment-full,
+.widget img.size-medium,
+.widget img.attachment-medium {
+	width:auto;
+}
+.gallery-thumb img,
+#main .avatar {
+	max-width:700px;
+}

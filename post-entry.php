@@ -23,7 +23,7 @@
 
 	<?php fastfood_hook_post_content_before(); ?>
 
-	<div class="storycontent">
+	<div class="entry-content">
 
 		<?php the_content(); ?>
 

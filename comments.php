@@ -16,33 +16,17 @@
 
 <div id="comments">
 
-<?php
-	if ( post_password_required() ) {
+	<?php fastfood_hook_comments_top(); ?>
 
-		echo '<div class="comment_tools">' . __( 'Enter your password to view comments.','fastfood' ) . '</div>';
+	<div id="commentlist-wrap">
 
-	} elseif ( comments_open() ) {
+		<?php get_template_part( 'comments-list' ); ?>
 
-		echo '<div class="comment_tools">';
-		comments_number( __( 'No Comments','fastfood' ), __( '1 Comment','fastfood' ), __( '% Comments','fastfood' ) );
-		echo sprintf( '<span class="hide_if_print"> - <a class="show_comment_form" href="#respond" title="%s">%s</a></span>',
-			esc_attr__( 'Leave a comment', 'fastfood' ),
-			esc_html__( 'Leave a comment', 'fastfood' )
-		);
-		echo '</div>';
+	</div>
 
-	} elseif ( have_comments() ) {
+	<?php comment_form();  ?>
 
-		echo '<div class="comment_tools">';
-		comments_number( __( 'No Comments','fastfood' ), __( '1 Comment','fastfood' ), __( '% Comments','fastfood' ) );
-		echo '</div>';
-
-	}
-?>
-
-<?php get_template_part( 'comments-list' ); ?>
-
-<?php comment_form();  ?>
+	<?php fastfood_hook_comments_bottom(); ?>
 
 </div>
 

@@ -2,14 +2,12 @@
 /**
  * sidebar-primary.php
  *
- * Template part file that contains the primary sidebar content
+ * Template part file that contains the primary widget area
  *
  * @package fastfood
  * @since 0.15
  */
 ?>
-
-<!-- begin sidebar -->
 
 <?php fastfood_hook_sidebars_before( 'primary' ); ?>
 
@@ -21,8 +19,6 @@
 
 	<?php fastfood_hook_sidebar_bottom( 'primary' ); ?>
 
-</div>
+</div><!-- #primary-widget-area -->
 
 <?php fastfood_hook_sidebars_after( 'primary' ); ?>
-
-<!-- end sidebar -->

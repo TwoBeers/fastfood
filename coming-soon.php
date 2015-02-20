@@ -39,7 +39,7 @@
 
 				<div <?php post_class() ?> id="post-<?php the_ID(); ?>">
 
-					<div class="storytitle">
+					<div class="entry-title">
 
 						<span><a href="<?php echo esc_url( home_url( '/' ) ); ?>"><?php bloginfo( 'name' ); ?></a></span>
 
@@ -47,7 +47,7 @@
 
 					</div>
 
-					<div class="storycontent">
+					<div class="entry-content">
 
 						<?php echo nl2br( get_the_content() ); ?>
 

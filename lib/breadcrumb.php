@@ -20,7 +20,7 @@ class Fastfood_Breadcrumb {
 
 	function display() {
 
-		if ( ! FastfoodOptions::get_opt( 'fastfood_breadcrumb' ) ) return;
+		if ( !FastfoodOptions::get_opt( 'fastfood_breadcrumb' ) ) return;
 
 		echo $this->get_the_breadcrumb();
 
@@ -61,7 +61,7 @@ class Fastfood_Breadcrumb {
 			$current_location = $blogname;
 		}
 		// If static Page as Front Page, and on Blog, output Blog link
-		if ( ! is_home() && ! is_page() && ! is_front_page() && ( 'page' == get_option( 'show_on_front' ) ) ) {
+		if ( !is_home() && !is_page() && !is_front_page() && ( 'page' == get_option( 'show_on_front' ) ) ) {
 			$hierarchy = $delimiter;
 			$current_location = '<a href="' . get_permalink( get_option( 'page_for_posts' ) ) . '">' . $blogname . '</a>';
 		}
@@ -149,26 +149,26 @@ class Fastfood_Breadcrumb {
 			$current_location = get_the_title();  
 		}
 		// Define Taxonomy Crumbs for Custom Post Types
-		elseif ( is_singular( get_post_type() ) && ! is_singular( 'post' ) && ! is_page() && ! is_attachment() ) {
+		elseif ( is_singular( get_post_type() ) && !is_singular( 'post' ) && !is_page() && !is_attachment() ) {
 			$post_type_object = get_post_type_object( get_post_type() );
 			$post_type_name = $post_type_object->labels->name;
 			$post_type_slug = $post_type_object->name;
 			$taxonomies = get_object_taxonomies( get_post_type() );
-			$taxonomy = ( ! empty( $taxonomies ) ? $taxonomies[0] : false );
+			$taxonomy = ( !empty( $taxonomies ) ? $taxonomies[0] : false );
 			$terms = ( $taxonomy ? get_the_term_list( $post->ID, $taxonomy ) : false );
 			$hierarchy = $delimiter . '<a href="' . get_post_type_archive_link( $post_type_slug ) . '">' . $post_type_name . '</a>';
 			$hierarchy .= ( $terms ? $delimiter . $terms . $delimiter : $delimiter );
 			$current_location = get_the_title();
 		}
 		// Define Current Location for Parent Pages
-		elseif ( ! is_front_page() && is_page() && ! $post->post_parent ) { 
+		elseif ( !is_front_page() && is_page() && !$post->post_parent ) { 
 			$hierarchy = $delimiter;
 			// Note: get_the_title() is filtered to output a
 			// default title if none is specified
 			$current_location = get_the_title();
 		}
 		// Define Parent Page Hierarchy Crumbs for Child Pages
-		elseif ( ! is_front_page() && is_page() && $post->post_parent ) { 
+		elseif ( !is_front_page() && is_page() && $post->post_parent ) { 
 			$parent_id  = $post->post_parent;
 			$breadcrumbs = array();
 			while ( $parent_id ) {
@@ -217,7 +217,7 @@ class Fastfood_Breadcrumb {
 			$current_location = __( 'Error 404','fastfood' ) . ' - ' . __( 'Page not found','fastfood' );
 		}
 		// Define current location for Post Format Archives
-		elseif ( get_post_format() && ! is_home() ) { 
+		elseif ( get_post_format() && !is_home() ) { 
 			$hierarchy = $delimiter;
 			$current_location = get_post_format_string( get_post_format() );
 		}
@@ -232,7 +232,7 @@ class Fastfood_Breadcrumb {
 			$hierarchy = $delimiter;
 			$current_location = get_the_title();
 		}
-		if ( is_front_page() && ! ( 'page' == get_option( 'show_on_front' ) ) ) { 
+		if ( is_front_page() && !( 'page' == get_option( 'show_on_front' ) ) ) { 
 			$hierarchy = $delimiter;
 			$current_location = $blogname;
 		}
@@ -242,7 +242,7 @@ class Fastfood_Breadcrumb {
 		}
 
 		// Define pagination for paged Archive pages
-		if ( get_query_var('paged') && ! function_exists( 'wp_paginate' ) ) {
+		if ( get_query_var('paged') && !function_exists( 'wp_paginate' ) ) {
 			$crumb_pagination = ' (Page ' . get_query_var( 'paged' ) . ')';
 		}
 

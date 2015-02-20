@@ -23,7 +23,7 @@
 
 			<?php fastfood_hook_entry_after(); ?>
 
-			<?php fastfood_get_sidebar( 'singular' ); // show singular widgets area ?>
+			<?php fastfood_get_sidebar( 'singular', true ); // show singular widgets area ?>
 
 			<?php comments_template(); // Get wp-comments.php template ?>
 

@@ -1,131 +1,106 @@
 ﻿/* Low Resolutions
 ----------------------------------------------------------*/
 #quickbar,
-#statusbar,
-#ff_background {
+#statusbar {
 	display: none;
 }
-body {
-	background: #f8f8f8 !important;
-	font-size: 16px !important;
-}
-select {
-	font-size: 16px;
-}
-.menu-container:before {
-	content: "\e690";
-	display: block;
-	font-family: Elusive-Icons;
-	font-style: normal;
-	font-weight: normal;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	line-height: 30px;
-	position: absolute;
-}
-#main,
-#content {
-	padding: 0;
-	width: auto;
-}
-#main {
-	margin: 0 50px 0 0;
-	border-right: 1px solid #ccc;
-}
-.has-header-image #head-text {
-	position: static;
-	background: transparent;
-}
-#head-text h1 a,
-#head-text {
-	color: #404040 !important;
-}
-#head-text h1 {
-	font-size: 1.5em;
-}
-#head-text .description {
-	display: none;
-}
-#posts_content {
-	min-height: auto;
-}
-#fixedfoot {
-	right: 0;
-	width: auto;
+.minibutton {
+	display: inline;
 }
 #navbuttons {
-	padding: 0;
-	background: transparent;
-	bottom: auto;
+	background: #f8f8f8;
+	border-top: 1px solid #ccc;
 	position: static;
-	right: auto;
+	text-align: center;
 }
 .minibutton .nb_tooltip {
 	display: none !important;
 }
 .minibutton .minib_img {
 	line-height: 2em;
+	height: 2em;
 	color: #404040 !important;
 	width: 50px;
+	display: inline-block;
 }
 .minib_img.el-icon-print,
 .minib_img.el-icon-refresh,
 .minib_img.el-icon-rss {
 	display: none;
 }
-.posts_narrow {
-	border: none;
-}
-.posts_wide {
-}
-.posts_narrow,
-.posts_wide,
-#primary-widget-area {
-	width: auto;
-	float: none;
-}
-#primary-widget-area {
-	margin-top: 30px;
-	padding: 0;
-}
-#main .widget {
-	float: left;
-	width: 50%;
-	padding: 20px;
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
-	min-height: 0;
-}
-#footer-widget-area .widget-area {
-	-webkit-box-sizing: border-box;
-	box-sizing: border-box;
-	float: none;
-	padding: 0;
-	width: 100%;
-}
-#header-widget-area .widget:nth-of-type(3n+1) {
-	clear: none;
-}
-#header-widget-area .widget:nth-of-type(2n+1),
-#primary-widget-area .widget:nth-of-type(2n+1) {
-	clear: left;
-}
-.comment-body .reply {
-	display: none;
-}
-#respond {
-	display: block !important;
-}
-.coming-soon .hentry {
-	border: none;
-	box-shadow: none;
-}
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 782px) {
+	body {
+		font-size: 16px !important;
+	}
+	.has-header-image #head-text {
+		position: static;
+		background: transparent;
+	}
+	#head-text h1 a,
+	#head-text {
+		color: #404040 !important;
+	}
+	#head-text h1 {
+		font-size: 2em;
+	}
+	#posts_content {
+		min-height: auto;
+	}
+	#posts_content.posts_wide,
+	#posts_content.posts_narrow {
+		border: none;
+		width: 100%;
+		float: none;
+		clear: both;
+	}
+	div#primary-widget-area {
+		margin-top: 30px;
+		width: 100%;
+		float: none;
+	}
+	#main .widget,
+	#main .widget:first-child,
+	#main .widget.colspan-2{
+		float: left;
+		width: 50%;
+		padding: 20px;
+		clear: none;
+	}
+	#primary-widget-area .widget:nth-of-type(2n+1) {
+		clear: left;
+	}
+	#footer-widget-area {
+	}
+	.fixed-menu #menu-primary-container {
+		position: static;
+	}
+	.fixed-menu #menu-primary-placeholder {
+		display: none;
+	}
+	.coming-soon .hentry {
+		border: none;
+		box-shadow: none;
+	}
+	.menu-container:before {
+		content: "\e690";
+		display: block;
+		font-family: Elusive-Icons;
+		font-style: normal;
+		font-weight: normal;
+		-webkit-font-smoothing: antialiased;
+		-moz-osx-font-smoothing: grayscale;
+		line-height: 3em;
+		height: 3em;
+		position: absolute;
+	}
+	.minibutton .minib_img {
+		font-size: 24px;
+	}
 	.tinynav {
 		display: block;
 		width: 100%;
-		padding: 5px 5px 5px 20px;
+		padding: 1em 5px 1em 20px;
 		border: none;
 		background: #404040;
 		color: #fff;
@@ -143,10 +118,38 @@ select {
 		font-weight: bold;
 		margin-bottom:10px;
 	}
-
+	.fixed-menu #menu-primary-container {
+		position: static;
+	}
+	.fixed-menu #menu-primary-placeholder {
+		display: none;
+	}
+	#respond.visible,
+	#respond.hidden {
+		display: block !important;
+	}
+	#hide-respond-link {
+		display: none;
+	}
+	.comment_tools.after-comments {
+		display: none;
+	}
+	.ff-js .comment-reply-link {
+		width: auto; 
+		height: auto; 
+		border: none;
+		position: static;
+		overflow: visible;
+	}
+	.comment .comment-meta {
+		display: none;
+	}
 }
 
 @media screen and (max-width: 479px) {
+	#head-text .description {
+		display: none;
+	}
 	#main .widget-area .widget {
 		float: none;
 		width: 100%;

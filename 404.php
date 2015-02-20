@@ -24,7 +24,7 @@ get_header(); ?>
 
 			<p><?php _e( 'You can try the following:','fastfood' ); ?></p>
 
-			<?php fastfood_get_sidebar( 'error404' ); // show error404 widgets area ?>
+			<?php fastfood_get_sidebar( 'error404', false ); // show error404 widgets area ?>
 
 		<?php } else { ?>
 

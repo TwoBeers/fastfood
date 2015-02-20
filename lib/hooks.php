@@ -93,6 +93,14 @@ function fastfood_hook_comments_after() {
 	tha_comments_after();
 }
 
+function fastfood_hook_comments_top() {
+	do_action( 'fastfood_hook_comments_top' );
+}
+
+function fastfood_hook_comments_bottom() {
+	do_action( 'fastfood_hook_comments_bottom' );
+}
+
 function fastfood_hook_sidebars_before( $location = 'every' ) {
 	tha_sidebars_before();
 	do_action( 'fastfood_hook_sidebars_before' );

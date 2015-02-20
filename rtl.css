@@ -20,7 +20,7 @@ blockquote {
 	margin-left: 0;
 	padding-left: 0;
 }
-.storycontent table {
+.entry-content table {
 	text-align: right;
 }
 input[type=password] {
@@ -31,12 +31,12 @@ input[type=password] {
 #primary-widget-area {
 	float: left;
 }
-.storycontent ul li,
+.entry-content ul li,
 .widget ul li,
 .comment-body ul li {
 	padding: 0 2em 0 0;
 }
-.storycontent ul li:before,
+.entry-content ul li:before,
 .widget ul li:before,
 .comment-body ul li:before {
 	margin-left: 0;
@@ -154,7 +154,6 @@ img.alignright,
 	margin-right: 24px;
 }
 .search-form {
-	background: url("images/lens.png") no-repeat scroll 5px center #BEC0BE;
 }
 .widget .tbm-format,
 .widget.tb_popular_posts img,

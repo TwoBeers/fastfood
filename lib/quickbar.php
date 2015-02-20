@@ -27,22 +27,25 @@ if ( !function_exists( 'fastfood_fixed_footer' ) ) {
 ?>
 	<!-- begin fixed footer -->
 
-	<div id="fixedfoot">
+	<div id="fixedfoot-wrapper">
 
-		<?php fastfood_quickbar(); ?>
+		<div id="fixedfoot">
 
-		<?php fastfood_statusbar(); ?>
+			<?php fastfood_quickbar(); ?>
 
-		<?php fastfood_navbuttons();?>
+			<?php fastfood_statusbar(); ?>
+
+			<?php fastfood_navbuttons();?>
+
+		</div>
 
 	</div>
-
 	<!-- end fixed footer -->
 <?php
 
 	}
 }
-add_action( 'fastfood_hook_footer_after', 'fastfood_fixed_footer' );
+add_action( 'fastfood_hook_body_bottom', 'fastfood_fixed_footer' );
 
 
 /**
@@ -53,7 +56,7 @@ if ( !function_exists( 'fastfood_quickbar' ) ) {
 	function fastfood_quickbar( $args = '' ) {
 		global $post, $current_user;
 
-		if ( ! FastfoodOptions::get_opt( 'fastfood_qbar' ) ) return;
+		if ( !FastfoodOptions::get_opt( 'fastfood_qbar' ) ) return;
 
 		wp_reset_postdata();
 
@@ -63,7 +66,7 @@ if ( !function_exists( 'fastfood_quickbar' ) ) {
 ?>
 
 	<!-- begin quickbar -->
-	<div id="quickbar" class="no-grav<?php if ( ! FastfoodOptions::get_opt( 'fastfood_statusbar' ) ) echo ' no-status'; ?>">
+	<div id="quickbar" class="no-grav<?php if ( !FastfoodOptions::get_opt( 'fastfood_statusbar' ) ) echo ' no-status'; ?>">
 
 	<?php fastfood_hook_quickbar_top(); ?>
 
@@ -168,7 +171,7 @@ if ( !function_exists( 'fastfood_quickbar' ) ) {
 							}
 							?>
 						</li>
-						<?php if ( ! is_user_logged_in() || current_user_can( 'read' ) ) { wp_register(); }?>
+						<?php if ( !is_user_logged_in() || current_user_can( 'read' ) ) { wp_register(); }?>
 						<?php if ( is_user_logged_in() ) { ?>
 							<?php if ( current_user_can( 'read' ) ) { ?>
 								<li><a href="<?php echo esc_url( admin_url( 'profile.php' ) ); ?>"><?php _e( 'Your Profile', 'fastfood' ); ?></a></li>
@@ -185,7 +188,7 @@ if ( !function_exists( 'fastfood_quickbar' ) ) {
 							<?php } ?>
 							<li><a title="<?php _e( 'Log out', 'fastfood' ); ?>" href="<?php echo esc_url( wp_logout_url() ); ?>"><?php _e( 'Log out', 'fastfood' ); ?></a></li>
 						<?php } ?>
-						<?php if ( ! is_user_logged_in() ) {?>
+						<?php if ( !is_user_logged_in() ) {?>
 							<li class="qb-login-link">
 								<a title="<?php _e( 'Log in', 'fastfood' ); ?>" href="<?php echo esc_url( wp_login_url() ); ?>"><?php _e( 'Log in', 'fastfood' ); ?></a>
 								<?php fastfood_mini_login(); ?>
@@ -213,7 +216,7 @@ if ( !function_exists( 'fastfood_quickbar' ) ) {
 function fastfood_statusbar () {
 	global $current_user;
 
-	if ( ! FastfoodOptions::get_opt('fastfood_statusbar' ) ) return;
+	if ( !FastfoodOptions::get_opt('fastfood_statusbar' ) ) return;
 
 	$user_name = is_user_logged_in() ? $current_user->display_name : '';
 	$welcome = sprintf( __( 'Welcome %s','fastfood' ), $user_name );
@@ -236,7 +239,7 @@ if ( !function_exists( 'fastfood_navbuttons' ) ) {
 	function fastfood_navbuttons( $args = '' ) {
 		global $post, $paged, $wp_query;
 
-		if ( ! FastfoodOptions::get_opt('fastfood_navbuttons' ) ) return;
+		if ( !FastfoodOptions::get_opt('fastfood_navbuttons' ) ) return;
 
 		wp_reset_postdata();
 
@@ -338,7 +341,7 @@ if ( !function_exists( 'fastfood_navbuttons' ) ) {
 		}
 
 		// ------- Back to parent post -------
-		if ( $is_image && ! empty( $post->post_parent ) ) { 
+		if ( $is_image && !empty( $post->post_parent ) ) { 
 
 			$buttons['image'] = array(
 				'class' => '',
@@ -378,20 +381,6 @@ if ( !function_exists( 'fastfood_navbuttons' ) ) {
 
 		}
 
-		// ------- Next post -------
-		if ( FastfoodOptions::get_opt( 'fastfood_navbuttons_nextprev' ) && $args['next_prev'] && $is_post && get_next_post() ) { 
-
-			$buttons['nextpost'] = array(
-				'class' => '',
-				'a_class' => '',
-				'a_rel' => '',
-				'a_href' => get_permalink( get_next_post() ),
-				'icon_class' => 'el-icon-chevron-right',
-				'tooltip' => sprintf( __( 'Next Post', 'fastfood' ) . ': %s', get_the_title( get_next_post() ) )
-			);
-
-		}
-
 		// ------- Previous post -------
 		if ( FastfoodOptions::get_opt( 'fastfood_navbuttons_nextprev' ) && $args['next_prev'] && $is_post && get_previous_post() ) { 
 
@@ -406,16 +395,16 @@ if ( !function_exists( 'fastfood_navbuttons' ) ) {
 
 		}
 
-		// ------- Newer Posts -------
-		if ( FastfoodOptions::get_opt( 'fastfood_navbuttons_newold' ) && $args['next_prev'] && !$is_singular && !fastfood_is_allcat() && get_previous_posts_link() ) { 
+		// ------- Next post -------
+		if ( FastfoodOptions::get_opt( 'fastfood_navbuttons_nextprev' ) && $args['next_prev'] && $is_post && get_next_post() ) { 
 
-			$buttons['newposts'] = array(
-				'class' => 'nb-nextprev',
+			$buttons['nextpost'] = array(
+				'class' => '',
 				'a_class' => '',
 				'a_rel' => '',
-				'a_href' => previous_posts( false ),
+				'a_href' => get_permalink( get_next_post() ),
 				'icon_class' => 'el-icon-chevron-right',
-				'tooltip' => __( 'Newer Posts', 'fastfood' )
+				'tooltip' => sprintf( __( 'Next Post', 'fastfood' ) . ': %s', get_the_title( get_next_post() ) )
 			);
 
 		}
@@ -432,6 +421,20 @@ if ( !function_exists( 'fastfood_navbuttons' ) ) {
 				'a_href' => next_posts( $max_page, false ),
 				'icon_class' => 'el-icon-chevron-left',
 				'tooltip' => __( 'Older Posts', 'fastfood' )
+			);
+
+		}
+
+		// ------- Newer Posts -------
+		if ( FastfoodOptions::get_opt( 'fastfood_navbuttons_newold' ) && $args['next_prev'] && !$is_singular && !fastfood_is_allcat() && get_previous_posts_link() ) { 
+
+			$buttons['newposts'] = array(
+				'class' => 'nb-nextprev',
+				'a_class' => '',
+				'a_rel' => '',
+				'a_href' => previous_posts( false ),
+				'icon_class' => 'el-icon-chevron-right',
+				'tooltip' => __( 'Newer Posts', 'fastfood' )
 			);
 
 		}
@@ -484,7 +487,7 @@ if ( !function_exists( 'fastfood_navbuttons' ) ) {
 
 		$buttons = apply_filters( 'fastfood_filter_navbuttons', $buttons );
 
-		if ( ! $buttons ) return;
+		if ( !$buttons ) return;
 
 ?>
 

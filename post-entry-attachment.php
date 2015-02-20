@@ -21,13 +21,13 @@
 
 	<?php fastfood_extrainfo( array( 'tags' => 0, 'cats' => 0 ) ); ?>
 
-	<div class="storycontent entry-attachment">
+	<div class="entry-content entry-attachment">
 
 		<?php fastfood_hook_attachment_before(); ?>
 
+			<p class="attachment">
 		<?php if ( wp_attachment_is_image() ) { ?>
 
-			<p class="attachment">
 				<?php
 					echo fastfood_build_link( array(
 						'href'		=> wp_get_attachment_url(),
@@ -36,17 +36,15 @@
 						'rel'		=> 'attachment',
 					) );
 				?>
-			</p>
 
-			<?php if ( ! empty( $post->post_excerpt ) ) the_excerpt(); ?>
+			<?php if ( !empty( $post->post_excerpt ) ) the_excerpt(); ?>
 
 		<?php } else { ?>
 
 			<?php echo wp_get_attachment_link( $post->ID, 'thumbnail', 0, 1 ); ?>
 
-			<?php if ( ! empty( $post->post_content ) ) the_content(); ?>
-
 		<?php } ?>
+			</p>
 
 		<?php fastfood_hook_attachment_after(); ?>
 
