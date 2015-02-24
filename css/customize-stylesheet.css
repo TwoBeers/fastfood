@@ -264,17 +264,21 @@ li.customize-control-background .current .container img {
 }
 .theme-controls-header-description {
 	background: #f5f5f5;
-	padding: 10px 20px 15px;
+	padding: 0;
 	border-bottom: 1px solid #eee;
+}
+.theme-controls-header-description p {
+	padding: 10px 20px 15px;
 	font-size: .8em;
+	margin: 0;
 }
-.control-panel-fastfood_options .control-section.control-subsection {
-}
-.control-panel-fastfood_options .control-section.control-subsection.expanded {
-}
-.control-panel-fastfood_options .control-section.control-subsection.collapsed {
+.control-panel-fastfood_options .control-subsection {
 	position: absolute;
 	top: -10000px;
 	left: -10000px;
-	width: 282px;
+}
+.control-panel-fastfood_options .control-subsection.expanded {
+	position: static;
+}
+.control-panel-fastfood_options .control-subsection.collapsed {
 }

@@ -46,7 +46,7 @@ class FastfoodAdmin {
 
 		$output = '
 
-			<div id="theme_donation">
+			<p id="theme_donation">
 				' . sprintf( __( '%s theme is created by %s.', 'fastfood' ), 'Fastfood', '<a target="_blank" href="http://www.twobeers.net/">TwoBeers</a>' ) . '
 				<br />
 				' . __( 'Our developers need coffee (and beer). How about a small donation?', 'fastfood' ) . '
@@ -55,7 +55,7 @@ class FastfoodAdmin {
 				<a target="_blank" href="https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=4MEDQV3CCZGC6">
 					<img src="https://www.paypalobjects.com/en_US/GB/i/btn/btn_donateCC_LG.gif" alt="PayPal - The safer, easier way to pay online."/>
 				</a>
-			</div>
+			</p>
 
 		';
 

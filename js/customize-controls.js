@@ -17,16 +17,20 @@
 					api( 'background_color' ).set( _fastfoodCustomizeControls.backgroundScheme[value].attributes['background_color'] );
 					api.control( 'background_color' ).container.find( '.color-picker-hex' )
 						.data( 'data-default-color', _fastfoodCustomizeControls.backgroundScheme[value].attributes['background_color'] )
-						.wpColorPicker( 'defaultColor', _fastfoodCustomizeControls.backgroundScheme[value].attributes['background_color'] );
+						.wpColorPicker( 'defaultColor', _fastfoodCustomizeControls.backgroundScheme[value].attributes['background_color'] )
+						.wpColorPicker( 'color', _fastfoodCustomizeControls.backgroundScheme[value].attributes['background_color'] );
 
 					// Update Background Image.
 					var api_control_background_image = api.control( 'background_image' );
+					var api_control_background_image_container = api_control_background_image.container;
 					api( 'background_image' ).set( _fastfoodCustomizeControls.backgroundScheme[value].attributes['background_image'] );
-					api_control_background_image.container.find( '.current .container' )
-						.html('<div class="thumbnail-image"><img src="' + _fastfoodCustomizeControls.backgroundScheme[value].attributes['background_image'] + '"/></div>');
-					api_control_background_image.container.find( '.actions .remove-button, .actions .default-button' ).remove();
-					api_control_background_image.container.find( '.actions' )
-						.prepend('<button class="button remove-button" type="button">' + api_control_background_image.params.button_labels.remove + '</button>');
+					if ( api_control_background_image_container.is( '.customize-control-background' ) ) {
+						api_control_background_image_container.find( '.current' )
+							.html('<div class="container"><div class="thumbnail-image"><img src="' + _fastfoodCustomizeControls.backgroundScheme[value].attributes['background_image'] + '"/></div></div>');
+						api_control_background_image_container.find( '.actions .remove-button,.actions .default-button' ).remove();
+						api_control_background_image_container.find( '.actions' )
+							.prepend('<button class="button remove-button" type="button">' + _fastfoodCustomizeControls.labels['remove'] + '</button>');
+					}
 
 					// Update Other Background Attributes.
 					api( 'background_repeat' ).set( _fastfoodCustomizeControls.backgroundScheme[value].attributes['background_repeat'] );
@@ -35,10 +39,12 @@
 					api( 'background_position_y' ).set( _fastfoodCustomizeControls.backgroundScheme[value].attributes['background_position_y'] );
 
 					// Update Icons Color.
+					var api_control_background_icons_color = api.control( 'background_icons_color' );
 					api( 'background_icons_color' ).set( _fastfoodCustomizeControls.backgroundScheme[value].attributes['background_icons_color'] );
-					api.control( 'background_icons_color' ).container.find( '.color-picker-hex' )
+					api_control_background_icons_color.container.find( '.color-picker-hex' )
 						.data( 'data-default-color', _fastfoodCustomizeControls.backgroundScheme[value].attributes['background_icons_color'] )
-						.wpColorPicker( 'defaultColor', _fastfoodCustomizeControls.backgroundScheme[value].attributes['background_icons_color'] );
+						.wpColorPicker( 'defaultColor', _fastfoodCustomizeControls.backgroundScheme[value].attributes['background_icons_color'] )
+						.wpColorPicker( 'color', _fastfoodCustomizeControls.backgroundScheme[value].attributes['background_icons_color'] );
 				} );
 			}
 		}
@@ -106,7 +112,6 @@
 		attributes.fastfood_content_width = 100 - attributes.fastfood_rsideb_width;
 		attributes.sticky_background = Color( attributes.fastfood_colors_link ).toCSS( 'rgba', 0.05 );
 		css = cssTemplate( attributes );
-		console.log(css);
 
 		api.previewer.send( 'fastfood-update-dynamic-css', css );
 	}
@@ -155,88 +160,82 @@
 	});
 
 	api.bind( 'ready', function() {
-		render_donate_block();
+		render_theme_options();
 	} );
 
-	function render_donate_block() {
+	function render_theme_options() {
+
 		// Grab the HTML out of our template tag and pre-compile it.
 		var theme_nag = _.template( $( "script#tmpl-customize-theme-header" ).html() );
-
 		$( '#customize-info' ).after( theme_nag() );
 
-		toggle_nag_visibility();
+		toggle_theme_header();
 
 		$( '#customize-theme-header' ).find( '.theme-controls-header-title' ).click( function() {
 			if ( $( '#customize-theme-header' ).is( '.ready' ) ) {
-				_.each( _fastfoodCustomizeControls.headers, function( header, header_key ) {
-					label       = header.label       ? '<div class="theme-controls-header-title" data-sections="control-section-' + header_key + '">' + header.label + '</div>' : '';
-					description = header.description ? '<div class="theme-controls-header-description">' + header.description + '</div>' : '';
-					$( '.control-section-' + header_key ).filter( ":first" ).before('<li class="theme-controls-header">' + label + description +'</li>');
-				});
+				add_theme_controls_headers();
 				$( '#customize-theme-header' ).removeClass('ready');
-				//$('#customize-theme-controls').find( '.control-panel-fastfood_options .theme-controls-header' ).addClass('can-expand');
-				//$('#customize-theme-controls').find( '.control-panel-fastfood_options .control-section.control-subsection' ).addClass('collapsed');
-				//$('#customize-theme-controls').find( '.control-panel-fastfood_options .theme-controls-header-description' ).hide();
 			}
-			toggle_nag_visibility();
+			toggle_theme_header();
 		});
 	}//end of donate block
 
-	function toggle_nag_visibility() {
+	function add_theme_controls_headers() {
+		_.each( _fastfoodCustomizeControls.headers, function( header, header_key ) {
+			label       = header.label       ? '<div class="theme-controls-header-title" data-sections="control-section-' + header_key + '">' + header.label + '</div>' : '';
+			description = header.description ? '<div class="theme-controls-header-description control-subsection control-section-' + header_key + '"><p>' + header.description + '</p></div>' : '';
+			$( '<li class="theme-controls-header">' + label + description + '</li>' )
+				.insertBefore( '.control-section-' + header_key + ':first' )
+				.on( 'click', '.theme-controls-header-title', function() {
+					var sections = $(this).data( 'sections' ) ? '.' + $(this).data( 'sections' ) : false;
+					toggle_theme_options( sections );
+				});
+		});
+	}
+
+	function toggle_theme_header() {
 		var customize_theme_header = $( '#customize-theme-header' );
+		var customize_theme_panels = $( '#customize-theme-controls' ).find( '.control-panel-fastfood_options' );
 		if ( customize_theme_header.is( '.collapsed' ) ) {
 			customize_theme_header.removeClass( 'collapsed' ).addClass( 'current' );
 			$( '.theme-controls-header-description', customize_theme_header ).slideDown( 'fast' );
-			$( '.control-panel-fastfood_options' ).hide().css('height','auto').slideDown('fast');
+			customize_theme_panels.hide().css('height','auto').slideDown('fast');
 		} else {
 			customize_theme_header.addClass( 'collapsed' ).removeClass( 'current' );
 			$( '.theme-controls-header-description', customize_theme_header ).slideUp( 'fast' );
-			$( '.control-panel-fastfood_options' ).slideUp( 'fast', function() {
+			customize_theme_panels.slideUp( 'fast', function() {
 				$(this).css('height',0);
 			});
 		}
 	}
 
-	$( '#customize-theme-controls' ).on( 'click', '.can-expand .theme-controls-header-title', function() {
-		var $this          = $( this );
-		var parent         = $this.parent();
-		var sections       = $this.data( 'sections' ) ? '.' + $this.data( 'sections' ) : false;
-		var _sections      = $('#customize-theme-controls').find( '.control-panel-fastfood_options .control-section.control-subsection' );
-		var _headers       = $('#customize-theme-controls').find( '.control-panel-fastfood_options .theme-controls-header-title' );
-		var _descriptions  = $('#customize-theme-controls').find( '.control-panel-fastfood_options .theme-controls-header-description' );
-
-		if ( sections ) {
-
-			$sections = $( sections );
-
-			_sections.not('.collapsed').animate({
-				height: 0
-			}, 'fast', function() {
-				$(this).addClass( 'collapsed' ).css('height','auto');
-			});
-
-			_headers.not( this ).parent().removeClass( 'current' );
-
-			_descriptions.slideUp('fast');
-
-			if ( parent.is( '.current' ) ) {
-				parent.removeClass( 'current' );
-			} else {
-				parent.addClass( 'current' );
-				$sections.each(function() {
-					to_height = $(this).height();
-					$(this).css('height',0).removeClass( 'collapsed' ).animate({
-						height: to_height
-					}, 'fast', function() {
-						$(this).css('height','auto');
+	function toggle_theme_options( current ) {
+		var _sections = $('#customize-theme-controls').find( '.control-panel-fastfood_options .control-subsection' );
+		if ( current ) {
+			_sections.filter( current ).each( function() {
+				$this = $( this );
+				if ( $( this ).is( '.expanded' ) ) {
+					$( this ).animate({
+						height: 0
+					}, 200, function() {
+						$( this ).removeClass( 'expanded' ).css({ height: 'auto' });
 					});
-				});
-				$('.theme-controls-header-description',parent).slideDown('fast');
-			}
-			
+				} else {
+					var cur_height = $( this ).outerHeight();
+					$( this ).css({ height: 0 }).addClass( 'expanded' ).animate({
+						height: cur_height
+					}, 200, function() {
+						$( this ).css({ height: 'auto' });
+					});
+				}
+			});
+			_sections.not( current ).filter( '.expanded' ).animate({
+				height: 0
+			}, 200, function() {
+				$( this ).removeClass( 'expanded' ).css({ height: 'auto' });
+			});
 		}
-
-	});
+	}
 
 } )( wp.customize, jQuery );
 

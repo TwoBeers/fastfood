@@ -36,6 +36,13 @@ class FastfoodCustomizer {
 	 */
 	protected $controls_headers = array();
 
+	/**
+	 * Holds transport mode
+	 * @access protected
+	 * @var mixed
+	 */
+	protected $force_refresh = false;
+
 
 	/**
 	 * Pairs the render_type property to its control class
@@ -58,7 +65,6 @@ class FastfoodCustomizer {
 		add_action( 'customize_register'						, array( $this, 'init' ) );
 		add_action( 'customize_register'						, array( $this, 'add_theme_mods_controls' ), 99 );
 		add_action( 'customize_register'						, array( $this, 'add_theme_options_controls' ), 99 );
-		add_action( 'customize_render_section'					, array( $this, 'add_fields_label' ) );
 		add_action( 'customize_controls_print_styles'			, array( $this, 'customize_stylesheet' ) );
 		add_action( 'customize_controls_print_footer_scripts'	, array( $this, 'dynamic_css_template' ) );
 		add_action( 'customize_controls_print_footer_scripts'	, array( $this, 'print_js_templates' ) );
@@ -84,6 +90,10 @@ class FastfoodCustomizer {
 		$this->prefix_global       = 'fastfood_options';
 		$this->prefix_panel        = $this->prefix_global . '_panel_';
 		$this->prefix_section      = $this->prefix_global . '_section_';
+
+		if ( version_compare( $GLOBALS['wp_version'], '4.1-alpha', '<' ) )
+			$this->force_refresh   = true;
+
 	}
 
 
@@ -116,6 +126,9 @@ class FastfoodCustomizer {
 
 			if ( $mod['control']['require'] )
 				$mod['control']['active_callback'] = array( $this, 'control_visibility' );
+
+			if ( $this->force_refresh )
+				$mod['setting']['transport'] = 'refresh';
 
 			if ( $wp_customize->get_setting( $m_key ) ) {
 				foreach( $mod['setting'] as $p_key => $property ) {
@@ -203,6 +216,9 @@ class FastfoodCustomizer {
 				if ( $option['control']['require'] )
 					$option['control']['active_callback'] = array( $this, 'control_visibility' );
 
+				if ( $this->force_refresh )
+					$option['setting']['transport'] = 'refresh';
+
 				$wp_customize->add_setting( 'fastfood_options[' . $o_key . ']', $option['setting'] );
 
 				if ( isset( $this->render_type[$option['control']['render_type']] ) )
@@ -248,36 +264,6 @@ class FastfoodCustomizer {
 		}
 
 		return true;
-
-	}
-
-	/**
-	 * Add fields labels before controls
-	 *
-	 * @since Fastfood 0.37
-	 *
-	 * @param $wp_section Customizer Section object.
-	 */
-	function add_fields_label( $wp_section ) {return;
-			$preg_prefix = '/' . $this->prefix_section . '/';
-			if ( !preg_match( $preg_prefix, $wp_section->id ) ) return;
-
-			static $sections = array();
-
-			$id = preg_replace( $preg_prefix, '', $wp_section->id );
-
-			$_sections_id = $this->options_hierarchy['field'][$id]['parent'];
-
-			if ( !in_array( $_sections_id, $sections ) ) {
-				$description = $this->options_hierarchy['section'][$_sections_id]['description'] ? '<div class="theme-controls-header-description">' . $this->options_hierarchy['section'][$_sections_id]['description'] . '</div>' : '';
-				?>
-
-					<li class="theme-controls-header theme-controls-header-<?php echo $_sections_id; ?>">
-					</li>
-
-				<?php
-				$sections[] = $_sections_id;
-			}
 
 	}
 
@@ -369,6 +355,9 @@ class FastfoodCustomizer {
 				'fastfood_rsideb_width'			=> 'fastfood_options[fastfood_rsideb_width]',
 			),
 			'headers' => $this->controls_headers,
+			'labels' => array(
+				'remove'			=> __( 'Remove', 'fastfood' ),
+			),
 		) );
 
 		wp_localize_script( 'fastfood-customize-controls',
@@ -389,6 +378,8 @@ class FastfoodCustomizer {
 		global $fastfood_opt;
 
 		$fastfood_opt = get_option( 'fastfood_options' );
+
+		if ( $this->force_refresh ) return;
 
 		wp_enqueue_script( 'fastfood-customize-preview',
 			get_template_directory_uri() . '/js/customize-preview.js',
