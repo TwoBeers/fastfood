@@ -92,13 +92,17 @@ function fastfood_get_info( $field ) {
 		$infos['theme'] = wp_get_theme( 'fastfood' );
 		$infos['current_theme'] = wp_get_theme();
 		$infos['version'] = $infos['theme']? $infos['theme']['Version'] : '';
+		$infos['required_wp_version'] = '4.0';
 	}
 
-	return $infos[$field];
+	return isset( $infos[$field] ) ? $infos[$field] : false;
+
 }
 
 
 /* load modules (accordingly to http://justintadlock.com/archives/2010/11/17/how-to-load-files-within-wordpress-themes) */
+
+require_once( 'lib/back-compat.php' );
 
 require_once( 'lib/formats-functions.php' );
 
@@ -981,6 +985,23 @@ function fastfood_extrainfo( $args = '' ) {
 	</div>
 <?php
 
+	}
+}
+
+
+// comments navigation
+function fastfood_navigate_comments(){
+	if ( get_comment_pages_count() > 1 && get_option( 'page_comments' ) ) {
+		?>
+
+		<div class="navigation_links navigate_comments">
+			<?php
+				if ( ! apply_filters( 'fastfood_filter_navigation_comments', false ) )
+					echo str_replace( "\n", "", paginate_comments_links( array( 'prev_text' => '&laquo;', 'next_text' => '&raquo;', 'echo' => 0 ) ) );
+			?>
+		</div>
+
+		<?php
 	}
 }
 

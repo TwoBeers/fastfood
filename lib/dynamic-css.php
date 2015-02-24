@@ -29,7 +29,8 @@ function fastfood_dynamic_css() {
 		'background_icons_color',
 	);
 
-	$attributes = fastfood_get_background_schemes( '0' )['attributes'];
+	$attributes = fastfood_get_background_schemes( '0' );
+	$attributes = $attributes['attributes'];
 
 	foreach ( $mods as $attribute_key ) {
 		$attributes[$attribute_key] = get_theme_mod( $attribute_key, $attributes[$attribute_key] );
