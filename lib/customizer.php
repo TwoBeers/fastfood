@@ -70,6 +70,7 @@ class FastfoodCustomizer {
 		add_action( 'customize_controls_print_footer_scripts'	, array( $this, 'print_js_templates' ) );
 		add_action( 'customize_controls_enqueue_scripts'		, array( $this, 'customize_control_js' ) );
 		add_action( 'customize_preview_init'					, array( $this, 'customize_preview_js' ) );
+		add_action( 'customize_save_after'						, array( $this, 'update_version' ) );
 
 	}
 
@@ -187,6 +188,7 @@ class FastfoodCustomizer {
 				'description'		=> $field['description'],
 				'type'				=> $field['parent'],
 				'panel'				=> $this->prefix_panel . $this->options_hierarchy['section'][$field['parent']]['parent'],
+				'active_callback'	=> isset( $field['active_callback'] ) ? $field['active_callback'] : '',
 			) );
 
 			if ( !array_key_exists( $field['parent'], $this->controls_headers ) )
@@ -292,7 +294,6 @@ class FastfoodCustomizer {
 			'fastfood_body_width'			=> '{{ data.fastfood_body_width }}',
 			'fastfood_rsideb_width'			=> '{{ data.fastfood_rsideb_width }}',
 			'fastfood_content_width'		=> '{{ data.fastfood_content_width }}',
-			'sticky_background'				=> '{{ data.sticky_background }}',
 		);
 		?>
 
@@ -312,8 +313,8 @@ class FastfoodCustomizer {
 	 */
 	function customize_stylesheet() {
 
-		wp_enqueue_style( 'fastfood-customize-stylesheet',
-			get_template_directory_uri() . '/css/customize-stylesheet.css',
+		wp_enqueue_style( 'fastfood-customizer',
+			sprintf('%1$s/css/customizer.css' , get_template_directory_uri() ),
 			false,
 			fastfood_get_info( 'version' ),
 			'all'
@@ -331,8 +332,9 @@ class FastfoodCustomizer {
 	 */
 	function customize_control_js() {
 
-		wp_enqueue_script( 'fastfood-customize-controls',
-			get_template_directory_uri() . '/js/customize-controls.js',
+		wp_enqueue_script(
+			'fastfood-customize-controls',
+			sprintf('%1$s/js/customize-controls.js' , get_template_directory_uri() ),
 			array( 'customize-controls', 'iris', 'underscore', 'wp-util', 'jquery', 'jquery-ui-slider', 'jquery-ui-accordion' ),
 			fastfood_get_info( 'version' ),
 			true
@@ -360,7 +362,8 @@ class FastfoodCustomizer {
 			),
 		) );
 
-		wp_localize_script( 'fastfood-customize-controls',
+		wp_localize_script(
+			'fastfood-customize-controls',
 			'_fastfoodCustomizeControls',
 			$data
 		);
@@ -381,29 +384,29 @@ class FastfoodCustomizer {
 
 		if ( $this->force_refresh ) return;
 
-		wp_enqueue_script( 'fastfood-customize-preview',
-			get_template_directory_uri() . '/js/customize-preview.js',
+		wp_enqueue_script(
+			'fastfood-customize-preview',
+			sprintf('%1$s/js/customize-preview.js' , get_template_directory_uri() ),
 			array( 'jquery', 'customize-preview' ),
 			fastfood_get_info( 'version' ),
 			true
 		);
-		wp_localize_script( 'fastfood-customize-preview',
-			'fastfoodCustomizePreview',
+		wp_localize_script(
+			'fastfood-customize-preview',
+			'_fastfoodCustomizePreview',
 			apply_filters( 'fastfood_customize_preview_js_data', array() )
 		);
 
 	}
 
 
-
-
-
-	/*
-	* Renders the underscore templates for the call to actions
-	* callback of 'customize_controls_print_footer_scripts'
-	*@since v3.2.9
-	*/
+	/**
+	 * Renders the underscore templates.
+	 *
+	 * @since Fastfood 0.37
+	 */
 	function print_js_templates() {
+
 		?>
 
 			<script type="text/template" id="tmpl-customize-theme-header">
@@ -414,6 +417,21 @@ class FastfoodCustomizer {
 			</script>
 
 		<?php
+
+	}
+
+
+	/**
+	 * Updates the version number in theme options
+	 *
+	 * @since Fastfood 0.37
+	 */
+	function update_version( $wp_customize_manager ) {
+
+		$options = get_option( 'fastfood_options' );
+		$options['version'] = fastfood_get_info( 'version' );
+		update_option( $this->prefix_global , $options );
+
 	}
 
 }
@@ -703,7 +721,7 @@ function fastfood_register_theme_mods() {
 					),
 					'control'	=> array(
 						'render_type'		=> 'color',
-						'label'				=> __( 'Header Background Color' ),
+						'label'				=> __( 'Header Background Color', 'fastfood' ),
 						'section'			=> 'title_tagline',
 						'priority'			=> 23,
 					),

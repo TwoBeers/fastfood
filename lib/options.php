@@ -513,7 +513,7 @@ class FastfoodOptions {
 								'control'			=> array(
 									'type'				=> 'checkbox',
 									'render_type'		=> 'checkbox',
-									'label'				=> __( 'entry meta', 'fastfood' ),
+									'label'				=> __( 'entry metadata', 'fastfood' ),
 									'description'		=> '',
 									'require'			=> 'fastfood_options[fastfood_jsani]',
 								),
@@ -1400,6 +1400,20 @@ class FastfoodOptions {
 									'description'		=> __( 'It is completely optional, but if you like the Theme we would appreciate it if you keep the credit link at the bottom', 'fastfood' ),
 								),
 							),
+			'version' =>
+							array(
+								'setting'			=> array(
+									'default'			=> fastfood_get_info( 'version' ),
+									'sanitize_method'	=> 'text',
+								),
+								'control'			=> array(
+									'type'				=> 'hidden',
+									'render_type'		=> 'hidden',
+									'label'				=> '',
+									'description'		=> '',
+									'active_callback'	=> '__return_false',
+								),
+							),
 		) );
 
 		self::$hierarchy = apply_filters( 'fastfood_options_hierarchy', array(
@@ -1868,6 +1882,7 @@ class FastfoodOptions {
 						'fastfood_editor_style',
 						'fastfood_custom_widgets',
 						'fastfood_tbcred',
+						'version',
 					),
 					'parent'		=> 'other_c',
 					'require'		=> '',
@@ -1891,9 +1906,9 @@ class FastfoodOptions {
 
 		if ( $option )
 			if ( $data )
-				return isset( self::$coa[$option][$data[0]][$data[1]] ) ? self::$coa[$option][$data[0]][$data[1]] : false;
+				return isset( self::$coa[$option][$data[0]][$data[1]] ) ? self::$coa[$option][$data[0]][$data[1]] : NULL;
 			else
-				return isset( self::$coa[$option] ) ? self::$coa[$option] : false;
+				return isset( self::$coa[$option] ) ? self::$coa[$option] : NULL;
 		else
 			return self::$coa;
 	}
@@ -1924,20 +1939,46 @@ class FastfoodOptions {
 	 *
 	 * @global	array	$fastfood_opt
 	 * @param	string	$opt			(required) the option key
+	 * @param	mixed	$alt			(optional) alternative (if option isn't set)
 	 * @param	mixed	$fallback		(optional) a fallback value (ICE)
+	 * @param	bool	$force_update	(optional) force update of the global variable $fastfood_opt
 	 * @return	mixed					the option value
 	 */
-	public static function get_opt( $opt, $fallback = NULL, $force_update = false ) {
+	public static function get_opt( $opt, $alt = NULL, $fallback = NULL, $force_update = false ) {
 		global $fastfood_opt;
 
 		if ( $force_update ) $fastfood_opt = get_option( 'fastfood_options' );
 
 		if ( isset( $fastfood_opt[$opt] ) ) return apply_filters( 'fastfood_option_' . $opt, $fastfood_opt[$opt], $opt );
 
-		if ( !$defopt = self::get_coa( $opt, array( 'setting', 'default' ) ) )
+		if ( !is_null( $alt ) ) return $alt;
+
+		if ( is_null( $defopt = self::get_coa( $opt, array( 'setting', 'default' ) ) ) )
 			return $fallback;
 		else
 			return $defopt;
+
+	}
+
+
+	/**
+	 * Return the default values
+	 *
+	 * @return	array	the default values
+	 */
+	public static function get_defaults() {
+
+		$defaults = array();
+
+		foreach( self::get_coa() as $key => $option ) {
+
+			$defaults[$key] = $option['setting']['default'];
+
+		}
+
+		$defaults['version'] = ''; //it's empty for version checking purposes
+
+		return $defaults;
 
 	}
 

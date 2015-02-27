@@ -53,11 +53,10 @@ function fastfood_dynamic_css() {
 
 	$attributes['fastfood_rsideb_width'] = round( absint( $attributes['fastfood_rsideb_width'] ) / absint( $attributes['fastfood_body_width'] ), 5 ) * 100;
 	$attributes['fastfood_content_width'] = 100 - $attributes['fastfood_rsideb_width'];
-	$attributes['sticky_background'] = 'rgba(' . implode( ', ', fastfood_hex2rgb( $attributes['fastfood_colors_link'] ) ) . ', 0.05)';
 
 	$dynamic_css = fastfood_get_dynamic_css( $attributes );
 
-	wp_add_inline_style( 'fastfood-general-style', $dynamic_css );
+	wp_add_inline_style( 'fastfood', $dynamic_css );
 
 }
 add_action( 'wp_enqueue_scripts', 'fastfood_dynamic_css' );
@@ -87,7 +86,6 @@ function fastfood_get_dynamic_css( $attributes ) {
 		'fastfood_body_width'			=> '',
 		'fastfood_rsideb_width'			=> '',
 		'fastfood_content_width'		=> '',
-		'sticky_background'				=> '',
 	) );
 
 	$css = <<<CSS
@@ -107,7 +105,8 @@ function fastfood_get_dynamic_css( $attributes ) {
 	a {
 		color: {$attributes['fastfood_colors_link']};
 	}
-	.ff-js .comment-reply-link {
+	.ff-js .comment-reply-link,
+	.hentry.sticky:before {
 		border-color: {$attributes['fastfood_colors_link']};
 	}
 	textarea:hover,
@@ -124,7 +123,8 @@ function fastfood_get_dynamic_css( $attributes ) {
 	button,
 	.navigation_links a,
 	.pagination-links a,
-	.comment_tools .show_comment_form,
+	.nav-single a,
+	.solid-label .show_comment_form,
 	input[type=button],
 	input[type=submit],
 	input[type=reset],
@@ -137,7 +137,8 @@ function fastfood_get_dynamic_css( $attributes ) {
 	button:hover,
 	.navigation_links a:hover,
 	.pagination-links a:hover,
-	.comment_tools .show_comment_form:hover,
+	.nav-single a:hover,
+	.solid-label .show_comment_form:hover,
 	input[type=button]:hover,
 	input[type=submit]:hover,
 	input[type=reset]:hover,
@@ -167,9 +168,6 @@ function fastfood_get_dynamic_css( $attributes ) {
 	#navxt-crumbs li.current_item,
 	li.current-menu-ancestor > a:after {
 		color: {$attributes['fastfood_colors_link_sel']};
-	}
-	#content .hentry.sticky {
-		background-color: {$attributes['sticky_background']};
 	}
 	#ff_background:before,
 	#main,
@@ -222,7 +220,7 @@ function fastfood_custom_fonts() {
 
 CSS;
 
-	wp_add_inline_style( 'fastfood-general-style', $css );
+	wp_add_inline_style( 'fastfood', $css );
 
 }
 add_action( 'wp_enqueue_scripts', 'fastfood_custom_fonts' );
@@ -246,7 +244,7 @@ function fastfood_custom_css() {
 
 CSS;
 
-	wp_add_inline_style( 'fastfood-general-style', $css );
+	wp_add_inline_style( 'fastfood', $css );
 
 }
 add_action( 'wp_enqueue_scripts', 'fastfood_custom_css' );

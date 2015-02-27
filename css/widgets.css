@@ -112,7 +112,9 @@ div[id*=_ff-] .widget-title h4:before {
 .wp-core-ui .button.colspan-options {
 	margin-right: 5px;
 }
-[id$="tbm-widget-area"] .button.colspan-options {
+[id$="tbm-widget-area"] .button.colspan-options,
+[id$="hidden-widget-area"] .button.colspan-options,
+[id$="primary-widget-area"] .button.colspan-options {
 	display: none;
 }
 [id$="primary-widget-area"] .widget-colspan label.colspan-2,

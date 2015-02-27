@@ -110,7 +110,6 @@
 
 		attributes.fastfood_rsideb_width = ( parseInt( attributes.fastfood_rsideb_width ) / parseInt( attributes.fastfood_body_width ) ) * 100;
 		attributes.fastfood_content_width = 100 - attributes.fastfood_rsideb_width;
-		attributes.sticky_background = Color( attributes.fastfood_colors_link ).toCSS( 'rgba', 0.05 );
 		css = cssTemplate( attributes );
 
 		api.previewer.send( 'fastfood-update-dynamic-css', css );

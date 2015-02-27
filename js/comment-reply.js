@@ -17,7 +17,7 @@ addComment = {
 		$( 'body' )
 			.addClass( 'floating-comment-form' );
 
-		$( '.comment_tools.has-comments', comments )
+		$( '.solid-label.has-comments', comments )
 			.clone()
 			.addClass( 'after-comments' )
 			.insertAfter( '#commentlist-wrap' );
@@ -69,7 +69,7 @@ addComment = {
 
 		if ( t.I( 'comment_parent' ).value !== '0' )
 			$( '#reply-title .label' )
-				.text( fastfood_comment_reply_l10n.replytocomment );
+				.text( _fastfoodCommentReplyL10n.replytocomment );
 
 		if ( $( 'body' ).is( '.layout-2,.layout-1' ) ) {
 			$( '#respond-inner' )
@@ -101,7 +101,7 @@ addComment = {
 		t.I( 'comment_parent' ).value = '0';
 
 		$( '#reply-title .label' )
-			.text( fastfood_comment_reply_l10n.replytopost );
+			.text( _fastfoodCommentReplyL10n.replytopost );
 
 		$( temp )
 			.after( respond );

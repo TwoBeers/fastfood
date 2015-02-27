@@ -24,7 +24,7 @@
 <h3>REQUIREMENTS :</h3>
 	<ul>
 		<li>PHP 5+</li>
-		<li>Wordpress 3.7+ (REQUIRED)</li>
+		<li>Wordpress 4.0+ (REQUIRED)</li>
 	</ul>
 
 <h3>BUNDLED RESOURCES :</h3>
@@ -51,7 +51,7 @@
 		<li>Two columns : to fill with your content that will be visible and accessible</li>
 		<li>Widgets Support : use the widgets if you want to enrich the site</li>
 		<li>Translation ready : Fastfood is ready to be translated into other languages (English and Italian are included)</li>
-		<li>Up to 5 sidebars : yes, it's true!you have up to 5 sidebars for your extra content &amp; widgets</li>
+		<li>Up to 6 widgets areas : yes, it's true!you have up to 6 widgets areas for your extra content &amp; widgets</li>
 		<li>Standard WordPress : fully compliant with the standards required by WordPress</li>
 		<li>Gravatars Support : your gravatar follows you everywhere</li>
 		<li>Quick navigation : all the more useful links always at your disposal</li>
@@ -74,7 +74,7 @@
 				<li><a href="http://wordpress.org/extend/plugins/breadcrumbs/">Yoast Breadcrumbs</a> ( also included as module in <a href="http://wordpress.org/plugins/wordpress-seo/">WordPress SEO</a> )</li>
 				<li><a href="https://github.com/TwoBeers/tb-chat-post">TB Chat Post</a></li>
 				<li><a href="https://github.com/TwoBeers/tb-comment-tools">TB Comment Tools</a></li>
-				<li><a href="http://wordpress.org/extend/plugins/jetpack/">Jetpack</a> (or <a href="http://wordpress.org/plugins/slimjetpack/">Slim Jetpack</a>)</li>
+				<li><a href="http://wordpress.org/extend/plugins/jetpack/">Jetpack</a></li>
 				<li><a href="http://wordpress.org/plugins/bbpress/">bbPress</a></li>
 				<li><a href="http://wordpress.org/plugins/buddypress/">BuddyPress</a></li>
 			</ul>
@@ -119,6 +119,7 @@
 				<li>widgets span</li>
 				<li>"error 404" widget area</li>
 				<li>(Partial) PHPDoc documentation</li>
+				<li>hidden widget area</li>
 			</ul>
 		</li>
 
@@ -131,12 +132,13 @@
 				<li>"Ubuntu One" service from "follow me" widget (discontinued)</li>
 				<li>"cork" background</li>
 				<li>dropped any support for IE7 and below</li>
+				<li>custom header and custom background pages. use the customizer instead</li>
 			</ul>
 		</li>
 
 		<li>Changed
 			<ul>
-				<li>code heavily cleaned</li>
+				<li>code really heavily cleaned</li>
 				<li>Follow Me services are now filterable</li>
 				<li>gallery captions animation</li>
 				<li>the layout now fits a more consistent <a target="_blank" href="http://www.gridsystemgenerator.com/gs01.php?GridWidth=980&GridColumns=20&GridMarginLeft=10&GridMarginRight=10">grid system</a></li>
@@ -144,9 +146,11 @@
 			</ul>
 		</li>
 
-		<li>Upgrade Notes
+		<li class="important">Upgrade Notes
 			<ul>
 				<li><strong>PREVIOUS FOOTER WIDGET AREAS (FIRST, SECOND AND THIRD) ARE NOW MERGED IN A SINGLE ONE. CHECK YOUR WIDGETS!</strong></li>
+				<li>If you created a child-theme based on Fastfood, it probably will not work, because of the many changes we have made to our theme. Sorry</li>
+				<li>WordPress 4.0+ <strong>REQUIRED</strong></li>
 			</ul>
 		</li>
 

@@ -15,7 +15,7 @@
 
 	<?php fastfood_hook_sidebar_top( 'footer' ); ?>
 
-	<?php if ( is_active_sidebar( 'footer-widget-area' ) ) dynamic_sidebar( 'footer-widget-area' ); ?>
+	<?php dynamic_sidebar( 'footer-widget-area' ); ?>
 
 	<?php fastfood_hook_sidebar_bottom( 'footer' ); ?>
 

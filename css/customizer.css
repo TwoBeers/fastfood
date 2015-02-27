@@ -172,6 +172,7 @@ li.customize-control-background .current .container img {
 }
 #customize-control-background_scheme img {
 	border-radius: 2px;
+	max-width: 100%;
 }
 #customize-control-background_scheme label[title="0"] {
 	display: none;

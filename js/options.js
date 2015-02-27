@@ -19,7 +19,7 @@ fastfoodOptions = {
 		fastfoodOptions.switchTab('style');
 
 		$('#to-defaults').click (function () {
-			var answer = confirm(fastfood_l10n.confirm_to_defaults)
+			var answer = confirm(_fastfoodOptionsL10n.confirm_to_defaults)
 			if (!answer){
 				return false;
 			}

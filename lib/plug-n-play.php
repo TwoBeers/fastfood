@@ -16,7 +16,36 @@ class Fastfood_For_Jetpack {
 
 	function __construct () {
 
-		add_action( 'init', array( $this, 'init' ) ); //Jetpack support
+		if ( !class_exists( 'Jetpack' ) ) return;
+
+		//Infinite Scroll
+		add_theme_support( 'infinite-scroll', array(
+			'container'		=> 'posts_content',
+			'render'		=> array( $this, 'infinite_scroll_render' ),
+			'wrapper'		=> false,
+		) );
+		if ( Jetpack::is_module_active( 'infinite-scroll' ) ) {
+			//nop
+		}
+
+		//Sharedaddy
+		if ( Jetpack::is_module_active( 'sharedaddy' ) ) {
+			//nop
+		}
+
+		//Carousel
+		if ( Jetpack::is_module_active( 'carousel' ) ) {
+			add_filter( 'fastfood_option_fastfood_gallery_preview'		, '__return_false' );
+			add_filter( 'fastfood_option_fastfood_force_link_to_image'	, '__return_false' );
+			add_filter( 'fastfood_options_hierarchy'					, array( $this, 'update_options_hierarchy' ) );
+		}
+
+		//Likes
+		if ( Jetpack::is_module_active( 'likes' ) ) {
+			//nop
+		}
+
+		add_action( 'init', array( $this, 'init' ) );
 
 	}
 
@@ -24,39 +53,30 @@ class Fastfood_For_Jetpack {
 	/* initialize Jetpack support */
 	function init() {
 
-		if ( !class_exists( 'Jetpack' ) ) return;
-
 		if ( fastfood_is_mobile() ) return;
 
 		//Infinite Scroll
-		add_theme_support( 'infinite-scroll', array(
-			'type'			=> 'click',
-			'container'		=> 'posts_content',
-			'render'		=> array( $this, 'infinite_scroll_render' ),
-			'wrapper'		=> false,
-		) );
 		if ( Jetpack::is_module_active( 'infinite-scroll' ) ) {
-			//add_filter		( 'infinite_scroll_results'		, array( $this, 'infinite_scroll_encode' ), 11, 1 );
-			remove_action( 'fastfood_hook_loop_after'						, 'fastfood_navigate_archives' );
+			//nop
 		}
 
 		//Sharedaddy
 		if ( Jetpack::is_module_active( 'sharedaddy' ) ) {
-			remove_filter	( 'the_content'									, 'sharing_display', 19 );
-			remove_filter	( 'the_excerpt'									, 'sharing_display', 19 );
-			add_action		( 'fastfood_hook_entry_bottom'					, array( $this, 'sharedaddy' ) );
+			remove_filter( 'the_content', 'sharing_display', 19 );
+			remove_filter( 'the_excerpt', 'sharing_display', 19 );
+			add_action( 'fastfood_hook_entry_bottom', array( $this, 'sharedaddy' ) );
 		}
 
 		//Carousel
 		if ( Jetpack::is_module_active( 'carousel' ) ) {
-			add_filter		( 'fastfood_option_fastfood_gallery_preview'	, '__return_false' );
+			//nop
 		}
 
 		//Likes
 		if ( Jetpack::is_module_active( 'likes' ) ) {
-			add_action		( 'fastfood_hook_entry_bottom'					, array( $this, 'likes' ) );
-			remove_filter	( 'the_content'									, array( Jetpack_Likes::init(), 'post_likes' ), 30, 1);
-			add_filter		( 'fastfood_filter_likes'						, array( Jetpack_Likes::init(), 'post_likes' ), 30, 1);
+			add_action( 'fastfood_hook_entry_bottom', array( $this, 'likes' ) );
+			remove_filter( 'the_content', array( Jetpack_Likes::init(), 'post_likes' ), 30, 1);
+			add_filter( 'fastfood_filter_likes', array( Jetpack_Likes::init(), 'post_likes' ), 30, 1);
 		}
 
 	}
@@ -65,10 +85,17 @@ class Fastfood_For_Jetpack {
 	//print the "likes" button after post content
 	function likes() {
 
-		echo '<br class="fixfloat" />' . apply_filters('fastfood_filter_likes','') . '<br class="fixfloat" />';
+		echo apply_filters( 'fastfood_filter_likes', '' );
 
 	}
 
+
+	//print the sharedaddy buttons inside the "I-like-it" container instead of after post content
+	function sharedaddy() {
+
+		echo sharing_display();
+
+	}
 
 	//Set the code to be rendered on for calling posts,
 	function infinite_scroll_render() {
@@ -78,22 +105,11 @@ class Fastfood_For_Jetpack {
 	}
 
 
-	//re-encodes html result to UTF8 (jetpack bug?)
-	//http://localhost/wordpress/?infinity=scrolling&action=infinite_scroll&page=5&order=DESC
-	function infinite_scroll_encode( $results ) {
+	function update_options_hierarchy( $hierarchy ) {
 
-		$results['html'] = utf8_encode( utf8_decode( $results['html'] ) );
-		return $results;
+		$hierarchy['field']['thickbox']['active_callback'] = '__return_false';
 
-	}
-
-
-	//print the sharedaddy buttons inside the "I-like-it" container instead of after post content
-	function sharedaddy() {
-
-		if ( ( function_exists( 'is_buddypress' ) && is_buddypress() ) || ( function_exists( 'is_bbpress' ) && is_bbpress() ) ) return;
-
-		echo sharing_display();
+		return $hierarchy;
 
 	}
 
@@ -132,6 +148,7 @@ class Fastfood_bbPress {
 		add_filter( 'fastfood_filter_featured_title'			, array( $this, 'show_title' ) );
 		add_filter( 'fastfood_use_sidebar'						, array( $this, 'show_sidebar' ) );
 		add_filter( 'fastfood_get_sidebar_singular'				, '__return_false' );
+		add_filter( 'sharing_show'								, '__return_false' );
 
 	}
 
@@ -261,6 +278,7 @@ class Fastfood_BuddyPress {
 		add_filter( 'fastfood_filter_featured_title'				, array( $this, 'show_title' ) );
 		add_filter( 'fastfood_filter_navbuttons'					, array( $this, 'navbuttons' ) );
 		add_filter( 'fastfood_get_sidebar_singular'					, '__return_false' );
+		add_filter( 'sharing_show'									, '__return_false' );
 
 	}
 

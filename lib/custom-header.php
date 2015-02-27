@@ -60,8 +60,8 @@ class Fastfood_Custom_Header {
 		) );
 
 		$args = array(
-			'width'						=> absint( FastfoodOptions::get_opt( 'fastfood_body_width', 852 ) ),
-			'height'					=> absint( FastfoodOptions::get_opt( 'fastfood_head_h', 120 ) ),
+			'width'						=> absint( FastfoodOptions::get_opt( 'fastfood_body_width' ) ),
+			'height'					=> absint( FastfoodOptions::get_opt( 'fastfood_head_h' ) ),
 			'default-image'				=> get_template_directory_uri() . '/images/headers/tree.jpg',
 			'header-text'				=> true,
 			'default-text-color'		=> '404040',

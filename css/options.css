@@ -188,6 +188,23 @@ h3 {
 	right: -1em;
 	width: 0;
 }
+li.important{
+	list-style: none;
+}
+li.important:before {
+	background: #ff0000;
+	color: #fff;
+	content: "!";
+	display: block;
+	font-weight: bold;
+	height: 1em;
+	line-height: 1em;
+	margin: 0.2em 0 0 -1.5em;
+	padding: 0 1px 2px;
+	position: absolute;
+	text-align: center;
+	width: 1em;
+}
 
 @media screen and (max-width: 1024px) {
 	#tabselector img {

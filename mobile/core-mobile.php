@@ -155,7 +155,9 @@ class fastfood_Mobile {
 	function enqueue_comments_reply() {
 
 		if( get_option( 'thread_comments' ) )
-			wp_enqueue_script( 'comment-reply' );
+			wp_enqueue_script(
+				'comment-reply'
+			);
 
 	}
 

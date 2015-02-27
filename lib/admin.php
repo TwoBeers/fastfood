@@ -21,7 +21,6 @@ class FastfoodAdmin {
 	function __construct() {
 
 		/* custom actions */
-		add_action( 'admin_init'					, array( $this, 'default_options' ) );
 		add_action( 'admin_head'					, array( $this, 'post_manage_style' ) );
 		add_action( 'manage_posts_custom_column'	, array( $this, 'add_extra_value' ), 10, 2 );
 		add_action( 'manage_pages_custom_column'	, array( $this, 'add_extra_value' ), 10, 2 );
@@ -66,55 +65,17 @@ class FastfoodAdmin {
 
 	}
 
-	/**
-	 * Check and set default options 
-	 */
-	function default_options() {
-
-			$the_coa = FastfoodOptions::get_coa();
-			$the_opt = get_option( $this->option_name );
-
-			// if options are empty, sets the default values
-			if ( empty( $the_opt ) || !isset( $the_opt ) ) {
-
-				foreach ( $the_coa as $key => $val ) {
-					$the_opt[$key] = $the_coa[$key]['setting']['default'];
-				}
-				$the_opt['version'] = ''; //null value to keep admin notice alive and invite user to discover theme options
-				update_option( $this->option_name , $the_opt );
-
-			} else if ( !isset( $the_opt['version'] ) || $the_opt['version'] < fastfood_get_info( 'version' ) ) {
-
-				// check for unset values and set them to default value -> when updated to new version
-				foreach ( $the_coa as $key => $val ) {
-					if ( !isset( $the_opt[$key] ) ) $the_opt[$key] = $the_coa[$key]['setting']['default'];
-				}
-				$the_opt['version'] = ''; //null value to keep admin notice alive and invite user to discover theme options
-				update_option( $this->option_name , $the_opt );
-
-			}
-
-	}
-
 
 	/**
 	 * Print a reminder message for set the options after the theme is installed or updated
 	 */
 	function setopt_admin_notice() {
 
-		if ( current_user_can( 'manage_options' ) && ( FastfoodOptions::get_opt( 'version' ) < fastfood_get_info( 'version' ) ) ) {
-			echo '<div class="updated"><p><strong>' . sprintf( __( "%s theme says: Dont forget to set <a href=\"%s\">my options</a>!", 'fastfood' ), 'Fastfood', get_admin_url() . 'themes.php?page=' . $this->option_name ) . '</strong></p></div>';
+		$screen = get_current_screen();
+
+		if ( current_user_can( 'manage_options' ) && ( $screen->id !== 'appearance_page_fastfood_options' ) && version_compare( FastfoodOptions::get_opt( 'version', '0' ), fastfood_get_info( 'version' ), '<' ) ) {
+			echo '<div class="update-nag"><strong>' . sprintf( __( "%s theme says: Dont forget to set <a href=\"%s\">my options</a>!", 'fastfood' ), 'Fastfood', get_admin_url() . 'themes.php?page=' . $this->option_name ) . '</strong></div>';
 		}
-
-	}
-
-
-	/**
-	 * the custon header style - called only on your theme options page
-	 */
-	function fastfood_theme_admin_styles() {
-
-		wp_enqueue_style( 'fastfood-options', get_template_directory_uri() . '/css/options.css', array(), '', 'screen' );
 
 	}
 
@@ -146,8 +107,6 @@ class FastfoodAdmin {
 			$input[$key] = $_value;
 		}
 
-		$input['version'] = fastfood_get_info( 'version' ); // keep version number
-
 		return $input;
 
 	}
@@ -160,24 +119,12 @@ class FastfoodAdmin {
 
 		if ( !current_user_can( 'edit_theme_options' ) ) wp_die( 'You do not have sufficient permissions to access this page.' );
 
-		global $fastfood_opt;
-
 		$the_hierarchy = FastfoodOptions::get_hierarchy( 'group' );
 
 		if ( isset( $_GET['erase'] ) ) {
 			$_SERVER['REQUEST_URI'] = remove_query_arg( 'erase', $_SERVER['REQUEST_URI'] );
 			delete_option( $this->option_name );
-			$this->default_options();
-			$fastfood_opt = get_option( $this->option_name );
 		}
-
-		// update version value when admin visit options page
-		if ( $fastfood_opt['version'] < fastfood_get_info( 'version' ) ) {
-			$fastfood_opt['version'] = fastfood_get_info( 'version' );
-			update_option( $this->option_name , $fastfood_opt );
-		}
-
-		$the_opt = $fastfood_opt;
 
 		// options have been updated
 		if ( isset( $_REQUEST['settings-updated'] ) ) {
@@ -210,7 +157,6 @@ class FastfoodAdmin {
 			?>
 
 				<div id="buttons">
-					<input type="hidden" name="<?php echo $this->option_name; ?>[hidden_opt]" value="default" />
 					<input class="button button-primary" type="submit" name="Submit" value="<?php _e( 'Update Options' , 'fastfood' ); ?>" />
 					<a class="button" href="themes.php?page=<?php echo $this->option_name; ?>" target="_self"><?php _e( 'Undo Changes' , 'fastfood' ); ?></a>
 					<a class="button" id="to-defaults" href="themes.php?page=<?php echo $this->option_name; ?>&erase=1" target="_self"><?php _e( 'Back to defaults' , 'fastfood' ); ?></a>
@@ -380,8 +326,9 @@ class FastfoodAdmin {
 	 * Function that renders the settings field
 	 */
 	function render_field( $options ) {
-
 		global $fastfood_opt;
+
+		$fastfood_opt = get_option( $this->option_name );
 		$the_coa = FastfoodOptions::get_coa();
 
 		foreach ( $options as $i => $key ) {
@@ -560,8 +507,17 @@ class FastfoodAdmin {
 	 */
 	function admin_theme_options_style() {
 
-		wp_enqueue_style( 'wp-color-picker' );
-		wp_enqueue_style( 'fastfood-options', get_template_directory_uri() . '/css/admin-options.css', false, '', 'screen' );
+		wp_enqueue_style(
+			'wp-color-picker'
+		);
+
+		wp_enqueue_style(
+			'fastfood-options',
+			sprintf('%1$s/css/options.css' , get_template_directory_uri() ),
+			false,
+			'',
+			'screen'
+		);
 
 	}
 
@@ -571,12 +527,22 @@ class FastfoodAdmin {
 	 */
 	function admin_theme_options_script() {
 
-		wp_enqueue_script( 'fastfood-options', get_template_directory_uri().'/js/admin-options.js',array('jquery','thickbox','wp-color-picker'),fastfood_get_info( 'version' ), true ); //thebird js
+		wp_enqueue_script(
+			'fastfood-options',
+			sprintf('%1$s/js/options.js' , get_template_directory_uri() ),
+			array( 'jquery', 'thickbox', 'wp-color-picker' ),
+			fastfood_get_info( 'version' ),
+			true
+		);
 
 		$data = array(
 			'confirm_to_defaults' => esc_js( __( 'Are you really sure you want to set all the options to their default values?', 'fastfood' ) )
 		);
-		wp_localize_script( 'fastfood-options', 'fastfood_l10n', $data );
+		wp_localize_script(
+			'fastfood-options',
+			'_fastfoodOptionsL10n',
+			$data
+		);
 
 	}
 
@@ -586,7 +552,13 @@ class FastfoodAdmin {
 	 */
 	function admin_widgets_style() {
 
-		wp_enqueue_style( 'fastfood-widgets-css', get_template_directory_uri() . '/css/admin-widgets.css', false, '', 'screen' );
+		wp_enqueue_style(
+			'fastfood-widgets',
+			sprintf('%1$s/css/widgets.css' , get_template_directory_uri() ),
+			false,
+			'',
+			'screen'
+		);
 
 	}
 
@@ -596,7 +568,13 @@ class FastfoodAdmin {
 	 */
 	function admin_widgets_script() {
 
-		wp_enqueue_script( 'fastfood-widgets-js', get_template_directory_uri() . '/js/admin-widgets.js', array('jquery'), fastfood_get_info( 'version' ), true );
+		wp_enqueue_script(
+			'fastfood-widgets',
+			sprintf('%1$s/js/widgets.js' , get_template_directory_uri() ),
+			array( 'jquery' ),
+			fastfood_get_info( 'version' ),
+			true
+		);
 
 	}
 
