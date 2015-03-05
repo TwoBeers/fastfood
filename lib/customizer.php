@@ -79,8 +79,6 @@ class FastfoodCustomizer {
 	 * Initialize the class
 	 *
 	 * @since Fastfood 0.37
-	 *
-	 * @param WP_Customize_Manager $wp_customize Customizer object.
 	 */
 	function init() {
 
@@ -294,6 +292,7 @@ class FastfoodCustomizer {
 			'fastfood_body_width'			=> '{{ data.fastfood_body_width }}',
 			'fastfood_rsideb_width'			=> '{{ data.fastfood_rsideb_width }}',
 			'fastfood_content_width'		=> '{{ data.fastfood_content_width }}',
+			'fastfood_featured_title_size'	=> '{{ data.fastfood_featured_title_size }}',
 		);
 		?>
 
@@ -314,7 +313,7 @@ class FastfoodCustomizer {
 	function customize_stylesheet() {
 
 		wp_enqueue_style( 'fastfood-customizer',
-			sprintf('%1$s/css/customizer.css' , get_template_directory_uri() ),
+			sprintf( '%1$s/css/customizer.css' , get_template_directory_uri() ),
 			false,
 			fastfood_get_info( 'version' ),
 			'all'
@@ -334,7 +333,7 @@ class FastfoodCustomizer {
 
 		wp_enqueue_script(
 			'fastfood-customize-controls',
-			sprintf('%1$s/js/customize-controls.js' , get_template_directory_uri() ),
+			sprintf( '%1$s/js/customize-controls.js' , get_template_directory_uri() ),
 			array( 'customize-controls', 'iris', 'underscore', 'wp-util', 'jquery', 'jquery-ui-slider', 'jquery-ui-accordion' ),
 			fastfood_get_info( 'version' ),
 			true
@@ -355,6 +354,7 @@ class FastfoodCustomizer {
 				'fastfood_colors_link_sel'		=> 'fastfood_options[fastfood_colors_link_sel]',
 				'fastfood_body_width'			=> 'fastfood_options[fastfood_body_width]',
 				'fastfood_rsideb_width'			=> 'fastfood_options[fastfood_rsideb_width]',
+				'fastfood_featured_title_size'	=> 'fastfood_options[fastfood_featured_title_size]',
 			),
 			'headers' => $this->controls_headers,
 			'labels' => array(
@@ -386,7 +386,7 @@ class FastfoodCustomizer {
 
 		wp_enqueue_script(
 			'fastfood-customize-preview',
-			sprintf('%1$s/js/customize-preview.js' , get_template_directory_uri() ),
+			sprintf( '%1$s/js/customize-preview.js' , get_template_directory_uri() ),
 			array( 'jquery', 'customize-preview' ),
 			fastfood_get_info( 'version' ),
 			true

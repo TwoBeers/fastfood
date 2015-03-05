@@ -44,7 +44,7 @@ function fastfood_switch_theme() {
  */
 function fastfood_upgrade_notice() {
 
-	$message = sprintf( __( 'Fastfood requires at least WordPress version %s. You are running version %s. Please upgrade and try again.', 'fastfood' ), fastfood_get_info( 'required_wp_version' ), $GLOBALS['wp_version'] );
+	$message = sprintf( __( 'Fastfood requires at least WordPress version %1$s. You are running version %2$s. Please upgrade and try again.', 'fastfood' ), fastfood_get_info( 'required_wp_version' ), $GLOBALS['wp_version'] );
 	printf( '<div class="error"><p>%s</p></div>', $message );
 
 }
@@ -57,7 +57,7 @@ function fastfood_upgrade_notice() {
  */
 function fastfood_load_customizer() {
 
-		wp_die( sprintf( __( 'Fastfood requires at least WordPress version %s. You are running version %s. Please upgrade and try again.', 'fastfood' ), fastfood_get_info( 'required_wp_version' ), $GLOBALS['wp_version'] ), '', array(
+		wp_die( sprintf( __( 'Fastfood requires at least WordPress version %1$s. You are running version %2$s. Please upgrade and try again.', 'fastfood' ), fastfood_get_info( 'required_wp_version' ), $GLOBALS['wp_version'] ), '', array(
 			'back_link' => true,
 		) );
 
@@ -72,7 +72,7 @@ function fastfood_load_customizer() {
 function fastfood_preview() {
 
 	if ( isset( $_GET['preview'] ) )
-		wp_die( sprintf( __( 'Fastfood requires at least WordPress version %s. You are running version %s. Please upgrade and try again.', 'fastfood' ), fastfood_get_info( 'required_wp_version' ), $GLOBALS['wp_version'] ) );
+		wp_die( sprintf( __( 'Fastfood requires at least WordPress version %1$s. You are running version %2$s. Please upgrade and try again.', 'fastfood' ), fastfood_get_info( 'required_wp_version' ), $GLOBALS['wp_version'] ) );
 
 }
 

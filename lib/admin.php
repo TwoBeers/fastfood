@@ -46,7 +46,7 @@ class FastfoodAdmin {
 		$output = '
 
 			<p id="theme_donation">
-				' . sprintf( __( '%s theme is created by %s.', 'fastfood' ), 'Fastfood', '<a target="_blank" href="http://www.twobeers.net/">TwoBeers</a>' ) . '
+				' . sprintf( __( '%1$s theme is created by %2$s.', 'fastfood' ), 'Fastfood', '<a target="_blank" href="http://www.twobeers.net/">TwoBeers</a>' ) . '
 				<br />
 				' . __( 'Our developers need coffee (and beer). How about a small donation?', 'fastfood' ) . '
 				<br />
@@ -74,7 +74,7 @@ class FastfoodAdmin {
 		$screen = get_current_screen();
 
 		if ( current_user_can( 'manage_options' ) && ( $screen->id !== 'appearance_page_fastfood_options' ) && version_compare( FastfoodOptions::get_opt( 'version', '0' ), fastfood_get_info( 'version' ), '<' ) ) {
-			echo '<div class="update-nag"><strong>' . sprintf( __( "%s theme says: Dont forget to set <a href=\"%s\">my options</a>!", 'fastfood' ), 'Fastfood', get_admin_url() . 'themes.php?page=' . $this->option_name ) . '</strong></div>';
+			echo '<div class="update-nag"><strong>' . sprintf( __( '%1$s theme says: Dont forget to set <a href="%2$s">my options</a>!', 'fastfood' ), 'Fastfood', get_admin_url() . 'themes.php?page=' . $this->option_name ) . '</strong></div>';
 		}
 
 	}
@@ -513,7 +513,7 @@ class FastfoodAdmin {
 
 		wp_enqueue_style(
 			'fastfood-options',
-			sprintf('%1$s/css/options.css' , get_template_directory_uri() ),
+			sprintf( '%1$s/css/options.css' , get_template_directory_uri() ),
 			false,
 			'',
 			'screen'
@@ -529,7 +529,7 @@ class FastfoodAdmin {
 
 		wp_enqueue_script(
 			'fastfood-options',
-			sprintf('%1$s/js/options.js' , get_template_directory_uri() ),
+			sprintf( '%1$s/js/options.js' , get_template_directory_uri() ),
 			array( 'jquery', 'thickbox', 'wp-color-picker' ),
 			fastfood_get_info( 'version' ),
 			true
@@ -554,7 +554,7 @@ class FastfoodAdmin {
 
 		wp_enqueue_style(
 			'fastfood-widgets',
-			sprintf('%1$s/css/widgets.css' , get_template_directory_uri() ),
+			sprintf( '%1$s/css/widgets.css' , get_template_directory_uri() ),
 			false,
 			'',
 			'screen'
@@ -570,7 +570,7 @@ class FastfoodAdmin {
 
 		wp_enqueue_script(
 			'fastfood-widgets',
-			sprintf('%1$s/js/widgets.js' , get_template_directory_uri() ),
+			sprintf( '%1$s/js/widgets.js' , get_template_directory_uri() ),
 			array( 'jquery' ),
 			fastfood_get_info( 'version' ),
 			true

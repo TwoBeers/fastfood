@@ -45,6 +45,7 @@ function fastfood_dynamic_css() {
 		'fastfood_colors_link_sel',
 		'fastfood_body_width',
 		'fastfood_rsideb_width',
+		'fastfood_featured_title_size',
 	);
 
 	foreach ( $opts as $attribute_key ) {
@@ -53,6 +54,7 @@ function fastfood_dynamic_css() {
 
 	$attributes['fastfood_rsideb_width'] = round( absint( $attributes['fastfood_rsideb_width'] ) / absint( $attributes['fastfood_body_width'] ), 5 ) * 100;
 	$attributes['fastfood_content_width'] = 100 - $attributes['fastfood_rsideb_width'];
+	$attributes['fastfood_featured_title_size'] = absint( $attributes['fastfood_featured_title_size'] );
 
 	$dynamic_css = fastfood_get_dynamic_css( $attributes );
 
@@ -86,6 +88,7 @@ function fastfood_get_dynamic_css( $attributes ) {
 		'fastfood_body_width'			=> '',
 		'fastfood_rsideb_width'			=> '',
 		'fastfood_content_width'		=> '',
+		'fastfood_featured_title_size'	=> '',
 	) );
 
 	$css = <<<CSS
@@ -99,7 +102,7 @@ function fastfood_get_dynamic_css( $attributes ) {
 		background-position: {$attributes['background_position_x']} {$attributes['background_position_y']};
 		background-image: url({$attributes['background_image']});
 	}
-	.menuitem .itemimg, .menuitem .itemimg_js, .minibutton .minib_img {
+	.quickbar-panel .quickbar-panel-icon, .quickbar-panel .quickbar-panel-icon_js, .minibutton .minib_img {
 		color: {$attributes['background_icons_color']};
 	}
 	a {
@@ -124,6 +127,7 @@ function fastfood_get_dynamic_css( $attributes ) {
 	.navigation_links a,
 	.pagination-links a,
 	.nav-single a,
+	.nav-pages a span,
 	.solid-label .show_comment_form,
 	input[type=button],
 	input[type=submit],
@@ -138,6 +142,7 @@ function fastfood_get_dynamic_css( $attributes ) {
 	.navigation_links a:hover,
 	.pagination-links a:hover,
 	.nav-single a:hover,
+	.nav-pages a span:hover,
 	.solid-label .show_comment_form:hover,
 	input[type=button]:hover,
 	input[type=submit]:hover,
@@ -172,8 +177,8 @@ function fastfood_get_dynamic_css( $attributes ) {
 	#ff_background:before,
 	#main,
 	#fixedfoot,
-	.menuback,
-	.menuback_js {
+	.quickbar-panel-container,
+	.quickbar-panel-container_js {
 		width: {$attributes['fastfood_body_width']}px;
 	}
 	#primary-widget-area {
@@ -181,6 +186,13 @@ function fastfood_get_dynamic_css( $attributes ) {
 	}
 	.posts_narrow {
 		width: {$attributes['fastfood_content_width']}%;
+	}
+	.entry-title.with-thumbnail .entry-title-content {
+		padding-left: {$attributes['fastfood_featured_title_size']}px;
+		min-height: {$attributes['fastfood_featured_title_size']}px;
+	}
+	.entry-title-thumbnail{
+		width: {$attributes['fastfood_featured_title_size']}px;
 	}
 
 CSS;

@@ -172,7 +172,7 @@ class Fastfood_Widget_Popular_Posts extends WP_Widget {
 				$the_format	= get_post_format() ? get_post_format() : 'standard';
 				$the_thumb	= $thumb? fastfood_get_the_thumb( array( 'id' => $the_id, 'size' => array( 32, 32 ), 'default' => '<span class="tbm-format f-' . $the_format . '"></span>' ) ) : '';
 
-				echo sprintf( '<li%s><a href="%s" title="%s">%s%s</a></li>',
+				echo sprintf( '<li%1$s><a href="%2$s" title="%3$s">%4$s%5$s</a></li>',
 					$the_class,
 					esc_url( get_permalink() ),
 					esc_attr( $the_title ),
@@ -317,7 +317,7 @@ class Fastfood_Widget_Latest_Commented_Posts extends WP_Widget {
 					$the_format	= get_post_format( $the_id ) ? get_post_format( $the_id ) : 'standard';
 					$the_thumb	= $thumb? fastfood_get_the_thumb( array( 'id' => $the_id, 'size' => array( 32, 32 ), 'default' => '<span class="tbm-format f-' . $the_format . '"></span>' ) ) : '';
 
-					$output .= sprintf( '<li%s><a href="%s" title="%s">%s%s</a></li>',
+					$output .= sprintf( '<li%1$s><a href="%2$s" title="%3$s">%4$s%5$s</a></li>',
 						$the_class,
 						esc_url( get_permalink( $the_id ) ),
 						esc_attr( $the_title ),
@@ -584,7 +584,7 @@ class Fastfood_Widget_Pop_Categories extends WP_Widget {
 
 		$output .= '<ul>';
 		foreach ( $categories as $category ) {
-			$output .= sprintf( '<li class="cat-item cat-item-%s"><a href="%s">%s <span class="details">(%s)</span></a></li>',
+			$output .= sprintf( '<li class="cat-item cat-item-%1$s"><a href="%2$s">%3$s <span class="details">(%4$s)</span></a></li>',
 				esc_attr( $category->term_id ),
 				esc_url( get_term_link( $category ) ),
 				esc_attr( apply_filters( 'list_cats', $category->name, $category ) ),
@@ -888,7 +888,7 @@ class Fastfood_Widget_Social extends WP_Widget {
 				$account = get_bloginfo( 'rss2_url' );
 			}
 			if ( $show && !empty( $account ) ) {
-				echo sprintf( '<a href="%s" target="_blank" class="ff-social-icon" title="%s"><img src="%s" alt="%s" style="width: %s; height: %s;" /></a>',
+				echo sprintf( '<a href="%1$s" target="_blank" class="ff-social-icon" title="%2$s"><img src="%3$s" alt="%4$s" style="width: %5$s; height: %6$s;" /></a>',
 					esc_url( $account ),
 					esc_attr( $service_data['name'] ),
 					esc_url( $service_data['icon'] ),
@@ -1141,7 +1141,7 @@ class Fastfood_Widget_Recent_Posts extends WP_Widget {
 				$the_format	= get_post_format() ? get_post_format() : 'standard';
 				$the_thumb	= $thumb? fastfood_get_the_thumb( array( 'id' => $the_id, 'size' => array( 32, 32 ), 'default' => '<span class="tbm-format f-' . $the_format . '"></span>' ) ) : '';
 
-				echo sprintf( '<li%s><a href="%s" title="%s">%s%s</a></li>',
+				echo sprintf( '<li%1$s><a href="%2$s" title="%3$s">%4$s%5$s</a></li>',
 					$the_class,
 					esc_url( get_permalink() ),
 					esc_attr( $the_title ),
@@ -1280,7 +1280,7 @@ class Fastfood_Widget_Image_Exif extends WP_Widget {
 		<?php if ( $title ) echo $before_title . apply_filters( 'widget_title', $title, $instance, $this->id_base ) . $after_title; ?>
 		<?php
 			foreach( fastfood_exif_details() as $image_meta ) {
-				echo sprintf( '%s: %s',
+				echo sprintf( '%1$s: %2$s',
 					$image_meta['label'],
 					$image_meta['readable']
 				) . '<br />';
@@ -1584,7 +1584,7 @@ class Fastfood_Widget_Font_Resize extends WP_Widget {
 
 		wp_enqueue_script(
 			'fastfood-font-resize',
-			sprintf('%1$s/js/font-resize%2$s.js' , get_template_directory_uri(), ( defined('WP_DEBUG') && true === WP_DEBUG ) ? '' : '.min' ),
+			sprintf( '%1$s/js/font-resize%2$s.js' , get_template_directory_uri(), ( defined('WP_DEBUG') && true === WP_DEBUG ) ? '' : '.min' ),
 			array( 'jquery' ),
 			'',
 			true

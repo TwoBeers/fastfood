@@ -24,7 +24,7 @@
 		</div>
 		<div id="footer">
 			<p id="themecredits">
-				<?php echo sprintf( __('Powered by %s and %s','fastfood'), '<a target="_blank" href="http://wordpress.org/" title="WordPress">WordPress</a>', '<a target="_blank" href="http://www.twobeers.net/" title="' . esc_attr( __( 'Visit theme authors homepage','fastfood' ) ) . ' @ twobeers.net">fastfood</a>') ; ?>
+				<?php echo sprintf( __('Powered by %1$s and %2$s','fastfood'), '<a target="_blank" href="http://wordpress.org/" title="WordPress">WordPress</a>', '<a target="_blank" href="http://www.twobeers.net/" title="' . esc_attr( __( 'Visit theme authors homepage','fastfood' ) ) . ' @ twobeers.net">fastfood</a>') ; ?>
 			</p>
 			<?php wp_loginout(); wp_register( ' | ', '' ); ?><?php echo ' | <a href="' . home_url() . '?mobile_override=desktop">'. __( 'Desktop View', 'fastfood' ) .'</a>'; ?>
 </div>

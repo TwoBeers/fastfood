@@ -182,7 +182,7 @@ var fastfoodAnimations;
 				$this.hoverIntent(
 					function(){ //when mouse enters, shift right the tooltip
 						list.css( { 'display' : 'block' } ).animate(
-							{ 'opacity' : 0.9 , 'right' : 41 },
+							{ 'opacity' : 1 , 'right' : 41 },
 							200
 						);
 					},
@@ -254,45 +254,44 @@ var fastfoodAnimations;
 		quickbar_panels : function() {
 
 			//quickbar animation
-			$( '#quickbar' ).children( '.menuitem' ).each( function(){ //get every quickbar item
-				var $this = $( this );
-				var list = $this.children( '.menuback' ); // get the sub list for each quickbar item
-				var trig = $this.children( '.itemimg' );
+			var panels = $( '#quickbar' ).children( '.quickbar-panel' );
+			var panels_count = Math.max( 5, panels.length );
 
-				trig.removeClass( 'itemimg' ).addClass( 'itemimg_js' );
-				list.removeClass().addClass( 'menuback_js' ).css( { 'height' : 0 } ).hide();
+			panels.each( function(){ //get every quickbar item
+				var $this = $( this );
+				var list = $this.children( '.quickbar-panel-container' ); // get the sub list for each quickbar item
+
+				list.css( { 'height' : 0 } ).hide();
 
 				$this.hoverIntent(
 					function(){ //when mouse enters, slide left the sub list, restore its shadow and animate the button
-						if ( $( '#panel_user' ).hasClass( 'keepme' ) ) return;
+						if ( $( '#panel-user' ).hasClass( 'keepme' ) ) return;
 						list.stop().show().animate(
-							{ 'height': 250 },
+							{ 'height': panels_count * 50 },
 							400
 						);
 					},
 					function(){ //when mouse leaves, hide the submenu
-						if ( $( '#panel_user' ).hasClass( 'keepme' ) ) return;
-						list.stop().css( { 'height' : 0 , 'display' : '' } ).hide();
+						if ( $( '#panel-user' ).hasClass( 'keepme' ) ) return;
+						list.stop().css( { 'height' : 0 } ).hide();
 					}
 				);
 			} );
 
 			//add a "close" link after the submit button in minilogin form
-			$( '.login-submit' ).append( $( '#closeminilogin' ) );
-			$( '#closeminilogin' ).css( { 'display' : 'inline' } );
-			$( '#closeminilogin' ).click( function() {
-				$( '.itemimg_js' ).fadeIn();
-				$( '#panel_user .menuback_js' ).css( { 'display' : '' , 'height' : 0  } );
-				$( '#ff_minilogin_wrap' ).css( { 'display' : '' } );
-				$( '#panel_user' ).removeClass( 'keepme' );
-				return false;
-			} );
+			$( '<a id="closeminilogin" href="#">' + _fastfoodL10n.close_minilogin + '</a>' )
+				.appendTo( '#minilogin .login-submit' )
+				.click( function() {
+					$( '.quickbar-panel-icon' ).fadeIn();
+					$( '#panel-user .quickbar-panel-container' ).hide();
+					$( '#panel-user' ).removeClass( 'keepme' );
+					return false;
+				} );
 
 			//preserve the menu div from disappear when loginform name input is clicked
-			$( '#ff-user_login' ).mousedown( function() {
-				$( '#ff_minilogin_wrap' ).css( { 'display' : 'block' } );
-				$( '#panel_user' ).addClass( 'keepme' );
-				$( '.itemimg_js' ).fadeOut();
+			$( '#panel-user:not(.keepme) input' ).mousedown( function() {
+				$( '#panel-user' ).addClass( 'keepme' );
+				$( '.quickbar-panel-icon' ).fadeOut();
 			} );
 
 		},
@@ -306,15 +305,15 @@ var fastfoodAnimations;
 
 			$( '#posts_content' ).hoverIntent(
 				function(){ //when mouse enters, slide down the sub list
-					$( '.metafield-content', this )
+					$( '.metadata-panel-content', this )
 						.slideDown();
 				},
 				function(){ //when mouse leaves, hide the sub list
-					$( '.metafield-content', this )
-						.finish()
+					$( '.metadata-panel-content', this )
+						.stop( true , true )
 						.hide();
 				},
-				'.metafield'
+				'.metadata-panel'
 			);
 
 		},

@@ -64,7 +64,7 @@ class FastfoodOptions {
 									'render_type'		=> 'checkbox',
 									'label'				=> __( 'mini login', 'fastfood' ),
 									'description'		=> __( 'a small login form in the user panel', 'fastfood' ),
-									'require'			=> 'fastfood_options[fastfood_qbar]',
+									'require'			=> array( 'fastfood_options[fastfood_qbar]', 'fastfood_options[fastfood_qbar_user]' ),
 								),
 							),
 			'fastfood_qbar_reccom' =>
@@ -869,17 +869,17 @@ class FastfoodOptions {
 							array(
 								'setting'			=> array(
 									'default'			=> 50,
-									'sanitize_method'	=> 'select',
+									'sanitize_method'	=> 'number',
+									'transport'			=> 'postMessage',
 								),
 								'control'			=> array(
-									'type'				=> 'select',
-									'render_type'		=> 'select',
-									'label'				=> __( 'thumbnail size', 'fastfood' ),
-									'description'		=> '',
-									'choices'			=> array(
-										50	=> '50px',
-										75	=> '75px',
-										150	=> '150px',
+									'render_type'		=> 'slider',
+									'label'				=> __( 'thumbnail size', 'fastfood' ) . ' (px)',
+									'description'		=> '[50-150]',
+									'input_attrs'		=> array(
+										'min'	=> 50,
+										'max'	=> 150,
+										'step'	=> 1,
 									),
 									'require'			=> 'fastfood_options[fastfood_featured_title]',
 								),
@@ -1151,7 +1151,7 @@ class FastfoodOptions {
 									'type'				=> 'text',
 									'render_type'		=> 'text',
 									'label'				=> __( 'font name', 'fastfood' ),
-									'description'		=> sprintf( __( 'Copy and paste here the name of a font from the %s library . Example: %s', 'fastfood' ), '<a href="http://www.google.com/fonts" target="_blank"><strong>Google web font</strong></a>', '<code>Droid Sans</code>' ),
+									'description'		=> sprintf( __( 'Copy and paste here the name of a font from the %1$s library . Example: %2$s', 'fastfood' ), '<a href="http://www.google.com/fonts" target="_blank"><strong>Google web font</strong></a>', '<code>Droid Sans</code>' ),
 								),
 							),
 			'fastfood_google_font_subset' =>

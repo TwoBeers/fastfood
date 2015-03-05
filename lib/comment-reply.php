@@ -65,7 +65,7 @@ class FastfoodCommentReply {
 
 		wp_enqueue_script(
 			'fastfood-comment-reply',
-			sprintf('%1$s/js/comment-reply%2$s.js' , get_template_directory_uri(), ( defined('WP_DEBUG') && true === WP_DEBUG ) ? '' : '.min' ),
+			sprintf( '%1$s/js/comment-reply%2$s.js' , get_template_directory_uri(), ( defined('WP_DEBUG') && true === WP_DEBUG ) ? '' : '.min' ),
 			array( 'jquery-ui-draggable', 'hoverIntent' ),
 			fastfood_get_info( 'version' ),
 			true
