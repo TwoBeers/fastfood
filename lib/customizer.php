@@ -174,61 +174,68 @@ class FastfoodCustomizer {
 				'type'				=> $this->prefix_global,
 			) );
 
-		}
+			foreach( $group['sections'] as $s_key ) {
 
-		foreach( $this->options_hierarchy['field'] as $f_key => $field ) {
+				$section = $this->options_hierarchy['section'][$s_key];
 
-			$section_count++;
-
-			$wp_customize->add_section( $this->prefix_section . $f_key, array(
-				'priority'			=> $section_count,
-				'title'				=> $field['label'],
-				'description'		=> $field['description'],
-				'type'				=> $field['parent'],
-				'panel'				=> $this->prefix_panel . $this->options_hierarchy['section'][$field['parent']]['parent'],
-				'active_callback'	=> isset( $field['active_callback'] ) ? $field['active_callback'] : '',
-			) );
-
-			if ( !array_key_exists( $field['parent'], $this->controls_headers ) )
-				$this->controls_headers[$field['parent']] = array(
-					'label' => $this->options_hierarchy['section'][$field['parent']]['label'],
-					'description' => $this->options_hierarchy['section'][$field['parent']]['description'],
+				$this->controls_headers[$s_key] = array(
+					'label' => $section['label'],
+					'description' => $section['description'],
 				);
 
-			foreach( $field['options'] as $o_key ) {
+				foreach( $section['fields'] as $f_key ) {
 
-				if ( !$o_key ) continue;
+					$field = $this->options_hierarchy['field'][$f_key];
 
-				$option = wp_parse_args( $this->theme_options[$o_key], array(
-					'setting'			=> array(),
-					'control'			=> array(),
-				) );
-				$option['setting'] = wp_parse_args( $option['setting'], array(
-					'type'				=> 'option',
-					'sanitize_callback'	=> 'FastfoodSanitize::theme_option',
-				) );
-				$option['control'] = wp_parse_args( $option['control'], array(
-					'section'			=> $this->prefix_section . $f_key,
-					'require'			=> array(),
-					'render_type'		=> 'text',
-				) );
+					$section_count++;
 
-				if ( $option['control']['require'] )
-					$option['control']['active_callback'] = array( $this, 'control_visibility' );
+					$wp_customize->add_section( $this->prefix_section . $f_key, array(
+						'priority'			=> $section_count,
+						'title'				=> $field['label'],
+						'description'		=> $field['description'],
+						'type'				=> $s_key,
+						'panel'				=> $this->prefix_panel . $g_key,
+						'active_callback'	=> isset( $field['active_callback'] ) ? $field['active_callback'] : '',
+					) );
 
-				if ( $this->force_refresh )
-					$option['setting']['transport'] = 'refresh';
+					foreach( $field['options'] as $o_key ) {
 
-				$wp_customize->add_setting( 'fastfood_options[' . $o_key . ']', $option['setting'] );
+						if ( !$o_key ) continue;
 
-				if ( isset( $this->render_type[$option['control']['render_type']] ) )
-					$wp_customize->add_control( new $this->render_type[$option['control']['render_type']]( $wp_customize, 'fastfood_options[' . $o_key . ']', $option['control'] ) );
-				else
-					$wp_customize->add_control( 'fastfood_options[' . $o_key . ']', $option['control'] );
+						$option = wp_parse_args( $this->theme_options[$o_key], array(
+							'setting'			=> array(),
+							'control'			=> array(),
+						) );
+						$option['setting'] = wp_parse_args( $option['setting'], array(
+							'type'				=> 'option',
+							'sanitize_callback'	=> 'FastfoodSanitize::theme_option',
+						) );
+						$option['control'] = wp_parse_args( $option['control'], array(
+							'section'			=> $this->prefix_section . $f_key,
+							'require'			=> array(),
+							'render_type'		=> 'text',
+						) );
 
-			}
+						if ( $option['control']['require'] )
+							$option['control']['active_callback'] = array( $this, 'control_visibility' );
 
-		}
+						if ( $this->force_refresh )
+							$option['setting']['transport'] = 'refresh';
+
+						$wp_customize->add_setting( 'fastfood_options[' . $o_key . ']', $option['setting'] );
+
+						if ( isset( $this->render_type[$option['control']['render_type']] ) )
+							$wp_customize->add_control( new $this->render_type[$option['control']['render_type']]( $wp_customize, 'fastfood_options[' . $o_key . ']', $option['control'] ) );
+						else
+							$wp_customize->add_control( 'fastfood_options[' . $o_key . ']', $option['control'] );
+
+					} //option
+
+				} //field
+
+			}//section
+
+		}//group
 
 	}
 

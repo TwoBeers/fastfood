@@ -46,7 +46,7 @@ addComment = {
 				return false;
 			});
 
-		$( '.show_comment_form' )
+		$( '.show-comment-form' )
 			.click(function() {
 				if ( $( respond ).is( '.hidden' ) ) {
 					t.viewForm();

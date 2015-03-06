@@ -16,7 +16,7 @@ class Fastfood_Featured_Content {
 	 * @access public
 	 * @var int
 	 */
-	public static $max_posts = 5;
+	public static $max_posts = 7;
 
 	/**
 	 * Instantiate.
@@ -28,8 +28,10 @@ class Fastfood_Featured_Content {
 	 * @since Fastfood 0.37
 	 */
 	public static function setup() {
-		add_action( 'init'				, array( __CLASS__, 'init'              ), 30 );
-		add_action( 'after_setup_theme'	, array( __CLASS__, 'add_theme_support' )     );
+		add_action( 'wp_loaded'						, array( __CLASS__, 'init'                     ), 30 );
+		add_action( 'after_setup_theme'				, array( __CLASS__, 'add_theme_support'        )     );
+		add_filter( 'fastfood_options_array'		, array( __CLASS__, 'extra_options'            )     );
+		add_filter( 'fastfood_options_hierarchy'	, array( __CLASS__, 'update_options_hierarchy' )     );
 	}
 
 	/**
@@ -39,7 +41,7 @@ class Fastfood_Featured_Content {
 		// Add support for featured content.
 		add_theme_support( 'featured-content', array(
 			'featured_content_filter'	=> 'fastfood_get_featured_posts',
-			'max_posts'					=> 5,
+			'max_posts'					=> 7,
 		) );
 	}
 
@@ -51,13 +53,15 @@ class Fastfood_Featured_Content {
 	 * @since Fastfood 0.37
 	 */
 	public static function init() {
+		if ( !FastfoodOptions::get_opt( 'fastfood_featured_content' ) || !FastfoodOptions::get_opt( 'fastfood_jsani' ) ) return;
+
 		$theme_support		= get_theme_support( 'featured-content' );
 		self::$max_posts	= absint( $theme_support[0]['max_posts'] );
 		$filter				= $theme_support[0]['featured_content_filter'];
 
 		add_action( $filter									, array( __CLASS__, 'get_featured_posts' )    );
 		add_action( 'pre_get_posts'							, array( __CLASS__, 'pre_get_posts'      )    );
-		add_action( 'fastfood_hook_breadcrumb_navigation'	, array( __CLASS__, 'featured_content'   ), 9 );
+		add_action( 'fastfood_hook_header_after'	, array( __CLASS__, 'featured_content'   ), 11 );
 	}
 
 	/**
@@ -125,35 +129,148 @@ class Fastfood_Featured_Content {
 		?>
 
 			<div id="featured-content" class="featured-content">
-				<div class="featured-content-inner">
-				<?php
-					/**
-					 * Fires before the Twenty Fourteen featured content.
-					 *
-					 * @since Twenty Fourteen 1.0
-					 */
-					do_action( 'fastfood_featured_posts_before' );
+				<div class="featured-content-inner viewport">
+					<div class="overview">
+					<?php
+						/**
+						 * Fires before the Twenty Fourteen featured content.
+						 *
+						 * @since Twenty Fourteen 1.0
+						 */
+						do_action( 'fastfood_featured_posts_before' );
 
-					foreach ( (array) $featured_posts as $order => $post ) :
-						setup_postdata( $post );
+						foreach ( (array) $featured_posts as $order => $post ) :
+							setup_postdata( $post );
 
-						 // Include the featured content template.
-						get_template_part( 'post', 'featured' );
-					endforeach;
+							 // Include the featured content template.
+							get_template_part( 'post', 'featured' );
+						endforeach;
 
-					/**
-					 * Fires after the Twenty Fourteen featured content.
-					 *
-					 * @since Twenty Fourteen 1.0
-					 */
-					do_action( 'fastfood_featured_posts_after' );
+						/**
+						 * Fires after the Twenty Fourteen featured content.
+						 *
+						 * @since Twenty Fourteen 1.0
+						 */
+						do_action( 'fastfood_featured_posts_after' );
 
-					wp_reset_postdata();
-				?>
-				</div><!-- .featured-content-inner -->
+						wp_reset_postdata();
+					?>
+					</div>
+				</div>
+				<div class="featured-label"><?php _e( 'featured', 'fastfood' ); ?></div>
+				<div class="featured-navigation">
+					<ul class="bullets">
+					<?php
+						for ($i = 0; $i < count( $featured_posts ); $i++) {
+							echo '<li><a data-slide="' . $i . '" class="bullet" href="#"><i class="el-icon-stop"></i></a></li>';
+						}
+					?>
+					</ul>
+				</div>
 			</div><!-- #featured-content .featured-content -->
 
+			<?php
+
+				if ( count( $featured_posts ) === 1 ) return;
+				wp_enqueue_script(
+					'tinycarousel',
+					sprintf( '%1$s/js/tinycarousel/jquery.tinycarousel%2$s.js' , get_template_directory_uri(), ( defined('WP_DEBUG') && true === WP_DEBUG ) ? '' : '.min' ),
+					array( 'jquery' ),
+					'2.1.8',
+					true
+				);
+
+				add_filter( 'fastfood_scripts_l10n', array( __CLASS__, 'localize_script' ) );
+			?>
+
 		<?php
+
+	}
+
+
+	public static function localize_script( $data ) {
+
+		//$data['script_modules'][] = 'boobs';
+		$data['script_modules'][] = 'featured_slideshow';
+		$data['featuredSlideshowSpeed'] = absint( FastfoodOptions::get_opt( 'fastfood_featured_content_speed' ) );
+		$data['featuredSlideshowPause'] = absint( FastfoodOptions::get_opt( 'fastfood_featured_content_speed' ) ) + absint( FastfoodOptions::get_opt( 'fastfood_featured_content_pause' ) );
+
+		return $data;
+
+	}
+
+
+	public static function extra_options( $coa ) {
+
+		$coa['fastfood_featured_content'] = array(
+			'setting'			=> array(
+				'default'			=> 1,
+				'sanitize_method'	=> 'checkbox',
+			),
+			'control'			=> array(
+				'type'				=> 'checkbox',
+				'render_type'		=> 'checkbox',
+				'label'				=> __( 'show the featured content', 'fastfood' ),
+				'description'		=> '',
+				'require'			=> array(
+					'fastfood_options[fastfood_jsani]',
+				),
+			),
+		);
+		$coa['fastfood_featured_content_speed'] = array(
+			'setting'	=> array(
+				'default'			=> 400,
+				'sanitize_method'	=> 'number',
+			),
+			'control'	=> array(
+				'type'				=> 'number',
+				'render_type'		=> 'number',
+				'label'				=> __( 'speed', 'fastfood' ),
+				'description'		=> __( 'speed of transition (ms)', 'fastfood' ),
+				'require'			=> array(
+					'fastfood_options[fastfood_jsani]',
+					'fastfood_options[fastfood_featured_content]',
+				),
+			),
+		);
+
+		$coa['fastfood_featured_content_pause'] = array(
+			'setting'	=> array(
+				'default'			=> 3000,
+				'sanitize_method'	=> 'number',
+			),
+			'control'	=> array(
+				'type'				=> 'number',
+				'render_type'		=> 'number',
+				'label'				=> __( 'pause', 'fastfood' ),
+				'description'		=> __( 'pause among transitions (ms)', 'fastfood' ),
+				'require'			=> array(
+					'fastfood_options[fastfood_jsani]',
+					'fastfood_options[fastfood_featured_content]',
+				),
+			),
+		);
+
+		return $coa;
+
+	}
+
+	public static function update_options_hierarchy( $hierarchy ) {
+
+		$hierarchy['field']['featured_content_slideshow'] = array(
+			'label'			=> __( 'featured content', 'fastfood' ),
+			'description'	=> '',
+			'options'		=> array(
+				'fastfood_featured_content',
+				'fastfood_featured_content_speed',
+				'fastfood_featured_content_pause',
+			),
+			'require'		=> '',
+		);
+
+		$hierarchy['section']['elements']['fields'][] = 'featured_content_slideshow';
+
+		return $hierarchy;
 
 	}
 } // Fastfood_Featured_Content

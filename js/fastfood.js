@@ -7,8 +7,6 @@ var fastfoodAnimations;
 		//initialize
 		init : function( modules ) {
 
-			//this.widgets_layout();
-
 			for ( i in modules ) {
 
 				switch( modules[i] ) {
@@ -67,8 +65,12 @@ var fastfoodAnimations;
 							this.sticky_menu();
 						break;
 
-					case 'comment_reply':
-						this.comment_reply();
+					case 'featured_slideshow':
+						this.featured_slideshow();
+						break;
+
+					case 'boobs':
+						alert('( . )( . ) boobs alert!!!');
 						break;
 
 					default :
@@ -82,89 +84,41 @@ var fastfoodAnimations;
 		},
 
 
-		widgets_layout : function () {
-
-			$( '#header-widget-area, #footer-widget-area' ).each( function() {
-				var widget_area = $( this );
-
-				count = 0;
-				widget_area.find( '.widget' ).each( function() {
-
-					if ( $( this ).hasClass( 'colspan-2' ) )
-						span = 2;
-					else if ( $( this ).hasClass( 'colspan-3' ) )
-						span = 3;
-					else
-						span = 1;
-
-					count = count + span;
-
-					if ( count > 3) {
-						$( this ).addClass( 'clearleft' );
-						count = span;
-					}
-
-				} );
-
-			} );
-
-		},
-
-
-		comment_reply : function () {
-
-			$( '#commentlist-wrap' ).addClass( 'mini-reply' ).hoverIntent(
-				function() {
-					$( '.comment-reply-link', this ).stop().animate(
-						{ 'border-width' : 10 },
-						100
-					);
-				},
-				function() {
-					$( '.comment-reply-link', this ).stop().animate(
-						{ 'border-width' : 5},
-						200
-					);
-				},
-				'.comment-body'
-			);
-
-		},
-
-
 		main_menu : function() {
 
 			//main menu dropdown animation
-			$( '.nav-menu.all-levels' ).children( '.menu-item-parent' ).each( function(){ //get every main list item
-				var $this         = $( this );
-				var d             = $this.children( 'ul' ); //for each main item, get the sub list
-				var margintop_in  = 20; //the starting distance between menu item and the popup submenu
-				var margintop_out = 20; //the exiting distance between menu item and the popup submenu
+			$( '.nav-menu.all-levels' )
+				.children( '.menu-item-parent' ).each( function(){ //get every main list item
 
-				if(d.size() !== 0){ //if the sub list exists...
+					var $this         = $( this );
+					var d             = $this.children( 'ul' ); //for each main item, get the sub list
+					var margintop_in  = 20; //the starting distance between menu item and the popup submenu
+					var margintop_out = 20; //the exiting distance between menu item and the popup submenu
 
-					d.css( { 'opacity' : 0 , 'margin-top' : margintop_in } );
+					if( d.size() !== 0 ){ //if the sub list exists...
 
-					$this.hoverIntent(
-						function(){ //when mouse enters, slide down the sub list
-							offset = d.offset();
-							if ( ( offset.left + d.outerWidth( true ) + 5 ) > $( document ).width() )
-								d.addClass( 'right' );
-							d.css( { 'display' : 'block' } ).animate(
-								{ 'opacity' : 1 , 'margin-top' : 0 },
-								400
-							);
-						},
-						function(){ //when mouse leaves, hide the sub list
-							d.stop().animate(
-								{ 'opacity' : 0 , 'margin-top' : margintop_out },
-								200,
-								function(){ d.css( { 'display' : '' , 'margin-top' : margintop_in } ).removeClass( 'right' ); }
-							);
-						}
-					);
-				}
-			} );
+						d.css( { 'opacity' : 0 , 'margin-top' : margintop_in } );
+
+						$this.hoverIntent(
+							function(){ //when mouse enters, slide down the sub list
+								offset = d.offset();
+								if ( ( offset.left + d.outerWidth( true ) + 5 ) > $( document ).width() )
+									d.addClass( 'right' );
+								d.css( { 'display' : 'block' } ).animate(
+									{ 'opacity' : 1 , 'margin-top' : 0 },
+									400
+								);
+							},
+							function(){ //when mouse leaves, hide the sub list
+								d.stop().animate(
+									{ 'opacity' : 0 , 'margin-top' : margintop_out },
+									200,
+									function(){ d.css( { 'display' : '' , 'margin-top' : margintop_in } ).removeClass( 'right' ); }
+								);
+							}
+						);
+					}
+				} );
 
 		},
 
@@ -172,25 +126,27 @@ var fastfoodAnimations;
 		navigation_buttons : function() {
 
 			//navbuttons tooltip animation
-			$( '#navbuttons' ).children( '.minibutton' ).each( function(){ //get every minibutton
-				var $this          = $( this );
-				var list           = $this.find( 'span.nb_tooltip' );
-				var marginright_in = 61; //the starting distance between menu item and the popup submenu
+			$( '#navbuttons' )
+				.children( '.minibutton' ).each( function(){ //get every minibutton
 
-				list.css( { 'opacity' : 0 , 'right' : marginright_in } );
+					var $this          = $( this );
+					var list           = $this.find( 'span.nb_tooltip' );
+					var marginright_in = 61; //the starting distance between menu item and the popup submenu
 
-				$this.hoverIntent(
-					function(){ //when mouse enters, shift right the tooltip
-						list.css( { 'display' : 'block' } ).animate(
-							{ 'opacity' : 1 , 'right' : 41 },
-							200
-						);
-					},
-					function(){ //when mouse leaves, hide the tooltip
-						list.stop().css( { 'opacity' : 0, 'display' : '', 'right' : marginright_in } );
-					}
-				);
-			} );
+					list.css( { 'opacity' : 0 , 'right' : marginright_in } );
+
+					$this.hoverIntent(
+						function(){ //when mouse enters, shift right the tooltip
+							list.css( { 'display' : 'block' } ).animate(
+								{ 'opacity' : 1 , 'right' : 41 },
+								200
+							);
+						},
+						function(){ //when mouse leaves, hide the tooltip
+							list.stop().css( { 'opacity' : 0, 'display' : '', 'right' : marginright_in } );
+						}
+					);
+				} );
 
 		},
 
@@ -198,10 +154,10 @@ var fastfoodAnimations;
 		smooth_scroll : function() {
 
 			var scroll_TO = false; //the TimeOut for functions fired on window scroll
+			var top_but   = $( '#navbuttons a[href="#"]' );
+			var bot_but   = $( '#navbuttons a[href="#footer"]' );
 
 			// fade in/out on scroll
-			top_but = $( '#navbuttons a[href="#"]' );
-			bot_but = $( '#navbuttons a[href="#footer"]' );
 			top_but.hide();
 			$(window).scroll( function () {
 
@@ -258,6 +214,7 @@ var fastfoodAnimations;
 			var panels_count = Math.max( 5, panels.length );
 
 			panels.each( function(){ //get every quickbar item
+
 				var $this = $( this );
 				var list = $this.children( '.quickbar-panel-container' ); // get the sub list for each quickbar item
 
@@ -299,7 +256,8 @@ var fastfoodAnimations;
 
 		entry_meta : function() {
 
-			$( 'body' ).addClass( 'metadata-js' );
+			$( 'body' )
+				.addClass( 'metadata-js' );
 
 			var margintop_in  = 20; //the starting distance between menu item and the popup submenu
 
@@ -321,24 +279,35 @@ var fastfoodAnimations;
 
 		thickbox : function() {
 
-			$( '#posts_content' ).find( '.entry-content a img' ).parent( 'a[href$=".jpg"],a[href$=".png"],a[href$=".gif"]' ).addClass( 'thickbox' );
-			$( '#posts_content' ).find( '.entry-content .gallery' ).each( function() {
-				var $this = $( this );
-				$( 'a[href$=".jpg"],a[href$=".png"],a[href$=".gif"]', $this ).attr( 'rel', $this.attr( 'id' ) );
-			} );
+			$( '#posts_content' )
+				.find( '.entry-content a img' )
+					.parent( 'a[href$=".jpg"],a[href$=".png"],a[href$=".gif"]' )
+						.addClass( 'thickbox' );
+
+			$( '#posts_content' )
+				.find( '.entry-content .gallery' ).each( function() {
+
+					var $this = $( this );
+
+					$( 'a[href$=".jpg"],a[href$=".png"],a[href$=".gif"]', $this )
+						.attr( 'rel', $this.attr( 'id' ) );
+				} );
 
 		},
 
 
 		quote_this : function () {
+
 			htmltext = '<a id="tb-quotethis" href="#" onclick="fastfoodAnimations.add_quote(); return false" title="' + _fastfoodL10n.quote_link_info + '" ><i class="el-icon-quotes"></i></a>'
 			$( htmltext ).insertBefore( '#comment' );
+
 		},
 
 
 		add_quote : function() {
 
 			var posttext = '';
+
 			if ( window.getSelection ){
 				posttext = window.getSelection();
 			}
@@ -386,6 +355,7 @@ var fastfoodAnimations;
 
 
 		get_comments : function () {
+
 			var navigation = $( '.navigate_comments' );
 
 			navigation.find( 'a' ).click( function() {
@@ -404,7 +374,7 @@ var fastfoodAnimations;
 						fastfoodAnimations.get_comments();
 						$( 'body' ).trigger( 'comments-loaded' );
 					}
-				} );	
+				} );
 
 				return false;
 
@@ -456,16 +426,18 @@ var fastfoodAnimations;
 					}, options.pause );
 				}
 			} );
+
 		},
 
 
 		tinynav : function() {
-			//if ( $(window).width() > 800 ) return false;
+
 			$( ".nav-menu" ).tinyNav( {
-				active: 'current_page_item', // Set the "active" class for default menu
-				label: '', // String: Sets the <label> text for the <select> (if not set, no label will be added)
-				header: '' // String: Specify text for "header" and show header instead of the active item
+				active : 'current_page_item', // Set the "active" class for default menu
+				label  : '', // String: Sets the <label> text for the <select> (if not set, no label will be added)
+				header : '' // String: Specify text for "header" and show header instead of the active item
 			} );
+
 		},
 
 
@@ -490,10 +462,49 @@ var fastfoodAnimations;
 		},
 
 
+		featured_slideshow : function () {
+
+			$( '#featured-content' ).tinycarousel({
+				axis          : 'y',
+				interval      : true,
+				buttons       : false,
+				bullets       : true,
+				animationTime : parseInt( _fastfoodL10n.featuredSlideshowSpeed ),
+				intervalTime  : parseInt( _fastfoodL10n.featuredSlideshowPause )
+			});
+
+			var featured_content      = $( '#featured-content' );
+			var featured_navigation   = $( '.featured-navigation', featured_content );
+			var featured_content_data = featured_content.data( 'plugin_tinycarousel' );
+
+			$( '.featured-content-inner', featured_content).hover(
+				function() {
+					featured_content_data.stop();
+				}, function() {
+					featured_content_data.start();
+				}
+			);
+
+			$( featured_content ).hover(
+				function() {
+					featured_navigation.animate({
+						right: 0,
+					});
+				}, function() {
+					featured_navigation.animate({
+						right: -20,
+					});
+				}
+			);
+
+		},
+
+
 		sticky_menu : function() {
-			var body    = $( 'body' ),
-				_window = $( window ),
-				_menu   = $( '#menu-primary-container' ),
+
+			var body           = $( 'body' ),
+				_window        = $( window ),
+				_menu          = $( '#menu-primary-container' ),
 				mastheadHeight = _menu.height(),
 				toolbarOffset,
 				mastheadOffset;
@@ -504,7 +515,9 @@ var fastfoodAnimations;
 
 			toolbarOffset  = body.is( '.admin-bar' ) ? $( '#wpadminbar' ).height() : 0;
 			mastheadOffset = _menu.offset().top - toolbarOffset;
+
 			_menu.css( 'top', toolbarOffset );
+
 			$( '<div id="menu-primary-placeholder"></div>' ).css( 'height', mastheadHeight ).insertBefore( _menu );
 
 			_window.on( 'scroll', function() {

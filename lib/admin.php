@@ -298,26 +298,37 @@ class FastfoodAdmin {
 
 		$the_hierarchy = FastfoodOptions::get_hierarchy();
 
-		foreach( $the_hierarchy['section'] as $key => $section ) {
-			add_settings_section(
-				$section['parent'] . '|' . $key,												// Unique identifier for the settings section
-				$section['label'],																// Section title (we don't want one)
-				array( $this, 'add_group_container' ),											// Section callback (we don't want anything)
-				$this->option_name																// Menu slug, used to uniquely identify the page; see add_page()
-			);
-		}
+		foreach( $the_hierarchy['group'] as $g_key => $group ) {
 
-		foreach( $the_hierarchy['field'] as $key => $field ) {
-			// Register our individual settings fields.
-			add_settings_field(
-				$key,																			// Unique identifier for the field for this section
-				$field['label'],																// Section title (we don't want one)
-				array( $this, 'render_field' ),													// Function that renders the settings field
-				$this->option_name,																// Menu slug, used to uniquely identify the page; see add_page()
-				$the_hierarchy['section'][$field['parent']]['parent'] . '|' . $field['parent'],	// Unique identifier for the settings section
-				$field['options']																// Arguments that are passed to the $callback function
-			);
-		}
+			foreach( $group['sections'] as $s_key ) {
+
+				$section = $the_hierarchy['section'][$s_key];
+
+				add_settings_section(
+					$g_key . '|' . $s_key,						// Unique identifier for the settings section
+					$section['label'],							// Section title (we don't want one)
+					array( $this, 'add_group_container' ),		// Section callback (we don't want anything)
+					$this->option_name							// Menu slug, used to uniquely identify the page; see add_page()
+				);
+
+				foreach( $section['fields'] as $f_key ) {
+
+					$field = $the_hierarchy['field'][$f_key];
+
+					add_settings_field(
+						$f_key,									// Unique identifier for the field for this section
+						$field['label'],						// Section title (we don't want one)
+						array( $this, 'render_field' ),			// Function that renders the settings field
+						$this->option_name,						// Menu slug, used to uniquely identify the page; see add_page()
+						$g_key . '|' . $s_key,					// Unique identifier for the settings section
+						$field['options']						// Arguments that are passed to the $callback function
+					);
+
+				} //field
+
+			}//section
+
+		}//group
 
 	}
 

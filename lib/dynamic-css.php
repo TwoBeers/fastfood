@@ -108,10 +108,6 @@ function fastfood_get_dynamic_css( $attributes ) {
 	a {
 		color: {$attributes['fastfood_colors_link']};
 	}
-	.ff-js .comment-reply-link,
-	.hentry.sticky:before {
-		border-color: {$attributes['fastfood_colors_link']};
-	}
 	textarea:hover,
 	.bbpress .wp-editor-area:hover,
 	.buddypress .wp-editor-area:hover,
@@ -128,7 +124,8 @@ function fastfood_get_dynamic_css( $attributes ) {
 	.pagination-links a,
 	.nav-single a,
 	.nav-pages a span,
-	.solid-label .show_comment_form,
+	.solid-label .show-comment-form,
+	.tb_clean_archives .year-link,
 	input[type=button],
 	input[type=submit],
 	input[type=reset],
@@ -143,7 +140,8 @@ function fastfood_get_dynamic_css( $attributes ) {
 	.pagination-links a:hover,
 	.nav-single a:hover,
 	.nav-pages a span:hover,
-	.solid-label .show_comment_form:hover,
+	.solid-label .show-comment-form:hover,
+	.tb_clean_archives .year-link:hover,
 	input[type=button]:hover,
 	input[type=submit]:hover,
 	input[type=reset]:hover,
@@ -247,10 +245,15 @@ add_action( 'wp_enqueue_scripts', 'fastfood_custom_fonts' );
  */
 function fastfood_custom_css() {
 
-	$attributes['fastfood_custom_css'] = wp_strip_all_tags( FastfoodOptions::get_opt( 'fastfood_custom_css' ) );
+	$attributes['fastfood_custom_css']		= wp_strip_all_tags( FastfoodOptions::get_opt( 'fastfood_custom_css' ) );
+	$attributes['fastfood_allowed_tags']	= FastfoodOptions::get_opt( 'fastfood_allowed_tags' ) ? 'block' : 'none';
 
 	$css = <<<CSS
 	/* custom CSS */
+
+	.form-allowed-tags {
+		display: {$attributes['fastfood_allowed_tags']};
+	}
 
 	{$attributes['fastfood_custom_css']}
 

@@ -276,7 +276,7 @@ class Fastfood_Fixed_Footer {
 
 			$buttons['comment'] = array(
 				'class'			=> '',
-				'a_class'		=> 'show_comment_form',
+				'a_class'		=> 'show-comment-form',
 				'a_rel'			=> '',
 				'a_href'		=> '#respond',
 				'icon_class'	=> 'el-icon-comment',

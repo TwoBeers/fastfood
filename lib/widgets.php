@@ -16,11 +16,13 @@ add_action( 'widgets_init', 'fastfood_widgets_init' );
 /**
  * Define default Widget arguments
  */
-function fastfood_get_default_widget_args( $widget_area = 'primary-widget-area', $extra_wrap_class = '' ) {
+function fastfood_get_default_widget_args( $widget_area = 'primary-widget-area' ) {
 
 	return apply_filters( 'fastfood_get_default_widget_args', array(
-		'before_widget'		=> $extra_wrap_class ? '<div class="' . $extra_wrap_class . '"><div id="%1$s" class="widget %2$s">' : '<div id="%1$s" class="widget %2$s">',
-		'after_widget'		=> $extra_wrap_class ? '</div></div>' : '</div>',
+		'before_widget'		=> '<div id="%1$s" class="widget %2$s">',
+		'after_widget'		=> '</div>',
+		'before_title'		=> '<h2 class="widgettitle">',
+		'after_title'		=> '</h2>',
 	), $widget_area );
 
 }

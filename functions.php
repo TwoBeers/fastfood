@@ -29,6 +29,7 @@
 add_action( 'after_setup_theme'						, 'fastfood_setup' );
 add_action( 'wp_enqueue_scripts'					, 'fastfood_stylesheet' );
 add_action( 'wp_enqueue_scripts'					, 'fastfood_scripts' );
+add_action( 'wp_footer'								, 'fastfood_scripts_l10n', 9 );
 add_action( 'init'									, 'fastfood_post_expander_activate' );
 add_action( 'init'									, 'fastfood_activate_get_comments_page' );
 add_action( 'template_redirect'						, 'fastfood_allcat' );
@@ -72,6 +73,7 @@ add_filter( 'page_css_class'						, 'fastfood_add_parent_class', 10, 4 );
 add_filter( 'wp_nav_menu_objects'					, 'fastfood_add_menu_parent_class' );
 add_filter( 'get_search_form'						, 'fastfood_search_form' );
 add_filter( 'comment_text'							, 'fastfood_wrap_comment_text',999 );
+add_filter( 'comment_reply_link'					, 'fastfood_comment_reply_link' );
 
 
 /* Custom filters - Misc hooks */
@@ -121,7 +123,7 @@ require_once( 'lib/plug-n-play.php' );
 require_once( 'lib/customizer.php' );
 require_once( 'lib/sanitize.php' );
 require_once( 'lib/dynamic-css.php' );
-//require_once( 'lib/featured-content.php' );
+require_once( 'lib/featured-content.php' );
 
 
 /**
@@ -354,7 +356,6 @@ function fastfood_get_js_modules() {
 	if ( FastfoodOptions::get_opt( 'fastfood_basic_animation_entry_meta' ) )			$modules[] = 'entry_meta';
 	if ( FastfoodOptions::get_opt( 'fastfood_basic_animation_smooth_scroll' ) )			$modules[] = 'smooth_scroll';
 	if ( FastfoodOptions::get_opt( 'fastfood_basic_animation_captions' ) )				$modules[] = 'captions';
-	if ( FastfoodOptions::get_opt( 'fastfood_basic_animation_comment_reply' ) )			$modules[] = 'comment_reply';
 
 	if ( FastfoodOptions::get_opt( 'fastfood_tinynav' ) )								$modules[] = 'tinynav';
 	if ( FastfoodOptions::get_opt( 'fastfood_post_expand' ) )							$modules[] = 'post_expander';
@@ -363,7 +364,7 @@ function fastfood_get_js_modules() {
 	if ( FastfoodOptions::get_opt( 'fastfood_sticky_menu' ) )							$modules[] = 'sticky_menu';
 	if ( FastfoodOptions::get_opt( 'fastfood_comments_navigation' ) )					$modules[] = 'get_comments';
 
-	return  apply_filters( 'fastfood_filter_js_modules', $modules );
+	return apply_filters( 'fastfood_filter_js_modules', $modules );
 
 }
 
@@ -407,6 +408,15 @@ if ( !function_exists( 'fastfood_scripts' ) ) {
 			true
 		);
 
+
+	}
+}
+
+
+/**
+ * localize script
+ */
+function fastfood_scripts_l10n() {
 		$data = array(
 			'script_modules'		=> fastfood_get_js_modules(),
 			'post_expander_wait'	=> __( 'Post loading, please wait...', 'fastfood' ),
@@ -418,10 +428,9 @@ if ( !function_exists( 'fastfood_scripts' ) ) {
 		wp_localize_script(
 			'fastfood',
 			'_fastfoodL10n',
-			$data
+			apply_filters( 'fastfood_scripts_l10n', $data )
 		);
-
-	}
+	
 }
 
 
@@ -613,45 +622,42 @@ function fastfood_author_badge( $author = '', $size = 48 ) {
 
 
 //get a thumb for a post/page
-if ( !function_exists( 'fastfood_get_the_thumb_url' ) ) {
-	function fastfood_get_the_thumb_url( $post_id = 0 ){
-		global $post;
+function fastfood_get_the_thumb_id( $args = '' ){
+	global $post;
 
-		if ( !$post_id ) $post_id = $post->ID;
+	$defaults = array(
+		'post_id'		=> 0,
+		'fb_attachment'	=> 1,
+		'fb_header'		=> 1,
+	);
+	$args = wp_parse_args( $args, $defaults );
 
-		// has featured image
-		if ( get_post_thumbnail_id( $post_id ) )
-			return wp_get_attachment_thumb_url( get_post_thumbnail_id( $post_id ) );
+	if ( !$args['post_id'] ) $args['post_id'] = $post->ID;
 
-		$attachments = get_children( array(
-			'post_parent'		=> $post_id,
-			'post_status'		=> 'inherit',
-			'post_type'			=> 'attachment',
-			'post_mime_type'	=> 'image',
-			'orderby'			=> 'menu_order',
-			'order'				=> 'ASC',
-			'numberposts'		=> 1,
-		) );
+	// has featured image
+	if ( get_post_thumbnail_id( $args['post_id'] ) )
+		return get_post_thumbnail_id( $args['post_id'] );
 
-		//has attachments
-		if ( $attachments )
-			return wp_get_attachment_thumb_url( key( $attachments ) );
+	$attachments = get_children( array(
+		'post_parent'		=> $args['post_id'],
+		'post_status'		=> 'inherit',
+		'post_type'			=> 'attachment',
+		'post_mime_type'	=> 'image',
+		'orderby'			=> 'menu_order',
+		'order'				=> 'ASC',
+		'numberposts'		=> 1,
+	) );
 
-		//has an hardcoded <img>
-		if ( $img = fastfood_get_first_image() )
-			return $img['src'];
+	//has attachments
+	if ( $args['fb_attachment'] && $attachments )
+		return key( $attachments );
 
-		//has a generated <img>
-		if ( $img = fastfood_get_first_image( array( 'filtered' => true ) ) )
-			return $img['src'];
+	$header_image_data = (array) get_theme_mod( 'header_image_data' );
+	if ( $args['fb_header'] && $header_image_data && isset( $header_image_data['attachment_id'] ) )
+		return $header_image_data['attachment_id'];
 
-		if ( $img = get_header_image() )
-			return $img;
-
-		//nothing found
-		return '';
-	}
-
+	//nothing found
+	return false;
 }
 
 
@@ -1631,10 +1637,23 @@ function fastfood_search_form() {
 }
 
 
-// wrap the categories count with a span
+// wrap the comment content a div
 function fastfood_wrap_comment_text( $output ) {
 
 	return '<div class="comment-content">' . $output . '</div>';
+
+}
+
+
+//replace the comment_reply_link text
+function fastfood_comment_reply_link( $link ) {
+
+	preg_match_all( '/<a\b[^>]*>(.*?)<\/a>/',$link, $text );
+
+	if ( isset( $text[1][0] ) )
+		$link = str_replace( '>' . $text[1][0], ' title="' . esc_attr__( 'Reply to comment', 'fastfood' ) . '" ><i class="el-icon-return-key"></i><span class="screen-reader-text">' . esc_attr__( 'Reply to comment', 'fastfood' ) . '</span>', $link);
+
+	return $link;
 
 }
 
@@ -1688,7 +1707,7 @@ function fastfood_comments_header() {
 
 	} elseif ( comments_open() ) {
 
-		$output = $comments . sprintf( ' <a class="show_comment_form hide_if_print" href="#respond" title="%1$s">%2$s</a>',
+		$output = $comments . sprintf( ' <a class="show-comment-form hide_if_print" href="#respond" title="%1$s">%2$s</a>',
 			esc_attr__( 'Leave a comment', 'fastfood' ),
 			esc_html__( 'Leave a comment', 'fastfood' )
 		);
@@ -1699,9 +1718,9 @@ function fastfood_comments_header() {
 
 	}
 
-	$class = $num_comments ? ' has-comments' : '';
+	$class = $num_comments ? 'has-comments' : 'no-comments';
 	if ( $output )
-		echo '<div class="solid-label' . $class . '">' . $output . '</div>';
+		echo '<div class="solid-label comments-header ' . $class . '">' . $output . '</div>';
 
 }
 

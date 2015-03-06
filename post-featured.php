@@ -9,12 +9,21 @@
  */
 ?>
 
-<div <?php post_class() ?> id="post-<?php the_ID(); ?>">
+<div class="featured-post">
 
-	<?php fastfood_featured_title( array( 'fallback' => sprintf ( __( 'post #%s','fastfood' ), get_the_ID() ) ) ); ?>
+	<?php echo wp_get_attachment_image( fastfood_get_the_thumb_id(), 'thumbnail' ); ?>
+
+	<h2 class="entry-title"><?php
+		echo fastfood_build_link( array(
+			'href'		=> get_permalink(),
+			'text'		=> get_the_title(),
+			'title'		=> the_title_attribute( array( 'echo' => 0 ) ),
+			'class'		=> 'entry-title-content',
+		) );
+	?></h2>
 
 	<div class="entry-content">
-		<?php the_content(); ?>
+		<?php the_excerpt(); ?>
 	</div>
 
 </div>

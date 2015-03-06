@@ -546,20 +546,6 @@ class FastfoodOptions {
 									'require'			=> 'fastfood_options[fastfood_jsani]',
 								),
 							),
-			'fastfood_basic_animation_comment_reply' =>
-							array(
-								'setting'			=> array(
-									'default'			=> 1,
-									'sanitize_method'	=> 'checkbox',
-								),
-								'control'			=> array(
-									'type'				=> 'checkbox',
-									'render_type'		=> 'checkbox',
-									'label'				=> __( 'comment reply link', 'fastfood' ),
-									'description'		=> '',
-									'require'			=> 'fastfood_options[fastfood_jsani]',
-								),
-							),
 			'fastfood_post_expand' =>
 							array(
 								'setting'			=> array(
@@ -1374,6 +1360,19 @@ class FastfoodOptions {
 									'description'		=> '',
 								),
 							),
+			'fastfood_allowed_tags' =>
+							array(
+								'setting'			=> array(
+									'default'			=> 1,
+									'sanitize_method'	=> 'checkbox',
+								),
+								'control'			=> array(
+									'type'				=> 'checkbox',
+									'render_type'		=> 'checkbox',
+									'label'				=> __( 'show the allowed tags list', 'fastfood' ),
+									'description'		=> '',
+								),
+							),
 			'fastfood_custom_css' =>
 							array(
 								'setting'			=> array(
@@ -1422,21 +1421,39 @@ class FastfoodOptions {
 				'style' => array(
 					'label'			=> __( 'Style', 'fastfood' ),
 					'description'	=> '',
+					'sections'		=> array(
+						'colors',
+						'fonts',
+						'other_a',
+					),
 				),
 
 				'layout' => array(
 					'label'			=> __( 'Layout', 'fastfood' ),
 					'description'	=> '',
+					'sections'		=> array(
+						'elements',
+						'mobile',
+					),
 				),
 
 				'contents' => array(
 					'label'			=> __( 'Contents', 'fastfood' ),
 					'description'	=> '',
+					'sections'		=> array(
+						'post_formats',
+						'titles',
+						'other_b',
+					),
 				),
 
 				'features' => array(
 					'label'			=> __( 'Features', 'fastfood' ),
 					'description'	=> '',
+					'sections'		=> array(
+						'javascript',
+						'other_c',
+					),
 				),
 
 			),
@@ -1446,61 +1463,102 @@ class FastfoodOptions {
 				'colors' => array(
 					'label'			=> __( 'Colors', 'fastfood' ),
 					'description'	=> '',
-					'parent'		=> 'style',
+					'fields'		=> array(
+						'links_colors',
+					),
 				),
 
 				'fonts' => array(
 					'label'			=> __( 'Fonts', 'fastfood' ),
 					'description'	=> '',
-					'parent'		=> 'style',
+					'fields'		=> array(
+						'basic_font',
+						'google_font',
+					),
 				),
 
 				'other_a' => array(
 					'label'			=> __( 'Other', 'fastfood' ),
 					'description'	=> '',
-					'parent'		=> 'style',
+					'fields'		=> array(
+						'custom_css',
+					),
 				),
 
 				'elements' => array(
 					'label'			=> __( 'Elements', 'fastfood' ),
 					'description'	=> '',
-					'parent'		=> 'layout',
+					'fields'		=> array(
+						'body',
+						'header',
+						'primary_menu',
+						'breadcrumb',
+						'sidebar',
+						'quickbar',
+						'navbuttons',
+						'statusbar',
+						'comment_form',
+					),
 				),
 
 				'mobile' => array(
 					'label'			=> __( 'Mobile', 'fastfood' ),
 					'description'	=> '',
-					'parent'		=> 'layout',
+					'fields'		=> array(
+						'responsive_layout',
+						'mobile_theme',
+					),
 				),
 
 				'post_formats' => array(
 					'label'			=> __( 'Post formats', 'fastfood' ) . ' <a class="more-info-link" href="http://codex.wordpress.org/Post_Formats" target="_blank" title="' . esc_attr__( 'learn more about the post formats', 'fastfood' ) . '">?</a>',
 					'description'	=> __( 'the following options affect only the blog/index view, while in single posts the appearance will be the same', 'fastfood' ),
-					'parent'		=> 'contents',
+					'fields'		=> array(
+						'post_formats_standard',
+						'post_formats_aside',
+						'post_formats_gallery',
+						'post_formats_quote',
+						'post_formats_status',
+					),
 				),
 
 				'titles' => array(
 					'label'			=> __( 'Titles', 'fastfood' ),
 					'description'	=> '',
-					'parent'		=> 'contents',
+					'fields'		=> array(
+						'blank_titles',
+						'hide_titles',
+						'featured_titles',
+					),
 				),
 
 				'other_b' => array(
 					'label'			=> __( 'Other', 'fastfood' ),
 					'description'	=> '',
-					'parent'		=> 'contents',
+					'fields'		=> array(
+						'extra_info',
+						'excerpt',
+						'the_more_tag',
+					),
 				),
 
 				'javascript' => array(
 					'label'			=> __( 'Javascript', 'fastfood' ),
 					'description'	=> '',
-					'parent'		=> 'features',
+					'fields'		=> array(
+						'js_animations',
+						'basic_animations',
+						'advanced_js_features',
+						'thickbox',
+					),
 				),
 
 				'other_c' => array(
 					'label'			=> __( 'Other', 'fastfood' ),
 					'description'	=> '',
-					'parent'		=> 'features',
+					'fields'		=> array(
+						'hotchpotch',
+					),
 				),
 
 			),
@@ -1515,7 +1573,6 @@ class FastfoodOptions {
 						'fastfood_colors_link_hover',
 						'fastfood_colors_link_sel',
 					),
-					'parent'		=> 'colors',
 					'require'		=> '',
 				),
 
@@ -1526,7 +1583,6 @@ class FastfoodOptions {
 						'fastfood_font_family',
 						'fastfood_font_size',
 					),
-					'parent'		=> 'fonts',
 					'require'		=> '',
 				),
 
@@ -1541,7 +1597,6 @@ class FastfoodOptions {
 						'fastfood_google_font_post_title',
 						'fastfood_google_font_post_content',
 					),
-					'parent'		=> 'fonts',
 					'require'		=> '',
 				),
 
@@ -1551,7 +1606,6 @@ class FastfoodOptions {
 					'options'		=> array(
 						'fastfood_custom_css',
 					),
-					'parent'		=> 'other_a',
 					'require'		=> '',
 				),
 
@@ -1561,7 +1615,6 @@ class FastfoodOptions {
 					'options'		=> array(
 						'fastfood_body_width',
 					),
-					'parent'		=> 'elements',
 					'require'		=> '',
 				),
 
@@ -1571,7 +1624,6 @@ class FastfoodOptions {
 					'options'		=> array(
 						'fastfood_head_h',
 					),
-					'parent'		=> 'elements',
 					'require'		=> '',
 				),
 
@@ -1583,7 +1635,6 @@ class FastfoodOptions {
 						'',
 						'fastfood_sticky_menu',
 					),
-					'parent'		=> 'elements',
 					'require'		=> '',
 				),
 
@@ -1593,7 +1644,6 @@ class FastfoodOptions {
 					'options'		=> array(
 						'fastfood_breadcrumb',
 					),
-					'parent'		=> 'elements',
 					'require'		=> '',
 				),
 
@@ -1610,7 +1660,6 @@ class FastfoodOptions {
 						'fastfood_rsidebposts',
 						'fastfood_rsidebattachments',
 					),
-					'parent'		=> 'elements',
 					'require'		=> '',
 				),
 
@@ -1627,7 +1676,6 @@ class FastfoodOptions {
 						'',
 						'fastfood_qbar_minilogin',
 					),
-					'parent'		=> 'elements',
 					'require'		=> '',
 				),
 
@@ -1646,7 +1694,6 @@ class FastfoodOptions {
 						'fastfood_navbuttons_newold',
 						'fastfood_navbuttons_topbottom',
 					),
-					'parent'		=> 'elements',
 					'require'		=> '',
 				),
 
@@ -1656,7 +1703,16 @@ class FastfoodOptions {
 					'options'		=> array(
 						'fastfood_statusbar',
 					),
-					'parent'		=> 'elements',
+					'require'		=> '',
+				),
+
+				'comment_form' => array(
+					'label'			=> __( 'comment form', 'fastfood' ),
+					'description'	=> '',
+					'options'		=> array(
+						'fastfood_cust_comrep',
+						'fastfood_allowed_tags',
+					),
 					'require'		=> '',
 				),
 
@@ -1666,7 +1722,6 @@ class FastfoodOptions {
 					'options'		=> array(
 						'fastfood_responsive_layout',
 					),
-					'parent'		=> 'mobile',
 					'require'		=> '',
 				),
 
@@ -1677,7 +1732,6 @@ class FastfoodOptions {
 						'fastfood_mobile_css',
 						'fastfood_mobile_css_color',
 					),
-					'parent'		=> 'mobile',
 					'require'		=> '',
 				),
 
@@ -1688,7 +1742,6 @@ class FastfoodOptions {
 						'fastfood_post_formats_standard_title',
 						'fastfood_postexcerpt',
 					),
-					'parent'		=> 'post_formats',
 					'require'		=> '',
 				),
 
@@ -1700,7 +1753,6 @@ class FastfoodOptions {
 						'',
 						'fastfood_post_view_aside',
 					),
-					'parent'		=> 'post_formats',
 					'require'		=> '',
 				),
 
@@ -1714,7 +1766,6 @@ class FastfoodOptions {
 						'fastfood_post_formats_gallery_content',
 						'fastfood_post_formats_gallery_preview_items',
 					),
-					'parent'		=> 'post_formats',
 					'require'		=> '',
 				),
 
@@ -1724,7 +1775,6 @@ class FastfoodOptions {
 					'options'		=> array(
 						'fastfood_post_formats_quote',
 					),
-					'parent'		=> 'post_formats',
 					'require'		=> '',
 				),
 
@@ -1736,7 +1786,6 @@ class FastfoodOptions {
 						'',
 						'fastfood_post_view_status',
 					),
-					'parent'		=> 'post_formats',
 					'require'		=> '',
 				),
 
@@ -1748,7 +1797,6 @@ class FastfoodOptions {
 						'',
 						'fastfood_blank_title',
 					),
-					'parent'		=> 'titles',
 					'require'		=> '',
 				),
 
@@ -1761,7 +1809,6 @@ class FastfoodOptions {
 						'fastfood_hide_posts_title',
 						'fastfood_hide_selected_entries_title',
 					),
-					'parent'		=> 'titles',
 					'require'		=> '',
 				),
 
@@ -1772,7 +1819,6 @@ class FastfoodOptions {
 						'fastfood_featured_title',
 						'fastfood_featured_title_size',
 					),
-					'parent'		=> 'titles',
 					'require'		=> '',
 				),
 
@@ -1796,7 +1842,6 @@ class FastfoodOptions {
 						'',
 						'fastfood_xinfos_static',
 					),
-					'parent'		=> 'other_b',
 					'require'		=> '',
 				),
 
@@ -1808,7 +1853,6 @@ class FastfoodOptions {
 						'fastfood_excerpt_more_txt',
 						'fastfood_excerpt_more_link',
 					),
-					'parent'		=> 'other_b',
 					'require'		=> '',
 				),
 
@@ -1820,7 +1864,6 @@ class FastfoodOptions {
 						'fastfood_more_tag_scroll',
 						'fastfood_more_tag_always',
 					),
-					'parent'		=> 'other_b',
 					'require'		=> '',
 				),
 
@@ -1830,7 +1873,6 @@ class FastfoodOptions {
 					'options'		=> array(
 						'fastfood_jsani',
 					),
-					'parent'		=> 'javascript',
 					'require'		=> '',
 				),
 
@@ -1844,9 +1886,7 @@ class FastfoodOptions {
 						'fastfood_basic_animation_entry_meta',
 						'fastfood_basic_animation_smooth_scroll',
 						'fastfood_basic_animation_captions',
-						'fastfood_basic_animation_comment_reply',
 					),
-					'parent'		=> 'javascript',
 					'require'		=> 'fastfood_options[fastfood_jsani]',
 				),
 
@@ -1854,13 +1894,11 @@ class FastfoodOptions {
 					'label'			=> __( 'advanced features', 'fastfood' ),
 					'description'	=> '',
 					'options'		=> array(
-						'fastfood_cust_comrep',
 						'fastfood_post_expand',
 						'fastfood_comments_navigation',
 						'fastfood_quotethis',
 						'fastfood_tinynav',
 					),
-					'parent'		=> 'javascript',
 					'require'		=> 'fastfood_options[fastfood_jsani]',
 				),
 
@@ -1871,7 +1909,6 @@ class FastfoodOptions {
 						'fastfood_gallery_preview',
 						'fastfood_force_link_to_image',
 					),
-					'parent'		=> 'javascript',
 					'require'		=> 'fastfood_options[fastfood_jsani]',
 				),
 
@@ -1884,7 +1921,6 @@ class FastfoodOptions {
 						'fastfood_tbcred',
 						'version',
 					),
-					'parent'		=> 'other_c',
 					'require'		=> '',
 				),
 

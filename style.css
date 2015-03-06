@@ -155,7 +155,7 @@ input[type=reset] {
 	padding: 5px;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
-	height:30px;
+	height: 2.15em;
 	margin: 0;
 	vertical-align: middle;
 	display: inline-block;
@@ -595,7 +595,6 @@ i.quickbar-panel-icon {
 }
 #menu-primary-container {
 	z-index: 301;
-	border-bottom: 1px solid #555;
 }
 .nav-menu.all-levels {
 	line-height: 2.4em;
@@ -653,6 +652,7 @@ i.quickbar-panel-icon {
 .fixed-menu #menu-primary-container {
 	position: fixed;
 	width: inherit;
+	border-bottom: 1px solid #555;
 }
 .fixed-menu #menu-primary-placeholder {
 	display: block;
@@ -830,6 +830,9 @@ i.quickbar-panel-icon {
 	background-color: #404040;
 	color: #ddd;
 }
+#menu-primary-container + #header-widget-area {
+	border-top: 1px solid #555;
+}
 #header-widget-area .widget {
 	width: 33.3333%;
 }
@@ -966,8 +969,12 @@ i.quickbar-panel-icon {
 	width: 1em;
 }
 .tb_clean_archives .year-link {
-	font-size: 1.18em;
+	color: #fff;
+	display: inline-block;
 	font-weight: bold;
+	margin-bottom: 5px;
+	padding: 0 0.5em;
+	vertical-align: inherit;
 }
 div.tb_latest_commentators img {
 	margin: 0 5px 5px 0;
@@ -1117,7 +1124,7 @@ body.page .hentry:after {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
-.entry-content {
+#posts_content .entry-content {
 	font-size: 1.18em;
 	word-wrap: break-word;
 }
@@ -1141,6 +1148,9 @@ body.page .hentry:after {
 .entry-title .entry-title-content {
 	display: inline-block;
 	position: relative;
+	max-width: 100%;
+	text-overflow: ellipsis;
+	overflow: hidden;
 }
 .entry-title.with-thumbnail .entry-title-content{
 	padding-bottom: 0.25em;
@@ -1250,7 +1260,88 @@ img.wp-post-image {
 	opacity: 1;
 	filter: alpha(opacity=100);
 }
-
+/* featured content
+----------------------------------------------------------*/
+#featured-content {
+	overflow: hidden;
+	position: relative;
+	height: 150px;
+	width: 100%;
+	background: #fff;
+}
+.featured-post {
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
+	height: 150px;
+	padding: 20px 20px 20px 170px;
+	position: relative;
+	background: #eee;
+	width: 100%;
+	margin-bottom: 1px;
+}
+.featured-post .attachment-thumbnail {
+	left: 0;
+	top: 0;
+	position: absolute;
+}
+.featured-post:after {
+	border-color: transparent #eee transparent transparent;
+	border-image: none;
+	border-style: solid;
+	border-width: 10px;
+	content: " ";
+	height: 0;
+	left: 130px;
+	margin-top: -10px;
+	pointer-events: none;
+	position: absolute;
+	top: 50%;
+	width: 0;
+}
+#featured-content .viewport {
+	height: 150px;
+	overflow: hidden;
+	position: relative;
+	width: 100%;
+}
+#featured-content .overview {
+	list-style: none;
+	position: absolute;
+	padding: 0;
+	margin: 0;
+	left: 0;
+	top: 0;
+	width: 100%;
+}
+.featured-navigation {
+	position: absolute;
+	bottom: 0;
+	right: -20px;
+	font-size: 6px;
+	padding-bottom: 7px;
+}
+#featured-content .featured-navigation a {
+	display: block;
+	text-align: center;
+	width: 20px;
+	padding: 7px 0;
+}
+#featured-content .featured-navigation a i {
+}
+#featured-content .featured-navigation a.active {
+	color: #808080;
+}
+.featured-label {
+	position: absolute;
+	top: 0;
+	right: 20px;
+	background: #404040;
+	color: #fff;
+	font-weight: bold;
+	text-transform: uppercase;
+	line-height: 20px;
+	padding: 0 10px;
+}
 /* author bio
 ----------------------------------------------------------*/
 .tb-author-bio {
@@ -1314,6 +1405,12 @@ img.wp-post-image {
 ----------------------------------------------------------*/
 #comments {
 	padding: 0 20px;
+}
+.comments-header.no-comments .show-comment-form {
+	display: none;
+}
+.floating-comment-form .comments-header.no-comments .show-comment-form {
+	display: inline-block;
 }
 .comment-body {
 	background-color: #f8f8f8;
@@ -1381,7 +1478,7 @@ img.wp-post-image {
 .solid-label.after-comments {
 	display: block;
 }
-.solid-label .show_comment_form {
+.solid-label .show-comment-form {
 	color: #fff;
 	display: inline-block;
 	margin: 0 -0.5em 0 0.5em;
@@ -1476,9 +1573,25 @@ img.wp-post-image {
 #commentform > p {
 	margin: 10px 0 0;
 }
-.reply {
-	text-align: right;
-	font-size: 0.8em;
+#commentform > p label {
+	line-height: 2.5em;
+}
+#author,
+#email,
+#url {
+	float: left;
+	margin-right: 10px;
+}
+.comment-form-author,
+.comment-form-email,
+.comment-form-url {
+	overflow: hidden;
+}
+
+.comment-reply-link {
+	position: absolute;
+	right: 5px;
+	bottom: 5px;
 }
 .trackback .reply,
 .pingback .reply,

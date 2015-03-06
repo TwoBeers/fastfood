@@ -33,13 +33,14 @@
 	body {
 		font-size: 16px !important;
 	}
-	.has-header-image #head-text {
+	body.has-header-image #head-text {
 		position: static;
 		background: transparent;
+		z-index: 0;
 	}
-	#head-text h1 a,
-	#head-text {
-		color: #404040 !important;
+	div#head-text h1 a,
+	div#head-text {
+		color: #404040;
 	}
 	#head-text h1 {
 		font-size: 2em;
@@ -82,6 +83,10 @@
 		border: none;
 		box-shadow: none;
 	}
+	.menu-container {
+		position: relative;
+		height: 40px;
+	}
 	.menu-container:before {
 		content: "\e690";
 		display: block;
@@ -90,9 +95,10 @@
 		font-weight: normal;
 		-webkit-font-smoothing: antialiased;
 		-moz-osx-font-smoothing: grayscale;
-		line-height: 3em;
-		height: 3em;
+		line-height: 40px;
+		height: 40px;
 		position: absolute;
+		left: 0;
 	}
 	.minibutton .minib_img {
 		font-size: 24px;
@@ -100,12 +106,13 @@
 	.tinynav {
 		display: block;
 		width: 100%;
-		padding: 1em 5px 1em 20px;
+		padding-left: 40px;
 		border: none;
 		background: #404040;
 		color: #fff;
 		font-weight: bold;
 		-webkit-appearance: none;
+		height: 40px;
 	}
 	.tinynav option {
 		margin: 5px 0;
@@ -134,15 +141,21 @@
 	.solid-label.after-comments {
 		display: none;
 	}
-	.ff-js .comment-reply-link {
-		width: auto; 
-		height: auto; 
-		border: none;
-		position: static;
-		overflow: visible;
-	}
 	.comment .comment-meta {
 		display: none;
+	}
+	#featured-content .entry-content,
+	#featured-content .featured-navigation {
+		display: none;
+	}
+	#featured-content .entry-title-content {
+		white-space: nowrap;
+	}
+	.posts_wide .nav-single {
+		margin-left: -20px;
+		margin-right: -20px;
+		position: static;
+		width: auto;
 	}
 }
 
