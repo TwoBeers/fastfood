@@ -13,7 +13,7 @@ class Fastfood_Breadcrumb {
 
 	function __construct() {
 
-		add_action( 'fastfood_hook_breadcrumb_navigation'	, array( $this, 'display' ) );
+		add_action( 'fastfood_hook_site_header', array( $this, 'display' ), 99 );
 
 	}
 

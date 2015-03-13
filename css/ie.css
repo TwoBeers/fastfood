@@ -19,3 +19,7 @@
 #main .avatar {
 	max-width:700px;
 }
+.entry-content {
+	overflow-x: auto;
+	overflow-y: visible;
+}

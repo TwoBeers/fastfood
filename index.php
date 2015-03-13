@@ -11,7 +11,7 @@
 
 get_header(); ?>
 
-<div id="posts_content"<?php fastfood_posts_content_class(); ?>>
+<div id="posts-content"<?php fastfood_posts_content_class(); ?>>
 
 	<?php fastfood_hook_content_top(); ?>
 

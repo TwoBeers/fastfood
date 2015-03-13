@@ -102,7 +102,9 @@ function fastfood_get_dynamic_css( $attributes ) {
 		background-position: {$attributes['background_position_x']} {$attributes['background_position_y']};
 		background-image: url({$attributes['background_image']});
 	}
-	.quickbar-panel .quickbar-panel-icon, .quickbar-panel .quickbar-panel-icon_js, .minibutton .minib_img {
+	.quickbar-panel .quickbar-panel-icon,
+	.quickbar-panel .quickbar-panel-icon_js,
+	.minibutton .minib_img {
 		color: {$attributes['background_icons_color']};
 	}
 	a {
@@ -132,7 +134,7 @@ function fastfood_get_dynamic_css( $attributes ) {
 	#hide-respond-link,
 	div.mejs-container .mejs-controls .mejs-play,
 	div.mejs-controls .mejs-time-rail .mejs-time-current,
-	#posts_content #infinite-handle span {
+	#posts-content #infinite-handle span {
 		background: {$attributes['fastfood_colors_link']};
 	}
 	button:hover,
@@ -148,7 +150,7 @@ function fastfood_get_dynamic_css( $attributes ) {
 	#hide-respond-link:hover,
 	div.mejs-container .mejs-controls .mejs-pause,
 	div.mejs-container .mejs-controls .mejs-play:hover,
-	#posts_content #infinite-handle span:hover {
+	#posts-content #infinite-handle span:hover {
 		background: {$attributes['fastfood_colors_link_hover']};
 	}
 	a:hover,

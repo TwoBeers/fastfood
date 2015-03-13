@@ -183,11 +183,13 @@
 		_.each( _fastfoodCustomizeControls.headers, function( header, header_key ) {
 			label       = header.label       ? '<div class="theme-controls-header-title" data-sections="control-section-' + header_key + '">' + header.label + '</div>' : '';
 			description = header.description ? '<div class="theme-controls-header-description control-subsection control-section-' + header_key + '"><p>' + header.description + '</p></div>' : '';
-			$( '<li class="theme-controls-header">' + label + description + '</li>' )
+			$( '<li class="theme-controls-header can-expand">' + label + description + '</li>' )
 				.insertBefore( '.control-section-' + header_key + ':first' )
 				.on( 'click', '.theme-controls-header-title', function() {
 					var sections = $(this).data( 'sections' ) ? '.' + $(this).data( 'sections' ) : false;
 					toggle_theme_options( sections );
+					$( '#customize-theme-controls .theme-controls-header-title' ).not( this ).parent().removeClass( 'expanded current' );
+					$( this ).parent().toggleClass( 'expanded current' );
 				});
 		});
 	}

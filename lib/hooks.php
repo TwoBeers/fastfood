@@ -23,6 +23,10 @@ function fastfood_hook_head_bottom() {
 	tha_head_bottom();
 }
 
+function fastfood_hook_site_header() {
+	do_action( 'fastfood_hook_site_header' );
+}
+
 function fastfood_hook_header_before() {
 	tha_header_before();
 	do_action( 'fastfood_hook_header_before' );
@@ -145,6 +149,10 @@ function fastfood_hook_footer_bottom() {
 	tha_footer_bottom();
 }
 
+function fastfood_hook_footer() {
+	do_action( 'fastfood_hook_footer' );
+}
+
 function fastfood_hook_statusbar() {
 	do_action( 'fastfood_hook_statusbar' );
 }
@@ -189,12 +197,52 @@ function fastfood_hook_body_bottom() {
 	do_action( 'fastfood_hook_body_bottom' );
 }
 
-function fastfood_hook_menu_top() {
-	do_action( 'fastfood_hook_menu_top' );
+function fastfood_hook_menu_primary_before() {
+	do_action( 'fastfood_hook_menu_primary_before' );
 }
 
-function fastfood_hook_menu_bottom() {
-	do_action( 'fastfood_hook_menu_bottom' );
+function fastfood_hook_menu_primary_after() {
+	do_action( 'fastfood_hook_menu_primary_after' );
+}
+
+function fastfood_hook_menu_primary_top() {
+	do_action( 'fastfood_hook_menu_primary_top' );
+}
+
+function fastfood_hook_menu_primary_bottom() {
+	do_action( 'fastfood_hook_menu_primary_bottom' );
+}
+
+function fastfood_hook_menu_secondary_first_before() {
+	do_action( 'fastfood_hook_menu_secondary_first_before' );
+}
+
+function fastfood_hook_menu_secondary_first_after() {
+	do_action( 'fastfood_hook_menu_secondary_first_after' );
+}
+
+function fastfood_hook_menu_secondary_first_top() {
+	do_action( 'fastfood_hook_menu_secondary_first_top' );
+}
+
+function fastfood_hook_menu_secondary_first_bottom() {
+	do_action( 'fastfood_hook_menu_secondary_first_bottom' );
+}
+
+function fastfood_hook_menu_secondary_second_before() {
+	do_action( 'fastfood_hook_menu_secondary_second_before' );
+}
+
+function fastfood_hook_menu_secondary_second_after() {
+	do_action( 'fastfood_hook_menu_secondary_second_after' );
+}
+
+function fastfood_hook_menu_secondary_second_top() {
+	do_action( 'fastfood_hook_menu_secondary_second_top' );
+}
+
+function fastfood_hook_menu_secondary_second_bottom() {
+	do_action( 'fastfood_hook_menu_secondary_second_bottom' );
 }
 
 function fastfood_hook_change_view() {
@@ -207,10 +255,6 @@ function fastfood_hook_attachment_before() {
 
 function fastfood_hook_attachment_after() {
 	do_action( 'fastfood_hook_attachment_after' );
-}
-
-function fastfood_hook_breadcrumb_navigation() {
-	do_action( 'fastfood_hook_breadcrumb_navigation' );
 }
 
 function fastfood_hook_loop_before() {

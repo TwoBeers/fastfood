@@ -63,7 +63,7 @@ class FastfoodOptions {
 									'type'				=> 'checkbox',
 									'render_type'		=> 'checkbox',
 									'label'				=> __( 'mini login', 'fastfood' ),
-									'description'		=> __( 'a small login form in the user panel', 'fastfood' ),
+									'description'		=> __( 'a small login form in the "user" panel', 'fastfood' ),
 									'require'			=> array( 'fastfood_options[fastfood_qbar]', 'fastfood_options[fastfood_qbar_user]' ),
 								),
 							),
@@ -81,6 +81,25 @@ class FastfoodOptions {
 									'require'			=> 'fastfood_options[fastfood_qbar]',
 								),
 							),
+			'fastfood_qbar_reccom_length' =>
+							array(
+								'setting'			=> array(
+									'default'			=> 10,
+									'sanitize_method'	=> 'number',
+								),
+								'control'			=> array(
+									'type'				=> 'number',
+									'render_type'		=> 'number',
+									'label'				=> '',
+									'description'		=> sprintf( __( 'number of items to show in the "%s" panel' , 'fastfood' ), __( 'recent comments', 'fastfood' ) ),
+									'input_attrs'		=> array(
+										'min'	=> 5,
+										'max'	=> 15,
+										'step'	=> 1,
+									),
+									'require'			=> array( 'fastfood_options[fastfood_qbar]', 'fastfood_options[fastfood_qbar_reccom]' ),
+								),
+							),
 			'fastfood_qbar_cat' =>
 							array(
 								'setting'			=> array(
@@ -95,6 +114,25 @@ class FastfoodOptions {
 									'require'			=> 'fastfood_options[fastfood_qbar]',
 								),
 							),
+			'fastfood_qbar_cat_length' =>
+							array(
+								'setting'			=> array(
+									'default'			=> 10,
+									'sanitize_method'	=> 'number',
+								),
+								'control'			=> array(
+									'type'				=> 'number',
+									'render_type'		=> 'number',
+									'label'				=> '',
+									'description'		=> sprintf( __( 'number of items to show in the "%s" panel' , 'fastfood' ), __( 'categories', 'fastfood' ) ),
+									'input_attrs'		=> array(
+										'min'	=> 5,
+										'max'	=> 15,
+										'step'	=> 1,
+									),
+									'require'			=> array( 'fastfood_options[fastfood_qbar]', 'fastfood_options[fastfood_qbar_cat]' ),
+								),
+							),
 			'fastfood_qbar_recpost' =>
 							array(
 								'setting'			=> array(
@@ -107,6 +145,25 @@ class FastfoodOptions {
 									'label'				=> __( 'recent posts', 'fastfood' ),
 									'description'		=> '',
 									'require'			=> 'fastfood_options[fastfood_qbar]',
+								),
+							),
+			'fastfood_qbar_recpost_length' =>
+							array(
+								'setting'			=> array(
+									'default'			=> 10,
+									'sanitize_method'	=> 'number',
+								),
+								'control'			=> array(
+									'type'				=> 'number',
+									'render_type'		=> 'number',
+									'label'				=> '',
+									'description'		=> sprintf( __( 'number of items to show in the "%s" panel' , 'fastfood' ), __( 'recent posts', 'fastfood' ) ),
+									'input_attrs'		=> array(
+										'min'	=> 5,
+										'max'	=> 15,
+										'step'	=> 1,
+									),
+									'require'			=> array( 'fastfood_options[fastfood_qbar]', 'fastfood_options[fastfood_qbar_recpost]' ),
 								),
 							),
 			'fastfood_postexcerpt' =>
@@ -1670,8 +1727,11 @@ class FastfoodOptions {
 						'fastfood_qbar',
 						'',
 						'fastfood_qbar_recpost',
+						'fastfood_qbar_recpost_length',
 						'fastfood_qbar_cat',
+						'fastfood_qbar_cat_length',
 						'fastfood_qbar_reccom',
+						'fastfood_qbar_reccom_length',
 						'fastfood_qbar_user',
 						'',
 						'fastfood_qbar_minilogin',

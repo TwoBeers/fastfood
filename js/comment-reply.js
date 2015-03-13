@@ -50,12 +50,11 @@ addComment = {
 			.click(function() {
 				if ( $( respond ).is( '.hidden' ) ) {
 					t.viewForm();
-					if ( $( 'body' ).is( '.layout-2,.layout-1' ) )
-						return false;
 				} else {
 					t.hideForm();
-					return false;
 				}
+				if ( $( 'body' ).is( '.layout-2,.layout-1' ) )
+					return false;
 			});
 	},
 

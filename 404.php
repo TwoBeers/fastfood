@@ -12,7 +12,7 @@
 
 get_header(); ?>
 
-<div id="posts_content" class="posts_wide">
+<div id="posts-content" class="posts_wide">
 
 	<?php fastfood_hook_content_top(); ?>
 

@@ -45,11 +45,11 @@
 	#head-text h1 {
 		font-size: 2em;
 	}
-	#posts_content {
+	#posts-content {
 		min-height: auto;
 	}
-	#posts_content.posts_wide,
-	#posts_content.posts_narrow {
+	#posts-content.posts_wide,
+	#posts-content.posts_narrow {
 		border: none;
 		width: 100%;
 		float: none;
@@ -113,6 +113,8 @@
 		font-weight: bold;
 		-webkit-appearance: none;
 		height: 40px;
+		-webkit-box-sizing: border-box;
+		box-sizing: border-box;
 	}
 	.tinynav option {
 		margin: 5px 0;
@@ -156,6 +158,22 @@
 		margin-right: -20px;
 		position: static;
 		width: auto;
+	}
+	.crumbs > li,
+	.crumbs > a,
+	.crumbs > span {
+		display: none;
+	}
+	.crumbs > .bbp-breadcrumb-home:first-child,
+	.crumbs > .home:first-child,
+	.crumbs.wpseo > span:first-child {
+		display: inline-block;
+	}
+	.crumbs > span.current,
+	.crumbs > span.bbp-breadcrumb-current,
+	.crumbs.navxt > li.current_item,
+	.crumbs.wpseo > span:last-child {
+		display: inline-block;
 	}
 }
 

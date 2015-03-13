@@ -12,7 +12,7 @@
 
 get_header(); ?>
 
-<div id="posts_content" class="posts_wide">
+<div id="posts-content" class="posts_wide">
 
 	<?php fastfood_hook_content_top(); ?>
 
@@ -23,7 +23,12 @@ get_header(); ?>
 		<div class="entry-content">
 
 			<ul>
-				<?php wp_list_categories( 'title_li=' ); ?>
+				<?php
+					wp_list_categories( array(
+						'show_count'	=> 1,
+						'title_li'		=> '',
+					) );
+				?>
 			</ul>
 
 		</div>

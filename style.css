@@ -57,12 +57,20 @@ p {
 	margin: 0 0 1em;
 }
 ul {
-	list-style: none outside none;
+	list-style: square outside none;
+	padding: 0;
+	margin: 0;
+}
+ul li {
+	margin: 0 0 0 1em;
 }
 ol {
 	list-style: decimal outside none;
-	margin: 0 0 0 2em;
 	padding: 0;
+	margin: 0;
+}
+ol li {
+	margin: 0 0 0 2em;
 }
 dt {
 	font-weight: bold;
@@ -82,6 +90,10 @@ blockquote {
 	margin-left: 15px;
 	padding-left: 15px;
 	font-style: italic;
+	-webkit-hyphens: none;
+	-moz-hyphens:    none;
+	-ms-hyphens:     none;
+	hyphens:         none;
 }
 pre,
 code,
@@ -90,6 +102,10 @@ kbd {
 	font: 1.2em "Courier New", monospace;
 	letter-spacing: 1px;
 	padding: 0 8px;
+	-webkit-hyphens: none;
+	-moz-hyphens:    none;
+	-ms-hyphens:     none;
+	hyphens:         none;
 }
 pre {
 	display: block;
@@ -115,6 +131,10 @@ pre {
 	text-align: left;
 	width: 100%;
 	border: 1px solid #ddd;
+	-webkit-hyphens: auto;
+	-moz-hyphens:    auto;
+	-ms-hyphens:     auto;
+	hyphens:         auto;
 }
 .entry-content td,
 .comment-body td {
@@ -363,7 +383,6 @@ i.quickbar-panel-icon {
 }
 .quickbar-panel:hover .quickbar-panel-icon {
 	opacity: .7;
-	filter: alpha(opacity=70);
 }
 .quickbar-panel-container {
 	background: #eee;
@@ -388,19 +407,19 @@ i.quickbar-panel-icon {
 .quickbar-panel.keepme .quickbar-panel-container,
 .quickbar-panel:hover .quickbar-panel-container {
 	display: block;
-	height: 250px;
+	height: 300px;
 }
 .has-5-panels .quickbar-panel.keepme .quickbar-panel-container,
 .has-5-panels .quickbar-panel:hover .quickbar-panel-container {
-	height: 300px;
+	height: 350px;
 }
 .has-6-panels .quickbar-panel.keepme .quickbar-panel-container,
 .has-6-panels .quickbar-panel:hover .quickbar-panel-container {
-	height: 350px;
+	height: 400px;
 }
 .has-7-panels .quickbar-panel.keepme .quickbar-panel-container,
 .has-7-panels .quickbar-panel:hover .quickbar-panel-container {
-	height: 400px;
+	height: 450px;
 }
 .no-status .quickbar-panel-container {
 	margin-bottom: -34px;
@@ -423,7 +442,7 @@ i.quickbar-panel-icon {
 	border-right: 1px solid #ddd;
 }
 .quickbar-panel-content .solid_ul {
-	height: 210px;
+	height: 260px;
 	margin: 20px 0 0;
 }
 .quickbar-panel-content .solid_ul > li {
@@ -452,7 +471,7 @@ i.quickbar-panel-icon {
 	font-weight: bold;
 	width: 20px;
 }
-#panel-popular-categories .quickbar-panel-content > ul > li.all_cat:hover:after {
+#panel-popular-categories .quickbar-panel-content > ul > li.all_cat:hover > .label:after {
 	content: '';
 }
 .quickbar-panel-content li:hover .quickbar-panel-subcontent {
@@ -484,7 +503,7 @@ i.quickbar-panel-icon {
 }
 .quickbar-panel-subcontent .preview {
 	padding: 20px;
-	height: 210px;
+	height: 260px;
 }
 #logged .avatar {
 	vertical-align: middle;
@@ -495,7 +514,7 @@ i.quickbar-panel-icon {
 	color: #404040;
 	list-style-image: none;
 	margin: 0 0 20px;
-	padding: 10px 20px;
+	padding: 20px;
 }
 .keepme #minilogin {
 	display: block;
@@ -599,10 +618,6 @@ i.quickbar-panel-icon {
 .nav-menu.all-levels {
 	line-height: 2.4em;
 }
-.nav-menu.all-levels ul.children {
-	margin: 0;
-	padding: 0 10px;
-}
 .nav-menu.all-levels .menu-item-parent > a:after { 
 	padding-left: 5px;
 	content: '\00bb';
@@ -632,17 +647,6 @@ i.quickbar-panel-icon {
 .nav-menu.all-levels > li:hover > ul {
 	display: block;
 }
-.nav-menu.all-levels > li li {
-	margin: 0;
-	padding: 0 0 0 1.2em;
-}
-.nav-menu.all-levels > li li:before {
-	content: '›';
-	display: inline-block;
-	margin-left: -1em; /*same as padding-left set on li*/
-	width: 1em; /*same as padding-left set on li*/
-	font-weight: bold;
-}​
 .nav-menu.all-levels ul li > div {
 	display: inline;
 }
@@ -662,10 +666,10 @@ i.quickbar-panel-icon {
 	display: block;
 	line-height: 2em;
 }
-#menu-secondary1 {
+#menu-secondary-1 {
 	text-align: right;
 }
-#menu-secondary1 li {
+#menu-secondary-1 li {
 	margin: 0 0 0 20px;
 }
 .tinynav {
@@ -953,10 +957,18 @@ i.quickbar-panel-icon {
 .tb_recent_entries li.li-with-thumbs,
 .tb_latest_commented_posts li.li-with-thumbs {
 	margin-bottom: 5px;
+}
+.tb_popular_posts li.li-with-thumbs a,
+.tb_recent_entries li.li-with-thumbs a,
+.tb_latest_commented_posts li.li-with-thumbs a {
+	display: inline-block;
+	height: 32px;
 	line-height: 32px;
+	max-width: 100%;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	white-space: nowrap;
+	vertical-align: middle;
+	white-space: pre;
 }
 .tb_font_resize {
 	font-size: 2em;
@@ -1124,7 +1136,7 @@ body.page .hentry:after {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
-#posts_content .entry-content {
+#posts-content .entry-content {
 	font-size: 1.18em;
 	word-wrap: break-word;
 }
@@ -1177,22 +1189,6 @@ img.size-large,
 img.wp-post-image {
 	max-width: 100%;
 	height: auto; /* Make sure images with WordPress-added height and width attributes are scaled correctly */
-}
-.entry-content ul li,
-.comment-body ul li {
-	padding: 0 0 0 2em;
-}
-.widget ul li {
-	padding: 0 0 0 1em;
-}
-.entry-content ul li:before,
-.widget ul li:before,
-.comment-body ul li:before {
-	content: '›';
-	display: inline-block;
-	margin-left: -1em; /*same as padding-left set on li*/
-	width: 1em; /*same as padding-left set on li*/
-	font-weight: bold;
 }
 .aside-cont {
 	background: #fff;
@@ -1320,6 +1316,9 @@ img.wp-post-image {
 	font-size: 6px;
 	padding-bottom: 7px;
 }
+.featured-navigation ul {
+	list-style: outside none none;
+}
 #featured-content .featured-navigation a {
 	display: block;
 	text-align: center;
@@ -1360,9 +1359,6 @@ img.wp-post-image {
 .tb-author-bio ul {
 	margin: 0;
 	padding: 0;
-}
-.tb-author-bio ul li:before {
-	content: "";
 }
 .tb-author-bio .author-avatar {
 	display: block;
@@ -1724,6 +1720,7 @@ img.wp-post-image {
 	left: 0;
 	opacity: 0.50;
 	filter: alpha(opacity=50);
+	width: 100%;
 }
 .nav-single .nav-previous {
 	float: left;
@@ -1768,7 +1765,7 @@ img.wp-post-image {
 }
 #wp-calendar tbody td {
 	background: rgba(0,0,0,.1);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#1a000000', endColorstr='#1a000000',GradientType=0 ); /* IE6-9 */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#40000000', endColorstr='#40000000',GradientType=0 ); /* IE6-9 */
 	text-align: center;
 }
 #wp-calendar tbody td a {
@@ -1777,11 +1774,12 @@ img.wp-post-image {
 }
 #wp-calendar tbody td:hover {
 	background: rgba(255,255,255,.2);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#33ffffff', endColorstr='#33ffffff',GradientType=0 ); /* IE6-9 */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#40ffffff', endColorstr='#40ffffff',GradientType=0 ); /* IE6-9 */
 }
 #wp-calendar tbody .pad,
 #wp-calendar tbody .pad:hover {
 	background: none;
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
 }
 #wp-calendar tfoot #next {
 	font-size: .8em;
@@ -1994,6 +1992,7 @@ img.aligncenter {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: pre;
+	margin: 0;
 }
 .crumbs a {
 	color: #ddd;
@@ -2296,9 +2295,6 @@ div.mejs-container .mejs-controls div {
 .tb-chat ul.chat-transcript li {
 	list-style: none outside none;
 }
-.tb-chat ul li:before {
-	content: '';
-}
 .tb-chat ul.chat-select ,
 .tb-chat ul.chat-transcript {
 	margin: 0;
@@ -2379,13 +2375,13 @@ div.mejs-container .mejs-controls div {
 }
 /* Jetpack Infinite Scroll
 ----------------------------------------------------------*/
-#posts_content #infinite-handle span {
+#posts-content #infinite-handle span {
 	border: none;
 	color: #fff;
 	font-weight: bold;
 	display: inline-block;
 }
-#posts_content #infinite-handle span:after {
+#posts-content #infinite-handle span:after {
 	content: "\e6e5";
 	display: inline-block;
 	font-family: Elusive-Icons;
@@ -2419,9 +2415,6 @@ div#content div.sharedaddy {
 .sd-button {
 	box-shadow: none !important;
 	border-radius: 0 !important;
-}
-.sd-block ul li:before {
-	display: none;
 }
 #content .sharedaddy a.sd-button {
 	background: #fff;
@@ -2502,8 +2495,8 @@ div#buddypress form#whats-new-form #whats-new-submit {
 div#buddypress div.dir-search {
 	margin: 0;
 }
-.buddypress #posts_content .hentry,
-.bbpress #posts_content .hentry {
+.buddypress #posts-content .hentry,
+.bbpress #posts-content .hentry {
 	border-bottom: none;
 }
 .bbpress .wp-editor-area,

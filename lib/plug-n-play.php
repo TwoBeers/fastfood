@@ -20,7 +20,7 @@ class Fastfood_For_Jetpack {
 
 		//Infinite Scroll
 		add_theme_support( 'infinite-scroll', array(
-			'container'		=> 'posts_content',
+			'container'		=> 'posts-content',
 			'render'		=> array( $this, 'infinite_scroll_render' ),
 			'wrapper'		=> false,
 		) );

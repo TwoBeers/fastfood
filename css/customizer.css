@@ -283,3 +283,34 @@ li.customize-control-background .current .container img {
 }
 .control-panel-fastfood_options .control-subsection.collapsed {
 }
+
+/* rtl support */
+.rtl .customize-control-tbslider .slider-display {
+	float: left;
+}
+.rtl #customize-controls .customize-control-checkbox {
+	padding-left: 0;
+	padding-right: 25px;
+}
+.rtl #customize-controls .customize-control-checkbox input {
+	margin-left: 0;
+	margin-right: -25px;
+}
+.rtl .theme-controls-header-title {
+	padding: 10px 14px 11px 10px;
+}
+.rtl .theme-controls-header-title:before {
+	right: 0;
+	left: auto;
+}
+.rtl .can-expand .theme-controls-header-title:after {
+	padding: 0 5px 0 0;
+	border-left: none;
+	border-right: 1px solid #eee;
+	right: auto;
+	left: 0;
+}
+.rtl .theme-logo {
+	margin-right: 0;
+	margin-left: 10px;
+}

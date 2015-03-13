@@ -8,20 +8,7 @@
 
 				<?php fastfood_hook_footer_top(); ?>
 
-				<?php
-					wp_nav_menu( array(
-						'container_class'	=> 'menu-container',
-						'menu_id'			=> 'menu-secondary2',
-						'menu_class'		=> 'nav-menu one-level secondary',
-						'fallback_cb'		=> false,
-						'theme_location'	=> 'secondary2',
-						'depth'				=> 1,
-					) );
-				?>
-
-				<?php fastfood_get_sidebar( 'footer', true ); ?>
-
-				<?php fastfood_credits(); ?>
+				<?php fastfood_hook_footer(); ?>
 
 				<?php fastfood_hook_footer_bottom(); ?>
 

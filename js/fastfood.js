@@ -211,7 +211,7 @@ var fastfoodAnimations;
 
 			//quickbar animation
 			var panels = $( '#quickbar' ).children( '.quickbar-panel' );
-			var panels_count = Math.max( 5, panels.length );
+			var panels_count = Math.max( 6, panels.length );
 
 			panels.each( function(){ //get every quickbar item
 
@@ -261,7 +261,7 @@ var fastfoodAnimations;
 
 			var margintop_in  = 20; //the starting distance between menu item and the popup submenu
 
-			$( '#posts_content' ).hoverIntent(
+			$( '#posts-content' ).hoverIntent(
 				function(){ //when mouse enters, slide down the sub list
 					$( '.metadata-panel-content', this )
 						.slideDown();
@@ -279,12 +279,12 @@ var fastfoodAnimations;
 
 		thickbox : function() {
 
-			$( '#posts_content' )
+			$( '#posts-content' )
 				.find( '.entry-content a img' )
 					.parent( 'a[href$=".jpg"],a[href$=".png"],a[href$=".gif"]' )
 						.addClass( 'thickbox' );
 
-			$( '#posts_content' )
+			$( '#posts-content' )
 				.find( '.entry-content .gallery' ).each( function() {
 
 					var $this = $( this );
@@ -332,7 +332,7 @@ var fastfoodAnimations;
 
 		post_expander : function () {
 
-			$( '#posts_content' ).on( 'click.postexpander', 'a.more-link', function ( e ) {
+			$( '#posts-content' ).on( 'click.postexpander', 'a.more-link', function ( e ) {
 				e.preventDefault();
 
 				var link = $( this );
@@ -443,7 +443,7 @@ var fastfoodAnimations;
 
 		captions : function() {
 
-			$( '#posts_content' ).hoverIntent(
+			$( '#posts-content' ).hoverIntent(
 				function(){ //when mouse enters, slide down the sub list
 					var $this = $( this ).closest( '.gallery-item' );
 					$this.find( '.gallery-caption' ).stop().slideDown({

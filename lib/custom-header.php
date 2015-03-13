@@ -12,8 +12,9 @@ class Fastfood_Custom_Header {
 
 	function __construct() {
 
-		add_action( 'after_setup_theme'	, array( $this, 'custom_header_support' ) );
-		add_filter( 'body_class'		, array( $this, 'body_classes' ) );
+		add_action( 'after_setup_theme'			, array( $this, 'custom_header_support' )     );
+		add_action( 'fastfood_hook_site_header'	, array( $this, 'the_header'            ), 11 );
+		add_filter( 'body_class'				, array( $this, 'body_classes'          )     );
 
 	}
 
@@ -106,10 +107,25 @@ class Fastfood_Custom_Header {
 			$image = '<div id="head-image">' . $image . '</div>';
 		}
 
-		$output = $text . $image;
-
 		// Allow plugins/themes to override the default header.
-		return apply_filters( 'fastfood_header', $output );
+		$output = apply_filters( 'fastfood_header', $text . $image );
+		?>
+
+			<?php fastfood_hook_header_before(); ?>
+
+			<div id="header">
+
+				<?php fastfood_hook_header_top(); ?>
+
+				<?php echo $output; ?>
+
+				<?php fastfood_hook_header_bottom(); ?>
+
+			</div>
+
+			<?php fastfood_hook_header_after(); ?>
+
+		<?php
 
 	}
 
@@ -124,12 +140,14 @@ class Fastfood_Custom_Header {
 		else
 			$style = 'color: #' . get_header_textcolor() . ';';
 
-		$header_text_background = get_theme_mod( 'header_text_background', 'transparent' );
+		$header_text_background = ltrim( get_theme_mod( 'header_text_background', 'transparent' ), '#' );
 
 		$header_text_background_rgba = $header_text_background;
+		$filter = '';
 		if ( $header_text_background_rgba && ( 'transparent' != $header_text_background_rgba ) ) {
 			$header_text_background_rgba = fastfood_hex2rgb( $header_text_background_rgba );
 			$header_text_background_rgba = vsprintf( 'rgba( %1$s, %2$s, %3$s, 0.7)', $header_text_background_rgba );
+			$filter = "filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#b3$header_text_background', endColorstr='#b3$header_text_background',GradientType=0 ); /* IE6-9 */";
 		}
 
 ?>
@@ -142,8 +160,8 @@ class Fastfood_Custom_Header {
 			max-height: <?php echo absint( FastfoodOptions::get_opt( 'fastfood_head_h' ) ); ?>px;
 		}
 		.has-header-image #head-text {
-			background-color: <?php echo $header_text_background; ?>; /* old browsers fallback */
 			background-color: <?php echo $header_text_background_rgba; ?>;
+			<?php echo $filter; ?>
 		}
 	</style>
 <?php
@@ -153,9 +171,3 @@ class Fastfood_Custom_Header {
 }
 
 new Fastfood_Custom_Header;
-
-function fastfood_header() {
-
-	return Fastfood_Custom_Header::the_header();
-
-}

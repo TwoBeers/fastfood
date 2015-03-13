@@ -517,7 +517,7 @@ class Fastfood_Fixed_Footer {
 
 		$args = array(
 			'status'	=> 'approve',
-			'number'	=> apply_filters( 'fastfood_filter_get_recentcomments_number', 10 ),
+			'number'	=> apply_filters( 'fastfood_filter_get_recentcomments_number', absint( FastfoodOptions::get_opt( 'fastfood_qbar_reccom_length' ) ) ),
 			'type'		=> 'comment'
 		);
 		$comments = get_comments( $args ); // valid type values (not documented) : 'pingback','trackback','comment'
@@ -601,7 +601,7 @@ class Fastfood_Fixed_Footer {
 		$args = array(
 			'ignore_sticky_posts' => 'true',
 			'post_status' => 'publish',
-			'posts_per_page' => apply_filters( 'fastfood_filter_get_recententries_number', 10 ),
+			'posts_per_page' => apply_filters( 'fastfood_filter_get_recententries_number', absint( FastfoodOptions::get_opt( 'fastfood_qbar_recpost_length' ) ) ),
 			'no_found_rows' => 'true'
 		);
 		$r = new WP_Query( $args );
@@ -670,7 +670,7 @@ class Fastfood_Fixed_Footer {
 
 		$args = array(
 			'orderby'	=> 'count',
-			'number'	=> apply_filters( 'fastfood_filter_get_categories_wpr_number', 9 ),
+			'number'	=> apply_filters( 'fastfood_filter_get_categories_wpr_number', absint( FastfoodOptions::get_opt( 'fastfood_qbar_cat_length' ) ) ),
 			'order'		=> 'DESC'
 		);
 		$categories = get_categories( $args );
@@ -697,7 +697,7 @@ class Fastfood_Fixed_Footer {
 								<?php
 									$tmp_cat_ID = $category->cat_ID;
 									$post_search_args = array(
-										'numberposts' => 5,
+										'numberposts' => absint( FastfoodOptions::get_opt( 'fastfood_qbar_cat_length' ) ),
 										'category' => $tmp_cat_ID,
 										'no_found_rows' => true
 										);
@@ -731,6 +731,8 @@ class Fastfood_Fixed_Footer {
 					</li>
 
 				<?php } ?>
+
+				<li class="all_cat"><span class="label"><a title="<?php _e( 'View all categories', 'fastfood' ); ?>" href="<?php echo esc_url( add_query_arg( array( 'allcat' => 'y' ), home_url( '/' ) ) ); ?>">[...]</a></span></li>
 
 			</ul>
 

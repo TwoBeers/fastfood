@@ -59,9 +59,9 @@ class Fastfood_Featured_Content {
 		self::$max_posts	= absint( $theme_support[0]['max_posts'] );
 		$filter				= $theme_support[0]['featured_content_filter'];
 
-		add_action( $filter									, array( __CLASS__, 'get_featured_posts' )    );
-		add_action( 'pre_get_posts'							, array( __CLASS__, 'pre_get_posts'      )    );
-		add_action( 'fastfood_hook_header_after'	, array( __CLASS__, 'featured_content'   ), 11 );
+		add_action( $filter									, array( __CLASS__, 'get_featured_posts' )     );
+		add_action( 'pre_get_posts'							, array( __CLASS__, 'pre_get_posts'      )     );
+		add_action( 'fastfood_hook_site_header'				, array( __CLASS__, 'featured_content'   ), 14 );
 	}
 
 	/**
@@ -157,7 +157,7 @@ class Fastfood_Featured_Content {
 					?>
 					</div>
 				</div>
-				<div class="featured-label"><?php _e( 'featured', 'fastfood' ); ?></div>
+				<div class="featured-label"><?php echo esc_html( FastfoodOptions::get_opt( 'fastfood_featured_content_label' ) ); ?></div>
 				<div class="featured-navigation">
 					<ul class="bullets">
 					<?php
@@ -174,7 +174,7 @@ class Fastfood_Featured_Content {
 				if ( count( $featured_posts ) === 1 ) return;
 				wp_enqueue_script(
 					'tinycarousel',
-					sprintf( '%1$s/js/tinycarousel/jquery.tinycarousel%2$s.js' , get_template_directory_uri(), ( defined('WP_DEBUG') && true === WP_DEBUG ) ? '' : '.min' ),
+					fastfood_get_minified( '%1$s/js/tinycarousel/jquery.tinycarousel%2$s.js' ),
 					array( 'jquery' ),
 					'2.1.8',
 					true
@@ -204,7 +204,7 @@ class Fastfood_Featured_Content {
 
 		$coa['fastfood_featured_content'] = array(
 			'setting'			=> array(
-				'default'			=> 1,
+				'default'			=> 0,
 				'sanitize_method'	=> 'checkbox',
 			),
 			'control'			=> array(
@@ -217,6 +217,24 @@ class Fastfood_Featured_Content {
 				),
 			),
 		);
+
+		$coa['fastfood_featured_content_label'] = array(
+			'setting'			=> array(
+				'default'			=> __( 'featured', 'fastfood' ),
+				'sanitize_method'	=> 'text',
+			),
+			'control'			=> array(
+				'type'				=> 'text',
+				'render_type'		=> 'text',
+				'label'				=> __( 'label', 'fastfood' ),
+				'description'		=> '',
+				'require'			=> array(
+					'fastfood_options[fastfood_jsani]',
+					'fastfood_options[fastfood_featured_content]',
+				),
+			),
+		);
+
 		$coa['fastfood_featured_content_speed'] = array(
 			'setting'	=> array(
 				'default'			=> 400,
@@ -262,6 +280,7 @@ class Fastfood_Featured_Content {
 			'description'	=> '',
 			'options'		=> array(
 				'fastfood_featured_content',
+				'fastfood_featured_content_label',
 				'fastfood_featured_content_speed',
 				'fastfood_featured_content_pause',
 			),

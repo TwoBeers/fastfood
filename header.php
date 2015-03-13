@@ -39,35 +39,6 @@
 
 		<div id="main">
 
-			<?php
-				wp_nav_menu( array(
-					'container_class'	=> 'menu-container',
-					'menu_id'			=> 'menu-secondary1',
-					'menu_class'		=> 'nav-menu one-level secondary',
-					'fallback_cb'		=> false,
-					'theme_location'	=> 'secondary1',
-					'depth'				=> 1,
-				) );
-			?>
-
-			<?php fastfood_hook_header_before(); ?>
-
-			<div id="header">
-
-				<?php fastfood_hook_header_top(); ?>
-
-				<?php echo fastfood_header(); ?>
-
-				<?php fastfood_hook_header_bottom(); ?>
-
-			</div>
-
-			<?php fastfood_hook_header_after(); ?>
-
-			<?php fastfood_get_sidebar( 'header', true ); // show header widgets area ?>
-
-			<?php fastfood_hook_breadcrumb_navigation(); ?>
-
-			<?php fastfood_hook_content_before(); ?>
+			<?php fastfood_hook_site_header(); ?>
 
 			<div id="content">

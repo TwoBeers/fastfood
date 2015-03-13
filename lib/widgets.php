@@ -9,104 +9,7 @@
  */
 
 
-add_action( 'widgets_init', 'fastfood_register_sidebars' );
 add_action( 'widgets_init', 'fastfood_widgets_init' );
-
-
-/**
- * Define default Widget arguments
- */
-function fastfood_get_default_widget_args( $widget_area = 'primary-widget-area' ) {
-
-	return apply_filters( 'fastfood_get_default_widget_args', array(
-		'before_widget'		=> '<div id="%1$s" class="widget %2$s">',
-		'after_widget'		=> '</div>',
-		'before_title'		=> '<h2 class="widgettitle">',
-		'after_title'		=> '</h2>',
-	), $widget_area );
-
-}
-
-
-/**
- * Register sidebars
- */
-function fastfood_register_sidebars() {
-	static $registered_sidebars = array();
-
-	if ( empty( $registered_sidebars ) ) {
-
-		// Area 1, located at the top of the sidebar.
-		$registered_sidebars['primary'] = register_sidebar( array_merge( 
-			array(
-				'name'			=> __( 'Sidebar Widget Area', 'fastfood' ),
-				'id'			=> 'primary-widget-area',
-				'description'	=> __( 'The sidebar widget area', 'fastfood' ),
-				'columns'		=> 1,
-			),
-			fastfood_get_default_widget_args( 'primary-widget-area' )
-		) );
-
-		// Area 2, located under the main menu.
-		$registered_sidebars['header'] = register_sidebar( array_merge( 
-			array(
-				'name'			=> __( 'Header Widget Area', 'fastfood' ),
-				'id'			=> 'header-widget-area',
-				'description'	=> __( 'The widget area under the main menu', 'fastfood' ),
-				'columns'		=> 3,
-			),
-			fastfood_get_default_widget_args( 'header-widget-area' )
-		) );
-
-		// Area 3, located after post/page content.
-		$registered_sidebars['singular'] = register_sidebar( array_merge( 
-			array(
-				'name'			=> __( 'Post/Page Widget Area', 'fastfood' ),
-				'id'			=> 'post-widgets-area',
-				'description'	=> __( "The widget area after the post/page content. It's visible only in single posts/pages/attachments", 'fastfood' ),
-				'columns'		=> 2,
-			),
-			fastfood_get_default_widget_args( 'post-widgets-area' )
-		) );
-
-		// Area 4, located after post/page content.
-		$registered_sidebars['footer'] = register_sidebar( array_merge( 
-			array(
-				'name'			=> __( 'Footer Widget Area', 'fastfood' ),
-				'id'			=> 'footer-widget-area',
-				'description'	=> __( 'The footer widget area', 'fastfood' ),
-				'columns'		=> 3,
-			),
-			fastfood_get_default_widget_args( 'footer-widget-area' )
-		) );
-
-		// Area 5, located in page 404.
-		$registered_sidebars['error404'] = register_sidebar( array_merge( 
-			array(
-				'name'			=> __( 'Page 404 Widget Area', 'fastfood' ),
-				'id'			=> 'error404-widgets-area',
-				'description'	=> __( 'Enrich the page 404 with some useful widgets', 'fastfood' ),
-				'columns'		=> 2,
-			),
-			fastfood_get_default_widget_args( 'error404-widgets-area' )
-		) );
-
-		// Area 6, located in footer.
-		$registered_sidebars['hidden'] = register_sidebar( array_merge( 
-			array(
-				'name'			=> __( 'Hidden Widget Area', 'fastfood' ),
-				'id'			=> 'hidden-widget-area',
-				'description'	=> __( 'This widget area is not visible. Drop here your widget for eg. analytics scripts or whatever you want to keep hidden', 'fastfood' ),
-				'columns'		=> 1,
-			),
-			fastfood_get_default_widget_args( 'hidden-widget-area' )
-		) );
-
-	}
-
-	return $registered_sidebars;
-
-}
 
 
 /**
@@ -1586,7 +1489,7 @@ class Fastfood_Widget_Font_Resize extends WP_Widget {
 
 		wp_enqueue_script(
 			'fastfood-font-resize',
-			sprintf( '%1$s/js/font-resize%2$s.js' , get_template_directory_uri(), ( defined('WP_DEBUG') && true === WP_DEBUG ) ? '' : '.min' ),
+			fastfood_get_minified( '%1$s/js/font-resize%2$s.js' ),
 			array( 'jquery' ),
 			'',
 			true
