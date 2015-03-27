@@ -39,6 +39,18 @@
 
 		<div id="main">
 
-			<?php fastfood_hook_site_header(); ?>
+			<?php fastfood_hook_header_before(); ?>
+
+			<div id="header">
+
+				<?php fastfood_hook_header_top(); ?>
+
+				<?php fastfood_hook_header(); ?>
+
+				<?php fastfood_hook_header_bottom(); ?>
+
+			</div>
+
+			<?php fastfood_hook_header_after(); ?>
 
 			<div id="content">

@@ -11,10 +11,10 @@
 class FastfoodOptions {
 
 	//holds the complete default options array
-	private static $coa = array();
+	private static $_coa = array();
 
 	//holds the options hierarchy (for builing the theme options page)
-	private static $hierarchy = array();
+	private static $_hierarchy = array();
 
 
 	/**
@@ -24,7 +24,7 @@ class FastfoodOptions {
 	 */
 	public static function init() {
 
-		self::$coa = apply_filters( 'fastfood_options_array', array(
+		self::$_coa = apply_filters( 'fastfood_options_array', array(
 
 			'fastfood_qbar' =>
 							array(
@@ -1040,7 +1040,7 @@ class FastfoodOptions {
 								'control'			=> array(
 									'type'				=> 'checkbox',
 									'render_type'		=> 'checkbox',
-									'label'				=> __( 'prevent scroll when clicking the "more" tag', 'fastfood' ),
+									'label'				=> __( 'prevent scroll when clicking the "More" tag', 'fastfood' ),
 									'description'		=> '',
 								),
 							),
@@ -1053,7 +1053,7 @@ class FastfoodOptions {
 								'control'			=> array(
 									'type'				=> 'checkbox',
 									'render_type'		=> 'checkbox',
-									'label'				=> __( 'show a link to the page/post even if the "more" tag is not present', 'fastfood' ),
+									'label'				=> __( 'show a link to the page/post even if the "More" tag is not present', 'fastfood' ),
 									'description'		=> '',
 								),
 							),
@@ -1472,7 +1472,7 @@ class FastfoodOptions {
 							),
 		) );
 
-		self::$hierarchy = apply_filters( 'fastfood_options_hierarchy', array(
+		self::$_hierarchy = apply_filters( 'fastfood_options_hierarchy', array(
 			'group' => array(
 
 				'style' => array(
@@ -1623,7 +1623,7 @@ class FastfoodOptions {
 			'field' => array(
 
 				'links_colors' => array(
-					'label'			=> __( 'links colors', 'fastfood' ),
+					'label'			=> __( 'Links colors', 'fastfood' ),
 					'description'	=> '',
 					'options'		=> array(
 						'fastfood_colors_link',
@@ -1634,7 +1634,7 @@ class FastfoodOptions {
 				),
 
 				'basic_font' => array(
-					'label'			=> __( 'basic font', 'fastfood' ),
+					'label'			=> __( 'Basic font', 'fastfood' ),
 					'description'	=> '',
 					'options'		=> array(
 						'fastfood_font_family',
@@ -1658,7 +1658,7 @@ class FastfoodOptions {
 				),
 
 				'custom_css' => array(
-					'label'			=> __( 'custom CSS', 'fastfood' ),
+					'label'			=> __( 'Custom CSS', 'fastfood' ),
 					'description'	=> '',
 					'options'		=> array(
 						'fastfood_custom_css',
@@ -1667,7 +1667,7 @@ class FastfoodOptions {
 				),
 
 				'body' => array(
-					'label'			=> __( 'body', 'fastfood' ),
+					'label'			=> __( 'Body', 'fastfood' ),
 					'description'	=> '',
 					'options'		=> array(
 						'fastfood_body_width',
@@ -1676,7 +1676,7 @@ class FastfoodOptions {
 				),
 
 				'header' => array(
-					'label'			=> __( 'header', 'fastfood' ),
+					'label'			=> __( 'Site header', 'fastfood' ),
 					'description'	=> '',
 					'options'		=> array(
 						'fastfood_head_h',
@@ -1685,7 +1685,7 @@ class FastfoodOptions {
 				),
 
 				'primary_menu' => array(
-					'label'			=> __( 'primary menu', 'fastfood' ),
+					'label'			=> __( 'Primary menu', 'fastfood' ),
 					'description'	=> '',
 					'options'		=> array(
 						'fastfood_primary_menu',
@@ -1696,7 +1696,7 @@ class FastfoodOptions {
 				),
 
 				'breadcrumb' => array(
-					'label'			=> __( 'breadcrumb', 'fastfood' ),
+					'label'			=> __( 'Breadcrumb', 'fastfood' ),
 					'description'	=> '',
 					'options'		=> array(
 						'fastfood_breadcrumb',
@@ -1705,7 +1705,7 @@ class FastfoodOptions {
 				),
 
 				'sidebar' => array(
-					'label'			=> __( 'sidebar', 'fastfood' ),
+					'label'			=> __( 'Sidebar', 'fastfood' ),
 					'description'	=> '',
 					'options'		=> array(
 						'fastfood_rsideb_position',
@@ -1721,7 +1721,7 @@ class FastfoodOptions {
 				),
 
 				'quickbar' => array(
-					'label'			=> __( 'quickbar', 'fastfood' ),
+					'label'			=> __( 'Quickbar', 'fastfood' ),
 					'description'	=> '',
 					'options'		=> array(
 						'fastfood_qbar',
@@ -1740,7 +1740,7 @@ class FastfoodOptions {
 				),
 
 				'navbuttons' => array(
-					'label'			=> __( 'navigation buttons', 'fastfood' ),
+					'label'			=> __( 'Navigation buttons', 'fastfood' ),
 					'description'	=> '',
 					'options'		=> array(
 						'fastfood_navbuttons',
@@ -1758,7 +1758,7 @@ class FastfoodOptions {
 				),
 
 				'statusbar' => array(
-					'label'			=> __( 'status bar', 'fastfood' ),
+					'label'			=> __( 'Status bar', 'fastfood' ),
 					'description'	=> '',
 					'options'		=> array(
 						'fastfood_statusbar',
@@ -1767,7 +1767,7 @@ class FastfoodOptions {
 				),
 
 				'comment_form' => array(
-					'label'			=> __( 'comment form', 'fastfood' ),
+					'label'			=> __( 'Comment form', 'fastfood' ),
 					'description'	=> '',
 					'options'		=> array(
 						'fastfood_cust_comrep',
@@ -1777,7 +1777,7 @@ class FastfoodOptions {
 				),
 
 				'responsive_layout' => array(
-					'label'			=> __( 'responsive layout', 'fastfood' ),
+					'label'			=> __( 'Responsive layout', 'fastfood' ),
 					'description'	=> '',
 					'options'		=> array(
 						'fastfood_responsive_layout',
@@ -1786,7 +1786,7 @@ class FastfoodOptions {
 				),
 
 				'mobile_theme' => array(
-					'label'			=> __( 'mobile theme', 'fastfood' ),
+					'label'			=> __( 'Mobile theme', 'fastfood' ),
 					'description'	=> '',
 					'options'		=> array(
 						'fastfood_mobile_css',
@@ -1796,7 +1796,7 @@ class FastfoodOptions {
 				),
 
 				'post_formats_standard' => array(
-					'label'			=> sprintf( __( '"%s" format', 'fastfood' ), get_post_format_string( 'standard' ) ),
+					'label'			=> sprintf( __( '"%s" Format', 'fastfood' ), get_post_format_string( 'standard' ) ),
 					'description'	=> '',
 					'options'		=> array(
 						'fastfood_post_formats_standard_title',
@@ -1806,7 +1806,7 @@ class FastfoodOptions {
 				),
 
 				'post_formats_aside' => array(
-					'label'			=> sprintf( __( '"%s" format', 'fastfood' ), get_post_format_string( 'aside' ) ),
+					'label'			=> sprintf( __( '"%s" Format', 'fastfood' ), get_post_format_string( 'aside' ) ),
 					'description'	=> '',
 					'options'		=> array(
 						'fastfood_post_formats_aside',
@@ -1817,7 +1817,7 @@ class FastfoodOptions {
 				),
 
 				'post_formats_gallery' => array(
-					'label'			=> sprintf( __( '"%s" format', 'fastfood' ), get_post_format_string( 'gallery' ) ),
+					'label'			=> sprintf( __( '"%s" Format', 'fastfood' ), get_post_format_string( 'gallery' ) ),
 					'description'	=> '',
 					'options'		=> array(
 						'fastfood_post_formats_gallery',
@@ -1830,7 +1830,7 @@ class FastfoodOptions {
 				),
 
 				'post_formats_quote' => array(
-					'label'			=> sprintf( __( '"%s" format', 'fastfood' ), get_post_format_string( 'quote' ) ),
+					'label'			=> sprintf( __( '"%s" Format', 'fastfood' ), get_post_format_string( 'quote' ) ),
 					'description'	=> '',
 					'options'		=> array(
 						'fastfood_post_formats_quote',
@@ -1839,7 +1839,7 @@ class FastfoodOptions {
 				),
 
 				'post_formats_status' => array(
-					'label'			=> sprintf( __( '"%s" format', 'fastfood' ), get_post_format_string( 'status' ) ),
+					'label'			=> sprintf( __( '"%s" Format', 'fastfood' ), get_post_format_string( 'status' ) ),
 					'description'	=> '',
 					'options'		=> array(
 						'fastfood_post_formats_status',
@@ -1850,7 +1850,7 @@ class FastfoodOptions {
 				),
 
 				'blank_titles' => array(
-					'label'			=> __( 'blank titles', 'fastfood' ),
+					'label'			=> __( 'Blank titles', 'fastfood' ),
 					'description'	=> '',
 					'options'		=> array(
 						'fastfood_manage_blank_title',
@@ -1861,7 +1861,7 @@ class FastfoodOptions {
 				),
 
 				'hide_titles' => array(
-					'label'			=> __( 'hide titles', 'fastfood' ),
+					'label'			=> __( 'Hide titles', 'fastfood' ),
 					'description'	=> '',
 					'options'		=> array(
 						'fastfood_hide_frontpage_title',
@@ -1873,7 +1873,7 @@ class FastfoodOptions {
 				),
 
 				'featured_titles' => array(
-					'label'			=> __( 'thumbnails', 'fastfood' ),
+					'label'			=> __( 'Thumbnails', 'fastfood' ),
 					'description'	=> '',
 					'options'		=> array(
 						'fastfood_featured_title',
@@ -1883,7 +1883,7 @@ class FastfoodOptions {
 				),
 
 				'extra_info' => array(
-					'label'			=> __( 'post/page details', 'fastfood' ),
+					'label'			=> __( 'Post/Page details', 'fastfood' ),
 					'description'	=> '',
 					'options'		=> array(
 						'fastfood_xinfos_global',
@@ -1906,7 +1906,7 @@ class FastfoodOptions {
 				),
 
 				'excerpt' => array(
-					'label'			=> __( 'content summary', 'fastfood' ),
+					'label'			=> __( 'Content summary', 'fastfood' ),
 					'description'	=> '',
 					'options'		=> array(
 						'fastfood_excerpt_lenght',
@@ -1917,8 +1917,8 @@ class FastfoodOptions {
 				),
 
 				'the_more_tag' => array(
-					'label'			=> __( 'The More Tag', 'fastfood' ),
-					'description'	=> __( 'more info', 'fastfood') . ' : <a target="_blank" href="http://support.wordpress.com/splitting-content/more-tag/">' . __( 'The More Tag', 'fastfood' ) . '</a>',
+					'label'			=> __( 'The "More" tag', 'fastfood' ),
+					'description'	=> __( 'more info', 'fastfood') . ' : <a target="_blank" href="http://support.wordpress.com/splitting-content/more-tag/">' . __( 'The "More" tag', 'fastfood' ) . '</a>',
 					'options'		=> array(
 						'fastfood_more_tag',
 						'fastfood_more_tag_scroll',
@@ -1928,7 +1928,7 @@ class FastfoodOptions {
 				),
 
 				'js_animations' => array(
-					'label'			=> __( 'javascript support', 'fastfood' ),
+					'label'			=> __( 'Javascript support', 'fastfood' ),
 					'description'	=> '',
 					'options'		=> array(
 						'fastfood_jsani',
@@ -1937,7 +1937,7 @@ class FastfoodOptions {
 				),
 
 				'basic_animations' => array(
-					'label'			=> __( 'basic animations', 'fastfood' ),
+					'label'			=> __( 'Basic animations', 'fastfood' ),
 					'description'	=> '',
 					'options'		=> array(
 						'fastfood_basic_animation_main_menu',
@@ -1951,7 +1951,7 @@ class FastfoodOptions {
 				),
 
 				'advanced_js_features' => array(
-					'label'			=> __( 'advanced features', 'fastfood' ),
+					'label'			=> __( 'Advanced features', 'fastfood' ),
 					'description'	=> '',
 					'options'		=> array(
 						'fastfood_post_expand',
@@ -1963,7 +1963,7 @@ class FastfoodOptions {
 				),
 
 				'thickbox' => array(
-					'label'			=> __( 'thickbox', 'fastfood' ),
+					'label'			=> __( 'Thickbox', 'fastfood' ),
 					'description'	=> '',
 					'options'		=> array(
 						'fastfood_gallery_preview',
@@ -1973,7 +1973,7 @@ class FastfoodOptions {
 				),
 
 				'hotchpotch' => array(
-					'label'			=> __( 'hotchpotch', 'fastfood' ),
+					'label'			=> __( 'Hotchpotch', 'fastfood' ),
 					'description'	=> __( 'other mixed options', 'fastfood' ),
 					'options'		=> array(
 						'fastfood_editor_style',
@@ -2002,11 +2002,11 @@ class FastfoodOptions {
 
 		if ( $option )
 			if ( $data )
-				return isset( self::$coa[$option][$data[0]][$data[1]] ) ? self::$coa[$option][$data[0]][$data[1]] : NULL;
+				return isset( self::$_coa[$option][$data[0]][$data[1]] ) ? self::$_coa[$option][$data[0]][$data[1]] : NULL;
 			else
-				return isset( self::$coa[$option] ) ? self::$coa[$option] : NULL;
+				return isset( self::$_coa[$option] ) ? self::$_coa[$option] : NULL;
 		else
-			return self::$coa;
+			return self::$_coa;
 	}
 
 
@@ -2019,9 +2019,9 @@ class FastfoodOptions {
 	public static function get_hierarchy( $level = false ) {
 
 		if ( $level )
-			return self::$hierarchy[$level];
+			return self::$_hierarchy[$level];
 		else
-			return self::$hierarchy;
+			return self::$_hierarchy;
 
 	}
 

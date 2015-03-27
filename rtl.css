@@ -41,10 +41,10 @@ input[type=password] {
 .nav-menu > li {
 	margin: 0 0 0 20px;
 }
-.nav-menu.all-levels .menu-item-parent > a:after {
+.nav-menu.multiple-levels .menu-item-parent > a:after {
 	padding: 0 5px 0 0;
 }
-.nav-menu.all-levels > li > ul.children {
+.nav-menu.multiple-levels > li > ul.children {
 	left: auto;
 	right: 0;
 }

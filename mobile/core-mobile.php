@@ -19,7 +19,7 @@ class fastfood_Mobile {
 
 		add_action( 'template_redirect',			array( $this, 'init' ) ); // mobile support
 		add_action( 'after_setup_theme',			array( $this, 'setup' ) ); // Tell WordPress to run setup() when the 'after_setup_theme' hook is run.
-		add_action( 'widgets_init',					array( $this, 'widget_area_init' ) ); // Register sidebars by running widget_area_init() on the widgets_init hook
+		add_action( 'widgets_init',					array( $this, 'widget_area_init' ), 11 ); // Register sidebars by running widget_area_init() on the widgets_init hook
 		add_action( 'fastfood_hook_change_view' ,	array( $this, 'change_view_link' ) );
 
 	}

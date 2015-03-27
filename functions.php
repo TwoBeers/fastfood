@@ -36,7 +36,6 @@ add_action( 'template_redirect'						, 'fastfood_allcat', 99 );
 add_action( 'comment_form_comments_closed'			, 'fastfood_comments_closed' );
 add_action( 'pre_get_posts'							, 'fastfood_exclude_format_from_blog' );
 add_action( 'wp_head'								, 'fastfood_render_title' );
-add_action( 'wp_head'								, 'fastfood_header_order' );
 
 
 /* Custom actions - theme hooks */
@@ -46,7 +45,6 @@ add_action( 'fastfood_hook_content_top'				, 'fastfood_search_reminder' );
 add_action( 'fastfood_hook_post_content_after'		, 'fastfood_always_more' );
 add_action( 'fastfood_hook_comments_top'			, 'fastfood_comments_header' );
 add_action( 'fastfood_hook_footer_after'			, 'fastfood_print_preview_buttons', 99 );
-add_action( 'fastfood_hook_footer'					, 'fastfood_credits', 99 );
 
 
 /* Custom filters - WP hooks */
@@ -101,6 +99,7 @@ function fastfood_get_info( $field ) {
 
 require_once( 'lib/options.php' );
 require_once( 'lib/back-compat.php' );
+require_once( 'lib/builder.php' );
 require_once( 'lib/formats-functions.php' );
 require_once( 'lib/widgets.php' );
 require_once( 'mobile/core-mobile.php' );
@@ -564,9 +563,9 @@ function fastfood_credits () {
 
 		<?php
 			if ( FastfoodOptions::get_opt('fastfood_tbcred' ) ) {
-				$output = apply_filters( 'fastfood_filter_credits', sprintf( __( 'Fastfood theme by %1$s - Powered by %2$s', 'fastfood' ),
-					'<a target="_blank" href="http://www.twobeers.net/" title="' . esc_attr( __( 'Visit author homepage', 'fastfood' ) . ' @ TwoBeers.net' ) . '">TwoBeers Crew</a>',
-					'<a target="_blank" href="http://wordpress.org/" title="WordPress">WordPress</a>'
+				$output = apply_filters( 'fastfood_filter_credits', sprintf( __( 'Powered by %1$s and %2$s', 'fastfood' ),
+					'<a target="_blank" href="http://wordpress.org/" title="WordPress">WordPress</a>',
+					'<a target="_blank" href="http://www.twobeers.net/" title="' . esc_attr( __( 'Visit theme authors homepage', 'fastfood' ) . ' @ twobeers.net' ) . '">Fastfood</a>'
 				) );
 				echo '<small>' . $output . '</small>';
 			}
@@ -602,7 +601,7 @@ function fastfood_copyright() {
 	}
 	// Build the copyright notice, based on cached date values
 	$output = '&copy; ';
-	if( $copyright_cache ) {
+	if( $copyright_cache && $copyright_cache[0]->firstdate ) {
 		$copyright = $copyright_cache[0]->firstdate;
 		if( $copyright_cache[0]->firstdate != $copyright_cache[0]->lastdate ) {
 			$copyright .= '-' . $copyright_cache[0]->lastdate;
@@ -828,7 +827,7 @@ function fastfood_extrainfo( $args = '' ) {
 	}
 
 	$post_author	= ( ( $args['auth'] === true ) || ( $args['auth'] === 1 ) ) ? '<a class="fn author nickname url" href="' . get_author_posts_url( get_the_author_meta( 'ID' ) ) . '" title="' . sprintf( __( 'View all posts by %s', 'fastfood' ), esc_attr( get_the_author() ) ) . '">' . get_the_author() . '</a>' : '<span class="vcard fn author">' . $args['auth'] . '</span>';
-	$post_author	= '<i class="el-icon-user"></i> ' . $post_author;
+	$post_author	= '<span class="hide_if_no_print">' . __( 'Author', 'fastfood' ) . ': </span><i class="el-icon-user"></i> ' . $post_author;
 	$categories		= __( 'Categories', 'fastfood' ) . ': ' . get_the_category_list( ', ' );
 	$tags			= __( 'Tags', 'fastfood' ) . ': ' . ( ( get_the_tags() ) ? get_the_tag_list( '', ', ' , '') : __( 'No Tags', 'fastfood' ) );
 	$comments		= __( 'Comments', 'fastfood' ) . ': ' . fastfood_get_comments_link();
@@ -889,7 +888,7 @@ function fastfood_extrainfo( $args = '' ) {
 				<?php } ?>
 
 				<?php if ( get_edit_post_link() ) { ?>
-					<div class="metadata-panel metadata-panel-edit">
+					<div class="metadata-panel metadata-panel-edit hide_if_print">
 						<?php
 							echo fastfood_build_link( array(
 								'href'		=> get_edit_post_link(),
@@ -1158,9 +1157,9 @@ function fastfood_setup() {
 	$fastfood_opt = wp_parse_args( get_option( 'fastfood_options' ), FastfoodOptions::get_defaults() );
 
 	// Theme uses wp_nav_menu() in three location
-	register_nav_menus( array( 'primary'	=> __( 'Main Navigation Menu', 'fastfood' ) ) );
-	register_nav_menus( array( 'secondary1'	=> __( 'Secondary Navigation Menu #1', 'fastfood' ) ) );
-	register_nav_menus( array( 'secondary2'	=> __( 'Secondary Navigation Menu #2', 'fastfood' ) ) );
+	register_nav_menus( array( 'primary'	=> __( 'Primary menu', 'fastfood' ) ) );
+	register_nav_menus( array( 'secondary1'	=> __( 'Secondary menu #1', 'fastfood' ) ) );
+	register_nav_menus( array( 'secondary2'	=> __( 'Secondary menu #2', 'fastfood' ) ) );
 
 	add_theme_support( 'automatic-feed-links' );
 	add_theme_support( 'post-thumbnails' );
@@ -1389,19 +1388,6 @@ function fastfood_render_title() {
 ?>
 	<title><?php wp_title( '|', true, 'right' ); ?></title>
 <?php
-
-}
-
-
-/**
- * Change the order of the elements in the site header (NOT IMPLEMENTED YET)
- */
-function fastfood_header_order() {
-	global $wp_filter;
-
-	if ( isset( $wp_filter['fastfood_hook_site_header'] ) ) {
-		//DO SOMETHING
-	}
 
 }
 

@@ -59,18 +59,18 @@ p {
 ul {
 	list-style: square outside none;
 	padding: 0;
-	margin: 0;
+	margin: 0 0 0 1em;
 }
 ul li {
-	margin: 0 0 0 1em;
+	margin: 0;
 }
 ol {
 	list-style: decimal outside none;
 	padding: 0;
-	margin: 0;
+	margin: 0 0 0 2em;
 }
 ol li {
-	margin: 0 0 0 2em;
+	margin: 0;
 }
 dt {
 	font-weight: bold;
@@ -274,16 +274,19 @@ br.fixfloat {
 }
 #statusbar {
 	font-size: .8em;
-	height: 12px;
-	padding: 10px 20px;
+	height: 33px;
+	padding: 0 20px;
+	line-height: 32px;
 	text-align: right;
 	border-top: 1px solid #ddd;
 	background: #f8f8f8;
 	z-index: 10;
+	-webkit-box-sizing: border-box;
+	box-sizing: border-box;
 }
 #footer {
 	clear: both;
-	padding-bottom: 54px;
+	padding-bottom: 33px;
 	margin-top: 20px;
 }
 #credits {
@@ -310,49 +313,60 @@ br.fixfloat {
 /* =Header
 ----------------------------------------------------------*/
 #header {
+	width: inherit;
+	max-width: 100%;
+}
+#site-header {
 	position: relative;
 }
-#head-text {
+#site-heading {
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
 	padding: 10px 20px;
 	width: 100%;
 }
-.has-header-image #head-text {
+.has-header-image #site-heading {
 	position: absolute;
 	z-index: 1;
 }
-#head-text a {
+#site-heading a {
 	color: #404040;
 }
-#head-text h1 {
+#site-heading h1 {
 	margin: 0 0 5px;
 	font-size: 3em;
 }
-#header img {
+#site-header img {
 	width: 100%;
 	height: auto;
 }
-#head-image {
+#site-image {
 	position: relative;
 	overflow: hidden;
 }
-#head-image img {
+#site-image img {
 	position: absolute;
 	top: 0;
 	left: 0;
 	display: none;
 }
-#head-image img:first-child {
+#site-image img:first-child {
 	position: static;
 	display: block;
 }
-
+#header-widget-area + #menu-primary-container,
+#header-widget-area + #menu-secondary-first-container,
+#menu-primary-container + #menu-secondary-first-container,
+#menu-primary-container + #header-widget-area,
+#menu-secondary-first-container + #menu-primary-container,
+#menu-secondary-first-container + #header-widget-area {
+	border-top: 1px solid #555;
+}
 /* =other elements
 ----------------------------------------------------------*/
 #credits {
 	border-top: 1px solid #ddd;
-	padding: 20px 20px 0;
+	padding: 20px;
 }
 #credits small {
 	display: block;
@@ -534,7 +548,6 @@ i.quickbar-panel-icon {
 	float: right;
 	margin-left: 20px;
 	margin-right: -20px;
-	margin-top: -10px;
 }
 
 /* =navigation buttons
@@ -598,13 +611,19 @@ i.quickbar-panel-icon {
 .current-cat > a {
 	color: #ddd;
 }
-.menu-container {
+.menu-primary-container,
+.menu-secondary-container {
 	background-color: #404040;
 	color: #ddd;
 }
 .nav-menu {
-	padding: 10px 20px;
 	margin: 0;
+	padding: 0;
+	line-height: 2.4em;
+}
+.menu-primary-container .nav-menu,
+.menu-secondary-container .nav-menu {
+	padding: 10px 20px;
 }
 .nav-menu > li {
 	margin: 0 20px 0 0;
@@ -612,20 +631,22 @@ i.quickbar-panel-icon {
 	display: inline-block;
 	position: relative;
 }
-#menu-primary-container {
-	z-index: 301;
-}
-.nav-menu.all-levels {
-	line-height: 2.4em;
-}
-.nav-menu.all-levels .menu-item-parent > a:after { 
+.nav-menu.multiple-levels .menu-item-parent > a:after { 
 	padding-left: 5px;
-	content: '\00bb';
+	content: "\e706";
+	display: inline-block;
+	font-family: Elusive-Icons;
+	font-style: normal;
+	font-weight: normal;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	vertical-align: top;
+	font-size: .6em;
 }
-.nav-menu.all-levels > li > a{
+.nav-menu > li > a{
 	display: block;
 }
-.nav-menu.all-levels > li > ul.children {
+.nav-menu > li > ul {
 	position: absolute;
 	display: none;
 	z-index: 20;
@@ -635,19 +656,21 @@ i.quickbar-panel-icon {
 	border: 1px solid rgba( 255,255,255,.15);
 	background-color: #404040;
 	margin: 0;
-	padding: 10px 20px;
+	padding: 10px 20px 10px 30px;
 	left: 0;
 	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
+	color: #ddd;
+	text-align: left;
 }
-.nav-menu.all-levels > li > ul.children.right {
+.nav-menu > li > ul.right {
 	left: auto;
 	right: 0;
 }
-.nav-menu.all-levels > li:hover > ul {
+.nav-menu > li:hover > ul {
 	display: block;
 }
-.nav-menu.all-levels ul li > div {
+.nav-menu ul li > div {
 	display: inline;
 }
 #menu-primary-placeholder {
@@ -655,8 +678,8 @@ i.quickbar-panel-icon {
 }
 .fixed-menu #menu-primary-container {
 	position: fixed;
-	width: inherit;
 	border-bottom: 1px solid #555;
+	width: inherit;
 }
 .fixed-menu #menu-primary-placeholder {
 	display: block;
@@ -666,10 +689,10 @@ i.quickbar-panel-icon {
 	display: block;
 	line-height: 2em;
 }
-#menu-secondary-1 {
+#menu-secondary-first {
 	text-align: right;
 }
-#menu-secondary-1 li {
+#menu-secondary-first > li {
 	margin: 0 0 0 20px;
 }
 .tinynav {
@@ -833,9 +856,6 @@ i.quickbar-panel-icon {
 #header-widget-area {
 	background-color: #404040;
 	color: #ddd;
-}
-#menu-primary-container + #header-widget-area {
-	border-top: 1px solid #555;
 }
 #header-widget-area .widget {
 	width: 33.3333%;
@@ -1027,9 +1047,9 @@ div.tb_latest_commentators a img {
 }
 .ff-social-icon img {
 	border: none;
+	vertical-align: top;
 }
-.all_cat {
-}
+
 /* Post Format icons
 ----------------------------------------------------------*/
 .tbm-format.f-aside:before {
@@ -1125,10 +1145,10 @@ body.page .hentry:after {
 	height: 1em;
 	line-height: 1em;
 	position: absolute;
-	right: 0;
+	right: 20px;
 	text-align: center;
 	top: 0;
-	width: 1em;
+	width: .8em;
 	color: #808080;
 	font-family: Elusive-Icons;
 	font-style: normal;
@@ -1464,9 +1484,12 @@ img.wp-post-image {
 	right: 0;
 	overflow: hidden;
 }
-.comment ul.children {
-	margin: 0;
-	padding: 0 0 0 20px;
+#commentlist {
+	position: relative;
+	margin: 20px 0 0 0;
+}
+#commentlist li.comment {
+	list-style: none;
 }
 .solid-label {
 	text-align: right;
@@ -1480,11 +1503,6 @@ img.wp-post-image {
 	margin: 0 -0.5em 0 0.5em;
 	padding: 0 .5em;
 	border-left: 1px solid #fff;
-}
-#commentlist {
-	position: relative;
-	margin: 20px 0 0 0;
-	list-style: none;
 }
 .comment-form-comment {
 	text-align: center;
@@ -1964,7 +1982,7 @@ img.aligncenter {
 .crumbs {
 	background: none repeat scroll 0 0 #ddd;
 	line-height: 2.5em;
-	margin: 20px 0 0 0;
+	margin: 20px 0;
 	overflow: hidden;
 	padding: 0 20px;
 }

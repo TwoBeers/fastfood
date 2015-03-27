@@ -5,7 +5,10 @@
  * This module allows you to define a subset of posts to be displayed
  * in the theme's Featured Content area.
  */
+
 class Fastfood_Featured_Content {
+
+	var $is_active = false;
 
 	/**
 	 * The maximum number of posts a Featured Content area can contain.
@@ -18,62 +21,88 @@ class Fastfood_Featured_Content {
 	 */
 	public static $max_posts = 7;
 
+
 	/**
 	 * Instantiate.
 	 *
-	 * All custom functionality will be hooked into the "init" action.
-	 *
-	 * @static
-	 * @access public
-	 * @since Fastfood 0.37
-	 */
-	public static function setup() {
-		add_action( 'wp_loaded'						, array( __CLASS__, 'init'                     ), 30 );
-		add_action( 'after_setup_theme'				, array( __CLASS__, 'add_theme_support'        )     );
-		add_filter( 'fastfood_options_array'		, array( __CLASS__, 'extra_options'            )     );
-		add_filter( 'fastfood_options_hierarchy'	, array( __CLASS__, 'update_options_hierarchy' )     );
-	}
-
-	/**
-	 * Add theme support
-	 */
-	public static function add_theme_support() {
-		// Add support for featured content.
-		add_theme_support( 'featured-content', array(
-			'featured_content_filter'	=> 'fastfood_get_featured_posts',
-			'max_posts'					=> 7,
-		) );
-	}
-
-	/**
-	 * Conditionally hook into WordPress.
+	 * Create/Get the instance for the current class
 	 *
 	 * @static
 	 * @access public
 	 * @since Fastfood 0.37
 	 */
 	public static function init() {
+		static $instance = NULL;
+
+		if ( ! $instance ) {
+			$instance = new Fastfood_Featured_Content;
+		}
+
+		return $instance;
+
+	}
+
+
+	/**
+	 * Constructor.
+	 *
+	 * @since Fastfood 0.37
+	 */
+	function __construct() {
+
+		add_action( 'after_setup_theme', array( $this, 'setup' ), 9 );
+
+	}
+
+
+	/**
+	 * Add theme support
+	 */
+	function setup() {
+
+		add_action( 'wp_loaded'						, array( $this, 'wp_loaded'                ), 30 );
+		add_filter( 'fastfood_options_array'		, array( $this, 'extra_options'            )     );
+		add_filter( 'fastfood_options_hierarchy'	, array( $this, 'update_options_hierarchy' )     );
+
+		// Add support for featured content.
+		add_theme_support( 'featured-content', array(
+			'featured_content_filter'	=> 'fastfood_get_featured_posts',
+			'max_posts'					=> 7,
+		) );
+
+		add_action( 'fastfood_hook_builder'		, array( $this, 'featured_content'   ), 10, array( 'id' => 'featured_content', 'section' => 'header', 'priority' => 13, 'label' => __( 'Featured content', 'fastfood' ) ) );
+
+	}
+
+
+	/**
+	 * Conditionally hook into WordPress.
+	 *
+	 * @since Fastfood 0.37
+	 */
+	function wp_loaded() {
+
 		if ( !FastfoodOptions::get_opt( 'fastfood_featured_content' ) || !FastfoodOptions::get_opt( 'fastfood_jsani' ) ) return;
 
+		$this->is_active = true;
 		$theme_support		= get_theme_support( 'featured-content' );
 		self::$max_posts	= absint( $theme_support[0]['max_posts'] );
 		$filter				= $theme_support[0]['featured_content_filter'];
 
-		add_action( $filter									, array( __CLASS__, 'get_featured_posts' )     );
-		add_action( 'pre_get_posts'							, array( __CLASS__, 'pre_get_posts'      )     );
-		add_action( 'fastfood_hook_site_header'				, array( __CLASS__, 'featured_content'   ), 14 );
+		add_action( $filter						, array( $this, 'get_featured_posts' ) );
+		add_action( 'pre_get_posts'				, array( $this, 'pre_get_posts'      ) );
+
 	}
+
 
 	/**
 	 * Get featured posts.
 	 *
-	 * @static
-	 * @access public
 	 * @since Fastfood 0.37
 	 *
 	 * @return array Array of featured posts.
 	 */
-	public static function get_featured_posts( $featured_posts ) {
+	function get_featured_posts( $featured_posts ) {
 
 		if ( $featured_posts ) return $featured_posts;
 
@@ -92,6 +121,7 @@ class Fastfood_Featured_Content {
 		return $featured_posts;
 	}
 
+
 	/**
 	 * Exclude featured posts from the home page blog query.
 	 *
@@ -99,14 +129,12 @@ class Fastfood_Featured_Content {
 	 * Hooked onto the 'pre_get_posts' action, this changes the parameters of
 	 * the query before it gets any posts.
 	 *
-	 * @static
-	 * @access public
 	 * @since Fastfood 0.37
 	 *
 	 * @param WP_Query $query WP_Query object.
 	 * @return WP_Query Possibly-modified WP_Query.
 	 */
-	public static function pre_get_posts( $query ) {
+	function pre_get_posts( $query ) {
 
 		// Bail if not home or not main query.
 		if ( ! $query->is_home() || ! $query->is_main_query() ) {
@@ -116,11 +144,16 @@ class Fastfood_Featured_Content {
 		$query->set( 'ignore_sticky_posts', 1 );
 	}
 
+
 	/**
 	 * Display the featured content
+	 *
+	 * @since Fastfood 0.37
 	 */
-	public static function featured_content() {
+	function featured_content() {
 		global $post;
+
+		if ( !$this->is_active ) return;
 
 		$featured_posts = apply_filters( 'fastfood_get_featured_posts', array() );
 
@@ -180,7 +213,7 @@ class Fastfood_Featured_Content {
 					true
 				);
 
-				add_filter( 'fastfood_scripts_l10n', array( __CLASS__, 'localize_script' ) );
+				add_filter( 'fastfood_scripts_l10n', array( $this, 'localize_script' ) );
 			?>
 
 		<?php
@@ -188,10 +221,15 @@ class Fastfood_Featured_Content {
 	}
 
 
-	public static function localize_script( $data ) {
+	/**
+	 * Add data to localized js variable
+	 *
+	 * @since Fastfood 0.37
+	 */
+	function localize_script( $data ) {
 
 		//$data['script_modules'][] = 'boobs';
-		$data['script_modules'][] = 'featured_slideshow';
+		$data['script_modules'][]       = 'featured_slideshow';
 		$data['featuredSlideshowSpeed'] = absint( FastfoodOptions::get_opt( 'fastfood_featured_content_speed' ) );
 		$data['featuredSlideshowPause'] = absint( FastfoodOptions::get_opt( 'fastfood_featured_content_speed' ) ) + absint( FastfoodOptions::get_opt( 'fastfood_featured_content_pause' ) );
 
@@ -200,7 +238,12 @@ class Fastfood_Featured_Content {
 	}
 
 
-	public static function extra_options( $coa ) {
+	/**
+	 * Add extra options
+	 *
+	 * @since Fastfood 0.37
+	 */
+	function extra_options( $coa ) {
 
 		$coa['fastfood_featured_content'] = array(
 			'setting'			=> array(
@@ -273,10 +316,16 @@ class Fastfood_Featured_Content {
 
 	}
 
-	public static function update_options_hierarchy( $hierarchy ) {
+
+	/**
+	 * Update the options hierarchy
+	 *
+	 * @since Fastfood 0.37
+	 */
+	function update_options_hierarchy( $hierarchy ) {
 
 		$hierarchy['field']['featured_content_slideshow'] = array(
-			'label'			=> __( 'featured content', 'fastfood' ),
+			'label'			=> __( 'Featured content', 'fastfood' ),
 			'description'	=> '',
 			'options'		=> array(
 				'fastfood_featured_content',
@@ -292,7 +341,8 @@ class Fastfood_Featured_Content {
 		return $hierarchy;
 
 	}
+
 } // Fastfood_Featured_Content
 
-Fastfood_Featured_Content::setup();
+Fastfood_Featured_Content::init();
 

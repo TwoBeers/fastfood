@@ -9,9 +9,7 @@
  */
 
 
-add_action( 'fastfood_hook_site_header', 'fastfood_sidebar_header'   , 13    );
-add_action( 'fastfood_hook_footer'     , 'fastfood_sidebar_footer'   , 11    );
-add_action( 'widgets_init'             , 'fastfood_register_sidebars'        );
+add_action( 'widgets_init', 'fastfood_register_sidebars' );
 
 
 /**
@@ -111,7 +109,7 @@ function fastfood_register_sidebars() {
 		// Area 1, located at the top of the sidebar.
 		$registered_sidebars['primary'] = register_sidebar( array_merge( 
 			array(
-				'name'			=> __( 'Sidebar Widget Area', 'fastfood' ),
+				'name'			=> __( 'Sidebar widget area', 'fastfood' ),
 				'id'			=> 'primary-widget-area',
 				'description'	=> __( 'The sidebar widget area', 'fastfood' ),
 				'columns'		=> 1,
@@ -122,7 +120,7 @@ function fastfood_register_sidebars() {
 		// Area 2, located under the main menu.
 		$registered_sidebars['header'] = register_sidebar( array_merge( 
 			array(
-				'name'			=> __( 'Header Widget Area', 'fastfood' ),
+				'name'			=> __( 'Header widget area', 'fastfood' ),
 				'id'			=> 'header-widget-area',
 				'description'	=> __( 'The widget area under the main menu', 'fastfood' ),
 				'columns'		=> 3,
@@ -133,7 +131,7 @@ function fastfood_register_sidebars() {
 		// Area 3, located after post/page content.
 		$registered_sidebars['singular'] = register_sidebar( array_merge( 
 			array(
-				'name'			=> __( 'Post/Page Widget Area', 'fastfood' ),
+				'name'			=> __( 'Post/Page widget area', 'fastfood' ),
 				'id'			=> 'post-widgets-area',
 				'description'	=> __( "The widget area after the post/page content. It's visible only in single posts/pages/attachments", 'fastfood' ),
 				'columns'		=> 2,
@@ -144,7 +142,7 @@ function fastfood_register_sidebars() {
 		// Area 4, located after post/page content.
 		$registered_sidebars['footer'] = register_sidebar( array_merge( 
 			array(
-				'name'			=> __( 'Footer Widget Area', 'fastfood' ),
+				'name'			=> __( 'Footer widget area', 'fastfood' ),
 				'id'			=> 'footer-widget-area',
 				'description'	=> __( 'The footer widget area', 'fastfood' ),
 				'columns'		=> 3,
@@ -155,7 +153,7 @@ function fastfood_register_sidebars() {
 		// Area 5, located in page 404.
 		$registered_sidebars['error404'] = register_sidebar( array_merge( 
 			array(
-				'name'			=> __( 'Page 404 Widget Area', 'fastfood' ),
+				'name'			=> __( 'Page 404 widget area', 'fastfood' ),
 				'id'			=> 'error404-widgets-area',
 				'description'	=> __( 'Enrich the page 404 with some useful widgets', 'fastfood' ),
 				'columns'		=> 2,
@@ -166,7 +164,7 @@ function fastfood_register_sidebars() {
 		// Area 6, located in footer.
 		$registered_sidebars['hidden'] = register_sidebar( array_merge( 
 			array(
-				'name'			=> __( 'Hidden Widget Area', 'fastfood' ),
+				'name'			=> __( 'Hidden widget area', 'fastfood' ),
 				'id'			=> 'hidden-widget-area',
 				'description'	=> __( 'This widget area is not visible. Drop here your widget for eg. analytics scripts or whatever you want to keep hidden', 'fastfood' ),
 				'columns'		=> 1,

@@ -453,6 +453,12 @@ class FastfoodAdmin {
 					<?php echo $control_description; ?>
 				<?php
 				break;
+			case 'tbsortable':
+				?>
+					<span><?php _e( '(This control is available only in the customizer)', 'fastfood' ) ?></span>
+					<input name="<?php echo $this->option_name; ?>[<?php echo $key; ?>]" <?php echo $control_attributes; ?>type="hidden" value="<?php echo $value; ?>" />
+				<?php
+				break;
 			default:
 				?>
 					<label>

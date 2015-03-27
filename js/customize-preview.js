@@ -28,21 +28,21 @@
 	// Site title color.
 	api( 'header_textcolor', function( value ) {
 		value.bind( function( to ) {
-			$('#head-text, #head-text a').css( "color", to ).toggle( 'blank' !== to );
+			$('#site-heading, #site-heading a').css( "color", to ).toggle( 'blank' !== to );
 		} );
 	} );
 
 	// Site title background.
 	api( 'header_text_background', function( value ) {
 		value.bind( function( to ) {
-			$('#head-text').css( "background-color", convertHex( to, 0.7 ) );
+			$('#site-heading').css( "background-color", convertHex( to, 0.7 ) );
 		} );
 	} );
 
 	// Site image height.
 	api( 'fastfood_options[fastfood_head_h]', function( value ) {
 		value.bind( function( to ) {
-			$('#head-image').css( "max-height", parseInt( to ) );
+			$('#site-image').css( "max-height", parseInt( to ) );
 		} );
 	} );
 

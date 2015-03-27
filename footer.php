@@ -1,10 +1,8 @@
 			</div><!-- close content -->
 
-			<?php fastfood_hook_content_after(); ?>
-
 			<?php fastfood_hook_footer_before(); ?>
 
-			<div id="footer"><!-- begin footer -->
+			<div id="footer">
 
 				<?php fastfood_hook_footer_top(); ?>
 
@@ -12,7 +10,7 @@
 
 				<?php fastfood_hook_footer_bottom(); ?>
 
-			</div><!-- close footer -->
+			</div>
 
 			<?php fastfood_hook_footer_after(); ?>
 

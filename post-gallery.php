@@ -13,8 +13,6 @@
 
 	<?php fastfood_hook_entry_top(); ?>
 
-	<?php fastfood_hook_post_title_before(); ?>
-
 	<?php
 		switch ( FastfoodOptions::get_opt( 'fastfood_post_formats_gallery_title' ) ) {
 			case 'post title':
@@ -25,8 +23,6 @@
 				break;
 		}
 	?>
-
-	<?php fastfood_hook_post_title_after(); ?>
 
 	<?php fastfood_extrainfo(); ?>
 

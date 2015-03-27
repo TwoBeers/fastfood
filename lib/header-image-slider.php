@@ -55,7 +55,7 @@ class Fastfood_Header_Image_Slider {
 		shuffle( $slides );
 
 		$text = '
-			<div id="head-text">
+			<div id="site-heading">
 				<h1 class="site-title"><a href="' . esc_url( home_url( '/' ) ) . '">' . get_bloginfo( 'name' ) . '</a></h1>
 				<div class="site-description">' . get_bloginfo( 'description' ) . '</div>
 			</div>';
@@ -66,7 +66,7 @@ class Fastfood_Header_Image_Slider {
 		if ( $images ) {
 			if ( !display_header_text() )
 				$images = '<a href="' . esc_url( home_url( '/' ) ) . '">' . $images . '</a>';
-			$images = '<div id="head-image" class="slider">' . $images . '</div>';
+			$images = '<div id="site-image" class="slider">' . $images . '</div>';
 		}
 
 		$output = $text . $images;

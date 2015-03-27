@@ -55,6 +55,7 @@ class FastfoodCustomizer {
 		'color'			=> 'WP_Customize_Color_Control',
 		'tl_checkbox'	=> 'Fastfood_Customize_Checkbox_Control',
 		'background'	=> 'Fastfood_Customize_Background_Image_Control',
+		'tbsortable'	=> 'Fastfood_Customize_Sortable_Elements',
 	);
 
 	/**
@@ -62,15 +63,15 @@ class FastfoodCustomizer {
 	 */
 	function __construct() {
 
-		add_action( 'customize_register'						, array( $this, 'init' ) );
-		add_action( 'customize_register'						, array( $this, 'add_theme_mods_controls' ), 99 );
-		add_action( 'customize_register'						, array( $this, 'add_theme_options_controls' ), 99 );
-		add_action( 'customize_controls_print_styles'			, array( $this, 'customize_stylesheet' ) );
-		add_action( 'customize_controls_print_footer_scripts'	, array( $this, 'dynamic_css_template' ) );
-		add_action( 'customize_controls_print_footer_scripts'	, array( $this, 'print_js_templates' ) );
-		add_action( 'customize_controls_enqueue_scripts'		, array( $this, 'customize_control_js' ) );
-		add_action( 'customize_preview_init'					, array( $this, 'customize_preview_js' ) );
-		add_action( 'customize_save_after'						, array( $this, 'update_version' ) );
+		add_action( 'customize_register'						, array( $this, 'init'                       )     );
+		add_action( 'customize_register'						, array( $this, 'add_theme_mods_controls'    ), 98 );
+		add_action( 'customize_register'						, array( $this, 'add_theme_options_controls' ), 98 );
+		add_action( 'customize_controls_print_styles'			, array( $this, 'customize_stylesheet'       )     );
+		add_action( 'customize_controls_print_footer_scripts'	, array( $this, 'dynamic_css_template'       )     );
+		add_action( 'customize_controls_print_footer_scripts'	, array( $this, 'print_js_templates'         )     );
+		add_action( 'customize_controls_enqueue_scripts'		, array( $this, 'customize_control_js'       )     );
+		add_action( 'customize_preview_init'					, array( $this, 'customize_preview_js'       )     );
+		add_action( 'customize_save_after'						, array( $this, 'update_version'             )     );
 
 	}
 
@@ -341,7 +342,7 @@ class FastfoodCustomizer {
 		wp_enqueue_script(
 			'fastfood-customize-controls',
 			sprintf( '%1$s/js/customize-controls.js' , get_template_directory_uri() ),
-			array( 'customize-controls', 'iris', 'underscore', 'wp-util', 'jquery', 'jquery-ui-slider', 'jquery-ui-accordion' ),
+			array( 'customize-controls', 'iris', 'underscore', 'wp-util', 'jquery', 'jquery-ui-slider', 'jquery-ui-accordion', 'jquery-ui-sortable' ),
 			fastfood_get_info( 'version' ),
 			true
 		);
@@ -582,9 +583,9 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 		public function render_content() {
 
 			$this->step	= isset( $this->input_attrs['step'] ) ? $this->input_attrs['step'] : $this->step;
-			$this->min	= isset( $this->input_attrs['min'] ) ? $this->input_attrs['min'] : $this->min;
-			$this->max	= isset( $this->input_attrs['max'] ) ? $this->input_attrs['max'] : $this->max;
-			$this->unit = isset( $this->input_attrs['unit'] ) ? $this->input_attrs['unit'] : $this->unit;
+			$this->min	= isset( $this->input_attrs['min']  ) ? $this->input_attrs['min']  : $this->min;
+			$this->max	= isset( $this->input_attrs['max']  ) ? $this->input_attrs['max']  : $this->max;
+			$this->unit	= isset( $this->input_attrs['unit'] ) ? $this->input_attrs['unit'] : $this->unit;
 
 			?>
 
@@ -613,6 +614,38 @@ if ( class_exists( 'WP_Customize_Control' ) ) {
 			<?php endif; ?>
 
 			<input class="slider-amount" type="hidden" value="<?php echo absint( $this->value() ); ?>" <?php $this->link(); ?> />
+
+			<?php
+		}
+
+	}
+
+	/**
+	 * The "top level checkbox" custom control
+	 */
+	class Fastfood_Customize_Sortable_Elements extends WP_Customize_Control {
+		public $type = 'tbsortable';
+
+		public function render_content() {
+
+			foreach( $this->order as $s_key => $section ) {
+
+				echo '<span class="customize-control-title">' . $section['label'] . '</span>';
+
+				echo '<ul class="tbsortable">';
+
+				foreach( $section['elements'] as $priority => $element) {
+
+					echo '<li class="element" data-id="' . $element['id'] . '"><h4>' . $element['label'] . '</h4></li>';
+
+				}
+
+				echo '</ul>';
+
+			}
+			?>
+
+				<input class="sorted-list" type="hidden" value="<?php echo esc_attr( $this->value() ); ?>" data-default-value="<?php echo esc_attr( $this->setting->default ); ?>" <?php $this->link(); ?> />
 
 			<?php
 		}
@@ -728,7 +761,7 @@ function fastfood_register_theme_mods() {
 					),
 					'control'	=> array(
 						'render_type'		=> 'color',
-						'label'				=> __( 'Header Background Color', 'fastfood' ),
+						'label'				=> __( 'Header background color', 'fastfood' ),
 						'section'			=> 'title_tagline',
 						'priority'			=> 23,
 					),
@@ -744,7 +777,7 @@ function fastfood_register_theme_mods() {
 					'control'	=> array(
 						'type'				=> 'radio',
 						'render_type'		=> 'smart_radio',
-						'label'				=> __( 'Suggested Schemes', 'fastfood' ),
+						'label'				=> __( 'Suggested schemes', 'fastfood' ),
 						'section'			=> 'background_image',
 						'choices'			=> fastfood_get_background_schemes_thumbnails(),
 						'priority'			=> 9,
@@ -802,7 +835,7 @@ function fastfood_register_theme_mods() {
 					'control'	=> array(
 						'type'				=> 'select',
 						'render_type'		=> 'select',
-						'label'				=> __( 'Horizontal Position', 'fastfood' ),
+						'label'				=> __( 'Horizontal position', 'fastfood' ),
 						'priority'			=> 14,
 					),
 		),
@@ -817,7 +850,7 @@ function fastfood_register_theme_mods() {
 					'control'	=> array(
 						'type'				=> 'select',
 						'render_type'		=> 'select',
-						'label'				=> __( 'Vertical Position', 'fastfood' ),
+						'label'				=> __( 'Vertical position', 'fastfood' ),
 						'section'			=> 'background_image',
 						'choices'			=> array(
 							'top'				=> __( 'Top', 'fastfood' ),
@@ -837,7 +870,7 @@ function fastfood_register_theme_mods() {
 					),
 					'control'	=> array(
 						'render_type'		=> 'color',
-						'label'				=> __( 'Icons Color', 'fastfood' ),
+						'label'				=> __( 'Icons color', 'fastfood' ),
 						'section'			=> 'background_image',
 						'priority'			=> 16,
 					),

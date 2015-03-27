@@ -4,7 +4,6 @@
  *
  * The main loop that displays posts.
  *
- *
  * @package fastfood
  * @since 0.34
  */

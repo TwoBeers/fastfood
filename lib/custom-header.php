@@ -12,15 +12,15 @@ class Fastfood_Custom_Header {
 
 	function __construct() {
 
-		add_action( 'after_setup_theme'			, array( $this, 'custom_header_support' )     );
-		add_action( 'fastfood_hook_site_header'	, array( $this, 'the_header'            ), 11 );
-		add_filter( 'body_class'				, array( $this, 'body_classes'          )     );
+		add_action( 'after_setup_theme'			, array( $this, 'setup'        ) );
+		add_action( 'fastfood_hook_builder'		, array( $this, 'the_header'   ), 10, array( 'id' => 'custom_header', 'section' => 'header', 'priority' => 11, 'label' => __( 'Site header', 'fastfood' ) ) );
+		add_filter( 'body_class'				, array( $this, 'body_classes' ) );
 
 	}
 
 
 	// set up custom colors and header image
-	function custom_header_support() {
+	function setup() {
 
 		register_default_headers( array(
 			'tree' => array(
@@ -89,13 +89,13 @@ class Fastfood_Custom_Header {
 
 
 	// the custom header (filterable)
-	public static function the_header(){
+	function the_header(){
 
 		$text = '';
 		$image = get_header_image();
 
 		$text = '
-			<div id="head-text">
+			<div id="site-heading">
 				<h1 class="site-title"><a href="' . esc_url( home_url( '/' ) ) . '">' . get_bloginfo( 'name' ) . '</a></h1>
 				<div class="site-description">' . get_bloginfo( 'description' ) . '</div>
 			</div>';
@@ -104,26 +104,18 @@ class Fastfood_Custom_Header {
 			$image = '<img src="' . esc_url( $image ) . '" />';
 			if ( !display_header_text() )
 				$image = '<a href="' . esc_url( home_url( '/' ) ) . '">' . $image . '</a>';
-			$image = '<div id="head-image">' . $image . '</div>';
+			$image = '<div id="site-image">' . $image . '</div>';
 		}
 
 		// Allow plugins/themes to override the default header.
 		$output = apply_filters( 'fastfood_header', $text . $image );
 		?>
 
-			<?php fastfood_hook_header_before(); ?>
-
-			<div id="header">
-
-				<?php fastfood_hook_header_top(); ?>
+			<div id="site-header" role="banner">
 
 				<?php echo $output; ?>
 
-				<?php fastfood_hook_header_bottom(); ?>
-
 			</div>
-
-			<?php fastfood_hook_header_after(); ?>
 
 		<?php
 
@@ -152,14 +144,14 @@ class Fastfood_Custom_Header {
 
 ?>
 	<style type="text/css">
-		#head-text a,
-		#head-text {
+		#site-heading a,
+		#site-heading {
 			<?php echo $style; ?>
 		}
-		#head-image {
+		#site-image {
 			max-height: <?php echo absint( FastfoodOptions::get_opt( 'fastfood_head_h' ) ); ?>px;
 		}
-		.has-header-image #head-text {
+		.has-header-image #site-heading {
 			background-color: <?php echo $header_text_background_rgba; ?>;
 			<?php echo $filter; ?>
 		}

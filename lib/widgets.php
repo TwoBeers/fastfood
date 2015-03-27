@@ -22,7 +22,7 @@ class Fastfood_Widget_Popular_Posts extends WP_Widget {
 			'classname' => 'tb_popular_posts',
 			'description' => __( 'The most commented posts on your site', 'fastfood' )
 		);
-		$this->WP_Widget('ff-popular-posts', __('Popular Posts','fastfood'), $widget_ops);
+		$this->WP_Widget('ff-popular-posts', __('Popular posts','fastfood'), $widget_ops);
 		$this->alt_option_name = 'tb_popular_posts';
 
 		add_action( 'save_post'		, array( &$this, 'flush_widget_cache' ) );
@@ -30,7 +30,7 @@ class Fastfood_Widget_Popular_Posts extends WP_Widget {
 		add_action( 'switch_theme'	, array( &$this, 'flush_widget_cache' ) );
 
 		$this->defaults = array(
-			'title'		=> __( 'Popular Posts','fastfood' ),
+			'title'		=> __( 'Popular posts','fastfood' ),
 			'number'	=> 5,
 			'thumb'		=> 0,
 		);
@@ -300,7 +300,10 @@ class Fastfood_Widget_Latest_Commented_Posts extends WP_Widget {
 class Fastfood_Widget_Latest_Commentators extends WP_Widget {
 
 	function Fastfood_Widget_Latest_Commentators() {
-		$widget_ops = array( 'classname' => 'tb_latest_commentators', 'description' => __( 'The latest comment authors','fastfood' ) );
+		$widget_ops = array(
+			'classname'		=> 'tb_latest_commentators',
+			'description'	=> __( 'The latest comment authors','fastfood' ),
+		);
 		$this->WP_Widget( 'ff-recent-commentators', __('Latest comment authors','fastfood' ), $widget_ops );
 		$this->alt_option_name = 'tb_latest_commentators';
 
@@ -440,10 +443,10 @@ class Fastfood_Widget_Pop_Categories extends WP_Widget {
 
 	function Fastfood_Widget_Pop_Categories() {
 		$widget_ops = array(
-			'classname' => 'tb_categories',
-			'description' => __( 'A list of popular categories', 'fastfood' )
+			'classname'		=> 'tb_categories',
+			'description'	=> __( 'A list of popular categories', 'fastfood' ),
 		);
-		$this->WP_Widget( 'ff-categories', __('Popular Categories', 'fastfood' ), $widget_ops );
+		$this->WP_Widget( 'ff-categories', __('Popular categories', 'fastfood' ), $widget_ops );
 		$this->alt_option_name = 'tb_categories';
 
 		add_action( 'save_post'		, array( &$this, 'flush_widget_cache' ) );
@@ -451,7 +454,7 @@ class Fastfood_Widget_Pop_Categories extends WP_Widget {
 		add_action( 'switch_theme'	, array( &$this, 'flush_widget_cache' ) );
 
 		$this->defaults = array(
-			'title'		=> __( 'Popular Categories', 'fastfood' ),
+			'title'		=> __( 'Popular categories', 'fastfood' ),
 			'number'	=> 5,
 		);
 	}
@@ -555,7 +558,7 @@ class Fastfood_Widget_Social extends WP_Widget {
 			'description' => __( "This widget lets visitors of your blog subscribe to it and follow you on popular social networks like Twitter, FaceBook etc.", "fastfood" ) );
 		$control_ops = array('width' => 650);
 
-		$this->WP_Widget( "ff-social", __( "Follow Me", "fastfood" ), $widget_ops, $control_ops );
+		$this->WP_Widget( "ff-social", __( "Follow me", "fastfood" ), $widget_ops, $control_ops );
 
 		$icons_path = get_template_directory_uri() . '/images/follow/';
 		$this->follow_urls = apply_filters( 'fastfood_follow_services', array(
@@ -702,7 +705,7 @@ class Fastfood_Widget_Social extends WP_Widget {
 	}
 
 	function form( $instance ) {
-		$defaults = array( "title" => __( "Follow Me", "fastfood" ),
+		$defaults = array( "title" => __( "Follow me", "fastfood" ),
 			"icon_size" => '48px',
 		);
 		foreach ( $this->follow_urls as $follow_service => $service_data ) {
@@ -820,7 +823,10 @@ class Fastfood_Widget_Besides extends WP_Widget {
 	 * @return void
 	 **/
 	function Fastfood_Widget_Besides() {
-		$widget_ops = array( 'classname' => 'tb_besides', 'description' => __( 'Use this widget to list your recent Aside and Status posts', 'fastfood' ) );
+		$widget_ops = array(
+			'classname'		=> 'tb_besides',
+			'description'	=> __( 'Use this widget to list your recent Aside and Status posts', 'fastfood' ),
+		);
 		$this->WP_Widget( 'ff-widget-besides', __( 'besides...', 'fastfood' ), $widget_ops );
 		$this->alt_option_name = 'tb_besides';
 
@@ -974,10 +980,10 @@ class Fastfood_Widget_Recent_Posts extends WP_Widget {
 
 	function Fastfood_Widget_Recent_Posts() {
 		$widget_ops = array(
-			'classname' => 'tb_recent_entries',
-			'description' => __( "The most recent posts in a single category", 'fastfood' )
+			'classname'		=> 'tb_recent_entries',
+			'description'	=> __( "The most recent posts in a single category", 'fastfood' ),
 		);
-		$this->WP_Widget( 'ff-recent-posts', __( 'Recent Posts in Category', 'fastfood' ), $widget_ops );
+		$this->WP_Widget( 'ff-recent-posts', __( 'Recent posts in category', 'fastfood' ), $widget_ops );
 		$this->alt_option_name = 'tb_recent_entries';
 
 		add_action( 'save_post'		, array( &$this, 'flush_widget_cache' ) );
@@ -985,7 +991,7 @@ class Fastfood_Widget_Recent_Posts extends WP_Widget {
 		add_action( 'switch_theme'	, array( &$this, 'flush_widget_cache' ) );
 
 		$this->defaults = array(
-			'title' => __( 'Recent Posts in %s', 'fastfood' ),
+			'title' => __( 'Recent posts in %s', 'fastfood' ),
 			'number' => 5,
 			'thumb' => 1,
 			'category' => -1,
@@ -1107,13 +1113,13 @@ class Fastfood_Widget_Recent_Posts extends WP_Widget {
 		extract( $instance );
 ?>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title', 'fastfood' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:', 'fastfood' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>" />
 			<small><?php echo __( 'use <code>%s</code> as a placeholder for the category name', 'fastfood' ); ?></small>
 		</p>
 
 		<p>
-			<label for="<?php echo $this->get_field_id( 'category' ); ?>"><?php _e( 'Category', 'fastfood' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'category' ); ?>"><?php _e( 'Category:', 'fastfood' ); ?></label>
 			<?php $dropdown_categories = wp_dropdown_categories( Array(
 						'orderby'			=> 'ID',
 						'order'			  => 'ASC',
@@ -1161,8 +1167,8 @@ class Fastfood_Widget_Image_Exif extends WP_Widget {
 
 	function Fastfood_Widget_Image_Exif() {
 		$widget_ops = array(
-			'classname' => 'tb_exif_details',
-			'description' => __( "Display image details. It's visible ONLY in single attachments",'fastfood' )
+			'classname'		=> 'tb_exif_details',
+			'description'	=> __( "Display image details. It's visible ONLY in single attachments",'fastfood' ),
 		);
 		$this->WP_Widget( 'ff-exif-details', __( 'Image details','fastfood' ), $widget_ops );
 		$this->alt_option_name = 'tb_exif_details';
@@ -1214,7 +1220,7 @@ class Fastfood_Widget_Image_Exif extends WP_Widget {
  		extract( $instance );
 ?>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title','fastfood' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:','fastfood' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>" />
 		</p>
 
@@ -1231,10 +1237,10 @@ class Fastfood_Widget_Clean_Archives extends WP_Widget {
 
 	function Fastfood_Widget_Clean_Archives() {
 		$widget_ops = array(
-			'classname' => 'tb_clean_archives',
-			'description' => __( "Show archives in a cleaner way",'fastfood' )
+			'classname'		=> 'tb_clean_archives',
+			'description'	=> __( 'Show archives in a cleaner way','fastfood' ),
 		);
-		$this->WP_Widget( 'ff-clean-archives', __( 'Clean Archives','fastfood' ), $widget_ops );
+		$this->WP_Widget( 'ff-clean-archives', __( 'Clean archives','fastfood' ), $widget_ops );
 		$this->alt_option_name = 'tb_clean_archives';
 
 		add_action( 'save_post'		, array( &$this, 'flush_widget_cache' ) );
@@ -1333,11 +1339,11 @@ class Fastfood_Widget_Clean_Archives extends WP_Widget {
  		extract( $instance );
 ?>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title','fastfood' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:','fastfood' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>" />
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'month_style' ); ?>"><?php _e( 'Select month style', 'fastfood' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'month_style' ); ?>"><?php _e( 'Select month style:', 'fastfood' ); ?></label>
 			<select name="<?php echo $this->get_field_name('month_style'); ?>" id="<?php echo $this->get_field_id( 'month_style' ); ?>" >
 				<option value="number" <?php selected( $month_style, 'number' ); ?>>number</option>
 				<option value="acronym" <?php selected( $month_style, 'acronym' ); ?>>acronym</option>
@@ -1355,8 +1361,8 @@ class Fastfood_Widget_Post_Details extends WP_Widget {
 
 	function Fastfood_Widget_Post_Details() {
 		$widget_ops = array(
-			'classname' => 'tb_post_details',
-			'description' => __( "Show some details and links related to the current post. It's visible ONLY in single posts",'fastfood' )
+			'classname'		=> 'tb_post_details',
+			'description'	=> __( "Show some details and links related to the current post. It's visible ONLY in single posts",'fastfood' ),
 		);
 		$this->WP_Widget( 'ff-post-details', __( 'Post details','fastfood' ), $widget_ops );
 		$this->alt_option_name = 'tb_post_details';
@@ -1424,19 +1430,19 @@ class Fastfood_Widget_Post_Details extends WP_Widget {
  		extract( $instance );
 ?>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title','fastfood' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'title' ); ?>"><?php _e( 'Title:','fastfood' ); ?></label>
 			<input class="widefat" id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="text" value="<?php echo $title; ?>" />
 		</p>
 		<p>
 			<input id="<?php echo $this->get_field_id( 'featured' ); ?>" name="<?php echo $this->get_field_name( 'featured' ); ?>" value="1" type="checkbox" <?php checked( 1 , $featured ); ?> />
-			<label for="<?php echo $this->get_field_id( 'featured' ); ?>"><?php _e( 'thumbnail','fastfood' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'featured' ); ?>"><?php _e( 'Thumbnail','fastfood' ); ?></label>
 		</p>
 		<p>
 			<input id="<?php echo $this->get_field_id( 'author' ); ?>" name="<?php echo $this->get_field_name('author'); ?>" value="1" type="checkbox" <?php checked( 1 , $author ); ?> />
 			<label for="<?php echo $this->get_field_id( 'author' ); ?>"><?php _e( 'Author','fastfood' ); ?></label>
 		</p>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'avatar_size' ); ?>"><?php _e( 'Select avatar size', 'fastfood' ); ?></label>
+			<label for="<?php echo $this->get_field_id( 'avatar_size' ); ?>"><?php _e( 'Select avatar size:', 'fastfood' ); ?></label>
 			<select name="<?php echo $this->get_field_name( 'avatar_size' ); ?>" id="<?php echo $this->get_field_id( 'avatar_size' ); ?>" >
 				<?php
 					foreach( array ( 32, 48, 64, 96, 128 ) as $size ) {
@@ -1471,10 +1477,10 @@ class Fastfood_Widget_Font_Resize extends WP_Widget {
 
 	function Fastfood_Widget_Font_Resize() {
 		$widget_ops = array(
-			'classname' => 'tb_font_resize',
-			'description' => __( 'Simple javascript-based font resizer','fastfood' )
+			'classname'		=> 'tb_font_resize',
+			'description'	=> __( 'Simple javascript-based font resizer','fastfood' ),
 		);
-		$this->WP_Widget( 'ff-font-resize', __( 'Font Resize','fastfood' ), $widget_ops );
+		$this->WP_Widget( 'ff-font-resize', __( 'Font resize','fastfood' ), $widget_ops );
 		$this->alt_option_name = 'tb_font_resize';
 
 	}
@@ -1495,6 +1501,132 @@ class Fastfood_Widget_Font_Resize extends WP_Widget {
 			true
 		);
 	}
+}
+
+/**
+ * Navigation Menu widget class
+ *
+ * @since 0.37
+ */
+ class Fastfood_Widget_Nav_Menu extends WP_Widget {
+
+	public function __construct() {
+
+		$widget_ops = array(
+			'description' => __( 'Add a custom menu to your widget area.', 'fastfood' ),
+		);
+
+		parent::__construct(
+			'nav_menu',
+			__( 'Custom menu (enhanced)', 'fastfood' ),
+			$widget_ops
+		);
+
+		$this->defaults = array(
+			'title'			=> '',
+			'nav_menu'		=> '',
+			'behaviour'		=> 0,
+		);
+
+	}
+
+
+	public function widget($args, $instance) {
+
+		$instance = $this->validate_and_sanitize( $instance );
+
+		// Get menu
+		$nav_menu = ! empty( $instance['nav_menu'] ) ? wp_get_nav_menu_object( $instance['nav_menu'] ) : false;
+
+		if ( !$nav_menu )
+			return;
+
+		$behaviour = $instance['behaviour'] ? 'nav-menu' : '';
+
+		/** This filter is documented in wp-includes/default-widgets.php */
+		$instance['title'] = apply_filters( 'widget_title', empty( $instance['title'] ) ? '' : $instance['title'], $instance, $this->id_base );
+
+		echo $args['before_widget'];
+
+		if ( !empty($instance['title']) )
+			echo $args['before_title'] . $instance['title'] . $args['after_title'];
+
+		wp_nav_menu( array(
+			'fallback_cb'		=> '',
+			'menu'				=> $nav_menu,
+			'menu_class'		=> $behaviour,
+			'container_class'	=> 'menu-container',
+		) );
+
+		echo $args['after_widget'];
+
+	}
+
+
+	public function update( $new_instance, $old_instance ) {
+
+		$instance = $this->validate_and_sanitize( $new_instance, true );
+
+		return $instance;
+
+	}
+
+
+	function validate_and_sanitize( $instance, $is_update = false ) {
+
+		//we first need to trap unselected checkboxes value
+		if ( $is_update ) {
+			$instance['behaviour']	= ( isset( $instance['behaviour'] ) && ( $instance['behaviour'] != 0 ) ) ? 1 : 0;
+		}
+
+		$instance = wp_parse_args( $instance, $this->defaults );
+
+		$instance['title']			= strip_tags( stripslashes( $instance['title'] ) );
+		$instance['nav_menu']		= (int) $instance['nav_menu'];
+
+		return $instance;
+
+	}
+
+
+	public function form( $instance ) {
+
+		$instance = $this->validate_and_sanitize( $instance );
+ 		extract( $instance );
+
+		// Get menus
+		$menus = wp_get_nav_menus();
+
+		// If no menus exists, direct the user to go and create some.
+		if ( !$menus ) {
+			echo '<p>'. sprintf( __( 'No menus have been created yet. <a href="%s">Create some</a>.', 'fastfood' ), admin_url('nav-menus.php') ) .'</p>';
+			return;
+		}
+		?>
+		<p>
+			<label for="<?php echo $this->get_field_id('title'); ?>"><?php _e( 'Title:', 'fastfood' ) ?></label>
+			<input type="text" class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" value="<?php echo $title; ?>" />
+		</p>
+		<p>
+			<label for="<?php echo $this->get_field_id('nav_menu'); ?>"><?php _e( 'Select Menu:', 'fastfood' ); ?></label>
+			<select id="<?php echo $this->get_field_id('nav_menu'); ?>" name="<?php echo $this->get_field_name('nav_menu'); ?>">
+				<option value="0">&mdash; <?php _e( 'Select', 'fastfood' ); ?> &mdash;</option>
+		<?php
+			foreach ( $menus as $menu ) {
+				echo '<option value="' . $menu->term_id . '"'
+					. selected( $nav_menu, $menu->term_id, false )
+					. '>'. esc_html( $menu->name ) . '</option>';
+			}
+		?>
+			</select>
+		</p>
+		<p>
+			<input id="<?php echo $this->get_field_id('behaviour'); ?>" name="<?php echo $this->get_field_name('behaviour'); ?>" value="1" type="checkbox" <?php checked( 1, $behaviour ); ?> />
+			<label for="<?php echo $this->get_field_id('behaviour'); ?>"><?php _e( 'Compact', 'fastfood' ); ?></label>
+		</p>
+		<?php
+	}
+
 }
 
 /**
@@ -1529,6 +1661,10 @@ function fastfood_widgets_init() {
 	register_widget( 'Fastfood_Widget_Post_Details' );
 
 	register_widget( 'Fastfood_Widget_Font_Resize' );
+
+	unregister_widget( 'WP_Nav_Menu_Widget' );
+
+	register_widget( 'Fastfood_Widget_Nav_Menu' );
 
 }
 

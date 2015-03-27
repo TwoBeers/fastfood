@@ -23,10 +23,6 @@ function fastfood_hook_head_bottom() {
 	tha_head_bottom();
 }
 
-function fastfood_hook_site_header() {
-	do_action( 'fastfood_hook_site_header' );
-}
-
 function fastfood_hook_header_before() {
 	tha_header_before();
 	do_action( 'fastfood_hook_header_before' );
@@ -45,6 +41,10 @@ function fastfood_hook_header_top() {
 function fastfood_hook_header_bottom() {
 	do_action( 'fastfood_hook_header_bottom' );
 	tha_header_bottom();
+}
+
+function fastfood_hook_header() {
+	do_action( 'fastfood_hook_header' );
 }
 
 function fastfood_hook_content_before() {
@@ -153,24 +153,12 @@ function fastfood_hook_footer() {
 	do_action( 'fastfood_hook_footer' );
 }
 
-function fastfood_hook_statusbar() {
-	do_action( 'fastfood_hook_statusbar' );
-}
-
 function fastfood_hook_quickbar_top() {
 	do_action( 'fastfood_hook_quickbar_top' );
 }
 
 function fastfood_hook_quickbar_bottom() {
 	do_action( 'fastfood_hook_quickbar_bottom' );
-}
-
-function fastfood_hook_post_title_before() {
-	do_action( 'fastfood_hook_post_title_before' );
-}
-
-function fastfood_hook_post_title_after() {
-	do_action( 'fastfood_hook_post_title_after' );
 }
 
 function fastfood_hook_post_content_before () {
@@ -190,11 +178,13 @@ function fastfood_hook_comments_list_after() {
 }
 
 function fastfood_hook_body_top() {
+	do_action( 'tha_body_top' );
 	do_action( 'fastfood_hook_body_top' );
 }
 
 function fastfood_hook_body_bottom() {
 	do_action( 'fastfood_hook_body_bottom' );
+	do_action( 'tha_body_bottom' );
 }
 
 function fastfood_hook_menu_primary_before() {

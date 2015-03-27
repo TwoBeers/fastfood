@@ -99,6 +99,42 @@
 		}
 	} );
 
+	api.controlConstructor.tbsortable = api.Control.extend( {
+		ready: function() {
+			var control  = this.container;
+			var sortable = control.find( '.tbsortable' );
+
+			sortable
+				.sortable({
+					containment: "parent",
+					axis: "y",
+					placeholder: "ui-sortable-placeholder",
+					scrollSpeed: 10,
+					forcePlaceholderSize: true,
+					update: function( event, ui ) {
+						updateSortable( control );
+					}
+				})
+				.disableSelection();
+
+		}
+	} );
+
+	function updateSortable( control ) {
+		var display = control.find( '.sorted-list' );
+		var elements = [];
+		var jsonned;
+
+		_.each( control.find( 'li.element' ), function( element, index ) {
+			elements.push( $( element ).data( 'id' ) );
+		} );
+		jsonned = JSON.stringify( elements );
+		console.log( elements );
+		console.log( jsonned );
+		display.val( jsonned ).trigger('change');
+		return jsonned;
+	}
+
 	// Generate the CSS for the current dynamic css.
 	function updateCSS() {
 		var css, attributes = _.object();

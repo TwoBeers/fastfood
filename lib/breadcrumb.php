@@ -13,7 +13,13 @@ class Fastfood_Breadcrumb {
 
 	function __construct() {
 
-		add_action( 'fastfood_hook_site_header', array( $this, 'display' ), 99 );
+		add_action( 'after_setup_theme', array( $this, 'setup' ) );
+
+	}
+
+	function setup() {
+
+		add_action( 'fastfood_hook_builder', array( $this, 'display' ), 10, array( 'id' => 'breadcrumb', 'section' => 'header', 'priority' => 99, 'label' => __( 'Breadcrumb', 'fastfood' ) ) );
 
 	}
 

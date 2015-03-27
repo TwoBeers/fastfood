@@ -87,7 +87,7 @@ var fastfoodAnimations;
 		main_menu : function() {
 
 			//main menu dropdown animation
-			$( '.nav-menu.all-levels' )
+			$( '.nav-menu.multiple-levels' )
 				.children( '.menu-item-parent' ).each( function(){ //get every main list item
 
 					var $this         = $( this );
@@ -394,7 +394,7 @@ var fastfoodAnimations;
 			// Take the options that the user selects, and merge them with defaults.
 			options = $.extend( defaults, options );
 
-			return $( '#head-image.slider' ).each( function() {
+			return $( '#site-image.slider' ).each( function() {
 
 				// cache "this."
 				var $this = $( this );
@@ -518,7 +518,7 @@ var fastfoodAnimations;
 
 			_menu.css( 'top', toolbarOffset );
 
-			$( '<div id="menu-primary-placeholder"></div>' ).css( 'height', mastheadHeight ).insertBefore( _menu );
+			$( '<div id="menu-primary-placeholder"></div>' ).css( 'height', mastheadHeight ).prependTo( _menu.parent() );
 
 			_window.on( 'scroll', function() {
 				if ( ( window.scrollY > mastheadOffset ) ) {

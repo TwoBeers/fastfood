@@ -284,6 +284,39 @@ li.customize-control-background .current .container img {
 .control-panel-fastfood_options .control-subsection.collapsed {
 }
 
+.customize-control-tbsortable .tbsortable li {
+	cursor: move;
+	background: none repeat scroll 0 0 #f7f7f7;
+	border: 1px solid #e5e5e5;
+	margin: 5px 0;
+}
+.customize-control-tbsortable .customize-control-title {
+	margin-top: 20px;
+}
+.customize-control-tbsortable .tbsortable li:hover {
+	border: 1px solid #999;
+}
+.customize-control-tbsortable .tbsortable li h4{
+	padding: 10px 15px;
+	margin: 0;
+}
+.customize-control-tbsortable .tbsortable li.ui-sortable-helper{
+	border: 1px solid #999;
+	box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
+}
+.customize-control-tbsortable .tbsortable li.ui-sortable-placeholder{
+	background: transparent;
+	border: 1px solid rgba(46, 162, 204, 0.2);
+}
+
+
+
+
+
+
+
+
+
 /* rtl support */
 .rtl .customize-control-tbslider .slider-display {
 	float: left;

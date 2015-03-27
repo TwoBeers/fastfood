@@ -11,6 +11,8 @@
 
 get_header(); ?>
 
+<?php fastfood_hook_content_before(); ?>
+
 <div id="posts-content" class="posts_wide">
 
 	<?php fastfood_hook_content_top(); ?>
@@ -20,5 +22,7 @@ get_header(); ?>
 	<?php fastfood_hook_content_bottom(); ?>
 
 </div>
+
+<?php fastfood_hook_content_after(); ?>
 
 <?php get_footer(); ?>

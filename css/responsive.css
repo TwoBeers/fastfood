@@ -33,16 +33,16 @@
 	body {
 		font-size: 16px !important;
 	}
-	body.has-header-image #head-text {
+	body.has-header-image #site-heading {
 		position: static;
 		background: transparent;
 		z-index: 0;
 	}
-	div#head-text h1 a,
-	div#head-text {
+	div#site-heading h1 a,
+	div#site-heading {
 		color: #404040;
 	}
-	#head-text h1 {
+	#site-heading h1 {
 		font-size: 2em;
 	}
 	#posts-content {
@@ -120,6 +120,9 @@
 		margin: 5px 0;
 		font-weight: normal;
 	}
+	.widget .tinynav {
+		border: 1px solid #555;
+	}
 	.ff-js.tinynav-support .nav-menu {
 		display: none !important;
 	}
@@ -178,7 +181,7 @@
 }
 
 @media screen and (max-width: 479px) {
-	#head-text .description {
+	#site-heading .description {
 		display: none;
 	}
 	#main .widget-area .widget {

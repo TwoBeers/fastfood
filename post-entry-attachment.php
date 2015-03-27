@@ -13,11 +13,7 @@
 
 	<?php fastfood_hook_entry_top(); ?>
 
-	<?php fastfood_hook_post_title_before(); ?>
-
 	<?php fastfood_featured_title( array( 'fallback' => sprintf ( __( 'attachment #%s', 'fastfood' ), get_the_ID() ) ) ); ?>
-
-	<?php fastfood_hook_post_title_after(); ?>
 
 	<?php fastfood_extrainfo( array( 'tags' => 0, 'cats' => 0 ) ); ?>
 

@@ -11,6 +11,8 @@
 
 get_header(); ?>
 
+<?php fastfood_hook_content_before(); ?>
+
 <div id="posts-content"<?php fastfood_posts_content_class(); ?>>
 
 	<?php fastfood_hook_content_top(); ?>
@@ -20,6 +22,8 @@ get_header(); ?>
 	<?php fastfood_hook_content_bottom(); ?>
 
 </div>
+
+<?php fastfood_hook_content_after(); ?>
 
 <?php fastfood_get_sidebar(); // show sidebar ?>
 

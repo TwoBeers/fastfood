@@ -18,21 +18,40 @@
 class Fastfood_Fixed_Footer {
 
 	/**
+	 * Instantiate.
+	 *
+	 * Create/Get the instance for the current class
+	 *
+	 * @static
+	 * @access public
+	 * @since Fastfood 0.37
+	 */
+	public static function init() {
+		static $instance = NULL;
+
+		if ( ! $instance ) {
+			$instance = new Fastfood_Fixed_Footer;
+		}
+
+		return $instance;
+	}
+
+	/**
 	 * Constructor
 	 */
 	function __construct () {
 
-		add_action( 'template_redirect', array( $this, 'init' ) );
+		add_action( 'template_redirect', array( $this, 'hooks' ) );
 
 	}
 
 
 	/**
-	 * Initialize the class
+	 * Prepare the hooks
 	 *
 	 * @since Fastfood 0.37
 	 */
-	function init() {
+	function hooks() {
 
 		if ( fastfood_is_mobile() ) return;
 
@@ -828,5 +847,5 @@ class Fastfood_Fixed_Footer {
 
 }
 
-new Fastfood_Fixed_Footer;
+Fastfood_Fixed_Footer::init();
 
