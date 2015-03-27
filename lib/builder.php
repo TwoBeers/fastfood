@@ -163,7 +163,7 @@ class Fastfood_Builder {
 			'credits' => array(
 				'section'	=> 'footer',
 				'callback'	=> 'fastfood_credits',
-				'priority'	=> 9,
+				'priority'	=> 99,
 				'label'		=> __( 'Site informations', 'fastfood' ),
 			),
 		);

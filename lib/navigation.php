@@ -56,7 +56,7 @@ class Fastfood_Nav_Menus {
 	 * 
 	 * @since Fastfood 0.37
 	 */
-	function get_menu_depth( $classes, $item, $args, $depth ) {
+	function get_menu_depth( $classes, $item, $args, $depth = 0 ) {
 
 		$this->depth = max( $this->depth, $depth);
 
