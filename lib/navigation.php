@@ -300,7 +300,7 @@ function fastfood_navigate_archives() {
 function fastfood_link_pages() {
 
 	$args = array(
-		'before'           => '<div class="nav-pages">&nbsp;' . __( 'Pages', 'fastfood' ),
+		'before'           => '<div class="nav-pages">' . __( 'Pages', 'fastfood' ) . '&nbsp;',
 		'after'            => '</div>',
 		'link_before'      => '<span>',
 		'link_after'       => '</span>',

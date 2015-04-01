@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Fastfood v0.37\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: \n"
-"PO-Revision-Date: 2015-03-27 04:13:27+0000\n"
+"PO-Revision-Date: 2015-04-01 10:32:44+0000\n"
 "Last-Translator: TwoBeers Crew <light@twobeers.net>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Textdomain-Support: yes"
 
-#: functions.php:1111
+#: functions.php:1085
 #@ fastfood
 msgid "% Comments"
 msgstr "% Commenti"
@@ -40,8 +40,8 @@ msgstr "(continua...)"
 msgid "(no title)"
 msgstr "(senza titolo)"
 
-#: functions.php:1110
-#: functions.php:1416
+#: functions.php:1084
+#: functions.php:1410
 #@ fastfood
 msgid "1 Comment"
 msgstr "1 Commento"
@@ -97,7 +97,7 @@ msgid "Are you really sure you want to set all the options to their default valu
 msgstr "Sei veramente sicuro di voler riportare tutte le opzioni ai loro valori predefiniti?"
 
 #: functions.php:830
-#: functions.php:1007
+#: functions.php:981
 #: lib/widgets.php:1442
 #: mobile/core-mobile.php:307
 #@ fastfood
@@ -146,14 +146,13 @@ msgstr "Carpe"
 
 #: allcat.php:23
 #: functions.php:457
-#: functions.php:831
 #: lib/quickbar.php:124
 #: lib/widgets.php:1467
 #@ fastfood
 msgid "Categories"
 msgstr "Categorie"
 
-#: functions.php:993
+#: functions.php:967
 #: mobile/core-mobile.php:293
 #@ fastfood
 msgid "Category"
@@ -170,7 +169,7 @@ msgid "Child pages"
 msgstr "Pagine inferiori"
 
 #: functions.php:369
-#: functions.php:1049
+#: functions.php:1023
 #: lib/comment-reply.php:77
 #@ fastfood
 msgid "Close"
@@ -182,7 +181,6 @@ msgstr "Chiudi"
 msgid "Comment authors <strong>must</strong> use a name and a valid e-mail in order to use this widget. Check the <a href=\"%1$s\">Discussion settings</a>"
 msgstr "Per poter utilizzare questo widget gli autori dei commenti <strong>devono</strong> usare un nome e una e-mail valida. Controlla le <a href=\"%1$s\">Impostazioni discussione</a>"
 
-#: functions.php:833
 #: lib/quickbar.php:801
 #: mobile/comments-mobile.php:21
 #@ fastfood
@@ -204,7 +202,7 @@ msgstr "Copyright"
 msgid "Credit"
 msgstr "Crediti"
 
-#: functions.php:998
+#: functions.php:972
 #: lib/widgets.php:1459
 #: mobile/core-mobile.php:298
 #@ fastfood
@@ -236,9 +234,8 @@ msgstr "Modalità Desktop"
 msgid "Display image details. It's visible ONLY in single attachments"
 msgstr "Visualizza i dettagli dell'immagine. E' visibile SOLAMENTE nei singoli allegati"
 
-#: functions.php:895
-#: functions.php:896
-#: functions.php:925
+#: functions.php:838
+#: functions.php:839
 #: post-aside.php:18
 #: post-quote.php:22
 #: post-status.php:24
@@ -267,7 +264,7 @@ msgstr "Arricchisci la pagina 404 con alcuni widget utili"
 msgid "Enter %1$s account link:"
 msgstr "Inserisci il collegamento all'account di %1$s:"
 
-#: functions.php:1421
+#: functions.php:1415
 #: mobile/comments-mobile.php:14
 #@ fastfood
 msgid "Enter your password to view comments."
@@ -344,9 +341,9 @@ msgstr "Gli ultimi autori dei commenti"
 msgid "Leave a Reply to %s"
 msgstr "Replica al commento di %s"
 
-#: functions.php:1400
-#: functions.php:1426
-#: functions.php:1427
+#: functions.php:1394
+#: functions.php:1420
+#: functions.php:1421
 #: lib/comment-reply.php:75
 #: lib/quickbar.php:302
 #: mobile/core-mobile.php:353
@@ -424,8 +421,8 @@ msgstr "Articolo successivo"
 msgid "Next page"
 msgstr "Pagina successiva"
 
-#: functions.php:1109
-#: functions.php:1412
+#: functions.php:1083
+#: functions.php:1406
 #@ fastfood
 msgid "No Comments"
 msgstr "Nessun Commento"
@@ -547,7 +544,7 @@ msgstr "Articolo precedente"
 msgid "Previous page"
 msgstr "Pagina  precedente"
 
-#: functions.php:1050
+#: functions.php:1024
 #@ fastfood
 msgid "Print"
 msgstr "Stampa"
@@ -558,7 +555,6 @@ msgid "Print preview"
 msgstr "Anteprima di stampa"
 
 #: functions.php:464
-#: functions.php:834
 #@ fastfood
 msgid "Published on"
 msgstr "Pubblicato il"
@@ -595,20 +591,20 @@ msgstr "Replica a questo commento"
 msgid "Return to %s"
 msgstr "Ritorna a %s"
 
-#: functions.php:1399
+#: functions.php:1393
 #: mobile/core-mobile.php:351
 #@ fastfood
 msgid "Say It!"
 msgstr "Dillo!"
 
-#: functions.php:1344
-#: functions.php:1345
-#: functions.php:1346
+#: functions.php:1318
+#: functions.php:1319
+#: functions.php:1320
 #@ fastfood
 msgid "Search"
 msgstr "Cerca"
 
-#: functions.php:1015
+#: functions.php:989
 #: mobile/core-mobile.php:315
 #, php-format
 #@ fastfood
@@ -666,14 +662,13 @@ msgstr "Nessun articolo risponde ai criteri di ricerca impostati."
 msgid "Style"
 msgstr "Stile"
 
-#: functions.php:994
+#: functions.php:968
 #: mobile/core-mobile.php:294
 #@ fastfood
 msgid "Tag"
 msgstr "Tag"
 
 #: functions.php:461
-#: functions.php:832
 #: lib/widgets.php:1463
 #@ fastfood
 msgid "Tags"
@@ -1385,12 +1380,12 @@ msgstr "visualizza un link per inserire facilmente all'interno del modulo di com
 msgid "excerpt length"
 msgstr "lunghezza estratto"
 
-#: functions.php:1192
+#: functions.php:1166
 #@ fastfood
 msgid "quoted on"
 msgstr "citato in"
 
-#: functions.php:1205
+#: functions.php:1179
 #@ fastfood
 msgid "Post"
 msgstr "Articolo"
@@ -1457,18 +1452,18 @@ msgstr "Spiacente ma stai cercando qualcosa che non esiste"
 msgid "There are several links scattered around the page, maybe you can find what you&#39;re looking for"
 msgstr "Ci sono parecchi link sparsi per la pagina, forse potresti trovare quello che fa per te"
 
-#: functions.php:940
+#: functions.php:914
 #@ fastfood
 msgid "Comments are closed."
 msgstr "Commenti chiusi"
 
-#: functions.php:995
+#: functions.php:969
 #: mobile/core-mobile.php:295
 #@ fastfood
 msgid "Taxonomy"
 msgstr "Tassonomia"
 
-#: functions.php:1011
+#: functions.php:985
 #, php-format
 #@ fastfood
 msgid "%s archive"
@@ -1511,17 +1506,17 @@ msgstr "schede della quickbar"
 msgid "smooth scroll"
 msgstr "scorrimento automatico"
 
-#: functions.php:1112
+#: functions.php:1086
 #@ fastfood
 msgid "Comments Off"
 msgstr "Commenti disabilitati"
 
-#: functions.php:1124
+#: functions.php:1098
 #@ fastfood
 msgid "Enter your password to view comments"
 msgstr "Inserisci la tua password per vedere i commenti"
 
-#: functions.php:1130
+#: functions.php:1104
 #, php-format
 #@ fastfood
 msgid "Comment on %s"
@@ -1690,7 +1685,7 @@ msgstr "Pagina superiore"
 msgid "Lower pages"
 msgstr "Pagine inferiori"
 
-#: functions.php:1414
+#: functions.php:1408
 #, php-format
 #@ fastfood
 msgid "%s Comments"
@@ -1915,7 +1910,7 @@ msgstr "Menu per dispositivi mobili"
 msgid "Follow %1$s on %2$s"
 msgstr "Segui %1$s su %2$s"
 
-#: functions.php:1369
+#: functions.php:1343
 #@ fastfood
 msgid "Reply to comment"
 msgstr "Replica al commento"
@@ -1986,20 +1981,20 @@ msgstr "%1$s di %2$s"
 msgid "Powered by %1$s and %2$s"
 msgstr "Utilizza %1$s e %2$s"
 
-#: functions.php:1160
+#: functions.php:1134
 #: lib/builder.php:137
 #: lib/options.php:1688
 #@ fastfood
 msgid "Primary menu"
 msgstr "Menu principale"
 
-#: functions.php:1161
+#: functions.php:1135
 #: lib/builder.php:143
 #@ fastfood
 msgid "Secondary menu #1"
 msgstr "Menu secondario #1"
 
-#: functions.php:1162
+#: functions.php:1136
 #: lib/builder.php:149
 #@ fastfood
 msgid "Secondary menu #2"

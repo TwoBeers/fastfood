@@ -271,7 +271,7 @@ var fastfoodAnimations;
 						.stop( true , true )
 						.hide();
 				},
-				'.metadata-panel'
+				'.metadata.dropdown .metadata-panel'
 			);
 
 		},

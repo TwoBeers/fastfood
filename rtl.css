@@ -6,10 +6,10 @@ body {
 	direction:rtl;
 	unicode-bidi:embed;
 }
-ul li {
+ul {
 	margin: 0 1em 0 0;
 }
-ol li {
+ol {
 	margin: 0 2em 0 0;
 }
 dd {
@@ -119,16 +119,16 @@ div.ff_widget_latest_commentators ul li {
 #logged .avatar {
 	margin: 0 0 0 10px;
 }
-.comment-reply-link {
-	background: url('images/comment_reply.png') no-repeat scroll right center transparent;
-	padding: 4px 24px 0 0;
+.comment-author .avatar {
+	float: right;
+	margin: -1px 0 0;
+	padding: 0 0 0 10px;
 }
-ul.children {
-	padding: 0 10px 0 0;
-}
-.reply {
+.comment-body .reply {
 	text-align: left;
-	margin: 0;
+}
+.nav-menu > li > ul {
+    text-align: right;
 }
 .navigate_comments a, .navigate_comments span {
 	margin-right: 0;

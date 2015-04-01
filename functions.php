@@ -828,107 +828,81 @@ function fastfood_extrainfo( $args = '' ) {
 
 	$post_author	= ( ( $args['auth'] === true ) || ( $args['auth'] === 1 ) ) ? '<a class="fn author nickname url" href="' . get_author_posts_url( get_the_author_meta( 'ID' ) ) . '" title="' . sprintf( __( 'View all posts by %s', 'fastfood' ), esc_attr( get_the_author() ) ) . '">' . get_the_author() . '</a>' : '<span class="vcard fn author">' . $args['auth'] . '</span>';
 	$post_author	= '<span class="hide_if_no_print">' . __( 'Author', 'fastfood' ) . ': </span><i class="el-icon-user"></i> ' . $post_author;
-	$categories		= __( 'Categories', 'fastfood' ) . ': ' . get_the_category_list( ', ' );
-	$tags			= __( 'Tags', 'fastfood' ) . ': ' . ( ( get_the_tags() ) ? get_the_tag_list( '', ', ' , '') : __( 'No Tags', 'fastfood' ) );
-	$comments		= __( 'Comments', 'fastfood' ) . ': ' . fastfood_get_comments_link();
-	$date			= __( 'Published on', 'fastfood' ) . ': <b class="published" title="' . get_the_time( 'c' ) . '">' . get_the_time( get_option( 'date_format' ) ) . '</b>';
+	$categories		= get_the_category_list( ', ' );
+	$tags			= ( get_the_tags() ) ? get_the_tag_list( '', ', ' , '') : __( 'No Tags', 'fastfood' );
+	$comments		= fastfood_get_comments_link();
+	$date			= '<span class="published" title="' . get_the_time( 'c' ) . '">' . get_the_time( get_option( 'date_format' ) ) . '</span>';
 	$hierarchy		= fastfood_multipages();
+	$edit_post_link = ! get_edit_post_link() ? false : fastfood_build_link( array(
+		'href'		=> get_edit_post_link(),
+		'text'		=> '<i class="el-icon-pencil"></i><span class="screen-reader-text">' . __( 'Edit', 'fastfood' ) . '</span>',
+		'title'		=> __( 'Edit', 'fastfood' ),
+		'rel'		=> 'nofollow',
+	) );
 
-	if ( is_page() && !$args['comms'] && !$hierarchy ) return;
+	$metadata = array();
 
-	if ( !$args['list_view'] ) {
+	if ( $args['auth'] )
+		$metadata['author'] = array(
+			'trigger' => $post_author,
+			'content' => '',
+		);
+	if ( $args['date'] )
+		$metadata['date'] = array(
+			'trigger' => '<i class="el-icon-calendar"></i>',
+			'content' => $date,
+		);
+	if ( $args['cats'] )
+		$metadata['categories'] = array(
+			'trigger' => '<i class="el-icon-folder-open"></i>',
+			'content' => $categories,
+		);
+	if ( $args['tags'] )
+		$metadata['tags'] = array(
+			'trigger' => '<i class="el-icon-tags"></i>',
+			'content' => $tags,
+		);
+	if ( $args['comms'] )
+		$metadata['comments'] = array(
+			'trigger' => '<i class="el-icon-comment"></i>',
+			'content' => $comments,
+		);
+	if ( $args['hiera'] && $hierarchy )
+		$metadata['hierarchy'] = array(
+			'trigger' => '<i class="el-icon-fork"></i>',
+			'content' => $hierarchy,
+		);
+	if ( $edit_post_link )
+		$metadata['edit'] = array(
+			'trigger' => $edit_post_link,
+			'content' => '',
+		);
 
+	$metadata = apply_filters( 'fastfood_post_metadata', $metadata );
+
+	if ( $metadata ) {
 		?>
 
-			<div class="metadata">
+		<div class="metadata <?php echo $args['list_view'] ? 'static' : 'dropdown'; ?>">
 
-				<?php if ( $args['cats'] ) { ?>
-					<div class="metadata-panel metadata-panel-categories">
+			<?php foreach( $metadata as $m_key => $data ) { ?>
+
+				<div class="metadata-panel metadata-panel-<?php echo $m_key; ?><?php echo $data['content'] ? ' has-content' : ''; ?>">
+					<span class="metadata-panel-trigger"><?php echo $data['trigger']; ?></span>
+					<?php if ( $data['content'] ) { ?>
 						<div class="metadata-panel-content">
-							<?php echo $categories; ?>
+							<?php echo $data['content']; ?>
 						</div>
-						<span class="metadata-panel-trigger"><i class="el-icon-folder-open"></i></span>
-					</div>
-				<?php }?>
+					<?php } ?>
+				</div>
 
-				<?php if ( $args['tags'] ) { ?>
-					<div class="metadata-panel metadata-panel-tags">
-						<div class="metadata-panel-content">
-							<?php echo $tags; ?>
-						</div>
-						<span class="metadata-panel-trigger"><i class="el-icon-tags"></i></span>
-					</div>
-				<?php }?>
+			<?php } ?>
 
-				<?php if ( $args['comms'] ) { ?>
-					<div class="metadata-panel metadata-panel-comments">
-						<div class="metadata-panel-content">
-							<?php echo $comments; ?>
-						</div>
-						<span class="metadata-panel-trigger"><i class="el-icon-comment"></i></span>
-					</div>
-				<?php } ?>
-
-				<?php if ( $args['date'] ) { ?>
-					<div class="metadata-panel metadata-panel-date">
-						<div class="metadata-panel-content">
-							<?php echo $date; ?>
-						</div>
-						<span class="metadata-panel-trigger"><i class="el-icon-calendar"></i></span>
-					</div>
-				<?php } ?>
-
-				<?php if ( $args['hiera'] && $hierarchy ) { ?>
-					<div class="metadata-panel metadata-panel-hierarchy">
-						<div class="metadata-panel-content">
-							<?php echo $hierarchy; ?>
-						</div>
-						<span class="metadata-panel-trigger"><i class="el-icon-fork"></i></span>
-					</div>
-				<?php } ?>
-
-				<?php if ( get_edit_post_link() ) { ?>
-					<div class="metadata-panel metadata-panel-edit hide_if_print">
-						<?php
-							echo fastfood_build_link( array(
-								'href'		=> get_edit_post_link(),
-								'text'		=> '<i class="el-icon-pencil"></i><span class="screen-reader-text">' . __( 'Edit', 'fastfood' ) . '</span>',
-								'title'		=> __( 'Edit', 'fastfood' ),
-								'class'		=> 'metadata-panel-trigger',
-								'rel'		=> 'nofollow',
-							) );
-						?>
-					</div>
-				<?php } ?>
-
-				<?php if ( $args['auth'] ) { ?>
-					<div class="metadata-panel metadata-panel-author vcard">
-						<span class="metadata-panel-trigger"><?php echo $post_author; ?></span>
-					</div>
-				<?php } ?>
-
-			</div>
+		</div>
 
 		<?php
-
-	} else {
-
-		?>
-
-			<div class="metadata static">
-
-				<?php if ( $args['auth'] )	echo $post_author . '<br />'; ?>
-				<?php if ( $args['date'] )	echo $date . '<br />'; ?>
-				<?php if ( $args['comms'] )	echo $comments . '<br />'; ?>
-				<?php if ( $args['tags'] )	echo $tags . '<br />'; ?>
-				<?php if ( $args['cats'] )	echo $categories . '<br />'; ?>
-				<?php edit_post_link( __( 'Edit', 'fastfood' ) ); ?>
-
-			</div>
-
-		<?php
-
 	}
+
 }
 
 
@@ -1388,6 +1362,26 @@ function fastfood_render_title() {
 ?>
 	<title><?php wp_title( '|', true, 'right' ); ?></title>
 <?php
+
+}
+
+
+//get comments list
+function fastfood_comments_list() {
+
+	if ( !post_password_required() && have_comments() ) {
+
+		$comments_list = wp_list_comments( array(
+			'echo' => false,'avatar_size'       => 64,
+		) );
+
+		fastfood_hook_comments_list_before();
+
+		echo '<ol id="commentlist">' . $comments_list . '</ol>';
+
+		fastfood_hook_comments_list_after();
+
+	}
 
 }
 

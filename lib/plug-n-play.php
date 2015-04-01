@@ -544,3 +544,41 @@ class Fastfood_For_WP_Pagenavi {
 }
 
 new Fastfood_For_WP_Pagenavi;
+
+
+/**
+ * Functions and hooks for WP-Pagenavi integration
+ */
+class Fastfood_For_WP_CommentNavi {
+
+	function __construct() {
+
+		add_action( 'wp_print_styles', array( $this, 'dequeue_style' ), 99 );
+
+		add_filter( 'fastfood_filter_navigation_comments', array( $this, 'navigate_comments' ) );
+
+	}
+
+	function dequeue_style() {
+
+		wp_dequeue_style( 'wp-commentnavi' );
+
+	}
+
+	function navigate_comments( $bool ) {
+
+		if ( function_exists( 'wp_commentnavi' ) ) {
+
+			wp_commentnavi();
+
+			$bool = true;
+
+		}
+
+		return $bool;
+
+	}
+
+}
+
+new Fastfood_For_WP_CommentNavi;
