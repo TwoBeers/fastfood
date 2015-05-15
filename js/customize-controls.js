@@ -226,6 +226,9 @@
 					toggle_theme_options( sections );
 					$( '#customize-theme-controls .theme-controls-header-title' ).not( this ).parent().removeClass( 'expanded current' );
 					$( this ).parent().toggleClass( 'expanded current' );
+				})
+				.find( 'a' ).click( function( event ) {
+					event.stopPropagation();
 				});
 		});
 	}

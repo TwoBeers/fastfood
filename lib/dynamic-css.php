@@ -36,7 +36,7 @@ function fastfood_dynamic_css() {
 		$attributes[$attribute_key] = get_theme_mod( $attribute_key, $attributes[$attribute_key] );
 	}
 
-	$attributes['background_color'] = '#' . $attributes['background_color'];
+	$attributes['background_color'] = '#' . str_replace( '#', '', $attributes['background_color'] );
 
 	// gathers the theme options
 	$opts = array(

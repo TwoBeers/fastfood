@@ -29,7 +29,7 @@ body {
 	font-size: 11px;
 	color: #404040;
 	margin: 0;
-	line-height: 1.5em;
+	line-height: 1.5;
 }
 a img {
 	border: none;
@@ -50,10 +50,8 @@ h5,
 h6,
 p {
 	margin: 0 0 1em;
-	line-height: 1.5em;
 }
 .entry-content p {
-	line-height: 1.3em;
 	margin: 0 0 1em;
 }
 ul {
@@ -470,7 +468,6 @@ i.quickbar-panel-icon {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	line-height: 1.5em;
 }
 .quickbar-panel-content .solid_ul > li:hover > .label {
 	background: #ddd;
@@ -568,10 +565,10 @@ i.quickbar-panel-icon {
 	cursor: pointer;
 	display: block;
 	font-size: 18px;
-	line-height: 1.5em;
 	text-align: center;
 	width: 31px;
 	color: #404040;
+	line-height: 31px;
 }
 .minibutton .minib_img:hover {
 	opacity: .7;
@@ -588,7 +585,7 @@ i.quickbar-panel-icon {
 	text-align: right;
 	white-space: pre;
 	padding: 0 5px;
-	line-height: 2em;
+	line-height: 2.5;
 }
 .minibutton .nb_tooltip:after {
 	content: "›";
@@ -619,7 +616,7 @@ i.quickbar-panel-icon {
 .nav-menu {
 	margin: 0;
 	padding: 0;
-	line-height: 2.4em;
+	line-height: 2.5;
 }
 .menu-primary-container .nav-menu,
 .menu-secondary-container .nav-menu {
@@ -640,7 +637,7 @@ i.quickbar-panel-icon {
 	font-weight: normal;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	vertical-align: top;
+	vertical-align: text-bottom;
 	font-size: .7em;
 }
 .nav-menu > li > a{
@@ -680,6 +677,7 @@ i.quickbar-panel-icon {
 	position: fixed;
 	border-bottom: 1px solid #555;
 	width: inherit;
+	z-index: 2;
 }
 .fixed-menu #menu-primary-placeholder {
 	display: block;
@@ -687,7 +685,6 @@ i.quickbar-panel-icon {
 .secondary {
 	font-size: 1.18em;
 	display: block;
-	line-height: 2em;
 }
 #menu-secondary-first {
 	text-align: right;
@@ -718,7 +715,7 @@ i.quickbar-panel-icon {
 	height: auto;
 	padding: 10px;
 	background: #eee;
-	line-height: 2.5em;
+	line-height: 2.5;
 }
 .metadata.static .metadata-panel-content {
 	display: inline;
@@ -762,7 +759,7 @@ i.quickbar-panel-icon {
 }
 .metadata.dropdown .metadata-panel-trigger {
 	color: #808080;
-	line-height: 2.5em;
+	line-height: 2.5;
 }
 .metadata.dropdown .metadata-panel .metadata-panel-trigger {
 	cursor: default;
@@ -770,7 +767,7 @@ i.quickbar-panel-icon {
 	position: relative;
 }
 .metadata-panel .metadata-panel-trigger i {
-	line-height: 2.5em;
+	line-height: 2.5;
 	height: 2.5em;
 	width: 2em;
 	display: inline-block;
@@ -809,7 +806,7 @@ i.quickbar-panel-icon {
 	margin: 20px 0 0;
 	padding: 0 .5em;
 	font-size: 1em;
-	line-height: 2.5em;
+	line-height: 2.5;
 	clear: both;
 }
 .entry-content .solid-label {
@@ -942,8 +939,9 @@ i.quickbar-panel-icon {
 	text-align: center;
 	text-transform: uppercase;
 	border-bottom: 1px solid #ddd;
-	line-height: 2em;
+	line-height: 2.5;
 	font-size: 1em;
+	padding: 0 .5em;
 }
 #header-widget-area .widgettitle {
 	border-bottom: 1px solid #555;
@@ -1009,7 +1007,7 @@ i.quickbar-panel-icon {
 .tb_font_resize {
 	font-size: 2em;
 	text-align: center;
-	line-height: 1em;
+	line-height: 1;
 }
 .tb_font_resize a {
 	display: inline-block;
@@ -1058,9 +1056,6 @@ div.tb_latest_commentators a img {
 	padding: 5px;
 	margin: 0 0 5px;
 	text-align: center;
-}
-.exif-attachment-info {
-	line-height: 2em;
 }
 .ff-social-icon {
 	margin: 0 5px 5px 0;
@@ -1126,7 +1121,7 @@ div.tb_latest_commentators a img {
 	margin: 0 auto;
 }
 .hentry {
-	padding: 30px 20px;
+	padding: 20px;
 	margin: 0 0 1px;
 	border-top: 1px solid #eee;
 	border-bottom: 1px solid #eee;
@@ -1136,7 +1131,7 @@ div.tb_latest_commentators a img {
 	border-top: none;
 }
 .hentry.sticky:first-child {
-	padding-top: 30px;
+	padding-top: 20px;
 	border-top: 1px solid #eee;
 }
 body.single .hentry,
@@ -1153,7 +1148,7 @@ body.page .hentry:after {
 	position: absolute;
 	left: 0;
 	width: 100%;
-	margin-top: 30px;
+	margin-top: 20px;
 }
 .hentry.sticky {
 	position: relative;
@@ -1444,7 +1439,7 @@ img.wp-post-image {
 	display: inline-block;
 }
 .comment-body {
-	margin-top: 30px;
+	margin-top: 20px;
 	position: relative;
 	border-top: 1px solid #ddd;
 }
@@ -1472,7 +1467,6 @@ img.wp-post-image {
 }
 .comment-author .fn {
 	font-size: 1.5em;
-	line-height: 1.5em;
 	font-style: normal;
 	font-weight: bold;
 }
@@ -1596,7 +1590,7 @@ img.wp-post-image {
 	margin: 10px 0 0;
 }
 #commentform > p label {
-	line-height: 2.5em;
+	line-height: 2.5;
 }
 #author,
 #email,
@@ -1622,7 +1616,7 @@ img.wp-post-image {
 }
 #ff_reply_close {
 	cursor: pointer;
-	line-height: 2.5em;
+	line-height: 2.5;
 	text-align: center;
 	width: 2em;
 	vertical-align: top;
@@ -1642,7 +1636,7 @@ img.wp-post-image {
 }
 #tb-quotethis i {
 	width: 2em;
-	line-height: 2em;
+	line-height: 2;
 }
 #tb-quotethis:hover {
 	color: #404040;
@@ -1660,6 +1654,10 @@ img.wp-post-image {
 }
 .hentry + .navigation_links {
 	margin-top: 20px;
+}
+#commentlist + .navigation_links {
+	padding-top: 20px;
+	border-top: 1px solid #ddd;
 }
 .navigation_links ul,
 .navigation_links ol {
@@ -1691,7 +1689,7 @@ img.wp-post-image {
 .navigation_links a,
 .navigation_links span {
 	display: inline-block;
-	line-height: 2.5em;
+	line-height: 2.5;
 	min-width: 2.5em;
 	margin-left: 0.3em;
 	vertical-align: top;
@@ -1704,7 +1702,7 @@ img.wp-post-image {
 	color: #808080;
 }
 .navigation_links i {
-	line-height: 2.5em;
+	line-height: 2.5;
 }
 .nav-single {
 	overflow: hidden;
@@ -1725,7 +1723,7 @@ img.wp-post-image {
 	color: #fff;
 	display: block;
 	height: 2.5em;
-	line-height: 2.5em;
+	line-height: 2.5;
 	position: relative;
 	text-align: center;
 	width: 2.5em;
@@ -1755,7 +1753,7 @@ img.wp-post-image {
 	background: #ddd;
 	clear: both;
 	font-size: 1em;
-	line-height: 2.5em;
+	line-height: 2.5;
 	margin: 20px 0 0;
 	min-height: 2.5em;
 	padding: 0;
@@ -1774,7 +1772,7 @@ img.wp-post-image {
 ----------------------------------------------------------*/
 #wp-calendar {
 	width: 100%;
-	line-height: 2em;
+	line-height: 2;
 }
 #wp-calendar caption {
 	text-align: right;
@@ -1983,7 +1981,7 @@ img.aligncenter {
 ----------------------------------------------------------*/
 .crumbs {
 	background: none repeat scroll 0 0 #ddd;
-	line-height: 2.5em;
+	line-height: 2.5;
 	margin: 20px 0;
 	overflow: hidden;
 	padding: 0 20px;
@@ -1993,7 +1991,7 @@ img.aligncenter {
 .crumbs.wpseo > span:first-child i {
 	color: #fff;
 	vertical-align: top;
-	line-height: 2.5em;
+	line-height: 2.5;
 }
 .crumbs > .bbp-breadcrumb-home:first-child,
 .crumbs > .home:first-child,
@@ -2319,7 +2317,7 @@ div.mejs-container .mejs-controls div {
 .tb-chat ul.chat-transcript {
 	margin: 0;
 	padding: 0;
-	line-height: 2em;
+	line-height: 2;
 }
 .tb-chat ul.chat-select {
 	overflow: hidden;
@@ -2477,7 +2475,7 @@ div#content div.sharedaddy {
 .pagination-links a,
 .pagination-links span {
 	display: inline-block;
-	line-height: 2.5em;
+	line-height: 2.5;
 	min-width: 2em;
 	margin-left: 0.3em;
 	vertical-align: top;

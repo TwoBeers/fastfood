@@ -92,19 +92,16 @@ function fastfood_upgrade() {
 
 		// footer widget area
 		$sidebars_widgets = get_option( 'sidebars_widgets', array() );
+		$_sidebars_widgets = array();
 
-		if (
-			isset( $sidebars_widgets['first-footer-widget-area'] ) &&
-			isset( $sidebars_widgets['second-footer-widget-area'] ) &&
-			isset( $sidebars_widgets['third-footer-widget-area'] )
-		) {
-			$_sidebars_widgets = array_merge( $sidebars_widgets['first-footer-widget-area'], $sidebars_widgets['second-footer-widget-area'], $sidebars_widgets['third-footer-widget-area'] );
-			$sidebars_widgets['footer-widget-area'] = $_sidebars_widgets;
-			unset( $sidebars_widgets['first-footer-widget-area'] );
-			unset( $sidebars_widgets['second-footer-widget-area'] );
-			unset( $sidebars_widgets['third-footer-widget-area'] );
-			wp_set_sidebars_widgets( $sidebars_widgets );
+		foreach ( array( 'first-footer-widget-area', 'second-footer-widget-area', 'third-footer-widget-area' ) as $sidebar ) {
+			if ( isset( $sidebars_widgets[$sidebar] ) ) {
+				$_sidebars_widgets = array_merge( $_sidebars_widgets, $sidebars_widgets[$sidebar] );
+				unset( $sidebars_widgets[$sidebar] );
+			}
 		}
+		$sidebars_widgets['footer-widget-area'] = $_sidebars_widgets;
+		wp_set_sidebars_widgets( $sidebars_widgets );
 
 		// header slider
 		$header_image = get_theme_mod( 'header_image' );
